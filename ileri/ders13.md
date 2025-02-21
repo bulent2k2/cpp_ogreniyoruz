@@ -1,5 +1,5 @@
 
-*Yazı düzenleme* bulmacasına giriş yaptık. Talha'nın güzel çözümüne/koduna baktık. [Nesneye yönelik yazılım kavramları](sınıf-yapı-kavramı.md) kullanarak nasıl geliştirebiliriz diye konuştuk. Bir iki ipucu ile dersimize son verdik.    
+*Yazı düzenleme* bulmacasına giriş yaptık. Talha'nın güzel çözümüne/koduna baktık. [Nesneye yönelik yazılım kavramları](sınıf-yapı-kavramı.md) kullanarak nasıl geliştirebiliriz, daha genel ve becerikli bir tasarım nasıl olabilir, yapıtaşları ne olabilir, nasıl biraraya konabilir diye konuştuk. `class Yazı` diye yeni bir tür önerdik. Gizli verisi `vector<string>`, yani akıllı yazı dizisi olsun ve her bir elemanı ekrana bir satır olarak yazılsın dedik. Bazı temel yöntemlerini (örneğin: `Yazı yana(Yazı)` ve `Yazı alta(Yazı)`) *südo-kod* (pseuso-code) olarak yazdık. Yani tam çalışmasa da, bize fikir versin, düşündürsün ve ipucu olsun. 
 
 Arada `int main(int, char**)` kullanarak programımıza komut satırından girdi alma becerisi ekledik. Asel ve Talha çok güzel sorular sordular. O sayede iki ve üç boyutlu dizilere (vektör, matris ve hatta tensörlere) baktık. Yüksek boyutlu dizileri işlevlere girdi olarak soktuk, işlevlerin çıktısı olarak kullandık. `ostream& operator<<` işlemcisine yüksek boyutlu dizilerimizi yazmayı öğrettik. `vector::push_pack` yöntemini gözden geçirdik...
 

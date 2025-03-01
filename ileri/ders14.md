@@ -5,7 +5,7 @@
 
 [Kodun en son hali burada](https://onlinegdb.com/fC4ztk-lF).   
 
-Dersten sonra önemli bir değişiklik daha yaptım bu kodun içinde. Derste **işlev kalıbını** yazarken derleyici hata verince **tür değişkeni* türünde gereksiz bir girdi eklemiştik:
+Dersten sonra önemli bir değişiklik daha yaptım bu kodun içinde. Derste **işlev kalıbını** yazarken derleyici hata verince *tür değişkeni* türünde gereksiz bir girdi eklemiştik:
 ```c++
 template <typename T>
 T girdi(T gereksiz, string, string);

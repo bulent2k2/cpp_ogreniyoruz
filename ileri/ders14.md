@@ -39,7 +39,7 @@ Yazı::yana(Yazı);
 Yazı::alta(Yazı);
 ```
 
-Ondan sonra şöyle çizimleri kolaylıkla  yapabileceğiz: 
+Bu sayede yazı ve çizimleri düzenlemek iyice kolaylaşacak. Örneğin:
 ```c++
 Yazı y1{"+"};
 Yazı y2{"----"};

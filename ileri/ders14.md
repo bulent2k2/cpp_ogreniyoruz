@@ -16,13 +16,13 @@ template <typename T>
 T girdi(string g1, string g2);
 ```
 
-Burada önemli nokta şu: **tür degiskeni** olan `T`, sadece çıktının türü. Onun için derleyici kalıbı girdilerin türüne bakarak somutlaştıramıyor ve hata veriyor. Çözüm de çok kolay:
+Burada önemli nokta şu: **tür değişkeni** olan `T`, sadece çıktının türü. Onun için derleyici kalıbı girdilerin türüne bakarak somutlaştıramıyor ve hata veriyor. Çözüm de çok kolay:
 
 ```c++
 const int kolSayisi{girdi<int>(soru, hataDurumundaSoru)};
 ```
 
-Yani kalıbın adından sonra `<int>` diyerek türün değerini biz belirliyoruz, çünkü işlevin girdilerinin hiç birinin türü `T` değil. Bu tekniğe kalıbı somutlaştırmak ya da özelleştirmek (*template specialization*) deniyor. Şu küçük projeyle bir kaç örnek daha görelim:  [girdi okuma kalıbı](https://onlinegdb.com/LzdD5FHnz).  
+Yani kalıbın adından sonra `<int>` diyerek tür değişkeninin yani `T`nin değerini belirliyoruz, çünkü işlevin girdilerinin hiç birinin türü `T` değil. Bu tekniğe kalıbı somutlaştırmak ya da özelleştirmek (*template specialization*) deniyor. Şu küçük projeyle bir kaç örnek daha görelim:  [girdi okuma kalıbı](https://onlinegdb.com/LzdD5FHnz).  
 
 Olimpiyat Sorusu, Yapay Beyin ve bir Sayaç
 ----

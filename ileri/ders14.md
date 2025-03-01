@@ -34,7 +34,7 @@ En sonda da genel yazı düzenleme bulmacasına tekrar baktık. [Kod burada](htt
 Ben birkaç küçük ekleme yaptım. Size kalan şu üç yöntem üzerinde düşünmek ve fırsat bulursanız yazıvermek. Birkaç satırda halledebilirsiniz!
 
 ```c++
-operator<<(std::ostream&, Yazı);
+operator<<(ostream&, Yazı);
 Yazı::yana(Yazı);
 Yazı::alta(Yazı);
 ```

@@ -10,19 +10,19 @@ template <typename T>
 T girdi(T gereksiz, string, string);
 ```
 
-Ama daha iyi bir çözüm de mümkün. Önce ilk yazdığımız sade kalıba geri dönüyoruz. Önemli nokta şu: **tür degiskeni** olan `T`, sadece çıktının türü. 
+Ama daha iyi bir çözüm de mümkün. Önce ilk yazdığımız sade kalıba geri dönüyoruz:
 ```c++
 template <typename T>
 T girdi(string g1, string g2);
 ```
 
-Sonra kalıbı somutlaştırmak için gerekli tür değerini belirtmek için, ki bizim için o değer `int`, şöyle yapıyoruz:
+Burada önemli nokta şu: **tür degiskeni** olan `T`, sadece çıktının türü. Onun için derleyici kalıbı girdilerin türüne bakarak somutlaştıramıyor ve hata veriyor. Çözüm de çok kolay:
 
 ```c++
 const int kolSayisi{girdi<int>(soru, hataDurumundaSoru)};
 ```
 
-Bu tekniğe kalıbı somutlaştırmak ya da özelleştirmek (*template specialization*) deniyor: kalıbın adından sonra `<int>` diyerek türün değerini biz belirliyoruz,  çünkü işlevin girdilerinin hiç birinin türü `T` değil. Şu küçük proje bir kaç örnek daha veriyor:  [girdi okuma kalıbı](https://onlinegdb.com/LzdD5FHnz).  
+Yani kalıbın adından sonra `<int>` diyerek türün değerini biz belirliyoruz, çünkü işlevin girdilerinin hiç birinin türü `T` değil. Bu tekniğe kalıbı somutlaştırmak ya da özelleştirmek (*template specialization*) deniyor. Şu küçük projeyle bir kaç örnek daha görelim:  [girdi okuma kalıbı](https://onlinegdb.com/LzdD5FHnz).  
 
 Olimpiyat Sorusu, Yapay Beyin ve bir Sayaç
 ----

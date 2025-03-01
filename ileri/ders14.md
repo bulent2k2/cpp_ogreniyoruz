@@ -1,9 +1,9 @@
 
-[Görsel kayıt bir saat 10 dakika](https://drive.google.com/file/d/1ERTPOKKvDge97CBYOmcR-KbCJdx0gtCM).  
+[Görsel kayıt](https://drive.google.com/file/d/1ERTPOKKvDge97CBYOmcR-KbCJdx0gtCM) bir saat 10 dakika.  
 
 Önce Talha kardeşimizin sarmal çizen kodunu satır satır okuduk ve bir kaç değişiklik yaptık. Tasarımı anladık, yorumladık. Hepimiz için epey öğretici oldu. Sağol Talha!
 
-[Kodun en son hali burada](https://onlinegdb.com/fC4ztk-lF).   
+Kodun en son hali [burada](https://onlinegdb.com/fC4ztk-lF).   
 
 Dersten sonra önemli bir değişiklik daha yaptım bu kodun içinde. Derste **işlev kalıbını** yazarken derleyici hata verince *tür değişkeni* türünde gereksiz bir girdi eklemiştik:
 ```c++

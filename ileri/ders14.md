@@ -33,8 +33,7 @@ Daha sonra eski bir olimpiyat sorusuna baktık: Bir sayı dizisin en iri ve en k
 
 Yazım Çizim Düzenleme
 ----
-En sonda da genel yazı düzenleme bulmacasına tekrar baktık. Ben dersten sonra da birkaç yapıcı ekledim, `+` ve `/` işlemcilerini tanımladım.  
-[Kod burada](https://onlinegdb.com/wfhQZ81l-). Gelecek derste devam ederiz inşallah. Arada size kalan şu üç yöntem üzerinde düşünmek ve fırsat bulursanız yazıvermek. Birkaç satırda halledebilirsiniz!
+En sonda da genel yazı düzenleme bulmacasına tekrar baktık. Ben dersten sonra da birkaç yapıcı ekledim, `+` ve `/` işlemcilerini tanımladım. [Kod burada](https://onlinegdb.com/wfhQZ81l-). Gelecek derste devam ederiz inşallah. Arada size kalan şu üç yöntem üzerinde düşünmek ve fırsat bulursanız yazıvermek. Birkaç satırda halledebilirsiniz!
 
 ```c++
 operator<<(ostream&, Yazı);

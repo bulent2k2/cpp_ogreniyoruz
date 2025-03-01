@@ -32,7 +32,7 @@ Daha sonra eski bir olimpiyat sorusuna baktık: Bir sayı dizisin en iri ve en k
 
 En sonda da genel yazı düzenleme bulmacasına tekrar baktık. [Kod burada](https://onlinegdb.com/rtMQs6sLO).
 
-Ben birkaç küçük ekleme yaptım. Size kalan şu üç yöntem üzerinde düşünmek ve fırsat bulursanız yazıvermek. Birkaç satırda hallederbilirsiniz!
+Ben birkaç küçük ekleme yaptım. Size kalan şu üç yöntem üzerinde düşünmek ve fırsat bulursanız yazıvermek. Birkaç satırda halledebilirsiniz!
 
 ```c++
 operator<<(std::ostream&, Yazi);

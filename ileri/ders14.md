@@ -1,3 +1,6 @@
+
+[Görsel kayıt bir saat 10 dakika](https://drive.google.com/file/d/1ERTPOKKvDge97CBYOmcR-KbCJdx0gtCM).  
+
 Önce Talha kardeşimizin sarmal çizen kodunu satır satır okuduk ve bir kaç değişiklik yaptık. Tasarımı anladık, yorumladık. Hepimiz için epey öğretici oldu. Sağol Talha!
 
 [Kodun en son hali burada](https://onlinegdb.com/fC4ztk-lF).   
@@ -42,7 +45,5 @@ Ondan sonra şöyle çizimleri kolaylıkla  yapabileceğiz:
 Yazı y1{"+"};
 Yazı y2{"----"};
 Yazı y3 = y1 + y2 + y1;
-cout y3/y2/y3;
+cout << y3/y2/y3;
 ```
-
-[Görsel kayıt bir saat 10 dakika](https://drive.google.com/file/d/1ERTPOKKvDge97CBYOmcR-KbCJdx0gtCM).

@@ -25,8 +25,7 @@ const int kolSayisi{girdi<int>(soru, hataDurumundaSoru)};
 
 Bu tekniğe kalıbı somutlaştırmak ya da özelleştirmek (*template specialization*) deniyor: kalıbın adından sonra `<int>` diyerek türün değerini biz belirliyoruz,  çünkü işlevin girdilerinin hiç birinin türü `T` değil. Şu küçük proje bir kaç örnek daha veriyor:  [girdi okuma kalıbı](https://onlinegdb.com/LzdD5FHnz).  
 
-Daha sonra eski bir olimpiyat sorusuna baktık: Bir sayı dizisin en iri ve en küçük ögelerini en az sayıda karşılaştırma yaparak bulmak. *DeepSeek* adlı yapay beyin (*YB*) tarafından yazılmış algoritmayı inceledik. Sonra `Sayı` adlı yeni bir tür tanımlayarak  karşılaştımaları programa saydırdık. [Kodun hepsi burada] 
-(https://onlinegdb.com/Hrd-T3H1S).  
+Daha sonra eski bir olimpiyat sorusuna baktık: Bir sayı dizisin en iri ve en küçük ögelerini en az sayıda karşılaştırma yaparak bulmak. *DeepSeek* adlı yapay beyin (*YB*) tarafından yazılmış algoritmayı inceledik. Sonra `Sayı` adlı yeni bir tür tanımlayarak  karşılaştımaları programa saydırdık. [Kodun hepsi burada](https://onlinegdb.com/Hrd-T3H1S).  
 
 Çıkardığımız dersler: *YB*'ye danışmak faydalı ama yanıtlarına çok güvenmek doğru değil. Kendi araştırmamızı yapmamızda çok fayda var. Ayrıca kodu doğru yazmaya öncelik vermek ve ancak daha sonra hızlandırmaya çalışmak da önemli (programcıların meşhur atasözü: *bütün baş belalarının kaynağı sırasız yapılan iyileştirmelerdir!*)
 

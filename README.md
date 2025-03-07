@@ -28,7 +28,7 @@ Diğer Siteler
 
 [Dersler](ileri)
 ====
-Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Beşinci dersten itibaren, detaylı ders notlarının olduğu dosyalara linkler de aşağıda. On birinci ve daha sonraki dersler için [ileri adlı dizine](ileri) bakabilirsiniz. [En yeni dersimiz de burada](ileri/ders14.md). 
+Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Beşinci dersten itibaren, detaylı ders notlarının olduğu dosyalara linkler de aşağıda. On birinci ve daha sonraki dersler için [ileri adlı dizine](ileri) bakabilirsiniz. [En yeni dersimiz de burada](ileri/ders15.md). 
 
 İlk derste bazı temel yapıtaşlarını gördük 
 -- 

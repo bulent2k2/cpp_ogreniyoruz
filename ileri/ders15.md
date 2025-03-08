@@ -35,4 +35,4 @@ Eğer yukarıda gördüğümüz gibi bir `try` yani deneme kapsamı içinde kull
 
 Şu örnek koda bakıp bunları pekiştirmeniz iyi olur: [dout, throw-try-catch ve durgun yerel değişken](https://onlinegdb.com/mmWkdwbUY).
 
-Bu örnekte bir de daha önce görmediğimiz durgun (`static`) yerel değişken kullandım. Bir işlevi birden çok çağırdığımızda, değerini koruyan, yani ilk değere geri dönmeyen yerel bir değişken faydalı olabilir. Ona da dikkat edin. Anlaşılmazsa bir sonraki derse üzerinden geçeriz. 
+Bu örnekte bir de daha önce görmediğimiz durgun (`static`) bir yerel değişken kullandım. Bir işlevi birden çok çağırdığımızda, değerini koruyan, yani ilk değerine geri dönmeyen yerel bir değişken faydalı olabilir. Ona da dikkat edin. Anlaşılmazsa bir sonraki derste üzerinden geçeriz inşallah. 

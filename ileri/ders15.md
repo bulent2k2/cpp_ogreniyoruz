@@ -8,13 +8,13 @@ Kodlar:
 Epey okuduk ve yazdık. Daha önce görmediğimiz birkaç yeni becerinin üzerinde duralım:
 
 ```c++
-bool yaz = false; // yazmak için true
+bool yaz = false; // yazmak için, true olmalı 
 ostream nout{nullptr};
 ostream & dout = yaz ? cout : nout;
 dout << "istersek yazar, istemezsek yazmaz";
 ```
 
-Programların içinde bol bol `cout` kullanıyoruz. Bu `dout` (*debug out*), hepsini birden kapatıp açmak için kullanışlı bir yöntem. 
+Programların içinde bol bol `cout` kullanıyoruz. Bu `dout` (*debug out*), hepsini birden kapatıp açmak için kullanışlı bir yöntem. Onu tanımlarken de `nout` değişkeni kullandık. Onun yerine direk `nullptr` kullanmayı deneyin. Çalışmama nedenini anlamaya çalışın. 
 
 ```c++
 vector<int> dizi{2, 4, 6, 8};
@@ -29,7 +29,7 @@ try {
 } 
 ``` 
 
-Çizim projesine bakarken, `throw` anahtar sözcüğünü de ilk defa gördük. Beklemediğimiz, kuraldışı ya da istisnai (*exception*) durumlarda programı durdurmaya yarar. Projede  girdi olarak bilgi veren bir yazı kullandık. Ama her tür değer kullanılabilir. Burada da sayı kullandık `throw 4;`. İşlevler gibi parantezle de kullanılabilir: `throw("bilgi");`
+Çizim projesine bakarken, `throw` anahtar sözcüğünü de ilk defa gördük. Beklemediğimiz, kuraldışı ya da istisnai (*exception*) durumlarda programı durdurmaya yarar. Projede  girdi olarak bilgi veren bir yazı kullandık. Ama her tür değer kullanılabilir. Burada da sayı kullandık: `throw 4;` İşlevler gibi parantezle de kullanılabilir: `throw("bilgi");`
 
 Eğer yukarıda gördüğümüz gibi bir `try` yani deneme kapsamı içinde kullanırsak, arkadan gelen bir `catch` komuduyla istisnayı ele alıp gerekli bilgiyi yazabiliriz. Program, oradan devam eder. Büyük uzman profesyonel projelerde çok faydalı bir yapıdır. İngilizce adını da bilmenizde fayda var: *exception handling*.
 

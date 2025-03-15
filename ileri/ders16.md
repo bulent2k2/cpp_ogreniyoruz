@@ -1,5 +1,5 @@
 Çizim Projesi, İşlevsel Programlama ve Grafik Kütüphanesiyle Yazılıma Giriş 
-====
+----
 
 [Görsel kayıt](https://drive.google.com/file/d/17cazkcCEq1kCGr9qp7sQTMNrlPpmZEhD)
 bir saat 27 dakika uzunluğunda.
@@ -66,4 +66,4 @@ Bu kodun hemen hemen hepsi Talha arkadaşınızın yazdığı kodun aynısı. Bu
 
 Arada, geçen dersteki [kağıt katlama koduna](https://onlinegdb.com/QNojjbcbV) birkaç hedef daha eklendi: en yakın komşu yıldız [Proksima Sentauri](https://en.wikipedia.org/wiki/Proxima_Centauri), en yakın komşu galaksi [Andromeda](https://en.wikipedia.org/wiki/Andromeda_Galaxy) ve bilinen [Evren'in ucu](https://docs.google.com/document/d/1vyvwIJ3sX90vZp9yzZ-zOfFuMMMENNJftpcWO3k402Q/)! İçinde `std::map` yani **eşlem** kalıbını kullanan bir örneğimiz daha var.
 
-En son grafik kartı kullanarak canlandırma, simülasyon ve oyun programlamaya giriş yaptık. [Cinder adlı kütüphaneyi](https://libcinder.org) inceledik. Örnek olarak [zıplayan top simülasyonu kodunu](https://onlinegdb.com/aYu-ehYHj) okuduk ve çalıştırdık. Ne yazık ki [OnlineGDB](https://www.onlinegdb.com/) henüz bu gelişmiş kütüphaneyi desteklemiyor. Zaten yerleşim içi yani bir sunucuda çalışması grafik kartını çok zorlardı. Bilgisayarınıza bu kütüphaneyi indirip *Visual Studio* ile derlemek ve çalıştırmak isterseniz bana haber verin, yardımcı olayım.
+En son grafik kartı kullanarak canlandırma, simülasyon ve oyun programlamaya giriş yaptık. [Cinder adlı kütüphaneyi](https://libcinder.org) inceledik. Örnek olarak [zıplayan top simülasyonu kodunu](https://onlinegdb.com/aYu-ehYHj) okuduk ve çalıştırdık. Ne yazık ki [OnlineGDB](https://www.onlinegdb.com/) henüz bu gelişmiş kütüphaneyi desteklemiyor. Zaten çevrimiçi yani internette bir sunucuda çalışması o sunucunun grafik kartını çok zorlardı. Bilgisayarınıza bu kütüphaneyi indirip *Visual Studio* ile derlemek ve çalıştırmak isterseniz bana haber verin, yardımcı olayım.

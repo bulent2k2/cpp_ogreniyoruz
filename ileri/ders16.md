@@ -40,7 +40,7 @@ void oluşturVeYaz(İşlev çizim, int w, int l,
     for(int y=0;y<l;y++) {
       for(int s=k;s>0;s--){
 	       cout << "  ";
-	         for(int x=0;x<w;x++)
+	       for(int x=0;x<w;x++)
 	         cout << alan[x][y];
       }
       if(y==l-1) cout <<endl<<endl;

@@ -1,4 +1,4 @@
-Çizim Projesi, İşlevsel Programlama ve Grafik Kütüphanesiyle Kodlamaya Giriş 
+Çizim Projesi, İşlevsel Programlama ve Grafik Kütüphanesiyle Yazılıma Giriş 
 ====
 
 [Görsel kayıt](https://drive.google.com/file/d/17cazkcCEq1kCGr9qp7sQTMNrlPpmZEhD)
@@ -21,10 +21,9 @@ bool sayıMı(std::string yazı) {
 
 Burada da [kodun hepsi](https://onlinegdb.com/jAaKQESar) var.
 
-Dikkat ederseniz, çizimleri yan yana ve alt alta çizen iç içe **yedi tane** `for` döngüsü var. Talha arkadaşınız çok güzel yazmış! Sonra da bu başarılı tekniği üç dört farklı yerde aynı şekilde
-kullanmış.   
+Dikkat ederseniz, çizimleri yan yana ve alt alta çizen iç içe **yedi tane** `for` döngüsü var. Talha arkadaşınız çok emek vermiş ve güzel çalışan bir teknik bulmuş. Sonra da bu başarılı tekniği üç dört farklı yerde aynı şekilde kullanmış.   
  
-Bu kodu şöyle bir kalıp oluşturmak için kullanabiliriz:
+Talha'nın kodunu şöyle bir kalıp oluşturmak için kullanabiliriz:
 ```c++
 template <typename İşlev>
 void oluşturVeYaz(İşlev çizim, int w, int l, int sayi, int k) {
@@ -35,9 +34,9 @@ void oluşturVeYaz(İşlev çizim, int w, int l, int sayi, int k) {
   
   // sonra onu ekrana yaz:
 
-  // Önce ilk satır sonra ikinci vs. olmak üzere her satırı
-  // yatay doğrultu boyuncaki kutucuk/sarmal/üçgen/emoji 
-  // sayısı kadar yazdırıyoruz:
+  // Önce yanyana k tane sonra da alta olmak üzere
+  // çizimi (kutucuk/sarmal/üçgen veya emoji) 
+  // verilen sayi kadar yazdırıyor:
   for(int sayac=sayi/k;sayac>0;sayac--) {
     for(int y=0;y<l;y++) {
       for(int s=k;s>0;s--) { 
@@ -49,7 +48,7 @@ void oluşturVeYaz(İşlev çizim, int w, int l, int sayi, int k) {
       else cout << endl;
     }
   }
-  // Eğer tam bölünme yoksa kalanlari son satıra ekliyoruz 
+  // Eğer tam bölünme yoksa kalanlari an alta yan yana ekliyor 
   if(sayi%k!=0)
     for(int y=0;y<l;y++) {
       for(int s=sayi%k;s>0;s--){
@@ -63,9 +62,8 @@ void oluşturVeYaz(İşlev çizim, int w, int l, int sayi, int k) {
 }
 ```
 
-Sonra, bu işlev kalıbını `kutucuk`, `sarmal`, `üçgen` ve `emoji` işlevleri içinde kullanabiliriz. Bu proje kodu epey sadeleşir, öyle değil mi? Onun için de gelişmiş bir teknik olan işlevleri girdi ve çıktı olarak kullanmaya (*functional programming*) giriş yaptık. [`ele` ve `işle` adlı işlevleri tanımlayan kod burada](https://onlinegdb.com/hom_Y7CSt). 
+Bu kodun çoğunluğu Talha arkadaşınızın yazdığı kodun aynısı. Ben ufak bir iki şey ekledim ki bu işlev kalıbını `kutucuk`, `sarmal`, `üçgen` ve `emoji` işlevleri içinde kullanabilelim. Bu projemizin kodunu epey sadeleştirir (*refactoring* ve DRY yani *Don't Repeat Yourself* denilen ilkemizden daha önce de bahsetmiştik), öyle değil mi? Bu ileri kalıp ve işlevsel programlama tekniğini daha iyi anlamak için de işlevleri girdi ve çıktı olarak kullanmaya (*functional programming*) giriş yaptık. [`ele` ve `işle` adlı işlevleri tanımlayan kod burada](https://onlinegdb.com/hom_Y7CSt). Yine ilk defa **adsız işlevler** gördük (İngilizce *lambda* ya da *anonymous function*.) Yazdığımız program çalışırken yeni işlevler tanımlayıp onları çalıştırabiliyor! Çok faydalı bir teknik. Dersten sonra bir de daha genel `işle2` adında bir işlev daha ekledim. Onu ayrı bir başlık dosyası içine koydum. Bu da`işle` yöntemi gibi verilen bir dizinin bütün ögelerini değiştirerek yeni bir dizi yapıyor. Girdisi akıllı sayı dizisi ama çıktısı karakter, ikil, yazı ya da başka herhangi bir türün dizisi olabiliyor. En altta bir iki örnek var. `işle2` tanımı epey ileri bir yöntem olan *metaprogramlama* kullanıyor ki ben bile tan bilmiyorum detaylarını. Onun için çok üzerinde durmayın ama fikriniz olsun ki ilerde gerekince kullanın, dönüp bakın.
 
-Geçen dersten [kağıt katlama koduna](https://onlinegdb.com/QNojjbcbV) birkaç hedef daha eklendi: en yakın galaksi Andromeda ve bilinen Evren'in ucu. 
+Arada, geçen dersten [kağıt katlama koduna](https://onlinegdb.com/QNojjbcbV) birkaç hedef daha eklendi: en yakın komşu yıldız [Proksima Sentauri](https://en.wikipedia.org/wiki/Proxima_Centauri), en yakın komşu galaksi [Andromeda](https://en.wikipedia.org/wiki/Andromeda_Galaxy) ve bilinen [Evren'in ucu](https://docs.google.com/document/d/1vyvwIJ3sX90vZp9yzZ-zOfFuMMMENNJftpcWO3k402Q/)! Bunda `std::map` yani **eşlem** kalıbını kullanan bir örneğimiz daha var.
 
-Grafik kartı kullanarak canlandırma, simülasyon ve oyun programlamaya giriş yaptık. [Cinder adlı kütüphaneyi](https://libcinder.org) inceledik. Örnek olarak [zıplayan top simülasyonu kodunu](https://onlinegdb.com/aYu-ehYHj) okuduk ve çalıştırdık.
-
+Grafik kartı kullanarak canlandırma, simülasyon ve oyun programlamaya giriş yaptık. [Cinder adlı kütüphaneyi](https://libcinder.org) inceledik. Örnek olarak [zıplayan top simülasyonu kodunu](https://onlinegdb.com/aYu-ehYHj) okuduk ve çalıştırdık. Ne yazık ki [OnlineGDB](https://www.onlinegdb.com/) henüz bu gelişmiş kütüphaneyi desteklemiyor. Zaten yerleşim içi yani bir sunucuda çalışması grafik kartını çok zorlardı. Bilgisayarınıza bu kütüphaneyi indirip *Visual Studio* ile derlemeyı ve çalıştırmayı denemek isterseniz bana haber verin yardımcı olmaya çalışırım.

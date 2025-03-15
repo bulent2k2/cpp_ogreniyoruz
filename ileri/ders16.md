@@ -1,7 +1,8 @@
 Çizim Projesi, İşlevsel Programlama ve Grafik Kütüphanesiyle Kodlamaya Giriş 
 ====
 
-[Görsel kayıt(https://drive.google.com/file/d/17cazkcCEq1kCGr9qp7sQTMNrlPpmZEhD) bir saat 27 dakika uzunluğunda.
+[Görsel kayıt](https://drive.google.com/file/d/17cazkcCEq1kCGr9qp7sQTMNrlPpmZEhD)
+bir saat 27 dakika uzunluğunda.
 
 [Çizim projesi kodunu](https://onlinegdb.com/hT4HTDvwG)  okuduk. Çok güzel, renkli ve çeşitli çizimler yapan epey gelişmiş bir yazılım. Yazan ve bizimle paylaşan arkadaşınız Talha'ya çok teşekkür ediyoruz. Bu koddan öğrenilebilecek çok şey var. Bir tanesi de karakterlerin sayı olup olmadığını bulma: 
 
@@ -18,7 +19,46 @@ bool sayıMı(std::string yazı) {
 }
 ```
 
-Hatta, bazı döngü kalıpları üç dört farklı yerde tekrar ediyor. Onları sadeleştirmek, yeni bir yapıtaşı oluşturmak faydalı olur dedik ve onun için işlevleri girdi ve çıktı olarak kullanma tekniklerine giriş yaptık. [`ele` ve `işle` adlı işlevleri tanımlayan kod burada](https://onlinegdb.com/hom_Y7CSt). 
+Burada da [kodun hepsi](https://onlinegdb.com/gSWK6biQP) var.
+
+Hatta, çizimleri yan yana ve alt alta çizen iç içe `for` döngüleri üç dört farklı yerde aynı şekilde kullanılıyor. Şöyle bir kalıp olsa: 
+```c++
+template <typename İşlev>
+void oluşturVeYaz(İşlev işlev, int w, int l)
+  string alan[w][l];
+    
+  // alanı oluştur:
+  işlev(alan, w, l);
+  
+  // sonra onu ekrana yaz:
+
+  // Önce ilk satır sonra ikinci vs. olmak üzere her satırı yatay doğrultu boyuncaki kutucuk/sarmal/üçgen/emoji sayısı kadar yazdırıyoruz:
+  for(int sayac=sayi/k;sayac>0;sayac--) {
+    for(int y=0;y<l;y++) {
+      for(int s=k;s>0;s--){
+	       cout << "  ";
+	       for(int x=0;x<w;x++)
+	         cout << alan[x][y];
+      }
+      if(y==l-1) cout <<"\n"<< endl;
+      else cout << endl;
+    }
+  }
+  // Eğer tam bölünme yoksa kalanlari son satıra ekliyoruz 
+  if(sayi%k!=0)
+    for(int y=0;y<l;y++) {
+      for(int s=sayi%k;s>0;s--){
+        	cout << "  ";
+        	for(int x=0;x<w;x++)
+	          cout << alan[x][y];
+      }
+      if(y==l-1) cout <<"\n"<< endl;
+      else cout << endl;
+    }
+  }
+```
+
+Bu işlevi `kutucuk`, `sarmal`, `üçgen` ve `emoji` işlevleri içinde kullanabiliriz.  Onun için de gelişmiş bir teknik olan işlevleri girdi ve çıktı olarak kullanmaya (*functional programming*) giriş yaptık. [`ele` ve `işle` adlı işlevleri tanımlayan kod burada](https://onlinegdb.com/hom_Y7CSt). 
 
 Geçen dersten [kağıt katlama koduna](https://onlinegdb.com/QNojjbcbV) birkaç hedef daha eklendi: en yakın galaksi Andromeda ve bilinen Evren'in ucu. 
 

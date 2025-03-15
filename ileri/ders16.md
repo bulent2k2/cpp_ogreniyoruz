@@ -14,7 +14,7 @@ bool rakamMı(char k) {
 
 bool sayıMı(std::string yazı) {
     for (auto k : yazı)
-      if (!rakamMı(k)) return false;
+        if (!rakamMı(k)) return false;
     return true;
 }
 ```
@@ -39,9 +39,9 @@ void oluşturVeYaz(İşlev çizim, int w, int l,
   for(int sayac=sayi/k;sayac>0;sayac--) {
     for(int y=0;y<l;y++) {
       for(int s=k;s>0;s--){
-	     cout << "  ";
-	     for(int x=0;x<w;x++)
-	       cout << alan[x][y];
+	       cout << "  ";
+	         for(int x=0;x<w;x++)
+	         cout << alan[x][y];
       }
       if(y==l-1) cout <<endl<<endl;
       else cout << endl;
@@ -52,8 +52,8 @@ void oluşturVeYaz(İşlev çizim, int w, int l,
     for(int y=0;y<l;y++) {
       for(int s=sayi%k;s>0;s--){
         cout << "  ";
-        for(int x=0;x<w;x++)
-	      cout << alan[x][y];
+        for(int x=0;x<w;x++) 
+          cout << alan[x][y];
       }
       if(y==l-1) cout <<endl<< endl;
       else cout << endl;

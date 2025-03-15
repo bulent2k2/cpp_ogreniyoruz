@@ -9,23 +9,22 @@ bir saat 27 dakika uzunluğunda.
 ```c++
 // rakam karakterleri ASCII'de peşpeşe kodlanmış, onun için: 
 bool rakamMı(char k) {
-    return k >= '0' && k <= '9';
+  return k >= '0' && k <= '9';
 }
 
 bool sayıMı(std::string yazı) {
-    for (auto k : yazı)
-        if (!rakamMı(k)) return false;
-    return true;
+  for (auto k : yazı)
+    if (!rakamMı(k)) return false;
+  return true;
 }
 ```
 
-Burada da [kodun hepsi](https://onlinegdb.com/gSWK6biQP) var.
+Burada da [kodun hepsi](https://onlinegdb.com/jAaKQESar) var.
 
 Hatta, çizimleri yan yana ve alt alta çizen iç içe `for` döngüleri üç dört farklı yerde aynı şekilde kullanılıyor. Şöyle bir kalıp olsa: 
 ```c++
 template <typename İşlev>
-void oluşturVeYaz(İşlev çizim, int w, int l,
-  int sayi, int k) {
+void oluşturVeYaz(İşlev çizim, int w, int l, int sayi, int k) {
   string alan[w][l];
     
   // istenilen çizimi alana yaz:
@@ -38,12 +37,12 @@ void oluşturVeYaz(İşlev çizim, int w, int l,
   // sayısı kadar yazdırıyoruz:
   for(int sayac=sayi/k;sayac>0;sayac--) {
     for(int y=0;y<l;y++) {
-      for(int s=k;s>0;s--){
-	       cout << "  ";
-	       for(int x=0;x<w;x++)
-	         cout << alan[x][y];
+      for(int s=k;s>0;s--) { 
+        cout << "  ";
+        for(int x=0;x<w;x++) 
+          cout << alan[x][y];
       }
-      if(y==l-1) cout <<endl<<endl;
+      if(y==l-1) cout << endl << endl;
       else cout << endl;
     }
   }
@@ -55,7 +54,7 @@ void oluşturVeYaz(İşlev çizim, int w, int l,
         for(int x=0;x<w;x++) 
           cout << alan[x][y];
       }
-      if(y==l-1) cout <<endl<< endl;
+      if(y==l-1) cout <<endl << endl;
       else cout << endl;
     }
 }

@@ -97,5 +97,5 @@ Görsel kayıt ve notlar başlıktaki linkte ve [burada](ileri/ders10.md).
 
 Koco ve Scala'yla öğrenmeye devam
 ====
-Son yıllarda Hintli ve İsveçli birkaç iş arkadaşımla epey emek verdiğimiz bu gönüllü açık kaynak öğrenme ortamını denemeye davet ediyorum hepinizi. Derslerimizden birinde ufak bir sunum da yaparım isterseniz. Daha çok bilgi ve indirmek için [link burada](ileri/kocoya-davet.md).
+Son yıllarda Hintli ve İsveçli birkaç iş arkadaşımla epey emek verdiğimiz bu gönüllü açık kaynak öğrenim ve programlama ortamını denemeye davet ediyorum hepinizi. Derslerimizden birinde ufak bir sunum da yaparım isterseniz. Daha çok bilgi ve indirmek için [link burada](ileri/kocoya-davet.md).
 

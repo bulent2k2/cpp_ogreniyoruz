@@ -24,23 +24,26 @@ Burada da [kodun hepsi](https://onlinegdb.com/gSWK6biQP) var.
 Hatta, çizimleri yan yana ve alt alta çizen iç içe `for` döngüleri üç dört farklı yerde aynı şekilde kullanılıyor. Şöyle bir kalıp olsa: 
 ```c++
 template <typename İşlev>
-void oluşturVeYaz(İşlev işlev, int w, int l)
+void oluşturVeYaz(İşlev çizim, int w, int l,
+  int sayi, int k) {
   string alan[w][l];
     
-  // alanı oluştur:
-  işlev(alan, w, l);
+  // istenilen çizimi alana yaz:
+  çizim(alan, w, l);
   
   // sonra onu ekrana yaz:
 
-  // Önce ilk satır sonra ikinci vs. olmak üzere her satırı yatay doğrultu boyuncaki kutucuk/sarmal/üçgen/emoji sayısı kadar yazdırıyoruz:
+  // Önce ilk satır sonra ikinci vs. olmak üzere her satırı
+  // yatay doğrultu boyuncaki kutucuk/sarmal/üçgen/emoji 
+  // sayısı kadar yazdırıyoruz:
   for(int sayac=sayi/k;sayac>0;sayac--) {
     for(int y=0;y<l;y++) {
       for(int s=k;s>0;s--){
-	       cout << "  ";
-	       for(int x=0;x<w;x++)
-	         cout << alan[x][y];
+	     cout << "  ";
+	     for(int x=0;x<w;x++)
+	       cout << alan[x][y];
       }
-      if(y==l-1) cout <<"\n"<< endl;
+      if(y==l-1) cout <<endl<<endl;
       else cout << endl;
     }
   }
@@ -48,14 +51,14 @@ void oluşturVeYaz(İşlev işlev, int w, int l)
   if(sayi%k!=0)
     for(int y=0;y<l;y++) {
       for(int s=sayi%k;s>0;s--){
-        	cout << "  ";
-        	for(int x=0;x<w;x++)
-	          cout << alan[x][y];
+        cout << "  ";
+        for(int x=0;x<w;x++)
+	      cout << alan[x][y];
       }
-      if(y==l-1) cout <<"\n"<< endl;
+      if(y==l-1) cout <<endl<< endl;
       else cout << endl;
     }
-  }
+}
 ```
 
 Bu işlevi `kutucuk`, `sarmal`, `üçgen` ve `emoji` işlevleri içinde kullanabiliriz.  Onun için de gelişmiş bir teknik olan işlevleri girdi ve çıktı olarak kullanmaya (*functional programming*) giriş yaptık. [`ele` ve `işle` adlı işlevleri tanımlayan kod burada](https://onlinegdb.com/hom_Y7CSt). 

@@ -1,4 +1,4 @@
-Conway adlı bir matematikçinin yaklaşık 50 yıl önce icat ettiği yaşam oyununu duydunuz mu? 
+Conway adlı bir matematikçinin yaklaşık 50 yıl önce icat ettiği [yaşam oyununu](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) duydunuz mu? 
 
 Şu siteyi kurcalayarak başlayalım:
 
@@ -22,3 +22,5 @@ Bazı önemli noktalar:
 - Oyun "sıfır oyunculu" bir oyundur, yani başladıktan sonra oyuncuların yapması gereken bir şey yoktur.
 - Her nesil, önceki neslin durumuna göre tamamen otomatik olarak oluşur.
 - Başlangıç desenine bağlı olarak hücreler yok olabilir, sabit kalabilir veya karmaşık desenler oluşturabilir.
+
+Yukardaki çevirimiçi site güzel bir yazılımla çalışıyor (sanırım JavaScript diliyle yazılmış). Dersimizde okumak ve yazmak için [Claude AI yardımıyla başlayan C++ yazılım](https://onlinegdb.com/9nOi2LmtO) da burada. Okuyup yazalım ki daha iyi anlayalım. 

@@ -1,20 +1,20 @@
 Conway adlı bir matematikçinin yaklaşık 50 yıl önce icat ettiği [yaşam oyununu](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) duydunuz mu? 
 
-Şu çevirimiçi site çok güzel yapılmış: [Yaşam Oyununu Oyna adlı site](https://playgameoflife.com/). Bu site sanırım JavaScript diliyle yazılmış ve çok güzel çalışıyor. Dersimizde okumak ve yazmak için [Claude AI yardımıyla başlayan C++ yazılım](https://onlinegdb.com/9nOi2LmtO) da burada. Okuyup yazalım ki daha iyi anlayalım. 
+Şu site çok güzel yapılmış: [Yaşam Oyununu Oyna adlı site](https://playgameoflife.com/). Sanırım [JavaScript](https://javascript.info/) diliyle yazılmış ve çok güzel çalışıyor. Dersimizde kullanmak için [Claude AI yardımıyla başlayan C++ yazılım](https://onlinegdb.com/9nOi2LmtO) da burada. Kendimiz okuyup yazalım ki daha iyi anlayalım. 
 
 Oyunun kuralları oldukça basit ama bir o kadar da ilginç:
 
-Oyun, canlı veya ölü durumda olan hücrelerin bulunduğu bir ızgara üzerinde oynanır. Her hücrenin sekiz komşusu vardır (dikey, yatay ve çapraz). Hücrelerin bir sonraki nesle geçişi şu kurallara bağlıdır:
+Oyun, canlı ve cansız hücrelerin bulunduğu bir ızgara üzerinde oynanır. Her hücrenin sekiz komşusu vardır (dikey, yatay ve çapraz). Hücrelerin bir sonraki nesilde canlı ya da cansız olması şu kurallara bağlıdır:
 
-1. **Az Nüfus Kuralı**: Herhangi bir canlı hücre, iki hücreden daha az sayıda canlı komşuya sahipse ölür (yalnızlıktan).
+1. **Az Nüfus Kuralı**: Herhangi bir canlı hücre, iki hücreden daha az sayıda canlı komşuya sahipse canı çıkar (yalnızlıktan).
 
 2. **Hayatta Kalma Kuralı**: Herhangi bir canlı hücre, iki veya üç canlı komşuya sahipse bir sonraki nesilde de hayatta kalır.
 
-3. **Aşırı Nüfus Kuralı**: Herhangi bir canlı hücre, üçten fazla canlı komşuya sahipse ölür (aşırı kalabalıktan).
+3. **Aşırı Nüfus Kuralı**: Herhangi bir canlı hücre, üçten fazla canlı komşuya sahipse canı çıkar (aşırı kalabalıktan).
 
-4. **Üreme Kuralı**: Herhangi bir ölü hücre, tam olarak üç canlı komşuya sahipse, bir sonraki nesilde canlı hücreye dönüşür.
+4. **Üreme Kuralı**: Herhangi bir cansız hücre, tam olarak üç canlı komşuya sahipse, bir sonraki nesilde canlanır.
 
-Bu basit kurallar, inanılmaz karmaşık ve güzel desenler oluşturabilir. Oyunun en ilginç yanı, başlangıç durumu belirlendikten sonra herhangi bir insan müdahalesi olmadan sistemin kendi kendine gelişmesidir. 
+Bu basit kurallar inanılmaz karmaşık ve güzel desenler oluşturabilir. Oyunun en ilginç yanı, başlangıç durumu belirlendikten sonra herhangi bir insan müdahalesi olmadan sistemin kendi kendine gelişmesidir. 
 
 Bazı önemli noktalar:
 - Oyun "sıfır oyunculu" bir oyundur, yani başladıktan sonra oyuncuların yapması gereken bir şey yoktur.

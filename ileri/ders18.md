@@ -10,7 +10,7 @@ Gelecek ders için iki alıştırma öneriyorum:
   - A1: `{2, 3, 1, 3, 2}`  
   - A2: `{3, 1, 3}`  
   - A3: `{1, 3, 2, 1}`   
-İçindeki sayıların toplamı en büyük olan alt dizi A1. Toplamı da 11. Verilen herhangi bir dizi bu özel toplamı bulan bir işlev yazalım:
+İçindeki sayıların toplamı en büyük olan alt dizi A1. Toplamı da 11. Verilen herhangi bir dizi için bu özel toplamı bulan bir işlev yazalım:
 ```c++
 int altToplam(std::vector<int> dizi) {
     // ...

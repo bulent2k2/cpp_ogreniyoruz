@@ -8,5 +8,5 @@ ile başlayalım. Çizgeleri *komşuluk matrisi* kullanarak programlamak epey ko
 
 Daha detaylı bir anlatım için YBS ansiklopedisinden [çizge bölümü bu PDF dosyasında](https://ybsansiklopedi.com/wp-content/uploads/2015/05/cizge_teorisi.pdf). Bunu okumak da faydalı olabilir.  
 
-Çizgelerle bir oyun da Bülent hocadan: [Kocoyla düğüm oyunu](http://ikojo.in/sf/OhWWM7U/14).
+Çizgelerle bir oyun da Bülent hocadan: [Kocoyla düğüm çözme oyunu](http://ikojo.in/sf/OhWWM7U/14). Hata verirse *https* yerine *http* yazıp tekrar yükleyin. 
 

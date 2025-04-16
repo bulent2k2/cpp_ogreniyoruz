@@ -12,5 +12,5 @@ Daha detaylı bir anlatım için [YBS](https://ybsansiklopedi.com/) ansiklopedis
 
 Daha ileri derslerde göreceğimiz bir kaç algoritmaya da bakalım kısaca. İlgilenenler için. Anlamadığınız bir şey olursa lütfen bana yazın:
 - [Euler yolu bulmak](https://onlinegdb.com/GYUjrUZ75). Her bağlantının üzerinden ama tekrarlamadan geçilebilir mi?
-- [Önce derinine doğru arama ile bağlı bileşen ve döngü bulma](https://onlinegdb.com/uqsts_xGZ). Kopuk bir çizge mi? Yönlü çizgede döngü var mı?
-- [Önce enlemesine arama ile yol bulma](https://onlinegdb.com/XLCbeaUQN). Bir düğümden öbürüne yol var mı? Varsa en kısası nasıl bulunur?
+- [Önce derinine doğru arama (DFS) ile bağlı bileşen ve döngü bulma](https://onlinegdb.com/uqsts_xGZ). Kopuk bir çizge mi? Yönlü çizgede döngü var mı?
+- [Önce enlemesine arama (BFS) ile yol bulma](https://onlinegdb.com/XLCbeaUQN). Bir düğümden öbürüne yol var mı? Varsa en kısası nasıl bulunur?

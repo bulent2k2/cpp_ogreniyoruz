@@ -1,11 +1,12 @@
 Çizge Kuramı Hakkında
 ====================
 
-[Giriş](https://tr.mathigon.org/course/graph-theory/introduction).  
+[Çizge ve ağlara giriş](https://tr.mathigon.org/course/graph-theory/introduction). [Mathigon.org](matching.org) sitesinden.
 
-[YBS ansiklopedisinden bölüm](https://ybsansiklopedi.com/wp-content/uploads/2015/05/cizge_teorisi.pdf).  
+[Örnek yazılım](https://onlinegdb.com/d60_ncCRk).  
 
-[Örnek yazılım](https://www.onlinegdb.com/fork/9pbe2NF5-)
+Dersten önce bu yazılımı hızla bir okuyuverin. Derste de yeni özellikler ve beceriler ekleriz ve bazı sorunları çözmek için kullanılırız inşallah. 
 
-Dersimizde buna yeni özellikler ve beceriler ekleriz inşallah.
+Daha detaylı bir giriş için YBS ansiklopedisindeki [Çizge bölümü bu PDF dosyasında](https://ybsansiklopedi.com/wp-content/uploads/2015/05/cizge_teorisi.pdf). Onu da okumak faydalı olur.  
+
 

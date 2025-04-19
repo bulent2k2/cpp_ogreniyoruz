@@ -14,7 +14,7 @@ Talha arkadaşınız [Project Euler'in 52. sorusunu](https://projecteuler.net/pr
 ```c++
 const int N=10; // en çok 10 düğüm olsun
 bool km[N][N];
-// ikinci düğümünden birinci düğüme yönlü bağ:
+// ikinci düğümden birinci düğüme yönlü bir bağ:
 km[1][0] = true;
 ```
 
@@ -27,15 +27,15 @@ Basit bir çizge yerine iki düğüm arasında birden çok bağ olursa, o zaman 
 ```c++
 unsigned int km[N][N];
 // 0 ve 1 arasında iki yönsüz bağ için:
-km[0][1] = 2;
-km[1][0] = 2; 
+km[0][1] = 3; // iki kıyı arasında
+km[1][0] = 3; // üç köprü olsun
 ```
 
-Bağların değişik kapasitelere sahip olduğu *çizge*lere *ağ* deniyor. Onun için de `unsiged double` kullanabiliriz:
+Bağların değişik kapasitelere sahip olduğu çizgelere *ağ* da deniyor. Ağları kodlamal için de `unsiged double` kullanabiliriz:
 ```c++
 unsigned double km[N][N];
-km[3][5] = 2.5;
-km[5][3] = 0.5;
+km[3][5] = 2.5; // gidiş kapasitesi büyük 
+km[5][3] = 0.5; // geliş küçük 
 ```
 
 Derste üzerinden geçtiğimiz [kodumuz burada](https://onlinegdb.com/qph9rcrQE).

@@ -31,9 +31,9 @@ km[0][1] = 3; // iki kıyı arasında
 km[1][0] = 3; // üç köprü olsun
 ```
 
-Bağların değişik kapasitelere sahip olduğu çizgelere *ağ* da deniyor. Ağları kodlamal için de `unsiged double` kullanabiliriz:
+Bağların değişik kapasitelere sahip olduğu çizgelere *ağ* da deniyor. Ağları kodlamak için de `double` kullanabiliriz:
 ```c++
-unsigned double km[N][N];
+double km[N][N];
 km[3][5] = 2.5; // gidiş kapasitesi büyük 
 km[5][3] = 0.5; // geliş küçük 
 ```

@@ -38,6 +38,6 @@ km[3][5] = 2.5; // gidiş kapasitesi büyük
 km[5][3] = 0.5; // geliş küçük 
 ```
 
-Derste üzerinden geçtiğimiz [kodumuz burada](https://onlinegdb.com/qph9rcrQE).
+Derste üzerinden geçtiğimiz komşuluk matrisi oluşturup ekrana yazan [kodumuz da burada](https://onlinegdb.com/qph9rcrQE).
 
 Çizgeler ve Ağlar hakkında [bilgiler de burada](../notlar/cizge-kurami.md).  

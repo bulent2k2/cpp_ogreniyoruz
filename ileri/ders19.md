@@ -5,7 +5,7 @@ Dersimizin [görsel kayıdı burada](https://drive.google.com/file/d/1Vh9RPK3vkr
 
 Bir dizi sayı içinde tekrar var mı yok mu? Bir dizinin *alt dizilerini* nasıl bulabiliriz? Bu soruları yanıtlamak için beraber yazdığımız [kodlar burada](
 https://onlinegdb.com/FXZNCCrMb
-). Alt dizi tanımımız: dizinin başı ve sonu aynı sayı olan parçaları. 
+). Alt dizi örneklerini [geçen derste](ders18.md) görmüş ve tanımını yapmıştık. Tekrar edelim: dizinin, başı ve sonu aynı sayı olan parçaları. 
 
 Talha arkadaşınız [Project Euler'in 52. sorusunu](https://projecteuler.net/problem=52) çok güzel programlayarak çözmüş. Derste üzerinden geçtik. [Kodu burada](https://www.onlinegdb.com/fUk6rwipq).  
 

@@ -15,4 +15,4 @@ Daha ileri derslerde göreceğimiz bir kaç algoritmaya da bakalım kısaca. İl
 - [Önce derinine doğru arama (DFS) ile bağlı bileşen ve döngü bulma](https://onlinegdb.com/uqsts_xGZ). Kopuk bir çizge mi? Yönlü çizgede döngü var mı?
 - [Önce enlemesine arama (BFS) ile yol bulma](https://onlinegdb.com/XLCbeaUQN). Bir düğümden öbürüne yol var mı? Varsa en kısası nasıl bulunur?
 
-Bir de [Scala](https://scala-lang.org/) dili ve [Kojo](https://sites.google.com/view/koco-surum) ortamı ile [DFS ve BFS nasıl kodlanır](http://ikojo.in/sf/7QGWvkx/16) görüverelim. Hem işlevsel dillerin becerisine tanık olalım hem de bu algoritmaları daha iyi anlayalım.
+Bir de [Scala](https://scala-lang.org/) dili ve [Kojo](https://sites.google.com/view/koco-surum) ortamı ile [DFS ve BFS nasıl kodlanır](http://ikojo.in/sf/2cY7qZa/3) görüverelim. Hem işlevsel dillerin becerisine tanık olalım hem de bu algoritmaları daha iyi anlayalım.

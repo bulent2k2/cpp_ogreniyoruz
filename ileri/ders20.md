@@ -28,6 +28,13 @@ Dersin çoğunu, çizgeler üzerinde arama ve gezinme yöntemlerinin en çok kul
 - Enine gezi (*BFS: breadth-first search/traversal*), ve
 - Derinine gezi (*DFS: depth-first search/traversal*).
 
+İkisi için tek bir işlev türü tanımlamak yetti:
+```c++
+// Gezi bağlarla bağlı bir sıra düğüm demek:
+using std::list<Düğüm> Gezi; 
+Gezi gez(bool enine, const Çizge&, Gezi sıra, Küme atla = Küme{});
+```
+
 [Kodun hepsi burada](https://onlinegdb.com/y6uXvw2dE).
 
 [Dersimizin görsel kaydı da burada](https://drive.google.com/file/d/15w5yM379blFVbCNRIAL2IcGaW0i3Lc-3). Süresi yaklaşık bir saat.

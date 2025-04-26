@@ -30,12 +30,16 @@ Dersin çoğunu, çizgeler üzerinde arama ve gezinme yöntemlerinin en çok kul
 
 İkisi için tek bir işlev türü tanımlamak yetti:
 ```c++
-// Gezi bağlarla bağlı bir sıra düğüm demek:
+// en başa öge eklemek ya da en baştaki ögeyi  silmek daha kolay olsun diye vector yerine list kullandık:
 using std::list<Düğüm> Gezi; 
+// sıra girdisiyle gezinin en başında olmasını istediğimiz düğümleri belirliyoruz.
+// atla girdisi de varsa gezmek istemediğimiz düğümleri belirliyor.
 Gezi gez(bool enine, const Çizge&, Gezi sıra, Küme atla = Küme{});
 ```
 
+Özyineleyen bir işlevle bu iki tür arama ve gezi türünün nasıl çalıştığını iyice inceledik, daha iyi anladık. Tek taşla iki kuş vurduk. Ayrıca çizgeleri ve gezileri kolayca ekrana yazmayı da gördük.
+ 
 [Kodun hepsi burada](https://onlinegdb.com/y6uXvw2dE).
 
-[Dersimizin görsel kaydı da burada](https://drive.google.com/file/d/15w5yM379blFVbCNRIAL2IcGaW0i3Lc-3). Süresi yaklaşık bir saat.
+[Dersimizin görsel kaydı burada](https://drive.google.com/file/d/15w5yM379blFVbCNRIAL2IcGaW0i3Lc-3). Süresi yaklaşık bir saat.
 

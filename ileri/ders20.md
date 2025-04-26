@@ -30,7 +30,7 @@ Dersin çoğunu, çizgeler üzerinde arama ve gezinme yöntemlerinin en çok kul
 
 İkisi için tek bir işlev türü tanımlamak yetti:
 ```c++
-// en başa öge eklemek ya da en baştaki ögeyi  silmek daha kolay olsun diye vector yerine list kullandık:
+// en başa öge eklemek ve en baştaki ögeyi silmek kolay olsun diye vector yerine list kullandık:
 using std::list<Düğüm> Gezi; 
 // sıra girdisiyle gezinin en başında olmasını istediğimiz düğümleri belirliyoruz.
 // atla girdisi de varsa gezmek istemediğimiz düğümleri belirliyor.

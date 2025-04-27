@@ -11,7 +11,7 @@ using Çizge = std::map<Düğüm, Küme>;
 Çizge çizge { // yönlü çizge örneği
     {2, Küme{3, 4, 5}},
     {3, Küme{4, 6}},
-    {4, Küme{5, 6, 2} // ...
+    {4, Küme{5, 6, 2}} // ...
 }; 
 ```
 
@@ -24,7 +24,7 @@ void bağla(Çizge & çizge, Düğüm d1, Düğüm d2) {
 
 Bir dizi bağı kolaylıkla tanımlamak için `std::pair<Düğüm, Düğüm>` dizisi kullandık.
 
-Dersin çoğunu, çizgeler üzerinde arama ve gezinme yöntemlerinin en çok kullanılan ve faydalı olan iki meşhur türünü görmeye ve anlamaya adadık: 
+Dersin çoğunu, çizgeler üzerinde arama ve gezinme yöntemlerinin en çok kullanılan ve faydalı olan iki meşhur türünü anlamaya ve kodlamaya adadık: 
 - Enine gezi (*BFS: breadth-first search/traversal*), ve
 - Derinine gezi (*DFS: depth-first search/traversal*).
 

@@ -24,7 +24,7 @@ void bağla(Çizge & çizge, Düğüm d1, Düğüm d2) {
 
 Bir dizi bağı kolaylıkla tanımlamak için `std::pair<Düğüm, Düğüm>` dizisi kullandık.
 
-Dersin çoğunu, çizgeler üzerinde arama ve gezinme yöntemlerinin en çok kullanılan ve faydalı olan iki meşhur türünü anlamaya ve kodlamaya adadık: 
+Çizgelerde gezinerek arayış yapmanın çok kullanılan ve faydalı olan iki meşhur türü var. Dersin çoğunu onları anlamaya ve kodlamaya adadık: 
 - Enine gezi (*BFS: breadth-first search/traversal*), ve
 - Derinine gezi (*DFS: depth-first search/traversal*).
 

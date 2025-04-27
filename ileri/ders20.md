@@ -37,7 +37,7 @@ using std::list<Düğüm> Gezi;
 Gezi gez(bool enine, const Çizge&, Gezi sıra, Küme atla = Küme{});
 ```
 
-Özyineleyen bir işlevle bu iki tür arama ve gezi türünün nasıl çalıştığını iyice inceledik, daha iyi anladık. Tek taşla iki kuş vurduk. Ayrıca çizgeleri ve gezileri kolayca ekrana yazmayı da gördük.
+Bu işlevin özyinelemeyle nasıl yazılabildiğini gördük. Enlemesine ve derinlemesine gezi türlerinin nasıl çalıştığını iyice inceledik, daha iyi anladık. Tek taşla iki kuş vurduk. Ayrıca çizgeleri ve gezileri kolayca ekrana yazmayı da gördük.
  
 [Kodun hepsi burada](https://onlinegdb.com/y6uXvw2dE).
 

@@ -7,14 +7,14 @@ Tarihi sırasıyla programlama teknikleri ve yöntemleri
 ----
 - Makine dili: 1940larda komutlar ve bütün değişkenler/bellekteki adresler sayılarla yazılıyor.
 - Assembly dili: 1950lerde komutların adları var sonunda. Örneğin MOV ADD COPY JUMP. Direk donanımın komutlarını çalıştırıyor.
-- yüksek düzey dillerin doğuşu: Fortran, Cobol ve C. C dili 1980lerde yüksek düzey kabul edilirken, 2000'lerde düşük düzey kalıyor.
+- Yüksek düzey dillerin doğuşu: Fortran, Cobol ve C. C dili 1980lerde yüksek düzey kabul edilirken, 2000'lerde düşük düzey kalıyor.
 - Modüler programlama (işlevlerle yapıtaşları tanımlama ve onlari bir araya getirme)
-- Object Oriented (nesne yönelimli) C++ (classes/sınıflar/yeni türler). 1990larda Java ile yaygınlaşıyor.
-- Functional programming (işlevsel programlama). 2000'lerde yayginlaşıyor.
+- Object Oriented (nesne yönelimli) (classes/sınıflar/yeni türler). 1990larda C++ ve Java ile yaygınlaşıyor.
+- Functional programming (işlevsel programlama). 2000'lerde web sunucuları ve web sitesi yazılımlarında kullanılarak yaygınlaşıyor.
 - Paralel programlama (core/cpu thread)  multicore computers, supercomputers
 - Eşzamanlı programlama/Concurrent programming (cluster of computers) 
   RDD model Resilient Distibuted Data model (Scala / Spark) 
-- Big data / Google search / AI
+- Çok geniş hacimli veri işleme (big data) / Google arama motoru / AI
 - Veri yapıları/Data structures: verileri nasıl düzenleyelim, bir araya koyalim, yapılandıralım
 ```c++
 int s; // tek değer
@@ -34,7 +34,7 @@ Daha önce görmediğimiz ama çok faydalı olabilen bazı özel dizi türlerini
 
 - Yığın: İlk giren son çıkar. Son giren ilk çıkar. Önemli yöntemler: `push()`, `pop()` ve `top()`. DFS (derinlemesine gezi/arama) için faydalı.
 - Kuyruk: İlk giren ilk çıkar. Son giren son çıkar. Yöntemler: `push()`, `pop()` ve `front()`. BFS (enlemesine gezi/arama) için faydalı.
-- Öncelik sırası: En büyük değer önce çıkar. Giriş sırası önemli değil. Yöntemler yığınla aynı: `push()`, `pop()` ve `top(). En kısa yol bulmak için faydalı.
+- Öncelik sırası: En büyük değer önce çıkar. Giriş sırası önemli değil. Yöntemler yığınla aynı: `push()`, `pop()` ve `top()`. En kısa yol bulmak için faydalı.
 - Deste: Ya da iki başlı kuyruk: Öne ya da arkaya eklenebilir ve önden ya da arkadan çıkarılabilir. Yöntemler: `push_front()`, `push_back()`, `front()`, `back()`.
 
 [Dersten kodumuz biraz iyileştirilmiş haliyle burada](https://onlinegdb.com/g-bZYoHcx).

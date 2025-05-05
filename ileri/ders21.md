@@ -27,6 +27,7 @@ std::stack<int> // yığın   FILO (ilk giren son çıkan) DFS derinlemesine
 std::queue<int> // kuyruk  FIFO BFS
 ...
 ```
+Daha detaylı tarihi bilgiler için şu makale fena değil: [1849'dan 2022'ye Kodlama: Programlama Dillerinin Zaman Çizelgesine Bir Kılavuz](https://www.computer.org/publications/tech-news/insider-membership-news/timeline-of-programming-languages).
 
 Yığın, kuyruk, öncelik sırası ve deste
 ----
@@ -38,3 +39,5 @@ Daha önce görmediğimiz ama çok faydalı olabilen bazı özel dizi türlerini
 - Deste: Ya da iki başlı kuyruk: Öne ya da arkaya eklenebilir ve önden ya da arkadan çıkarılabilir. Yöntemler: `push_front()`, `push_back()`, `front()`, `back()`.
 
 [Dersten kodumuz biraz iyileştirilmiş haliyle burada](https://onlinegdb.com/g-bZYoHcx).
+
+Bu kavramları, bilhassa *yığın* yapısını biraz pekiştirmek için şu alıştırma üzerinde düşünmek ve mümkünse kodunu yazıp çözmek öğretici olabilir: [Parantezler doğru açılıp doğru kapanıyor mu](https://onlinegdb.com/Gk91i3N7K)? 

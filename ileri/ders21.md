@@ -1,4 +1,4 @@
-Kısaca yazılım tarihçesi ve bazı önemli veri yapıları
+Kısaca yazılım tarihçesi ve bazı faydalı veri yapıları
 ====
 
 [Görsel kayıt burada](https://drive.google.com/file/d/1HFgtYu63jB1Rfmr1tatwwjs1TSlhdHUC). 55 dakika uzunluğunda.

@@ -28,7 +28,7 @@ Diğer Siteler
 
 Kısa, genel ve faydalı notlar
 -- 
-[*For Dummies*](https://www.dummies.com/about-for-dummies/) kitap serisinde çok kaliteli, pratik ve öğretici kitaplar var. Hocanız en az on tanesini okumuştur😉. Bilmiyorum Türkçe tercümeleri var mı? Yoksa belki de yapmak gerek! Örneğin: 
+[*Yeni başlayanlar için* anlamına gelen *For Dummies*](https://www.dummies.com/about-for-dummies/) kitap serisinde çok kaliteli, pratik ve öğretici kitaplar var. Hocanız en az on tanesini okumuştur😉. Bilmiyorum Türkçe tercümeleri var mı? Yoksa belki de yapmak gerek! Örneğin: 
 
 [Matematiksel ve felsefi mantık](https://www.dummies.com/book/body-mind-spirit/philosophy/logic/logic-for-dummies-282362/). `Ve ∧`, `Veya ∨`, `İse ➡️` işlemcilerinden, 'En az bir ∃' ve 'Her bir ∀' nicelleştirip özelleştirenlerden taaa çağdaş filozof *Bertrand Russell* ve *Einstein*'ın arkadaşı üstat matematikçi *Kurt Gödel*'e kadar uzanır!  
 

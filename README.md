@@ -58,7 +58,7 @@ Bu son kitapi yeni aldım ve biraz karıştırdım. Çok iyi yazılmış ve heme
 6. Dosya okumak ve dosyalara yazmak. *Reading and Writing Files*
 7. Standart kütüphanenin daha gelişmiş kullanımı. *Advanced Standard Library Usage* 
 
-Bu yedi kitabın hepsinde de en azbeş on bölüm (*chapter*) var. Dedim ya çok kapsamlı ve iyi yazılmış. Neyseki elektronik kitap var ve elektronik mürekkeple yazılmış. Gerçek mürekkep çok pahalı. Bir de çok ağaç kesilmesin. Size biraz yol göstersin ve ufuk açsın diye bu kitap adlarını burada sıraladım. Haydi okumaya, yazmaya, çalışmaya ve öğrenmeye devam..  
+Yedi tane kitap ama hepsi çok uzun değil. Bazısı sadece üç beş bölüm (*chapter*). Ama arı, sade, kapsamlı ve iyi yazılmış. Neyseki elektronik kitap ve elektronik mürekkeple yazılmış. Gerçek mürekkep çok pahalı. Bir de çok ağaç kesilmesin. Size biraz yol göstersin ve ufuk açsın diye bu kitap adlarını burada sıraladım. Haydi okumaya, yazmaya, çalışmaya ve öğrenmeye devam..  
 
 [Dersler](ileri)
 ====

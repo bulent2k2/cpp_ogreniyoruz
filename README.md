@@ -32,13 +32,13 @@ Kısa, genel ve faydalı notlar
 
 [Matematiksel ve felsefi mantık](https://www.dummies.com/book/body-mind-spirit/philosophy/logic/logic-for-dummies-282362/). Önergeleri bileştiren `Ve ∧`, `Veya ∨`, `İse ➡️` işlemcilerinden, 'En az bir ∃' ve 'Her bir ∀' gibi önergeleri nicelleştirip özelleştirenlerden taaa çağdaş filozof *Bertrand Russell* ve *Einstein*'ın arkadaşı üstat matematikçi *Kurt Gödel*'e kadar uzanır!  
 
-[Önder olunur mu? Neden olmasın? Ama nasıl olursa iyi olur](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/)? Yogi Berra hem komik hem de doğru söylemiş: önder olmak kolay da esas izlenmek zor!  Onun için deriz ya Atam izindeyiz. Bu kitap iyi önderleri iyi yapan temeller üzerinde duyuyor ve bunları çok güzel özetliyor. Kitap tabii biraz uzun. Burada   kısaca [özetin özetini](http://ozetle.com/) yapalım: 
+[Önder olunur mu? Neden olmasın? Ama nasıl olursa iyi olur](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/)? Yogi Berra hem komik hem de doğru söylemiş: önden gitmek önder olmak kolay da esas izlenmek zor! Onun için deriz ya *Atam izindeyiz*. Bu kitap iyi önderleri iyi yapan temeller üzerinde duyuyor ve bunları çok güzel özetliyor. Kitap tabii biraz uzun. Burada kısaca [özetin özetini](http://ozetle.com/) yapalım: 
  
-1. İzleyenlerin çıkarını kendi çıkarından önce tutar iyi önder.
-2. İzleyenleri iyi dinler iyi önder.
-3. İzleyenleri biraz dürter ve devinime şevk eder iyi önder.   
+1. İzleyenlerin çıkarları kendi çıkarından önce gelir, iyi öndere.
+2. İzleyenleri iyi dinler, iyi önder.
+3. İzleyenleri biraz dürter ve devinime heveslendirir, iyi önder.   
 
-İşte gerek ve yeteni bu kadar! 
+İşte gerek ve yeteni bu kadar! Haydi önden buyurun.
 
 [Bireysel yatırım](https://www.dummies.com/article/business-careers-money/personal-finance/general-personal-finance/personal-finance-for-dummies-cheat-sheet-208319/). Bunu okuduğumda neredeyse otuz yaşındaydım. Biraz geç kaldım belki de. Siz gecikmeyin.  
 
@@ -48,7 +48,7 @@ Neyse, burada derdimiz esas şu iki özeti okumak ve değerlendirmek olsun:
 
 [C++ for dummies cheat sheet](https://www.dummies.com/article/technology/programming-web-design/cplusplus/c-all-in-one-for-dummies-cheat-sheet-209511/).   
 
-Bu son kitapi yeni aldım ve biraz karıştırdım. Çok iyi yazılmış ve hemen hemen herşeyi de anlatmış. Ama 7 kitap ve neredeyse toplam 800 sayfa! Bakın kitaplar şunlar:
+Bu son kitabı yeni aldım ve biraz karıştırdım. Çok iyi yazılmış ve hemen hemen herşeyi de anlatmış. Ama 7 kitap ve neredeyse toplam 800 sayfa! Bakın alt kitapları şunlar:
 
 1. C++'a giriş. *Getting Started with C++*
 2. Nesne ve sınıfları anlamak. *Understanding Objects and Classes*
@@ -58,7 +58,7 @@ Bu son kitapi yeni aldım ve biraz karıştırdım. Çok iyi yazılmış ve heme
 6. Dosya okumak ve dosyalara yazmak. *Reading and Writing Files*
 7. Standart kütüphanenin daha gelişmiş kullanımı. *Advanced Standard Library Usage* 
 
-Yedi tane kitap ama hepsi çok uzun değil. Bazısı sadece üç beş bölüm (*chapter*). Ama arı, sade, kapsamlı ve iyi yazılmış. Neyseki elektronik kitap ve elektronik mürekkeple yazılmış. Gerçek mürekkep çok pahalı. Bir de çok ağaç kesilmesin. Size biraz yol göstersin ve ufuk açsın diye bu kitap adlarını burada sıraladım. Haydi okumaya, yazmaya, çalışmaya ve öğrenmeye devam..  
+Yedi tane kitap ama hepsi çok uzun değil. Bazısı sadece üç beş bölüm (*chapter*). Ama arı, sade, kapsamlı ve iyi yazılmış. Neyseki elektronik kitap ve elektronik mürekkeple yazılmış. Gerçek mürekkep çok pahalı. Bir de çok ağaç kesilmesin. Size biraz daha yol göstersin ve ufuk açsın diye bu kitap adlarını burada sıraladım. Haydi okumaya, yazmaya, çalışmaya ve öğrenmeye devam. Sevgiyle inşallah.  
 
 [Dersler](ileri)
 ====

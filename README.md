@@ -26,23 +26,21 @@ Diğer Siteler
 
 [C++ referans](https://en.cppreference.com) 
 
-Kısa ve genel notlar
+Kısa, genel ve faydalı notlar
 -- 
-*For Dummies* kitap serisinde çok kaliteli, pratik ve öğretici kitaplar var. Hocanız en az on tanesini okumuştur😉. Bilmiyorum Türkçe tercümeleri var mı? Yoksa belki de yapmak gerek! Örneğin: 
+[*For Dummies*](https://www.dummies.com/about-for-dummies/) kitap serisinde çok kaliteli, pratik ve öğretici kitaplar var. Hocanız en az on tanesini okumuştur😉. Bilmiyorum Türkçe tercümeleri var mı? Yoksa belki de yapmak gerek! Örneğin: 
 
-[Matematiksel ve felsefi mantık](https://www.dummies.com/book/body-mind-spirit/philosophy/logic/logic-for-dummies-282362/).   Ve, Veya, İse işlemcileriden Russell ve Gödel'e kadar uzanır!  
+[Matematiksel ve felsefi mantık](https://www.dummies.com/book/body-mind-spirit/philosophy/logic/logic-for-dummies-282362/). `Ve`, `Veya`, `İse` işlemcilerinden çağdaş filozof *Bertrand Russell* ve *Einstein*'ın arkadaşı üstat matematikçi *Kurt Gödel*'e kadar uzanır!  
 
-[Önder olunur mu? Neden olmasın? Ama nasıl?](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/).  
+[Önder olunur mu? Neden olmasın? Ama nasıl olursa iyi olur?](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/).  
 
-[Bireysel yatırım](https://www.dummies.com/article/business-careers-money/personal-finance/general-personal-finance/personal-finance-for-dummies-cheat-sheet-208319/).  
-
-Bunu okuduğumda neredeyse otuz yaşındaydım. Biraz geç kaldım belki de. Siz gecikmeyin.  
+[Bireysel yatırım](https://www.dummies.com/article/business-careers-money/personal-finance/general-personal-finance/personal-finance-for-dummies-cheat-sheet-208319/). Bunu okuduğumda neredeyse otuz yaşındaydım. Biraz geç kaldım belki de. Siz gecikmeyin.  
 
 Neyse, burada derdimiz esas şu ikisini okumak ve değerlendirmek olsun:  
 
 [C++ programlamaya giriş](https://www.dummies.com/article/technology/programming-web-design/cplusplus/an-introduction-to-c-201132/).          
 
-[C++ for dummies cheat sheet](https://www.dummies.com/article/technology/programming-web-design/cplusplus/c-all-in-one-for-dummies-cheat-sheet-209511/)  
+[C++ for dummies cheat sheet](https://www.dummies.com/article/technology/programming-web-design/cplusplus/c-all-in-one-for-dummies-cheat-sheet-209511/).   
 
 
 [Dersler](ileri)

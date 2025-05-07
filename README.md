@@ -42,7 +42,7 @@ Kısa, genel ve faydalı notlar
 
 [Bireysel yatırım](https://www.dummies.com/article/business-careers-money/personal-finance/general-personal-finance/personal-finance-for-dummies-cheat-sheet-208319/). Bunu okuduğumda neredeyse otuz yaşındaydım. Biraz geç kaldım belki de. Siz gecikmeyin.  
 
-[Algoritmalara giriş](https://www.dummies.com/article/technology/information-technology/data-science/general-data-science/algorithms-dummies-cheat-sheet-238398/). [21. dersimizde](ileri/ders21.md) gördüğümüz enine ve derinine arayış yöntemleri (*BFS* ve *DFS*) çok faydalıdır demiştik. Teknik çevrelerde bunlara *algoritma* deniyor. Bu kitap BFS ve DFS de dahil önemli belli başlı bütün algoritmaları tanıtıp, uygulama alanlarıyla beraber çalışma sürelerini inceliyor.
+[Algoritmalara giriş](https://www.dummies.com/article/technology/information-technology/data-science/general-data-science/algorithms-dummies-cheat-sheet-238398/). Daha önce ([20. dersimizde](ileri/ders20.md)) gördüğümüz ve kodunu yazdığımız enine ve derinine arayış yöntemleri (*BFS* ve *DFS*) çok faydalıdır demiştik. Teknik çevrelerde böyle genel tariflere *algoritma* deniyor. Bu kitap, BFS ve DFS de dahil önemli belli başlı birçok algoritmayı uygulama alanlarıyla beraber tanıtıp çalışma sürelerini matematiksel olarak inceliyor.
 
 Neyse, burada derdimiz esas şu iki özeti okumak ve değerlendirmek olsun:  
 

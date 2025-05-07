@@ -24,7 +24,9 @@ Diğer Siteler
 --
 [Project Euler](https://projecteuler.net/)  
 
-[C++ referans](https://en.cppreference.com)  
+[C++ referans](https://en.cppreference.com) 
+
+[C++ kısa ve genel notlar](https://www.dummies.com/article/technology/programming-web-design/cplusplus/c-all-in-one-for-dummies-cheat-sheet-209511/)]  
 
 [Dersler](ileri)
 ====

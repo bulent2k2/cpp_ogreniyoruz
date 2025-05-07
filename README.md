@@ -50,15 +50,15 @@ Neyse, burada derdimiz esas şu iki özeti okumak ve değerlendirmek olsun:
 
 Bu son kitapi yeni aldım ve biraz karıştırdım. Çok iyi yazılmış ve hemen hemen herşeyi de anlatmış. Ama 7 kitap ve neredeyse toplam 800 sayfa! Bakın kitaplar şunlar:
 
-1. C++'a giriş *Getting Started with C++*
-2. Nesne ve sınıfları anlamak *Understanding Objects and Classes*
-3. İşlevsel programlamayı anlamak *Understanding Functional Programming* 
-4. Hata onarımı, *böcekler* (*bugs*, *debugging with debuggers*) *Fixing Problems* 
-5. İleri programlama *Advanced Programming*
-6. Dosya okumak ve dosyalara yazmak *Reading and Writing Files*
+1. C++'a giriş. *Getting Started with C++*
+2. Nesne ve sınıfları anlamak. *Understanding Objects and Classes*
+3. İşlevsel programlamayı anlamak. *Understanding Functional Programming* 
+4. Hata onarımı, **böcekler** (*bugs*), **böceksizleştiricilerle** **böceksizleştirmek** (*debugging with debuggers*). *Fixing Problems* 
+5. İleri programlama. *Advanced Programming*
+6. Dosya okumak ve dosyalara yazmak. *Reading and Writing Files*
 7. Standart kütüphanenin daha gelişmiş kullanımı. *Advanced Standard Library Usage* 
 
-Hepsinde de beş on bölüm (*chapter*) var. Size biraz yol göstersin ve ufuk açsın diye sıraladım...  
+Bu yedi kitabın hepsinde de en azbeş on bölüm (*chapter*) var. Dedim ya çok kapsamlı ve iyi yazılmış. Neyseki elektronik kitap var ve elektronik mürekkeple yazılmış. Gerçek mürekkep çok pahalı. Bir de çok ağaç kesilmesin. Size biraz yol göstersin ve ufuk açsın diye bu kitap adlarını burada sıraladım. Haydi okumaya, yazmaya, çalışmaya ve öğrenmeye devam..  
 
 [Dersler](ileri)
 ====

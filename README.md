@@ -32,7 +32,7 @@ Kısa, genel ve faydalı notlar
 
 [Matematiksel ve felsefi mantık](https://www.dummies.com/book/body-mind-spirit/philosophy/logic/logic-for-dummies-282362/). Önergeleri bileştiren `Ve ∧`, `Veya ∨`, `İse ➡️` işlemcilerinden, 'En az bir ∃' ve 'Her bir ∀' gibi önergeleri nicelleştirip özelleştirenlerden taaa çağdaş filozof *Bertrand Russell* ve *Einstein*'ın arkadaşı üstat matematikçi *Kurt Gödel*'e kadar uzanır!  
 
-[Önder olunur mu? Neden olmasın? Ama nasıl olursa iyi olur](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/)? Yogi Berra hem komik hem de doğru söylemiş: önden gitmek önder olmak kolay da esas izlenmek zor! Onun için deriz ya *Atam izindeyiz*. Bu kitap iyi önderleri iyi yapan temeller üzerinde duyuyor ve bunları çok güzel özetliyor. Kitap tabii biraz uzun. Burada kısaca [özetin özetini](http://ozetle.com/) yapalım: 
+[Önder doğunur mu, önder olunur mu? Neden olunmasın? Ama nasıl olursa iyi olur](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/)? Yogi Berra hem komik hem de doğru söylemiş: önden gitmek önder olmak kolay da esas izlenmek zor! Onun için deriz ya *Atam izindeyiz*. Bu kitap iyi önderleri iyi yapan temeller üzerinde duruyor ve bunları çok güzel özetliyor. Kitap tabii biraz uzun. Burada kısaca [özetin özetini](http://ozetle.com/) yapalım: 
  
 1. İzleyenlerin çıkarları kendi çıkarından önce gelir, iyi öndere.
 2. İzleyenleri iyi dinler, iyi önder.

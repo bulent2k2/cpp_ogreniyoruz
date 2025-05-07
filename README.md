@@ -32,7 +32,13 @@ Kısa, genel ve faydalı notlar
 
 [Matematiksel ve felsefi mantık](https://www.dummies.com/book/body-mind-spirit/philosophy/logic/logic-for-dummies-282362/). `Ve`, `Veya`, `İse` işlemcilerinden çağdaş filozof *Bertrand Russell* ve *Einstein*'ın arkadaşı üstat matematikçi *Kurt Gödel*'e kadar uzanır!  
 
-[Önder olunur mu? Neden olmasın? Ama nasıl olursa iyi olur?](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/).  
+[Önder olunur mu? Neden olmasın? Ama nasıl olursa iyi olur](https://www.dummies.com/book/body-mind-spirit/emotional-health-psychology/psychology/persuasion-influence/leadership-for-dummies-282350/)? Yogi Berra hem komik hem de doğru söylemiş: önder olmak kolay da esas izlenmek zor!  Onun için deriz ya Atam izindeyiz. Bu kitap iyi önderleri iyi yapan temeller üzerinde duyuyor ve bunları çok güzel özetliyor. Kitap tabii biraz uzun. Burada   kısaca [özetin özetini](http://ozetle.com/) yapalım: 
+ 
+1. İzleyenlerin çıkarını kendi çıkarından önce tutar iyi önder.
+2. İzleyenleri iyi dinler iyi önder.
+3. İzleyenleri biraz dürter ve devinime şevk eder iyi önder.   
+
+İşte gerek ve yeteni bu kadar! 
 
 [Bireysel yatırım](https://www.dummies.com/article/business-careers-money/personal-finance/general-personal-finance/personal-finance-for-dummies-cheat-sheet-208319/). Bunu okuduğumda neredeyse otuz yaşındaydım. Biraz geç kaldım belki de. Siz gecikmeyin.  
 

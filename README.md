@@ -42,12 +42,23 @@ Kısa, genel ve faydalı notlar
 
 [Bireysel yatırım](https://www.dummies.com/article/business-careers-money/personal-finance/general-personal-finance/personal-finance-for-dummies-cheat-sheet-208319/). Bunu okuduğumda neredeyse otuz yaşındaydım. Biraz geç kaldım belki de. Siz gecikmeyin.  
 
-Neyse, burada derdimiz esas şu ikisini okumak ve değerlendirmek olsun:  
+Neyse, burada derdimiz esas şu iki özeti okumak ve değerlendirmek olsun:  
 
 [C++ programlamaya giriş](https://www.dummies.com/article/technology/programming-web-design/cplusplus/an-introduction-to-c-201132/).          
 
 [C++ for dummies cheat sheet](https://www.dummies.com/article/technology/programming-web-design/cplusplus/c-all-in-one-for-dummies-cheat-sheet-209511/).   
 
+Bu son kitapi yeni aldım ve biraz karıştırdım. Çok iyi yazılmış ve hemen hemen herşeyi de anlatmış. Ama 7 kitap ve neredeyse toplam 800 sayfa! Bakın kitaplar şunlar:
+
+1. asd
+2. ABC
+3. def 
+4. yakında geliyor 
+5. İleri Programlama *Advanced Programming*
+6. Dosya okumak ve dosyalara yazmak *Reading and Writing Files*
+7. Standart Kütüphanenin Daha Gelişmiş Kullanımı. *Advanced Standard Library Usage* 
+
+Size biraz yol göstersin ve ufuk açsın diye...  
 
 [Dersler](ileri)
 ====

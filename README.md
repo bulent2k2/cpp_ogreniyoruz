@@ -13,7 +13,6 @@ Fen Lisesinde C++ Öğreniyoruz
 
 [Jupyter + C++](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable?filepath=notebooks/xcpp.ipynb).  
 
-
 Çevirimiçi Dersler (Ücretsiz)
 --
 [Giriş dersleri](https://www.sololearn.com/en/learn/courses/c-plus-plus-introduction)  Temel bilgiler. Bunun üzerinden geçmekte fayda var.  
@@ -26,9 +25,13 @@ Diğer Siteler
 
 [C++ referans](https://en.cppreference.com) 
 
+[Ulusal Standartlar Ofisinden c++ kaynaklari](https://isocpp.org/get-started)
+
+[#include<c++> sitesinden başvuru kaynakları](https://www.includecpp.org/resources/references/)
+
 [Kısa özet, genel, faydalı notlar](notlar/cheatsheets.md)
 --
-Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfası ve benzeri notlar için [alt sayfa burada](notlar/cheatsheets.md).
+Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfaları öğrendiğimiz kavramları hatırlamak için faydalı olabilir. [Bir örnek burada](https://github.com/mortennobel/cpp-cheatsheet). Benzeri genel ve faydalı başka notlar için [bu alt sayfaya](notlar/cheatsheets.md) da bakabilirsiniz.
 
 [Dersler](ileri)
 ====

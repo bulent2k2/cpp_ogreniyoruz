@@ -29,7 +29,7 @@ Diğer Siteler
 
 [#include<c++> sitesinden başvuru kaynakları](https://www.includecpp.org/resources/references/)
 
-[Kısa özet, genel, faydalı notlar](notlar/cheatsheets.md)
+[Kısa özet kopya sayfaları ve genel notlar](notlar/cheatsheets.md)
 --
 Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfaları hem öğrendiğimiz kavramları hatırlamak için, hem de bilmediğimiz kavramlarla tanışmak için faydalı olabilir. En temel kavramları veren [kısa bir örnek burada](https://www.codewithharry.com/blogpost/cpp-cheatsheet). Daha kapsamlı ve ileri iki örnek daha görelim: [biri burada](https://github.com/mortennobel/cpp-cheatsheet), ikincisi de [burada](https://hackingcpp.com/cpp/cheat_sheets.html). `c++ cheatsheet` diye arayarak ya da yapay beyine sorarak daha başka kaynaklar da bulabilirsiniz. Bazı genel notlar ve hocanızdan yorumlar da [bu alt sayfada](notlar/cheatsheets.md).
 

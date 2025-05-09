@@ -31,7 +31,7 @@ Diğer Siteler
 
 [Kısa özet, genel, faydalı notlar](notlar/cheatsheets.md)
 --
-Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfaları hem öğrendiğimiz kavramları hatırlamak için, hem de bilmediğimiz kavramlarla tanışmak için faydalı olabilir. En temel kavramları veren [kısa bir örnek burada](https://www.codewithharry.com/blogpost/cpp-cheatsheet). Daha kapsamlı ve ileri [bir örnek de burada](https://github.com/mortennobel/cpp-cheatsheet). `c++ cheatsheet` diye arayarak ya da yapay beyine sorarak daha başka kaynaklar da bulabilirsiniz. Daha genel ve faydalı notlar için de [bu alt sayfaya](notlar/cheatsheets.md) bakabilirsiniz.
+Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfaları hem öğrendiğimiz kavramları hatırlamak için, hem de bilmediğimiz kavramlarla tanışmak için faydalı olabilir. En temel kavramları veren [kısa bir örnek burada](https://www.codewithharry.com/blogpost/cpp-cheatsheet). Daha kapsamlı ve ileri iki örnek daha görelim: [biri burada](https://github.com/mortennobel/cpp-cheatsheet), ikincisi de [burada](https://hackingcpp.com/cpp/cheat_sheets.html). `c++ cheatsheet` diye arayarak ya da yapay beyine sorarak daha başka kaynaklar da bulabilirsiniz. Bazı genel notlar ve hocanızdan yorumlar da [bu alt sayfada](notlar/cheatsheets.md).
 
 [Dersler](ileri)
 ====

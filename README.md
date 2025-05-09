@@ -25,7 +25,7 @@ Diğer Siteler
 
 [C++ referans](https://en.cppreference.com) 
 
-[Ulusal Standartlar Ofisinden c++ kaynaklari](https://isocpp.org/get-started)
+[Ulusal Standartlar Ofisinden C++ kaynakları](https://isocpp.org/get-started)
 
 [#include<c++> sitesinden başvuru kaynakları](https://www.includecpp.org/resources/references/)
 
@@ -35,7 +35,7 @@ Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfalar
 
 [Dersler](ileri)
 ====
-Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Beşinci dersten itibaren, detaylı ders notlarının olduğu dosyalara linkler de aşağıda. On birinci ve daha sonraki dersler için [ileri adlı dizine](ileri) bakabilirsiniz. [Sondan bir önceki dersimiz burada](ileri/ders20.md). [En son dersimiz de burada](ileri/ders21.md).
+Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Beşinci dersten itibaren, detaylı ders notlarının olduğu dosyalara linkler de aşağıda. On birinci ve daha sonraki dersler için [ileri adlı dizine](ileri) bakabilirsiniz. [Sondan bir önceki dersimiz burada](ileri/ders21.md). [En son dersimiz de burada](ileri/ders22.md).
 
 İlk derste bazı temel yapıtaşlarını gördük 
 -- 

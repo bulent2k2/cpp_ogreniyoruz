@@ -7,10 +7,10 @@ Yığın, kuyruk, öncelik sırası ve deste
 ----
 Daha önce görmediğimiz ama çok faydalı olabilen bazı özel dizi türlerini inceledik. Hepsinin `size()` ve `empty()` adlı yöntemleri var. Hiçbirinde `begin()` ve `end()` yok.
 
-- Yığın: İlk giren son çıkar. Son giren ilk çıkar. Önemli yöntemler: `push()`, `pop()` ve `top()`. DFS (derinlemesine gezi/arama) için faydalı.
-- Kuyruk: İlk giren ilk çıkar. Son giren son çıkar. Yöntemler: `push()`, `pop()` ve `front()`. BFS (enlemesine gezi/arama) için faydalı.
-- Öncelik sırası: En büyük değer önce çıkar. Giriş sırası önemli değil. Yöntemler yığınla aynı: `push()`, `pop()` ve `top()`. En kısa yol bulmak için faydalı.
-- Deste: Ya da iki başlı kuyruk: Öne ya da arkaya eklenebilir ve önden ya da arkadan çıkarılabilir. Yöntemler: `push_front()`, `push_back()`, `front()`, `back()`.
+- Yığın: İlk giren son çıkar. Son giren ilk çıkar. Önemli yöntemler: `push(e)`, `pop()` ve `top()`. DFS (derinlemesine gezi/arama) için faydalı.
+- Kuyruk: İlk giren ilk çıkar. Son giren son çıkar. Yöntemler: `push(e)`, `pop()` ve `front()`. BFS (enlemesine gezi/arama) için faydalı.
+- Öncelik sırası: En büyük değer önce çıkar. Giriş sırası önemli değil. Yöntemler yığınla aynı: `push(e)`, `pop()` ve `top()`. En kısa yol bulmak için faydalı.
+- Deste: Ya da iki başlı kuyruk: Öne ya da arkaya eklenebilir ve önden ya da arkadan çıkarılabilir. Yöntemler: `push_front(e)`, `pop_front()`, `push_back(e)`, `pop_back()`, `front()`, `back()`.
 
 [Dersten kodumuz biraz iyileştirilmiş haliyle burada](https://onlinegdb.com/g-bZYoHcx).
 

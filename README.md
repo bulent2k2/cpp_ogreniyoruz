@@ -42,7 +42,7 @@ Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Beşinci dersten 
 Pekiştirmek için şu örnek programların üzerinden geçmekte fayda var.  
 
 [İlk program](https://sololearn.com/compiler-playground/cHlx3KLO5G6d/)  
-Sağ alttaki **RUN** tuşuna basın.  
+Sağ alttaki **RUN** tuşuna basın. Benzeri [onlinegdb'de de var.](https://onlinegdb.com/_oH65nLWB). **Run** tuşu üstte sola doğru.  
 
 [Temel veri tipleri](https://sololearn.com/compiler-playground/cPv2HfqDr8h7) sayı(`int`), kesirli sayı (`double`), harf(`char`) ve ikil(`bool`).  
 

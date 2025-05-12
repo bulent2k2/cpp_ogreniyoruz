@@ -46,7 +46,7 @@ Sağ alttaki **RUN** tuşuna basın. Benzeri [onlinegdb'de de var.](https://onli
 
 [Temel veri tipleri](https://sololearn.com/compiler-playground/cPv2HfqDr8h7) sayı(`int`), kesirli sayı (`double`), harf(`char`) ve ikil(`bool`).  
 
-[Girdi alma](https://sololearn.com/compiler-playground/c1JyEkLln8AK) `cin>>girdi`;  
+[Girdi alma](https://sololearn.com/compiler-playground/c1JyEkLln8AK)/[onlinegdb](https://onlinegdb.com/fRVNofQAT) `cin>>girdi`;  
 
 [Kontrol yapıları](https://sololearn.com/compiler-playground/coLvDwg6K4Te) kontrol için `if/else` yapısı, `for` ve `while` döngüleri. Bir de basit bir işlev (*function*) tanımladık.
 

@@ -1,8 +1,8 @@
 Bazı takım arkadaşlarımız, ilk altı dersten sonra, derslerimizin kaydı olsa çok faydalı olur dediler. Tekrar üzerinden geçeriz, dersi kaçıran arkadaşlar da sonradan arayı kapatırlar, vb... Biz de başladık kaydetmeye:
 
-[07. ders](../ileri/ders7.md): [Görsel kayıt](https://drive.google.com/file/d/1n6_-fDBSnLnbIM4GPM2d7P7gvJbVevqj) 1:39 (1 saat 39 dakika) sürmüş. 
-[08. ders](../ileri/ders8.md): [Görsel kayıt](https://drive.google.com/file/d/1WpOxvV7uT1ift6mPO51yMSaSRt2ZfE-2).  1:22.  
-[09. ders](../ileri/ders9.md): [Görsel kayıt](https://drive.google.com/file/d/1zwkZlNUy0wBKcLLF9hJN__ogHwUnTavp). 51:54.  
+[7. ders](../ileri/ders7.md): [Görsel kayıt](https://drive.google.com/file/d/1n6_-fDBSnLnbIM4GPM2d7P7gvJbVevqj) 1:39 (1 saat 39 dakika) sürmüş.  
+[8. ders](../ileri/ders8.md): [Görsel kayıt](https://drive.google.com/file/d/1WpOxvV7uT1ift6mPO51yMSaSRt2ZfE-2).  1:22.  
+[9. ders](../ileri/ders9.md): [Görsel kayıt](https://drive.google.com/file/d/1zwkZlNUy0wBKcLLF9hJN__ogHwUnTavp). 51:54.  
 [10. ders](../ileri/ders10.md): [Görsel kayıt](https://drive.google.com/file/d/1yAIe-4ukKw8Eqws7TU6ER55EFK23Zzuf). 41:38.  
 [11. ders](../ileri/ders11.md): [Görsel kayıt](https://drive.google.com/file/d/1Ls8NcHeju8L_yrY0eDc9ZUUdb_Faqyzr). 1:24.  
 [12. ders](../ileri/ders12.md): [Görsel kayıt](https://drive.google.com/file/d/1vbOHdEOnAxqS53GEToBmgoPkyUs_0Lyo). 1:24.  

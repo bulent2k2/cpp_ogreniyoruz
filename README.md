@@ -1,9 +1,9 @@
 Fen Lisesinde C++ Öğreniyoruz
 =============================
 
-Derslerimizin görsel kayıtları
+[Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----
-Bazı takım arkadaşlarımız, İlk altı dersten sonra, dersimizin kaydı olsa çok faydalı olur dediler. Tekrar üzerinden geçeriz, dersi kaçıran arkadaşlar da sonradan arayı kapatırlar, vb... Biz de başladık kaydetmeye. Bütün kayıtlar [burada](mp4ler/gorsel-kayitlar.md).
+Derslerimizi (meet.google.com)[https://meet.google.com] kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/dvu-qish-arm). Video kayıtları da [burada](mp4ler/gorsel-kayitlar.md).
 
 Çevirimiçi Derleyiciler
 -----------------------

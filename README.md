@@ -3,7 +3,7 @@ Fen Lisesinde C++ Öğreniyoruz
 
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----
-Derslerimizi (meet.google.com)[https://meet.google.com] kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/dvu-qish-arm). Video kayıtları da [burada](mp4ler/gorsel-kayitlar.md).
+Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/dvu-qish-arm). Video kayıtları da [burada](mp4ler/gorsel-kayitlar.md).
 
 Çevirimiçi Derleyiciler
 -----------------------

@@ -5,12 +5,12 @@ Bazı takım arkadaşlarımız, ilk altı dersten sonra, derslerimizin kaydı ol
 [09. ders](../ileri/ders9.md): [Görsel kayıt](https://drive.google.com/file/d/1zwkZlNUy0wBKcLLF9hJN__ogHwUnTavp). 51:54.  
 [10. ders](../ileri/ders10.md): [Görsel kayıt](https://drive.google.com/file/d/1yAIe-4ukKw8Eqws7TU6ER55EFK23Zzuf). 41:38.  
 [11. ders](../ileri/ders11.md): [Görsel kayıt](https://drive.google.com/file/d/1Ls8NcHeju8L_yrY0eDc9ZUUdb_Faqyzr). 1:24.  
-[12. ders](../ileri/ders12.md): [Görsel kayıt](https://drive.google.com/file/d/1vbOHdEOnAxqS53GEToBmgoPkyUs_0Lyo). 1:24.
-[13. ders](../ileri/ders13.md): [Görsel kayıt](https://drive.google.com/file/d/143UKi-DCpFAQ2SKPtiprna0TpuaO5g1D/). 1:24.
+[12. ders](../ileri/ders12.md): [Görsel kayıt](https://drive.google.com/file/d/1vbOHdEOnAxqS53GEToBmgoPkyUs_0Lyo). 1:24.  
+[13. ders](../ileri/ders13.md): [Görsel kayıt](https://drive.google.com/file/d/143UKi-DCpFAQ2SKPtiprna0TpuaO5g1D/). 1:24.  
 [14. ders](../ileri/ders14.md): [Görsel kayıt](https://drive.google.com/file/d/1ERTPOKKvDge97CBYOmcR-KbCJdx0gtCM). 1:10.  
 [15. ders](../ileri/ders15.md): [Görsel kayıt](https://drive.google.com/file/d/1QVIXkgY4_82bnhnCnjpk2D50BjXFn3DA). 1:16.  
 [16. ders](../ileri/ders16.md): [Görsel kayıt](https://drive.google.com/file/d/17cazkcCEq1kCGr9qp7sQTMNrlPpmZEhD). 1:27.  
-[17. ders](../ileri/ders17.md): [Görsel kayıt](https://drive.google.com/file/d/1yHD-vFga8CO_lebrrCT5GvmynHKqwrkY). 54 dakika.
+[17. ders](../ileri/ders17.md): [Görsel kayıt](https://drive.google.com/file/d/1yHD-vFga8CO_lebrrCT5GvmynHKqwrkY). 54 dakika.  
 [18. ders](../ileri/ders18.md): [Görsel kayıt](https://drive.google.com/file/d/1N432CdhsD0_aBFxe-MMQoRvW4PzPIJz2). 1 saat 8 dakika.  
 [19. ders](../ileri/ders19.md): [Görsel kayıt](https://drive.google.com/file/d/1Vh9RPK3vkrsmIxbi4M3nUWiMstfS2T08). 1 saat 5 dakika.  
 [20. ders](../ileri/ders20.md): [Görsel kayıt](https://drive.google.com/file/d/15w5yM379blFVbCNRIAL2IcGaW0i3Lc-3). 1 saat kadar.   

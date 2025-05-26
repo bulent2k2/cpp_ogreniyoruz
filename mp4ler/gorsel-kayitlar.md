@@ -1,4 +1,4 @@
-Bazı takım arkadaşlarımız, ilk altı dersten sonra, derslerimizin kaydı olsa çok faydalı olur dediler. Tekrar üzerinden geçeriz, dersi kaçıran arkadaşlar da sonradan arayı kapatırlar, vb... Biz de başladık kaydetmeye:
+Altıncı dersin arkasından, birkaç takım arkadaşımız derslerimizin kaydı olsa çok faydalı olur dediler. Tekrar üzerinden geçeriz, dersi kaçıran arkadaşlar da sonradan arayı kapatırlar, vb... Biz de başladık kaydetmeye:
 
 [7. ders](../ileri/ders7.md): [Görsel kayıt](https://drive.google.com/file/d/1n6_-fDBSnLnbIM4GPM2d7P7gvJbVevqj) 1:39 (1 saat 39 dakika) sürmüş.  
 [8. ders](../ileri/ders8.md): [Görsel kayıt](https://drive.google.com/file/d/1WpOxvV7uT1ift6mPO51yMSaSRt2ZfE-2).  1:22.  

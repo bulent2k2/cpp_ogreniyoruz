@@ -1,6 +1,10 @@
 Fen Lisesinde C++ Öğreniyoruz
 =============================
 
+Derslerimizin görsel kayıtları
+-----
+Bazı takım arkadaşlarımız, İlk altı dersten sonra, dersimizin kaydı olsa çok faydalı olur dediler. Tekrar üzerinden geçeriz, dersi kaçıran arkadaşlar da sonradan arayı kapatırlar, vb... Biz de başladık kaydetmeye. Bütün kayıtlar [burada](mp4ler/gorsel-kayitlar.md).
+
 Çevirimiçi Derleyiciler
 -----------------------
 [Sololearn](https://www.sololearn.com/en/compiler-playground/cpp)  `std::cin >> girdi;` çalışıyor. 

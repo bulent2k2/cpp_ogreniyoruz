@@ -1,6 +1,6 @@
 Altıncı dersin arkasından, birkaç takım arkadaşımız derslerimizin kaydı olsa çok faydalı olur dediler. Tekrar üzerinden geçeriz, dersi kaçıran arkadaşlar da sonradan arayı kapatırlar, vb... Biz de başladık kaydetmeye:
 
-[Ders 1-4](ReadMe.md#dersler). Görsel kayıt yok.  
+[Ders 1-4](README.md#dersler). Görsel kayıt yok.  
 [5. ders](../ileri/ders5.md). Görsel kayıt yok.  
 [6. ders](../ileri/ders6.md). Görsel kayıt yok.  
 [7. ders](../ileri/ders7.md): [Görsel kayıt](https://drive.google.com/file/d/1n6_-fDBSnLnbIM4GPM2d7P7gvJbVevqj) 1:39 (1 saat 39 dakika) sürmüş.  

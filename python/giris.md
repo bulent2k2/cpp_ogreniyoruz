@@ -1,8 +1,8 @@
-[Ana Sayfadan Giriş Bilgileri](https://www.python.org/)
+[Ana Python Sitesinden Giriş Bilgileri](https://www.python.org/)
 ==
 İşlevleri tanımlayalım
 --
-The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. [More about defining functions in Python 3](http://docs.python.org/3/tutorial/introduction.html#using-python-as-a-calculator)
+The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. [More about defining functions in Python 3](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
 
 Bileşke Veri Türleri
 --
@@ -16,7 +16,7 @@ Akış Yönetimi
 --
 Python knows the usual control flow statements that other languages speak — `if`, `for`, `while` and `range` — with some of its own twists, of course. [More control flow tools in Python 3](https://docs.python.org/3/tutorial/controlflow.html)
 
-Çabucak ve kolayca Öğrenelim
+Çabucak ve Kolayca Öğrenelim
 --
 Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. [Whet your appetite](https://docs.python.org/3/tutorial/) with our Python 3 overview.
 

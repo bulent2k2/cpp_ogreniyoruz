@@ -8,11 +8,11 @@ Buyrun okumaya ve yazmaya başlayıverelim ki bu sorulara kendimiz yanıt bulal�
 
 Program yazmak üç temel becerinin bir araya gelmesi demek:
 
-1- yapıtaşları: komutlar, fonksiyon yani işlevler ve temel veri türleri. Programlama dili ve yazılım ortamı pek çok yapı taşı sunar. Türkçe'nin sözcükleri beni.
+1- yapıtaşları: komutlar, fonksiyon yani işlevler ve temel veri türleri. Programlama dili ve yazılım ortamı pek çok yapıtaşı sunar. Türkçe'nin sözcükleri gibi.
 
-2- kompozisyon yani bileşim yöntemleri: bilgisayar dilinin sunduğu, yapı taşlarını bir araya getirmek için kullandığımız beceriler. Türkçe'nin yapım ve çekim ekleri, bileşik terimler gibi.
+2- kompozisyon yani bileşim yöntemleri: bilgisayar dilinin sunduğu, yapıtaşlarını bir araya getirmek için kullandığımız beceriler. Türkçe'nin yapım ve çekim ekleri, bileşik terimler gibi.
 
-3- soyutlama: bileşkelere isim takarak kısa yollar oluşturma süreci...
+3- soyutlama: bileşkelere isim takma, yeni türler tanımlama, ve başka kısa yollar oluşturma...
 
 Çok soyut oldu! Kocoyla örnekler görerek pekiştirmek gerek. 
 

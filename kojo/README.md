@@ -22,3 +22,8 @@ Ama önce arkaplanı da görelim kısaca ki havada kalmasın. Sonra da deneyimle
 3. [Bilgisayar Mühendiliğinin ve Biliminin Temelleri](https://docs.kogics.net/concepts/computing-essentials.html)
 4. [Bilgisayar Donanımının Kavramsal Temeli](https://docs.kogics.net/concepts/notional-machine.html)
 5. [Renklensin!](https://docs.kogics.net/concepts/colors.html)
+
+Bir de şuna bakıverin: 
+
+[Koco'ya davet](https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri%2Fkocoya-davet.md).
+

@@ -10,7 +10,7 @@ Georgia Institute of Technology üniversitesinde ikinci sınıf ders kitabı ola
 
 Dizilerle arama yöntemlerine (*list algorithms*) giriş
 ---
-Yukarıdaki kitabın 14. bölümüne odaklandık ([çevirim içi sayfası burada](https://openbookproject.net/thinkcs/python/english3e/list_algorithms.html)). Python'la yazılmış fonksiyonları okuduk ve bunları *c++*'a çevirmenin çok da zor olmayacağını gördük.  
-Örneğin, `test()` yerine `assert()`, *list* yerine `std::vector`, döngü değişkeni için `in` yerine `:`, *tuple* denilen `(a,b)` yerine `std::pair` yani `[a,b]`, ...  
+Yukarıdaki kitabın 14. bölümüne odaklandık ([çevirim içi sayfası burada](https://openbookproject.net/thinkcs/python/english3e/list_algorithms.html)). Python'la yazılmış fonksiyonları okuduk ve bunları *c++*'a çevirmenin çok da zor olmayacağını gördük. Örneğin,   
+`test()` yerine `assert()`, *list* yerine `std::vector`, döngü değişkeni için `in` yerine `:`, *tuple* denilen `(a,b)` yerine `std::pair` yani `[a,b]`, ... ama kavramlar aynı!   
 
 Öğrendiklerimizi pekiştirmek için sizlere faydalı bir alıştırma olacağını umuyorum (ben de fırsat buldukça yazacağım). Aynı bölümün sonunda da *sekiz vezir* problemi var. Onu da okuyup *c++*'la programlamanızı öneririm. Kitaptaki kodlar ve alıştırmaların çözümleri de [GitHub'da burada](https://github.com/JohnHowardRoark/thinkcspy3).  

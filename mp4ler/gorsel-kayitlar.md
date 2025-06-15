@@ -19,5 +19,6 @@ Altıncı dersin arkasından, birkaç takım arkadaşımız derslerimizin kaydı
 [20. ders](../ileri/ders20.md): [Görsel kayıt](https://drive.google.com/file/d/15w5yM379blFVbCNRIAL2IcGaW0i3Lc-3) 1 saat kadar.   
 [21. ders](../ileri/ders21.md): [Görsel kayıt](https://drive.google.com/file/d/1HFgtYu63jB1Rfmr1tatwwjs1TSlhdHUC) 55 dakika.   
 [22. ders](../ileri/ders22.md): [Görsel kayıt](https://drive.google.com/file/d/1BqPO1LdeO2QKx5f7PIpSJKULmhdRQWKL) 1 saat 12 dakika.   
-[23. ders](../ileri/ders23.md)
+[23. ders](../ileri/ders23.md): [Görsel kayıt](https://drive.google.com/file/d/10tiLkU8YxDbUqX3pu7uLLMFxUOobpaXc) 53 dakika.  
+
 Arkası gelecek döneme...

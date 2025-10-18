@@ -1,0 +1,1 @@
+Segment Trees: Dizi parçalarının verimli kullanımı

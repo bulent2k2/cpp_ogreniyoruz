@@ -94,17 +94,14 @@ void yaz() {
       dout << saha[r][c];
     dout << std::endl;
   }
-}  
+}
 
 int main() {
   oku();
-  
   yaz();
-
   for(int r=1; r<=H; ++r)
     for(int c=1; c<=W; ++c)
       bellek[r][c] = -1;
-
   dout << "Yanıt:\n";
   std::cout << bul() << std::endl;
   return 0;

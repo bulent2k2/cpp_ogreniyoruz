@@ -13,8 +13,8 @@ using Çizge = std::map<Düğüm, Bağlar>; // Komşuluk Kümesi
 using Gezi = std::list<Düğüm>; // düğümleri sıralamak için
 using Küme = std::set<Düğüm>;
 using İkili = std::pair<Düğüm,Düğüm>;
-using Uzunluklar = std::map<İkili, Uzunluk>; // kolaylık için 
-using GelenBağlar = std::map<Düğüm, Küme>; 
+using Uzunluklar = std::map<İkili, Uzunluk>; // kolaylık için
+using GelenBağlar = std::map<Düğüm, Küme>;
 
 void bağla(Çizge& c, Düğüm a, Düğüm b, Uzunluk boy);
 Küme komşular(const Çizge& c, Düğüm d);
@@ -24,7 +24,7 @@ Gezi gez(bool enine, const Çizge& ç, Gezi sıra, Küme atla);
 
 void bağla(Çizge& c, Düğüm a, Düğüm b, Uzunluk boy) {
   Bağ bağ{b, boy};
-  if (c.contains(a)) 
+  if (c.contains(a))
     c[a].insert(bağ);
   else {
     Bağlar küme{bağ};
@@ -54,14 +54,14 @@ Gezi sırala(const Çizge& czg, Düğüm b) {
 }
 
 Gezi gez(bool enine, const Çizge& çizge, Gezi sıra, Küme atla) {
-  if (sıra.size() == 0) return Gezi{}; 
-  auto ilk = sıra.front(); 
+  if (sıra.size() == 0) return Gezi{};
+  auto ilk = sıra.front();
   Küme komşu{komşular(çizge, ilk)};
   for(auto d : atla) komşu.erase(d);
-  for(auto d : sıra) komşu.erase(d); 
+  for(auto d : sıra) komşu.erase(d);
   sıra.pop_front();
   atla.insert(ilk);
-  for (auto d : komşu) 
+  for (auto d : komşu)
     if (enine) sıra.push_back(d); // bfs
     else sıra.push_front(d); // dfs: boyuna ya da derinlemesine
   Gezi gezi{gez(enine, çizge, sıra, atla)};
@@ -72,7 +72,7 @@ Gezi gez(bool enine, const Çizge& çizge, Gezi sıra, Küme atla) {
 Uzunluklar uzunluklar(const Çizge& czg) {
     Uzunluklar uz;
     for (auto [d, bk] : czg)
-        for (auto [d2, u] : bk) 
+        for (auto [d2, u] : bk)
             uz[{d, d2}] = u;
     return uz;
 }
@@ -89,8 +89,8 @@ Uzunluk enUzunBağ(const Uzunluklar& uz) {
     return max;
 }
 
-void enKısaYollar(const Çizge& czg, Düğüm baş) { 
-    std::map<Düğüm, Uzunluk> uzaklık{ {baş, 0} }; 
+void enKısaYollar(const Çizge& czg, Düğüm baş) {
+    std::map<Düğüm, Uzunluk> uzaklık{ {baş, 0} };
     Gezi s{sırala(czg, baş)};
     s.pop_front(); // baş düğümü çıkaralım
     Uzunluklar uz{uzunluklar(czg)};
@@ -112,7 +112,7 @@ void enKısaYollar(const Çizge& czg, Düğüm baş) {
 }
 
 // Dikkat! topo sıralama yetmiyor! s-a-c == s-c-a ama birinci doğru çalışmaz!
-void enUzunYollar(const Çizge& czg, Düğüm baş) { 
+void enUzunYollar(const Çizge& czg, Düğüm baş) {
     std::map<Düğüm, Uzunluk> uzaklık{ {baş, 0} };
     Uzunluklar uz{uzunluklar(czg)};
     // topo sırası yetmediği için:
@@ -140,11 +140,11 @@ void enUzunYollar(const Çizge& czg, Düğüm baş) {
 }
 
 void yap(Çizge & czg) {
-  struct Üçlü { 
+  struct Üçlü {
     Düğüm d1, d2;
     Uzunluk boy;
-  }; 
-  /* 
+  };
+  /*
      Bu örnek şuradan: Vazirani Algorithms Kitabı 6. Bölüm (Dynamic Programming) Sayfa 169
   */
   char S{'s'}, A{'a'}, B{'b'}, C{'c'}, D{'d'}, E{'e'};
@@ -153,8 +153,8 @@ void yap(Çizge & czg) {
     {C, A, 4}, {A, B, 6}, {C, D, 3}, {B, D, 1},
     {B, E, 2}, {D, E, 1}
   };
-    
-  for (auto [a,b,k] : üçlüler) bağla(czg,a,b,k);  
+
+  for (auto [a,b,k] : üçlüler) bağla(czg,a,b,k);
 }
 
 void yaz(const Çizge & czg) {
@@ -162,15 +162,15 @@ void yaz(const Çizge & czg) {
     cout << "Çizge:\n";
     for(auto [d, bk] : czg) {
         cout << "  " << d << " -> ";
-        for(auto [d2, boy] : bk) 
+        for(auto [d2, boy] : bk)
             cout << "(" << d2 << " " << boy << ") ";
         cout << "\n";
-    } 
+    }
     Uzunluklar uz{uzunluklar(czg)};
     cout << "Bağ uzunlukları:\n";
     for(auto [ikili, l] : uz)
-        cout << "  " << ikili.first << "->" 
-             << ikili.second << ": " 
+        cout << "  " << ikili.first << "->"
+             << ikili.second << ": "
              << l << '\n';
     cout << "En uzun bağ=" << enUzunBağ(uz) << '\n';
     cout << "Gelen Bağlar:\n";
@@ -180,7 +180,7 @@ void yaz(const Çizge & czg) {
         for (Düğüm d2:dk)
             cout << d2 << ' ';
         cout << '\n';
-    } 
+    }
     std::cout << "Topo sıralama: ";
     for (auto d : sırala(czg, 's'))
         std::cout << d << ' ';

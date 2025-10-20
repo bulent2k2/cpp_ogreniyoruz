@@ -37,7 +37,7 @@ int main() {
     for(int y=1; y<N; ++y)
       bellek[x][y] = 0;
 
-  for(int s=2; s < N; ++s) 
+  for(int s=2; s < N; ++s)
     std::cout << s << 'x' << s << "=" << bul(s) << '\n';
 
   return 0;

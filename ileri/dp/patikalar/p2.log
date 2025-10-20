@@ -1,0 +1,10 @@
+make -k 
+c++ -g -std=c++23 p2.cpp -o prog
+./prog < test1
+3
+./prog < test2
+0
+./prog < test3
+24
+./prog < test4
+345263555

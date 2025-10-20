@@ -3,6 +3,7 @@
 *.*~
 bin/
 **/bin/
+**/prog
 program
 .DS_Store
 code-deneme1.dSYM

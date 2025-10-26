@@ -61,14 +61,14 @@ Bunu çözmek için de ana problemi iki boyutlu bir çizelge kullanarak ifade ed
 Gerisi epey kolay:
 ```c++
 // uzunluğu bulduktan sonra ortak altdiziyi bulmak da kolay
-yazı bul2(yazı y1, yazı y2);  // bu genel çözüm olsun
+yazı bul2(const yazı& y1, const yazı& y2);  // bu genel çözüm olsun
 int bul(yazı y1, yazı y2) {
     yazı o = bul2(y1, y2);
     return o.size();
 }
-yazı bul2(yazı y1, yazı y2) {
-    int boy1 = y1.size(), boy2 = y2.size(),
-        max=0, k=0; // şu ana kadar bulduğumuz en uzun ortak altdizinin uzunluğu ve y1'de bittiği konum
+yazı bul2(const yazı& y1, const yazı& y2) {
+    const int boy1 = y1.size(), boy2 = y2.size();
+	int max=0, k=0; // şu ana kadar bulduğumuz en uzun ortak altdizinin uzunluğu ve y1'de bittiği konum
 	std::vector<std::vector<int>>  // iki boyutlu sayı dizisi  == tane[boy1+1][boy2+1]
 		tane ( boy1 + 1, std::vector<int> ( boy2 + 1, 0) );
     for(int k1=0; k1 < boy1; ++k1) {

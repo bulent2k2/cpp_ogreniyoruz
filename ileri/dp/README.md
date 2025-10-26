@@ -74,10 +74,10 @@ yazı bul2(const yazı& y1, const yazı& y2){
     for(int k1=0; k1 < boy1; ++k1) {
         for(int k2=0; k2 < boy2; ++k2) {
             if (y1[k1] == y2[k2]) {
-	               int m = tane[k1+1][k2+1] = tane[k1][k2] + 1;
-		           // ...
-   			       }
-	        }
+                int m = tane[k1+1][k2+1] = tane[k1][k2] + 1;
+                // ...
+            }
+        }
     }
     if (max > 0) return y1.substr(k+1-max, max);
     else return std::string{""};

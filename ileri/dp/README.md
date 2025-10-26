@@ -27,6 +27,58 @@ Arkadaşlarınız zıplayan kurbağa problemini de öneriyorlar. O da yine [AtCo
 
 Daha pek çok örnek var internette. Örneğin: 
 
-1- [CSES.fi sitesinden](https://cses.fi/problemset/) Dynamic Programming kısmına bakın. Örneğin [**Longest Common Subsequence** yukarıda görüğümüz iki yazı kesişimi problemine denk ](https://cses.fi/problemset/task/3403).  
-2- [SPOJ - Sphere Online Judge sitesinden DP problemleri](https://www.spoj.com/problems/tag/dynamic-programming). En popüler problem [**ALPHACODE** burada](https://www.spoj.com/problems/ACODE/) ve faydalı bir alıştırma olur.  
+1. [CSES.fi sitesinden](https://cses.fi/problemset/) Dynamic Programming kısmına bakın. Örneğin [**Longest Common Subsequence** yukarıda görüğümüz iki yazı kesişimi problemine denk ](https://cses.fi/problemset/task/3403).  
+2. [SPOJ - Sphere Online Judge sitesinden DP problemleri](https://www.spoj.com/problems/tag/dynamic-programming). En popüler problem [**ALPHACODE** burada](https://www.spoj.com/problems/ACODE/) ve faydalı bir alıştırma olur.  
 
+Önerilen okuma: [Algoritma kitabından DP bölümü](https://people.eecs.berkeley.edu/~vazirani/algorithms/chap6.pdf). Bu kitap üniversite'de bilgisayar mühendisliğinde okunan güzel ve ileri kitaplardan. Herşeyi anlamasak da faydalı olur. Takıldığınız bir şey olursa WhatsApp'tan bana direk yazabilirsiniz. Çekinmeyin.
+
+Derste baktığımız sorular
+----
+
+[Project Euler'den 15. problem](https://projecteuler.net/problem=15) ızgara üzerindeki patikaları saydık. [Çözüm burada](https://www.onlinegdb.com/rLWkHMxGu5). Bu çözümde DP YA, yani yukarıdan aşağı arama yöntemini kullandık. Bellek ekledik ki 20x20'lik ızgarayı da çözebilsin. Derste bir arkadaşınız güzel bir soru sordu. Daha küçük bir bellek kullansak olur mu? Emin değilim. Bir de aşağıdan yukarı yöntemiyle çözebilir miyiz dersiniz?  
+
+[AtCoder.jp sitesinden engelli sahada yolları sayma problemi](https://atcoder.jp/contests/dp/tasks/dp_h). [Çözüm burada](https://www.onlinegdb.com/BJ7qjYXnN). Bir önceki problemin daha genel hali, çünkü engeller ve veri girdisi var. Ama yine bellek ekleyerek DP YA yöntemiyle güzel bir çözüm oldu. Sahanın kutularını sol üst köşeye `(1, 1)` konumunu vererek çözdük. Sağ alt köşe `(H, W)` konumunda oldu. Genel haliyle problemimiz `(r, c)` kutusundan (H, W) kutusuna giden yolların sayısını bulmak. Alt problemleri de `(r+1, c)` yani aşağdan gelen patikalar ve `(r, c+1)` yani sağdan gelen patikaların sayısı olarak ifade ettik. Konumlamayı başka türlü yapmanın da mümkün olduğunu gördük. Örneğin `(1, 1)` sağ alt kutu olsun ve sola ve yukarı doğru satır ve sütun sayıları artsın da diyebilirdik. Öyle yapınca kodumuz daha da doğal oldu: Alt problemleri bu sefer de `(r-1, c)` ve `(r, c-1)` olarak oluşturduk. Görünen o ki önemli olan alt problemleri nasıl ifade ettiğimiz değil, alt problemlerin ana problemden daha küçük olması. Bu ikinci [çözüm de burada](https://www.onlinegdb.com/19X5NIcu7).  
+
+İki dizinin ortak altdizilerinden en uzununu bulma problemine de giriş yaptık. [Yarım çözüm burada](https://www.onlinegdb.com/UEyDuzjdfB). Bu problemi seçme nedenim çizelge kullanan DP AY, yani aşağıdan yukarıya arama yöntemine güzel bir örnek olması. Önce birim denemeler (unit testing) ile başlamakta fayda var:  
+```
+using yazı=std::string;
+void dene(yazı y1, yazı y2, yazı ortak) {
+    assert(bul2(y1, y2) == ortak);
+}
+dene("abca", "daxbcby", "bc");
+dene("abc", "xyz", "");
+dene("xyabc", "xydabca", "abc");
+dene("abcdxyad", "xyabcdxyb", "abcdxy");
+dene("1234", "567", "");
+dene("123", "345", "3");
+// https://www.spoj.com/problems/SBSTR1/
+dene("1010110010","10110", "10110");
+dene("1110111011","10011", "011");
+```
+Bunu çözmek için de ana problemi iki boyutlu bir çizelge kullanarak ifade edilebiliriz: `tane[k1][k2]` yani `y1` yazısının `k1` konumunda biten ve `y2` yazısının `k2` konumunda biten ortak altdizinin içinde kaç tane harf olduğunu kaydedelim. `(k1, k2)` konumlarındaki harfler farklı olduğunda sıfır olacak. Yani çoğu sıfır olabilir. Onun ilk değeri için de iki boyutlu akıllı dizi kullandık:
+```std::vector<std::vector<int>> tane(y1.size()+1, std::vector<int>(y2.size()+1, 0));```
+
+Gerisi epey kolay:
+```
+// uzunluğu bulduktan sonra ortak altdiziyi bulmak da kolay
+yazı bul2(yazı y1, yazı y2);  // bu genel çözüm olsun
+int bul(yazı y1, yazı y2) {
+    yazı o = bul2(y1, y2);
+    return o.size();
+}
+yazı bul2(yazı y1, yazı y2) {
+    int boy1 = y1.size(), boy2 = y2.size(),
+        max=0, k=0; // şu ana kadar bulduğumuz en uzun ortak altdizinin uzunluğu ve y1'de bittiği konum
+    std::vector<std::vector<int>> tane(boy1 + 1, std::vector<int>(boy2 + 1, 0));
+    for(int k1=0; k1 < y1.size(); ++k1)
+        for(int k2=0; k2 < y2.size(); ++k2) {
+            if (y1[k1] == y2[k2]) {
+	        int m = tane[k1+1][k2+1] = tane[k1][k2] + 1;
+		// ...
+	    }
+        }
+    if (max > 0) return y1.substr(k+1-max, max);
+    return std::string{""};
+}
+```
+`bul2()` işlevini tamamlamayı size bırakıyorum. Bir deneyin isterseniz. Gerekirse gelecek derste birlikte tamamlarız.

@@ -40,7 +40,7 @@ Derste baktığımız sorular
 [AtCoder.jp sitesinden engelli sahada yolları sayma problemi](https://atcoder.jp/contests/dp/tasks/dp_h). [Çözüm burada](https://www.onlinegdb.com/BJ7qjYXnN). Bir önceki problemin daha genel hali, çünkü engeller ve veri girdisi var. Ama yine bellek ekleyerek DP YA yöntemiyle güzel bir çözüm oldu. Sahanın kutularını sol üst köşeye `(1, 1)` konumunu vererek çözdük. Sağ alt köşe `(H, W)` konumunda oldu. Genel haliyle problemimiz `(r, c)` kutusundan (H, W) kutusuna giden yolların sayısını bulmak. Alt problemleri de `(r+1, c)` yani aşağdan gelen patikalar ve `(r, c+1)` yani sağdan gelen patikaların sayısı olarak ifade ettik. Konumlamayı başka türlü yapmanın da mümkün olduğunu gördük. Örneğin `(1, 1)` sağ alt kutu olsun ve sola ve yukarı doğru satır ve sütun sayıları artsın da diyebilirdik. Öyle yapınca kodumuz daha da doğal oldu: Alt problemleri bu sefer de `(r-1, c)` ve `(r, c-1)` olarak oluşturduk. Görünen o ki önemli olan alt problemleri nasıl ifade ettiğimiz değil, alt problemlerin ana problemden daha küçük olması. Bu ikinci [çözüm de burada](https://www.onlinegdb.com/19X5NIcu7).  
 
 İki dizinin ortak altdizilerinden en uzununu bulma problemine de giriş yaptık. [Yarım çözüm burada](https://www.onlinegdb.com/UEyDuzjdfB). Bu problemi seçme nedenim çizelge kullanan DP AY, yani aşağıdan yukarıya arama yöntemine güzel bir örnek olması. Önce birim denemeler (unit testing) ile başlamakta fayda var:  
-```
+```c++
 using yazı=std::string;
 void dene(yazı y1, yazı y2, yazı ortak) {
     assert(bul2(y1, y2) == ortak);
@@ -59,7 +59,7 @@ Bunu çözmek için de ana problemi iki boyutlu bir çizelge kullanarak ifade ed
 ```std::vector<std::vector<int>> tane(y1.size()+1, std::vector<int>(y2.size()+1, 0));```
 
 Gerisi epey kolay:
-```
+```c++
 // uzunluğu bulduktan sonra ortak altdiziyi bulmak da kolay
 yazı bul2(yazı y1, yazı y2);  // bu genel çözüm olsun
 int bul(yazı y1, yazı y2) {
@@ -69,16 +69,18 @@ int bul(yazı y1, yazı y2) {
 yazı bul2(yazı y1, yazı y2) {
     int boy1 = y1.size(), boy2 = y2.size(),
         max=0, k=0; // şu ana kadar bulduğumuz en uzun ortak altdizinin uzunluğu ve y1'de bittiği konum
-    std::vector<std::vector<int>> tane(boy1 + 1, std::vector<int>(boy2 + 1, 0));
-    for(int k1=0; k1 < y1.size(); ++k1)
-        for(int k2=0; k2 < y2.size(); ++k2) {
+	std::vector<std::vector<int>>  // iki boyutlu sayı dizisi  == tane[boy1+1][boy2+1]
+		tane ( boy1 + 1, std::vector<int> ( boy2 + 1, 0) );
+    for(int k1=0; k1 < boy1; ++k1) {
+        for(int k2=0; k2 < boy2; ++k2) {
             if (y1[k1] == y2[k2]) {
-	        int m = tane[k1+1][k2+1] = tane[k1][k2] + 1;
-		// ...
+	            int m = tane[k1+1][k2+1] = tane[k1][k2] + 1;
+		        // ...
+   			}
 	    }
-        }
+    }
     if (max > 0) return y1.substr(k+1-max, max);
-    return std::string{""};
+    else return std::string{""};
 }
 ```
 `bul2()` işlevini tamamlamayı size bırakıyorum. Bir deneyin isterseniz. Gerekirse gelecek derste birlikte tamamlarız.

@@ -30,7 +30,7 @@ Daha pek çok örnek var internette. Örneğin:
 1. [CSES.fi sitesinden](https://cses.fi/problemset/) Dynamic Programming kısmına bakın. Örneğin [**Longest Common Subsequence** yukarıda görüğümüz iki yazı kesişimi problemine denk ](https://cses.fi/problemset/task/3403).  
 2. [SPOJ - Sphere Online Judge sitesinden DP problemleri](https://www.spoj.com/problems/tag/dynamic-programming). En popüler problem [**ALPHACODE** burada](https://www.spoj.com/problems/ACODE/) ve faydalı bir alıştırma olur.  
 
-Önerilen okuma: [Algoritma kitabından DP bölümü](https://people.eecs.berkeley.edu/~vazirani/algorithms/chap6.pdf). Bu kitap üniversite'de bilgisayar mühendisliğinde okunan güzel ve ileri kitaplardan. Herşeyi anlamasak da faydalı olur. Takıldığınız bir şey olursa WhatsApp'tan bana direk yazabilirsiniz. Çekinmeyin.
+Önerilen okuma: [Algoritma kitabından DP bölümü](https://people.eecs.berkeley.edu/~vazirani/algorithms/chap6.pdf). Bu kitap üniversitelerde bilgisayar mühendisliğinde okunan güzel ve ileri derece kitaplardan. Herşeyi anlamasak bile şöyle bir karıştırmak faydalı olabilit. Takıldığınız birşey olursa WhatsApp'tan bana direk yazabilirsiniz. Çekinmeyin.
 
 Derste baktığımız sorular
 ----

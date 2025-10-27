@@ -6,7 +6,8 @@ Bir problemi küçük parçalarına bölerek çözme yöntemine DP deniyor. Kü�
 En basit örnek, Fibonaççi fonksiyonu:  
 
 ```
-Fib(n) = Fib(n-1) + Fib(n-2)  
+Fib(n) = Fib(n-1) + Fib(n-2) 
+n ≥ 0 
 Fib(0) = 0  
 Fib(1) = 1
 ```

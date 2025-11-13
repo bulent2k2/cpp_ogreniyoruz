@@ -8,17 +8,15 @@ Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi
 Çevirimiçi Derleyiciler
 -----------------------
 [Sololearn](https://www.sololearn.com/en/compiler-playground/cpp)  `std::cin >> girdi;` çalışıyor. 
-
 [OnlineGdb](https://onlinegdb.com/MOj93f6vtA)  Alttaki terminalde girdi ve çıktılar beraber.  
-
 [CoLiRu](https://coliru.stacked-crooked.com/a/9a5a244a826e572a).  Sağ alttaki **Edit** tuşuna basın.  
-
 [Jupyter: Okuryazar Programlama](https://jupyter.org/).  *Literate programming*. *C++* için aşağıdaki linki kullanın.  
-
 [Jupyter + C++](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable?filepath=notebooks/xcpp.ipynb).  
 
-Çevirımiçi Yarışma Alanları
+Çevirimiçi Yarışma Alanları
 --
+[SPOJ kılavuz](https://www.spoj.com/tutorials/)  Başlamak için gerekli bilgiler.   
+[SPOJ klasik](https://www.spoj.com/problems/classical/)  Parmakları program yazmaya alıştırmak için 😊..  
 [Atcoder giriş](https://atcoder.jp/contests/abc430)  Başlangıç alıştırmaları. `Tasks` adlı menüye bakın.  
 [Atcoder ileri algoritmalar](https://atcoder.jp/contests/practice2/tasks)  Ciddi algoritma bilgisi ve tecrubesi gerekiyor. Derslerimizde üzerinden geçeceğiz.  
 [Codeforces](https://codeforces.com/problemset?order=BY_RATING_ASC)  *A* ile kodlanmış en kolay sorulardan başlayarak birkaç tane yapıp, sonra *B*, *C*, *D* kodlu daha zorlara doğru devam edelim istedikçe, hevesle.  

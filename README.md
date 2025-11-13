@@ -13,6 +13,12 @@ Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi
 [Jupyter: Okuryazar Programlama](https://jupyter.org/).  *Literate programming*. *C++* için aşağıdaki linki kullanın.  
 [Jupyter + C++](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable?filepath=notebooks/xcpp.ipynb).  
 
+Yarışmacılar için Kılavuz
+--
+Antti Laaksonen tarafından 2018'de yazılmış güzel bir kitap. Yarışmalarda daha başarılı daha hızlı olmak için okuyalım.     
+[Türkçesi](kitap/Rekabetci-Programlama-ElKitabi.pdf)  2022'de Arda ve Arkın Kaz tarafından Türkçeye çevrilmiş!  
+[İngilizce orijinali](kitap/Competitive-Programmers-Handbook.pdf)  isteyenlere, merak edenlere.  
+
 Çevirimiçi Yarışma Alanları
 --
 [SPOJ kılavuz](https://www.spoj.com/tutorials/)  Başlamak için gerekli bilgiler.   

@@ -17,6 +17,14 @@ Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi
 
 [Jupyter + C++](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable?filepath=notebooks/xcpp.ipynb).  
 
+Çevirımiçi Yarışma Alanları
+--
+[Atcoder giriş](https://atcoder.jp/contests/abc430)  Başlangıç alıştırmaları. `Tasks` adlı menüye bakın.  
+[Atcoder ileri algoritmalar](https://atcoder.jp/contests/practice2/tasks)  Ciddi algoritma bilgisi ve tecrubesi gerekiyor. Derslerimizde üzerinden geçeceğiz.  
+[Codeforces](https://codeforces.com/problemset?order=BY_RATING_ASC)  *A* ile kodlanmış en kolay sorulardan başlayarak birkaç tane yapıp, sonra *B*, *C*, *D* kodlu daha zorlara doğru devam edelim istedikçe, hevesle.  
+[Codeforces güzel şeyler](https://codeforces.com/contest/2162)  İlk akla gelen çözümü kodlamadan önce iyice düşünmenin önemini hatırlatan güzel sorular.  
+[Codeforces dinamik program](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dp)  Kolaydan zora sıralı dinamik programlama soruları.  
+
 Çevirimiçi Dersler (Ücretsiz)
 --
 [Giriş dersleri](https://www.sololearn.com/en/learn/courses/c-plus-plus-introduction)  Temel bilgiler. Bunun üzerinden geçmekte fayda var.  

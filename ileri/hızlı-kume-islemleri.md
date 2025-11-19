@@ -1,4 +1,4 @@
-Kümeden sayı çıkarma
+Kümede küçük olmayan sayı bulma ve sayı çıkarma (*successor with delete*)
 ====================
 
 Elimizde `n` tane tam sayı, yani şu küme olsun:  
@@ -39,7 +39,7 @@ void dene() {
 ```
 
 Bu küme sınıfını öyle programlayalım ki 
-sonraki() ve çıktı() yöntemleri en azından logaritmik hızla, yani çok hızlı çalışsın. 
+`sonraki()` ve `çıktı()` yöntemleri en azından logaritmik hızla, yani çok hızlı çalışsın. 
 
 Logaritmik olunca kümenin büyüklüğü karesine çıksa, 
 çalışma süresi sadece iki kat civarında artıyor. 

@@ -35,7 +35,8 @@ void dene() {
   k.sonraki(0); // 2
   k.çıkar(2);   // {}
   k.sonraki(0); // -1
-}```
+}
+```
 
 Bu küme sınıfını öyle programlayalım ki 
 sonraki() ve çıktı() yöntemleri en azından logaritmik hızla, yani çok hızlı çalışsın. 

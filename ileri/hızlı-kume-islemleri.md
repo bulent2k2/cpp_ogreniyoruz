@@ -8,7 +8,7 @@ Elimizde `n` tane tam sayı, yani şu küme olsun:
   - `x`'i kümeden çıkar.  
   - Kümenin içinde `x`'den küçük olmayan en küçük sayı `y` olsun.  
     Yani en küçük `y ≥ x` neyse onu bulalım.  
-    Öyle bir `y` yoksa, çıktı `x-1` olsun.  
+    Öyle bir `y` yoksa, çıktı `n` olsun.  
 
 Örneğin:
 ```c++
@@ -27,14 +27,14 @@ void dene() {
   k.çıkar(3);   // {0, 1, 2, 4}
   k.sonraki(3); // 4
   k.çıkar(4);   // {0, 1, 2}
-  k.sonraki(3); // 2
-  k.sonraki(4); // 3
+  k.sonraki(3); // 5
+  k.sonraki(4); // 5
   k.sonraki(1); // 1
   k.çıkar(0);   // {1, 2}
   k.çıkar(1);   // {2}
   k.sonraki(0); // 2
   k.çıkar(2);   // {}
-  k.sonraki(0); // -1
+  k.sonraki(0); // 5
 }
 ```
 

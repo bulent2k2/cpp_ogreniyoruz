@@ -46,3 +46,23 @@ int main() {
     return 0;
 }
 ```
+
+Bu arada bu kod sayesinde, temel dizilerle, akıllı dinamik (`std::vector`) dizilerin hızlarını da çabucak karşılaştırabiliriz:
+[onlinegdb](https://onlinegdb.com/cMIMm5LtE).  Görünen o ki temel diziler iki kata yakın daha hızlı, ama `c++` sağolsun, ikisi de çok ve çok hızlı.  
+ 
+```
+--- Performans Testi ---
+Temel dizi:
+Dizi boyutu: 1000000 eleman
+İnşa süresi: 3ms
+Ortalama sorgu süresi: 0.0023μs
+```
+
+16. satırı etkinleştirince:
+```
+--- Performans Testi ---
+Akıllı dizi:
+Dizi boyutu: 1000000 eleman
+İnşa süresi: 7ms
+Ortalama sorgu süresi: 0.0034μs
+```

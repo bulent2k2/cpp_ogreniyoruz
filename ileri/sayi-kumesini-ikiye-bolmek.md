@@ -1,7 +1,7 @@
 
 Bir sayı kümesini ikiye bölmek zor olabilir mi?
 
-Bu basit görünen soru, [CSES](CSES.fi) sitesinden güzel bir problemin konusu: https://cses.fi/problemset/task/1623
+Bu basit görünen soru, [CSES](https://CSES.fi) sitesinden güzel bir problemin konusu: https://cses.fi/problemset/task/1623
 
 Geçen dersten [çözümü burada](dersler/d20251212.md). Ama genel çözümü yok diyebiliriz, çünkü [*np-zor* (np-hard)](ai/np-hard-nedir.md) sınıfında olduğunu biliyoruz.  
 

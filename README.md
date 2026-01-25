@@ -7,7 +7,7 @@ Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi
 
 Çevirimiçi Derleyiciler
 -----------------------
-[Sololearn](https://www.sololearn.com/en/compiler-playground/cpp)  `std::cin >> girdi;` çalışıyor. 
+[Sololearn](https://www.sololearn.com/en/compiler-playground/cpp)  `std::cin >> girdi;` çalışıyor.  
 [OnlineGdb](https://onlinegdb.com/MOj93f6vtA)  Alttaki terminalde girdi ve çıktılar beraber.  
 [CoLiRu](https://coliru.stacked-crooked.com/a/9a5a244a826e572a).  Sağ alttaki **Edit** tuşuna basın.  
 [Jupyter: Okuryazar Programlama](https://jupyter.org/).  *Literate programming*. *C++* için aşağıdaki linki kullanın.  
@@ -52,7 +52,9 @@ Türkçeye kısa özet diye çevirebileceğimiz *cheatsheet* yani kopya sayfalar
 
 [Dersler](ileri)
 ====
-Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Beşinci dersten itibaren, detaylı ders notlarının olduğu dosyalara linkler de aşağıda. On birinci ve daha sonraki dersler için [ileri adlı dizine](ileri) bakabilirsiniz. [Sondan bir önceki dersimiz burada](ileri/ders22.md). [En son dersimiz de burada](ileri/ders23.md).
+Aşağıda ilk on dersimiz hakkında bazı genel bilgiler var. Bunlar 2024-2025 döneminden. Beşinci dersten itibaren, detaylı ders notlarının olduğu dosyalara linkler de aşağıda. On birinci ve daha sonraki dersler için [ileri adlı dizine](ileri) bakabilirsiniz. Programlamaya giriş derslerimizin [en sonuncusu da burada](ileri/ders23.md).
+
+2025-2026 döneminde temel programlama bilgileri yerine algoritmalar ve verimli çözüm gerektiren rekabetçi programlama sorularına odaklandık. Bu dersleri de tarihleriyle beraber [burada bulabilirsiniz](ileri/dersler).
 
 İlk derste bazı temel yapıtaşlarını gördük 
 -- 

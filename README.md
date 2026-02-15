@@ -28,7 +28,7 @@ Antti Laaksonen tarafından 2018'de yazılmış güzel bir kitap. Yarışmalarda
 [Codeforces](https://codeforces.com/problemset?order=BY_RATING_ASC)  *A* ile kodlanmış en kolay sorulardan başlayarak birkaç tane yapıp, sonra *B*, *C*, *D* kodlu daha zorlara doğru devam edelim istedikçe, hevesle.  
 [Codeforces güzel şeyler](https://codeforces.com/contest/2162)  İlk akla gelen çözümü kodlamadan önce iyice düşünmenin önemini hatırlatan güzel sorular.  
 [Codeforces dinamik program](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dp)  Kolaydan zora sıralı dinamik programlama soruları.  
-[cses.fi'den problemler](https://cses.fi/problemset/) Bir dizi alıştırma, zorluk sırasıyla. Oto testler ve detaylı sonuçları da çok faydalı. Garip (*weird*) algoritmayla başlayalım. Sonra ızgara (*grid*) bulmacalarına da bakalım. [Birincisi burada](https://cses.fi/problemset/task/2432).   
+[cses.fi'den problemler](https://cses.fi/problemset/) Bir dizi alıştırma, zorluk sırasıyla. Oto testler ve detaylı sonuçları da çok faydalı. Garip (*weird*) algoritmayla başlayalım: [ilk soru](https://cses.fi/problemset/task/1068). Sonra ızgara (*grid*) bulmacalarına da bakalım: [birincisi burada](https://cses.fi/problemset/task/2432).   
 
 Çevirimiçi Dersler (Ücretsiz)
 --

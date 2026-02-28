@@ -1,4 +1,4 @@
-Fen Lisesinde C++ Öğreniyoruz
+Fen Lisesinde C++ ve Algoritma Öğreniyoruz
 =============================
 
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)

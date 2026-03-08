@@ -29,6 +29,7 @@ Antti Laaksonen tarafından 2018'de yazılmış güzel bir kitap. Yarışmalarda
 [Codeforces güzel şeyler](https://codeforces.com/contest/2162)  İlk akla gelen çözümü kodlamadan önce iyice düşünmenin önemini hatırlatan güzel sorular.  
 [Codeforces dinamik program](https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dp)  Kolaydan zora sıralı dinamik programlama soruları.  
 [cses.fi'den problemler](https://cses.fi/problemset/) Bir dizi alıştırma, zorluk sırasıyla. Oto testler ve detaylı sonuçları da çok faydalı. Garip (*weird*) algoritmayla başlayalım: [ilk soru](https://cses.fi/problemset/task/1068). Sonra ızgara (*grid*) bulmacalarına da bakalım: [birincisi burada](https://cses.fi/problemset/task/2432).   
+[USACO](https://usaco.org/index.php) ABD bilgisayar olimpiyat takımının ön elemeleri, deneme sınavları. Üye olup faydalanalım. Oturum için kayıt yapınca emaille şifre yolluyor. Sonra şifrenizi değiştirin. Derste Mahmut arkadaşızın önerdiği [sırtta taşıma (*piggyback*) adlı soruyu](https://usaco.org/index.php?page=viewproblem2&cpid=491) beraber çözeceğiz. Ama önce siz de biraz kafa yorun, olur mu?   
 
 Çevirimiçi Dersler (Ücretsiz)
 --

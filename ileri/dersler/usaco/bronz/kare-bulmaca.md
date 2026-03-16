@@ -3,20 +3,17 @@
 
 *Aralık 2014, 2. Bronz Problem*  
 *Yazarı Mark Gordon*  
+*Türkçesi GeminiAI ve hocanızdan*. 
 
-`N x M` boyutlarında (`3 <= N <= 50, 3 <= M <= 50`) bir kare bulmacamız var. Bazı hücreler boş ve bazı hücreler engelli (siyaha boyanmış). Ama ipucu numaraları eksik.
-İpucu sayısı iki mantıksal adımı izleyen basit bir işlemle bulunuyor: 
+`N x M` boyutlarında bir kare sözcük bulmacamız var. `3 <= N <= 50, 3 <= M <= 50`. Her bir kare ya boş ya da engelli (siyaha boyanmış). Ama kelime ipuçları eksik. İpuçları, iki mantıksal adımdan oluşan basit bir işlemle bulunuyor: 
 
-1. Adım: Her hücrenin yatay mı yoksa dikey bir ipucu mu başlattığını belirleriz. Bir hücre yatay bir ipucu başlatıyorsa, boş olmalı, 
-solundaki komşu hücre engellenmiş veya bulmaca ızgarasının dışında olmalı ve sağındaki iki hücre de boş olmalıdır 
-(yani, yatay bir ipucu yalnızca 3 veya daha fazla karakterden oluşan bir kelimeyi temsil edebilir). 
-Dikey bir ipucu başlatan bir hücre için kurallar benzerdir: üstündeki hücre engellenmiş veya ızgaranın dışında olmalı ve altındaki iki hücre boş olmalıdır. 
+1. Adım: Her karenin bir ipucu başlatıp başlatmadığını belirleriz. Bir kare yatay bir ipucu başlatıyorsa, boş olmalı, 
+solundaki komşu hücre engellenmiş veya bulmaca ızgarasının dışında olmalı ve sağındaki iki hücre de boş olmalıdır.
+Yani, yatay bir ipucu yalnızca 3 veya daha fazla karakterden oluşan bir kelimeyi temsil edebilir. Dikey ipucu başlatan kareler için de kurallar benzerdir: üstündeki kare engellenmiş veya ızgaranın dışında olmalı ve altındaki iki kare boş olmalıdır. 
 
-3. Adım: Bir ipucu başlatan her hücreye bir numara atarız. Hücrelere, bir kitabı okuyacağınız sırayla, 
-1'den başlayarak ardışık olarak numaralar atanır; en üst sıradaki hücrelere soldan sağa, 
-ardından ikinci sıradaki hücrelere vb. numaralar atanır. Yalnızca bir ipucu başlatan hücrelere numaralar atanır. 
+2. Adım: İpucu başlatan her kareye birden başlayarak ardışık sayılar atanır. Bunu kitap okur gibi en üst sıradan başlar soldan sağa, sonra da ikinci sıradaki karelere soldan sağa, ve benzer şekilde son satıra kadar sayılar atanır. Yalnızca ipucu başlatan karelere sayı atanır. 
 
-Örneğin, noktalar boş hücreleri göstersin. `#` işareti de engellenmiş hücreleri göstersin. 
+Örneğin, noktalar boş kareleri göstersin. `#` işareti de engellenmiş kareleri göstersin. 
 ```
 ... 
 #.. 
@@ -24,7 +21,7 @@ ardından ikinci sıradaki hücrelere vb. numaralar atanır. Yalnızca bir ipucu
 ..# 
 .## 
 ```
-Yatay veya dikey bir ipucu başlatabilen hücreler aşağıda ünlem işareti ile işaretlenmiştir:
+Yatay veya dikey ipucu başlatabilen kareler aşağıda ünlem işareti ile işaretlenmiştir:
 ```
 !!! 
 #..
@@ -32,7 +29,7 @@ Yatay veya dikey bir ipucu başlatabilen hücreler aşağıda ünlem işareti il
 ..#
 .## 
 ```
-Bu hücrelere sayılar atarsak, aşağıdaki sonucu elde ederiz; 
+Bu karelere sayılar atarsak, aşağıdaki sonucu elde ederiz; 
 ```
 123 
 #.. 
@@ -40,7 +37,7 @@ Bu hücrelere sayılar atarsak, aşağıdaki sonucu elde ederiz;
 ..# 
 .## 
 ```
-1 yatay, 2 ve 3 dikey, 4 hem yatay hem dikey sözcükler. Giriş verilerinde açıklanan bulmacanın, yayınlanmış bulmacalarda tipik olarak görülen kısıtlamaları karşılamayabileceğini unutmayın. Örneğin, bazı boş hücreler herhangi bir ipucunun parçası olmayabilir. 
+Birinci ipucu yatay, 2. ve 3. dikey, 4. hem yatay hem dikey sözcüklerden oluşuyor. Aman dikkat, bazı boş kareler herhangi bir ipucunun parçası olmayabilir. Yani bizim bulmacamız gazete ve dergilerde yayınlanan bulmacalardan biraz daha genel.
 
 GİRDİ (crosswords.in dosyası) 
 --
@@ -60,7 +57,7 @@ Girdinin ilk satırı, bir boşlukla ayrılmış `N` ve `M` içerir. Sonraki `N`
 ÇIKTI (crosswords.out dosyası) 
 --
 Çıktının ilk satırına, ipucu sayısını yazdırın. Kalan her satıra, tek bir ipucunun konumunu veren satır ve sütunu yazdırın (yukarıda açıklandığı gibi sıralanmıştır). 
-Sol üst hücrenin konumu `(1, 1)`'dir. Sağ alt hücrenin konumu `(N, M)`'dir. 
+Sol üst karenin konumu `(1, 1)`'dir. Sağ alt karenin konumu da `(N, M)`'dir. 
 
 ÖRNEK ÇIKTI 
 --

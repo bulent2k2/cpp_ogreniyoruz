@@ -3,7 +3,8 @@ Geçen derste yazdığımız algoritma neden doğru?
 
 `a` ile `b` şehirleri arasındaki en kısa yollardan birinin uzunluğunu `k`'nin fonksiyonu olarak `f(a,b,k)` diye yazalım ama bir koşulla: Yoldaki şehirler illa şu kümenin içinde olsunlar: 
 ```
-K = {1, 2, ..., k}
+K = {1, 2, ..., k},
+1 <= k <= n
 ```
 O halde, `f(a,b,n)` bize en kısa uzunluğu verecek.  
 

@@ -28,7 +28,7 @@ f(a, b, k) = min(
 ``` 
 Neden? Çünkü, `a` şehrinden `b` şehrine giden yolda `k` şehri ya ara duraklardan biri olacak, ya da olmayacak.
 
-Bu özyineleyen fonksiyon bize dinamik program (DP) yapabileceğimizi apaçık gösteriyor: problemi daha küçük problemlere bölmeyi becerdik. Küçük problemlerin sayısı da çok büyük değil. Daha önce gördüğümüz DP örneklerinde olduğu gibi yukarıdan aşağıya (YA) tanımlamak, anlamak ve kanıtlamak daha kolay oldu. **c++** diliyle de aşağıdan yukarı (AY) yazmak hiç zor olmadı. `k=1` ile başlayıp `k=n` olana kadar devam eden döngüyle herhangi iki şehir arasındaki en kısa yolun uzunluğunu bulabildik.
+Bu özyineleyen fonksiyon bize dinamik program (DP) yapabileceğimizi apaçık gösteriyor: problemi daha küçük problemlere bölmeyi becerdik. Küçük problemlerin sayısı da çok büyük değil. Daha önce gördüğümüz [DP örneklerinde (3.ders)](d20251010-1128.md) olduğu gibi yukarıdan aşağıya (YA) tanımlamak, anlamak ve kanıtlamak daha kolay oldu. **c++** diliyle de aşağıdan yukarı (AY) yazmak hiç zor olmadı. `k=0` için ilk değerleri belirledik. Sonra `k=1` ile başlayıp `k=n` olana kadar devam eden döngüyle bütün şehir arasındaki en kısa yol uzunluğunu bulabildik.
 
 > [Esin kaynağı burada](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm), wiki sağolsun.  
 > [İlk kanıtın ve yazarının kısa hikayesi de burada](https://en.wikipedia.org/wiki/Stephen_Warshall#). Sanırım 1960 yılında yazılmış ilk defa.  

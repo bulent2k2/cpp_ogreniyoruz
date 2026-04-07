@@ -28,5 +28,5 @@ Neden? Çünkü, `a` şehrinden `b` şehrine giden yolda `k` şehri ya ara durak
 Onun için bu son eşitliği kullanarak `k=1` ile başlayıp `k=n` olana kadar devam eden döngüyle herhangi iki şehir arasındaki en kısa yolun uzunluğunu bulabiliyoruz.
 
 > [Esin kaynağı burada](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm), wiki sağolsun.  
-> [Kanıtın ve yazarının kısa hikayesi de burada](https://en.wikipedia.org/wiki/Stephen_Warshall#). Sanırım 1960 yılında yazılmış bu kanıt.  
+> [İlk kanıtın ve yazarının kısa hikayesi de burada](https://en.wikipedia.org/wiki/Stephen_Warshall#). Sanırım 1960 yılında yazılmış ilk defa.  
 > [StackEdit](https://stackedit.io/) ile yazdım.  

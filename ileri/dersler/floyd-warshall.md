@@ -1,11 +1,13 @@
 
 Geçen derste yazdığımız algoritma neden doğru?
 
-`f(a,b,k)`, `a` ile `b` arasındaki en kısa yollardan birinin (*path*) uzunluğu olsun, ama bir koşulla: Yoldaki şehirler illa şu kümenin içinde olsun: 
+`a` ile `b` şehirleri arasındaki en kısa yollardan birinin uzunluğunu `k`'nin fonksiyonu olarak `f(a,b,k)` diye yazalım ama bir koşulla: Yoldaki şehirler illa şu kümenin içinde olsunlar: 
 ```
 K = {1, 2, ..., k}
 ```
-`h(a,b)` iki şehir arasındaki hat ya da direk yolun (*edge*) uzunluğu olsun. Arada hat yoksa, sonsuz olsun.  `k=0` yani `K` boş küme olunca `f(a,b,0) = h(a,b)`, `k=1` olduğunda da şu doğru olur:
+O halde, `f(a,b,n)` bize en kısa uzunluğu verecek.  
+
+İki şehir arasındaki hat ya da direk yolun (*edge*) uzunluğunu da `h(a,b)` diye yazalım. Arada hat yoksa, değeri sonsuz olsun. `k=0` yani `K` boş küme olunca `f(a,b,0) = h(a,b)`, `k=1` olduğunda da şu doğru olur:
 ```
 f(a,b,1) = min(
     h(a,b),

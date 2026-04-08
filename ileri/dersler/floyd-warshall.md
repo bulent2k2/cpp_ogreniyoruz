@@ -30,7 +30,7 @@ f(a,b,k) = min( f(a,b,k-1), f(a,k,k-1)+f(k,b,k-1) )
 ```  
 Neden? Çünkü, `a` şehrinden `b` şehrine seyahat ediyorsak, sadece iki olasılık var: ya `k` şehrini ziyaret edeceğiz ya da etmeyeceğiz.
 
-Bu özyineleyen fonksiyon bize dinamik program (DP) yazabileceğimizi apaçık gösteriyor: problemi daha küçük problemlere bölmeyi becerdik. Küçük problemleri bir kere çözüp birleştirerek büyük problem için de doğru hızı bulabiliriz. Daha önce gördüğümüz [DP örneklerinde (3.ders)](d20251010-1128.md) olduğu gibi *yukarıdan aşağıya* (YA) yani özyineleyerek tanımlamak, anlamak ve kanıtlamak daha kolay oldu. **C++** diliyle de *aşağıdan yukarı* (AY) yazmak hiç zor olmadı. `k=0` için ilk değerleri belirledik. Sonra $k=1$ ile başlayıp $k=n$ olana kadar devam eden döngüyle bütün şehirler arasındaki en kısa seyahat süresini bulduk.
+Bu özyineleyen fonksiyon bize dinamik program (DP) yazabileceğimizi apaçık gösteriyor: problemi daha küçük problemlere bölmeyi becerdik. Küçük problemleri bir kere çözüp birleştirerek büyük problemi de çözebiliriz. Daha önce gördüğümüz [DP örneklerinde (3.ders)](d20251010-1128.md) olduğu gibi *yukarıdan aşağıya* (YA) yani özyineleyerek tanımlamak, anlamak ve kanıtlamak daha kolay oldu. **C++** diliyle de *aşağıdan yukarı* (AY) yazmak hiç zor olmadı. `k=0` için ilk değerleri belirledik. Sonra $k=1$ ile başlayıp $k=n$ olana kadar devam eden döngüyle bütün şehirler arasındaki en kısa seyahat süresini bulduk.
 
 > [Esin kaynağı burada](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm), wiki sağolsun.  
 > [İlk kanıtın ve yazarının kısa hikayesi de burada](https://en.wikipedia.org/wiki/Stephen_Warshall#). Sanırım 1960 yılında yazılmış ilk defa.  

@@ -24,7 +24,7 @@ Her `k` için şu da hep doğru:
 ```math
 f(a,b,k) \le f(a,b,k-1)
 ```
-Çünkü, `k`'inci şehre uğramayan bir seyahat daha kısa olamaz, değil mi? Ama `k`'den geçen bir seyahat bir ihtimal daha kısa olabilir. O zaman, şu da doğru olmalı: 
+Çünkü, `k`'inci şehre uğrama seçeneği olmayan bir seyahat daha kısa olamaz, değil mi? Ama `k`'den geçen bir seyahat bir ihtimal daha kısa olabilir. O zaman, şu da doğru olmalı: 
 ```math
 f(a,b,k) = min( f(a,b,k-1), f(a,k,k-1)+f(k,b,k-1) )
 ```  

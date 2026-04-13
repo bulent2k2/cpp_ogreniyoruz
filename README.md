@@ -1,6 +1,8 @@
 Fen Lisesinde C++ ve Algoritma Öğreniyoruz
 =============================
 
+Dersler sırasıyla [burada](ileri/icindekiler.md).
+
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----
 Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/rhc-jgcs-vre).  Geçen yılki (2024-25) giriş derslerinin notları ve kayıtları [burada](mp4ler/gorsel-kayitlar.md). Bu yılki dersler de [burada](ileri/dersler).

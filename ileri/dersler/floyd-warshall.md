@@ -1,5 +1,5 @@
 
-Geçen derste yazdığımız algoritma neden doğru? Önce problemi tekrar gözden geçirelim: `n` tane şehir ve bazı şehirler arasında ikişer ikişer olmak üzere `m` tane yol var. Yolların uzunluğunu da biliyoruz. `a` ve `b` şehirleri arasındaki yolun uzunluğunu $h(a,b)$ diye yazalım. Bunu seyahat süresi olarak da düşünebiliriz. Her şehir için $h(a,a) = 0$ ve aralarında yol olmayan şehirler için $h(a,b) = \infty$ olsun. Herhangi iki şehir arasında seyahat etmek isteyebiliriz. Mümkün olan en kısa seyahat süresini bulmak istiyoruz.
+[Geçen derste](d20260403.md) yazdığımız algoritma neden doğru? Önce problemi tekrar gözden geçirelim: `n` tane şehir ve bazı şehirler arasında ikişer ikişer olmak üzere `m` tane yol var. Yolların uzunluğunu da biliyoruz. `a` ve `b` şehirleri arasındaki yolun uzunluğunu $h(a,b)$ diye yazalım. Bunu seyahat süresi olarak da düşünebiliriz. Her şehir için $h(a,a) = 0$ ve aralarında yol olmayan şehirler için $h(a,b) = \infty$ olsun. Herhangi iki şehir arasında seyahat etmek isteyebiliriz. Mümkün olan en kısa seyahat süresini bulmak istiyoruz.
 
 `a` şehrinden `b` şehrine seyahat süresini bir `k` sayısının fonksiyonu olarak $f(a,b,k)$ diye yazalım ama bir koşulla: Seyahatte ziyaret edilen şehirler illa şu altkümenin içinde olsunlar:
 ```math

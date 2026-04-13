@@ -1,0 +1,47 @@
+Giriş Dersleri
+====
+
+C++
+--
++ [ders1-4](ders1-4.md)
++ [ders5](ders5.md)
++ [ders6](ders6.md)
++ [ders7](ders7.md)
++ [ders8](ders8.md)
++ [ders9](ders9.md)
++ [ders10](ders10.md)
++ [ders11](ders11.md)
++ [ders12](ders12.md)
++ [ders13](ders13.md)
++ [ders14](ders14.md)
++ [ders15](ders15.md)
++ [ders16](ders16.md)
++ [ders17](ders17.md)
++ [ders18](ders18.md)
++ [ders19](ders19.md)
++ [ders20](ders20.md)
++ [ders21](ders21.md)
++ [ders22](ders22.md)
++ [ders23](ders23.md)
+
+Algoritma
+--
++ [ders1-8](dersler/d20251010-1128.md)
++ [ders9](dersler/d20251205.md)
++ [ders10](dersler/d20251212.md)
++ [ders11](dersler/d20251219.md)
++ [ders12](dersler/d20251226.md)
++ [ders13](dersler/d20260109.md)
++ [ders14](dersler/d20260116.md)
++ [ders15](dersler/d20260123.md)
++ [ders16](dersler/d20260130.md)
++ [ders17](dersler/d20260206.md)
++ [ders18](dersler/d20260213.md)
++ [ders19](dersler/d20260220.md)
++ [ders20](dersler/d20260227.md)
++ [ders21](dersler/d20260306.md)
++ [ders22](dersler/d20260313.md)
++ [ders23](dersler/d20260327.md)
++ [ders24](dersler/d20260403.md)
++ [ders25](dersler/d20260410.md)
+

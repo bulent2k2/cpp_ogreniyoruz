@@ -1,7 +1,7 @@
 Giriş Dersleri
 ====
 
-C++
+C++ (2024-25)
 --
 + [ders1-4](ders1-4.md)
 + [ders5](ders5.md)
@@ -24,7 +24,7 @@ C++
 + [ders22](ders22.md)
 + [ders23](ders23.md)
 
-Algoritma
+Algoritma (2025-2026)
 --
 + [ders1-8](dersler/d20251010-1128.md)
 + [ders9](dersler/d20251205.md)
@@ -44,4 +44,8 @@ Algoritma
 + [ders23](dersler/d20260327.md)
 + [ders24](dersler/d20260403.md)
 + [ders25](dersler/d20260410.md)
+
+Algoritma (2022 civarı)
+--
++ [ders1-10](../2022/README.md)
 

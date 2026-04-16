@@ -1,3 +1,5 @@
+> [Önceki](ders16.md) [Hepsi](icindekiler.md) [Sonraki](ders18.md)
+
 AlgLib kütüphanesi ve Project Euler'den 52. soru
 ----
 
@@ -6,3 +8,5 @@ AlgLib kütüphanesi ve Project Euler'den 52. soru
 AlgLib kütüphanesi hakkında bazı genel bilgilerin üzerinden geçtik. Faydalı özelliklerinden bazıları: Doğrusal çok bilinmeyenli çok sayıda denklem (`Ax = b`, `A` matris, `x` bilinmeyenler vektörü, ve `b` sabit sayılar vektörü) çözmek, matematiksel *optimizasyon* yani iyileştirme problemleri çözmek, Fourier Transformasyonları, istatistik hesaplar, vb...  [Kullanım kılavuzu burada](https://www.alglib.net/docs.php).
 
 Beraber kod yazarak Project Euler'dan 52. soruyu çözdük. Katlarıyla aynı rakamları kullanan sayılar hakkında. Soru [burada](https://projecteuler.net/problem=52). Kodumuz da [burada](https://onlinegdb.com/rSAdNiZfg).
+
+> [Önceki](ders16.md) [Hepsi](icindekiler.md) [Sonraki](ders18.md)

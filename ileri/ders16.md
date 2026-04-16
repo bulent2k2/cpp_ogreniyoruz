@@ -1,3 +1,5 @@
+> [Önceki](ders15.md) [Hepsi](icindekiler.md) [Sonraki](ders17.md)
+
 Çizim Projesi, İşlevsel Programlama ve Grafik Kütüphanesiyle Yazılıma Giriş 
 ----
 
@@ -69,3 +71,5 @@ Arada, geçen dersteki [kağıt katlama koduna](https://onlinegdb.com/QNojjbcbV)
 En son grafik kartı kullanarak canlandırma, simülasyon ve oyun programlamaya giriş yaptık. [Cinder adlı kütüphaneyi](https://libcinder.org) inceledik. Örnek olarak [zıplayan top simülasyonu kodunu](https://onlinegdb.com/aYu-ehYHj) okuduk ve çalıştırdık. Ne yazık ki [OnlineGDB](https://www.onlinegdb.com/) henüz bu gelişmiş kütüphaneyi desteklemiyor. Zaten çevrimiçi yani internette bir sunucuda çalışması o sunucunun grafik kartını çok zorlardı. Bilgisayarınıza bu kütüphaneyi indirip *Visual Studio* ile derlemek ve çalıştırmak isterseniz bana haber verin, yardımcı olayım.
 
 Bitti.
+
+> [Önceki](ders15.md) [Hepsi](icindekiler.md) [Sonraki](ders17.md)

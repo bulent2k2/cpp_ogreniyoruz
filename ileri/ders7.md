@@ -1,5 +1,6 @@
-Yedinci ders
-====
+> [Önceki](ders6.md) [Hepsi](icindekiler.md) [Sonraki](ders8.md)
+
+*Özyineleme tekniği (recursion), `std::list` kalıbı, bellekle hızlandırma (*memoizasyon*), yeni türler: `konum, aralık` ve `dörtgen`, özgür bellek, özgür dizi konuları.*  
 
 [Görsel kayıt](https://drive.google.com/file/d/1n6_-fDBSnLnbIM4GPM2d7P7gvJbVevqj) 1:39:32. 
 
@@ -80,4 +81,4 @@ Gelecek hafta iki dikdörtgenin kesişimini bulan bir yöntem ekleyerek devam ed
 
 [Özgür dizi/özgür bellek](https://www.onlinegdb.com/K0bjhI0l_). Ders sırasında bir arkadaşınız güzel ve zor bir soru sordu. Bir fonksiyon içinde oluşturduğumuz bir diziyi o fonksiyonun dışında kullanmak mümkün mü? Hem de kopyalamadan, aynı adresten. Burada bir örnek görelim. `new` ve `delete` anahtar sözcüklerini kullanıyoruz. Ama modern derleyiciler sayesinde (c++11 ve sonrası) daha akıllı ve becerikli yöntemler de var ([new/delete yerine akıllı pointer kullanımı](https://stackoverflow.com/questions/22146094/why-should-i-use-a-pointer-rather-than-the-object-itself/22146244#22146244)). Ayrıca donanımlar da artık yeterince hızlı. Onun için fonksiyonların girdi ve çıktılarının kopyalanmasında da çok sakınca yok. Bunun bir örneği yukarıdaki özyineleyen asal çarpan kodu ([dizileri girdi ve çıktı olarak kullanmak da kolay](https://www.onlinegdb.com/fIuuPTf33)). Kullandığımız dizi (`std::list<Sayı>`) hem girdi hem de çıktı olarak bol bol kopyalanıyor. Ayrıca yine gelişmiş modern derleyiciler kopyalamak yerine çok daha hızlı olan bir adres taşıma yöntemi de kullanabiliyorlar. Bu derste kısaca gördüğümüz yapıcı (*constuctor*) ve bahsettiğimiz yıkıcı (*destructor*) yöntemlerden başka eşitleme, kopya ve taşıma yapıcıları ( *assignment constructor, copy constructor, move constructor*) da var. Sırası geldikçe önümüzdeki derslerde göreceğiz.
 
-
+> [Önceki](ders6.md) [Hepsi](icindekiler.md) [Sonraki](ders8.md)

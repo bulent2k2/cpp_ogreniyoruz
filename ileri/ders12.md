@@ -1,3 +1,5 @@
+> [Önceki](ders11.md) [Hepsi](icindekiler.md) [Sonraki](ders13.md)
+
 [Görsel kayıt burada]( https://drive.google.com/file/d/1vbOHdEOnAxqS53GEToBmgoPkyUs_0Lyo). 1 saat 24 dakika.  
 
 Hızlıca [on birinci ders](ders11.md) notlarına baktık. *Temel* adlı sınıfın, `public, protected, private, operator, friend` anahtar sözcüklerinin, yapıcı (`Temel(...)`) yöntemlerin ve yıkıcı (`~Temel()`) yöntemin üzerinden geçtik. Bilhassa `operator=`, `operator<<` ve `operator>>` ile `=`, `<<` ve `>>` işlemcilerine yeni beceriler kazandırmanın faydalarını gördük.
@@ -104,3 +106,5 @@ cout << sayı << endl
      << ikiKare << endl;
 ```
 Güzel olmaz mı?
+
+> [Önceki](ders11.md) [Hepsi](icindekiler.md) [Sonraki](ders13.md)

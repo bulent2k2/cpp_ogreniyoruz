@@ -1,3 +1,4 @@
+> [Önceki](ders13.md) [Hepsi](icindekiler.md) [Sonraki](ders15.md)
 
 [Görsel kayıt](https://drive.google.com/file/d/1ERTPOKKvDge97CBYOmcR-KbCJdx0gtCM) bir saat 10 dakika.  
 
@@ -50,3 +51,5 @@ Yazı y1 = köşe + yatay + köşe,
      y2 = köşe / dikey / köşe;
 cout << y1 / (y2 + y2) / y1;
 ```
+
+> [Önceki](ders13.md) [Hepsi](icindekiler.md) [Sonraki](ders15.md)

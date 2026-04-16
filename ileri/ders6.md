@@ -1,5 +1,7 @@
-Altıncı Dersimiz
-===
+> [Önceki](ders5.md) [Hepsi](icindekiler.md) [Sonraki](ders7.md)
+
+*Fibonaççi dizisi, asal çarpanlar, yeni türlere ve Project Euler'den 15. soruya bir bakış.*
+
 Geçen hafta Project Euler'in ilk sorusunu çözmüştük beraber. Bu derste de iki soruyu daha çözdük. 
 
 [PE 2](https://projecteuler.net/problem=2): Fibonaççi serisi.  
@@ -63,3 +65,4 @@ Not
 ----
 *Dinamik programlama* diye google edince yapay beyinden faydalı olabilecek bilgiler çıktı. YouTube videosuna link de var, ilgilenenlere: [Gemini on Dynamic Programming](https://docs.google.com/document/d/1ASiWWVzfq-02uKg9foiEJ0XCbrhyJHPJvqJIVoPA11g/edit?usp=sharing).
 
+> [Önceki](ders5.md) [Hepsi](icindekiler.md) [Sonraki](ders7.md)

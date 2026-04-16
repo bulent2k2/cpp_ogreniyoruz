@@ -1,3 +1,5 @@
+> [Önceki](ders22.md) [Hepsi](icindekiler.md) [Sonraki](dersler/d20251010-1128.md)
+
 [Görsel kayıt](https://drive.google.com/file/d/10tiLkU8YxDbUqX3pu7uLLMFxUOobpaXc)
 
 C++, Python ve Scala dillerinin karşılaştırması
@@ -14,3 +16,5 @@ Yukarıdaki kitabın 14. bölümüne odaklandık ([çevirim içi sayfası burada
 `test()` yerine `assert()`, *list* yerine `std::vector`, döngü değişkeni için `in` yerine `:`, *tuple* denilen `(a,b)` yerine `std::pair` yani `[a,b]`, ... ama kavramlar aynı!   
 
 Öğrendiklerimizi pekiştirmek için sizlere faydalı bir alıştırma olacağını umuyorum (ben de fırsat buldukça yazacağım). Aynı bölümün sonunda da *sekiz vezir* problemi var. Onu da okuyup *c++*'la programlamanızı öneririm. Kitaptaki kodlar ve alıştırmaların çözümleri de [GitHub'da burada](https://github.com/JohnHowardRoark/thinkcspy3).  
+
+> [Önceki](ders22.md) [Hepsi](icindekiler.md) [Sonraki](dersler/d20251010-1128.md)

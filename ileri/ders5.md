@@ -1,3 +1,7 @@
+> [Önceki](ders1-4.md) [Hepsi](icindekiler.md) [Sonraki](ders6.md)
+
+*Tam bölünebilen sayıları sayma, komut satırından derleyici çalıştırma. Ayrıca Windows'a Terminal, C++ Derleyici ve Emacs ya da başka Editör eklemek için gerekli linkler.*  
+
 [Project Euler Birinci Problem](https://projecteuler.net/problem=1)  3'e ve 5'e bölünen sayıların toplamını bulmak için beraber kod yazdık. İki kaynak dosyamız var. **ana.cpp**:  
 ```c++
 #include <iostream>
@@ -85,3 +89,5 @@ $ ./dene
 ```
 [Bir de emacs editor iyi olur](https://ftp.gnu.org/gnu/emacs/windows/emacs-29/emacs-29.4-installer.exe). Eski ama [özgür bir yazılım](https://www.gnu.org/software/emacs/). [Özgür yazılım vakfı](https://fsf.org) ve pekçok gönüllü tarafından geliştiriliyor ve destekleniyor.    
 [Bu da modern VS Code editörü ve IDE'si](https://code.visualstudio.com/). Bunda yazıp bizim cygwin terminalinde derlemeyi ve çalıştırmayı deneyebilirsiniz. 
+
+> [Önceki](ders1-4.md) [Hepsi](icindekiler.md) [Sonraki](ders6.md)

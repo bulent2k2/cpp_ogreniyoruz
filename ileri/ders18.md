@@ -1,3 +1,5 @@
+> [Önceki](ders17.md) [Hepsi](icindekiler.md) [Sonraki](ders19.md)
+
 [Görsel kayıt burada](https://drive.google.com/file/d/1N432CdhsD0_aBFxe-MMQoRvW4PzPIJz2). Süresi bir saat 8 dakika. 
 
 Geçen yılın sınav sorularına baktık.
@@ -19,3 +21,4 @@ int altToplam(std::vector<int> dizi) {
 ```
 İpucu: `std::map` yani *eşlem* kalıbı işimizi çok kolaylaştırır.
 
+> [Önceki](ders17.md) [Hepsi](icindekiler.md) [Sonraki](ders19.md)

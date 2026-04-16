@@ -1,3 +1,7 @@
+> [Önceki](ders8.md) [Hepsi](icindekiler.md) [Sonraki](ders10.md)
+
+*Eşlem kalıbını pekiştirmek için örnekler, matematiksel tam sayı fonksiyonları, `makefile` ve `make` uygulaması ile otomasyon, karmaşık sayı türüyle *nesne yönelimine* hızlı giriş.*  
+
 [Görsel kayıt](https://drive.google.com/file/d/1zwkZlNUy0wBKcLLF9hJN__ogHwUnTavp/view). 51:54 uzunluğunda.   
 
 Önce geçen dersi tekrar ettik.  
@@ -77,3 +81,5 @@ En son beş dakikada *karmaşık sayı* örneğiyle `struct` ya da `class` kulla
 [John](http://www.eddaardvark.co.uk/index.html) adında bir bilgisayar mühendisi kendi sitesinde hem [Mandelbrot kümesinden](http://www.eddaardvark.co.uk/v2/mandelbrot/webgl.html) hem de bizim [üç kare açılımı](http://www.eddaardvark.co.uk/v2/cube_sums/index.html) konularından bahsediyor. Güzel ve faydalı görseller var.  
 
 **İyi tatiller!**
+
+> [Önceki](ders8.md) [Hepsi](icindekiler.md) [Sonraki](ders10.md)

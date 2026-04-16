@@ -1,3 +1,5 @@
+> [Önceki](ders21.md) [Hepsi](icindekiler.md) [Sonraki](ders23.md)
+
 [Görsel kayıt burada](https://drive.google.com/file/d/1BqPO1LdeO2QKx5f7PIpSJKULmhdRQWKL) ve bir saat 12 dakika uzunluğunda.
 
 Bir önceki dersten kalan dengeli parantez alıştırmasını sadece `(` ve `)` için çözdük. 
@@ -11,3 +13,5 @@ Derste daha da genel bir problemi *yığın* kalıbı kullanarak çözdük: Hem 
 [*Project Euler*](https://projecteuler.net/)'den 11. ve 13. problemlere giriş yaptık. `ifstream` kullanarak dosyadan veri okumayı gördük. İkisi için de veri dosyaları ve verileri dosyadan okuyup dizilere yazan [kod hazır ve burada](https://onlinegdb.com/kFwoPnvGaW). İlki [*PE 11*](https://projecteuler.net/problem=11) 20x20'lik bir tablodan 4 uzunluğundaki bütün dizileri (yukarı, aşağı, sağa, sola ve çaprazlar dahil) kodla bulmak gerekiyor. İkincisi [*PE 13*](https://projecteuler.net/problem=13)'te de bilgisayara çok büyük sayıları toplamayı öğretiyoruz. Çünkü sayıların hepsi 50 basamaklı yani ne `int` ne de `long` yetiyor. Devamını getirmek de yine sizlere alıştırma olsun.
 
 Aşama sınavı bir hafta sonra (17 Mayıs Cumartesi sabahı) olacakmış. Hepinize başarılar diliyorum. Kolay gelsin, keyifli ve öğretici olsun inşallah.
+
+> [Önceki](ders21.md) [Hepsi](icindekiler.md) [Sonraki](ders23.md)

@@ -1,3 +1,7 @@
+> [Önceki](ders9.md) [Hepsi](icindekiler.md) [Sonraki](ders11.md)
+
 Vay be, 1️⃣0️⃣ oluvermiş, damlaya damlaya❕ Tatilin son haftası olmasına rağmen Talha ve Eren katıldılar. Teşekkür ediyorum ikisine de. Sayelerinde kısa bir ders yaptık. Derse başlamadan önce kısaca Windows ve Mac bilgisayarlarda çalışan *IDE*'ler (Integrated Development Environment) yani *Bileşik Geliştirme Ortamları, BiGO* hakkında konuştuk biraz: [VS Code](https://code.visualstudio.com) hem Windows ve hem MacOS için, [Xcode](https://developer.apple.com/xcode/) sadece MacOS'te çalışıyor, ve her yerde çalışan BiGO [Koco](kocoya-davet.md). Yine kısaca yaygın işletim sistemlerini destekleyen [Cinder](https://libcinder.org/gallery) adlı hızlı grafik kütüphanesini kullanan iki örnek *c++* uygulaması gördük: döndürülebilen Dünya küresi ve ekrana çizgi çizme programı.  
 
 Sonra kayda başladık ([Görsel kayıt burada](https://drive.google.com/file/d/1yAIe-4ukKw8Eqws7TU6ER55EFK23Zzuf/view) ve 41:38 uzunluğunda) ve [bir önceki dersimizi](ders9.md) hızla gözden geçirdikten sonra [`Araba` adlı yeni türümüze daldık](https://www.onlinegdb.com/dbFycFP09). *Kapsama/koruma, soyutlama, kalıtım ve bileşim* kavramlarının somut örneklerini gördük. Detaylı bilgiler de [burada](sınıf-yapı-kavramı.md). `this` anahtar sözcüğü ile `Araba &` türü yöntem çıktısını birleştirdik. Siz de bu kodu çatallayıp kurcalayın, yeni bir alt tür (örneğin `ElektrikliAraba`) ekleyin.
+
+> [Önceki](ders9.md) [Hepsi](icindekiler.md) [Sonraki](ders11.md)

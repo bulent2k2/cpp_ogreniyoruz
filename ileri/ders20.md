@@ -1,3 +1,5 @@
+> [Önceki](ders19.md) [Hepsi](icindekiler.md) [Sonraki](ders21.md)
+
 Çizgelerde Gezintiler
 ====
 
@@ -43,3 +45,4 @@ Bu işlevin özyinelemeyle nasıl yazılabildiğini gördük. Enlemesine ve deri
 
 [Dersimizin görsel kaydı burada](https://drive.google.com/file/d/15w5yM379blFVbCNRIAL2IcGaW0i3Lc-3). Süresi yaklaşık bir saat.
 
+> [Önceki](ders19.md) [Hepsi](icindekiler.md) [Sonraki](ders21.md)

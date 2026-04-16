@@ -1,3 +1,5 @@
+> [Önceki](ders20.md) [Hepsi](icindekiler.md) [Sonraki](ders22.md)
+
 Kısaca yazılım tarihçesi ve bazı faydalı veri yapıları
 ====
 
@@ -41,3 +43,5 @@ std::queue<int> // kuyruk  FIFO BFS
 ...
 ```
 Daha detaylı tarihi bilgiler için şu makale fena değil: [1849'dan 2022'ye Kodlama: Programlama Dillerinin Zaman Çizelgesine Bir Kılavuz](https://www.computer.org/publications/tech-news/insider-membership-news/timeline-of-programming-languages).
+
+> [Önceki](ders20.md) [Hepsi](icindekiler.md) [Sonraki](ders22.md)

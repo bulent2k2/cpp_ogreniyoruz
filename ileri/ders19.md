@@ -1,3 +1,5 @@
+> [Önceki](ders18.md) [Hepsi](icindekiler.md) [Sonraki](ders20.md)
+
 Dizi analizi, Çizgeler ve Ağlar
 ----
 
@@ -41,3 +43,5 @@ km[5][3] = 0.5; // geliş küçük
 Derste üzerinden geçtiğimiz komşuluk matrisi oluşturup ekrana yazan [kodumuz da burada](https://onlinegdb.com/qph9rcrQE).
 
 Çizgeler ve Ağlar hakkında [bilgiler de burada](../notlar/cizge-kurami.md).  
+
+> [Önceki](ders18.md) [Hepsi](icindekiler.md) [Sonraki](ders20.md)

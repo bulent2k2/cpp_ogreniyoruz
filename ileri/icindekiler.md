@@ -18,15 +18,15 @@ C++ (2024-25)
 + [ders12](ders12.md)
 + [ders13](ders13.md)
 + [ders14](ders14.md)
-+ [ders15](ders15.md)
-+ [ders16](ders16.md)
-+ [ders17](ders17.md)
-+ [ders18](ders18.md)
-+ [ders19](ders19.md)
-+ [ders20](ders20.md)
-+ [ders21](ders21.md)
-+ [ders22](ders22.md)
-+ [ders23](ders23.md)
++ [ders15](ders15.md) 
++ [ders16](ders16.md) çizim projesi, *lambda*, Cinder kütüp, kağıt katlama ve Evren'in ucu!
++ [ders17](ders17.md) AlgLib kütüp, PE 52 (a)
++ [ders18](ders18.md) geçen yılın sınav soruları 
++ [ders19](ders19.md) dizi analizi, çizgeler ve ağlar, PE 52 (b)
++ [ders20](ders20.md) çizgelerde gezintiler
++ [ders21](ders21.md) yığın, kuyruk, öncelik sırası ve deste; yazılım tarihçesi 
++ [ders22](ders22.md) `std::stack<>`, `assert()`, PE 11, PE 13
++ [ders23](ders23.md) c++, python ve scala
 
 Algoritma (2025-2026)
 --

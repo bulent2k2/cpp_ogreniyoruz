@@ -7,17 +7,17 @@ Algoritma (2022 civarı)
 
 C++ (2024-25)
 --
-+ [ders1-4](ders1-4.md)
-+ [ders5](ders5.md)
-+ [ders6](ders6.md)
-+ [ders7](ders7.md)
-+ [ders8](ders8.md)
-+ [ders9](ders9.md)
-+ [ders10](ders10.md)
-+ [ders11](ders11.md)
-+ [ders12](ders12.md)
-+ [ders13](ders13.md)
-+ [ders14](ders14.md)
++ [ders1-4](ders1-4.md) *değer*, *değişken*, *tür* ve *işlev* kavramları, üçüncü derste *pointer/reference* yani adres değişkenleri ve takma ad kavramlarına giriş, bir oyunla rasgele sayılar, girdi ve çıktı gibi temel bilgiler
++ [ders5](ders5.md) tam bölünebilen sayıları sayma (*Project Euler* ilk problem), komut satırından derleyici çalıştırma. Ayrıca Windows'a Terminal, C++ Derleyici ve Emacs ya da başka Editör eklemek için gerekli linkler
++ [ders6](ders6.md) Fibonaççi dizisi, asal çarpanlar, yeni türlere ve Project Euler'den 15. soruya bir bakış
++ [ders7](ders7.md) özyineleme tekniği (recursion), `std::list` kalıbı, bellekle hızlandırma (*memoizasyon*), yeni türler: `konum`, `aralık` ve `dörtgen`, özgür bellek, özgür dizi konuları
++ [ders8](ders8.md) `std::list` kullanarak özyineleme, 2025 sayısının özellikleri ve `std::map` kalıbı, `fayda.h` başlık dosyası ve faydaları, dizi (*array*), akıllı (dinamik) dizi (`std::vector`), dizin (`std::list`) ve eşlem (`std::map`) kalıpları arasındaki benzerlikler ve farklar. Bir de **DRY** ilkesi
++ [ders9](ders9.md) eşlemlere giriş: `std::map` ve başka pek çok şey..
++ [ders10](ders10.md) Bileşik Geliştirme Ortamları (*IDE*), kapsama/koruma, soyutlama, kalıtım ve bileşim, `Araba` türü, `this`
++ [ders11](ders11.md) `Temel` adlı yeni bir tür, yapıcı yöntemler, `protected`, `private`, `friend`, `operator<<()` ve `operator>>()`
++ [ders12](ders12.md) eşlemlere devam, işlev ve tür kalıplarına giriş 
++ [ders13](ders13.md) ana işleve girdi: `int main(int, char**)`, iki ve üç boyutlu diziler, yöney (vektor=, matris ve tensör
++ [ders14](ders14.md) sarmal çizim, girdi okuma kalıbı, yapay zeka ile olimpiyat sorusu, başka pek çok şey
 + [ders15](ders15.md) kağıt katlama, meşhur Monty Hall adlı tv yarışması, `cout` yerine `dout`, `ostream&`, `throw`, `try`, `catch` ve `static`
 + [ders16](ders16.md) çizim projesi, *lambda*, Cinder kütüp, kağıt katlayarak Evren'in ucuna!
 + [ders17](ders17.md) AlgLib kütüp, PE 52 (a)

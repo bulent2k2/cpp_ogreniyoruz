@@ -30,19 +30,19 @@ C++ (2024-25)
 
 Algoritma (2025-2026)
 --
-+ [ders1-8](dersler/d20251010-1128.md)
-+ [ders9](dersler/d20251205.md)
-+ [ders10](dersler/d20251212.md)
-+ [ders11](dersler/d20251219.md)
-+ [ders12](dersler/d20251226.md)
-+ [ders13](dersler/d20260109.md)
-+ [ders14](dersler/d20260116.md)
-+ [ders15](dersler/d20260123.md)
-+ [ders16](dersler/d20260130.md)
-+ [ders17](dersler/d20260206.md)
-+ [ders18](dersler/d20260213.md)
-+ [ders19](dersler/d20260220.md)
-+ [ders20](dersler/d20260227.md) canavarlardan kaçış sorusuna giriş (enlemesine, genişleyen gezi kalıbı)
++ [ders1-8](dersler/d20251010-1128.md) dinamik programlama, ayrık küme bileşimi, dilim ağaçları, ...
++ [ders9](dersler/d20251205.md) Hanoi kuleleri, aceleci olmayan yani miskin dilim ağaçları
++ [ders10](dersler/d20251212.md) adil bölüştürme sorusu ve alt küme üretimi 
++ [ders11](dersler/d20251219.md) permütasyon üretimi 
++ [ders12](dersler/d20251226.md) 8 vezir bulmacası 
++ [ders13](dersler/d20260109.md) Hamilton patikaları, deste sıralama soruları (1/2)
++ [ders14](dersler/d20260116.md) arama uzayını budalama, deste sıralama soruları (2/2) 
++ [ders15](dersler/d20260123.md) oda sayımı (*backtracking*), labirentte yol bulma (`std::queue` ile *BFS*)
++ [ders16](dersler/d20260130.md) yol ağı tasarımı, derinlemesine gezi kalıpları (*DFS, depth-first search/traversal*)
++ [ders17](dersler/d20260206.md) bilgisayar ağında en kısa mesaj yolu, enlemesine gezi (*BFS, breadth-first search/traversal*) 
++ [ders18](dersler/d20260213.md) iki takım kurma, iki parça çizgeler (*bipartite graphs*)
++ [ders19](dersler/d20260220.md) çevrim bulma (derinlemesine geziyle)
++ [ders20](dersler/d20260227.md) canavarlardan kaçış sorusuna giriş (enlemesine yani genişleyen gezi kalıbı)
 + [ders21](dersler/d20260306.md) canavarlardan kaçış 
 + [ders22](dersler/d20260313.md) omuzda taşıyarak en kolay yolculuk (usaco)
 + [ders23](dersler/d20260327.md) en kısa yol (Dijkstra algoritması)

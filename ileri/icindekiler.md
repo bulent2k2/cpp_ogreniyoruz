@@ -18,8 +18,8 @@ C++ (2024-25)
 + [ders12](ders12.md)
 + [ders13](ders13.md)
 + [ders14](ders14.md)
-+ [ders15](ders15.md) 
-+ [ders16](ders16.md) çizim projesi, *lambda*, Cinder kütüp, kağıt katlama ve Evren'in ucu!
++ [ders15](ders15.md) kağıt katlama, meşhur Monty Hall adlı tv yarışması, `cout` yerine `dout`, `ostream&`, `throw`, `try`, `catch` ve `static`
++ [ders16](ders16.md) çizim projesi, *lambda*, Cinder kütüp, kağıt katlayarak Evren'in ucuna!
 + [ders17](ders17.md) AlgLib kütüp, PE 52 (a)
 + [ders18](ders18.md) geçen yılın sınav soruları 
 + [ders19](ders19.md) dizi analizi, çizgeler ve ağlar, PE 52 (b)

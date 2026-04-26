@@ -49,7 +49,7 @@ t = ekle(s, 10); // hem t hem de s 20 oldu
 
 Sadece tek bir `&` imgesi ekledik ve herşey değişti! Artık `ikiz` adlı değişken sadece bir kopya değil, `s` değişkeninin bir takma adı, yani birebir kendisi. Onun için takma adıyla da olsa kendi değeri değişti. 
 
-**C** dilinde sadece adres değişkenleri vardı. Bu takma ad becerisi yıllar sonra **C++** diliyle ortaya çıktı. Pek çok yerde artık adres yerine takma adları kullanıyoruz. Daha sade ve güvenli oluyor programlarımız. Ama iş dizilere gelince eğer akıllı dinamik dizi, yani `std::vector<>` yerine temel dizi kullanmak istersek adres değişkenleri kullanmak gerekebiliyor. Zaten akıllı dizi kalıbı da bize göstermese de kendisi yapıcı yöntemleri içinde adres değişkenleri kullanıyor. Örneğin:
+**C** dilinde sadece adres değişkenleri vardı. Bu takma ad becerisi yıllar sonra **C++** diliyle ortaya çıktı. Pek çok yerde artık adres yerine takma adları kullanıyoruz. Daha sade ve güvenli oluyor programlarımız. Ama iş dizilere gelince eğer akıllı dinamik dizi dediğimiz `std::vector<>` yerine temel dizi kullanınca adres değişkenlerini iyi bilmekte fayda var. Ayrıca, akıllı dizi kalıbı, bize göstermese de, kendi yapıcı yöntemleri içinde adres değişkenleri kullanıyor. Örneğin:
 
 ```c++
 using Sayı = int;
@@ -57,7 +57,7 @@ using Adres = Sayı*;
 Sayı s = 10;
 Adres a = new Sayı[s];
 ```
-Bu adres şimdi bellekte peşpeşe gelen on tane sayının ilkinin adresi. Bu adrese bir eklersek, ikinci sayının adresini elde ediyoruz. Böyle işlemlere *pointer* artimatiği de derler. Örneğin:
+Bu adres şimdi bellekte peşpeşe dizilen on tane sayıdan ilkinin adresi. Bu adrese bir eklersek, ikinci sayının adresini elde ediyoruz. Böyle işlemlere *pointer* aritmatiği de derler. Örneğin:
 
 ```c++
 *a = 5; // dizinin ilk sayısı 5 oldu
@@ -68,6 +68,8 @@ a--;
 *(a+9) = 100; // onuncu sayı 100 oldu
 ```
 
+Adres, sayı yerine kocaman bir yapının (`struct` ya da `class` nesnesi) adresinolsa da, artı veya eksi bir işlemleri hep bir sonraki ya da bir önceki nesneye ulaşır. Yani derleyici, her nesnenin kaç lokma (*byte*) kullandığını bilir ve ona göre adresi hesaplar. Kendiniz örnek olarak bir `std::string` dizisi oluşturuverin. Ve adresini bir artırın. Bakalım kaç lokma artacak?
+
 Sayıların hepsini yazdırmak da kolay:
 ```c++
 using K = unsigned;
@@ -77,9 +79,9 @@ for (K k = 0; k<10; ++k)
 
 Bu kodun hepsi [biraz daha düzenlenmiş haliyle burada](https://onlinegdb.com/2tPZnvgz8).
 
-`new` komutu bellekte yer ayırdığı için, işimiz bitince `delete` komutuyla belleği  geri vermemizde fayda var. Onu da yukarıdaki bağlantıda görebilirsiniz. `stl::vector<Sayı> dizi(n);` ile akıllı dinamik dizi oluşturduğumuzda `vector` sınıfının yapıcı yöntemi de `new Sayı[n]` komutunu kullanır. `dizi.push_back(s);` yöntemi de gerektiğinde, yani `n`'den çok sayı yazmak istediğimizde, önce `a = new Sayı[2*n]` ile daha büyük bir yer ayırıp bütün sayıları oraya kopyalar, ve arkasından `delete [] a` ile eskisini serbest bırakır. 
+`new` komutu bellekte yer ayırdığı için, işimiz bitince `delete` komutuyla belleği  geri vermemizde fayda var. Onu da yukarıdaki bağlantıda görebilirsiniz. `stl::vector<Sayı> dizi(n);` ile akıllı dinamik dizi oluşturduğumuzda `vector` sınıfının yapıcı yöntemi de `new Sayı[n]` komutunu kullanır. `dizi.push_back(s);` yöntemi de gerektiğinde, yani `n`'den çok sayı yazmak istediğimizde, önce `a = new Sayı[2*n]` ile daha büyük bir yer ayırıp bütün sayıları oraya kopyalar, ve arkasından `delete [] a` ile eskisini serbest bırakır. `push_back()` kullanmakta bir sınır olmadığı için, gerektikçe `4*n`, `8*n` diye büyüyen temel diziler kullanır. Ama bunların hepsi motorun içinde gizli. Onun için akıllı ya da becerikli dizi diyoruz zaten.
 
-Ya iki boyutlu bir dizi nasıl olacak? En kolayı şöyle:
+Ya iki boyutlu temel dizi nasıl olur? En kolayı şöyle:
 ```c++
 S d1[][3] = { {2, 3, 4}, {5, 6, 7} };
 S d2[][2] = { {2, 3}, {4, 5}, {6, 7} };
@@ -96,7 +98,7 @@ for (auto d: d2) {
 }
 ```
 
-Derleyici, ilk boyutun uzunluğunu eşittir işaretinin sağındaki sabit dizi değerine bakarak bulabiliyor. İkinci ve varsa sonraki boyutların uzunluğunu bizim belirtmemiz gerek. (Neden?)
+Derleyici, ilk boyutun uzunluğunu eşitleme işaretinin sağındaki sabit dizi değerine bakarak bulabiliyor. İkinci ve varsa sonraki boyutların uzunluğunu bizim belirtmemiz gerek. (Neden?)
 
 Döngülerde kullandığımız `d` aslında bir adres değişkeni. Onun için `d[k]` yerine `*(d+k)` de yazabiliriz.
 

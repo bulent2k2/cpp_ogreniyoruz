@@ -148,6 +148,26 @@ void yaz(auto d, K b1, K b2) {
 ```
 Çıktısını merak ederseniz, [kodu buradan](https://onlinegdb.com/EPrtCzTnmC) çalıştırıverin.
 
+Bu arada, gelin `Adres` türümüzü kullanarak tekrar yazalım:
+```c++
+using Adres = S*;
+void yaz(Adres* d, K b1, K b2) { 
+    S s = 11;
+    for (K k1 = 0; k1<b1; ++k1) {
+        for (K k2=0; k2<b2; ++k2) 
+            std::cout << (d[k1][k2]=++s) << " ";
+        std::cout << '\n';
+    }
+}
+
+// main içinde:
+Adres* d = new Adres[b1];
+for (K k=0; k<b1; ++k)
+    d[k] = new S[b2];
+yaz(d, b1, b2);
+```
+Daha da sadeleşti, değil mi?
+
 Tabii bellekte özel yer ayırdığımız için, temizliğini de yapmamız gerekir. O da kolay:
 ```c++
 for (K k=0; k<b1; ++k)

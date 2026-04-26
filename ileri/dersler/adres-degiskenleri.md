@@ -68,7 +68,7 @@ a--;
 *(a+9) = 100; // onuncu sayı 100 oldu
 ```
 
-Adres, sayı yerine kocaman bir yapının (`struct` ya da `class` nesnesi) adresinolsa da, artı veya eksi bir işlemleri hep bir sonraki ya da bir önceki nesneye ulaşır. Yani derleyici, her nesnenin kaç lokma (*byte*) kullandığını bilir ve ona göre adresi hesaplar. Kendiniz örnek olarak bir `std::string` dizisi oluşturuverin. Ve adresini bir artırın. Bakalım kaç lokma artacak?
+Adres, sayı yerine kocaman bir yapının (`struct` ya da `class` nesnesi) adresi olsa da, artı bir veya eksi bir işlemleri hep bir sonraki ya da bir önceki nesneye ulaşır. Yani derleyici, her nesnenin kaç lokma (ingilizcede *byte*) kullandığını bilir ve ona göre adresi hesaplar. Kendiniz örnek olarak bir `std::string` dizisi oluşturuverin. Sonra adresini bir artırın. Bakalım kaç lokma artacak?
 
 Sayıların hepsini yazdırmak da kolay:
 ```c++

@@ -3,7 +3,7 @@ Giriş Dersleri
 
 Algoritma (2022 civarı)
 --
-+ [ders1-10](../2022/README.md)
++ [ders 1-10](../2022/README.md)
 
 C++ (2024-25)
 --

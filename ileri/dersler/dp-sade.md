@@ -49,7 +49,7 @@ Yani en iyi çözüm:
 f(11) = 1 + min \{f(4) + f(6) + f(10)\}
 ```
 Benzer şekilde 
-$f(10)$, $f(6)$ ve $f(4)$'ü de indirgeyen eşitlikleri de yazabiliriz elbet. Yani genel tümevarım formülümüzü şöyle yazabiliriz (sağol Arhan!):
+$f(10)$, $f(6)$ ve $f(4)$ değerlerini indirgeyen eşitlikleri de yazabiliriz elbet. Yani genel tümevarım formülümüzü şöyle yazabiliriz (sağol Arhan!):
 ```math
 f(x) = 1 + min \{ f(x - b1),  
             f(x - b2),  

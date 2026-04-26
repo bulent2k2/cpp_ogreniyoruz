@@ -36,22 +36,20 @@ Bunun kodunu nasıl yazarız? O da gelecek derse kaldı. Umarım arada siz de ya
 
 Bozuk paralarımız 1, 5 ve 7 kuruş olsun. 11 kuruş için en iyi çözüm $5 + 5 + 1$ yani 3 bozuk parayla olur. Aceleci (İngilizcede *greedy* denen) bir çözüm 7 ile başlardı, değil mi? O zaman çözüm $7 + 1 + 1 + 1 + 1$ olur ve 5 bozuk para gerekirdi. Onun için, acele etmeyelim ve bu soruyu da yine daha küçük sorulara bölelim.   
 
-$f(n)$, $n$ toplamı için en iyi çözümdeki bozuk para sayısı olsun. 
-Örneğin, 
+$f(n)$, $n$ toplamı için en iyi çözümdeki bozuk para sayısı olsun. Örneğimiz için şunu yazabiliriz:
 ```math
 f(11) = 1 + min \{f(11-7), f(11-5), f(11-1)\}
 ```
-, olur değil mi?
-Yani bir çözüm içinde 7 kuruştan bir tane varsa, ki 11 için daha çok olamaz zaten,
-o zaman $1 + f(11-7=4)$ tane bozuk para kullanması gerek. Ama 7 kuruş kullanmak zorunda değiliz elbet.
+Yani en iyi çözüm içinde 7 kuruştan bir tane varsa, ki 11 için daha çok olamaz zaten,
+o zaman $1 + f(11-7=4)$ tane bozuk para kullanması gerek. Ama 7 kuruş kullanmak zorunda değiliz elbet. Yani en iyi çözümde 7 olup olmadığını bilmiyoruz. 
 5 kuruş kullanmayı da denemeliz. Onun için de bozuk para sayısı $1 + f(11-5=6)$ olmalı. 
-Elbette bir de önce 1 kuruş kullanabiliriz. O zaman da $1 + f(11-1=10)$ oluyor. 
+Elbette bir de 1 kuruş için de aynı şey geçerli. O zaman da $1 + f(11-1=10)$ oluyor. 
 Yani en iyi çözüm: 
 ```math
 f(11) = 1 + min \{f(4) + f(6) + f(10)\}
 ```
 Benzer şekilde 
-$f(10)$, $f(6)$ ve $f(4)$'ü de hesaplayabiliriz elbet. Yani genel tümevarım formülümüzü şöyle yazabiliriz (sağol Arhan!):
+$f(10)$, $f(6)$ ve $f(4)$'ü de indirgeyen eşitlikleri de yazabiliriz elbet. Yani genel tümevarım formülümüzü şöyle yazabiliriz (sağol Arhan!):
 ```math
 f(x) = 1 + min \{ f(x - b1),  
             f(x - b2),  

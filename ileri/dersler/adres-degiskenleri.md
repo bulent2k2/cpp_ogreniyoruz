@@ -106,7 +106,7 @@ Farketmişsinizdir, iki döngü birbirine çok benziyor. Sadeleştirmek iyi olur
 
 ```c++
 void yaz(auto d, K b1, K b2) {
-    for (K k1 = 0; k1<b1; ++k1) {
+    for (K k1=0; k1<b1; ++k1) {
         for (K k2=0; k2<b2; ++k2) 
             std::cout << d[k1][k2] << " ";
         std::cout << '\n';
@@ -121,7 +121,7 @@ yaz(d1, std::size(d1), 3);
 yaz(d2, std::size(d2), 2);
 ```
 
-Çok boyutlu bir diziyi bu şekilde işlev girdi olarak da kullanabiliyoruz. 
+Çok boyutlu bir diziyi bu şekilde işlevlere girdi olarak da kullanabiliyoruz. 
 
 Bunu da [burada çalıştırabilirsiniz](https://onlinegdb.com/0S6eTQNV6).  
 

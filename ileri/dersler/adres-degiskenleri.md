@@ -96,7 +96,7 @@ for (auto d: d2) {
 }
 ```
 
-Derleyici, ilk boyutun uzunluğunu eşittir işaretinin sağındaki sabit dizi değerine bakarak bulabiliyor. İkinci ve varsa sonraki boyutların uzunluğunu bizim belitmemiz gerek. (Neden?)
+Derleyici, ilk boyutun uzunluğunu eşittir işaretinin sağındaki sabit dizi değerine bakarak bulabiliyor. İkinci ve varsa sonraki boyutların uzunluğunu bizim belirtmemiz gerek. (Neden?)
 
 Döngülerde kullandığımız `d` aslında bir adres değişkeni. Onun için `d[k]` yerine `*(d+k)` de yazabiliriz.
 

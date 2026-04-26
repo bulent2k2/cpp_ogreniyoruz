@@ -139,7 +139,7 @@ Tabii `yaz()` işlevi pek anlamlı birşey yazamayacak. Ufak bir değişiklik ya
 ```c++
 void yaz(auto d, K b1, K b2) { 
     S s = 11;
-    for (K k1 = 0; k1<b1; ++k1) {
+    for (K k1=0; k1<b1; ++k1) {
         for (K k2=0; k2<b2; ++k2) 
             std::cout << (d[k1][k2]=++s) << " ";
         std::cout << '\n';
@@ -153,7 +153,7 @@ Bu arada, gelin `Adres` türümüzü kullanarak tekrar yazalım:
 using Adres = S*;
 void yaz(Adres* d, K b1, K b2) { 
     S s = 11;
-    for (K k1 = 0; k1<b1; ++k1) {
+    for (K k1=0; k1<b1; ++k1) {
         for (K k2=0; k2<b2; ++k2) 
             std::cout << (d[k1][k2]=++s) << " ";
         std::cout << '\n';

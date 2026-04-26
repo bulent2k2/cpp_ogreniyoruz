@@ -37,12 +37,20 @@ Bunun kodunu nasıl yazarız? O da gelecek derse kaldı. Umarım arada siz de ya
 Bozuk paralarımız 1, 5 ve 7 kuruş olsun. 11 kuruş için en iyi çözüm $5 + 5 + 1$ yani 3 bozuk parayla olur. Aceleci (İngilizcede *greedy* denen) bir çözüm 7 ile başlardı, değil mi? O zaman çözüm $7 + 1 + 1 + 1 + 1$ olur ve 5 bozuk para gerekirdi. Onun için, acele etmeyelim ve bu soruyu da yine daha küçük sorulara bölelim.   
 
 $f(n)$, $n$ toplamı için en iyi çözümdeki bozuk para sayısı olsun. 
-Örneğin, $f(11) = 1 + min \{f(11-7), f(11-5), f(11-1)\}$, olur değil mi?
+Örneğin, 
+```math
+f(11) = 1 + min \{f(11-7), f(11-5), f(11-1)\}
+```
+, olur değil mi?
 Yani bir çözüm içinde 7 kuruştan bir tane varsa, ki 11 için daha çok olamaz zaten,
 o zaman $1 + f(11-7=4)$ tane bozuk para kullanması gerek. Ama 7 kuruş kullanmak zorunda değiliz elbet.
 5 kuruş kullanmayı da denemeliz. Onun için de bozuk para sayısı $1 + f(11-5=6)$ olmalı. 
 Elbette bir de önce 1 kuruş kullanabiliriz. O zaman da $1 + f(11-1=10)$ oluyor. 
-Yani en iyi çözüm: $f(11) = 1 + min \{f(4) + f(6) + f(10)\}$. Benzer şekilde 
+Yani en iyi çözüm: 
+```math
+f(11) = 1 + min \{f(4) + f(6) + f(10)\}
+```
+Benzer şekilde 
 $f(10)$, $f(6)$ ve $f(4)$'ü de hesaplayabiliriz elbet. Yani genel tümevarım formülümüzü şöyle yazabiliriz (sağol Arhan!):
 ```math
 f(x) = 1 + min \{ f(x - b1),  
@@ -50,6 +58,22 @@ f(x) = 1 + min \{ f(x - b1),
             ...,  
             f(x - bn)\}  
 ```
+Burada `n` tane bozuk para değeri var ve bu değerler: `b1, b2, ... bn`. Bir önceki soruda olduğu gibi başlangıç değerimiz:
+```math
+f(0) = 0
+```
+O sayede:
+```math
+f(1) = 1 + f(1-1) = 1 + f(0) = 1
+```
+```math
+f(2) = 1 + f(2-1) = 1 + f(1) = 2
+```
+Ve:
+```math
+f(x) = 0, \forall x \lt 0
+```
+yani sıfırdan küçük her $x$ için, fonksiyonun değeri 0. Yani toplamı eksi olan dizilerin sayısı sıfır 😊.
 
 Bozuk paralarla bir hedefe varmanın bütün yollarını sayalım!
 ---

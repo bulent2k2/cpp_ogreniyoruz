@@ -58,7 +58,7 @@ f(x) = 1 + min \{ f(x - b1),
             ...,  
             f(x - bn)\}  
 ```
-Burada `n` tane bozuk para değeri var ve bu değerler: `b1, b2, ... bn`. Bir önceki soruda olduğu gibi başlangıç değerimiz:
+Burada `n` tane bozuk para değeri var ve bu değerler: `b1, b2, ... bn`. Başlangıç değerimiz olarak hedef sıfır. O da sıfır tane bozuk para gerektiriyor:
 ```math
 f(0) = 0
 ```
@@ -73,7 +73,7 @@ Ve:
 ```math
 f(x) = 0, \forall x \lt 0
 ```
-yani sıfırdan küçük her $x$ için, fonksiyonun değeri 0. Yani toplamı eksi olan dizilerin sayısı sıfır 😊.
+yani sıfırdan küçük her $x$ için de fonksiyonun değeri sıfır. Yani toplamı eksi olan dizilerin içindeki bozuk paraların sayısı da sıfır. Ne faydalı bir sayı, değil mi? 😊.
 
 Bozuk paralarla bir hedefe varmanın bütün yollarını sayalım!
 ---

@@ -1,3 +1,6 @@
+Daha önce Dinamik Programlamaya giriş yaptığımız ilk dersimizin [notları burada](../dp/README.md).  
+
+Bu haftaki dersimizde ([o da burada](d20260424.md)) daha önce görmediğimiz dört tane sade ve temel DP sorusuna baktık:
 
 [Zar dizilerini sayalım (CSES DP1)](https://cses.fi/problemset/task/1633)
 ---

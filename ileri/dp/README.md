@@ -85,3 +85,9 @@ yazı bul2(const yazı& y1, const yazı& y2){
 }
 ```
 `bul2()` işlevini tamamlamayı size bırakıyorum. Bir deneyin isterseniz. Gerekirse gelecek derste birlikte tamamlarız.
+
+Bugünlük bu kadar. Haftalar sonra DP tekniğini çizge soruları çözmek için de kullandık. Örneğin:
+1. Floyd-Warshall algoritması: DP kullanarak doğruluğunu [kanıtladık](../dersler/floyd-warshall.md) ve bütün şehirlerin birbirlerine uzaklığını hesapladık.
+2. Bellman-Ford algoritması: [Kanıt burada](../dersler/d20260417.md). Onunla da eksi *uzaklılara* rağmen, en *uzun* yolu bulduk, hem de artan çevrimleri de yakalayarak.
+
+Ama önce DP tekniğini iyice özümsemek için, şu dört temel ve meşhur probleme de bakın: [zar ve bozuk para soruları ve çözüm teknileri](../dersler/dp-sade.md).

@@ -63,18 +63,27 @@ Burada `n` tane bozuk para değeri var ve bu değerler: `b1, b2, ... bn`. Başla
 ```math
 f(0) = 0
 ```
-O sayede:
+ve:
 ```math
-f(1) = 1 + f(1-1) = 1 + f(0) = 1
+f(x) = \infty, \forall x \lt 0
+```
+yani sıfırdan küçük her $x$ için de fonksiyonun değeri sonsuz olsun diyoruz. Neden? Toplamı eksi olan bir dizi mümkün değil de ondan. Mantıklı değil gibi ama sonsuz kavramı burada formülümüzün bütün hedef ve bozuk para değerleri için çalışmasını sağlıyor. Yoksa, sadece hedeften büyük olmayan bozuk para değerleri için çalışır diye bir koşul belirtmemiz gerekirdi. Örneğimiz için bir kaç değeri aşağıdan yukarı hesaplayalım:
+```math
+f(1) = 1 + min \{ f(1-1), f(1-5), f(1-7) \} = 1 + f(0) = 1 + 0 = 1
 ```
 ```math
-f(2) = 1 + f(2-1) = 1 + f(1) = 2
+f(2) = 1 + min \{ f(2-1), f(2-5), f(2-7) \} = 1 + f(1) = 1 + 1 = 2
 ```
-Ve:
 ```math
-f(x) = 0, \forall x \lt 0
+...
 ```
-yani sıfırdan küçük her $x$ için de fonksiyonun değeri sıfır. Yani toplamı eksi olan dizilerin içindeki bozuk paraların sayısı da sıfır. Ne faydalı bir sayı, değil mi? 😊.
+```math
+f(5) = 1 + min \{ f(5-1), f(5-5), f(5-7) \} = 1 + min \{ f(4), 0 \} = 1 + 0 = 1
+```
+```math
+...
+```
+$min$ sayesinde sonsuz olan değerlerin bir etkisi olmuyor elbet.
 
 Bozuk paralarla bir hedefe varmanın bütün yollarını sayalım!
 ---

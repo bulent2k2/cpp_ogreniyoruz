@@ -1,6 +1,8 @@
 Giriş Dersleri
 ====
 
+Son ders: [ders 27](dersler/d20260424.md) adres değişkenleri, iki boyutlu diziler, sade ve meşhur DP problemleri.
+
 Algoritma (2022 civarı)
 --
 + [ders 1-10](../2022/README.md)

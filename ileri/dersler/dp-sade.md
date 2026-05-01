@@ -1,3 +1,5 @@
+> [27. ders](d20260424.md) [Hepsi](../icindekiler.md)
+
 Daha önce Dinamik Programlamaya giriş yaptığımız ilk dersimizin [notları burada](../dp/README.md).  
 
 Bu haftaki dersimizde ([o da burada](d20260424.md)) daha önce görmediğimiz dört tane sade ve temel DP sorusuna baktık:
@@ -93,3 +95,5 @@ Ama ya sıraya önem vermiyorsak? Örneğin `{1, 2, 2}` ve `{2, 1, 2}` ayrı ayr
 [CSES DP 4](https://cses.fi/problemset/task/1636): $fk(x)$ bize toplamı $x$ olan kombinasyonların sayısını versin. 
 
 Tümevarım formülleri gelecek derse kaldı. Ama arada kağıt ve kalem alıp düşünmekte çok fayda var! 
+
+> [27. ders](d20260424.md) [Hepsi](../icindekiler.md)

@@ -1,3 +1,5 @@
+> [27. ders](d20260424.md) [Hepsi](../icindekiler.md)
+
 Adres değişkenleri ve iki boyutlu diziler
 ====
 
@@ -178,3 +180,5 @@ delete [] d;
 ```
 
 Şimdilik bu kadar. Derste yazdığımız kod biraz aceleye geldi ama anımsamak isterseniz [o da burada](https://onlinegdb.com/Z6_283dYl).
+
+> [27. ders](d20260424.md) [Hepsi](../icindekiler.md)

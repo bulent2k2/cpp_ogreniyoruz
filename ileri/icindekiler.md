@@ -1,7 +1,7 @@
 Giriş Dersleri
 ====
 
-Son ders: [ders 27](dersler/d20260424.md) adres değişkenleri, iki boyutlu diziler, sade ve meşhur DP problemleri.
+Bugün 1 Mayıs 2026. 24 Nisan günü yaptığımız son ders burada: [ders 27](dersler/d20260424.md).
 
 Algoritma (2022 civarı)
 --

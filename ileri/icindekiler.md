@@ -52,3 +52,5 @@ Algoritma (2025-2026)
 + [ders 25](dersler/d20260410.md) Floyd-Warshall kanıtı, en iyi yol ve sonsuz çevrim bulma (Bellman-Ford algoritması)
 + [ders 26](dersler/d20260417.md) Bellman-Ford kanıtı
 + [ders 27](dersler/d20260424.md) adres değişkenleri, iki boyutlu diziler, sade ve meşhur DP problemleri
++ [ders 28](dersler/d20260501.md) CSES DP'den üçüncü ve dördüncü sorular: toplama varan bozuk para dizileri ve kümeleri
+

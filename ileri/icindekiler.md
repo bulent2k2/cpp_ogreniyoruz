@@ -1,7 +1,7 @@
 Giriş Dersleri
 ====
 
-Bugün 1 Mayıs 2026. 24 Nisan günü yaptığımız son ders burada: [ders 27](dersler/d20260424.md).
+1 Mayıs 2026 tarihli dersimiz burada: [ders 28](dersler/d20260501.md).
 
 Algoritma (2022 civarı)
 --

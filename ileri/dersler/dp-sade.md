@@ -94,6 +94,6 @@ Bozuk paralarla bir hedefe varmanın bütün yollarını sayalım!
 Ama ya sıraya önem vermiyorsak? Örneğin `{1, 2, 2}` ve `{2, 1, 2}` ayrı ayrı sayılmasın diyoruz. `std::multiset` kavramını anımsatmış olabilir:  
 [CSES DP 4](https://cses.fi/problemset/task/1636): $fk(x)$ bize toplamı $x$ olan kombinasyonların sayısını versin. 
 
-Tümevarım formülleri gelecek derse kaldı. Ama arada kağıt ve kalem alıp düşünmekte çok fayda var! 
+Tümevarım formülleri gelecek derse kaldı. Ama arada kağıt ve kalem alıp düşünmek yarar. Sonra [kanıtları burada](d20260501.md) bulabilirsiniz.
 
 > [27. ders](d20260424.md) [Hepsi](../icindekiler.md)

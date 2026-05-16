@@ -2,6 +2,7 @@ Giriş Dersleri
 ====
 
 8 Mayıs 2026 tarihli dersimiz en altta: [ders 29](dersler/d20260508.md).
+Sınav 16 Mayıs 2026'da. 14 Mayıs'ta yaptığımız son ders [ders 30](dersler/d20260514.md).
 
 Algoritma (2022 civarı)
 --

@@ -1,0 +1,448 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm I</div>
+  <h1>İlk Adımlar</h1>
+  <p class="ozet">
+    Bir programın içinde aslında çok az şey var: değerler, onlara verdiğimiz adlar,
+    kararlar, tekrarlar ve işler. Beşi de bu bölümde. Sonunda bilgisayarla oyun
+    oynayacak ve ilk Project Euler sorunuzu çözeceksiniz.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">I.1</div>
+  <div class="govde">
+    <h2>Değer, ad, tür</h2>
+
+    <p>
+      Programlamanın tamamı şu üçlünün etrafında dönüyor. Bir <strong>değer</strong>
+      var: <code>16</code>. Bu değere bir <strong>ad</strong> veriyoruz:
+      <code>yas</code>. Ve bilgisayara bu değerin ne cins bir şey olduğunu, yani
+      <strong>türünü</strong> söylüyoruz: <code>int</code>.
+    </p>
+
+    <p>
+      Neden tür söylemek zorundayız? Çünkü bilgisayarın belleği, üzerine sadece sıfır
+      ve bir yazılabilen upuzun bir şerit. Aynı sıfır-bir dizisi, türüne göre bambaşka
+      şeyler demek: bir sayı, bir harf, bir doğru/yanlış. Tür, o şeridin nasıl
+      okunacağını söyleyen etiket. C++ bu etiketi <em>derleme</em> anında
+      istiyor &mdash; işte hızının sırrı da burada.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">01-turler.cpp</span><span class="etiket">temel türler</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">"Merhaba! Ben senin ilk programın."</span> &lt;&lt; endl;
+
+  <span class="t">int</span>    yas      {<span class="n">16</span>};        <span class="y">// sayı</span>
+  <span class="t">double</span> boy      {<span class="n">1.72</span>};      <span class="y">// kesirli sayı</span>
+  <span class="t">char</span>   basHarfi {<span class="s">'B'</span>};       <span class="y">// harf</span>
+  <span class="t">bool</span>   ogrenci  {<span class="a">true</span>};      <span class="y">// ikil</span>
+
+  cout &lt;&lt; <span class="s">"Yaş      : "</span> &lt;&lt; yas      &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"Boy      : "</span> &lt;&lt; boy      &lt;&lt; <span class="s">" m"</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"Baş harfi: "</span> &lt;&lt; basHarfi &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"Öğrenci  : "</span> &lt;&lt; ogrenci  &lt;&lt; endl;             <span class="y">// 1 yazar!</span>
+  cout &lt;&lt; <span class="s">"Öğrenci  : "</span> &lt;&lt; boolalpha &lt;&lt; ogrenci &lt;&lt; endl; <span class="y">// true yazar</span>
+
+  cout &lt;&lt; <span class="s">"On yıl sonra: "</span> &lt;&lt; yas + <span class="n">10</span> &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <p>
+      Süslü parantezle ilk değer verme (<code>int yas{16}</code>) alışkanlığını
+      baştan edinin. <code>int yas = 16</code> da çalışır ama süslü parantez, veri
+      kaybına yol açan sessiz dönüşümlere derleyicinin itiraz etmesini sağlar.
+      <strong>İlk değeri vermeyi asla unutmayın:</strong> ilk değeri verilmemiş bir
+      değişkende bellekte o an ne varsa o durur; çoğu zaman sıfır çıkar ve sizi
+      kandırır, bir gün <code>1696521216</code> çıkar ve saatinizi alır.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        <code>ogrenci</code> değişkenini <code>false</code> yapın. Çıktı ne olur?
+        Sonra <code>char basHarfi{'B'}</code> yerine <code>int basHarfi{'B'}</code>
+        yazıp çalıştırın. Çıkan <code>66</code> sayısı nereden geldi? (İpucu: harfler
+        de bellekte sayı olarak duruyor. Adı <em>ASCII</em>.)
+      </p>
+    </div>
+
+    <h3>Her türün bir sınırı var</h3>
+
+    <p>
+      Şimdi çok öğretici bir hataya bakalım. Aşağıdaki programın çıktısını
+      okumadan önce tahmin edin:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">02-tasma.cpp</span><span class="etiket">taşma</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;cmath&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;limits&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> a{<span class="n">2000</span>}, b{<span class="n">3000</span>};
+
+  cout &lt;&lt; <span class="s">"2000'in küpü (int) : "</span> &lt;&lt; a * a * a &lt;&lt; endl;   <span class="y">// eksi!</span>
+  cout &lt;&lt; <span class="s">"3000'ün küpü (int) : "</span> &lt;&lt; b * b * b &lt;&lt; endl;   <span class="y">// yanlış!</span>
+  cout &lt;&lt; <span class="s">"3000'ün küpü (long): "</span> &lt;&lt; <span class="n">1L</span> * b * b * b &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"karekök(2000'in küpü) : "</span> &lt;&lt; sqrt(a * a * a) &lt;&lt; endl; <span class="y">// nan</span>
+
+  cout &lt;&lt; <span class="s">"int'in en büyüğü           : "</span>
+       &lt;&lt; numeric_limits&lt;<span class="t">int</span>&gt;::max() &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"unsigned long'un en büyüğü : "</span>
+       &lt;&lt; numeric_limits&lt;<span class="t">unsigned long</span>&gt;::max() &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">gerçek sonuç</span></figcaption>
+      <pre><code>2000'in küpü (int) : <span class="v">-589934592</span>
+3000'ün küpü (int) : <span class="v">1230196224</span>
+3000'ün küpü (long): 27000000000
+karekök(2000'in küpü) : <span class="v">-nan</span>
+int'in en büyüğü           : 2147483647
+unsigned long'un en büyüğü : 18446744073709551615</code></pre>
+    </figure>
+
+    <p>
+      Bir sayının küpü nasıl eksi olur? Olmaz elbette &mdash; ama <code>int</code>
+      türü yaklaşık iki milyar iki yüz milyona kadar sayabiliyor. Bunu aşınca sayaç
+      başa dönüyor, tıpkı kilometre saati gibi. Buna <strong>taşma</strong>
+      (<em>overflow</em>) deniyor. Eksi bir sayının karekökü de haliyle
+      <code>nan</code>, yani &ldquo;sayı değil&rdquo; (<em>not a number</em>).
+    </p>
+
+    <p>
+      Bu hata, yarışma sorularında en çok can yakan hatadır: kodunuz küçük örneklerde
+      mükemmel çalışır, büyük testte sessizce yanlış yanıt verir.
+      <strong>Çarpım yapıyorsanız türünüzü büyütün</strong> &mdash;
+      <code>long long</code> kullanın ya da <code>1L *</code> ile çarpıma
+      başlayın. Son satırdaki <code>unsigned long</code> sınırına bakın:
+      18 milyar kere milyardan fazla. Neredeyse her şeye yeter.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        İkiniz de kâğıt kalemle şunu hesaplayın: <code>int</code> 32 bit ise, en
+        büyük değeri neden tam olarak <code>2147483647</code>? Neden
+        <code>2147483648</code> değil? Sonra yanıtlarınızı karşılaştırın. Bu tek
+        sorunun cevabı, sayıların bellekte nasıl durduğunu bir ömür hatırlatır.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.2</div>
+  <div class="govde">
+    <h2>Kararlar ve tekrarlar</h2>
+
+    <p>
+      Şimdiye kadarki program yukarıdan aşağıya bir kere aktı. Programı
+      <em>program</em> yapan iki şey daha var: bazı satırları
+      <strong>duruma göre</strong> çalıştırmak ve bazı satırları
+      <strong>defalarca</strong> çalıştırmak.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">kalıplar</span></figcaption>
+      <pre><code><span class="y">// karar</span>
+<span class="a">if</span> (not sayi) cout &lt;&lt; <span class="s">"sıfır"</span>;
+<span class="a">else if</span> (sayi &lt; <span class="n">0</span>) cout &lt;&lt; <span class="s">"eksi"</span>;
+<span class="a">else</span> cout &lt;&lt; <span class="s">"artı"</span>;
+
+<span class="y">// sayısı belli tekrar</span>
+<span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; <span class="n">10</span>; ++k)
+    cout &lt;&lt; k &lt;&lt; <span class="s">" "</span>;
+
+<span class="y">// sayısı belli olmayan tekrar</span>
+<span class="a">while</span> (hak &gt; <span class="n">0</span>) {
+    <span class="y">// ... </span>
+    --hak;
+}</code></pre>
+    </figure>
+
+    <p>
+      C++ dilinde <code>and</code>, <code>or</code>, <code>not</code> sözcükleri
+      <code>&amp;&amp;</code>, <code>||</code>, <code>!</code> imgelerinin
+      birebir karşılığı. İkisini de tanıyın; sözcük hâli Türkçe kod yazarken çok daha
+      okunaklı oluyor, ders notlarımızda genelde onları kullandık.
+    </p>
+
+    <h3>İşlev: bir kere yaz, çok kere kullan</h3>
+
+    <p>
+      Bir <strong>işlev</strong> (<em>function</em>) girdi alan, iş yapan ve
+      çıktı veren küçük bir makine. Programı işlevlere bölmenin üç faydası var:
+      okumak kolaylaşır, sınamak kolaylaşır ve aynı şeyi iki kere yazmaktan
+      kurtulursunuz.
+    </p>
+
+    <p>
+      Şimdi bu üçünü birden kullanan bir çözüme bakalım.
+      <a href="https://projecteuler.net/problem=1">Project Euler'in birinci sorusu</a>
+      şunu istiyor: 1000'den küçük, 3'e ya da 5'e tam bölünen bütün sayıların
+      toplamı kaçtır?
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">04-pe1.cpp</span><span class="etiket">project euler 1</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="t">bool</span> bolunuyorMu(<span class="t">int</span> sayi, <span class="t">int</span> bolen) {
+  <span class="a">return</span> sayi % bolen == <span class="n">0</span>;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> toplam{<span class="n">0</span>};
+  <span class="a">for</span> (<span class="t">int</span> sayi{<span class="n">3</span>}; sayi &lt; <span class="n">1000</span>; ++sayi)
+    <span class="a">if</span> (bolunuyorMu(sayi, <span class="n">3</span>) <span class="a">or</span> bolunuyorMu(sayi, <span class="n">5</span>))
+      toplam += sayi;
+
+  cout &lt;&lt; <span class="s">"Project Euler, birinci problem: "</span> &lt;&lt; toplam &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <p class="cikti-satiri">$ ./pe1 &rarr; Project Euler, birinci problem: 233168</p>
+
+    <p>
+      <code>bolunuyorMu()</code> işlevi tek satır. Buna değer mi? Kesinlikle değer.
+      Adı sayesinde <code>if</code> satırı Türkçe bir cümle gibi okunuyor:
+      &ldquo;sayı üçe bölünüyorsa ya da beşe bölünüyorsa&rdquo;. İyi kod, yorum
+      satırına ihtiyaç bırakmayan koddur.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Klasik tuzak</span>
+      <p>
+        Bu soruyu <code>if</code>'i ikiye bölerek yazarsanız &mdash; biri 3 için,
+        biri 5 için &mdash; 15'e bölünen sayıları iki kere saymış olursunuz.
+        Derste tam olarak bu hatayı yaptık ve <code>if (bolunuyorMu(sayi, 15))
+        toplam -= sayi;</code> diye bir satırla yamaladık. Çalışıyor, ama
+        yukarıdaki <code>or</code>'lu hâli hem daha kısa hem daha doğru.
+        <strong>Yamamak yerine yeniden düşünmeyi</strong> alışkanlık edinin.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.3</div>
+  <div class="govde">
+    <h2>İlk oyununuz</h2>
+
+    <p>
+      Şimdi bilgisayarla konuşan bir program yazalım. Bilgisayar bir sayı tutsun,
+      siz tahmin edin, o da &ldquo;daha büyük / daha küçük&rdquo; desin.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">03-tahmin.cpp</span><span class="etiket">sayı tahmin oyunu</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;cstdlib&gt;</span>   <span class="y">// rand, srand</span>
+<span class="a">#include</span> <span class="s">&lt;ctime&gt;</span>     <span class="y">// time</span>
+<span class="a">using namespace</span> std;
+
+<span class="t">int</span> main() {
+  srand(time(<span class="a">nullptr</span>));            <span class="y">// her çalıştırışta farklı olsun</span>
+  <span class="a">const</span> <span class="t">int</span> gizli{rand() % <span class="n">100</span> + <span class="n">1</span>};  <span class="y">// 1..100</span>
+  <span class="t">int</span> hak{<span class="n">7</span>};
+
+  cout &lt;&lt; <span class="s">"1 ile 100 arasında bir sayı tuttum. "</span>
+       &lt;&lt; hak &lt;&lt; <span class="s">" hakkın var."</span> &lt;&lt; endl;
+
+  <span class="a">while</span> (hak &gt; <span class="n">0</span>) {
+    cout &lt;&lt; <span class="s">"Tahminin: "</span>;
+    <span class="t">int</span> tahmin;
+    <span class="a">if</span> (<span class="a">not</span> (cin &gt;&gt; tahmin)) <span class="a">break</span>;   <span class="y">// girdi bitti ya da bozuk</span>
+    --hak;
+
+    <span class="a">if</span> (tahmin == gizli) {
+      cout &lt;&lt; <span class="s">"Bildin! "</span> &lt;&lt; (<span class="n">7</span> - hak) &lt;&lt; <span class="s">" tahminde."</span> &lt;&lt; endl;
+      <span class="a">return</span> <span class="n">0</span>;
+    }
+    cout &lt;&lt; (tahmin &lt; gizli ? <span class="s">"Daha büyük."</span> : <span class="s">"Daha küçük."</span>)
+         &lt;&lt; <span class="s">" Kalan hak: "</span> &lt;&lt; hak &lt;&lt; endl;
+  }
+  cout &lt;&lt; <span class="s">"Hakkın bitti. Tuttuğum sayı "</span> &lt;&lt; gizli &lt;&lt; <span class="s">" idi."</span> &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <p>
+      Küçük ama içinde çok şey var: rastgele sayı, kullanıcıdan girdi, döngü, koşul,
+      üçlü işlemci (<code>? :</code>) ve bozuk girdiye karşı bir savunma. Bir de
+      <code>const</code> var: <code>gizli</code> bir kere belirlenip bir daha
+      değişmeyecek, biz de bunu derleyiciye söylüyoruz ki yanlışlıkla değiştirirsek
+      bize haber versin.
+    </p>
+
+    <h3>Neden tam yedi hak?</h3>
+
+    <p>
+      Burası bu bölümün en güzel yeri. Rastgele bir sayı seçmiyoruz.
+      Akıllı oyuncu her seferinde <strong>ortayı</strong> söyler: 50. &ldquo;Daha
+      büyük&rdquo; derse geriye 50 sayı kalır; sonra 75, geriye 25&hellip;
+      Her tahmin arama uzayını ikiye böler:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Tahmin</th><th class="sayi">1</th><th class="sayi">2</th><th class="sayi">3</th><th class="sayi">4</th><th class="sayi">5</th><th class="sayi">6</th><th class="sayi">7</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kalan olasılık</td>
+            <td class="sayi">50</td><td class="sayi">25</td><td class="sayi">13</td>
+            <td class="sayi">7</td><td class="sayi">4</td><td class="sayi">2</td><td class="sayi">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Yedi adımda kesin buluyoruz, çünkü <code>2⁷ = 128 &gt; 100</code>. Bu yönteme
+      <strong>ikili arama</strong> (<em>binary search</em>) deniyor ve bu kitapçığın
+      sonuna kadar karşınıza defalarca çıkacak. Milyon sayı arasından aradığınızı
+      yirmi adımda bulur. Bir milyar arasından otuz adımda. İşte algoritma budur:
+      aynı işi bambaşka bir hızla yapmak.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Sınırı 100 yerine 1000 yapın. Kaç hak vermelisiniz? Programı, hak sayısını
+        sınıra bakarak kendisi hesaplayacak biçimde değiştirin. (İpucu:
+        <code>&lt;cmath&gt;</code> içinde <code>log2</code> var, ama önce
+        <code>while</code> döngüsüyle elle hesaplamayı deneyin &mdash; daha
+        öğretici.)
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.4</div>
+  <div class="govde">
+    <h2>Adların nerede geçerli olduğu</h2>
+
+    <p>
+      Bir değişkenin adı her yerde tanınmıyor. Süslü parantezin içinde tanımlanan bir
+      ad, o parantez kapanınca yok oluyor. Buna <strong>kapsam</strong>
+      (<em>scope</em>) deniyor. İşlevin dışında, en üstte tanımlanan adlar ise
+      <strong>küresel</strong>: her yerden görünüyorlar.
+    </p>
+
+    <p>
+      Küresel değişkenler pratiktir ama tehlikelidir; hangi işlevin ne zaman
+      değiştirdiğini kestiremezsiniz. Sınav sorusu yazanlar da bunu çok sever.
+      Şuna bakın, gerçek bir sınav sorusundan sadeleştirildi:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">kapsam.cpp</span><span class="etiket">ne yazar?</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="t">int</span> sayi = <span class="n">3</span>;              <span class="y">// küresel</span>
+
+<span class="t">void</span> f() { sayi = <span class="n">10</span>; }     <span class="y">// küreseli değiştirir</span>
+<span class="t">void</span> g() { <span class="t">int</span> sayi = <span class="n">99</span>; } <span class="y">// kendi yerelini yapar, küresele dokunmaz</span>
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> sayi = <span class="n">5</span>;            <span class="y">// yerel, küreseli gölgeliyor</span>
+  f();
+  g();
+  std::cout &lt;&lt; sayi &lt;&lt; <span class="s">" "</span> &lt;&lt; ::sayi;   <span class="y">// ?? ve ??</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      Yanıtı vermiyorum; çalıştırın. Sadece bir ipucu: <code>::sayi</code>
+      yazımı &ldquo;küresel olanı kastediyorum&rdquo; demek. Bu tür sorular kötü kod
+      örnekleridir ve <strong>kasıtlı olarak</strong> kafa karıştırmak için yazılırlar.
+      Sizden beklenen, bu kodu yazmanız değil; okuduğunuzda tuzağı görmeniz.
+    </p>
+
+    <p>
+      Kendi programlarınızda kuralı basit tutun: <strong>bir değişkeni, ihtiyaç
+      duyulan en dar kapsamda tanımlayın.</strong> Döngüde kullanılacaksa döngünün
+      içinde, işlevde kullanılacaksa işlevin içinde.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.5</div>
+  <div class="govde">
+    <h2>Bölümü kapatırken</h2>
+
+    <p>
+      Bir programın beş yapıtaşını gördünüz: değer, ad, tür, karar, tekrar. Bir de
+      altıncısını: bunları paketleyen işlev. Bundan sonrası, bu beş taşla giderek
+      daha büyük binalar kurmaktan ibaret. Gerçekten öyle &mdash; bu kitapçığın son
+      bölümündeki Bellman&ndash;Ford algoritması da bu beş taşla yazılıyor.
+    </p>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Tahmin oyununu tersine çevirin.</strong> Siz bir sayı tutun,
+          bilgisayar tahmin etsin, siz &ldquo;büyük/küçük&rdquo; deyin. Kaç adımda
+          buluyor? Yukarıdaki tabloyla uyuşuyor mu?
+        </li>
+        <li>
+          <strong>Fibonaççi.</strong>
+          <a href="https://projecteuler.net/problem=2">Project Euler 2</a>: dört
+          milyonu aşmayan çift Fibonaççi sayılarının toplamı. Şimdilik döngüyle
+          yazın; özyinelemeyi <a href="{{04-ozyineleme}}">Bölüm IV</a>'te göreceğiz.
+        </li>
+        <li>
+          <strong>Asal çarpanlar.</strong>
+          <a href="https://projecteuler.net/problem=3">Project Euler 3</a>:
+          <code>600851475143</code> sayısının en büyük asal çarpanı.
+          <span class="zor">tuzak</span> Bu sayı <code>int</code>'e sığmıyor.
+          Hangi türü seçeceksiniz?
+        </li>
+        <li>
+          <strong>Doğum günü sayacı.</strong> Komut satırından yıl, ay, gün alıp
+          &ldquo;siz doğalı kaç gün olmuş&rdquo; yazan bir program. Artık yılları
+          unutmayın. (Depoda <code>gun-sayimi/</code> dizininde bir örnek var, ama
+          önce kendiniz deneyin.)
+        </li>
+        <li>
+          <strong>Kendi kendine sınanan program.</strong> Yazdığınız
+          <code>bolunuyorMu()</code> işlevini <code>&lt;cassert&gt;</code> içindeki
+          <code>assert</code> ile sınayın: <code>assert(bolunuyorMu(15, 5));</code>
+          Bir de yanlış olması gereken bir durumu sınayın. Bu alışkanlık
+          <a href="{{03-zanaat}}">Bölüm III</a>'te büyüyecek.
+        </li>
+      </ol>
+    </div>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        İkinci ve üçüncü alıştırmayı ikili programlamayla yapın. On beş dakika biri
+        yazsın, on beş dakika öteki. Sonra kodu bir kere daha, bu sefer sıfırdan ve
+        <em>ezberden</em> yazın. İkinci yazışın ne kadar hızlı olduğuna şaşıracaksınız;
+        öğrenmenin gerçekten olduğu an orası.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

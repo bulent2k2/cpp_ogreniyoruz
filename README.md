@@ -3,6 +3,10 @@ Fen Lisesinde C++ ve Algoritma Öğreniyoruz
 
 Dersler sırasıyla [burada](ileri/icindekiler.md).
 
+Yeni: [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](kitapcik/README.md)
+--
+İki dönemlik ders notlarımızdan damıtılmış, altı bölümlük bir giriş kitapçığı. Temel kavramlardan çizge algoritmalarına ve dinamik programlamaya kadar, hepsi derste birlikte yazdığımız çalışan programlarla. [PDF olarak burada](kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) (63 sayfa), bölüm bölüm çevrimiçi okumak için de [buraya bakın](kitapcik/README.md). Örnek programların hepsi `kitapcik/kod/` dizininde, derlenmeye hazır.
+
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----
 Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/rhc-jgcs-vre).  Geçen yılki (2024-25) giriş derslerinin notları ve kayıtları [burada](mp4ler/gorsel-kayitlar.md). Bu yılki dersler de [burada](ileri/dersler).

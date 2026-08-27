@@ -1,0 +1,582 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm IV</div>
+  <h1>Özyineleme ve Arama</h1>
+  <p class="ozet">
+    Bir işlev kendi kendini çağırabilir. Kulağa hile gibi geliyor, ama bu tek fikir
+    Hanoi kulelerinden sekiz vezire, altküme üretiminden bütün bir çizge kuramına
+    kadar uzanıyor. Bu bölümde onu ehlileştireceğiz &mdash; ve bir ara
+    kırk bin kat hızlanacağız.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">IV.1</div>
+  <div class="govde">
+    <h2>Kendini çağıran işlev</h2>
+
+    <p>
+      Alışık olduğumuz işlev tanımı şöyle: <code>y = f(x)</code>. Girdi ver, çıktı al.
+      <strong>Özyinelemeli</strong> (<em>recursive</em>) tanım ise bir şeyi
+      <em>kendi küçük hâliyle</em> anlatır:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">iki tür tanım</span></figcaption>
+      <pre><code><span class="y">// klasik tanım: her x için bir y</span>
+y = f(x)
+
+<span class="y">// özyinelemeli tanım</span>
+f(0) = sabit                              <span class="y">// TABAN</span>
+f(n) = g( f(n-1), f(n-2), ..., f(0) )     <span class="y">// ADIM</span></code></pre>
+    </figure>
+
+    <p>
+      Her özyinelemeli işlevin iki parçası var ve <strong>ikisi de olmazsa
+      olmaz</strong>:
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Taban durumu.</strong> Kendini çağırmadan yanıt verdiği durum.
+        En küçük, en kolay hâl.
+      </li>
+      <li>
+        <strong>Adım.</strong> Problemi kendinden <em>daha küçük</em> bir problemle
+        ifade etmesi. Küçülmesi şart, yoksa hiç durmaz.
+      </li>
+    </ol>
+
+    <div class="kutu dikkat">
+      <span class="basi">Bir numaralı hata</span>
+      <p>
+        Taban durumunu unutmak ya da yanlış yazmak. Program ya sonsuza kadar
+        çalışır ya da bir süre sonra çöker (&ldquo;<em>stack overflow</em>&rdquo;:
+        çağrı yığını taşar). Derste tam olarak bunu yaptık: bir çizge gezisinde
+        &ldquo;daha önce buraya uğradık mı&rdquo; koşulunu yazmayı unuttuk ve program
+        sonsuz döngüye girdi. Özyinelemeli bir işlev yazarken <strong>ilk yazacağınız
+        satır taban durumu olsun.</strong>
+      </p>
+    </div>
+
+    <h3>Hanoi kuleleri</h3>
+
+    <p>
+      Özyinelemenin gücünü en iyi gösteren bulmaca. Üç çubuk var, birincisinde
+      büyükten küçüğe dizilmiş <em>n</em> disk. Hepsini üçüncü çubuğa taşıyacaksınız.
+      Kurallar: her seferinde tek disk, ve büyük disk asla küçüğün üstüne konmayacak.
+    </p>
+
+    <p>
+      Döngüyle çözmeye kalkarsanız saatlerinizi alır. Özyinelemeyle bakış açısı
+      şu: <em>en büyük diski hedefe koyabilmem için, üstündeki n&minus;1 diskin
+      yoldan çekilmesi gerek.</em> O da aynı problemin küçüğü!
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">34-hanoi.cpp</span><span class="etiket">üç satırlık çözüm</span></figcaption>
+      <pre><code><span class="t">void</span> tasi(<span class="t">int</span> n, <span class="t">int</span> kaynak, <span class="t">int</span> hedef, <span class="t">int</span> yardimci) {
+  <span class="a">if</span> (n == <span class="n">0</span>) <span class="a">return</span>;                       <span class="y">// TABAN: taşınacak disk yok</span>
+
+  tasi(n-<span class="n">1</span>, kaynak, yardimci, hedef);       <span class="y">// üstteki n-1 diski aradaki çubuğa</span>
+  cout &lt;&lt; ++adim &lt;&lt; <span class="s">") "</span> &lt;&lt; n &lt;&lt; <span class="s">". diski "</span>
+       &lt;&lt; kaynak &lt;&lt; <span class="s">" -&gt; "</span> &lt;&lt; hedef &lt;&lt; endl;   <span class="y">// en büyüğü hedefe</span>
+  tasi(n-<span class="n">1</span>, yardimci, hedef, kaynak);       <span class="y">// n-1 diski üstüne</span>
+}
+
+<span class="y">// çağırırken: tasi(3, 1, 3, 2);</span></code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">n = 3</span></figcaption>
+      <pre><code>1) 1. diski 1 -&gt; 3
+2) 2. diski 1 -&gt; 2
+3) 1. diski 3 -&gt; 2
+4) 3. diski 1 -&gt; 3
+5) 1. diski 2 -&gt; 1
+6) 2. diski 2 -&gt; 3
+7) 1. diski 1 -&gt; 3
+toplam 7 adım (2^3 - 1 = 7)</code></pre>
+    </figure>
+
+    <p>
+      Üç satırlık bir işlev, mükemmel bir çözüm üretiyor. Adım sayısı da
+      <code>2ⁿ − 1</code>. Efsaneye göre 64 diskli bir kule tamamlandığında dünya
+      sona erecekmiş; saniyede bir hamleyle bu yaklaşık
+      <strong>584 milyar yıl</strong> sürer. Rahat olun.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        <code>n</code>'i 4, 5, 6 yapın ve adım sayısını not edin. Sonra
+        <code>tasi()</code> içindeki üç satırın sırasını değiştirin. Çıktı hâlâ
+        geçerli bir çözüm mü? Neden değil?
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.2</div>
+  <div class="govde">
+    <h2>Aynı işi iki kere yapmayın</h2>
+
+    <p>
+      Özyinelemenin bir tuzağı var. Fibonaççi'yi tanımıyla yazalım:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tanımı yazdık, oldu</span></figcaption>
+      <pre><code><span class="t">Sayi</span> fibYavas(<span class="t">int</span> n) {
+  <span class="a">if</span> (n &lt; <span class="n">2</span>) <span class="a">return</span> n;
+  <span class="a">return</span> fibYavas(n-<span class="n">1</span>) + fibYavas(n-<span class="n">2</span>);
+}</code></pre>
+    </figure>
+
+    <p>
+      Doğru çalışıyor. Ama <code>fib(40)</code> deneyin, çayınızı içecek vakit
+      bulursunuz. Neden? Çünkü sağ tarafta <strong>iki</strong> çağrı var; her
+      çağrı ikiye çatallanıyor, o ikisi dörde&hellip; Ağacın altında
+      <code>fib(3)</code> milyonlarca kere yeniden hesaplanıyor.
+    </p>
+
+    <p>
+      Çare çok basit: <strong>hesapladığını bir kenara yaz</strong>. Buna
+      <strong>bellekle hızlandırma</strong> (<em>memoizasyon</em>) deniyor.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">30-fib.cpp</span><span class="etiket">tek satır fark</span></figcaption>
+      <pre><code>map&lt;<span class="t">int</span>, <span class="t">Sayi</span>&gt; bellek;
+
+<span class="t">Sayi</span> fibHizli(<span class="t">int</span> n) {
+  <span class="a">if</span> (n &lt; <span class="n">2</span>) <span class="a">return</span> n;
+  <span class="a">if</span> (bellek.contains(n)) <span class="a">return</span> bellek[n];      <span class="y">// &lt;- eklenen satır</span>
+  <span class="a">return</span> bellek[n] = fibHizli(n-<span class="n">1</span>) + fibHizli(n-<span class="n">2</span>);
+}</code></pre>
+    </figure>
+
+    <p>
+      İki işlevi <code>n = 40</code> için çalıştırıp çağrıları saydırdım.
+      Sonuç şaşırtıcı:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>İşlev</th><th>Çağrı sayısı</th><th>Süre</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>fibYavas(40)</code></td>
+            <td class="sayi">331 160 281</td>
+            <td class="sayi">321 613 µs</td>
+          </tr>
+          <tr>
+            <td><code>fibHizli(40)</code></td>
+            <td class="sayi">79</td>
+            <td class="sayi">8 µs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Üç yüz otuz bir milyon çağrı yerine yetmiş dokuz. Kırk bin kat hız &mdash;
+      <strong>tek bir satırla</strong>. Kodun mantığı değişmedi, sadece unutkanlığı
+      düzeldi.
+    </p>
+
+    <p>
+      Bu fikrin bir adı var ve bir bölümü hak ediyor:
+      <a href="{{06-dp}}">dinamik programlama</a>. Bölüm VI'da oraya döneceğiz.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Biriniz <code>fibYavas(35)</code> çalıştırırken, öteki
+        <code>fib(35)</code>'i kâğıt üzerinde tanımdan hesaplamaya başlasın.
+        Kim önce bitirir dersiniz? Sonra <code>fibHizli</code> ile yarışın. Bu küçük
+        oyun, &ldquo;algoritma seçimi&rdquo;nin ne demek olduğunu bir ömür anlatır.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.3</div>
+  <div class="govde">
+    <h2>Bütün olasılıkları gezmek</h2>
+
+    <p>
+      Şimdi özyinelemenin asıl gücüne geliyoruz. Çoğu zor problemde
+      &ldquo;bütün olasılıkları dene&rdquo;den başka yol yoktur. Buna
+      <strong>geri dönüşlü arama</strong> (<em>backtracking</em>) deniyor:
+      bir seçim yap, o dalda ilerle, çıkmaza girersen <strong>geri dön</strong>,
+      başka bir seçim dene.
+    </p>
+
+    <p>
+      Kalıbı her seferinde aynı ve ezberlemeye değer:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">geri dönüşlü arama kalıbı</span></figcaption>
+      <pre><code><span class="t">void</span> ara(durum) {
+  <span class="a">if</span> (tamamlandı) { kaydet(); <span class="a">return</span>; }
+
+  <span class="a">for</span> (<span class="a">auto</span> secim : olasiSecimler) {
+    <span class="a">if</span> (<span class="a">not</span> uygun(secim)) <span class="a">continue</span>;
+
+    uygula(secim);          <span class="y">// 1. seç</span>
+    ara(yeniDurum);         <span class="y">// 2. o dalda derine in</span>
+    geriAl(secim);          <span class="y">// 3. BIRAKTIĞIN GİBİ BIRAK</span>
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Üçüncü satır en çok unutulanı. Geri almayı unutursanız, bir daldaki seçiminiz
+      diğer dalları kirletir ve program sessizce yanlış yanıt verir.
+    </p>
+
+    <h3>Bütün altkümeler</h3>
+
+    <p>
+      <code>{3, 1, 2}</code> kümesinin bütün altkümelerini üretelim. Her öğe için tek
+      bir karar var: <em>alayım mı, almayayım mı?</em>
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">31-altkume.cpp</span><span class="etiket">al ya da alma</span></figcaption>
+      <pre><code>Dizi kume{<span class="n">3</span>, <span class="n">1</span>, <span class="n">2</span>}, secilen;
+
+<span class="t">void</span> uret(<span class="t">size_t</span> k) {
+  <span class="a">if</span> (k == kume.size()) { yaz(); <span class="a">return</span>; }   <span class="y">// TABAN: karar bitti</span>
+
+  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı öğeyi ALMA</span>
+
+  secilen.push_back(kume[k]);
+  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı öğeyi AL</span>
+  secilen.pop_back();             <span class="y">// geri dön: bıraktığın gibi bırak</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      Aynı işi <strong>hiç özyineleme kullanmadan</strong>, bitlerle de yapabiliriz.
+      <em>n</em> öğe için <code>2ⁿ</code> altküme var; her sayının ikili yazılışı
+      bir altkümeyi tarif ediyor:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">bitler ve altkümeler</span></figcaption>
+      <pre><code>sayı  bitler  altküme
+----  ------  --------
+ 0     000    { }
+ 1     001    { 3 }
+ 2     010    { 1 }
+ 3     011    { 3 1 }
+ 4     100    { 2 }
+ 5     101    { 3 2 }
+ 6     110    { 1 2 }
+ 7     111    { 3 1 2 }</code></pre>
+    </figure>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bitlerle üretim</span></figcaption>
+      <pre><code><span class="t">size_t</span> n = kume.size(), altKumeSayisi = <span class="n">1u</span> &lt;&lt; n;   <span class="y">// 2^n</span>
+
+<span class="a">for</span> (<span class="t">size_t</span> ak = <span class="n">0</span>; ak &lt; altKumeSayisi; ++ak)
+  <span class="a">for</span> (<span class="t">size_t</span> k = <span class="n">0</span>; k &lt; n; ++k)
+    <span class="a">if</span> (ak &amp; (<span class="n">1u</span> &lt;&lt; k))         <span class="y">// k'ıncı bit açık mı?</span>
+      cout &lt;&lt; kume[k] &lt;&lt; <span class="s">" "</span>;</code></pre>
+    </figure>
+
+    <p>
+      İkisini de bilmekte fayda var. Bit yöntemi daha hızlı ve bellek yemiyor, ama
+      sadece <em>n</em> 60'tan küçükken kullanılabiliyor. Özyineleme ise her boyutta
+      çalışıyor ve <strong>budama</strong> yapmaya izin veriyor &mdash; birazdan
+      göreceğimiz gibi bu çok kritik.
+    </p>
+
+    <h3>Bütün permütasyonlar</h3>
+
+    <p>
+      Aynı kalıp, tek fark: bu sefer <em>sıra</em> önemli, ve her öğeyi bir kere
+      kullanabiliriz. Onun için &ldquo;bunu daha önce kullandım mı&rdquo; diye bir
+      dizi tutuyoruz.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">32-permutasyon.cpp</span><span class="etiket">n = 3</span></figcaption>
+      <pre><code>vector&lt;<span class="t">int</span>&gt; perm;
+vector&lt;<span class="t">bool</span>&gt; eklendi(N, <span class="a">false</span>);
+
+<span class="t">void</span> uret(<span class="t">int</span> derinlik) {
+  <span class="a">if</span> ((<span class="t">int</span>) perm.size() == N) { yaz(perm); <span class="a">return</span>; }
+
+  <span class="a">for</span> (<span class="t">int</span> k = <span class="n">0</span>; k &lt; N; ++k) {
+    <span class="a">if</span> (eklendi[k]) <span class="a">continue</span>;        <span class="y">// bunu zaten kullandık</span>
+
+    eklendi[k] = <span class="a">true</span>;
+    perm.push_back(k);
+    uret(derinlik + <span class="n">1</span>);
+    perm.pop_back();               <span class="y">// geri al</span>
+    eklendi[k] = <span class="a">false</span>;           <span class="y">// geri al</span>
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Bu programa bir izleme satırı ekleyip çalıştırdım. Çıktıyı okuyun &mdash;
+      özyinelemenin nasıl derine inip geri döndüğünü <em>görebilirsiniz</em>.
+      <code>+</code> işaretleri derinliği gösteriyor:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">izleme</span><span class="etiket">özyineleme canlı</span></figcaption>
+      <pre><code>+ k=0  perm: 0
+++ k=1  perm: 01
++++ k=2  perm: 012
+       <span class="v">1. permütasyon: 012</span>
+++ k=2  perm: 02
++++ k=1  perm: 021
+       <span class="v">2. permütasyon: 021</span>
++ k=1  perm: 1
+++ k=0  perm: 10
++++ k=2  perm: 102
+       <span class="v">3. permütasyon: 102</span>
+++ k=2  perm: 12
++++ k=0  perm: 120
+       <span class="v">4. permütasyon: 120</span>
++ k=2  perm: 2
+++ k=0  perm: 20
++++ k=1  perm: 201
+       <span class="v">5. permütasyon: 201</span>
+++ k=1  perm: 21
++++ k=0  perm: 210
+       <span class="v">6. permütasyon: 210</span></code></pre>
+    </figure>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Standart kütüpte hazırı var: <code>std::next_permutation(d.begin(),
+        d.end())</code>. Diziyi bir sonraki permütasyona çevirir, bitince
+        <code>false</code> döner. Bir <code>do&hellip;while</code> döngüsüyle
+        hepsini üretirsiniz. Ama önce kendiniz yazın &mdash; hazırı kullanmak,
+        nasıl çalıştığını bilerek kullanmakla aynı şey değil.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.4</div>
+  <div class="govde">
+    <h2>Sekiz vezir</h2>
+
+    <p>
+      Klasiklerin klasiği. Satranç tahtasına sekiz vezir yerleştirin; hiçbiri
+      diğerini tehdit etmesin. Vezir yatay, dikey ve çapraz gider &mdash; yani her
+      satırda tam bir vezir olmak zorunda. Bu gözlem problemi yarı yarıya küçültüyor:
+      artık soru &ldquo;her satırdaki vezir hangi sütunda?&rdquo;
+    </p>
+
+    <p>
+      Püf noktası köşegenleri numaralandırmakta. Sol-üstten sağ-alta giden bir
+      köşegen üzerinde <code>satır + sütun</code> hep aynıdır; öteki yönde ise
+      <code>satır − sütun</code> aynıdır. Böylece &ldquo;bu köşegen dolu mu?&rdquo;
+      sorusu tek bir dizi bakışına iniyor.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">33-vezir.cpp</span><span class="etiket">tam çözüm</span></figcaption>
+      <pre><code><span class="a">const</span> <span class="t">int</span> N = <span class="n">8</span>;
+vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>),          <span class="y">// bu sütunda vezir var mı?</span>
+             capraz1(<span class="n">2</span>*N-<span class="n">1</span>, <span class="a">false</span>),    <span class="y">// satır + sütun sabit</span>
+             capraz2(<span class="n">2</span>*N-<span class="n">1</span>, <span class="a">false</span>);    <span class="y">// satır - sütun sabit</span>
+<span class="t">int</span> cozum = <span class="n">0</span>;
+
+<span class="t">void</span> koy(<span class="t">int</span> satir) {
+  <span class="a">if</span> (satir == N) { ++cozum; <span class="a">return</span>; }        <span class="y">// sekiz vezir yerleşti</span>
+
+  <span class="a">for</span> (<span class="t">int</span> s = <span class="n">0</span>; s &lt; N; ++s) {
+    <span class="t">int</span> c1 = satir + s, c2 = satir - s + N - <span class="n">1</span>;
+    <span class="a">if</span> (sutun[s] <span class="a">or</span> capraz1[c1] <span class="a">or</span> capraz2[c2]) <span class="a">continue</span>;   <span class="y">// tehdit altında</span>
+
+    sutun[s] = capraz1[c1] = capraz2[c2] = <span class="a">true</span>;   <span class="y">// vezir kondu</span>
+    koy(satir + <span class="n">1</span>);                                 <span class="y">// bir alt satıra geç</span>
+    sutun[s] = capraz1[c1] = capraz2[c2] = <span class="a">false</span>;  <span class="y">// geri al</span>
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Kalıbı tanıdınız mı? Altküme ve permütasyon üretimiyle <strong>birebir
+      aynı</strong>: seç, derine in, geri al. Değişen sadece &ldquo;uygun mu?&rdquo;
+      koşulu.
+    </p>
+
+    <p>
+      Programı farklı tahta boylarında çalıştırdım. Sonuçlar hiç de düzenli değil:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Tahta</th><th class="sayi">4×4</th><th class="sayi">5×5</th><th class="sayi">6×6</th><th class="sayi">7×7</th><th class="sayi">8×8</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Çözüm sayısı</td>
+            <td class="sayi">2</td><td class="sayi">10</td><td class="sayi">4</td>
+            <td class="sayi">40</td><td class="sayi">92</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      6×6 tahtada 5×5'ten <em>daha az</em> çözüm var. Neden? Kimse basit bir formül
+      bulamadı; bu diziyi hesaplamanın bilinen tek yolu saymak. Matematiğin
+      hoşuma giden yanı da bu: bazen en sade sorunun bile kısa yolu yok.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.5</div>
+  <div class="govde">
+    <h2>Ne kadar sürer? Karmaşıklık</h2>
+
+    <p>
+      &ldquo;Bütün olasılıkları dene&rdquo; iyi bir fikir, ta ki olasılıklar
+      tükenmez olana kadar. Bir algoritmanın girdi büyüdükçe ne kadar
+      yavaşladığını anlatan gösterime <strong>büyük O</strong> deniyor.
+      Sabitleri ve küçük terimleri atarız; çünkü mesele bir milisaniye değil,
+      <em>büyüme biçimi</em>.
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Karmaşıklık</th><th>Adı</th><th>n=20</th><th>n=1000</th><th>n=10⁶</th><th>Örnek</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>O(1)</code></td><td>sabit</td><td class="sayi">1</td><td class="sayi">1</td><td class="sayi">1</td><td>Dizide öğeye erişim</td></tr>
+          <tr><td><code>O(log n)</code></td><td>logaritmik</td><td class="sayi">4</td><td class="sayi">10</td><td class="sayi">20</td><td>İkili arama, tahmin oyunu</td></tr>
+          <tr><td><code>O(n)</code></td><td>doğrusal</td><td class="sayi">20</td><td class="sayi">10³</td><td class="sayi">10⁶</td><td>Diziyi bir kere tarama</td></tr>
+          <tr><td><code>O(n log n)</code></td><td>&mdash;</td><td class="sayi">86</td><td class="sayi">10⁴</td><td class="sayi">2×10⁷</td><td>Sıralama, Dijkstra</td></tr>
+          <tr><td><code>O(n²)</code></td><td>karesel</td><td class="sayi">400</td><td class="sayi">10⁶</td><td class="sayi">10¹²</td><td>İç içe iki döngü</td></tr>
+          <tr><td><code>O(2ⁿ)</code></td><td>üstel</td><td class="sayi">10⁶</td><td class="sayi">&infin;</td><td class="sayi">&infin;</td><td>Bütün altkümeler</td></tr>
+          <tr><td><code>O(n!)</code></td><td>faktöriyel</td><td class="sayi">10¹⁸</td><td class="sayi">&infin;</td><td class="sayi">&infin;</td><td>Bütün permütasyonlar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Tabloyu bir kere gerçekten okuyun. <code>O(n²)</code> bir milyon öğe için
+      <code>10¹²</code> işlem demek &mdash; saatler. <code>O(2ⁿ)</code> ise
+      <em>n</em> kırkı geçince evrenin yaşını aşıyor. Bu yüzden yarışma sorularında
+      girdi sınırına bakmak, algoritma seçmenin ilk adımıdır:
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Kaba kural</span>
+      <p>
+        Bilgisayarınız saniyede kabaca <strong>10⁸</strong> basit işlem yapar.
+        Soruda <code>n ≤ 20</code> yazıyorsa üstel çözüm serbest.
+        <code>n ≤ 5000</code> ise karesel olabilir. <code>n ≤ 10⁶</code> ise
+        <code>O(n)</code> ya da <code>O(n log n)</code> aramanız gerek. Bu tek
+        cümle, boşa harcanacak saatlerinizi kurtarır.
+      </p>
+    </div>
+
+    <h3>Arama uzayını budamak</h3>
+
+    <p>
+      Üstel bir arama uzayıyla karşılaştığınızda ne yapılır? Bütünüyle
+      kurtulamazsınız, ama <strong>meyve vermeyecek dalları kesebilirsiniz</strong>.
+      Buna <strong>budama</strong> (<em>pruning</em>) deniyor.
+    </p>
+
+    <p>
+      Derste ızgara üzerinde bütün <em>Hamilton patikalarını</em> (her kareden tam
+      bir kere geçen yollar) arayan bir program yazdık. 6×6 tahtada saniyeler
+      sürüyordu, 7×7'de dakikalar. Sonra şu iki satırı ekledik:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">budama</span><span class="etiket">dakikalar → saniyenin altı</span></figcaption>
+      <pre><code><span class="t">bool</span> so = gir[y][x-<span class="n">1</span>], sa = gir[y][x+<span class="n">1</span>],
+     yu = gir[y-<span class="n">1</span>][x], as = gir[y+<span class="n">1</span>][x];
+
+<span class="a">if</span> (yu <span class="a">and</span> as <span class="a">and</span> <span class="a">not</span>(so <span class="a">or</span> sa) <span class="a">or</span>
+    so <span class="a">and</span> sa <span class="a">and</span> <span class="a">not</span>(yu <span class="a">or</span> as))
+    <span class="a">return</span>;                 <span class="y">// çıkmaz sokak: geri dön</span></code></pre>
+    </figure>
+
+    <p>
+      Anlamı şu: bu karenin üstü <em>ve</em> altı zaten ziyaret edilmişse ama
+      sağı <em>ve</em> solu boşsa, tahta ikiye bölünmüş demektir ve bir daha
+      birleşemeyiz. O dalda meyve yok, geri dön.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Budarken dikkat</span>
+      <p>
+        Kestiğiniz dalın gerçekten meyve veremeyeceğinden <strong>emin</strong>
+        olmalısınız. Yoksa doğru çözümleri kaybedersiniz ve program hızlı hızlı
+        yanlış yanıt verir &mdash; en kötü hata türü. Her budama kuralı için bir
+        kanıt isteyin kendinizden. Yukarıdaki kural için kâğıda birkaç örnek
+        çizmek yetiyor.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Kümeyi ikiye bölün.</strong>
+          <a href="https://cses.fi/problemset/task/1623">Apple Division</a>:
+          <em>n</em> elmayı iki gruba ayırın, ağırlık farkı en az olsun.
+          Hem özyinelemeyle hem bitlerle çözün. (<code>n ≤ 20</code> olduğuna
+          dikkat &mdash; yukarıdaki kaba kural size ne söylüyor?)
+        </li>
+        <li>
+          <strong>Vezirleri yazdırın.</strong> Yukarıdaki program çözümleri
+          <em>sayıyor</em>. Bir de her çözümü tahta olarak ekrana çizsin. 92
+          çözümün ilk üçüne bakın; birbirlerinin aynadaki hâli mi?
+        </li>
+        <li>
+          <strong>Güzel permütasyon.</strong>
+          <a href="https://cses.fi/problemset/task/1070/">CSES 1070</a>: peş peşe
+          gelen öğelerin farkı en az 2 olan bir permütasyon bulun. Önce hepsini
+          üretip eleyin. Sonra <span class="zor">asıl soru</span> doğrudan
+          kurmanın bir yolunu bulun &mdash; <em>n</em> büyük olduğunda üretmek
+          çalışmaz.
+        </li>
+        <li>
+          <strong>Hamilton patikaları.</strong>
+          <a href="https://cses.fi/problemset/task/1625">CSES 1625</a>: ızgarada
+          sol üstten sağ alta, her kareden bir kere geçen yolları sayın. Önce
+          budamasız yazın ve 6×6'da süreyi ölçün. Sonra yukarıdaki budamayı
+          ekleyin ve tekrar ölçün. Aradaki farkı görün.
+          <span class="zor">zor</span> Başka bir budama kuralı bulabilir misiniz?
+        </li>
+        <li>
+          <strong>Bir kanıt yazın.</strong> Yukarıdaki budama kuralının doğru
+          olduğunu &mdash; yani kesilen dalda gerçekten çözüm olamayacağını
+          &mdash; birkaç cümleyle anlatın. Kâğıt kalem serbest.
+          Bu alıştırma kod yazmaktan daha değerli.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

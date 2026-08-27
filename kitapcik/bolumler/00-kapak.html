@@ -1,0 +1,355 @@
+<header class="ust">
+  <div class="seri">Fen Lisesi için C++ ve algoritma kitapçığı</div>
+  <h1>Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</h1>
+  <p class="ozet">
+    Bu kitapçık iki dönemlik ders notlarımızın, birlikte yazdığımız programların ve
+    sorduğunuz soruların damıtılmış hâli. Amacı size programlamayı
+    <em>anlatmak</em> değil; kendi kendinize öğrenebileceğinizi
+    <em>fark ettirmek</em>. Bir de arkadaşınızla yan yana oturunca işin ne kadar
+    hızlandığını.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">Önsöz</div>
+  <div class="govde">
+    <h2>Merhaba</h2>
+
+    <p>
+      Programlamayı öğrenmenin en zor tarafı, ilk birkaç haftanın insana
+      &ldquo;ben bunu beceremem&rdquo; dedirtmesi. Noktalı virgül unutulur, derleyici
+      anlaşılmaz bir hata verir, program çalışır ama yanlış sayı yazar. Sonra bir gün
+      bir şey tıklar: bilgisayarın aslında son derece <em>aptal</em> ama son derece
+      <em>itaatkâr</em> olduğunu anlarsınız. O günden sonrası keyif.
+    </p>
+
+    <p>
+      Bu kitapçık o günü öne çekmek için yazıldı. İçindeki her kavram, derslerimizde
+      gerçekten yazdığımız, çalıştırdığımız ve bazen de hata verdiği için birlikte
+      düzelttiğimiz programlardan geliyor. Hataları da sakladım, çünkü hata bulmak
+      programcılığın yarısı.
+    </p>
+
+    <p>
+      Altı bölüm var. İlk üçü temeli kuruyor: dil, veri ve zanaat. Son üçü
+      algoritmalara ayrılmış: özyineleme, çizgeler ve dinamik programlama. Sırayla
+      okumanız gerekmiyor ama sırayla okursanız her bölüm bir öncekine yaslanacak.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Yöntem</div>
+  <div class="govde">
+    <h2>Nasıl çalışalım?</h2>
+
+    <p>
+      Altı ilke. Hepsi derslerde pahalı yollardan öğrendiğimiz şeyler; hiçbiri
+      kitaptan okunmadı.
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Kod okumadan kod yazılmaz.</strong> Müzisyen dinleyerek, yazar okuyarak
+        öğrenir. Siz de başkasının kodunu satır satır okuyun. Anlamadığınız satırda
+        durun, tahmin edin, sonra çalıştırıp tahmininizi sınayın. Bu kitapçıktaki her
+        program okunmak için var.
+      </li>
+      <li>
+        <strong>Çalıştırmadan inanmayın.</strong> Bir kodun ne yapacağını
+        &ldquo;herhâlde şunu yapar&rdquo; diye geçiştirmeyin. Çalıştırın. Bilgisayar
+        elinizin altında; dünyanın en sabırlı öğretmeni ve hiç yorulmuyor.
+      </li>
+      <li>
+        <strong>Önce doğru, sonra hızlı.</strong> Programcıların meşhur bir sözü var:
+        <em>bütün baş belalarının kaynağı sırasız yapılan iyileştirmelerdir.</em>
+        Çalışan yavaş bir program, çalışmayan hızlı bir programdan sonsuz kere iyidir.
+      </li>
+      <li>
+        <strong>Kanıt isteyin.</strong> Kodunuz doğru yanıtı verdi diye doğru olduğunu
+        bilmiyorsunuz; sadece o girdide yanlış olmadığını biliyorsunuz. Neden
+        çalıştığını anlatabiliyor musunuz? Anlatamıyorsanız, henüz çözmediniz demektir.
+        Bilmediğimizi bilmek de bir bilgidir; bilmemek ayıp değil.
+      </li>
+      <li>
+        <strong>Yapay zekâya danışın, ama güvenmeyin.</strong> Çok iyi bir yol
+        arkadaşı, çok kötü bir hakem. Yazdığı kodu okuyun, çalıştırın, sınayın.
+        Derslerimizde yapay zekânın yazdığı kodlarda birden fazla hata bulduk.
+      </li>
+      <li>
+        <strong>Yarım bıraktığım yerler kasıtlı.</strong> Bu kitapçıkta bilerek
+        tamamlanmamış işlevler ve yanıtı verilmemiş sorular var. Onlar boşluk değil,
+        davet. Bir çözümü okuyarak öğrenilenle, bir çözümü bulmaya çalışırken
+        öğrenilen aynı şey değil.
+      </li>
+    </ol>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Takıldığınızda geçirdiğiniz süreyi ölçün. Yirmi dakika ilerleyemediyseniz,
+        problemi bir arkadaşınıza <em>yüksek sesle</em> anlatın. Anlatırken çözdüğünüz
+        çok olacak. Buna &ldquo;lastik ördek yöntemi&rdquo; deniyor: karşınızdaki
+        dinlemese de olur, hatta ördek bile olur.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Takım</div>
+  <div class="govde">
+    <h2>Yalnız gidebilirsiniz, ama ikili daha hızlı</h2>
+
+    <p>
+      Bu kitapçığın en önemli sayfası burası. Programlamayı tek başınıza
+      öğrenebilirsiniz &mdash; buna hiç şüphem yok, insanlar öğreniyor. Ama iki ya da
+      üç kişilik küçük takımlarla çalışanların ne kadar hızlı yol aldığını her dönem
+      görüyorum. Nedeni de basit: <strong>programlamanın zor kısmı yazmak değil,
+      düşünmek.</strong> Düşünmek de tek başına yapılınca kısır döngüye girmeye çok
+      müsait.
+    </p>
+
+    <p>
+      Yazılım dünyasında bunun bir adı var: <em>ikili programlama</em>
+      (<em>pair programming</em>). Kuralları şöyle:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>Sürücü</h4>
+        <p>
+          Klavye onda. Sadece o yazar. Aklından geçeni sesli söyler:
+          &ldquo;şimdi döngüyü kuruyorum, sayaç sıfırdan başlasın&hellip;&rdquo;
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Yol gösterici</h4>
+        <p>
+          Klavyeye dokunmaz. Bir adım ileriyi düşünür: &ldquo;dizinin dışına taşacak
+          galiba&rdquo;, &ldquo;bunun testi ne olacak?&rdquo;
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Üçüncü kişi</h4>
+        <p>
+          Varsa test yazar ve karşı örnek arar. Takımın en eğlenceli işi:
+          arkadaşlarının kodunu kırmaya çalışmak.
+        </p>
+      </div>
+    </div>
+
+    <ul>
+      <li>
+        <strong>On beş dakikada bir rol değişin.</strong> Zamanlayıcı kurun.
+        Değişmezseniz hızlı olan yazar, yavaş olan seyreder ve kimse öğrenmez.
+      </li>
+      <li>
+        <strong>Önce algoritmayı konuşun, sonra klavyeye dokunun.</strong> Kâğıt kalem
+        alın, küçük bir örneği elle çözün. Elle çözemediğiniz bir şeyi bilgisayara
+        anlatamazsınız.
+      </li>
+      <li>
+        <strong>&ldquo;Anlamadım&rdquo; demek takımın en değerli cümlesi.</strong>
+        Anlamamış gibi görünmemek için susan bir takım, hep birlikte yanlış yola sapar.
+      </li>
+      <li>
+        <strong>Aynı problemi ayrı ayrı çözüp sonra kodları karşılaştırmak</strong> da
+        harika bir yöntem. İki farklı çözüm görmek, tek çözümü iki kere görmekten çok
+        daha öğretici.
+      </li>
+    </ul>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Bu kitapçıkta yeşil kutular takımca yapılacak işleri gösteriyor. İlki şu:
+        bir araya gelip <strong>haftada bir sabit saat</strong> belirleyin ve o saati
+        koruyun. Düzenli bir saat, uzun ama düzensiz saatlerden çok daha verimli. İki
+        saatlik haftalık bir buluşma, bir dönemde sizi şaşırtacak bir yere getirir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Tezgâh</div>
+  <div class="govde">
+    <h2>Tezgâhınızı kurun</h2>
+
+    <p>
+      Marangozun tezgâhı, programcının da geliştirme ortamı var. İki aşamada kurun:
+      önce hiçbir şey yüklemeden başlayın, sonra kendi bilgisayarınıza inin.
+    </p>
+
+    <h3>Bugün, hiçbir şey yüklemeden</h3>
+
+    <p>
+      Tarayıcıda çalışan derleyiciler var. İlk haftalar için fazlasıyla yeterli, hatta
+      kod paylaşmak için uzun süre en pratik yol:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Site</th><th>İyi tarafı</th><th>Not</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.sololearn.com/en/compiler-playground/cpp">Sololearn</a></td>
+            <td>Sade, hızlı açılıyor</td>
+            <td><code>std::cin &gt;&gt; girdi;</code> çalışıyor</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.onlinegdb.com/">OnlineGDB</a></td>
+            <td>Girdi ve çıktı altta, aynı terminalde</td>
+            <td>Hata ayıklayıcısı (<em>debugger</em>) var, çok işe yarar</td>
+          </tr>
+          <tr>
+            <td><a href="https://coliru.stacked-crooked.com/">Coliru</a></td>
+            <td>Derleme komutunu siz yazıyorsunuz</td>
+            <td>Sağ alttaki <strong>Edit</strong> tuşuna basın</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Bu ay, kendi bilgisayarınızda</h3>
+
+    <p>
+      Er ya da geç kendi makinenizde derlemeniz gerekecek; büyük testler tarayıcıda
+      zorlanıyor. Gereken üç şey var: bir <strong>terminal</strong>, bir
+      <strong>derleyici</strong> ve bir <strong>editör</strong>.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Windows:</strong> <a href="https://cygwin.com/install.html">Cygwin</a>
+        kurun, içine <code>gcc-g++</code> paketini ekleyin. Cygwin terminalinde
+        <code>pwd</code> yazınca <code>/home/&lt;kullanıcı&gt;</code> görmelisiniz.
+        Alternatif olarak WSL de çok iyi çalışıyor.
+      </li>
+      <li>
+        <strong>macOS:</strong> terminalde <code>c++ --version</code> yazın. Yoksa
+        Xcode komut satırı araçlarını kurmayı önerecektir; kabul edin.
+      </li>
+      <li>
+        <strong>Linux:</strong> zaten hazır. Değilse dağıtımınızın paket yöneticisiyle
+        <code>g++</code> kurun.
+      </li>
+      <li>
+        <strong>Editör:</strong>
+        <a href="https://code.visualstudio.com/">VS Code</a> her yerde çalışıyor ve
+        kolay. <a href="https://www.gnu.org/software/emacs/">Emacs</a> eski ve dik
+        başlı ama bir kere alışınca bırakılmıyor. Hangisi olduğu önemli değil,
+        birini seçip kısayollarını öğrenmeniz önemli.
+      </li>
+    </ul>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">ilk sınav</span></figcaption>
+      <pre><code><span class="y"># derleyici duruyor mu?</span>
+$ c++ --version
+
+<span class="y"># ders deposunu indirin</span>
+$ git clone https://github.com/bulent2k2/cpp_ogreniyoruz
+$ cd cpp_ogreniyoruz
+$ ls
+
+<span class="y"># tek dosyalık bir programı derleyip çalıştırın</span>
+$ c++ -std=c++23 ilkProgram.cpp -o ilk
+$ ./ilk</code></pre>
+    </figure>
+
+    <h3>Hesaplarınızı açın</h3>
+
+    <p>
+      Bunların hepsi ücretsiz ve hepsi bir dönem boyunca işinize yarayacak. Bugün
+      açın, sonra unutulur:
+    </p>
+
+    <ul>
+      <li><a href="https://github.com/signup">GitHub</a> &mdash; kodlarınızı saklamak ve paylaşmak için</li>
+      <li><a href="https://projecteuler.net/register">Project Euler</a> &mdash; matematik kokan, tadına doyulmaz sorular</li>
+      <li><a href="https://cses.fi/problemset/">CSES Problem Set</a> &mdash; algoritma öğrenmek için sıraya dizilmiş en iyi liste</li>
+      <li><a href="https://usaco.org/">USACO</a> &mdash; ABD bilgisayar olimpiyatı ön elemeleri, deneme sınavları</li>
+      <li><a href="https://codeforces.com/problemset?order=BY_RATING_ASC">Codeforces</a> ve <a href="https://atcoder.jp/">AtCoder</a> &mdash; yarışmalar</li>
+    </ul>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">İçindekiler</div>
+  <div class="govde">
+    <h2>Bu kitapçıkta neler var?</h2>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Bölüm</th><th>Konu</th><th>Sonunda yapabileceğiniz</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="{{01-ilk-adimlar}}"><strong>I. İlk Adımlar</strong></a></td>
+            <td>Değer, değişken, tür, işlev; koşullar ve döngüler; kapsam</td>
+            <td>Kullanıcıyla konuşan bir tahmin oyunu ve ilk Project Euler çözümünüz</td>
+          </tr>
+          <tr>
+            <td><a href="{{02-veri}}"><strong>II. Veriyi Düzenlemek</strong></a></td>
+            <td>Dizi, akıllı dizi, dizin, eşlem, küme, yığın, kuyruk; kendi türleriniz; kalıplar</td>
+            <td>Bir metindeki harfleri sayan, kendi türünü tanımlayan programlar</td>
+          </tr>
+          <tr>
+            <td><a href="{{03-zanaat}}"><strong>III. Zanaat</strong></a></td>
+            <td>Derleme, <code>make</code>, testler, hata ayıklama, hız ölçümü</td>
+            <td>Kendini sınayan, tek komutla derlenen bir proje düzeni</td>
+          </tr>
+          <tr>
+            <td><a href="{{04-ozyineleme}}"><strong>IV. Özyineleme ve Arama</strong></a></td>
+            <td>Kendini çağıran işlevler, bellekle hızlandırma, geri dönüşlü arama, budama</td>
+            <td>Sekiz vezir bulmacası ve altküme/permütasyon üretimi</td>
+          </tr>
+          <tr>
+            <td><a href="{{05-cizgeler}}"><strong>V. Çizgeler</strong></a></td>
+            <td>Derinlemesine ve enlemesine gezi, bağlı parçalar, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford</td>
+            <td>Labirentte en kısa yol, canavarlardan kaçış, en ucuz uçuş rotası</td>
+          </tr>
+          <tr>
+            <td><a href="{{06-dp}}"><strong>VI. Dinamik Programlama</strong></a></td>
+            <td>Problemi küçültmek, tümevarım formülü kurmak, yukarıdan aşağı ve aşağıdan yukarı</td>
+            <td>Bozuk para ve zar dizisi problemlerini kendi başınıza kurup çözmek</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="kutu dikkat">
+      <span class="basi">Son bir uyarı</span>
+      <p>
+        Bu kitapçıktaki <strong>alıştırmaların çözümleri yok</strong> ve bu bir eksiklik
+        değil. Bazı örnek kodlar da bilerek yarım bırakıldı. Takıldığınız yerde ipucu
+        var, ama yanıt yok. Yanıt sizde &mdash; ya da yan masadaki arkadaşınızda.
+      </p>
+    </div>
+
+    <div class="kutu">
+      <span class="basi">Basmak isterseniz</span>
+      <p>
+        Kitapçığın tamamı tek bir PDF dosyası olarak da var: ders deposunda
+        <code>kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf</code>.
+        Altmış üç sayfa; A4'e basılmak üzere düzenlendi. İçindeki bütün
+        programların kaynak dosyaları da <code>kitapcik/kod/</code> dizininde.
+      </p>
+    </div>
+
+    <p class="dipnot">
+      Kaynak: 2024&ndash;25 ve 2025&ndash;26 dönemi ders notları, birlikte yazdığımız
+      programlar ve sınıfta sorulan sorular. Ders notlarının tamamı
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">GitHub deposunda</a>,
+      dizini de <code>ileri/icindekiler.md</code> dosyasında.
+    </p>
+  </div>
+</div>
+
+<!--GEZINME-->

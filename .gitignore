@@ -8,3 +8,5 @@ program
 .DS_Store
 code-deneme1.dSYM
 **/*.dSYM/
+# kitapçığın üretilen html çıktıları (kaynak: kitapcik/bolumler + ortak.css)
+kitapcik/cikti/

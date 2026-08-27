@@ -1,0 +1,582 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm III</div>
+  <h1>Programcının Zanaatı</h1>
+  <p class="ozet">
+    Bu bölümde tek bir yeni C++ kavramı yok. Onun yerine, iyi programcıyı acemi
+    programcıdan ayıran şey var: kodu derlemek, sınamak, hatayı bulmak ve hızı
+    tahmin etmek yerine ölçmek. Bu alışkanlıkları edinen bir öğrenci, dili daha iyi
+    bilen ama bunları bilmeyen bir öğrenciyi kolayca geçer.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">III.1</div>
+  <div class="govde">
+    <h2>Tarayıcıdan terminale</h2>
+
+    <p>
+      Çevrimiçi derleyiciler harika bir başlangıç. Ama bir noktada kendi
+      bilgisayarınıza inmelisiniz: büyük testler tarayıcıda çalışmaz, hata
+      ayıklayıcı orada zayıftır ve gerçek projeler tek dosyaya sığmaz.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">bilmeniz gereken sekiz komut</span></figcaption>
+      <pre><code>pwd                     <span class="y"># neredeyim?</span>
+ls                      <span class="y"># burada ne var?</span>
+ls -l                   <span class="y"># ayrıntılı liste</span>
+cd ileri/dersler        <span class="y"># dizine gir</span>
+cd ..                   <span class="y"># bir üste çık</span>
+mkdir yeni-alistirma    <span class="y"># dizin aç</span>
+cat dosya.cpp           <span class="y"># dosyayı ekrana bas</span>
+./prog &lt; test1          <span class="y"># programa dosyadan girdi ver</span></code></pre>
+    </figure>
+
+    <p>
+      Son satır yarışmalarda hayat kurtarır: girdiyi her seferinde elle yazmak
+      yerine bir dosyaya koyup <code>&lt;</code> ile beslersiniz.
+    </p>
+
+    <h3>Derleyici tek bir program değil</h3>
+
+    <p>
+      <code>c++ ana.cpp -o prog</code> yazdığınızda aslında iki iş art arda yapılıyor:
+      önce <strong>derleme</strong> (kaynak koddan makine koduna), sonra
+      <strong>bağlama</strong> (parçaları tek çalıştırılabilir dosyada birleştirme).
+      İkisini ayırabilirsiniz:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">derleme ve bağlama</span></figcaption>
+      <pre><code><span class="y"># tek adımda</span>
+$ c++ -std=c++23 ana.cpp asal.cpp -o prog
+
+<span class="y"># ya da iki adımda: önce nesne kodu (.o), sonra bağlama</span>
+$ c++ -std=c++23 -c ana.cpp      <span class="y"># -&gt; ana.o</span>
+$ c++ -std=c++23 -c asal.cpp     <span class="y"># -&gt; asal.o</span>
+$ c++ -std=c++23 ana.o asal.o -o prog
+
+<span class="y"># faydalı seçenekler</span>
+$ c++ -std=c++23 -Wall -Wextra ana.cpp -o prog   <span class="y"># bütün uyarıları göster</span>
+$ c++ -std=c++23 -g ana.cpp -o prog              <span class="y"># hata ayıklama bilgisi ekle</span>
+$ c++ -std=c++23 -O2 ana.cpp -o prog             <span class="y"># iyileştirmeleri aç (hızlı!)</span></code></pre>
+    </figure>
+
+    <p>
+      Neden ayıralım? Çünkü yirmi dosyalık bir projede tek bir dosyayı
+      değiştirdiğinizde diğer on dokuzunu yeniden derlemek anlamsız. İşte
+      <code>make</code> tam olarak bunun için var.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        <code>-Wall</code> seçeneğini <strong>her zaman</strong> açık tutun.
+        Derleyici uyarıları can sıkıcı değil, bedava kod incelemesidir. Derste bir
+        işlevin çıktı türünü yanlış yazmıştık; program tesadüfen doğru çalışıyordu ama
+        derleyici bunu <code>-Wall</code> ile baştan söylemişti. Uyarıyı okusaydık
+        yarım saat kazanacaktık.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.2</div>
+  <div class="govde">
+    <h2><code>make</code>: tek komutla her şey</h2>
+
+    <p>
+      <code>make</code>, bir dosyanın bağlı olduğu dosyalardan daha eski olup
+      olmadığına bakar ve sadece gerekeni yeniden yapar. Kuralları
+      <code>Makefile</code> adlı dosyaya yazarsınız. Biçim çok basit:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">Makefile biçimi</span></figcaption>
+      <pre><code><span class="a">&lt;hedef&gt;</span>: <span class="t">&lt;bağlı olduğu şeyler&gt;</span>
+<span class="y">&lt;SEKME&gt;</span>çalıştırılacak komut</code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">En sinir bozucu hata</span>
+      <p>
+        Komut satırının başındaki girinti <strong>sekme</strong> (Tab) olmak zorunda,
+        boşluk değil. Editörünüz sekmeyi boşluğa çeviriyorsa <code>make</code>
+        anlaşılmaz bir hata verir. <code>Makefile</code> düzenlerken bu dönüşümü
+        kapatın.
+      </p>
+    </div>
+
+    <p>
+      Şimdi gerçek bir örnek. Asal çarpan bulan, üç dosyaya bölünmüş, kendi kendini
+      sınayan küçük bir proje:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">Makefile</span><span class="etiket">asal-projesi</span></figcaption>
+      <pre><code><span class="a">hedef</span>: derle çalıştır
+
+<span class="a">derle</span>: prog
+
+<span class="a">prog</span>: ana.o asal.o
+	c++ -std=c++23 ana.o asal.o -o prog
+
+<span class="a">ana.o</span>: ana.cpp asal.h
+	c++ -std=c++23 -c ana.cpp
+
+<span class="a">asal.o</span>: asal.cpp asal.h
+	c++ -std=c++23 -c asal.cpp
+
+<span class="a">çalıştır</span>: prog
+	./prog 60
+
+<span class="a">test</span>: prog
+	./prog 360 &gt; test-ciktisi
+	diff beklenen-cikti test-ciktisi
+	rm -f test-ciktisi
+	@echo <span class="s">"TEST GEÇTİ"</span>
+
+<span class="a">temizle</span>:
+	rm -f prog *.o test-ciktisi</code></pre>
+    </figure>
+
+    <p>
+      Hedef adlarının Türkçe olabildiğine dikkat edin &mdash; <code>make derle</code>,
+      <code>make test</code>, <code>make temizle</code>. Bir de her hedefin
+      <strong>neye bağlı olduğunu</strong> doğru yazmak önemli: <code>ana.o</code>
+      hem <code>ana.cpp</code>'ye hem <code>asal.h</code>'ye bağlı, çünkü başlık
+      dosyası değişirse yeniden derlenmesi gerek.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">çalışırken</span></figcaption>
+      <pre><code>$ make
+c++ -std=c++23 -c ana.cpp
+c++ -std=c++23 -c asal.cpp
+c++ -std=c++23 ana.o asal.o -o prog
+./prog 60
+denemeler geçti.
+60 sayısının asal çarpanları: 2 2 3 5
+
+$ make          <span class="y"># ikinci kez: hiçbir şey değişmedi</span>
+make: 'hedef' hedefi için yapılacak bir şey yok.</code></pre>
+    </figure>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Yeni bir alıştırmaya başlarken hazır bir düzenden kopyalayın: bir
+        <code>Makefile</code>, bir <code>ana.cpp</code>, bir de
+        <code>beklenen-cikti</code>. Ders deposundaki <code>sablon/</code> dizini
+        tam olarak bunun için var. Takımca bir kere kurun, dönem boyunca
+        kopyalayın &mdash; her seferinde sıfırdan Makefile yazmak zaman kaybı.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.3</div>
+  <div class="govde">
+    <h2>Kendi kendini sınayan program</h2>
+
+    <p>
+      Bir program yazdınız, çalıştırdınız, doğru yanıt verdi. Sonra bir yerini
+      değiştirdiniz. Hâlâ doğru mu? Bunu her seferinde elle denemek imkânsız.
+      Çözüm: <strong>sınamayı programın içine koymak</strong>.
+    </p>
+
+    <p>
+      En sade araç <code>&lt;cassert&gt;</code> içindeki <code>assert</code>.
+      İçindeki koşul yanlışsa program hemen durur ve hangi satırda durduğunu söyler.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">denemeler</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;cassert&gt;</span>
+<span class="a">#include</span> <span class="s">"asal.h"</span>
+
+<span class="t">void</span> dene() {
+  assert(asalMi(<span class="n">2</span>));
+  assert(asalMi(<span class="n">97</span>));
+  assert(<span class="a">not</span> asalMi(<span class="n">1</span>));
+  assert(<span class="a">not</span> asalMi(<span class="n">91</span>));                 <span class="y">// 7 * 13, kolay tuzak</span>
+  assert(carpanlar(<span class="n">60</span>).size() == <span class="n">4</span>);      <span class="y">// 2, 2, 3, 5</span>
+  std::cout &lt;&lt; <span class="s">"denemeler geçti."</span> &lt;&lt; std::endl;
+}
+
+<span class="t">int</span> main(<span class="t">int</span> argc, <span class="t">char</span>** argv) {
+  dene();                                     <span class="y">// her çalıştırışta sınansın</span>
+  <span class="t">int</span> n = (argc &gt; <span class="n">1</span>) ? std::stoi(argv[<span class="n">1</span>]) : <span class="n">60</span>;
+  <span class="y">// ...</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>assert(not asalMi(91))</code> satırına özellikle dikkat.
+      İyi bir sınama, <strong>doğru olması gerekeni değil, yanlış olması gerekeni</strong>
+      de sınar. 91 sayısı asal görünür ama <code>7 &times; 13</code>'tür; naif bir asal
+      denetimi tam burada patlar.
+    </p>
+
+    <p>
+      Şimdi kasten bir hata yapalım: çarpan bulan işlevin son satırını silelim.
+      Ne olduğuna bakın:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">yakalandı</span></figcaption>
+      <pre><code>$ make test
+c++ -std=c++23 -c asal.cpp
+c++ -std=c++23 ana.o asal.o -o prog
+./prog 360 &gt; test-ciktisi
+<span class="v">prog: ana.cpp:10: void dene(): Assertion `carpanlar(60).size() == 4' failed.</span>
+Aborted
+make: *** [Makefile:18: test] Error 134</code></pre>
+    </figure>
+
+    <p>
+      Hata dosya ve satır numarasıyla birlikte geldi. Bu, üç saatlik bir aramayı üç
+      saniyeye indiren şey.
+    </p>
+
+    <h3>Altın dosya yöntemi</h3>
+
+    <p>
+      <code>assert</code> tek tek değerleri sınar. Peki programın <strong>bütün
+      çıktısını</strong> nasıl sınarız? Ders deposunda kullandığımız yöntem çok
+      basit ve çok etkili: doğru çıktıyı bir kere üretip bir dosyaya kaydedin
+      (buna <strong>altın dosya</strong> deniyor), sonra her seferinde
+      <code>diff</code> ile karşılaştırın.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">Makefile</span><span class="etiket">test hedefi</span></figcaption>
+      <pre><code><span class="a">test</span>: prog
+	./prog 360 &gt; test-ciktisi
+	diff beklenen-cikti test-ciktisi
+	rm -f test-ciktisi</code></pre>
+    </figure>
+
+    <p>
+      Çıktıda tek bir boşluk bile kaysa <code>diff</code> haber veriyor:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">diff yakaladı</span></figcaption>
+      <pre><code>$ make test
+./prog 360 &gt; test-ciktisi
+diff beklenen-cikti test-ciktisi
+<span class="v">2c2</span>
+&lt; 360 sayısının asal çarpanları: 2 2 2 3 3 5
+---
+&gt; 360  sayısının asal çarpanlari: 2 2 2 3 3 5
+make: *** [Makefile:19: test] Error 1</code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">Dikkat</span>
+      <p>
+        <code>diff</code> fark gösterdiğinde iki ihtimal var: ya kodunuzu bozdunuz,
+        ya da çıktıyı <strong>bilerek</strong> değiştirdiniz. İkincisiyse altın
+        dosyayı güncelleyin. Ama önce farka gerçekten bakın &mdash; altın dosyayı
+        düşünmeden güncellemek, testi tamamen silmekle aynı şey.
+      </p>
+      <p>
+        Bir de zamana bağlı çıktılara dikkat: &ldquo;doğduğunuzdan beri kaç gün
+        geçti&rdquo; yazan bir programın altın dosyası her gün bozulur. Böyle
+        çıktıları ya sabitleyin ya da testin dışında tutun.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.4</div>
+  <div class="govde">
+    <h2>Hata bulmanın üç yolu</h2>
+
+    <h3>1. Yazdırarak &mdash; ama açılıp kapanabilir biçimde</h3>
+
+    <p>
+      En yaygın hata ayıklama yöntemi programın içine <code>cout</code> serpiştirmek.
+      Sorun şu: iş bitince hepsini tek tek silmek gerekiyor, sonra hata tekrarlayınca
+      hepsini geri yazmak. Şu küçük numara bu derdi bitiriyor:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">dout numarası</span></figcaption>
+      <pre><code><span class="t">bool</span> yaz = <span class="a">false</span>;              <span class="y">// yazsın istiyorsak true yapalım</span>
+ostream nout{<span class="a">nullptr</span>};          <span class="y">// hiçbir yere yazmayan akım</span>
+ostream&amp; dout = yaz ? cout : nout;
+
+dout &lt;&lt; <span class="s">"k="</span> &lt;&lt; k &lt;&lt; <span class="s">" toplam="</span> &lt;&lt; toplam &lt;&lt; endl;</code></pre>
+    </figure>
+
+    <p>
+      Artık bütün ayıklama çıktılarınızı <code>dout</code> ile yazın. Tek bir
+      <code>bool</code> değiştirerek hepsini birden açıp kapatabilirsiniz.
+      (<em>debug out</em>'un kısaltması.)
+    </p>
+
+    <h3>2. Hata ayıklayıcıyla</h3>
+
+    <p>
+      <strong>gdb</strong>, C ve C++ dünyasının efsanevi hata ayıklayıcısı.
+      Programı satır satır çalıştırıp her adımda değişkenlerin içine bakmanızı sağlar.
+      Önce <code>-g</code> ile derleyin:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">gdb</span></figcaption>
+      <pre><code>$ c++ -std=c++23 -g ana.cpp -o prog
+$ gdb ./prog
+
+(gdb) break main          <span class="y"># main'de dur</span>
+(gdb) run                 <span class="y"># başlat</span>
+(gdb) next                <span class="y"># bir satır ilerle (işlevin içine girme)</span>
+(gdb) step                <span class="y"># bir satır ilerle (işlevin içine gir)</span>
+(gdb) print toplam        <span class="y"># değişkenin değerini göster</span>
+(gdb) backtrace           <span class="y"># buraya hangi çağrılarla geldik?</span>
+(gdb) continue            <span class="y"># bir sonraki durağa kadar devam</span>
+(gdb) quit</code></pre>
+    </figure>
+
+    <p>
+      OnlineGDB'de aynı şey tuşlarla yapılıyor: satır numarasına tıklayıp durak
+      koyun, <strong>Debug</strong>'a basın, sonra <strong>step into</strong> ile
+      ilerleyin. Özyineleyen bir işlevin nasıl çalıştığını anlamanın en hızlı yolu
+      budur &mdash; <a href="{{04-ozyineleme}}">Bölüm IV</a>'te işinize yarayacak.
+    </p>
+
+    <h3>3. Küçülterek</h3>
+
+    <p>
+      Belki de en güçlü yöntem, ve hiçbir araç gerektirmiyor. Kod büyük ve hata
+      nerede belli değilse, <strong>hatayı yeniden üreten en küçük örneği</strong>
+      bulun. Girdiyi yarıya indirin: hâlâ hata veriyor mu? Yarısını daha indirin.
+      Beş adımda bin satırlık girdi otuz satıra iner ve hata çoğu zaman kendini
+      gösterir.
+    </p>
+
+    <p>
+      Ders deposundaki her ciddi hata bu şekilde bulundu. Bir keresinde bir düğüm
+      kuyruğa iki kere giriyordu; yedi düğümlük minik bir çizgede çıktıyı elle
+      okuyunca hemen göründü. Yüz düğümlük çizgede asla göremezdik.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Hata avında ikili çalışmanın faydası en yüksek. Bir kişi kodu yüksek sesle
+        okur, öteki &ldquo;dur, burada ne olur?&rdquo; diye sorar. İnsan kendi
+        kodunda ne yazdığını değil, <em>ne yazmak istediğini</em> okur; ikinci bir
+        çift göz bu körlüğü kırar.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.5</div>
+  <div class="govde">
+    <h2>Tahmin etmeyin, ölçün</h2>
+
+    <p>
+      &ldquo;Bu kod yavaş galiba&rdquo; cümlesi bir bilgi değil, bir his. C++ size
+      hissi ölçüye çevirecek bir araç veriyor: <code>&lt;chrono&gt;</code>.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">20-hiz.cpp</span><span class="etiket">süre ölçümü</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;chrono&gt;</span>
+<span class="a">using</span> saat = std::chrono::high_resolution_clock;
+
+<span class="a">auto</span> basla = saat::now();
+
+<span class="a">const</span> <span class="t">int</span> n = <span class="n">1'000'000</span>;               <span class="y">// tırnaklar okumayı kolaylaştırır</span>
+std::vector&lt;<span class="t">int</span>&gt; dizi(n);
+<span class="a">for</span> (<span class="t">int</span> k = <span class="n">0</span>; k &lt; n; ++k) dizi[k] = <span class="n">2</span> * k;
+
+<span class="a">auto</span> bitti = saat::now();
+<span class="a">auto</span> insa = std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(bitti - basla);
+
+std::cout &lt;&lt; <span class="s">"inşa süresi: "</span> &lt;&lt; insa.count() &lt;&lt; <span class="s">" ms"</span> &lt;&lt; std::endl;</code></pre>
+    </figure>
+
+    <p>
+      Bu programı iki kere derleyip çalıştırdım. Tek fark derleyici seçeneği:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Derleme</th><th>Bir milyon öğe inşası</th><th>Ortalama erişim</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>-O0</code> (iyileştirme yok)</td>
+            <td class="sayi">8 ms</td>
+            <td class="sayi">2.66 ns</td>
+          </tr>
+          <tr>
+            <td><code>-O2</code> (iyileştirme açık)</td>
+            <td class="sayi">2 ms</td>
+            <td class="sayi">0.28 ns</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Aynı kod, dört kat hızlı inşa, on kat hızlı erişim. Tek satır kod
+      değiştirmeden. Yarışmalarda bu fark, &ldquo;zaman aşımı&rdquo; ile
+      &ldquo;kabul edildi&rdquo; arasındaki fark olabilir.
+    </p>
+
+    <p>
+      Terminalde bütün programın süresini ölçmenin daha da kolay bir yolu var:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">time</span></figcaption>
+      <pre><code>$ time ./prog &lt; buyuk-test
+...
+./prog &lt; buyuk-test  <span class="v">28.71s</span> user 0.11s system 97% cpu 29.430 total</code></pre>
+    </figure>
+
+    <p>
+      Bu, derste gerçekten karşımıza çıkan bir ölçüm: labirentten kaçış problemini
+      çözen ilk programımız yarım dakika sürüyordu. Algoritmayı düzeltince aynı
+      girdide <span class="sayi">0.73</span> saniyeye indi &mdash; kırk kat.
+      Nasıl olduğunu <a href="{{05-cizgeler}}">Bölüm V</a>'te göreceksiniz. Şimdilik
+      şunu aklınızda tutun: <strong>büyük hız farkları derleyici seçeneğinden değil,
+      algoritmadan gelir.</strong>
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.6</div>
+  <div class="govde">
+    <h2>Kendini tekrar etme</h2>
+
+    <p>
+      Yazılımın belki de en meşhur ilkesi: <strong>DRY</strong>
+      (<em>Don't Repeat Yourself</em>). Aynı kodu kopyalayıp yapıştırdığınızda,
+      onu bir kere değil <em>iki kere</em> bakıma almış olursunuz. Bir hata bulup
+      birini düzeltir, ötekini unutursunuz.
+    </p>
+
+    <p>
+      Derste yedi kere iç içe <code>for</code> döngüsü içeren, dört farklı yerde
+      neredeyse aynı biçimde tekrarlanan bir çizim koduna baktık. Çalışıyordu, hem
+      de güzel çalışıyordu. Ama o dört bloğu tek bir <em>işlev kalıbına</em>
+      çevirince kod hem kısaldı hem de yeni çizim eklemek dakikalar sürer oldu.
+    </p>
+
+    <h3>Sadeleştirme (<em>refactoring</em>)</h3>
+
+    <p>
+      Kodu, davranışını değiştirmeden daha anlaşılır hâle getirmeye
+      <strong>sadeleştirme</strong> deniyor. Öğrenciyken bunun boş bir uğraş gibi
+      görünmesi çok normal &mdash; &ldquo;çalışıyor ya, ne gerek var?&rdquo;
+      Gerek var, çünkü kodu bir kere yazarsınız, on kere okursunuz.
+    </p>
+
+    <p>
+      İki gerçek örnek, ders notlarından:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Program</th><th>Önce</th><th>Sonra</th><th>Ne kazandık</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Labirentte en kısa yol</td>
+            <td class="sayi">93 satır</td>
+            <td class="sayi">69 satır</td>
+            <td>Aynı puan, çok daha okunur kod</td>
+          </tr>
+          <tr>
+            <td>Canavarlardan kaçış</td>
+            <td class="sayi">141 satır</td>
+            <td class="sayi">100 satır</td>
+            <td>Hem kısaldı hem <strong>40 kat hızlandı</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      İkinci satır çok öğretici: uzun program yavaş, kısa program hızlıydı.
+      Bu tesadüf değil. Kodu sadeleştirirken ne yaptığınızı daha net görürsünüz,
+      ve o netlikte daha iyi algoritma saklıdır.
+    </p>
+
+    <h4>Sadeleştirme için üç somut hamle</h4>
+
+    <ul>
+      <li>
+        <strong>İyi ad koyun.</strong> <code>int a, b, c;</code> yerine
+        <code>int satir, sutun, uzaklik;</code>. Bir değişkenin adını doğru
+        koyduğunuzda kodun yarısı kendini yazar.
+      </li>
+      <li>
+        <strong>Tür takma adları kullanın.</strong>
+        <code>vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt;</code> yerine
+        <code>using Cizge = Dizi&lt;Baglar&gt;;</code>. Kod problemin dilinde
+        konuşmaya başlar.
+      </li>
+      <li>
+        <strong>Tekrarlayan bloğu işlev yapın.</strong> Aynı beş satırı ikinci kez
+        yazdığınızı fark ettiğiniz an durun ve ona bir ad verin.
+      </li>
+    </ul>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Kendi şablonunuzu kurun.</strong> Bir dizin açın; içine
+          <code>Makefile</code>, <code>ana.cpp</code> ve <code>beklenen-cikti</code>
+          koyun. <code>make</code>, <code>make test</code> ve <code>make temizle</code>
+          çalışsın. Bundan sonraki her alıştırmada bunu kopyalayın.
+        </li>
+        <li>
+          <strong>Testi kırın.</strong> Çalışan bir programınızın çıktısını tek bir
+          karakter değiştirin ve <code>make test</code>'in nasıl bir hata verdiğini
+          görün. Sonra geri alın. Testin gerçekten çalıştığını görmemiş olsaydınız,
+          ona güvenemezdiniz.
+        </li>
+        <li>
+          <strong>Ölçün.</strong> <a href="{{02-veri}}">Bölüm II</a>'deki
+          &ldquo;tekrar var mı&rdquo; alıştırmasının üç çözümünü
+          <code>&lt;chrono&gt;</code> ile ölçün. On bin, yüz bin ve bir milyon
+          öğeyle deneyin. Süreler nasıl artıyor? Bir tablo yapın.
+          <span class="zor">önemli</span> Bu tablo, bir sonraki bölümde
+          konuşacağımız <em>karmaşıklık</em> kavramının somut hâli.
+        </li>
+        <li>
+          <strong>gdb ile özyineleme izleyin.</strong> Fibonaççi'yi özyinelemeli
+          yazın, <code>fib(5)</code> için <code>backtrace</code> komutunu birkaç kere
+          çalıştırın. Çağrı yığınının büyüyüp küçüldüğünü kendi gözünüzle görün.
+        </li>
+        <li>
+          <strong>Bir kodu sadeleştirin.</strong> İki hafta önce yazdığınız bir
+          programı açın. Anlamakta zorlandığınız her satır bir fırsat: değişkeni
+          yeniden adlandırın, tekrarı işleve çıkarın, sihirli sayıya isim verin.
+          Sonunda <code>make test</code> hâlâ geçiyor mu? Geçiyorsa doğru
+          sadeleştirdiniz.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

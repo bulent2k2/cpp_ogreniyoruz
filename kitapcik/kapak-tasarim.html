@@ -1,0 +1,56 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width:1600px; height:2400px;
+    background-color:#F6F7FA;
+    background-image:
+      linear-gradient(#DFE5F1 2px, transparent 2px),
+      linear-gradient(90deg, #DFE5F1 2px, transparent 2px);
+    background-size:64px 64px;
+    color:#16203A;
+    font-family:"IBM Plex Sans",sans-serif;
+    display:flex; flex-direction:column;
+    padding:150px 130px 120px;
+    position:relative; overflow:hidden;
+  }
+  .seri { font-family:"IBM Plex Mono",monospace; font-size:30px; letter-spacing:.22em;
+          text-transform:uppercase; color:#8792AA; }
+  h1 { font-family:"Bitter",serif; font-weight:700; font-size:150px; line-height:1.03;
+       letter-spacing:-.03em; margin-top:70px; }
+  h1 .vurgu { color:#2A4BC4; }
+  .alt { font-size:44px; color:#52607C; line-height:1.5; margin-top:56px; max-width:1150px; }
+  .kod {
+    margin-top:140px; background:#111A2B; border-radius:16px; padding:44px 52px;
+    font-family:"IBM Plex Mono",monospace; font-size:33px; line-height:1.66; color:#DCE5F4;
+    box-shadow:0 30px 70px -34px rgba(10,20,40,.55);
+  }
+  .kod .y { color:#7A8AA8; font-style:italic; }
+  .kod .a { color:#8FB0FF; }
+  .kod .s { color:#9BD8A8; }
+  .kod .t { color:#E5C3F0; }
+  .kod .n { color:#E8B98A; }
+  .altbilgi { margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; }
+  .yazar { font-family:"Bitter",serif; font-size:52px; font-weight:700; }
+  .rozet { font-family:"IBM Plex Mono",monospace; font-size:26px; color:#52607C;
+           text-align:right; line-height:1.7; }
+  .serit { position:absolute; top:0; left:0; width:26px; height:100%; background:#2A4BC4; }
+</style></head><body>
+<div class="serit"></div>
+<div class="seri">Fen Lisesi için C++ ve algoritma</div>
+<h1>Programlamaya<br>ve Algoritmalara<br><span class="vurgu">Keyifli</span> Bir Başlangıç</h1>
+<p class="alt">Altı bölüm, yirmi dört çalışan program ve bir sürü soru.<br>
+Yalnız da okunur, ama ikili daha hızlı.</p>
+<div class="kod"><span class="y">// çizgede gezinmenin tamamı, beş satır</span><br>
+<span class="t">void</span> gez(<span class="t">Nokta</span> bu) {<br>
+&nbsp;&nbsp;<span class="a">if</span> (gezildi[bu]) <span class="a">return</span>;<br>
+&nbsp;&nbsp;gezildi[bu] = <span class="a">true</span>;<br>
+&nbsp;&nbsp;<span class="a">for</span> (<span class="t">Nokta</span> şu : komşular[bu])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gez(şu);<br>
+}</div>
+<div class="altbilgi">
+  <div class="yazar">Bülent Başaran</div>
+  <div class="rozet">CC BY-SA 4.0 &middot; kod MIT<br>github.com/bulent2k2/cpp_ogreniyoruz</div>
+</div>
+</body></html>

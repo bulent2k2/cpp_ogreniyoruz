@@ -71,7 +71,13 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   küçük programlar; her biri kendi `Makefile`'ıyla.
 - `notlar/` — kopya sayfaları (*cheatsheet*), terminal komutları, çizge
   kuramı, pdf'ler.
-- `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf).
+- `kitapcik/` — **Giriş kitapçığı** (*Programlamaya ve Algoritmalara Keyifli
+  Bir Başlangıç*): `bolumler/*.html` bölüm metinleri, `ortak.css` ekran
+  biçemi, `epub.css` e-kitap biçemi, `yap.py` (html), `pdf.mjs` (pdf),
+  `epub.py` (epub), `kapak.mjs` (kapak resmi -> `kitap/kapak.png`), `kod/` 24 örnek program.
+  Üretilen `cikti/` dizini `.gitignore`'dadır.
+- `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve kitapçığın
+  PDF/EPUB sürümleri.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt
   bağlantıları.
 - `python/`, `kojo/` — yan diller/ortamlar için giriş yazıları.
@@ -151,6 +157,20 @@ Yoksa `prog`, `bin/`, `*.o` ve `test-ciktisi` dosyalarını elle silin.
   izleniyor — bilinen bir istisna; temizlemek gerekirse önce sahibine
   sorun.)
 - Sürekli tümleştirme (CI) yoktur; `.github/` dizini yoktur.
+
+### Lisans
+
+Kök dizindeki `LICENSE` dosyası iki lisans tanımlıyor:
+
+- **Yazılar** (`.md`, `.html`, kitapçık metinleri, kitapçığın PDF ve EPUB
+  sürümleri): CC BY-SA 4.0.
+- **Kod** (`.cpp`, `.h`, `.py`, `.mjs`, `.css`, `Makefile`): MIT.
+
+Üçüncü taraflara ait malzeme (`kitap/` içindeki el kitapları, `2022/`
+dizininin tamamı, `notlar/*.pdf`) bu lisansların **dışındadır**; `LICENSE`
+dosyasında tek tek sayılmıştır. Depoya yeni bir dış kaynak eklerseniz o
+listeye de ekleyin. Yeni yazdığınız dosyalara ayrı lisans başlığı koymaya
+gerek yok; kök `LICENSE` kapsıyor.
 
 ## Kod Üslubu
 

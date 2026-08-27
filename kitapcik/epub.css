@@ -1,0 +1,303 @@
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   EPUB biçemi.
+
+   Ekran sürümünden farkları:
+   - Akışkan (reflowable): ızgara düzeni ve sabit genişlik yok.
+   - Kareli defter zemini yok; e-mürekkep okuyucularda işe yaramıyor.
+   - Kod blokları AÇIK zeminli. Bazı okuyucular blokların arka plan
+     rengini yok sayıyor; koyu zemin varsayarsak yazı okunmaz hâle
+     gelebiliyordu.
+   =========================================================== */
+
+body {
+  margin: 0 0.6em;
+  color: #16203A;
+  background: #FFFFFF;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  line-height: 1.6;
+  widows: 2;
+  orphans: 2;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Bitter", Georgia, "Times New Roman", serif;
+  color: #16203A;
+  line-height: 1.22;
+  margin: 0;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+h1 { font-size: 1.9em; margin: 0 0 0.4em; letter-spacing: -0.02em; }
+h2 {
+  font-size: 1.42em;
+  margin: 1.9em 0 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 2px solid #16203A;
+}
+h3 { font-size: 1.14em; margin: 1.5em 0 0.35em; }
+h4 {
+  font-size: 1em;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-weight: bold;
+  margin: 1.2em 0 0.3em;
+}
+
+p { margin: 0 0 0.85em; text-align: left; }
+
+a { color: #21409A; text-decoration: underline; }
+
+strong { font-weight: bold; }
+em { font-style: italic; color: #46536E; }
+
+ul, ol { margin: 0 0 1em; padding-left: 1.4em; }
+li { margin-bottom: 0.4em; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  margin: 0 0 1.4em;
+  padding-bottom: 0.9em;
+  border-bottom: 1px solid #BDC7DB;
+}
+.ust .seri {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8792AA;
+  margin-bottom: 0.7em;
+}
+.ust .no {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #A8352A;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.ust .ozet { font-size: 1.06em; color: #46536E; }
+
+/* içindekiler şeridi: EPUB'da düz bir liste */
+.icerik-seridi {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78em;
+}
+.icerik-seridi li { margin: 0 0 0.3em; }
+.icerik-seridi li a { color: #46536E; }
+
+/* ---------- bölüm blokları ---------- */
+
+/* ekran sürümündeki sol ray, burada küçük bir üst etiket */
+.ray {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8792AA;
+  margin: 2em 0 -1.4em;
+}
+.govde { margin: 0; }
+
+/* ---------- numaralı adımlar ---------- */
+
+ol.adimlar { padding-left: 1.5em; }
+ol.adimlar > li { margin-bottom: 0.7em; }
+
+/* ---------- kod ---------- */
+
+code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.86em;
+  background: #F0F2F7;
+  color: #16203A;
+  border: 1px solid #DCE2EE;
+  border-radius: 2px;
+  padding: 0 0.2em;
+}
+
+.kod {
+  margin: 1.1em 0;
+  background: #F7F8FB;
+  border: 1px solid #CBD4E4;
+  border-radius: 4px;
+  padding: 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.kod figcaption {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+  color: #6B7893;
+  background: #EAEEF6;
+  border-bottom: 1px solid #CBD4E4;
+  padding: 0.35em 0.7em;
+}
+.kod figcaption .nokta { display: none; }
+.kod figcaption .ad { color: #46536E; font-weight: bold; margin-right: 0.5em; }
+/* ekran sürümünde bu ikisini flex ayırıyordu; burada araya ayraç koyalım */
+.kod figcaption .etiket { text-transform: uppercase; }
+.kod figcaption .etiket::before { content: "· "; color: #A6B0C6; }
+.kod pre {
+  margin: 0;
+  padding: 0.7em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74em;
+  line-height: 1.5;
+  color: #16203A;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.kod pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* açık zemine göre ayarlanmış renkler */
+.kod .y { color: #6B7893; font-style: italic; }  /* yorum */
+.kod .a { color: #1F3FA8; }                       /* anahtar sözcük */
+.kod .s { color: #1F6B3F; }                       /* yazı sabiti */
+.kod .n { color: #9A5518; }                       /* sayı */
+.kod .t { color: #7A2E92; }                       /* tür */
+.kod .v { color: #A8352A; font-weight: bold; }    /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.1em 0;
+  padding: 0.7em 0.85em;
+  border: 1px solid #CBD4E4;
+  border-left: 3px solid #8792AA;
+  background: #FAFBFD;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.kutu .basi {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #46536E;
+  margin-bottom: 0.35em;
+}
+.kutu p:last-child { margin-bottom: 0; }
+
+.kutu.deneyin { border-left-color: #21409A; background: #F2F5FD; }
+.kutu.deneyin .basi { color: #21409A; }
+.kutu.dikkat  { border-left-color: #A8352A; background: #FDF3F1; }
+.kutu.dikkat .basi { color: #A8352A; }
+.kutu.takim   { border-left-color: #26603F; background: #F1F8F4; }
+.kutu.takim .basi { color: #26603F; }
+.kutu.puf     { border-left-color: #86620F; background: #FBF6E9; }
+.kutu.puf .basi { color: #86620F; }
+
+/* ---------- alıştırmalar ---------- */
+
+.alistirmalar {
+  margin: 1.8em 0 1em;
+  border: 2px solid #16203A;
+  border-radius: 3px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.alistirmalar h4 {
+  margin: 0;
+  padding: 0.45em 0.8em;
+  background: #16203A;
+  color: #FFFFFF;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.alistirmalar ol { margin: 0; padding: 0.8em 0.8em 0.8em 2.2em; }
+.alistirmalar .zor {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68em;
+  letter-spacing: 0.05em;
+  color: #A8352A;
+  text-transform: uppercase;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { margin: 1.1em 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.86em;
+}
+th, td {
+  text-align: left;
+  padding: 0.35em 0.5em;
+  border-bottom: 1px solid #DCE2EE;
+  vertical-align: top;
+}
+th {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82em;
+  text-transform: uppercase;
+  color: #46536E;
+  border-bottom: 2px solid #8792AA;
+}
+
+/* ---------- kartlar ---------- */
+
+.kart-izgara { margin: 1.1em 0; }
+.kart {
+  border: 1px solid #CBD4E4;
+  border-radius: 3px;
+  padding: 0.7em 0.85em;
+  margin-bottom: 0.6em;
+  background: #FAFBFD;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.kart h4 { margin: 0 0 0.25em; }
+.kart p { margin: 0; font-size: 0.94em; color: #46536E; }
+
+/* ---------- küçük parçalar ---------- */
+
+.cikti-satiri {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8em;
+  color: #1F6B3F;
+  background: #F4F8F5;
+  border-left: 3px solid #26603F;
+  padding: 0.5em 0.7em;
+}
+.dipnot { font-size: 0.86em; color: #6B7893; }
+.gezinme {
+  margin-top: 2em;
+  padding-top: 0.8em;
+  border-top: 1px solid #BDC7DB;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78em;
+}
+.gezinme .yon {
+  display: block;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8792AA;
+}
+.gezinme .sag { display: block; margin-top: 0.5em; }
+hr.ayrac { border: none; border-top: 1px solid #BDC7DB; margin: 1.8em 0; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- kapak ve künye sayfaları ---------- */
+
+.kapak-sayfasi { text-align: center; margin-top: 18%; }
+.kapak-sayfasi img { max-width: 100%; }

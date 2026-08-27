@@ -1,0 +1,111 @@
+Telif ve Lisans
+===============
+
+Telif hakkı (c) 2024-2026 Bülent Başaran
+
+Bu depodaki malzeme, öğrencilerin ve öğretmenlerin serbestçe
+kullanabilmesi için açık lisanslarla sunuluyor. Yazılar ve kod için iki
+ayrı lisans var, çünkü ikisinden beklentimiz farklı: yazıların açık
+kalmasını, kodun ise hiçbir yükümlülük olmadan kopyalanabilmesini
+istiyoruz.
+
+
+1. YAZILAR — Creative Commons Atıf-AynıLisanslaPaylaş 4.0 (CC BY-SA 4.0)
+------------------------------------------------------------------------
+
+Kapsam: Bütün ders notları ve yazılar. Yani `.md` ve `.html` uzantılı
+dosyalar, `kitapcik/` dizinindeki bölüm metinleri ve kitapçığın
+`kitap/` dizinindeki PDF ile EPUB sürümleri.
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+
+Lisansın tam metni (bağlayıcı olan sürüm):
+    https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+Türkçe özeti:
+    https://creativecommons.org/licenses/by-sa/4.0/deed.tr
+
+Kısaca: kopyalayabilir, basabilir, dağıtabilir, çevirebilir ve
+değiştirebilirsiniz. Ticari olarak da kullanabilirsiniz. İki şartla:
+
+  (a) Kaynağı ve yazarı anın, lisansa bağlantı verin, değişiklik
+      yaptıysanız belirtin.
+  (b) Türev çalışmanızı da aynı lisansla paylaşın.
+
+
+2. KOD — MIT
+------------
+
+Kapsam: Bütün `.cpp`, `.h`, `.py`, `.mjs` ve `.css` dosyaları,
+`Makefile`'lar ve örnek program dizinleri (`kitapcik/kod/`, `e1/`,
+`e2/`, `e3/`, `sablon/`, `gun-sayimi/`, `dogrusal-cebir/`, `ileri/dp/`,
+`ileri/generic-containers/` ...).
+
+    SPDX-License-Identifier: MIT
+
+Örnek kodları öğrenciler kendi projelerine hiçbir yükümlülük altına
+girmeden kopyalayabilsin diye MIT seçildi.
+
+    MIT License
+
+    Copyright (c) 2024-2026 Bülent Başaran
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+
+3. KAPSAM DIŞI — ÜÇÜNCÜ TARAFLARA AİT MALZEME
+----------------------------------------------
+
+Aşağıdaki dosyalar derste kolaylık olsun diye bu depoda duruyor.
+Telif hakları sahiplerine aittir ve yukarıdaki iki lisans bunları
+KAPSAMAZ. Yeniden dağıtmadan önce ilgili sahibine danışın:
+
+  - kitap/Competitive-Programmers-Handbook.pdf
+        Antti Laaksonen. Kendi lisansı için kitabın içine bakın.
+  - kitap/Rekabetci-Programlama-ElKitabi.pdf
+        Aynı kitabın Türkçesi; çeviri Arda ve Arkın Kaz (2022).
+  - 2022/ dizininin tamamı (pdf ve cpp dosyaları)
+        Mustafa Tacettin Hoca'nın ders notları, izniyle paylaşıldı.
+  - notlar/ dizinindeki pdf dosyaları
+        Kaynakları kendi içlerinde belirtilmiştir.
+  - ileri/dersler/resim/ altındaki, başka kaynaklardan alınmış görseller
+
+Ders notlarında bağlantı verilen çevrimiçi kaynaklar (Project Euler,
+CSES, USACO, Codeforces, AtCoder, Sololearn, OnlineGDB, Wikipedia ...)
+kendi sahiplerine ve kendi kullanım koşullarına tabidir.
+
+
+4. ÖĞRENCİ KATKILARI
+--------------------
+
+Ders notlarında, sınıftaki öğrencilerin yazdığı kod ve çözümlere yer
+verildi. Bu parçaların telif hakkı yazarlarına aittir; depoda
+paylaşılmalarına izin vermişlerdir. Kendi katkısının kaldırılmasını ya
+da başka bir biçimde anılmasını isteyen olursa lütfen depo sahibine
+yazsın.
+
+
+Nasıl atıf yaparım?
+-------------------
+
+Kitapçığın tamamını ya da bir bölümünü kullanıyorsanız şu satır yeter:
+
+    "Programlamaya ve Algoritmalara Keyifli Bir Başlangıç",
+    Bülent Başaran, CC BY-SA 4.0.
+    https://github.com/bulent2k2/cpp_ogreniyoruz

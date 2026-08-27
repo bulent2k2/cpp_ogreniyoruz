@@ -5,7 +5,8 @@ Dersler sırasıyla [burada](ileri/icindekiler.md).
 
 Yeni: [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](kitapcik/README.md)
 --
-İki dönemlik ders notlarımızdan damıtılmış, altı bölümlük bir giriş kitapçığı. Temel kavramlardan çizge algoritmalarına ve dinamik programlamaya kadar, hepsi derste birlikte yazdığımız çalışan programlarla. [PDF olarak burada](kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) (63 sayfa), bölüm bölüm çevrimiçi okumak için de [buraya bakın](kitapcik/README.md). Örnek programların hepsi `kitapcik/kod/` dizininde, derlenmeye hazır.
+İki dönemlik ders notlarımızdan damıtılmış, altı bölümlük bir giriş kitapçığı. Temel kavramlardan çizge algoritmalarına ve dinamik programlamaya kadar, hepsi derste birlikte yazdığımız çalışan programlarla. [PDF](kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) (64 sayfa) ve [EPUB](kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub) olarak indirebilir, bölüm bölüm çevrimiçi okumak için de [buraya bakabilirsiniz](kitapcik/README.md). Örnek programların hepsi `kitapcik/kod/` dizininde, derlenmeye hazır.  
+Metin [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr), kod MIT lisansıyla: serbestçe basın, çoğaltın, dersinizde kullanın. Ayrıntılar [LICENSE](LICENSE) dosyasında.
 
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----

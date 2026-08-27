@@ -6,7 +6,7 @@ Sınav 16 Mayıs 2026'da. 14 Mayıs'ta yaptığımız son ders: [ders 30](dersle
 
 Giriş Kitapçığı
 --
-+ [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](../kitapcik/README.md) bütün derslerden damıtılmış altı bölümlük bir giriş: temeller, veri yapıları, zanaat, özyineleme, çizgeler ve dinamik programlama. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
++ [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](../kitapcik/README.md) bütün derslerden damıtılmış altı bölümlük bir giriş: temeller, veri yapıları, zanaat, özyineleme, çizgeler ve dinamik programlama. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) ve [EPUB](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 
 Algoritma (2022 civarı)
 --

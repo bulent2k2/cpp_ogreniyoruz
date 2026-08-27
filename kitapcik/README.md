@@ -9,8 +9,11 @@ alacaklarını &mdash; hissettirmek.
 Kitapçığı okumak
 --
 
-**PDF (63 sayfa, A4):**
+**PDF (64 sayfa, A4'e basmaya hazır):**
 [kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
+
+**EPUB (telefon, tablet, e-kitap okuyucu):**
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 
 **Çevrimiçi bölümler:**
 
@@ -56,8 +59,32 @@ Bölümlerin metni `bolumler/*.html` dosyalarında (yalnızca gövde), ortak bi�
 + `cikti/kitapcik-tam.html` &mdash; hepsi bir arada, PDF için
 
 ```bash
+cd kitapcik
+make            # html + pdf + epub
+make html       # yalnızca cikti/*.html
+make pdf        # yalnızca PDF
+make epub       # yalnızca EPUB
+make denetle    # epubcheck ile doğrula
+```
+
+Betikleri tek tek de çağırabilirsiniz:
+
+```bash
 python3 kitapcik/yap.py     # html'leri üret
-node kitapcik/pdf.mjs       # PDF'i üret (kitap/ dizinine yazar)
+node kitapcik/pdf.mjs       # PDF'i üret  (kitap/ dizinine yazar)
+python3 kitapcik/epub.py    # EPUB'ı üret (kitap/ dizinine yazar)
+```
+
+EPUB için ayrı bir biçem dosyası var (`epub.css`): e-kitap okuyucularda
+akışkan olsun diye ızgara düzeni ve kareli defter zemini yok, kod blokları
+da açık zeminli. Kapak resmi (`kitap/kapak.png`) `kapak-tasarim.html` sayfasının ekran
+görüntüsü; yeniden üretmek için `node kitapcik/kapak.mjs`.
+
+Üretilen EPUB, `epubcheck` doğrulamasını hatasız ve uyarısız geçiyor:
+
+```bash
+pip install epubcheck
+python3 -m epubcheck kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub
 ```
 
 `baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor; `yap.py` bunları
@@ -74,3 +101,10 @@ Yazarken dikkat edilenler
   &ldquo;bir arkadaşınız&rdquo;, &ldquo;sınıftan biri&rdquo; dendi.
 + **Bütün kod çıktıları gerçek.** Uydurma çıktı yok; her biri bu depoda
   derlenip çalıştırıldı.
+
+Lisans
+--
+
+Kitapçığın **metni** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr),
+içindeki **örnek programlar** MIT lisansı altında. Ayrıntılar ve depodaki
+üçüncü taraf malzemenin dökümü kök dizindeki [LICENSE](../LICENSE) dosyasında.

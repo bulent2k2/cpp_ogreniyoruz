@@ -1,0 +1,616 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm II</div>
+  <h1>Veriyi Düzenlemek</h1>
+  <p class="ozet">
+    Tek bir sayıyla ne kadar iş yapılabilir? Programların gücü, çok sayıda veriyi
+    düzenli tutmaktan geliyor. Bu bölümde hazır kapları tanıyacak, sonra kendi
+    türünüzü yazacaksınız &mdash; ve bir tür yazdığınız an dilin size çalıştığını
+    hissedeceksiniz.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">II.1</div>
+  <div class="govde">
+    <h2>Dizi: bellekte yan yana</h2>
+
+    <p>
+      En eski, en sade ve en hızlı kap: <strong>dizi</strong> (<em>array</em>).
+      Aynı türden birkaç değer, bellekte yan yana. Öğelerin yerini hesaplamak
+      bedava &mdash; ilk öğenin adresini biliyorsanız, üçüncü öğe
+      &ldquo;ilk adres + 2 &times; öğe boyu&rdquo; adresindedir. Bu yüzden dizide
+      arama değil ama <em>erişim</em> anlıktır.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">10-dizi.cpp</span><span class="etiket">bellekte ne var?</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="t">short</span> dizi[]{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>};
+
+  cout &lt;&lt; <span class="s">"dizinin boyu     : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi)    &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"bir öğenin boyu  : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi[<span class="n">0</span>]) &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
+  <span class="t">int</span> ogeSayisi = <span class="a">sizeof</span>(dizi) / <span class="a">sizeof</span>(dizi[<span class="n">0</span>]);
+  cout &lt;&lt; <span class="s">"öğe sayısı       : "</span> &lt;&lt; ogeSayisi &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"ilk öğenin adresi: "</span> &lt;&lt; (<span class="t">void</span>*) dizi       &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"ikincininki      : "</span> &lt;&lt; (<span class="t">void</span>*) (dizi + <span class="n">1</span>) &lt;&lt; endl;
+
+  <span class="a">for</span> (<span class="a">auto</span> s : dizi) cout &lt;&lt; s &lt;&lt; <span class="s">" "</span>;
+  cout &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"taşma: "</span> &lt;&lt; dizi[<span class="n">12</span>] &lt;&lt; endl;   <span class="y">// dizinin dışı! kimse uyarmıyor</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>dizinin boyu     : 16 bayt
+bir öğenin boyu  : 2 bayt
+öğe sayısı       : 8
+ilk öğenin adresi: 0x7ffc4e4f2eb0
+ikincininki      : 0x7ffc4e4f2eb<span class="v">2</span>
+3 1 4 1 5 9 2 6
+taşma: <span class="v">-1536</span></code></pre>
+    </figure>
+
+    <p>
+      İki adres arasındaki fark tam <strong>2 bayt</strong>: bir <code>short</code>'un
+      boyu. Bellek gerçekten şerit gibi ve diziler o şeridin üzerinde bitişik duruyor.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Dikkat</span>
+      <p>
+        Son satıra bakın: <code>dizi[12]</code> diye bir öğe yok, ama program
+        çökmedi &mdash; bellekte o adreste ne varsa onu okuyup yazdı. C++ sizi
+        korumaz, size <em>güvenir</em>. Bu hem hızının hem de tehlikesinin kaynağı.
+        Yarışmalarda &ldquo;çalışıyor ama bazen yanlış&rdquo; hatalarının çoğu budur.
+        <strong>Etrafı duvarla çevirmek</strong> &mdash; yani diziyi bir sıra fazla
+        ayırmak &mdash; <a href="{{05-cizgeler}}">Bölüm V</a>'te çok işimize yarayacak.
+      </p>
+    </div>
+
+    <h3>Akıllı dizi: <code>std::vector</code></h3>
+
+    <p>
+      Temel dizinin boyu derleme anında bellidir ve büyüyemez. <strong>Akıllı dizi</strong>
+      (<em>vector</em>) bu sorunu çözer: gerekince kendi kendine büyür, boyunu bilir,
+      kopyalanabilir.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">akıllı dizi</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;vector&gt;</span>
+std::vector&lt;<span class="t">int</span>&gt; d{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>};
+d.push_back(<span class="n">1</span>);          <span class="y">// sona ekle</span>
+d.resize(<span class="n">10</span>);            <span class="y">// on öğeye çıkar, yenileri sıfır</span>
+d.size();                <span class="y">// kaç öğe var</span>
+d[<span class="n">2</span>];                    <span class="y">// erişim, sınır denetimi YOK</span>
+d.at(<span class="n">2</span>);                 <span class="y">// erişim, sınır denetimi VAR (yavaş ama güvenli)</span>
+
+<span class="y">// iki boyutlu: 5 satır, her satırda 8 sıfır</span>
+std::vector&lt;std::vector&lt;<span class="t">int</span>&gt;&gt; tablo(<span class="n">5</span>, std::vector&lt;<span class="t">int</span>&gt;(<span class="n">8</span>, <span class="n">0</span>));</code></pre>
+    </figure>
+
+    <p>
+      Hız kaybı var mı? Ölçtük: bir milyon öğelik dizide temel dizi
+      <span class="sayi">3 ms</span>'de kuruluyor, akıllı dizi
+      <span class="sayi">7 ms</span>'de. Sorgular ise ikisinde de mikrosaniyenin
+      binde biri. Yani fark var ama sizin problemleriniz için <strong>önemsiz</strong>.
+      Ölçmeyi <a href="{{03-zanaat}}">Bölüm III</a>'te öğreneceğiz &mdash; ve tahmin
+      etmek yerine ölçmek, bu kitapçığın belki de en önemli alışkanlığı.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.2</div>
+  <div class="govde">
+    <h2>Eşlem: en çok işinize yarayacak kap</h2>
+
+    <p>
+      <strong>Eşlem</strong> (<em>map</em>) bir şeyi başka bir şeye bağlar:
+      harften sayıya, addan telefona, şehirden komşularına. Dizide yer numarası
+      0, 1, 2 diye gitmek zorundadır; eşlemde &ldquo;yer numarası&rdquo; ne olursa
+      olabilir. Ona <strong>anahtar</strong> deniyor.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">11-esleme.cpp</span><span class="etiket">harf sayma</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;map&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;string&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="a">using</span> <span class="t">Sayac</span> = map&lt;<span class="t">char</span>, <span class="t">int</span>&gt;;
+
+<span class="t">int</span> main() {
+  string yazi{<span class="s">"kelebek kanadi"</span>};
+
+  <span class="t">Sayac</span> kac;
+  <span class="a">for</span> (<span class="t">char</span> h : yazi)
+    <span class="a">if</span> (h != <span class="s">' '</span>) ++kac[h];          <span class="y">// yoksa sıfırdan başlar</span>
+
+  <span class="a">for</span> (<span class="a">auto</span> [harf, adet] : kac)      <span class="y">// anahtarlar kendiliğinden sıralı</span>
+    cout &lt;&lt; harf &lt;&lt; <span class="s">" -&gt; "</span> &lt;&lt; adet &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"kaç ayrı harf: "</span> &lt;&lt; kac.size() &lt;&lt; endl;
+
+  <span class="y">// Dikkat! Olmayan bir anahtarı [] ile okumak onu YARATIR:</span>
+  cout &lt;&lt; <span class="s">"z kaç kere: "</span> &lt;&lt; kac[<span class="s">'z'</span>] &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"kaç ayrı harf: "</span> &lt;&lt; kac.size() &lt;&lt; <span class="s">"  &lt;- arttı!"</span> &lt;&lt; endl;
+
+  <span class="y">// Doğrusu:</span>
+  cout &lt;&lt; <span class="s">"q var mı: "</span> &lt;&lt; (kac.contains(<span class="s">'q'</span>) ? <span class="s">"evet"</span> : <span class="s">"hayır"</span>) &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"kaç ayrı harf: "</span> &lt;&lt; kac.size() &lt;&lt; <span class="s">"  &lt;- değişmedi"</span> &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>a -&gt; 2    b -&gt; 1    d -&gt; 1    e -&gt; 3
+i -&gt; 1    k -&gt; 3    l -&gt; 1    n -&gt; 1
+kaç ayrı harf: 8
+z kaç kere: 0
+kaç ayrı harf: <span class="v">9  &lt;- arttı!</span>
+q var mı: hayır
+kaç ayrı harf: 9  &lt;- değişmedi</code></pre>
+    </figure>
+
+    <p>
+      Üç şeye dikkat edin. Birincisi: <code>++kac[h]</code> satırı, harfi ilk kez
+      görüyorsa sıfırdan başlatıp bir artırıyor &mdash; sayaç yazmanın en zarif yolu.
+      İkincisi: eşlem anahtarları <strong>kendiliğinden sıralı</strong> tutuyor, siz
+      hiçbir şey yapmadan çıktı alfabetik geliyor. Üçüncüsü de tuzak.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Klasik tuzak</span>
+      <p>
+        Eşlemde <strong>olmayan</strong> bir anahtarı <code>[]</code> ile okursanız,
+        C++ o anahtarı sessizce yaratır ve ilk değerini verir. Yani salt okuma
+        sandığınız satır eşlemi büyütür. Sadece bakmak istiyorsanız
+        <code>contains()</code> ya da <code>find()</code> kullanın. Bu hatayı derste
+        yaptık ve bulmak yarım saatimizi aldı.
+      </p>
+    </div>
+
+    <h3>Küme, eşlemin küçük kardeşi</h3>
+
+    <p>
+      <strong>Küme</strong> (<em>set</em>) matematikteki kümenin ta kendisi:
+      sıralı, tekrarsız. Aslında eşlemin değerini attığınızda geriye küme kalır.
+      Tersi de doğru &mdash; her kümeyi bir eşlemle ifade edebilirsiniz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">küme ve eşlem</span></figcaption>
+      <pre><code>set&lt;<span class="t">int</span>&gt; kume {<span class="n">1</span>, <span class="n">4</span>, <span class="n">6</span>, <span class="n">9</span>};
+
+<span class="y">// aynı bilgi, üstüne "kaç çarpanı var" bilgisi de eklenmiş hâliyle:</span>
+map&lt;<span class="t">int</span>, <span class="t">int</span>&gt; eslem {{<span class="n">1</span>,<span class="n">1</span>}, {<span class="n">4</span>,<span class="n">3</span>}, {<span class="n">6</span>,<span class="n">4</span>}, {<span class="n">9</span>,<span class="n">3</span>}};
+
+<span class="y">// hatta çarpanların kendisi de saklanabilir:</span>
+map&lt;<span class="t">int</span>, set&lt;<span class="t">int</span>&gt;&gt; eslem2 {
+    { <span class="n">1</span>, {<span class="n">1</span>} },
+    { <span class="n">4</span>, {<span class="n">1</span>, <span class="n">2</span>, <span class="n">4</span>} },
+    { <span class="n">9</span>, {<span class="n">1</span>, <span class="n">3</span>, <span class="n">9</span>} }
+};</code></pre>
+    </figure>
+
+    <p>
+      Bu son yapıyı aklınızın bir köşesine yazın: &ldquo;bir şeyden bir şey kümesine
+      eşlem&rdquo;. <a href="{{05-cizgeler}}">Bölüm V</a>'te bir çizgeyi tam olarak
+      böyle temsil edeceğiz: <code>map&lt;Nokta, set&lt;Nokta&gt;&gt;</code>, yani
+      &ldquo;her noktadan komşularına&rdquo;.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.3</div>
+  <div class="govde">
+    <h2>Sıranın önemli olduğu kaplar</h2>
+
+    <p>
+      Üç özel kap daha var. Üçünün de yaptığı iş &ldquo;öğe ekle, öğe çıkar&rdquo;
+      &mdash; aralarındaki tek fark <strong>hangisinin çıkacağı</strong>. Ama o tek
+      fark, üçünü üç farklı algoritmanın kalbi yapıyor.
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Kap</th><th>Kural</th><th>Yöntemler</th><th>Ne işe yarar</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Yığın</strong><br><code>std::stack</code></td>
+            <td>Son giren ilk çıkar</td>
+            <td><code>push</code> <code>pop</code> <code>top</code></td>
+            <td>Derinlemesine gezi, parantez denetimi, geri alma</td>
+          </tr>
+          <tr>
+            <td><strong>Kuyruk</strong><br><code>std::queue</code></td>
+            <td>İlk giren ilk çıkar</td>
+            <td><code>push</code> <code>pop</code> <code>front</code></td>
+            <td>Enlemesine gezi, en kısa yol (eşit adımlı)</td>
+          </tr>
+          <tr>
+            <td><strong>Öncelik sırası</strong><br><code>std::priority_queue</code></td>
+            <td>En büyük önce çıkar</td>
+            <td><code>push</code> <code>pop</code> <code>top</code></td>
+            <td>Dijkstra, en yakın <em>n</em> şeyi bulmak</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">12-kaplar.cpp</span><span class="etiket">aynı girdi, üç çıktı</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;stack&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;queue&gt;</span>   <span class="y">// queue ve priority_queue ikisi de burada</span>
+
+stack&lt;<span class="t">int</span>&gt; yigin;               <span class="y">// ilk giren son çıkar</span>
+queue&lt;<span class="t">int</span>&gt; kuyruk;              <span class="y">// ilk giren ilk çıkar</span>
+priority_queue&lt;<span class="t">int</span>&gt; oncelik;    <span class="y">// en büyük önce çıkar</span>
+
+<span class="a">for</span> (<span class="t">int</span> s : {<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>}) {
+  yigin.push(s); kuyruk.push(s); oncelik.push(s);
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>girdi   : 3 1 4 1 5
+yığın   : <span class="v">5 1 4 1 3</span>   <span class="y">// ters</span>
+kuyruk  : <span class="v">3 1 4 1 5</span>   <span class="y">// aynı sırada</span>
+öncelik : <span class="v">5 4 3 1 1</span>   <span class="y">// büyükten küçüğe</span></code></pre>
+    </figure>
+
+    <p>
+      Bu üç satır, ileride yazacağınız onlarca algoritmanın özeti. Aynı gezinme
+      kodunda yığını kuyrukla değiştirdiğinizde derinlemesine arama enlemesine
+      aramaya dönüşüyor &mdash; ve bambaşka bir soruyu çözüyor.
+      <a href="{{05-cizgeler}}">Bölüm V</a>'te bunu tam olarak yapacağız.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        <code>priority_queue</code> büyükten küçüğe sıralıyor. Küçükten büyüğe
+        istiyorsanız üçüncü tür girdisine <code>std::greater&lt;int&gt;</code> verin:
+        <code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt;</code>.
+        Deneyin ve çıktının değiştiğini görün. Bu ayrıntı Dijkstra algoritmasında
+        hayati olacak.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.4</div>
+  <div class="govde">
+    <h2>Kendi türünüzü yazmak</h2>
+
+    <p>
+      Şimdi işin en keyifli kısmı. Bir noktanın <code>x</code> ve <code>y</code>'sini
+      iki ayrı değişkende taşımak yerine, ikisini bir araya getirip yeni bir tür
+      yapabilirsiniz. Bunu yaptığınız an dil sizin problem alanınızın dilini konuşmaya
+      başlar.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">13-konum.cpp</span><span class="etiket">ilk türünüz</span></figcaption>
+      <pre><code><span class="a">struct</span> <span class="t">Konum</span> {
+  <span class="t">int</span> x{<span class="n">0</span>}, y{<span class="n">0</span>};                         <span class="y">// veriler</span>
+
+  <span class="t">void</span> kaydir(<span class="t">int</span> dx, <span class="t">int</span> dy) {           <span class="y">// yöntem</span>
+    x += dx;
+    y += dy;
+  }
+  <span class="t">double</span> uzaklik() <span class="a">const</span> {                <span class="y">// const: hiçbir şeyi değiştirmem</span>
+    <span class="a">return</span> sqrt(<span class="n">1.0</span> * x * x + y * y);
+  }
+};
+
+<span class="y">// türün üyesi olmayan ama türü tanıyan bir işlemci:</span>
+ostream&amp; <span class="a">operator</span>&lt;&lt;(ostream&amp; o, <span class="a">const</span> <span class="t">Konum</span>&amp; k) {
+  <span class="a">return</span> o &lt;&lt; <span class="s">"("</span> &lt;&lt; k.x &lt;&lt; <span class="s">", "</span> &lt;&lt; k.y &lt;&lt; <span class="s">")"</span>;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">Konum</span> k{<span class="n">3</span>, <span class="n">4</span>};
+  cout &lt;&lt; k &lt;&lt; <span class="s">" başlangıca uzaklığı: "</span> &lt;&lt; k.uzaklik() &lt;&lt; endl;
+
+  k.kaydir(<span class="n">2</span>, <span class="n">2</span>);
+  cout &lt;&lt; k &lt;&lt; <span class="s">" şimdi uzaklığı: "</span> &lt;&lt; k.uzaklik() &lt;&lt; endl;
+}</code></pre>
+    </figure>
+
+    <p class="cikti-satiri">
+      (3, 4) başlangıca uzaklığı: 5<br>
+      (5, 6) şimdi uzaklığı: 7.81025
+    </p>
+
+    <p>
+      <code>operator&lt;&lt;</code> satırına dikkat: <code>cout &lt;&lt; k</code>
+      yazabilmemizin sebebi bu. C++'ta işlemcilere yeni beceriler öğretebiliyorsunuz.
+      Bir kere yazdınız mı, o türü artık her yerde <code>int</code> kadar rahat
+      yazdırabiliyorsunuz. Hata ayıklarken bunun değeri paha biçilmez.
+    </p>
+
+    <h3><code>struct</code> mu, <code>class</code> mı?</h3>
+
+    <p>
+      Teknik olarak tek fark: <code>struct</code>'ta üyeler varsayılan olarak
+      <strong>görünür</strong> (<code>public</code>), <code>class</code>'ta
+      <strong>gizli</strong> (<code>private</code>). Gelenek olarak ise
+      <code>struct</code> &ldquo;sadece veri torbası&rdquo;, <code>class</code>
+      &ldquo;kendi kurallarını koruyan bir nesne&rdquo; için kullanılır.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bir sınıfın anatomisi</span></figcaption>
+      <pre><code><span class="a">class</span> <span class="t">Temel</span> {
+    <span class="t">int</span> gizli_veri;          <span class="y">// varsayılan: private</span>
+
+<span class="a">protected</span>:
+    <span class="t">int</span> korunmus_veri;       <span class="y">// alt türler görebilir</span>
+
+<span class="a">public</span>:
+    <span class="t">int</span> gorunur_veri;
+
+    <span class="t">Temel</span>();                 <span class="y">// yapıcı: girdisi olabilir, çıktısı OLAMAZ</span>
+    <span class="t">Temel</span>(<span class="a">const</span> <span class="t">Temel</span>&amp;);     <span class="y">// kopyalayıcı yapıcı</span>
+    ~<span class="t">Temel</span>();                <span class="y">// yıkıcı: girdisi de çıktısı da YOK, tek tane</span>
+
+    <span class="t">Temel</span>&amp; <span class="a">operator</span>=(<span class="a">const</span> <span class="t">Temel</span>&amp;);   <span class="y">// eşitleme</span>
+
+    <span class="a">friend</span> ostream&amp; <span class="a">operator</span>&lt;&lt;(ostream&amp;, <span class="a">const</span> <span class="t">Temel</span>&amp;);
+};</code></pre>
+    </figure>
+
+    <ul>
+      <li>
+        <strong>Yapıcı</strong> (<em>constructor</em>) nesne doğarken çalışır: bellekte
+        yer açar, ilk değerleri yazar. Birden fazla yapıcı olabilir.
+      </li>
+      <li>
+        <strong>Yıkıcı</strong> (<em>destructor</em>) nesne ölürken çalışır ve tek
+        tanedir. Açtığınız kaynakları burada kapatırsınız.
+      </li>
+      <li>
+        <code>operator=</code> genelde <code>*this</code> döndürür &mdash; böylece
+        <code>a = b = c</code> yazabilirsiniz. <code>this</code>, nesnenin kendi
+        adresini tutan gösterge.
+      </li>
+      <li>
+        <code>friend</code>, üye olmayan bir işleve gizli verileri görme izni verir.
+        <code>operator&lt;&lt;</code> için tam da bu gerekir, çünkü o
+        <code>ostream</code>'in soluna yazılır, sizin türünüzün değil.
+      </li>
+    </ul>
+
+    <h4>Az sayıda değeri olan türler: <code>enum class</code></h4>
+
+    <p>
+      Bir öğrencinin takımı 1 mi 2 mi? <code>int</code> kullanırsanız 7. takıma da
+      yazabilirsiniz ve derleyici sesini çıkarmaz. Bunun yerine:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">enum class</span></figcaption>
+      <pre><code><span class="a">enum class</span> <span class="t">Takim</span> { Yok, Bir, İki };
+
+std::vector&lt;<span class="t">Takim</span>&gt; takim(n + <span class="n">1</span>, <span class="t">Takim</span>::Yok);
+
+<span class="a">using enum</span> <span class="t">Takim</span>;                <span class="y">// tür adını her seferinde yazmayalım</span>
+takim[b] = (takim[a] == Bir) ? İki : Bir;</code></pre>
+    </figure>
+
+    <p>
+      Hem kod okunaklı oluyor hem de yanlışlıkla üçüncü bir takım kurmaya kalkarsanız
+      derleyici hemen &ldquo;olmaz&rdquo; diyor. <strong>Derleyicinin sizi
+      yakalamasını sağlayan her tasarım kararı iyi bir karardır.</strong>
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.5</div>
+  <div class="govde">
+    <h2>Kalıplar: tür de bir değişken olabilir</h2>
+
+    <p>
+      Şimdiye kadar her değişkenin bir değeri, bir adı ve bir türü olduğunu söyledik.
+      Şimdi tuhaf bir şey yapacağız: <strong>türün kendisini değişken yapacağız.</strong>
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">14-kalip.cpp</span><span class="etiket">işlev kalıbı</span></figcaption>
+      <pre><code><span class="a">template</span> &lt;<span class="a">typename</span> <span class="t">Tur</span>&gt;
+<span class="t">Tur</span> ekle(<span class="t">Tur</span> a, <span class="t">Tur</span> b) { <span class="a">return</span> a + b; }
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; ekle(<span class="n">3</span>, <span class="n">4</span>)                       &lt;&lt; endl;   <span class="y">// Tur = int    -&gt; 7</span>
+  cout &lt;&lt; ekle(<span class="n">3.5</span>, <span class="n">4.25</span>)                  &lt;&lt; endl;   <span class="y">// Tur = double -&gt; 7.75</span>
+  cout &lt;&lt; ekle(string(<span class="s">"ke"</span>), string(<span class="s">"lebek"</span>)) &lt;&lt; endl;   <span class="y">// -&gt; kelebek</span>
+
+  <span class="y">// cout &lt;&lt; ekle("ke", "lebek");   // HATA! Neden?</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>Tur</code> bir <strong>tür değişkeni</strong>. Değeri, kalıp
+      kullanıldığında belli oluyor. Derleyici her çağrı için ayrı bir somut işlev
+      üretiyor; buna <em>somutlaştırma</em> (<em>instantiation</em>) deniyor.
+    </p>
+
+    <p>
+      Son satır neden hata veriyor? Çünkü <code>"ke"</code> bir
+      <code>std::string</code> değil, <code>const char*</code> yani bir
+      <strong>adres</strong>. İki adresi toplamanın anlamı yok, derleyici de tam olarak
+      bunu söylüyor:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">derleyici</span><span class="etiket">hata</span></figcaption>
+      <pre><code>error: invalid operands of types 'const char*' and 'const char*'
+       to binary 'operator+'
+   |         return a + b;</code></pre>
+    </figure>
+
+    <p>
+      Derleyici hatalarını okumayı öğrenin. Uzun ve korkutucu görünürler ama
+      genelde ilk iki satırında her şey yazar. Bu alışkanlık sizi saatlerce
+      zaman kazandırır.
+    </p>
+
+    <h3>Tür kalıpları</h3>
+
+    <p>
+      Aynı fikir türler için de geçerli &mdash; ve aslında bu bölümde kullandığımız
+      <code>vector&lt;int&gt;</code>, <code>map&lt;char,int&gt;</code>,
+      <code>set&lt;int&gt;</code> hepsi tür kalıbı:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tür kalıbı</span></figcaption>
+      <pre><code><span class="a">template</span> &lt;<span class="a">typename</span> X&gt;
+<span class="a">class</span> <span class="t">Kutu</span> {
+    X icerik;
+<span class="a">public</span>:
+    <span class="t">Kutu</span>(X x) : icerik{x} {}
+    X al() <span class="a">const</span> { <span class="a">return</span> icerik; }
+};
+
+<span class="t">Kutu</span>&lt;<span class="t">int</span>&gt;    k1{<span class="n">42</span>};
+<span class="t">Kutu</span>&lt;<span class="t">Konum</span>&gt;  k2{{<span class="n">3</span>, <span class="n">4</span>}};    <span class="y">// kendi türümüzle de çalışıyor!</span></code></pre>
+    </figure>
+
+    <p>
+      Ders notlarımızda çok kullandığımız bir kolaylık da şu: uzun kalıp adlarına
+      Türkçe takma ad vermek. Kod bir anda okunur hâle geliyor.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">takma adlar</span></figcaption>
+      <pre><code><span class="a">template</span> &lt;<span class="a">typename</span> T&gt; <span class="a">using</span> <span class="t">Dizi</span> = std::vector&lt;T&gt;;
+
+<span class="a">using</span> <span class="t">Dugum</span>   = <span class="t">unsigned</span>;
+<span class="a">using</span> <span class="t">Kume</span>    = std::set&lt;<span class="t">Dugum</span>&gt;;
+<span class="a">using</span> <span class="t">Cizge</span>   = std::map&lt;<span class="t">Dugum</span>, <span class="t">Kume</span>&gt;;   <span class="y">// komşuluk kümesi</span>
+<span class="a">using</span> <span class="t">Tahta</span>   = <span class="t">Dizi</span>&lt;<span class="t">Dizi</span>&lt;<span class="t">bool</span>&gt;&gt;;</code></pre>
+    </figure>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.6</div>
+  <div class="govde">
+    <h2>Adres ve takma ad</h2>
+
+    <p>
+      Son bir kavram, ve belki de C++'ın en çok korkulan kavramı. Aslında çok basit:
+      bir değişkenin <strong>değeri</strong> yerine bellekteki <strong>yerini</strong>
+      taşımak.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">15-adres.cpp</span><span class="etiket">üç ekleme, üç sonuç</span></figcaption>
+      <pre><code><span class="a">using</span> <span class="t">Sayi</span>  = <span class="t">int</span>;
+<span class="a">using</span> <span class="t">Adres</span> = <span class="t">Sayi</span>*;      <span class="y">// Sayı türünün adresi de bir tür</span>
+
+<span class="t">void</span> ekleA(<span class="t">Adres</span> a, <span class="t">Sayi</span> ek) { *a += ek; }   <span class="y">// adresle</span>
+<span class="t">void</span> ekleT(<span class="t">Sayi</span>&amp; t, <span class="t">Sayi</span> ek) { t  += ek; }   <span class="y">// takma adla</span>
+<span class="t">void</span> ekleK(<span class="t">Sayi</span>  k, <span class="t">Sayi</span> ek) { k  += ek; }   <span class="y">// kopyayla (etkisiz!)</span>
+
+<span class="t">int</span> main() {
+  <span class="t">Sayi</span> s{<span class="n">10</span>};
+
+  ekleK(s, <span class="n">10</span>);  cout &lt;&lt; <span class="s">"kopyadan sonra   : "</span> &lt;&lt; s &lt;&lt; endl;
+  ekleA(&amp;s, <span class="n">10</span>); cout &lt;&lt; <span class="s">"adresten sonra   : "</span> &lt;&lt; s &lt;&lt; endl;
+  ekleT(s, <span class="n">10</span>);  cout &lt;&lt; <span class="s">"takma addan sonra: "</span> &lt;&lt; s &lt;&lt; endl;
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>kopyadan sonra   : <span class="v">10</span>   <span class="y">// hiçbir şey olmadı!</span>
+adresten sonra   : 20
+takma addan sonra: 30</code></pre>
+    </figure>
+
+    <p>
+      Üç işlev de &ldquo;ekle&rdquo; diyor ama biri hiçbir işe yaramıyor.
+      <code>ekleK</code> değişkenin <em>ikizini</em> alıyor, ikizi artırıyor, sonra
+      ikiz ölüyor. <code>ekleA</code> adresi alıyor, <code>*</code> ile o adrestekine
+      uzanıyor. <code>ekleT</code> ise sadece tek bir <code>&amp;</code> imgesiyle
+      değişkenin kendisine <strong>takma ad</strong> (<em>reference</em>) veriyor.
+    </p>
+
+    <p>
+      C dilinde sadece adresler vardı; takma ad C++'la geldi. Modern kodda tercih
+      genelde takma ad: daha sade ve daha güvenli, çünkü takma ad hiçbir zaman
+      boş olamaz. Ama akıllı dizi yerine temel dizi kullandığınızda ya da
+      <code>new</code> ile bellek ayırdığınızda adreslere geri dönersiniz.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Büyük bir kabı işleve girdi olarak verirken <code>const Dizi&amp;</code>
+        yazın. <code>const</code> &ldquo;değiştirmeyeceğim&rdquo; sözü,
+        <code>&amp;</code> ise &ldquo;kopyalamayın&rdquo; demek. Bir milyon öğelik
+        bir diziyi her çağrıda kopyalamak, çözümünüzün neden yavaş olduğunu
+        anlayamadığınız durumların en yaygın nedenidir.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Sözlük.</strong> <code>map&lt;string, vector&lt;string&gt;&gt;</code>
+          kullanarak çok tanımlı bir sözlük yapın: bir sözcüğün birden fazla anlamı
+          olabilsin. Sonra sözcük ekleme ve arama işlevleri yazın.
+        </li>
+        <li>
+          <strong>Dengeli parantez.</strong> Bir yazıda parantezler doğru açılıp
+          kapanıyor mu? Önce sadece <code>(</code> ve <code>)</code> için çözün
+          &mdash; şaşırtıcı biçimde tek bir sayaçla olur, yığına gerek yok. Sonra
+          <code>[]</code> ve <code>{}</code> ekleyin. <span class="zor">şimdi
+          yığın gerekli</span> Neden gerekli oldu, onu da anlatabilir misiniz?
+        </li>
+        <li>
+          <strong>Tekrar var mı?</strong> Bir sayı dizisinde tekrar eden öğe var mı?
+          En az üç farklı yöntem bulun ve hızlarını karşılaştırın. (Biri
+          <code>set</code> kullanır, biri sıralama, biri iç içe iki döngü.)
+        </li>
+        <li>
+          <strong>Kendi <code>Kesir</code> türünüz.</strong> Pay ve paydası olan bir
+          tür yazın. <code>+</code>, <code>*</code> ve <code>&lt;&lt;</code>
+          işlemcilerini tanımlayın. Yapıcı içinde kesri sadeleştirin
+          (<code>3/6</code> yerine <code>1/2</code>). <span class="zor">bonus</span>
+          Payda sıfır verilirse ne yapmalı?
+        </li>
+        <li>
+          <strong>En büyük ve en küçük.</strong> Bir dizinin hem en büyük hem en
+          küçük öğesini, <strong>en az sayıda karşılaştırmayla</strong> bulun.
+          Karşılaştırmaları programa saydırın. Öğeleri ikişer ikişer ele almayı
+          deneyin; <em>n</em> öğe için <code>2n-2</code>'den az yapabilir misiniz?
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

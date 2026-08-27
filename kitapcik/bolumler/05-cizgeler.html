@@ -1,0 +1,685 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm V</div>
+  <h1>Çizgeler ve Gezintiler</h1>
+  <p class="ozet">
+    Şehirler ve yollar, bilgisayarlar ve kablolar, insanlar ve arkadaşlıklar,
+    labirentteki odalar &mdash; hepsi aynı matematiksel nesne: <strong>çizge</strong>.
+    Bu bölümde beş satırlık bir gezinme kalıbı öğreneceğiz ve o kalıbı değiştire
+    değiştire yarım düzine ünlü problemi çözeceğiz.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">V.1</div>
+  <div class="govde">
+    <h2>Çizge nedir, nasıl saklanır?</h2>
+
+    <p>
+      Bir <strong>çizge</strong> (<em>graph</em>) iki şeyden ibaret:
+      <strong>noktalar</strong> (<em>vertex</em>, düğüm de denir) ve onları
+      birleştiren <strong>bağlar</strong> (<em>edge</em>, kenar da denir). Hepsi bu.
+      Bu kadar sade bir yapının bu kadar çok şeyi modelleyebilmesi çizge kuramının
+      güzelliği.
+    </p>
+
+    <p>
+      Kuramın tarihteki ilk sorusu 1736'da soruldu: Königsberg şehrinde yedi köprü
+      var; hepsinden tam bir kere geçen bir yürüyüş mümkün mü? Euler, mümkün
+      olmadığını kanıtladı &mdash; ve bunu yaparken köprülerin uzunluğunun,
+      adaların büyüklüğünün hiç önemli olmadığını, sadece <em>neyin neye bağlı
+      olduğunun</em> önemli olduğunu gösterdi. Çizge kuramı o gün doğdu.
+    </p>
+
+    <p>
+      C++'ta çizgeyi saklamanın iki yaygın yolu var:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">iki temsil</span></figcaption>
+      <pre><code><span class="y">// 1) KOMŞULUK MATRİSİ: km[a][b] = a ile b bağlı mı?</span>
+<span class="a">const</span> <span class="t">int</span> N = <span class="n">100</span>;
+<span class="t">bool</span> km[N][N]{};
+km[<span class="n">1</span>][<span class="n">0</span>] = <span class="a">true</span>;              <span class="y">// 1'den 0'a yönlü bağ</span>
+km[<span class="n">0</span>][<span class="n">1</span>] = <span class="a">true</span>;              <span class="y">// yönsüz istiyorsak ikisi de</span>
+
+<span class="y">// ağırlıklı istersek bool yerine sayı:</span>
+<span class="t">double</span> agirlik[N][N];
+agirlik[<span class="n">3</span>][<span class="n">5</span>] = <span class="n">2.5</span>;
+
+<span class="y">// 2) KOMŞULUK LİSTESİ: her nokta için komşularının dizisi</span>
+<span class="a">using</span> <span class="t">Nokta</span> = <span class="t">unsigned</span>;
+vector&lt;vector&lt;<span class="t">Nokta</span>&gt;&gt; komsular;
+komsular[<span class="n">1</span>].push_back(<span class="n">2</span>);      <span class="y">// 1'den 2'ye</span></code></pre>
+    </figure>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th></th><th>Bellek</th><th>&ldquo;a ile b bağlı mı?&rdquo;</th><th>&ldquo;a'nın komşuları?&rdquo;</th><th>Ne zaman</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Matris</td><td><code>O(n²)</code></td><td><code>O(1)</code></td>
+            <td><code>O(n)</code></td><td>Nokta az, bağ çok</td>
+          </tr>
+          <tr>
+            <td>Liste</td><td><code>O(n+b)</code></td><td><code>O(derece)</code></td>
+            <td><code>O(derece)</code></td><td>Nokta çok, bağ seyrek &mdash; <strong>çoğu zaman bu</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Yüz bin şehir olan bir soruda matris <code>10¹⁰</code> hücre ister &mdash;
+      belleğe sığmaz. Onun için varsayılan tercihiniz komşuluk listesi olsun.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Bazen çizgeyi hiç saklamanız gerekmez! Labirent ya da satranç tahtası gibi
+        <em>ızgara</em> problemlerinde komşuluk zaten belli: <code>(y,x)</code>
+        karesinin komşuları <code>(y±1,x)</code> ve <code>(y,x±1)</code>. Çizge
+        oradadır, ama görünmez.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.2</div>
+  <div class="govde">
+    <h2>Beş satırlık kalıp</h2>
+
+    <p>
+      Bu bölümün kalbi burası. Bir çizgeyi gezmenin kalıbı şu &mdash; ezberleyin,
+      ömrünüz boyunca kullanacaksınız:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">derinlemesine gezi</span><span class="etiket">DFS</span></figcaption>
+      <pre><code><span class="t">void</span> gez(<span class="t">Nokta</span> bu) {
+  <span class="a">if</span> (gezildi[bu]) <span class="a">return</span>;          <span class="y">// taban: buraya zaten uğradık</span>
+  gezildi[bu] = <span class="a">true</span>;
+  <span class="a">for</span> (<span class="t">Nokta</span> su : komsular[bu])
+    gez(su);
+}</code></pre>
+    </figure>
+
+    <p>
+      Beş satır. Ama altında zengin bir temel var; sayalım: <code>void</code>,
+      <code>Nokta</code>, <code>bool</code>, <code>vector&lt;bool&gt;</code>,
+      <code>vector&lt;Nokta&gt;</code>, <code>vector&lt;vector&lt;Nokta&gt;&gt;</code>.
+      <a href="{{02-veri}}">Bölüm II</a>'de öğrendiğiniz her şey burada.
+    </p>
+
+    <p>
+      Bu yönteme <strong>derinlemesine gezi</strong> (<em>DFS &mdash; depth-first
+      search</em>) deniyor: bir yola girer, sonuna kadar gider, tıkanınca geri
+      döner. <a href="{{04-ozyineleme}}">Bölüm IV</a>'teki geri dönüşlü aramanın ta
+      kendisi &mdash; sadece adı değişti.
+    </p>
+
+    <h3>Aynı gezi, üç farklı yol</h3>
+
+    <p>
+      Özyineleme yerine <strong>yığın</strong> kullanarak da yazabiliriz. Ve işin
+      sihirli yanı: yığını <strong>kuyrukla</strong> değiştirdiğimizde gezi
+      derinlemesineden <strong>enlemesine</strong>ye (<em>BFS &mdash; breadth-first
+      search</em>) dönüşüyor. Tek kelime fark, bambaşka bir algoritma.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">40-gezi.cpp</span><span class="etiket">yığın mı, kuyruk mu?</span></figcaption>
+      <pre><code><span class="y">// derinlemesine, yığınla</span>
+<span class="t">void</span> gez2(<span class="t">Nokta</span> ilk) {
+  stack&lt;<span class="t">Nokta</span>&gt; tepe;
+  tepe.push(ilk);
+  <span class="a">while</span> (<span class="a">not</span> tepe.empty()) {
+    <span class="t">Nokta</span> bu = tepe.<span class="v">top</span>(); tepe.pop();
+    <span class="a">if</span> (gezildi[bu]) <span class="a">continue</span>;
+    gezildi[bu] = <span class="a">true</span>;
+    <span class="a">for</span> (<span class="t">Nokta</span> su : komsular[bu])
+      <span class="a">if</span> (<span class="a">not</span> gezildi[su]) tepe.push(su);
+  }
+}
+
+<span class="y">// enlemesine, kuyrukla -- yukarıdakiyle neredeyse birebir aynı!</span>
+<span class="t">void</span> gez3(<span class="t">Nokta</span> ilk) {
+  queue&lt;<span class="t">Nokta</span>&gt; kuyruk;
+  kuyruk.push(ilk);
+  <span class="a">while</span> (<span class="a">not</span> kuyruk.empty()) {
+    <span class="t">Nokta</span> bu = kuyruk.<span class="v">front</span>(); kuyruk.pop();
+    <span class="a">if</span> (gezildi[bu]) <span class="a">continue</span>;
+    gezildi[bu] = <span class="a">true</span>;
+    <span class="a">for</span> (<span class="t">Nokta</span> su : komsular[bu])
+      <span class="a">if</span> (<span class="a">not</span> gezildi[su]) kuyruk.push(su);
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Yedi noktalı küçük bir yönlü çizgede üçünü de çalıştırdım. Aynı çizge,
+      üç farklı sıra:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>derinlemesine (özyineleme): 1 2 5 7 3 4 6
+derinlemesine (yığınla)   : 1 3 4 7 5 6 2
+enlemesine    (kuyrukla)  : <span class="v">1 2 3</span> 5 4 7 6</code></pre>
+    </figure>
+
+    <p>
+      Enlemesine gezide 1'in bütün komşuları (2 ve 3) hemen başta geliyor.
+      Derinlemesine gezide ise 2'ye girip ta 7'ye kadar gidiliyor, 3 sona kalıyor.
+      İşte bu fark, birazdan en kısa yolu bulmamızı sağlayacak.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Gerçek bir hata</span>
+      <p>
+        <code>gez3</code> içindeki <code>if (gezildi[bu]) continue;</code> satırını
+        silerseniz program hâlâ çalışır, ama çıktı şöyle olur:
+      </p>
+      <p class="cikti-satiri">enlemesine (kuyrukla): 1 2 3 5 4 7 6 <strong>7</strong></p>
+      <p>
+        7 iki kere yazıldı! Neden? Çünkü aynı nokta kuyruğa <em>iki farklı
+        yoldan</em> girebilir; kuyruğa girmekle ziyaret edilmek aynı şey değil.
+        Derinlemesine gezide bu olmuyor &mdash; neden olmadığını düşünmek çok
+        öğretici bir alıştırma. Bu hatayı derste yaptık ve ancak çizgeye yedinci
+        noktayı ekleyince fark ettik.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.3</div>
+  <div class="govde">
+    <h2>Kalıbı çalıştırmak: dört problem</h2>
+
+    <h3>1. Kaç oda var?</h3>
+
+    <p>
+      Bir kat planı verilmiş; <code>#</code> duvar, <code>.</code> boşluk.
+      Kaç ayrı oda var? Kalıba iki satır ekliyoruz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">ızgarada derinlemesine gezi</span></figcaption>
+      <pre><code><span class="t">bool</span> gez(K y, K x, <span class="t">Tahta</span>&amp; t) {
+  <span class="a">if</span> (<span class="a">not</span> t[y][x]) <span class="a">return</span> <span class="a">false</span>;    <span class="y">// duvar ya da gezildi</span>
+  t[y][x] = <span class="a">false</span>;                <span class="y">// artık müsait değil</span>
+  gez(y-<span class="n">1</span>, x, t);
+  gez(y+<span class="n">1</span>, x, t);
+  gez(y, x-<span class="n">1</span>, t);
+  gez(y, x+<span class="n">1</span>, t);
+  <span class="a">return</span> <span class="a">true</span>;                    <span class="y">// bir oda daha bulduk</span>
+}
+
+<span class="y">// main içinde: her kareyi dene, kaç kere "true" döndüyse o kadar oda var</span></code></pre>
+    </figure>
+
+    <p>
+      Tek püf noktası: <strong>etrafı duvarla çevirin.</strong> Tahtayı her yönde bir
+      sıra büyütüp kenarları duvar yapın; böylece <code>gez(y-1, x)</code> çağrısı
+      dizinin dışına taşmaz. Bunu yapmazsanız sınır denetimi için dört tane
+      <code>if</code> yazmanız gerekir ve birini mutlaka unutursunuz.
+    </p>
+
+    <h3>2. Labirentte en kısa yol</h3>
+
+    <p>
+      Aynı ızgara, farklı soru: <code>A</code>'dan <code>B</code>'ye en kısa yol
+      nedir, tarifi ne? Burada derinlemesine gezi <strong>işe yaramaz</strong>
+      &mdash; bulduğu ilk yol en kısası olmak zorunda değil. Kuyruk gerekiyor.
+    </p>
+
+    <p>
+      Güzel bir numara var: her kareye &ldquo;buraya hangi yönden geldim&rdquo;
+      bilgisini yazarsak, sonunda B'den geriye doğru yürüyerek yolu okuyabiliriz.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">43-labirent.cpp</span><span class="etiket">enlemesine + yol tarifi</span></figcaption>
+      <pre><code><span class="a">struct</span> <span class="t">Bilgi</span> { <span class="t">bool</span> yol; <span class="t">char</span> adim; };   <span class="y">// müsait mi, nereden geldik</span>
+<span class="a">const</span> <span class="t">Bilgi</span> YOL{<span class="a">true</span>, <span class="s">'.'</span>}, DUVAR{<span class="a">false</span>, <span class="s">'#'</span>};
+<span class="a">using</span> <span class="t">Tahta</span> = <span class="t">Dizi</span>&lt;<span class="t">Dizi</span>&lt;<span class="t">Bilgi</span>&gt;&gt;;
+
+queue&lt;<span class="t">Oda</span>&gt; kuyruk;
+kuyruk.push(A);
+t[A.y][A.x] = {<span class="a">false</span>, <span class="s">'A'</span>};
+
+<span class="a">while</span> (<span class="a">not</span> kuyruk.empty()) {
+  <span class="a">auto</span> [y, x] = kuyruk.front();
+  kuyruk.pop();
+  <span class="a">if</span> (y == B.y <span class="a">and</span> x == B.x) { vardik = <span class="a">true</span>; <span class="a">break</span>; }
+
+  <span class="t">Dizi</span>&lt;<span class="t">Komsu</span>&gt; komsular{{{y-<span class="n">1</span>,x},<span class="s">'U'</span>}, {{y+<span class="n">1</span>,x},<span class="s">'D'</span>},
+                       {{y,x-<span class="n">1</span>},<span class="s">'L'</span>}, {{y,x+<span class="n">1</span>},<span class="s">'R'</span>}};
+  <span class="a">for</span> (<span class="a">auto</span> [oda, yon] : komsular)
+    <span class="a">if</span> (t[oda.y][oda.x].yol) {
+      t[oda.y][oda.x] = {<span class="a">false</span>, yon};   <span class="y">// hem işaretle hem yönü kaydet</span>
+      kuyruk.push(oda);
+    }
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>#########
+#A#.....#
+#.#.###.#
+#.#...#.#
+#.#####.#
+#......B#
+#########
+
+en kısa yol 10 adım: DDDDRRRRRR</code></pre>
+    </figure>
+
+    <div class="kutu deneyin">
+      <span class="basi">Neden en kısa?</span>
+      <p>
+        Kuyruk, noktaları başlangıca <em>uzaklık sırasına göre</em> işler: önce
+        uzaklığı 1 olanlar, sonra 2 olanlar&hellip; Öyleyse B'ye ilk vardığımız
+        anda, ondan kısa bir yol olamaz &mdash; olsaydı daha önce kuyruktan
+        çıkardı. Bunu tümevarımla düzgünce yazmak güzel bir alıştırma.
+        <strong>Bir çözümün doğru olduğunu bilmekle, doğru olduğunu
+        kanıtlayabilmek ayrı şeyler.</strong>
+      </p>
+    </div>
+
+    <h3>3. Bağlı parçalar ve yol ağı</h3>
+
+    <p>
+      <em>n</em> şehir ve bazıları arasında yollar var. Bütün şehirlerin birbirine
+      ulaşabilmesi için en az kaç yeni yol gerek, hangileri?
+    </p>
+
+    <p>
+      Çözüm iki adımda: önce <strong>bağlı parçaları</strong> bulun (birbirine
+      ulaşabilen şehir kümeleri), sonra her parçadan bir temsilci seçip onları
+      zincir gibi bağlayın. <em>k</em> parça varsa <code>k−1</code> yol yeter.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bağlı parçalar</span></figcaption>
+      <pre><code>vector&lt;<span class="t">unsigned</span>&gt; parca;     <span class="y">// parca[nokta] = kaçıncı parçada</span>
+
+<span class="t">void</span> parcayaEkle(<span class="t">Nokta</span> n, <span class="t">unsigned</span> no) {
+  <span class="a">if</span> (parca[n]) <span class="a">return</span>;
+  parca[n] = no;
+  <span class="a">for</span> (<span class="t">Nokta</span> n2 : cizge[n]) parcayaEkle(n2, no);
+}
+
+<span class="y">// main içinde:</span>
+<span class="t">unsigned</span> sayi = <span class="n">0</span>;
+vector&lt;<span class="t">Nokta</span>&gt; kok;                    <span class="y">// her parçanın temsilcisi</span>
+<span class="a">for</span> (<span class="t">Nokta</span> n = <span class="n">1</span>; n &lt;= toplam; ++n)
+  <span class="a">if</span> (<span class="a">not</span> parca[n]) {
+    parcayaEkle(n, ++sayi);
+    kok.push_back(n);
+  }
+<span class="y">// sonra kok[0]-kok[1], kok[1]-kok[2], ... bağla</span></code></pre>
+    </figure>
+
+    <p>
+      Bütün parçaları bulmak <code>O(n+b)</code>, bağlamak <code>O(n)</code>.
+      Yani tamamı doğrusal &mdash; yüz binlerce şehirde bile anlık.
+    </p>
+
+    <h3>4. İki takım kurmak</h3>
+
+    <p>
+      Bir sınıfı iki takıma bölün, ama arkadaş olan iki kişi <em>farklı</em>
+      takımlarda olsun. Her zaman mümkün mü? Değil &mdash; ve mümkün olup
+      olmadığını anlamanın adı <em>iki parçalı çizge</em>
+      (<em>bipartite graph</em>) denetimi.
+    </p>
+
+    <p>
+      Yine aynı kalıp; sadece &ldquo;gezildi&rdquo; yerine &ldquo;hangi takımda&rdquo;
+      tutuyoruz ve komşuya karşı takımı veriyoruz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">iki parçalı mı?</span></figcaption>
+      <pre><code><span class="a">enum class</span> <span class="t">Takim</span> { Yok, Bir, İki };
+vector&lt;<span class="t">Takim</span>&gt; takim;
+
+<span class="t">bool</span> gez(<span class="t">Ogrenci</span> a) {
+  <span class="a">for</span> (<span class="t">Ogrenci</span> b : sinif[a])
+    <span class="a">if</span> (takim[b] != <span class="t">Takim</span>::Yok) {
+      <span class="a">if</span> (takim[b] == takim[a]) <span class="a">return</span> <span class="a">false</span>;   <span class="y">// iki arkadaş aynı takımda!</span>
+    } <span class="a">else</span> {
+      <span class="a">using enum</span> <span class="t">Takim</span>;
+      takim[b] = (takim[a] == Bir) ? İki : Bir;
+      <span class="a">if</span> (<span class="a">not</span> gez(b)) <span class="a">return</span> <span class="a">false</span>;
+    }
+  <span class="a">return</span> <span class="a">true</span>;
+}</code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">İki hata, iki ders</span>
+      <p>
+        Bu kodu derste yazarken iki hata yaptık ve <code>gdb</code> ile bulduk.
+        Birincisi: <code>else</code>'i unutmuştuk &mdash; yani taban durumu
+        eksikti, gezi hiç durmuyordu. İkincisi: dış döngüde &ldquo;bu öğrenci
+        zaten bir takımda mı?&rdquo; denetimi yoktu. İkisi de aynı ailedendir:
+        <strong>&ldquo;buraya daha önce geldim mi?&rdquo; sorusunu sormayı
+        unutmak.</strong> Çizge kodu yazarken ilk denetleyeceğiniz şey budur.
+      </p>
+      <p>
+        Bir de: dış döngü neden gerekli? Çünkü çizge kopuk olabilir. Tek bir
+        noktadan başlayan gezi, ötekilerin bulunduğu parçaya hiç uğramaz.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.4</div>
+  <div class="govde">
+    <h2>Bir kuyruk, birçok başlangıç</h2>
+
+    <p>
+      Şimdi bu bölümün en güzel numarası. Ders notlarımızda bir labirent problemi
+      var: içinde canavarlar dolaşıyor, siz çıkışa ulaşmaya çalışıyorsunuz.
+      Canavarlar sizden hızlı değil, ama yolunuzu kesebilirler.
+    </p>
+
+    <p>
+      Çözmek için her karenin <strong>en yakın canavara</strong> uzaklığını bilmek
+      gerekiyor. 1000×1000'lik bir tahtada on bine yakın canavar olabilir. Her
+      canavar için ayrı bir gezi mi yapacağız?
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">yavaş</span><span class="etiket">28.71 saniye</span></figcaption>
+      <pre><code><span class="a">for</span> (<span class="a">auto</span> canavar : canavarlar) {   <span class="y">// her canavar için...</span>
+  uzaklik[canavar.y][canavar.x] = <span class="n">0</span>;
+  kuyruk.push(canavar);
+  <span class="a">while</span> (<span class="a">not</span> kuyruk.empty()) {       <span class="y">// ...bütün tahtayı gez</span>
+    <span class="y">// ...</span>
+  }
+}</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">hızlı</span><span class="etiket">0.73 saniye</span></figcaption>
+      <pre><code><span class="a">for</span> (<span class="a">auto</span> canavar : canavarlar) {   <span class="y">// önce HEPSİNİ kuyruğa koy</span>
+  uzaklik[canavar.y][canavar.x] = <span class="n">0</span>;
+  kuyruk.push(canavar);
+}
+<span class="a">while</span> (<span class="a">not</span> kuyruk.empty()) {         <span class="y">// sonra TEK bir gezi</span>
+  <span class="y">// ...</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      Farkı gördünüz mü? Süslü parantezin yeri değişti, o kadar. Ama birincisi
+      <code>c × n × m</code>, ikincisi <code>c + n × m</code> hızında çalışıyor.
+      Aynı girdide <strong>28.71 saniye</strong> yerine
+      <strong>0.73 saniye</strong> &mdash; kırk kat.
+    </p>
+
+    <p>
+      Sezgisel açıklaması çok hoş: bütün canavarları aynı kuyruğa koyduğunuzda
+      <em>iş bölümü</em> yapıyorlar. Her canavar sadece kendine en yakın kareleri
+      dolaşıyor; birbirlerine çarptıkları yerde duruyorlar. Buna
+      <strong>çok kaynaklı enlemesine gezi</strong> deniyor ve
+      &ldquo;her noktanın en yakın <em>şeye</em> uzaklığı&rdquo; tipindeki bütün
+      sorularda işe yarar.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Şunu da not edin</span>
+      <p>
+        Hızlı program <strong>100 satır</strong>, yavaş program
+        <strong>141 satır</strong>. Kısa olan hızlıydı. Bu tesadüf değil: kodu
+        sadeleştirirken ne yaptığınızı daha net görürsünüz ve o netlikte daha iyi
+        algoritma saklıdır.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.5</div>
+  <div class="govde">
+    <h2>Yollar eşit değilse: en kısa yol algoritmaları</h2>
+
+    <p>
+      Şimdiye kadar bütün bağlar eşitti; &ldquo;en kısa yol&rdquo; demek
+      &ldquo;en az adım&rdquo; demekti. Gerçek hayatta ise bağların bir
+      <strong>ağırlığı</strong> var: kilometre, dakika, ücret, kapasite, hatta
+      ödül. Üç ünlü algoritma, üç farklı durum için.
+    </p>
+
+    <h3>Dijkstra: bir noktadan hepsine</h3>
+
+    <p>
+      İstanbul'dan diğer bütün şehirlere en çabuk varan rota nedir? Enlemesine
+      gezi kalıbını alın ve <strong>kuyruğu öncelik sırasıyla değiştirin</strong>.
+      Hepsi bu.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">41-dijkstra.cpp</span><span class="etiket">kuyruk → öncelik sırası</span></figcaption>
+      <pre><code><span class="a">using</span> <span class="t">Hat</span> = pair&lt;U, <span class="t">Sehir</span>&gt;;            <span class="y">// {süre, varış} -- SIRA ÖNEMLİ</span>
+<span class="a">template</span> &lt;<span class="a">class</span> T&gt; <span class="a">using</span> <span class="t">OncelikSirasi</span> =
+    priority_queue&lt;T, vector&lt;T&gt;, greater&lt;T&gt;&gt;;   <span class="y">// küçükten büyüğe</span>
+
+<span class="t">void</span> gez(<span class="t">Sehir</span> ilk, vector&lt;U&gt;&amp; uzaklik) {
+  <span class="t">OncelikSirasi</span>&lt;<span class="t">Hat</span>&gt; sira;
+  sira.push({<span class="n">0</span>, ilk});
+  uzaklik[ilk] = <span class="n">0</span>;
+
+  <span class="a">while</span> (<span class="a">not</span> sira.empty()) {
+    <span class="a">auto</span> [u, bu] = sira.top();
+    sira.pop();
+    <span class="a">if</span> (uzaklik[bu] &lt; u) <span class="a">continue</span>;            <span class="y">// eski, işi bitmiş kayıt</span>
+
+    <span class="a">for</span> (<span class="a">auto</span> [sure, su] : hatlar[bu]) {
+      U yeni = u + sure;
+      <span class="a">if</span> (yeni &lt; uzaklik[su]) {
+        uzaklik[su] = yeni;
+        sira.push({yeni, su});
+      }
+    }
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      İki ayrıntı hayati. Birincisi: <code>pair</code> içinde <strong>süre önce,
+      şehir sonra</strong> &mdash; çünkü öncelik sırası soldan karşılaştırır ve biz
+      en yakın şehri istiyoruz. İkincisi: <code>greater&lt;T&gt;</code>. Varsayılan
+      <code>priority_queue</code> en <em>büyüğü</em> verir; biz en küçüğü istiyoruz.
+      (<code>greater</code> bir <em>işlevci</em> &mdash; nesnesi işlev gibi
+      çağrılabilen bir tür.)
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çalışırken</span></figcaption>
+      <pre><code>girdi:  3 şehir, 4 tek yönlü hat
+        1 -&gt; 2 : 6      1 -&gt; 3 : 2
+        3 -&gt; 2 : 3      1 -&gt; 3 : 4
+
+çıktı:  0 <span class="v">5</span> 2
+        <span class="y">// 1'den 2'ye doğrudan 6, ama 3 üzerinden 2+3 = 5!</span></code></pre>
+    </figure>
+
+    <p>
+      Hızı <code>O(b log b)</code>: her bağın üzerinden bir kere geçiyoruz
+      (<code>O(b)</code>) ve her seferinde öncelik sırasına ekleme yapıyoruz
+      (<code>O(log b)</code>).
+    </p>
+
+    <h3>Floyd&ndash;Warshall: herkesten herkese</h3>
+
+    <p>
+      Bütün şehir çiftleri arasındaki uzaklığı istiyorsanız, Dijkstra'yı
+      <em>n</em> kere çalıştırabilirsiniz &mdash; ya da şu üç satırı yazabilirsiniz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">42-floyd.cpp</span><span class="etiket">üç döngü, o kadar</span></figcaption>
+      <pre><code><span class="a">for</span> (<span class="t">int</span> o = <span class="n">1</span>; o &lt;= n; ++o)          <span class="y">// o: "ortadaki durak"</span>
+  <span class="a">for</span> (<span class="t">int</span> a = <span class="n">1</span>; a &lt;= n; ++a)
+    <span class="a">for</span> (<span class="t">int</span> b = <span class="n">1</span>; b &lt;= n; ++b)
+      f[a][b] = min(f[a][b], f[a][o] + f[o][b]);</code></pre>
+    </figure>
+
+    <p>
+      Fikri şu: <em>a</em>'dan <em>b</em>'ye giderken <em>o</em> şehrine
+      uğrarsam daha mı kısa olur? En dıştaki döngü, izin verilen ara durakları
+      birer birer artırıyor. Bu tam anlamıyla bir
+      <a href="{{06-dp}}">dinamik program</a> &mdash; kanıtı Bölüm VI'nın konusu.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">4 şehir, 4 çift yönlü yol</span></figcaption>
+      <pre><code>yollar: 1-2:5   1-4:9   2-3:2   3-4:7
+
+        1   2   3   4
+     ----------------
+  1 |   0   5   <span class="v">7</span>   9      <span class="y">// 1'den 3'e: 5+2 = 7</span>
+  2 |   5   0   2   <span class="v">9</span>      <span class="y">// 2'den 4'e: 2+7 = 9</span>
+  3 |   7   2   0   7
+  4 |   9   9   7   0</code></pre>
+    </figure>
+
+    <h3>Bellman&ndash;Ford: eksi ağırlıklar da olabilir</h3>
+
+    <p>
+      Bir odadan ötekine tünellerden geçiyorsunuz; bazı tüneller ödül veriyor,
+      bazıları ceza. En büyük ödülü nasıl toplarsınız? Dijkstra burada
+      <strong>yanlış yanıt verir</strong> &mdash; çünkü o &ldquo;açgözlü&rdquo;
+      bir algoritma: bir şehri işini bitmiş sayıp bir daha bakmaz. Eksi ağırlıklı
+      bir bağ, o kararı sonradan bozabilir.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">Bellman-Ford</span><span class="etiket">n-1 tur</span></figcaption>
+      <pre><code>vector&lt;S&gt; skor(n+<span class="n">1</span>, -SONSUZ);
+skor[<span class="n">1</span>] = <span class="n">0</span>;
+
+<span class="a">for</span> (K k = <span class="n">1</span>; k &lt; n; ++k)                     <span class="y">// en fazla n-1 tünel gerekir</span>
+  <span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller)
+    skor[b] = max(skor[b], skor[a] + x);
+
+<span class="y">// bir tur daha atıp hâlâ iyileşen var mı diye bakarsak,</span>
+<span class="y">// sonsuza kadar artan bir ÇEVRİM bulmuş oluruz:</span>
+<span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller)
+  <span class="a">if</span> (skor[a] + x &gt; skor[b])
+    cevrim.push_back(b);</code></pre>
+    </figure>
+
+    <p>
+      Neden <code>n−1</code> tur? Çünkü en uzun basit yol en fazla
+      <code>n−1</code> bağ içerir. Ve <code>n</code>'inci turda hâlâ bir şey
+      iyileşiyorsa, bu ancak sonsuza kadar dönülebilen kârlı bir çevrim varsa
+      olur. Aynı kodla hem yolu buluyor hem de &ldquo;sonsuz kâr&rdquo; durumunu
+      yakalıyoruz &mdash; çok zarif.
+    </p>
+
+    <h3>Hangisini seçmeli?</h3>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Algoritma</th><th>Ne bulur</th><th>Hız</th><th>Eksi ağırlık</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Enlemesine gezi</strong></td>
+            <td>Bir noktadan hepsine, <em>bağlar eşitse</em></td>
+            <td><code>O(n+b)</code></td><td>&mdash;</td>
+          </tr>
+          <tr>
+            <td><strong>Dijkstra</strong></td>
+            <td>Bir noktadan hepsine</td>
+            <td><code>O(b log b)</code></td>
+            <td>Hayır</td>
+          </tr>
+          <tr>
+            <td><strong>Bellman&ndash;Ford</strong></td>
+            <td>Bir noktadan hepsine + çevrim tespiti</td>
+            <td><code>O(n·b)</code></td>
+            <td><strong>Evet</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Floyd&ndash;Warshall</strong></td>
+            <td>Herkesten herkese</td>
+            <td><code>O(n³)</code></td>
+            <td><strong>Evet</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Bu tabloyu ezberlemeyin; anlayın. Sorudaki üç şeye bakın: bağlar eşit mi,
+      ağırlıklar eksi olabilir mi, kaç başlangıç noktası var? Yanıt sizi
+      doğru satıra götürür.
+    </p>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Odaları sayın.</strong>
+          <a href="https://cses.fi/problemset/task/1192">CSES 1192</a>. Derinlemesine
+          geziyle çözün, sonra bir de yığınla yazın. Hangisi daha kolay okunuyor?
+        </li>
+        <li>
+          <strong>Labirentte yol.</strong>
+          <a href="https://cses.fi/problemset/task/1193">CSES 1193</a>.
+          Yukarıdaki yol tarifi numarasını kendiniz kurun.
+        </li>
+        <li>
+          <strong>Yol ağı tasarımı.</strong>
+          <a href="https://cses.fi/problemset/task/1666">CSES 1666</a>. Bağlı
+          parçaları önce özyinelemeyle, sonra <code>std::stack</code> ile bulun.
+          Büyük girdide özyinelemeli sürüm neden çökebilir?
+        </li>
+        <li>
+          <strong>İki takım.</strong>
+          <a href="https://cses.fi/problemset/task/1668">CSES 1668</a>. Sonra
+          şunu düşünün: mümkün olmadığı durumda çizgede ne var?
+          <span class="zor">ipucu</span> Tek sayıda bağdan oluşan bir çevrim.
+        </li>
+        <li>
+          <strong>Güzel bir çevrim bulun.</strong>
+          <a href="https://cses.fi/problemset/task/1669">CSES 1669</a>. Gezi
+          kalıbına &ldquo;bir önceki nokta&rdquo; girdisini ekleyin ki
+          <code>A→B→A</code> gibi sahte çevrimleri saymayın.
+        </li>
+        <li>
+          <strong>Üç yol problemi.</strong> CSES'in
+          <a href="https://cses.fi/problemset/task/1671">1671</a>,
+          <a href="https://cses.fi/problemset/task/1672">1672</a> ve
+          <a href="https://cses.fi/problemset/task/1673">1673</a> soruları
+          sırasıyla Dijkstra, Floyd&ndash;Warshall ve Bellman&ndash;Ford ister.
+          Üçünü de yazın. <span class="zor">asıl iş</span> Sonra üçünü tek bir
+          sayfada karşılaştırın: hangi satır hangisini ötekinden ayırıyor?
+        </li>
+        <li>
+          <strong>Dijkstra'yı kırın.</strong> Eksi ağırlıklı bir bağ içeren,
+          <em>en fazla dört noktalı</em> bir çizge çizin; öyle ki Dijkstra
+          yanlış yanıt versin. Bulduğunuzda algoritmanın neden açgözlü olduğunu
+          gerçekten anlamış olacaksınız.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

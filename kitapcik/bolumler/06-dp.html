@@ -1,0 +1,609 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm VI</div>
+  <h1>Dinamik Programlama</h1>
+  <p class="ozet">
+    Korkutucu bir adı var ama arkasındaki fikir bir cümle: <strong>büyük problemi
+    kendinden küçük parçalarına böl, her parçayı bir kere çöz, bir daha
+    çözme.</strong> Bu bölümde o cümleyi bir reçeteye çevireceğiz &mdash; ve
+    kitapçığı, bundan sonra nereye gideceğinizi konuşarak kapatacağız.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">VI.1</div>
+  <div class="govde">
+    <h2>Aslında bunu zaten yaptınız</h2>
+
+    <p>
+      <a href="{{04-ozyineleme}}">Bölüm IV</a>'te Fibonaççi'ye tek satırlık bir
+      bellek ekleyip kırk bin kat hızlandırmıştık. İşte o, dinamik programlamaydı.
+      Adı büyük ama yaptığı iş bu kadar.
+    </p>
+
+    <p>
+      Dinamik programın iki yazılış biçimi var, ikisini de bilmek gerekiyor:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>Yukarıdan aşağı (YA)</h4>
+        <p>
+          Özyinelemeli işlev + bellek. Tanımı doğrudan koda çevirirsiniz;
+          <strong>düşünmesi ve kanıtlaması kolay</strong>. Derin çağrılarda
+          yığın taşabilir.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Aşağıdan yukarı (AY)</h4>
+        <p>
+          En küçükten başlayıp bir çizelgeyi doldurursunuz. Özyineleme yok,
+          yığın sorunu yok, <strong>genelde daha hızlı</strong> ve belleği
+          kısmak mümkün.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      Pratikte iyi bir sıra şudur: <strong>YA ile düşün, AY ile yaz.</strong>
+      Önce özyinelemeli tanımı bulun (çünkü orada kanıt var), sonra onu döngüye
+      çevirin.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.2</div>
+  <div class="govde">
+    <h2>Izgarada kaç yol var?</h2>
+
+    <p>
+      <a href="https://projecteuler.net/problem=15">Project Euler'in 15. sorusu</a>:
+      20×20'lik bir ızgaranın sol üst köşesinden sağ alt köşesine, sadece sağa ve
+      aşağıya giderek kaç farklı yol vardır?
+    </p>
+
+    <p>
+      Özyinelemeli tanım çok kolay: <code>(r, c)</code> karesine ya üstten ya
+      soldan gelinir. Öyleyse:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">1. yol</span><span class="etiket">belleksiz</span></figcaption>
+      <pre><code><span class="t">Sayi</span> yol1(<span class="t">int</span> r, <span class="t">int</span> c) {
+  <span class="a">if</span> (r == <span class="n">0</span> <span class="a">or</span> c == <span class="n">0</span>) <span class="a">return</span> <span class="n">1</span>;      <span class="y">// kenardaysak tek yol var</span>
+  <span class="a">return</span> yol1(r-<span class="n">1</span>, c) + yol1(r, c-<span class="n">1</span>);
+}</code></pre>
+    </figure>
+
+    <p>
+      Doğru, ama 12×12'de bile beş milyondan fazla çağrı yapıyor; 20×20'yi hiç
+      bitiremez. Belleği ekleyelim:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">2. yol</span><span class="etiket">bellekli</span></figcaption>
+      <pre><code>map&lt;pair&lt;<span class="t">int</span>,<span class="t">int</span>&gt;, <span class="t">Sayi</span>&gt; bellek;
+
+<span class="t">Sayi</span> yol2(<span class="t">int</span> r, <span class="t">int</span> c) {
+  <span class="a">if</span> (r == <span class="n">0</span> <span class="a">or</span> c == <span class="n">0</span>) <span class="a">return</span> <span class="n">1</span>;
+  <span class="a">auto</span> anahtar = make_pair(r, c);
+  <span class="a">if</span> (bellek.contains(anahtar)) <span class="a">return</span> bellek[anahtar];
+  <span class="a">return</span> bellek[anahtar] = yol2(r-<span class="n">1</span>, c) + yol2(r, c-<span class="n">1</span>);
+}</code></pre>
+    </figure>
+
+    <div class="tablo-sar">
+      <table>
+        <thead><tr><th>12×12 ızgara</th><th>Sonuç</th><th>Çağrı sayısı</th></tr></thead>
+        <tbody>
+          <tr><td>Belleksiz</td><td class="sayi">2 704 156</td><td class="sayi">5 408 311</td></tr>
+          <tr><td>Bellekli</td><td class="sayi">2 704 156</td><td class="sayi">289</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Şimdi aynı şeyi aşağıdan yukarı yazalım. Özyineleme yok, sadece bir çizelge
+      dolduruyoruz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">3. yol</span><span class="etiket">aşağıdan yukarı</span></figcaption>
+      <pre><code><span class="t">Sayi</span> yol3(<span class="t">int</span> n) {
+  vector&lt;vector&lt;<span class="t">Sayi</span>&gt;&gt; t(n+<span class="n">1</span>, vector&lt;<span class="t">Sayi</span>&gt;(n+<span class="n">1</span>, <span class="n">1</span>));  <span class="y">// kenarlar 1</span>
+  <span class="a">for</span> (<span class="t">int</span> r = <span class="n">1</span>; r &lt;= n; ++r)
+    <span class="a">for</span> (<span class="t">int</span> c = <span class="n">1</span>; c &lt;= n; ++c)
+      t[r][c] = t[r-<span class="n">1</span>][c] + t[r][c-<span class="n">1</span>];
+  <span class="a">return</span> t[n][n];
+}</code></pre>
+    </figure>
+
+    <p>
+      Ve son bir güzellik: çizelgenin sadece <em>bir önceki satırına</em>
+      bakıyoruz. Öyleyse bütün tabloyu saklamaya gerek yok &mdash;
+      <code>n²</code> bellek yerine <code>n</code> yeter:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">4. yol</span><span class="etiket">tek satır bellek</span></figcaption>
+      <pre><code><span class="t">Sayi</span> yol4(<span class="t">int</span> n) {
+  vector&lt;<span class="t">Sayi</span>&gt; satir(n+<span class="n">1</span>, <span class="n">1</span>);
+  <span class="a">for</span> (<span class="t">int</span> r = <span class="n">1</span>; r &lt;= n; ++r)
+    <span class="a">for</span> (<span class="t">int</span> c = <span class="n">1</span>; c &lt;= n; ++c)
+      satir[c] += satir[c-<span class="n">1</span>];   <span class="y">// satir[c]'nin eski değeri = üstteki satır!</span>
+  <span class="a">return</span> satir[n];
+}</code></pre>
+    </figure>
+
+    <p class="cikti-satiri">20×20 ızgarada yol sayısı: 137 846 528 820</p>
+
+    <p>
+      Dört yol, aynı yanıt. Bir problemi dört farklı biçimde yazabilmek, onu
+      gerçekten anlamış olmanın en iyi göstergesi.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Dördüncü sürümdeki <code>satir[c] += satir[c-1];</code> satırı neden
+        çalışıyor? Kâğıda 3×3'lük bir çizelge çizin ve döngüyü elle işletin.
+        Bu tek satırı anladığınızda dinamik programlamanın bellek hilelerinin
+        çoğunu anlamış olursunuz.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.3</div>
+  <div class="govde">
+    <h2>Beş adımlık reçete</h2>
+
+    <p>
+      Bir problemi gördüğünüzde dinamik programa uygun olup olmadığını nasıl
+      anlarsınız, uygunsa nasıl kurarsınız? Her seferinde aynı beş adım:
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Aradığınız şeyi bir fonksiyon olarak yazın.</strong>
+        &ldquo;<em>f(x)</em> = <em>x</em> toplamına varan en kısa dizinin boyu.&rdquo;
+        Bu adımı atlamayın; en zor ve en önemli adım budur.
+      </li>
+      <li>
+        <strong>Taban durumlarını belirleyin.</strong> <em>f</em>(0) kaç? Anlamsız
+        girdilerde (eksi sayılar gibi) ne olsun? Genellikle 0, 1 ya da sonsuz.
+      </li>
+      <li>
+        <strong>Tümevarım formülünü kurun.</strong> <em>f(x)</em>'i kendinden
+        küçük değerlerle yazın. Sorunuz şu: &ldquo;son adımda ne yaptım?&rdquo;
+      </li>
+      <li>
+        <strong>Kanıtlayın.</strong> İki soru: formül bütün durumları kapsıyor mu?
+        Hiçbir durumu iki kere saymıyor mu?
+      </li>
+      <li>
+        <strong>Kodlayın.</strong> Ya YA + bellek, ya da AY + çizelge.
+      </li>
+    </ol>
+
+    <p>
+      Şimdi bu reçeteyi üç soruya uygulayalım. Üçü de bozuk para ve zarlarla
+      ilgili, üçü de aldatıcı biçimde benzer &mdash; ve tam da bu yüzden çok
+      öğretici.
+    </p>
+
+    <h3>Soru 1: Zar dizilerini sayalım</h3>
+
+    <p>
+      Bir zarı defalarca atıyoruz. Toplamı <em>n</em> olan kaç farklı zar dizisi
+      var? (<a href="https://cses.fi/problemset/task/1633">CSES DP 1</a>)
+    </p>
+
+    <p>
+      <strong>1. Fonksiyon:</strong> <em>f(n)</em> = toplamı <em>n</em> olan dizi
+      sayısı.<br>
+      <strong>2. Taban:</strong> <em>f</em>(0) = 1 &mdash; boş dizinin toplamı sıfır,
+      ve o da bir dizidir.<br>
+      <strong>3. Formül:</strong> son atılan zar 1, 2, 3, 4, 5 ya da 6 olabilir:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tümevarım</span></figcaption>
+      <pre><code>f(n) = f(n-1) + f(n-2) + f(n-3) + f(n-4) + f(n-5) + f(n-6)</code></pre>
+    </figure>
+
+    <p>
+      <strong>4. Kanıt:</strong> Her dizinin bir son zarı var, o da altı değerden
+      biri &mdash; yani bütün durumlar kapsandı. Ve son zarı farklı olan iki dizi
+      aynı olamaz &mdash; yani hiçbir şey iki kere sayılmadı. İki koşul da
+      sağlandı.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">52-zar.cpp</span><span class="etiket">aşağıdan yukarı</span></figcaption>
+      <pre><code>vector&lt;S&gt; f(n+<span class="n">1</span>, <span class="n">0</span>);
+f[<span class="n">0</span>] = <span class="n">1</span>;
+<span class="a">for</span> (<span class="t">int</span> x = <span class="n">1</span>; x &lt;= n; ++x)
+  <span class="a">for</span> (<span class="t">int</span> zar = <span class="n">1</span>; zar &lt;= <span class="n">6</span>; ++zar)
+    <span class="a">if</span> (x - zar &gt;= <span class="n">0</span>) f[x] = (f[x] + f[x - zar]) % MOD;</code></pre>
+    </figure>
+
+    <p class="cikti-satiri">
+      f(0)=1&nbsp; f(1)=1&nbsp; f(2)=2&nbsp; f(3)=4&nbsp; f(4)=8&nbsp;
+      f(5)=16&nbsp; f(6)=32&nbsp; f(7)=63&nbsp; f(8)=125
+    </p>
+
+    <p>
+      İlk yedi değer ikinin kuvvetleri gibi gidiyor, sonra <em>f</em>(7)=63
+      olunca bozuluyor. Neden? Çünkü 7'ye kadar bütün eski değerleri
+      toplayabiliyorduk, 7'de birincisi (f(0)) listeden düşüyor. Böyle küçük
+      gözlemler formülünüzün doğru olduğuna dair en hızlı sağlamadır.
+    </p>
+
+    <h3>Soru 2: En az kaç bozuk para?</h3>
+
+    <p>
+      Paralarımız 1, 5 ve 7 kuruş. 11 kuruşu en az kaç parayla öderiz?
+      (<a href="https://cses.fi/problemset/task/1634">CSES DP 2</a>)
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Aç gözlülük neden yetmez?</span>
+      <p>
+        Sezgi &ldquo;en büyükten başla&rdquo; der: 7 + 1 + 1 + 1 + 1 =
+        <strong>5 para</strong>. Oysa en iyi çözüm 5 + 5 + 1 =
+        <strong>3 para</strong>. <em>Aç gözlü</em> (<em>greedy</em>) yöntem burada
+        yanılıyor. Bu yüzden acele etmiyor, bütün olasılıkları küçük parçalara
+        bölüyoruz.
+      </p>
+    </div>
+
+    <p>
+      <strong>Formül:</strong> Son koyduğum para hangisiydi? Hepsini deneyip en
+      iyisini alalım:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tümevarım</span></figcaption>
+      <pre><code>f(x) = 1 + min { f(x-b₁), f(x-b₂), ..., f(x-bₙ) }
+
+f(0) = 0
+f(x) = ∞     (x &lt; 0 için)</code></pre>
+    </figure>
+
+    <p>
+      Eksi girdilerde &ldquo;sonsuz&rdquo; demek şık bir numara: <code>min</code>
+      onları kendiliğinden eliyor, biz de her para değeri için ayrı koşul yazmaktan
+      kurtuluyoruz.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">51-bozukpara.cpp</span></figcaption>
+      <pre><code>vector&lt;S&gt; f(hedef+<span class="n">1</span>, SONSUZ);
+f[<span class="n">0</span>] = <span class="n">0</span>;
+<span class="a">for</span> (<span class="t">int</span> x = <span class="n">1</span>; x &lt;= hedef; ++x)
+  <span class="a">for</span> (S p : paralar)
+    <span class="a">if</span> (x - p &gt;= <span class="n">0</span>) f[x] = min(f[x], <span class="n">1</span> + f[x - p]);</code></pre>
+    </figure>
+
+    <h3>Soru 3: Diziler mi, kümeler mi?</h3>
+
+    <p>
+      Şimdi en ince ayrım. Paralarımız 2, 3, 5 ve hedef 9. İki soru:
+    </p>
+
+    <ul>
+      <li>
+        Toplamı 9 olan kaç <strong>dizi</strong> var? Yani sıra önemli:
+        <code>2+2+5</code> ile <code>5+2+2</code> ayrı sayılıyor.
+        (<a href="https://cses.fi/problemset/task/1635">CSES DP 3</a>)
+      </li>
+      <li>
+        Toplamı 9 olan kaç <strong>küme</strong> var? Sıra önemsiz:
+        <code>2+2+5</code> ile <code>5+2+2</code> aynı.
+        (<a href="https://cses.fi/problemset/task/1636">CSES DP 4</a>)
+      </li>
+    </ul>
+
+    <div class="tablo-sar">
+      <table>
+        <thead><tr><th>Diziler (8 tane)</th><th>Kümeler (3 tane)</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>2+2+5</code>, <code>2+5+2</code>, <code>5+2+2</code>,
+                <code>2+2+2+3</code>, <code>2+2+3+2</code>, <code>2+3+2+2</code>,
+                <code>3+2+2+2</code>, <code>3+3+3</code></td>
+            <td><code>{2,5}</code>, <code>{2,3}</code>, <code>{3}</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Şimdi çok güzel bir şey olacak. İki kodun farkına bakın:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">51-bozukpara.cpp</span><span class="etiket">tek fark: döngü sırası</span></figcaption>
+      <pre><code><span class="y">// DİZİLER: sıra önemli</span>
+d[<span class="n">0</span>] = <span class="n">1</span>;
+<span class="a">for</span> (<span class="t">int</span> x = <span class="n">1</span>; x &lt;= hedef; ++x)      <span class="v">// önce hedef</span>
+  <span class="a">for</span> (S p : paralar)                <span class="v">//   sonra para</span>
+    <span class="a">if</span> (x - p &gt;= <span class="n">0</span>) d[x] += d[x - p];
+
+<span class="y">// KÜMELER: sıra önemsiz</span>
+k[<span class="n">0</span>] = <span class="n">1</span>;
+<span class="a">for</span> (S p : paralar)                  <span class="v">// önce para</span>
+  <span class="a">for</span> (<span class="t">int</span> x = p; x &lt;= hedef; ++x)     <span class="v">//   sonra hedef</span>
+    k[x] += k[x - p];</code></pre>
+    </figure>
+
+    <p class="cikti-satiri">
+      kaç farklı dizi : 8 &nbsp;&nbsp;|&nbsp;&nbsp; kaç farklı küme : 3
+    </p>
+
+    <p>
+      İki döngünün yerini değiştirdik, cevap 8'den 3'e düştü. Neden? Çünkü ikinci
+      kodda paraları <em>sırayla</em> ele alıyoruz: önce bütün 2'leri, sonra
+      3'leri, sonra 5'leri. Böylece her küme yalnızca <strong>bir</strong> sırada
+      üretiliyor, tekrarlar kendiliğinden yok oluyor.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Bu iki kodu ayrı ayrı elle işletin &mdash; biriniz birincisini, öteki
+        ikincisini, <code>hedef = 5</code> ve <code>paralar = {2, 3}</code> için.
+        Her adımda dizinin içeriğini kâğıda yazın. Sonra karşılaştırın.
+        Bu yarım saat, dinamik programlamada saatlerce okumaktan daha çok şey
+        öğretir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.4</div>
+  <div class="govde">
+    <h2>Kanıt neden bu kadar önemli?</h2>
+
+    <p>
+      Bir dinamik program yazdığınızda, doğru olup olmadığını test ederek
+      anlayamazsınız &mdash; çünkü yanlış bir formül de küçük örneklerde doğru
+      yanıt verebilir. Elinizde bir kanıt olmalı.
+    </p>
+
+    <p>
+      İyi haber şu: kanıtlar genelde iki cümle. Floyd&ndash;Warshall'ı hatırlayın
+      (<a href="{{05-cizgeler}}">Bölüm V</a>). <em>f(a,b,k)</em>, <em>a</em>'dan
+      <em>b</em>'ye giden ve yalnızca <code>{1..k}</code> kümesindeki şehirlerden
+      geçen en kısa yol olsun. O zaman:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">Floyd-Warshall kanıtı</span></figcaption>
+      <pre><code>f(a, b, 0) = h(a, b)                     <span class="y">// hiç ara durak yok: doğrudan yol</span>
+
+f(a, b, k) = min( f(a, b, k-1),          <span class="y">// k şehrine UĞRAMAZSAK</span>
+                  f(a, k, k-1) + f(k, b, k-1) )   <span class="y">// UĞRARSAK</span></code></pre>
+    </figure>
+
+    <p>
+      Kanıtın tamamı tek cümle: <em>a</em>'dan <em>b</em>'ye giderken
+      <em>k</em> şehrine ya uğrarız ya uğramayız &mdash; üçüncü bir ihtimal yok.
+      Bütün durumlar kapsandı, hiçbiri iki kere sayılmadı. Bitti.
+    </p>
+
+    <p>
+      Bu formülü gördüğünüzde <code>k</code>'nın en dış döngü olması gerektiği
+      de kendiliğinden anlaşılıyor &mdash; işte kanıtın kodu nasıl yazacağınızı
+      söylemesi budur. Bölüm V'teki üç satırlık Floyd&ndash;Warshall kodu, bu
+      formülün doğrudan çevirisi.
+    </p>
+
+    <h3>Yarım bıraktığımız bir problem</h3>
+
+    <p>
+      İki yazının en uzun <strong>ortak altdizisi</strong>ni bulmak, çizelgeli
+      dinamik programlamanın en klasik örneği.
+      <code>tane[k1][k2]</code>, birinci yazının <em>k1</em>, ikinci yazının
+      <em>k2</em> konumunda biten ortak altdizinin uzunluğu olsun.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">altdizi.cpp</span><span class="etiket">size bırakıyorum</span></figcaption>
+      <pre><code><span class="a">using</span> <span class="t">yazi</span> = std::string;
+
+<span class="t">yazi</span> bul2(<span class="a">const</span> <span class="t">yazi</span>&amp; y1, <span class="a">const</span> <span class="t">yazi</span>&amp; y2) {
+    <span class="a">const</span> <span class="t">int</span> boy1 = y1.size(), boy2 = y2.size();
+    <span class="t">int</span> enUzun = <span class="n">0</span>, k = <span class="n">0</span>;   <span class="y">// şu ana kadarki en uzun ve nerede bittiği</span>
+
+    std::vector&lt;std::vector&lt;<span class="t">int</span>&gt;&gt;
+        tane(boy1 + <span class="n">1</span>, std::vector&lt;<span class="t">int</span>&gt;(boy2 + <span class="n">1</span>, <span class="n">0</span>));
+
+    <span class="a">for</span> (<span class="t">int</span> k1 = <span class="n">0</span>; k1 &lt; boy1; ++k1) {
+        <span class="a">for</span> (<span class="t">int</span> k2 = <span class="n">0</span>; k2 &lt; boy2; ++k2) {
+            <span class="a">if</span> (y1[k1] == y2[k2]) {
+                <span class="t">int</span> m = tane[k1+<span class="n">1</span>][k2+<span class="n">1</span>] = tane[k1][k2] + <span class="n">1</span>;
+                <span class="v">// ... buradan sonrası size kalıyor</span>
+            }
+        }
+    }
+    <span class="a">if</span> (enUzun &gt; <span class="n">0</span>) <span class="a">return</span> y1.substr(k + <span class="n">1</span> - enUzun, enUzun);
+    <span class="a">else</span> <span class="a">return</span> <span class="t">yazi</span>{<span class="s">""</span>};
+}</code></pre>
+    </figure>
+
+    <p>
+      Bu işlevi <strong>bilerek</strong> yarım bıraktım &mdash; ders notlarımızda
+      da öyle duruyor. Eksik olan birkaç satır. Ama önce şu denemeleri yazın,
+      sonra doldurun:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">önce testler</span></figcaption>
+      <pre><code><span class="t">void</span> dene(<span class="t">yazi</span> y1, <span class="t">yazi</span> y2, <span class="t">yazi</span> ortak) {
+    assert(bul2(y1, y2) == ortak);
+}
+
+dene(<span class="s">"abca"</span>,      <span class="s">"daxbcby"</span>,    <span class="s">"bc"</span>);
+dene(<span class="s">"abc"</span>,       <span class="s">"xyz"</span>,        <span class="s">""</span>);
+dene(<span class="s">"xyabc"</span>,     <span class="s">"xydabca"</span>,    <span class="s">"abc"</span>);
+dene(<span class="s">"abcdxyad"</span>,  <span class="s">"xyabcdxyb"</span>,  <span class="s">"abcdxy"</span>);
+dene(<span class="s">"123"</span>,       <span class="s">"345"</span>,        <span class="s">"3"</span>);
+dene(<span class="s">"1010110010"</span>,<span class="s">"10110"</span>,      <span class="s">"10110"</span>);
+dene(<span class="s">"1110111011"</span>,<span class="s">"10011"</span>,      <span class="s">"011"</span>);</code></pre>
+    </figure>
+
+    <p>
+      Testleri <em>önce</em> yazmanın faydası şu: çözümü kodlamadan önce problemi
+      tam olarak anlamak zorunda kalıyorsunuz. Yedi test yazıp hepsini geçen bir
+      işleve, gözle bakıp &ldquo;doğru görünüyor&rdquo; dediğiniz bir işlevden çok
+      daha fazla güvenebilirsiniz.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Son söz</div>
+  <div class="govde">
+    <h2>Yola devam</h2>
+
+    <p>
+      Altı bölüm bitti. Geriye dönüp bakın: bir değişken tanımlamayı bilmiyordunuz,
+      şimdi Bellman&ndash;Ford algoritmasının neden <code>n−1</code> tur döndüğünü
+      anlatabiliyorsunuz. Bu, bir dönemde kat edilebilecek epey uzun bir yol.
+    </p>
+
+    <p>
+      Bundan sonrası artık ders değil, <strong>alışkanlık</strong>. Şunları
+      öneriyorum:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>Haftada üç soru</h4>
+        <p>
+          <a href="https://cses.fi/problemset/">CSES Problem Set</a> sırayla
+          çözülmek için hazırlanmış. Baştan başlayın, atlamayın. Haftada üç soru,
+          bir yılda 150 soru eder.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Kitabı okuyun</h4>
+        <p>
+          Antti Laaksonen'in <em>Rekabetçi Programlama El Kitabı</em>, Türkçesi de
+          var. Ders deposunda <code>kitap/</code> dizininde. Anlamadığınız yerleri
+          atlayarak okuyun, sonra dönün.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Yarışmalara girin</h4>
+        <p>
+          <a href="https://codeforces.com/">Codeforces</a> ve
+          <a href="https://atcoder.jp/">AtCoder</a>'da haftalık yarışmalar var.
+          Sıralamanız önemli değil; iki saat boyunca zorlanmak önemli.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Bir şey inşa edin</h4>
+        <p>
+          Algoritma sorusu olmayan bir şey: bir oyun, bir çizim programı, bir
+          simülasyon. Yarışma kodu bir günde ölür; proje kodu sizinle kalır.
+        </p>
+      </div>
+    </div>
+
+    <h3>Nereye gidilir?</h3>
+
+    <p>
+      Bu kitapçıkta değinemediğimiz ama sırada bekleyen konular:
+      <strong>ayrık küme birleşimi</strong> (<em>union-find</em>),
+      <strong>dilim ağaçları</strong> (<em>segment tree</em>),
+      <strong>kapsayan ağaçlar</strong> (<em>minimum spanning tree</em>),
+      <strong>bit işlemleri</strong>, <strong>sayı kuramı</strong> ve
+      <strong>hesaplama geometrisi</strong>. Hepsinin girişi
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">ders deposunda</a> var.
+    </p>
+
+    <p>
+      Bir de büyük sorular var. Kümeyi ikiye bölme problemini
+      <a href="{{04-ozyineleme}}">Bölüm IV</a>'te <code>O(2ⁿ)</code> ile çözdük.
+      Daha hızlısı var mı? Kimse bilmiyor &mdash; bu, matematiğin en ünlü açık
+      problemi olan <strong>P ile NP</strong> sorusuna bağlı. Yani bir lise
+      alıştırmasından, insanlığın çözemediği bir soruya iki adımda varıyorsunuz.
+      Bilgisayar biliminin güzelliği tam olarak burada.
+    </p>
+
+    <h3>Son üç cümle</h3>
+
+    <p>
+      Bu kitapçık boyunca hataları sakladım: taşan sayılar, iki kere kuyruğa giren
+      düğümler, unutulan taban durumları, kırk kat yavaş çalışan programlar. Çünkü
+      hepsi gerçekti ve hepsini birlikte bulduk. <strong>Hata yapmak öğrenmenin
+      yan etkisi değil, yöntemidir.</strong>
+    </p>
+
+    <p>
+      Takıldığınızda yalnız kalmayın. Bir arkadaşınızı bulun, problemi ona
+      anlatın, kâğıt kalemle küçük bir örneği elle çözün. Bu kitapçığın en çok
+      tekrar ettiği tavsiye buydu ve tesadüf değil.
+    </p>
+
+    <p>
+      Ve son olarak: acele etmeyin. Uzun ince bir yoldayız; yolda yürümenin
+      kıymetini bilmek ve tadını çıkarmak da işin bir parçası. Kolay gelsin,
+      keyifli ve öğretici olsun.
+    </p>
+
+    <div class="alistirmalar">
+      <h4>Son alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Dört DP sorusu.</strong> CSES DP bölümünün ilk dördü
+          (<a href="https://cses.fi/problemset/task/1633">1633</a>,
+          <a href="https://cses.fi/problemset/task/1634">1634</a>,
+          <a href="https://cses.fi/problemset/task/1635">1635</a>,
+          <a href="https://cses.fi/problemset/task/1636">1636</a>).
+          Her biri için önce beş adımlık reçeteyi kâğıda yazın, sonra kodlayın.
+        </li>
+        <li>
+          <strong>Ortak altdiziyi tamamlayın.</strong> Yukarıdaki
+          <code>bul2()</code> işlevini bitirin. Yedi testin hepsi geçsin.
+          <span class="zor">devamı</span> Aynı problemi yukarıdan aşağı
+          (özyineleme + bellek) yöntemiyle de çözün.
+        </li>
+        <li>
+          <strong>Zıplayan kurbağa.</strong>
+          <a href="https://atcoder.jp/contests/dp/tasks/dp_a">AtCoder DP A</a>.
+          Klasik bir başlangıç sorusu; reçeteyi uygulayın.
+        </li>
+        <li>
+          <strong>Engelli ızgara.</strong>
+          <a href="https://atcoder.jp/contests/dp/tasks/dp_h">AtCoder DP H</a>.
+          Bu bölümdeki ızgara probleminin engelli hâli. Tek satır değişecek.
+        </li>
+        <li>
+          <strong>Kendi kitapçığınızı yazın.</strong> Öğrendiğiniz bir konuyu,
+          bir arkadaşınıza anlatacak biçimde iki sayfa yazın. Kod örnekleri
+          koyun, çalıştırın, çıktıyı yapıştırın. Bir şeyi anlatabildiğiniz gün
+          onu gerçekten öğrenmiş olursunuz.
+          <span class="zor">en önemlisi</span>
+        </li>
+      </ol>
+    </div>
+
+    <p class="dipnot">
+      Bu kitapçık 2024&ndash;25 ve 2025&ndash;26 dönemi ders notlarından,
+      sınıfta birlikte yazdığımız programlardan ve sorduğunuz sorulardan
+      derlendi. İçindeki bütün programlar derlenip çalıştırıldı; çıktılar
+      gerçek çıktılardır. Ders notlarının tamamı ve daha fazlası
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">GitHub deposunda</a>.
+    </p>
+  </div>
+</div>
+
+<!--GEZINME-->

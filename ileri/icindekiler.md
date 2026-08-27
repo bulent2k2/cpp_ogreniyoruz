@@ -4,6 +4,10 @@ Giriş Dersleri
 8 Mayıs 2026 tarihli dersimiz en altta: [ders 29](dersler/d20260508.md).
 Sınav 16 Mayıs 2026'da. 14 Mayıs'ta yaptığımız son ders: [ders 30](dersler/d20260514.md).
 
+Giriş Kitapçığı
+--
++ [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](../kitapcik/README.md) bütün derslerden damıtılmış altı bölümlük bir giriş: temeller, veri yapıları, zanaat, özyineleme, çizgeler ve dinamik programlama. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
+
 Algoritma (2022 civarı)
 --
 + [ders 1-10](../2022/README.md)

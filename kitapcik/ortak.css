@@ -497,7 +497,18 @@ hr.ayrac {
 
 /* ---------- baskı ---------- */
 
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
 @media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
   body {
     background-image: none;
     background-color: #fff;

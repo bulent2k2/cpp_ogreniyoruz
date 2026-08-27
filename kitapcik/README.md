@@ -78,7 +78,9 @@ python3 kitapcik/epub.py    # EPUB'ı üret (kitap/ dizinine yazar)
 EPUB için ayrı bir biçem dosyası var (`epub.css`): e-kitap okuyucularda
 akışkan olsun diye ızgara düzeni ve kareli defter zemini yok, kod blokları
 da açık zeminli. Kapak resmi (`kitap/kapak.png`) `kapak-tasarim.html` sayfasının ekran
-görüntüsü; yeniden üretmek için `node kitapcik/kapak.mjs`.
+görüntüsü; yeniden üretmek için `node kitapcik/kapak.mjs`. Kapaktaki kolaj
+`ileri/dersler/resim/` dizinindeki, derste elle çizilmiş çizge şekillerinden
+oluşuyor. Aynı kapak PDF'in de ilk sayfası.
 
 Üretilen EPUB, `epubcheck` doğrulamasını hatasız ve uyarısız geçiyor:
 

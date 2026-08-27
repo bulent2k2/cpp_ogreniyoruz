@@ -84,7 +84,14 @@ KAPSAMAZ. Yeniden dağıtmadan önce ilgili sahibine danışın:
         Mustafa Tacettin Hoca'nın ders notları, izniyle paylaşıldı.
   - notlar/ dizinindeki pdf dosyaları
         Kaynakları kendi içlerinde belirtilmiştir.
-  - ileri/dersler/resim/ altındaki, başka kaynaklardan alınmış görseller
+  - ileri/dersler/resim/konigsberg-kopruleri.png
+  - ileri/dersler/resim/matematik-ne-ise-yarar.png
+        Bu ikisi dışarıdan alınmış görseller.
+        Aynı dizindeki elle çizilmiş çizge şekilleri (bellman-ford,
+        bilgisayar-agi, daykstra1-2-3, omuzda-tasima, yonlu-cizge1 ve
+        yonlu-cizge1-arti-bir-nokta-ve-uc-ok) derste çizilmiştir ve
+        yukarıdaki CC BY-SA 4.0 lisansı kapsamındadır; kitapçığın
+        kapağında da onlar kullanıldı.
 
 Ders notlarında bağlantı verilen çevrimiçi kaynaklar (Project Euler,
 CSES, USACO, Codeforces, AtCoder, Sololearn, OnlineGDB, Wikipedia ...)

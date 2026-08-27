@@ -131,7 +131,11 @@ def artifact_yaz(baglantilar: dict[str, str]) -> None:
 
 def tam_yaz() -> None:
     """Hepsi bir arada: PDF için tam belge."""
-    parcalar = []
+    parcalar = [
+        '<section class="pdf-kapak">'
+        f'<img src="../../kitap/kapak.png" alt="{BASLIK}">'
+        "</section>"
+    ]
     for i, slug in enumerate(SIRA):
         sinif = "bolum-basi" if i > 0 else ""
         parcalar.append(

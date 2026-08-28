@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Kapak</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  /* Kapak resmi: 1600x2400. kapak.mjs bu sayfanın ekran görüntüsünü alıyor.
+     Çizimler ders notlarındaki saydam png'ler; kareli zemine doğrudan
+     oturuyorlar, deftere elle çizilmiş gibi dursun diye. */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1600px; height: 2400px;
+    background-color: #F6F7FA;
+    background-image:
+      linear-gradient(#DFE5F1 2px, transparent 2px),
+      linear-gradient(90deg, #DFE5F1 2px, transparent 2px);
+    background-size: 64px 64px;
+    color: #16203A;
+    font-family: "IBM Plex Sans", sans-serif;
+    display: flex; flex-direction: column;
+    padding: 140px 120px 110px;
+    position: relative; overflow: hidden;
+  }
+
+  .serit { position: absolute; top: 0; left: 0; width: 26px; height: 100%; background: #2A4BC4; }
+
+  .seri {
+    font-family: "IBM Plex Mono", monospace; font-size: 29px;
+    letter-spacing: .22em; text-transform: uppercase; color: #8792AA;
+  }
+
+  h1 {
+    font-family: "Bitter", serif; font-weight: 700;
+    font-size: 138px; line-height: 1.04; letter-spacing: -.03em;
+    margin-top: 58px;
+  }
+  h1 .vurgu { color: #2A4BC4; }
+
+  .alt {
+    font-size: 41px; color: #52607C; line-height: 1.5;
+    margin-top: 44px; max-width: 1150px;
+  }
+
+  /* ---- çizim kolajı ---- */
+
+  .kolaj { position: relative; flex: 1; margin-top: 26px; }
+  .kolaj img {
+    position: absolute; display: block;
+    box-shadow: 0 16px 34px -20px rgba(16, 28, 60, .5);
+  }
+
+  .c1 { left:  -26px; top:    6px; width: 496px; transform: rotate(-3.2deg); }
+  .c2 { left:  500px; top:  -26px; width: 462px; transform: rotate( 2.6deg); }
+  .c3 { left: 1020px; top:   22px; width: 356px; transform: rotate(-2.2deg); }
+  .c4 { left:  -10px; top:  626px; width: 610px; transform: rotate( 1.8deg); }
+  .c5 { left:  672px; top:  690px; width: 474px; transform: rotate(-4.4deg); }
+
+  .kolaj-not {
+    position: absolute; right: 0px; bottom: 8px; width: 320px;
+    font-family: "IBM Plex Mono", monospace; font-size: 26px;
+    line-height: 1.62; color: #8792AA; text-align: right;
+  }
+  .kolaj-not b { color: #52607C; font-weight: 500; }
+
+  /* ---- alt bilgi ---- */
+
+  .altbilgi {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-top: 3px solid #16203A; padding-top: 38px;
+  }
+  .yazar { font-family: "Bitter", serif; font-size: 50px; font-weight: 700; }
+  .rozet {
+    font-family: "IBM Plex Mono", monospace; font-size: 25px;
+    color: #52607C; text-align: right; line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+  <div class="serit"></div>
+
+  <div class="seri">Fen Lisesi için C++ ve algoritma</div>
+
+  <h1>Programlamaya<br>ve Algoritmalara<br><span class="vurgu">Keyifli</span> Bir Başlangıç</h1>
+
+  <p class="alt">
+    Altı bölüm, yirmi dört çalışan program ve bir sürü soru.<br>
+    Yalnız da okunur, ama ikili daha hızlı.
+  </p>
+
+  <div class="kolaj">
+    <img class="c1" src="../ileri/dersler/resim/bilgisayar-agi.png" alt="bilgisayar ağı">
+    <img class="c2" src="../ileri/dersler/resim/daykstra3.png" alt="Dijkstra adım adım">
+    <img class="c3" src="../ileri/dersler/resim/bellman-ford.png" alt="Bellman-Ford çizgesi">
+    <img class="c4" src="../ileri/dersler/resim/yonlu-cizge1.png" alt="yönlü çizge">
+    <img class="c5" src="../ileri/dersler/resim/omuzda-tasima.png" alt="omuzda taşıma">
+    <div class="kolaj-not">derste tahtaya<br><b>çizdiklerimizden</b></div>
+  </div>
+
+  <div class="altbilgi">
+    <div class="yazar">Bülent Başaran</div>
+    <div class="rozet">CC BY-SA 4.0 &middot; kod MIT<br>github.com/bulent2k2/cpp_ogreniyoruz</div>
+  </div>
+</body>
+</html>

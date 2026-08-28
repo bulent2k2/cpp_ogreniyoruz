@@ -517,6 +517,96 @@ dene(<span class="s">"1110111011"</span>,<span class="s">"10011"</span>,      <s
       </div>
     </div>
 
+    <h3>Başka ortamlar, başka keyifler</h3>
+
+    <p>
+      C++ hızlı ve sağlam, ama tek dil değil &mdash; ve bazı şeyleri anlamanın
+      yolu onları <em>çizdirmekten</em> geçiyor. Derste zaman zaman
+      bahsettiğim <a href="https://sites.google.com/view/koco-surum">Koco</a>
+      tam da bunun için: Scala diliyle yazıyorsunuz, yazdığınız her satırın
+      sonucunu anında ekranda görüyorsunuz.
+    </p>
+
+    <p>
+      Aşağıdakiler o ortamda yazılmış birkaç program. Üçü de bu kitapçıkta
+      gördüğünüz kavramların üstüne kurulu:
+    </p>
+
+    <div class="galeri uclu">
+      <figure>
+        <img src="../resim/koco-koh-tanesi.jpeg"
+             alt="Koch tanesi çizen Koco programı ve çıktısı">
+        <figcaption>
+          <b>Koch tanesi.</b> Kuralı tek cümle: her kenarın ortasına bir üçgen
+          koy &mdash; sonra o üçgenin kenarlarına da. <a href="{{04-ozyineleme}}">Bölüm
+          IV</a>'teki özyinelemenin ta kendisi, bu sefer gözle görülür hâli.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../resim/koco-mandelbrot.jpeg"
+             alt="Mandelbrot kümesini çizen Koco programı ve çıktısı">
+        <figcaption>
+          <b>Mandelbrot kümesi.</b> Karmaşık sayılar üzerinde tek satırlık bir
+          kural: <code>z &larr; z² + c</code>. Bu kadarcık kuraldan sonsuz
+          derinlikte bir desen çıkıyor; sınırı hem var hem yok.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../resim/koco-giysi-cercevesi-cokgen.jpg"
+             alt="Bir resmin etrafına çokgen çerçeve çizen Koco programı">
+        <figcaption>
+          <b>Çokgen çerçeve.</b> Herhangi bir resmin etrafına, kenar sayısını
+          siz seçerek çerçeve çizen bir program. Geometri, döngü ve biraz
+          şaka.
+        </figcaption>
+      </figure>
+    </div>
+
+    <h4>Aynı program, üç farklı başlangıç</h4>
+
+    <p>
+      Şu üçü ise <strong>üç cisim problemi</strong>: birbirini çeken üç gök
+      cismi. Newton'un yasaları üç satır tutuyor, ama üç cisim için kalem
+      kâğıtla kapalı bir çözüm <em>yok</em> &mdash; tek yol adım adım benzetim
+      (<em>simülasyon</em>). Üç çizim de aynı programın çıktısı; aralarındaki
+      tek fark başlangıç konum ve hızları.
+    </p>
+
+    <div class="galeri uclu serit">
+      <figure>
+        <img src="../resim/koco-uc-cisim-pr-1.jpg" alt="üç cisim, birinci deneme">
+        <figcaption>Birinci deneme</figcaption>
+      </figure>
+      <figure>
+        <img src="../resim/koco-uc-cisim-pr-2.jpg" alt="üç cisim, ikinci deneme">
+        <figcaption>İkinci deneme</figcaption>
+      </figure>
+      <figure>
+        <img src="../resim/koco-uc-cisim-pr-3.jpg" alt="üç cisim, üçüncü deneme">
+        <figcaption>Üçüncü deneme</figcaption>
+      </figure>
+    </div>
+
+    <p>
+      Minicik bir fark, bambaşka bir yörünge. Buna <em>kaosa duyarlılık</em>
+      deniyor ve neden hava durumunu on gün öteye tahmin edemediğimizin de
+      cevabı bu. Programınız tamamen belirlenimci
+      (<em>deterministic</em>) &mdash; her çalıştırışta aynı girdiye aynı çıktıyı
+      veriyor &mdash; ama yine de sonucunu önceden kestiremiyorsunuz.
+      Çalıştırmadan bilinemeyen şeyler var; bilgisayarın en güzel tarafı da bu.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Koco'yu kurun ve Mandelbrot kümesine dalın; sonra Koch tanesini
+        kendiniz yazın. Sadece birkaç satır sürüyor.
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/kocoya-davet.md">Kurulum
+        ve ilk adımlar burada</a>. Ardından aynı iki çizimi C++'la yapmayı
+        deneyin &mdash; iki dili yan yana görmek ikisini de daha iyi öğretir.
+      </p>
+    </div>
+
     <h3>Nereye gidilir?</h3>
 
     <p>

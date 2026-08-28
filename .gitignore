@@ -10,3 +10,5 @@ code-deneme1.dSYM
 **/*.dSYM/
 # kitapçığın üretilen html çıktıları (kaynak: kitapcik/bolumler + ortak.css)
 kitapcik/cikti/
+__pycache__/
+*.pyc

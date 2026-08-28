@@ -15,7 +15,10 @@ istiyoruz.
 
 Kapsam: Bütün ders notları ve yazılar. Yani `.md` ve `.html` uzantılı
 dosyalar, `kitapcik/` dizinindeki bölüm metinleri ve kitapçığın
-`kitap/` dizinindeki PDF ile EPUB sürümleri.
+`kitap/` dizinindeki PDF ile EPUB sürümleri. Ayrıca yazara ait görseller:
+`kitapcik/resim/` dizininin tamamı (Koco ortamında yazılmış programların
+ekran görüntüleri ve çizimleri), `kitap/kapak.png` ve
+`ileri/dersler/resim/` altındaki elle çizilmiş çizge şekilleri.
 
     SPDX-License-Identifier: CC-BY-SA-4.0
 

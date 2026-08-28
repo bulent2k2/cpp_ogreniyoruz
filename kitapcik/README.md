@@ -25,6 +25,22 @@ Kitapçığı okumak
 + [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc) derinlemesine/enlemesine gezi, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford
 + [VI. Dinamik Programlama](https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb) beş adımlık reçete, ızgara yolları, bozuk para soruları
 
+Resimler
+--
+
+`resim/` dizinindeki görseller kitapçığın son bölümünde, &ldquo;Yola devam&rdquo;
+başlığı altında kullanılıyor: Koch tanesi (özyineleme), Mandelbrot kümesi
+(karmaşık sayılar), çokgen çerçeve ve üç cisim probleminin üç ayrı
+çalıştırması. Hepsi Koco ortamında yazılmış programların çıktısı.
+
+Bölüm metinlerinde `../resim/<ad>` diye anılıyorlar. Bu yol PDF için
+doğrudan çalışıyor; `yap.py` tek başına yayımlanan sayfalarda onları data
+URI olarak gömüyor, `epub.py` de EPUB paketinin içine `resim/` altına
+kopyalayıp bildirime ekliyor.
+
+Kapaktaki kolaj ise `ileri/dersler/resim/` dizinindeki, derste elle çizilmiş
+çizge şekillerinden oluşuyor.
+
 Örnek programlar
 --
 

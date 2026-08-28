@@ -10,6 +10,8 @@ Girdi : kitapcik/ortak.css + kitapcik/bolumler/*.html (gövde parçaları)
 Kullanım:  python3 kitapcik/yap.py
 """
 
+import base64
+import mimetypes
 import pathlib
 import re
 
@@ -17,6 +19,12 @@ KOK = pathlib.Path(__file__).resolve().parent
 ORTAK = (KOK / "ortak.css").read_text(encoding="utf-8")
 CIKTI = KOK / "cikti"
 CIKTI.mkdir(exist_ok=True)
+RESIM = KOK / "resim"
+
+# Bölüm metinlerinde resimler ../resim/<ad> diye anılıyor. Bu yol
+# cikti/*.html ve PDF için doğru; ama tek başına yayımlanan sayfalarda
+# yanında dosya olmadığı için resimleri içeri gömmek gerekiyor.
+RESIM_DESENI = re.compile(r'src="\.\./resim/([^"]+)"')
 
 BASLIK = "Programlamaya ve Algoritmalara Keyifli Bir Başlangıç"
 
@@ -117,10 +125,23 @@ def kur(slug: str, baglantilar: dict[str, str] | None, tam: bool = False) -> str
     return g
 
 
+def resimleri_goem(metin: str) -> str:
+    """Resimleri data URI olarak gömer: sayfa tek başına taşınabilsin diye."""
+    def degistir(eslesme):
+        ad = eslesme.group(1)
+        yol = RESIM / ad
+        if not yol.exists():
+            return eslesme.group(0)
+        tur = mimetypes.guess_type(ad)[0] or "image/jpeg"
+        veri = base64.b64encode(yol.read_bytes()).decode("ascii")
+        return f'src="data:{tur};base64,{veri}"'
+    return RESIM_DESENI.sub(degistir, metin)
+
+
 def artifact_yaz(baglantilar: dict[str, str]) -> None:
     """Her bölüm için tek başına yayımlanabilir dosya."""
     for slug, _kisa, baslik, _tanit in BOLUMLER:
-        icerik = kur(slug, baglantilar, tam=False)
+        icerik = resimleri_goem(kur(slug, baglantilar, tam=False))
         html = (
             f"<title>{baslik}</title>\n{FONT}\n"
             f"<style>\n{ORTAK}\n</style>\n"

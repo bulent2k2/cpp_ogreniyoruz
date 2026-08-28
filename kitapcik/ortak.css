@@ -495,6 +495,40 @@ hr.ayrac {
   .kart-izgara { margin-right: -4.5rem; }
 }
 
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
 /* ---------- baskı ---------- */
 
 /* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
@@ -533,6 +567,11 @@ hr.ayrac {
   h2 { break-after: avoid; page-break-after: avoid; }
   h3, h4 { break-after: avoid; page-break-after: avoid; }
   .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
   a { color: #1D3FB0; text-decoration: none; }
   .bolum-basi { break-before: page; page-break-before: always; }
   .ust { padding-top: 0; }

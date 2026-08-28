@@ -9,6 +9,7 @@ Girdi : kitapcik/bolumler/*.html + kitapcik/epub.css (+ varsa kitap/kapak.png)
 Kullanım:  python3 kitapcik/epub.py
 """
 
+import mimetypes
 import pathlib
 import re
 import xml.etree.ElementTree as ET
@@ -17,6 +18,9 @@ import zipfile
 import yap  # bölüm listesi ve gövde birleştirme mantığı oradan geliyor
 
 KOK = pathlib.Path(__file__).resolve().parent
+RESIM = KOK / "resim"
+# bölüm metinlerindeki ../resim/<ad> yolları EPUB içinde resim/<ad> oluyor
+RESIM_DESENI = re.compile(r'src="\.\./resim/([^"]+)"')
 CIKTI = KOK.parent / "kitap" / "Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub"
 
 BASLIK = "Programlamaya ve Algoritmalara Keyifli Bir Başlangıç"
@@ -40,9 +44,13 @@ VARLIKLAR = {
     "&ldquo;": "“", "&rdquo;": "”",
     "&hellip;": "…", "&nbsp;": " ",
     "&infin;": "∞", "&times;": "×",
-    "&middot;": "·", "&rarr;": "→",
+    "&middot;": "·", "&rarr;": "→", "&larr;": "←",
     "&minus;": "−",
 }
+
+# XML'de tanımlı olan beşli; bunlara dokunmuyoruz
+XML_VARLIKLARI = {"lt", "gt", "amp", "quot", "apos"}
+KALAN_VARLIK = re.compile(r"&([a-zA-Z][a-zA-Z0-9]*);")
 
 XHTML = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
@@ -70,6 +78,15 @@ def xhtml_yap(parca: str) -> str:
     # boş öğeler XHTML'de kapanmak zorunda
     parca = re.sub(r"<br\s*/?>", "<br/>", parca)
     parca = re.sub(r"<(hr|img|meta|link)([^>]*?)/?>", r"<\1\2/>", parca)
+
+    # Haritada olmayan bir varlık kalmışsa XML çözümleyici anlaşılmaz bir
+    # hata verir. Onun yerine burada adıyla söyleyelim.
+    kalan = {a for a in KALAN_VARLIK.findall(parca) if a not in XML_VARLIKLARI}
+    if kalan:
+        raise SystemExit(
+            "VARLIKLAR haritasına eklenmesi gereken adlar: "
+            + ", ".join(f"&{a};" for a in sorted(kalan))
+        )
     return parca
 
 
@@ -81,16 +98,20 @@ def denetle(ad: str, metin: str) -> None:
         raise SystemExit(f"{ad}: XHTML iyi biçimli değil -> {hata}")
 
 
-def bolum_sayfalari() -> list[tuple[str, str, str]]:
-    """(dosya adı, başlık, xhtml) üçlüleri."""
+def bolum_sayfalari() -> tuple[list[tuple[str, str, str]], list[str]]:
+    """(dosya adı, başlık, xhtml) üçlüleri ve kullanılan resimlerin listesi."""
     baglantilar = {s: dosya_adi(s) for s in yap.SIRA}
-    sayfalar = []
+    sayfalar, resimler = [], []
     for slug, _kisa, baslik, _tanit in yap.BOLUMLER:
         govde = yap.kur(slug, baglantilar, tam=False)
+        for ad in RESIM_DESENI.findall(govde):
+            if ad not in resimler:
+                resimler.append(ad)
+        govde = RESIM_DESENI.sub(r'src="resim/\1"', govde)
         sayfa = XHTML.format(dil=DIL, baslik=baslik, govde=xhtml_yap(govde))
         denetle(slug, sayfa)
         sayfalar.append((dosya_adi(slug), baslik, sayfa))
-    return sayfalar
+    return sayfalar, resimler
 
 
 def kapak_sayfasi(kapak_var: bool) -> str:
@@ -119,7 +140,7 @@ def nav_sayfasi(sayfalar) -> str:
     return sayfa
 
 
-def opf(sayfalar, kapak_var: bool) -> str:
+def opf(sayfalar, kapak_var: bool, resimler=()) -> str:
     manifest = [
         '    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" '
         'properties="nav"/>',
@@ -132,6 +153,11 @@ def opf(sayfalar, kapak_var: bool) -> str:
         manifest.append(
             '    <item id="kapakresmi" href="kapak.png" media-type="image/png" '
             'properties="cover-image"/>'
+        )
+    for i, ad in enumerate(resimler):
+        tur = mimetypes.guess_type(ad)[0] or "image/jpeg"
+        manifest.append(
+            f'    <item id="r{i}" href="resim/{ad}" media-type="{tur}"/>'
         )
     omurga = ['    <itemref idref="kapaksayfa"/>', '    <itemref idref="nav"/>']
     for i, (ad, _baslik, _icerik) in enumerate(sayfalar):
@@ -214,9 +240,13 @@ def main() -> None:
     kapak_png = CIKTI.parent / "kapak.png"   # kitap/kapak.png
     kapak_var = kapak_png.exists()
 
-    sayfalar = bolum_sayfalari()
+    sayfalar, resimler = bolum_sayfalari()
+    eksik = [a for a in resimler if not (RESIM / a).exists()]
+    if eksik:
+        raise SystemExit("resim bulunamadı: " + ", ".join(eksik))
+
     denetle("container", CONTAINER)
-    denetle("opf", opf(sayfalar, kapak_var))
+    denetle("opf", opf(sayfalar, kapak_var, resimler))
     denetle("ncx", ncx(sayfalar))
 
     CIKTI.parent.mkdir(parents=True, exist_ok=True)
@@ -224,19 +254,21 @@ def main() -> None:
         # mimetype ilk sıradaki ve sıkıştırılmamış dosya olmak zorunda
         yaz(z, "mimetype", "application/epub+zip", sikistir=False)
         yaz(z, "META-INF/container.xml", CONTAINER)
-        yaz(z, "OEBPS/content.opf", opf(sayfalar, kapak_var))
+        yaz(z, "OEBPS/content.opf", opf(sayfalar, kapak_var, resimler))
         yaz(z, "OEBPS/toc.ncx", ncx(sayfalar))
         yaz(z, "OEBPS/nav.xhtml", nav_sayfasi(sayfalar))
         yaz(z, "OEBPS/kapak.xhtml", kapak_sayfasi(kapak_var))
         yaz(z, "OEBPS/bicem.css", (KOK / "epub.css").read_text(encoding="utf-8"))
         if kapak_var:
             yaz(z, "OEBPS/kapak.png", kapak_png.read_bytes())
+        for ad in resimler:
+            yaz(z, "OEBPS/resim/" + ad, (RESIM / ad).read_bytes())
         for ad, _baslik, icerik in sayfalar:
             yaz(z, "OEBPS/" + ad, icerik)
 
     boyut = CIKTI.stat().st_size / 1024
-    print(f"EPUB yazıldı: {CIKTI}  ({boyut:.0f} KB, {len(sayfalar)} bölüm"
-          f"{', kapaklı' if kapak_var else ', kapaksız'})")
+    print(f"EPUB yazıldı: {CIKTI}  ({boyut:.0f} KB, {len(sayfalar)} bölüm, "
+          f"{len(resimler)} resim{', kapaklı' if kapak_var else ', kapaksız'})")
 
 
 if __name__ == "__main__":

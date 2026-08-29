@@ -21,10 +21,11 @@ CIKTI = KOK / "cikti"
 CIKTI.mkdir(exist_ok=True)
 RESIM = KOK / "resim"
 
-# Bölüm metinlerinde resimler ../resim/<ad> diye anılıyor. Bu yol
-# cikti/*.html ve PDF için doğru; ama tek başına yayımlanan sayfalarda
-# yanında dosya olmadığı için resimleri içeri gömmek gerekiyor.
-RESIM_DESENI = re.compile(r'src="\.\./resim/([^"]+)"')
+# Bölüm metinlerindeki resim yolları cikti/ dizinine göre yazılıyor
+# (../resim/<ad>, ../../kitap/kapak.png). Bu yollar yerel önizleme ve PDF
+# için doğru; ama tek başına yayımlanan sayfaların yanında dosya olmadığı
+# için oralarda resimleri içeri gömmek gerekiyor.
+RESIM_DESENI = re.compile(r'src="((?:\.\./)+[^"]+)"')
 
 BASLIK = "Programlamaya ve Algoritmalara Keyifli Bir Başlangıç"
 
@@ -129,7 +130,7 @@ def resimleri_goem(metin: str) -> str:
     """Resimleri data URI olarak gömer: sayfa tek başına taşınabilsin diye."""
     def degistir(eslesme):
         ad = eslesme.group(1)
-        yol = RESIM / ad
+        yol = (CIKTI / ad).resolve()
         if not yol.exists():
             return eslesme.group(0)
         tur = mimetypes.guess_type(ad)[0] or "image/jpeg"

@@ -20,11 +20,9 @@ Kitapçığı okumak
 Çevrimiçi bölümler
 --
 
-Kitapçık bölüm bölüm çevrimiçi sayfalar hâlinde de yayımlandı. **Ama bu
-sayfalar şu anda özel:** yalnızca yayımlayan hesap açabiliyor. Başkalarının
-da açabilmesi için her sayfanın kendi paylaşım menüsünden paylaşılması
-gerekiyor. O yapılana kadar aşağıdaki bağlantılar sizde çalışmayacaktır;
-öğrencilere PDF ya da EPUB'ı verin.
+Kitapçık bölüm bölüm çevrimiçi sayfalar hâlinde de yayımlandı. Bağlantısı
+olan herkes açabilir; telefondan okumak için elverişli. Ders sırasında hızlıca
+bir bölüme bakmak isteyenler için:
 
 + [Kapak ve kılavuz](https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63) nasıl çalışalım, ikili programlama, tezgâh kurulumu
 + [I. İlk Adımlar](https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7) değer, değişken, tür, işlev; taşma; kapsam; sayı tahmin oyunu
@@ -48,7 +46,10 @@ URI olarak gömüyor, `epub.py` de EPUB paketinin içine `resim/` altına
 kopyalayıp bildirime ekliyor.
 
 Kapaktaki kolaj ise `ileri/dersler/resim/` dizinindeki, derste elle çizilmiş
-çizge şekillerinden oluşuyor.
+çizge şekillerinden oluşuyor. Aynı kapak üç yerde birden görünüyor: PDF'in ilk
+sayfası, EPUB'ın kapağı ve çevrimiçi kapak sayfasının başındaki görsel. Bu
+sonuncusu yalnızca ekran içindir; baskıda ve EPUB'da gizlenir, çünkü oralarda
+kapak zaten var.
 
 Örnek programlar
 --

@@ -15,7 +15,16 @@ Kitapçığı okumak
 **EPUB (telefon, tablet, e-kitap okuyucu):**
 [kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 
-**Çevrimiçi bölümler:**
+İkisi de bu depoda duruyor; herkes indirip okuyabilir, basabilir.
+
+Çevrimiçi bölümler
+--
+
+Kitapçık bölüm bölüm çevrimiçi sayfalar hâlinde de yayımlandı. **Ama bu
+sayfalar şu anda özel:** yalnızca yayımlayan hesap açabiliyor. Başkalarının
+da açabilmesi için her sayfanın kendi paylaşım menüsünden paylaşılması
+gerekiyor. O yapılana kadar aşağıdaki bağlantılar sizde çalışmayacaktır;
+öğrencilere PDF ya da EPUB'ı verin.
 
 + [Kapak ve kılavuz](https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63) nasıl çalışalım, ikili programlama, tezgâh kurulumu
 + [I. İlk Adımlar](https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7) değer, değişken, tür, işlev; taşma; kapsam; sayı tahmin oyunu

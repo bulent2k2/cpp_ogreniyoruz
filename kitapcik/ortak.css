@@ -495,6 +495,30 @@ hr.ayrac {
   .kart-izgara { margin-right: -4.5rem; }
 }
 
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
 /* ---------- görsel galeri ---------- */
 
 .galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
@@ -567,6 +591,7 @@ hr.ayrac {
   h2 { break-after: avoid; page-break-after: avoid; }
   h3, h4 { break-after: avoid; page-break-after: avoid; }
   .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
   .galeri { margin-right: 0; gap: 0.8em 0.7em; }
   /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
   .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }

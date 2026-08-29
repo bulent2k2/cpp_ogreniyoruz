@@ -297,6 +297,9 @@ th {
 hr.ayrac { border: none; border-top: 1px solid #BDC7DB; margin: 1.8em 0; }
 .sayi { font-variant-numeric: tabular-nums; }
 
+/* EPUB'ın kendi kapak sayfası var; bölüm içinde tekrarlamasın */
+.kapak-gorseli { display: none; }
+
 /* ---------- görsel galeri ---------- */
 /* E-okuyucularda grid desteği güvenilmez; resimler alt alta akıyor. */
 

@@ -42,6 +42,7 @@ HAKLAR = (
 VARLIKLAR = {
     "&mdash;": "—", "&ndash;": "–",
     "&ldquo;": "“", "&rdquo;": "”",
+    "&lsquo;": "‘", "&rsquo;": "’",
     "&hellip;": "…", "&nbsp;": " ",
     "&infin;": "∞", "&times;": "×",
     "&middot;": "·", "&rarr;": "→", "&larr;": "←",
@@ -107,6 +108,8 @@ def bolum_sayfalari() -> tuple[list[tuple[str, str, str]], list[str]]:
         for ad in RESIM_DESENI.findall(govde):
             if ad not in resimler:
                 resimler.append(ad)
+        # kapak resmi EPUB'da zaten OEBPS/kapak.png olarak duruyor
+        govde = govde.replace('src="../../kitap/kapak.png"', 'src="kapak.png"')
         govde = RESIM_DESENI.sub(r'src="resim/\1"', govde)
         sayfa = XHTML.format(dil=DIL, baslik=baslik, govde=xhtml_yap(govde))
         denetle(slug, sayfa)

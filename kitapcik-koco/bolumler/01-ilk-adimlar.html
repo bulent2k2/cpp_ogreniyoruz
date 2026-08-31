@@ -1,0 +1,490 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm I</div>
+  <h1>Kaplumbağayla İlk Adımlar</h1>
+  <p class="ozet">
+    Ekranın ortasında sizi bekleyen küçük bir kaplumbağa var. Komut verirseniz
+    yürüyor, yürürken de çiziyor. Bu bölümde ona kareler, yıldızlar ve çiçekler
+    çizdireceğiz &mdash; ve farkında olmadan programlamanın bütün yapıtaşlarını
+    öğrenmiş olacaksınız: değer, tür, işlev, yineleme. Sonunda da bilgisayarla
+    bir oyun oynayacağız.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">I.1</div>
+  <div class="govde">
+    <h2>Kaplumbağayla tanışın</h2>
+
+    <p>
+      Koco'yu açın, aşağıdaki üç satırı yazın ve çalıştırın:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">ilk çizim</span></figcaption>
+      <pre><code>sil()          <span class="y">// tuvali temizle, kaplumbağayı başa getir</span>
+ileri(100)     <span class="y">// 100 adım ileri</span>
+sağ()          <span class="y">// 90 derece sağa dön</span></code></pre>
+    </figure>
+
+    <p>
+      Tuvalde bir çizgi belirdi ve kaplumbağa artık doğuya bakıyor. Hepsi bu:
+      kaplumbağa <em>baktığı yöne</em> yürür, yürürken kalemiyle iz bırakır.
+      Şimdi bir kare çizelim. En kestirme yol, dört kere &ldquo;ileri ve
+      dön&rdquo; demek:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">kare</span><span class="etiket">ilk yineleme</span></figcaption>
+      <pre><code>sil()
+yinele(<span class="n">4</span>) {
+  ileri(<span class="n">100</span>)
+  sağ()
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>yinele(4) { &hellip; }</code> kıvrık parantezin içindeki komutları
+      dört kere çalıştırır. Kısa, okunaklı ve Türkçe bir cümle gibi:
+      &ldquo;dört kere yinele: ileri git, sağa dön.&rdquo;
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Karenin kodunda iki sayı var: <code>4</code> ve <code>100</code>.
+        Bir de <code>sağ()</code>'ın gizli sayısı: 90 derece.
+        <code>yinele(3)</code> ile <code>sağ(120)</code> yazarsanız ne çıkar?
+        <code>yinele(6)</code> ile <code>sağ(60)</code>? Peki
+        <code>yinele(5)</code> ile <code>sağ(144)</code>?
+        (Sonuncusu güzel bir sürpriz.)
+      </p>
+    </div>
+
+    <p>
+      Kaplumbağanın epey marifeti var; en çok kullanacaklarınız şunlar:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Komut</th><th>Ne yapar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ileri(100)</code>, <code>geri(50)</code></td>
+              <td>Baktığı yönde yürür (iz bırakarak)</td></tr>
+          <tr><td><code>sağ(45)</code>, <code>sol(30)</code></td>
+              <td>Olduğu yerde döner; sayı vermezseniz 90 derece</td></tr>
+          <tr><td><code>zıpla(50)</code></td>
+              <td>Kalemi kaldırıp yürür: iz bırakmaz</td></tr>
+          <tr><td><code>atla(x, y)</code></td>
+              <td>Çizmeden <code>(x, y)</code> noktasına gider</td></tr>
+          <tr><td><code>daire(60)</code>, <code>yay(60, 120)</code></td>
+              <td>Yarıçapı verilen daireyi ya da yayı çizer</td></tr>
+          <tr><td><code>kalemRenginiKur(mavi)</code></td>
+              <td>Kalemin rengini değiştirir</td></tr>
+          <tr><td><code>boyamaRenginiKur(sarı)</code></td>
+              <td>Kapalı şekillerin içini boyar</td></tr>
+          <tr><td><code>kalemKalınlığınıKur(4)</code></td>
+              <td>Çizginin kalınlığını ayarlar</td></tr>
+          <tr><td><code>canlandırmaHızınıKur(10)</code></td>
+              <td>Kaplumbağayı hızlandırır (100 adımın süresi, milisaniye)</td></tr>
+          <tr><td><code>sil()</code></td>
+              <td>Tuvali temizler, kaplumbağayı eve gönderir</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Renkler de hazır: <code>mavi</code>, <code>kırmızı</code>,
+        <code>sarı</code>, <code>yeşil</code>, <code>mor</code>,
+        <code>turuncu</code>, <code>camgöbeği</code>&hellip; Bir de
+        <code>rastgeleRenk</code> var &mdash; her çağrıda başka bir renk verir.
+        Deseninizin her koluna bir <code>kalemRenginiKur(rastgeleRenk)</code>
+        koyun, ne olacağını görün.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.2</div>
+  <div class="govde">
+    <h2>Kendi komutunuz: <code>def</code></h2>
+
+    <p>
+      Kare çizen kodu her seferinde yeniden yazmak olmaz. Ona bir <strong>ad</strong>
+      verelim ki tek sözcükle çağırabilelim. İşte ilk İngilizce çekirdek
+      sözcüğümüz: <code>def</code>, yani <em>tanımla</em>.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">kare.kojo</span><span class="etiket">ilk işleviniz</span></figcaption>
+      <pre><code><span class="a">def</span> kare(kenar: <span class="t">Sayı</span>) = {
+  yinele(<span class="n">4</span>) {
+    ileri(kenar)
+    sağ()
+  }
+}
+
+sil()
+kare(<span class="n">50</span>)
+kare(<span class="n">100</span>)
+kare(<span class="n">150</span>)      <span class="y">// iç içe üç kare</span></code></pre>
+    </figure>
+
+    <p>
+      <code>kare</code> artık bir <strong>komut</strong>: girdisi var
+      (<code>kenar</code>), işi var (dört kenar çizmek). Girdinin yanındaki
+      <code>: Sayı</code> ise girdinin <strong>türü</strong> &mdash; kenar bir
+      tam sayı olmalı, yazı ya da renk değil. Türlere birazdan döneceğiz.
+    </p>
+
+    <p>
+      Şimdi asıl güzellik. Madem <code>kare(100)</code> tek komut, onu da
+      yineleyebiliriz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">döner desen</span></figcaption>
+      <pre><code>sil()
+canlandırmaHızınıKur(<span class="n">10</span>)
+yinele(<span class="n">12</span>) {
+  kare(<span class="n">100</span>)
+  sağ(<span class="n">30</span>)     <span class="y">// 12 × 30 = 360: tam tur</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      On iki kare, her biri 30 derece dönük: bir çiçek. Dört satırlık kodun
+      böyle bir şey çizmesi ilk seferinde insanı hep şaşırtıyor. Kaç kere
+      döneceğinizi bilmek isterseniz sayaçlı yineleme de var:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">sayaçlı yineleme</span></figcaption>
+      <pre><code>sil()
+yineleDizinli(<span class="n">10</span>) { k =&gt;      <span class="y">// k: 0, 1, 2, ... 9</span>
+  kare(<span class="n">20</span> + <span class="n">15</span> * k)          <span class="y">// her kare bir öncekinden büyük</span>
+}</code></pre>
+    </figure>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Biriniz kâğıda bir desen çizsin &mdash; makul olsun: iç içe üçgenler,
+        bir merdiven, bir yel değirmeni. Öteki onu koda çevirsin. Sonra roller
+        değişsin. Kâğıttaki şekli koda çevirirken sorduğunuz sorular
+        (&ldquo;şimdi kaç derece dönmeli?&rdquo;) tam olarak programcı sorularıdır.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.3</div>
+  <div class="govde">
+    <h2>Değerler ve türler</h2>
+
+    <p>
+      İkinci çekirdek sözcük: <code>val</code>, yani <strong>değer</strong>.
+      Bir şeye ad takar ve o ad artık hep o değeri gösterir:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">değerler</span></figcaption>
+      <pre><code><span class="a">val</span> kenar = <span class="n">80</span>
+<span class="a">val</span> boşluk = kenar / <span class="n">4</span>
+<span class="a">val</span> ad = <span class="s">"kelebek"</span>
+
+satıryaz(ad)                <span class="y">// çıktı penceresine yazar</span>
+satıryaz(kenar + boşluk)    <span class="y">// 100</span>
+satıryaz(<span class="s">s"kenar $kenar, boşluk $boşluk"</span>)  <span class="y">// yazı kalıbı</span></code></pre>
+    </figure>
+
+    <p>
+      Son satırdaki <code>s"&hellip;"</code> bir <em>yazı kalıbı</em>: içindeki
+      <code>$kenar</code> yazının ortasına değerin kendisini koyar. Çıktıya bir
+      şey yazdırmanın en tatlı yolu budur.
+    </p>
+
+    <p>
+      Dikkat ederseniz <code>val kenar = 80</code> yazarken tür söylemedik.
+      Scala türü kendisi <em>çıkarır</em>: 80 bir <code>Sayı</code>,
+      <code>"kelebek"</code> bir <code>Yazı</code>. Tür yine var &mdash; sadece
+      çoğu zaman yazmak zorunda değilsiniz. En çok göreceğiniz türler:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Tür</th><th>Ne tutar</th><th>Örnek</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Sayı</code></td><td>Tam sayı</td><td><code>16</code>, <code>-3</code></td></tr>
+          <tr><td><code>Kesir</code></td><td>Kesirli sayı</td><td><code>1.72</code></td></tr>
+          <tr><td><code>Yazı</code></td><td>Harf dizisi</td><td><code>"merhaba"</code></td></tr>
+          <tr><td><code>Harf</code></td><td>Tek harf</td><td><code>'B'</code></td></tr>
+          <tr><td><code>İkil</code></td><td><code>doğru</code> ya da <code>yanlış</code></td><td><code>5 &gt; 3</code></td></tr>
+          <tr><td><code>Uzun</code>, <code>İriSayı</code></td><td>Büyük tam sayılar</td><td>birazdan&hellip;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Her türün bir sınırı var &mdash; burada da</h3>
+
+    <p>
+      Kardeş kitapçıkta C++'ın <code>int</code> türünün taşmasını görmüştük.
+      Kötü haber: <code>Sayı</code> da aynı 32 bitlik kutuda yaşıyor.
+      Tahmin edin, sonra çalıştırın:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">taşma</span><span class="etiket">tanıdık bir hata</span></figcaption>
+      <pre><code><span class="a">val</span> a = <span class="n">2000</span>
+satıryaz(a * a * a)          <span class="y">// 2000'in küpü... öyle mi?</span>
+
+<span class="a">val</span> iri: <span class="t">İriSayı</span> = <span class="n">2000</span>     <span class="y">// istediği kadar büyüyebilen tür</span>
+satıryaz(iri * iri * iri)</code></pre>
+    </figure>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code><span class="v">-589934592</span>
+8000000000</code></pre>
+    </figure>
+
+    <p>
+      Evet: eksi! Sayaç doldu ve başa döndü &mdash; C++'taki taşmanın
+      (<em>overflow</em>) ta kendisi, aynı sayıyla, aynı sonuçla. Diller değişir,
+      bilgisayarın belleği değişmez. <code>İriSayı</code> ise dilediği kadar
+      basamak kullanır; yarışmalardaki &ldquo;büyük sayı&rdquo; sorularının
+      Scala'daki kestirmesi budur.
+    </p>
+
+    <h3>Ya değişmesi gerekiyorsa: <code>var</code></h3>
+
+    <p>
+      <code>val</code> ile tanımlanan bir ada yeni değer veremezsiniz;
+      denerseniz Koco daha çalıştırmadan itiraz eder. Bu bir eksiklik değil,
+      bu kitapçığın en önemli fikirlerinden biri: <strong>değişmeyen değere
+      güvenilir.</strong> Kimin ne zaman değiştirdiğini düşünmek zorunda
+      kalmazsınız, çünkü kimse değiştiremez.
+    </p>
+
+    <p>
+      Yine de arada gerçekten değişen bir şey gerekir; onun için <code>var</code>
+      (<em>değişken</em>) var. Kural şu: <strong>önce <code>val</code> deneyin;
+      <code>var</code>'a ancak mecbur kalınca dönün.</strong> Bu bölümün sonunda
+      bir kere mecbur kalacağız.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.4</div>
+  <div class="govde">
+    <h2>Çıktısı olan işlevler</h2>
+
+    <p>
+      <code>kare</code> bir şeyler <em>yapıyordu</em>. İşlevlerin asıl gücü ise
+      bir şeyler <em>hesaplamak</em>: girdi al, çıktı ver.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">hesaplayan işlevler</span></figcaption>
+      <pre><code><span class="a">def</span> topla(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = a + b
+
+<span class="a">def</span> bölünüyorMu(sayı: <span class="t">Sayı</span>, bölen: <span class="t">Sayı</span>) = sayı % bölen == <span class="n">0</span>
+
+satıryaz(topla(<span class="n">3</span>, <span class="n">5</span>))            <span class="y">// 8</span>
+satıryaz(bölünüyorMu(<span class="n">15</span>, <span class="n">5</span>))     <span class="y">// true  (yani doğru)</span>
+satıryaz(bölünüyorMu(<span class="n">16</span>, <span class="n">5</span>))     <span class="y">// false (yani yanlış)</span></code></pre>
+    </figure>
+
+    <p>
+      <code>return</code> gibi bir sözcük aramayın: Scala'da işlevin gövdesi bir
+      <em>deyiş</em>tir ve değeri neyse çıktı odur. <code>a + b</code> yazdınız,
+      çıktı <code>a + b</code>. Kısa işlevler tek satıra sığar ve matematikteki
+      tanımlar gibi okunur &mdash; işlevsel üslubun ilk tadı.
+    </p>
+
+    <p>
+      Karar vermek için üçüncü ve dördüncü çekirdek sözcükler:
+      <code>if</code> ve <code>else</code>. Bunlar da deyiş; yani bir
+      <em>değer üretirler</em>:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">if bir deyiştir</span></figcaption>
+      <pre><code><span class="a">def</span> enİri2(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = <span class="a">if</span> (a &gt; b) a <span class="a">else</span> b
+
+<span class="a">def</span> işaret(s: <span class="t">Sayı</span>) =
+  <span class="a">if</span> (s &gt; <span class="n">0</span>) <span class="s">"artı"</span>
+  <span class="a">else if</span> (s &lt; <span class="n">0</span>) <span class="s">"eksi"</span>
+  <span class="a">else</span> <span class="s">"sıfır"</span>
+
+satıryaz(enİri2(<span class="n">7</span>, <span class="n">3</span>))     <span class="y">// 7</span>
+satıryaz(işaret(-<span class="n">5</span>))      <span class="y">// eksi</span></code></pre>
+    </figure>
+
+    <h3>İlk Project Euler çözümünüz</h3>
+
+    <p>
+      <a href="https://projecteuler.net/problem=1">Project Euler'in birinci
+      sorusu</a>: 1000'den küçük, 3'e ya da 5'e tam bölünen bütün sayıların
+      toplamı kaç? Kardeş kitapçıkta bunu bir döngüyle çözmüştük. İşlevsel
+      üslupta döngü bile yok:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">pe1.kojo</span><span class="etiket">tek deyişlik çözüm</span></figcaption>
+      <pre><code><span class="a">val</span> toplam = (<span class="n">1</span> |- <span class="n">1000</span>)                <span class="y">// 1'den 1000'e kadar (1000 hariç)</span>
+  .dizine                              <span class="y">// sayıları bir dizine çevir</span>
+  .ele(s =&gt; bölünüyorMu(s, <span class="n">3</span>) || bölünüyorMu(s, <span class="n">5</span>))   <span class="y">// uyanları ele: süz</span>
+  .topla                               <span class="y">// hepsini topla</span>
+
+satıryaz(toplam)     <span class="y">// 233168</span></code></pre>
+    </figure>
+
+    <p>
+      Satır satır okuyun: <em>1'den 1000'e kadar sayılardan, 3'e ya da 5'e
+      bölünenleri ele; topla.</em> Kod, sorunun Türkçesiyle neredeyse birebir.
+      <code>ele</code> ve arkadaşlarını II. Bölüm'de derinlemesine göreceğiz;
+      şimdilik tanışmış olun. (<code>||</code> &ldquo;ya da&rdquo; demek,
+      <code>&amp;&amp;</code> de &ldquo;ve&rdquo; &mdash; C++'taki
+      <code>or</code>/<code>and</code> sözcüklerinin imgeli halleri.)
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Klasik tuzak</span>
+      <p>
+        Bu soruyu &ldquo;3'e bölünenler + 5'e bölünenler&rdquo; diye iki ayrı
+        toplamla çözerseniz 15'e bölünenleri iki kere saymış olursunuz.
+        Kardeş sınıfta bu hatayı gerçekten yaptık. Yukarıdaki
+        <code>ele</code>'li çözümde bu tuzak <em>kurulamıyor</em> bile &mdash;
+        her sayı bir kere elenir ya da kalır. İyi araç, bazı hataları
+        yazılamaz hâle getirir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.5</div>
+  <div class="govde">
+    <h2>İlk oyununuz</h2>
+
+    <p>
+      Bilgisayar 1 ile 100 arasında bir sayı tutsun, siz bulmaya çalışın.
+      Kaplumbağa bu sefer dinlensin; oyun çıktı penceresinde geçiyor:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">tahmin.kojo</span><span class="etiket">sayı tahmin oyunu</span></figcaption>
+      <pre><code><span class="a">val</span> gizli = rastgele(<span class="n">100</span>) + <span class="n">1</span>     <span class="y">// 1..100</span>
+<span class="a">var</span> hak = <span class="n">7</span>                       <span class="y">// işte o mecbur kaldığımız var!</span>
+<span class="a">var</span> bulundu = yanlış
+
+satıryaz(<span class="s">"1 ile 100 arasında bir sayı tuttum. 7 hakkın var."</span>)
+
+yineleDoğruysa(hak &gt; <span class="n">0</span> &amp;&amp; !bulundu) {
+  <span class="a">val</span> tahmin = sayıOku(<span class="s">"Tahminin?"</span>)
+  hak = hak - <span class="n">1</span>
+  <span class="a">if</span> (tahmin == gizli) {
+    bulundu = doğru
+    satıryaz(<span class="s">s"Bildin! Hem de $hak hakkın artmıştı."</span>)
+  } <span class="a">else if</span> (tahmin &lt; gizli)
+    satıryaz(<span class="s">s"Daha büyük. Kalan hak: $hak"</span>)
+  <span class="a">else</span>
+    satıryaz(<span class="s">s"Daha küçük. Kalan hak: $hak"</span>)
+}
+
+<span class="a">if</span> (!bulundu) satıryaz(<span class="s">s"Hakkın bitti. Tuttuğum sayı $gizli idi."</span>)</code></pre>
+    </figure>
+
+    <p>
+      <code>yineleDoğruysa</code>, koşul doğru kaldıkça yineler &mdash; C++'taki
+      <code>while</code>'ın Koco'daki karşılığı. <code>sayıOku</code> sizden bir
+      sayı ister, <code>rastgele(100)</code> 0 ile 99 arasında bir sayı verir.
+      Ve evet, iki tane <code>var</code> kullandık: oyunun <em>durumu</em>
+      (kalan hak, bulundu mu) gerçekten değişiyor. Değişen şeye değişken demek
+      günah değil; alışkanlık hâline getirmek günah.
+    </p>
+
+    <h3>Neden tam yedi hak?</h3>
+
+    <p>
+      Akıllı oyuncu her tahminde ortayı söyler: önce 50, sonra kalan yarının
+      ortası, sonra onun ortası&hellip; Her tahmin arama uzayını ikiye böler ve
+      <code>2⁷ = 128 &gt; 100</code> olduğu için yedi tahmin her zaman yeter.
+      Bu yöntemin adı <strong>ikili arama</strong> (<em>binary search</em>) ve
+      kardeş kitapçığın da bu kitapçığın da baş köşesinde oturuyor: milyon
+      sayı içinden aradığınızı yirmi soruda bulur.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Sınırı 1000 yapın. Kaç hak vermek gerekir? Programı, hak sayısını
+        sınırdan kendisi hesaplayacak biçimde değiştirin.
+        (İpucu: <code>log2tabanlı(1000)</code> diye hazır bir işlev var; ama
+        önce <code>yineleDoğruysa</code> ile elle hesaplamayı deneyin &mdash;
+        daha öğretici.)
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Yıldızlı gökyüzü.</strong> Beş köşeli bir yıldız çizen
+          <code>yıldız(boy: Sayı)</code> işlevi yazın (I.1'deki sürprizi
+          hatırlayın). Sonra <code>atla</code> ve <code>rastgele</code> ile
+          tuvalin her yerine, rastgele boylarda yirmi yıldız serpiştirin.
+        </li>
+        <li>
+          <strong>Çember çiçeği.</strong> <code>daire</code> ve döndürmeyle,
+          I.2'deki kare çiçeğinin çemberli sürümünü çizin. Renkleri
+          <code>rastgeleRenk</code>'ten alın.
+        </li>
+        <li>
+          <strong>Fibonaççi.</strong>
+          <a href="https://projecteuler.net/problem=2">Project Euler 2</a>:
+          dört milyonu aşmayan çift Fibonaççi sayılarının toplamı.
+          Şimdilik <code>var</code> ve <code>yineleDoğruysa</code> ile yazın;
+          <a href="{{04-ozyineleme}}">Bölüm IV</a>'te bir daha, bambaşka
+          yazacağız.
+        </li>
+        <li>
+          <strong>Büyük çarpan.</strong>
+          <a href="https://projecteuler.net/problem=3">Project Euler 3</a>:
+          <code>600851475143</code> sayısının en büyük asal çarpanı.
+          <span class="zor">tuzak</span> Bu sayı <code>Sayı</code>'ya sığmaz.
+          Hangi türü seçeceksiniz?
+        </li>
+        <li>
+          <strong>Tahmini tersine çevirin.</strong> Siz tutun, bilgisayar
+          bulsun: program her turda ortayı söylesin, siz
+          <code>b</code>/<code>k</code>/<code>=</code> girin. Kaç adımda
+          buluyor? Yukarıdaki hesapla uyuşuyor mu?
+        </li>
+      </ol>
+    </div>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Üçüncü ve dördüncü alıştırmayı ikili programlamayla yapın: on beş
+        dakika biri yazsın, on beş dakika öteki. Bitince kodu kapatın ve
+        sıfırdan, ezberden bir daha yazın. İkinci yazışın hızına
+        şaşıracaksınız; öğrenme dediğimiz şey tam orada oluyor.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

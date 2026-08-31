@@ -8,6 +8,8 @@ Yeni: [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](kitapcik/README.
 İki dönemlik ders notlarımızdan damıtılmış, altı bölümlük bir giriş kitapçığı. Temel kavramlardan çizge algoritmalarına ve dinamik programlamaya kadar, hepsi derste birlikte yazdığımız çalışan programlarla. [PDF](kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) (64 sayfa) ve [EPUB](kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub) olarak indirebilir, bölüm bölüm çevrimiçi okumak için de [buraya bakabilirsiniz](kitapcik/README.md). Örnek programların hepsi `kitapcik/kod/` dizininde, derlenmeye hazır.  
 Metin [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr), kod MIT lisansıyla: serbestçe basın, çoğaltın, dersinizde kullanın. Ayrıntılar [LICENSE](LICENSE) dosyasında.
 
+Kitapçığın bir de kardeşi var: [Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş](kitapcik-koco/README.md) &mdash; aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-surum) ve Scala ile, bölüm bölüm paralel. Henüz ilk taslak; [PDF](kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf) ve [EPUB](kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub) sürümleri de hazır.
+
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----
 Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/rhc-jgcs-vre).  Geçen yılki (2024-25) giriş derslerinin notları ve kayıtları [burada](mp4ler/gorsel-kayitlar.md). Bu yılki dersler de [burada](ileri/dersler).

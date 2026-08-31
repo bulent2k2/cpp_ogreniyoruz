@@ -1,0 +1,307 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm III</div>
+  <h1>Soyutlama Sanatı</h1>
+  <p class="ozet">
+    Program yazmak üç becerinin bileşimi: yapıtaşlarını tanımak, onları
+    birleştirmek ve &mdash; en önemlisi &mdash; bileşimlere ad takıp yeni
+    yapıtaşları üretmek. Bu sonuncusunun adı <strong>soyutlama</strong>. Bu
+    bölümde tekrarları ada çevireceğiz, işlevleri işlevlere vereceğiz, kendi
+    <code>yinele</code>'mizi yazacağız &mdash; ve programlarımızı kendi kendini
+    sınar hâle getireceğiz.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">III.1</div>
+  <div class="govde">
+    <h2>Tekrara ad takın</h2>
+
+    <p>
+      Bölüm I'de üçgen, kare ve altıgen çizdiniz. Üç ayrı işlev yazdıysanız,
+      şimdi yan yana koyup bakın: aralarındaki tek fark bir sayı. Yazılımın en
+      meşhur ilkesi burada devreye girer: <strong>kendini tekrar etme</strong>
+      (<em>DRY &mdash; Don't Repeat Yourself</em>). Tekrarı görünce ona bir ad
+      takın:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çokgen.kojo</span><span class="etiket">üç işlev → bir işlev</span></figcaption>
+      <pre><code><span class="a">def</span> çokgen(kenarSayısı: <span class="t">Sayı</span>, kenar: <span class="t">Kesir</span>) = {
+  yinele(kenarSayısı) {
+    ileri(kenar)
+    sağ(<span class="n">360.0</span> / kenarSayısı)     <span class="y">// dış açıların toplamı hep 360</span>
+  }
+}
+
+sil()
+çokgen(<span class="n">3</span>, <span class="n">120</span>)     <span class="y">// üçgen</span>
+çokgen(<span class="n">4</span>, <span class="n">90</span>)      <span class="y">// kare</span>
+çokgen(<span class="n">6</span>, <span class="n">60</span>)      <span class="y">// altıgen</span>
+çokgen(<span class="n">60</span>, <span class="n">6</span>)      <span class="y">// 60 kenarlı çokgen... neredeyse çember!</span></code></pre>
+    </figure>
+
+    <p>
+      Son satır güzel bir armağan: kenar sayısını artırınca çokgen çembere
+      yaklaşıyor. Bir soyutlama iyi kurulduysa, beklemediğiniz yerlerde işe
+      yarar &mdash; iyi kurulduğunun işareti de budur.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Soyutlamanın yarısı <strong>iyi ad koymaktır</strong>.
+        <code>çokgen(kenarSayısı, kenar)</code> kendini anlatıyor;
+        <code>f(n, x)</code> anlatmıyor. Kodunuzu iki hafta sonra okuyacak en
+        önemli kişi için yazın: iki hafta sonraki siz.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.2</div>
+  <div class="govde">
+    <h2>İşlevi girdi alan işlev</h2>
+
+    <p>
+      Bölüm II'de <code>işle</code>'ye adsız işlevler verdik. Şimdi perdeyi
+      aralayıp aynı gücü kendi işlevlerimize verelim. Şu iki desene bakın:
+      &ldquo;12 kare, her biri 30 derece dönük&rdquo; ve &ldquo;36 daire, her
+      biri 10 derece dönük&rdquo;. Tekrar eden şey bu sefer bir sayı değil,
+      <em>çizimin kendisi</em>. O da soyutlanır:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">dönence.kojo</span><span class="etiket">çizimi girdi yap</span></figcaption>
+      <pre><code><span class="a">def</span> dönence(kaç: <span class="t">Sayı</span>, açı: <span class="t">Kesir</span>)(çizim: =&gt; <span class="t">Birim</span>) = {
+  yinele(kaç) {
+    çizim
+    sağ(açı)
+  }
+}
+
+sil(); canlandırmaHızınıKur(<span class="n">10</span>)
+
+dönence(<span class="n">12</span>, <span class="n">30</span>) { çokgen(<span class="n">4</span>, <span class="n">100</span>) }   <span class="y">// kare çiçeği</span>
+dönence(<span class="n">36</span>, <span class="n">10</span>) { daire(<span class="n">80</span>) }        <span class="y">// halka halka daireler</span>
+dönence(<span class="n">8</span>, <span class="n">45</span>) {                     <span class="y">// blok uzayabilir de:</span>
+  kalemRenginiKur(rastgeleRenk)
+  çokgen(<span class="n">3</span>, <span class="n">80</span>)
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>çizim: =&gt; Birim</code> girdisi bir kod bloğu: <em>çalıştırılmamış
+      komutlar</em>. <code>dönence</code> onu istediği kadar çalıştırıyor.
+      Yani işlevler de tıpkı sayılar gibi elden ele verilebilen değerlerdir
+      &mdash; işlevsel programlamaya adını veren fikir tam olarak bu.
+      (<code>Birim</code>, &ldquo;kayda değer bir çıktısı yok, işi var&rdquo;
+      demek; C++'taki <code>void</code>'in kardeşi.)
+    </p>
+
+    <h3>Perde arkası: <code>yinele</code> dediğiniz nedir ki?</h3>
+
+    <p>
+      Baştan beri kullandığımız <code>yinele</code> de işte böyle bir işlev.
+      Kendi sürümümüzü yazabiliriz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bizimYinele</span></figcaption>
+      <pre><code><span class="a">def</span> bizimYinele(kaç: <span class="t">Sayı</span>)(komutlar: =&gt; <span class="t">Birim</span>): <span class="t">Birim</span> =
+  <span class="a">if</span> (kaç &gt; <span class="n">0</span>) {
+    komutlar
+    bizimYinele(kaç - <span class="n">1</span>)(komutlar)    <span class="y">// kendini çağırıyor!</span>
+  }
+
+sil()
+bizimYinele(<span class="n">4</span>) { ileri(<span class="n">100</span>); sağ() }    <span class="y">// aynı kare</span></code></pre>
+    </figure>
+
+    <p>
+      İki şeye bakın. Birincisi: dilin &ldquo;sihirli&rdquo; sandığınız parçası
+      beş satırlık sıradan bir işlevmiş. İkincisi: <code>bizimYinele</code>
+      kendini çağırıyor. Bunun adı <strong>özyineleme</strong> ve bir sonraki
+      bölümün tamamı onun; şimdilik sadece not edin.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Biriniz <code>bizimYineleDizinli(kaç)(komutlar: Sayı =&gt; Birim)</code>
+        işlevini yazsın &mdash; hani şu sayacı da veren sürüm. Öteki, onu hiç
+        görmeden sadece çağırarak sınasın: <code>bizimYineleDizinli(5) { k =&gt;
+        satıryaz(k) }</code> ne yazmalı? Sıfırdan mı başlamalı, birden mi?
+        Bu kararın adı <em>arayüz tasarımı</em> ve tartışması yazmasından
+        değerlidir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.3</div>
+  <div class="govde">
+    <h2>Kendi kendini sınayan program</h2>
+
+    <p>
+      Bir işlev yazdınız, birkaç değerle denediniz, doğru göründü. Sonra bir
+      yerini değiştirdiniz &mdash; hâlâ doğru mu? Bunu her seferinde gözle
+      denetlemek olmaz. Çözüm, denemeleri programın içine koymak:
+      <code>belirt</code> (<em>assert</em>) verilen koşul yanlışsa programı o an
+      durdurur ve verdiğiniz mesajı gösterir.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">asal.kojo</span><span class="etiket">önce denemeler</span></figcaption>
+      <pre><code><span class="a">def</span> asalMı(n: <span class="t">Sayı</span>): <span class="t">İkil</span> =
+  n &gt; <span class="n">1</span> &amp;&amp; (<span class="n">2</span> |- n).diziye.hepsiDoğruMu(b =&gt; n % b != <span class="n">0</span>)
+
+<span class="a">def</span> dene() = {
+  belirt(asalMı(<span class="n">2</span>), <span class="s">"2 asaldır"</span>)
+  belirt(asalMı(<span class="n">97</span>), <span class="s">"97 asaldır"</span>)
+  belirt(!asalMı(<span class="n">1</span>), <span class="s">"1 asal sayılmaz"</span>)
+  belirt(!asalMı(<span class="n">91</span>), <span class="s">"91 = 7 × 13, kolay tuzak"</span>)
+  satıryaz(<span class="s">"denemeler geçti."</span>)
+}
+
+dene()</code></pre>
+    </figure>
+
+    <p>
+      <code>asalMı</code>'nın gövdesini yüksek sesle okuyun: <em>n birden büyükse
+      ve 2'den n'ye kadar hiçbir sayı onu bölmüyorsa, asaldır.</em> Tanımın
+      Türkçesi ile kodun kendisi neredeyse aynı cümle &mdash; işlevsel üslubun
+      sınamayı kolaylaştırmasının sebebi de bu: kod tanıma benzeyince tanımla
+      karşılaştırması kolaylaşıyor.
+    </p>
+
+    <p>
+      <code>!asalMı(91)</code> satırı özellikle önemli. İyi bir deneme kümesi
+      yalnız doğruları değil, <strong>yanlış olması gerekenleri</strong> de
+      sınar. 91 asal <em>görünür</em>; asallık kodlarının klasik tuzağıdır.
+      Kardeş sınıfta C++ yazarken de aynı sayıyı denemiştik &mdash; diller
+      değişiyor, tuzaklar değişmiyor.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        <code>asalMı</code> içindeki <code>n &gt; 1</code> koşulunu silin ve
+        <code>dene()</code>'yi çalıştırın. Hangi deneme, hangi mesajla patlıyor?
+        Denemelerin işi tam olarak bu: siz kodu bozar bozmaz, hangi sözünüzü
+        bozduğunuzu söylemek.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.4</div>
+  <div class="govde">
+    <h2>Tahmin etmeyin, ölçün &mdash; ve sayın</h2>
+
+    <p>
+      <code>asalMı</code> doğru; peki hızlı mı? <code>n</code> için 2'den
+      <code>n</code>'ye kadar <em>bütün</em> sayıları deniyor. Oysa
+      <code>n = a &times; b</code> ise çarpanlardan biri mutlaka
+      <code>&radic;n</code>'den büyük değildir; o hâlde
+      <strong>kareköke kadar bakmak yeter</strong>. Fark ne kadar? Ölçmeden
+      önce bir sayalım:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>n</th><th>2'den n'ye deneme</th><th>&radic;n'ye kadar deneme</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="sayi">10 007</td><td class="sayi">10 005</td><td class="sayi">99</td></tr>
+          <tr><td class="sayi">1 000 003</td><td class="sayi">1 000 001</td><td class="sayi">999</td></tr>
+          <tr><td class="sayi">10⁹ + 7</td><td class="sayi">~10⁹</td><td class="sayi">~31 623</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Son satırda fark otuz bin kat. Bu tablo bir ölçüm değil, bir
+      <em>sayım</em> &mdash; daha kodu yazmadan, kâğıt üstünde belli. Yine de
+      sözümüze sadık kalalım ve ölçelim; Koco'da süre tutmak için
+      <code>buSaniye</code> var:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">süre tutmak</span></figcaption>
+      <pre><code><span class="a">def</span> süresi(iş: =&gt; <span class="t">Birim</span>): <span class="t">Kesir</span> = {
+  <span class="a">val</span> t0 = buSaniye         <span class="y">// şu anın saniyesi</span>
+  iş
+  buSaniye - t0
+}
+
+satıryaz(süresi { asalMı(<span class="n">999999937</span>) })       <span class="y">// bir süre bekleyeceksiniz...</span>
+<span class="y">// asalMıHızlı'yı yazınca onu da ölçün ve karşılaştırın</span></code></pre>
+    </figure>
+
+    <p>
+      <code>süresi</code>'ne dikkat: yine işlevi girdi alan bir işlev &mdash;
+      bu bölümün bütün fikirleri birbirine dolanıyor. <code>asalMıHızlı</code>'yı
+      ise yazmıyorum; karekök sınırıyla siz yazın, denemelerden geçirin, sonra
+      iki sürümü aynı sayıyla ölçüp farkı kendi gözünüzle görün.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Dikkat</span>
+      <p>
+        Ölçtüğünüz süreler bilgisayardan bilgisayara değişir; bu yüzden bu
+        kitapçık size &ldquo;benim makinemde şu çıktı&rdquo; diye sayı
+        vermiyor &mdash; kendi sayılarınızı üretin. Değişmeyen şey
+        <em>oran</em>dır: deneme sayısını otuz bin kat azaltan bir fikir, her
+        makinede kabaca o kadar hızlandırır. <strong>Büyük hızlar donanımdan
+        değil, algoritmadan gelir.</strong>
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Sayaçlı yineleme.</strong> Takım işindeki
+          <code>bizimYineleDizinli</code>'yi bitirin. Sonra onunla, her
+          basamağı bir öncekinden uzun bir merdiven çizin.
+        </li>
+        <li>
+          <strong>Yıldıza genelleme.</strong> <code>çokgen</code>'i
+          <code>yıldız(köşe: Sayı, kenar: Kesir)</code> olacak biçimde
+          genelleyin. Beş köşeli yıldızda dönüş açısı kaçtı? Yedi köşelide?
+          Formülü bulun, koda koyun.
+        </li>
+        <li>
+          <strong>Mükemmel sayılar.</strong> Bir sayının kendisi dışındaki
+          bölenlerinin toplamı kendisine eşitse ona mükemmel denir (6 = 1+2+3).
+          <code>mükemmelMi(n)</code> işlevini <code>ele</code> ve
+          <code>topla</code> ile tek satırda yazın; 10 000'e kadar mükemmel
+          sayıları bulun. Kaç tane var?
+        </li>
+        <li>
+          <strong>asalMıHızlı.</strong> Karekök sınırlı sürümü yazın.
+          <code>dene()</code>'ye iki sürümü karşılaştıran bir satır ekleyin:
+          <code>belirt((1 |-| 1000).dizine.hepsiDoğruMu(n =&gt; asalMı(n) ==
+          asalMıHızlı(n)), "iki sürüm anlaşamadı")</code>. Bu tür denemeye
+          <em>eşleme denemesi</em> denir: yavaş ama basit sürüm, hızlı sürümün
+          hakemidir.
+        </li>
+        <li>
+          <strong>Ölçün.</strong> Bölüm II'deki &ldquo;tekrar var mı&rdquo;
+          alıştırmasının iki çözümünü <code>süresi</code> ile on bin, yüz bin
+          ve bir milyon ögelik dizinlerde ölçün. Süreler nasıl büyüyor?
+          Bir tablo yapın. <span class="zor">önemli</span> Bu tablo, kardeş
+          kitapçığın IV. bölümündeki <em>karmaşıklık</em> konusunun kapısıdır.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

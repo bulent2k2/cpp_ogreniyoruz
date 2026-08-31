@@ -1,0 +1,27 @@
+/* ===========================================================
+   Koco kitapçığı için ek biçem.
+   Biçemin tamamı kardeş kitapçıktan (kitapcik/ortak.css) geliyor;
+   burada yalnızca vurgu rengi değişiyor: mavi yerine petrol yeşili.
+   İki kitapçık yan yana açıldığında ilk bakışta ayırt edilsin diye.
+   =========================================================== */
+
+:root {
+  --mavi: #0E7490;          /* petrol: Koco kitapçığının vurgu rengi */
+  --mavi-yumusak: #E0F2F7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mavi: #67C8DC;
+    --mavi-yumusak: #102A33;
+  }
+}
+
+:root[data-theme="dark"] {
+  --mavi: #67C8DC;
+  --mavi-yumusak: #102A33;
+}
+
+@media print {
+  a { color: #0E6E86; }
+}

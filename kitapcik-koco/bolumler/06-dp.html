@@ -1,0 +1,389 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm VI</div>
+  <h1>Dinamik Programlama</h1>
+  <p class="ozet">
+    Korkutucu adlı, bir cümlelik fikir: <strong>büyük problemi kendinden küçük
+    parçalarına böl, her parçayı bir kere çöz, bir daha çözme.</strong>
+    İşlevsel üslupta bu fikir en doğal hâline kavuşur, çünkü tümevarım formülü
+    zaten bir işlev tanımıdır. Bölümün sonunda kitapçığı, karmaşık sayıların
+    içinden geçip yola devam ederek kapatacağız.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">VI.1</div>
+  <div class="govde">
+    <h2>Aslında bunu zaten yaptınız</h2>
+
+    <p>
+      <a href="{{04-ozyineleme}}">Bölüm IV</a>'te Fibonaççi'ye bir kenar defteri
+      ekleyip milyonlarca kat hızlandırmıştık. O, dinamik programlamaydı.
+      Adı büyük, yaptığı iş bu kadar. İki yazılış biçimi var, ikisi de gerekli:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>Yukarıdan aşağı (YA)</h4>
+        <p>
+          Özyinelemeli tanım + kenar defteri. Tümevarım formülünü doğrudan koda
+          çevirirsiniz; <strong>düşünmesi ve kanıtlaması kolay</strong>.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Aşağıdan yukarı (AY)</h4>
+        <p>
+          En küçük durumdan başlayıp bir çizelgeyi doldurursunuz. Özyineleme
+          yok; <strong>genelde daha hızlı</strong>, belleği kısmak mümkün.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      Kardeş kitapçığın öğüdü burada da geçerli: <strong>YA ile düşün, AY ile
+      yaz.</strong> Biz ikisini de aynı problemin üstünde deneyeceğiz.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.2</div>
+  <div class="govde">
+    <h2>Izgarada kaç yol var?</h2>
+
+    <p>
+      <a href="https://projecteuler.net/problem=15">Project Euler 15</a>:
+      20&times;20'lik ızgaranın sol üst köşesinden sağ alt köşesine, yalnızca
+      sağa ve aşağıya giderek kaç yol var? Tümevarım tek cümle: bir kareye ya
+      üstten ya soldan gelinir, öyleyse
+      <code>yol(r, c) = yol(r−1, c) + yol(r, c−1)</code>. Bu cümle,
+      Fibonaççi'deki kalıbın birebir aynısıyla koda dönüşür:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">yollar.kojo</span><span class="etiket">yukarıdan aşağı</span></figcaption>
+      <pre><code><span class="a">val</span> bellek = <span class="t">Eşlem</span>[(<span class="t">Sayı</span>, <span class="t">Sayı</span>), <span class="t">Uzun</span>]()
+
+<span class="a">def</span> yol(r: <span class="t">Sayı</span>, c: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">if</span> (r == <span class="n">0</span> || c == <span class="n">0</span>) <span class="n">1</span>          <span class="y">// TABAN: kenar boyunca tek yol var</span>
+  <span class="a">else</span> bellek.alYoksa((r, c), {
+    <span class="a">val</span> s = yol(r - <span class="n">1</span>, c) + yol(r, c - <span class="n">1</span>)
+    bellek.eşEkle((r, c) -&gt; s)
+    s
+  })
+
+satıryaz(yol(<span class="n">20</span>, <span class="n">20</span>))     <span class="y">// 137846528820</span></code></pre>
+    </figure>
+
+    <p>
+      Defterin anahtarı bu sefer bir demet: <code>(r, c)</code>. Kenar defteri
+      olmadan bu hesap 20&times;20'de asla bitmezdi; defterle, her kare bir kere
+      hesaplanır: 441 kayıt, o kadar.
+    </p>
+
+    <h3>Aşağıdan yukarı, işlevsel çizelge</h3>
+
+    <p>
+      Şimdi aynı işi çizelgeyle yapalım. Kardeş kitapçıkta buranın yıldızı
+      şu tek satırdı: <code>satir[c] += satir[c-1]</code> &mdash; çizelgenin
+      tamamı yerine tek bir satırı tutup üstüne yaza yaza ilerlemek. O satırın
+      yaptığı işin bir adı var: <strong>birikimli toplam</strong>. İşlevsel
+      ikizi de şöyle:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">yollar2.kojo</span><span class="etiket">aşağıdan yukarı</span></figcaption>
+      <pre><code><span class="y">// (1, 1, 1) -&gt; (1, 2, 3) -&gt; (1, 3, 6): her satır bir öncekinin birikimlisi</span>
+<span class="a">def</span> birikimli(satır: <span class="t">Dizin</span>[<span class="t">Uzun</span>]): <span class="t">Dizin</span>[<span class="t">Uzun</span>] =
+  satır.kuyruğu.soldanKatla(<span class="t">Dizin</span>(satır.başı)) {
+    (bina, öge) =&gt; (bina.başı + öge) :: bina
+  }.tersi
+
+<span class="a">var</span> satır = (<span class="n">0</span> |-| <span class="n">20</span>).dizine.işle(k =&gt; <span class="n">1L</span>)   <span class="y">// ilk satır: hep 1  (L: Uzun sabiti)</span>
+yinele(<span class="n">20</span>) { satır = birikimli(satır) }
+satıryaz(satır.sonu)     <span class="y">// 137846528820 -- aynı yanıt</span></code></pre>
+    </figure>
+
+    <p>
+      Neden çalışıyor? Izgara çizelgesinde her satır, bir üst satırın birikimli
+      toplamıdır &mdash; kâğıda 3&times;3'lük bir çizelge çizip yukarıdaki
+      yorum satırındaki diziyi elle üretin, kendi gözünüzle görün. İki sürüm
+      de aynı yanıtı veriyor; biri tanımı, öteki çizelgeyi anlatıyor.
+      <strong>Bir problemi iki biçimde yazabilmek, onu gerçekten anlamış
+      olmanın en iyi göstergesidir.</strong>
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.3</div>
+  <div class="govde">
+    <h2>En az kaç bozuk para?</h2>
+
+    <p>
+      Paralarımız 1, 5 ve 7 kuruş; 11 kuruşu en az kaç parayla öderiz?
+      Sezgi &ldquo;en büyükten başla&rdquo; der: 7+1+1+1+1, <strong>beş
+      para</strong>. Oysa 5+5+1 <strong>üç para</strong> eder &mdash; açgözlü
+      (<em>greedy</em>) yöntem burada yanılır. Doğrusu, son parayı sormaktır:
+      <em>son koyduğum para hangisiydi?</em> Hangisiyse geriye daha küçük ama
+      aynı türden bir problem kalır:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tümevarım</span></figcaption>
+      <pre><code>f(0) = 0
+f(x) = 1 + enUfağı( f(x - 1), f(x - 5), f(x - 7) )
+f(x) = ∞    (x &lt; 0 için: "böyle ödeme olmaz")</code></pre>
+    </figure>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">bozukpara.kojo</span><span class="etiket">formülün birebir çevirisi</span></figcaption>
+      <pre><code><span class="a">val</span> paralar = <span class="t">Dizin</span>(<span class="n">1</span>, <span class="n">5</span>, <span class="n">7</span>)
+<span class="a">val</span> defter = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Sayı</span>]()
+
+<span class="a">def</span> enAzPara(tutar: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
+  <span class="a">if</span> (tutar == <span class="n">0</span>) <span class="n">0</span>
+  <span class="a">else if</span> (tutar &lt; <span class="n">0</span>) <span class="n">1000000</span>      <span class="y">// "sonsuz": enUfağı bunu asla seçmez</span>
+  <span class="a">else</span> defter.alYoksa(tutar, {
+    <span class="a">val</span> s = <span class="n">1</span> + paralar.işle(p =&gt; enAzPara(tutar - p)).enUfağı
+    defter.eşEkle(tutar -&gt; s)
+    s
+  })
+
+satıryaz(enAzPara(<span class="n">11</span>))     <span class="y">// 3</span></code></pre>
+    </figure>
+
+    <p>
+      Ortadaki satırı formülle yan yana koyun:
+      <code>1 + paralar.işle(p =&gt; enAzPara(tutar - p)).enUfağı</code> tam
+      olarak &ldquo;1 + min f(x−p)&rdquo; diye okunuyor. İşlevsel üslubun
+      dinamik programlamayla arası bu yüzden çok iyi: <strong>tümevarım
+      formülü zaten bir işlev tanımı</strong>; çeviri kaybı sıfır.
+      &ldquo;Sonsuz&rdquo; için kocaman bir sayı kullanmak da kardeş
+      kitapçıktan tanıdığınız numara: <code>enUfağı</code> onu kendiliğinden
+      eler, biz de eksi tutarlar için ayrı ayrı koşul yazmaktan kurtuluruz.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Beş adımlık DP reçetesi &mdash; fonksiyonu yaz, tabanları belirle,
+        formülü kur, kanıtla, kodla &mdash; kardeş kitapçığın VI. bölümünde
+        ayrıntısıyla duruyor. Takımca şunu yapın: reçeteyi oradan okuyun ve bu
+        bölümdeki iki probleme adım adım uygulayarak kâğıda dökün. Kanıt
+        adımında sorulacak iki soru hep aynı: formül bütün durumları kapsıyor
+        mu? Hiçbirini iki kere saymıyor mu?
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.4</div>
+  <div class="govde">
+    <h2>Kendi türünüz: karmaşık sayılar</h2>
+
+    <p>
+      Kitapçığı kapatmadan bir borcumuz var: kapaktaki Mandelbrot kümesi.
+      Onun için karmaşık sayılar gerekiyor &mdash; ve bu, kendi türünüzü
+      yazmayı öğrenmenin tam sırası. Scala'da bunun aleti
+      <code>case class</code>:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">karmaşık.kojo</span><span class="etiket">kendi türünüz</span></figcaption>
+      <pre><code><span class="a">case class</span> <span class="t">Karmaşık</span>(g: <span class="t">Kesir</span>, s: <span class="t">Kesir</span>) {     <span class="y">// gerçek ve sanal kısım</span>
+  <span class="a">def</span> +(öbürü: <span class="t">Karmaşık</span>) = <span class="t">Karmaşık</span>(g + öbürü.g, s + öbürü.s)
+  <span class="a">def</span> *(öbürü: <span class="t">Karmaşık</span>) =
+    <span class="t">Karmaşık</span>(g * öbürü.g - s * öbürü.s, g * öbürü.s + s * öbürü.g)
+  <span class="a">def</span> büyüklüğü = karekökü(g * g + s * s)
+}
+
+<span class="a">val</span> a = <span class="t">Karmaşık</span>(<span class="n">1</span>, <span class="n">2</span>)
+satıryaz(a + a)       <span class="y">// Karmaşık(2.0,4.0)</span>
+satıryaz(a * a)       <span class="y">// Karmaşık(-3.0,4.0)</span></code></pre>
+    </figure>
+
+    <p>
+      <code>+</code> ve <code>*</code> sıradan yöntem adları &mdash; Scala'da
+      işleçler de birer yöntemdir, C++'taki <code>operator+</code> gibi ama
+      daha az törenle. İki satır tanımla, kendi türünüz sayılar kadar rahat
+      toplanıp çarpılıyor.
+    </p>
+
+    <p>
+      Mandelbrot kuralı tek satır: <code>z &larr; z&sup2; + c</code>. Bir
+      <code>c</code> noktası için sıfırdan başlayıp bu kuralı döndürün;
+      <code>z</code> büyüyüp kaçarsa <code>c</code> kümenin dışında, yüz adımda
+      kaçmazsa (bizim kararımızla) içinde:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">kaçış adımı</span></figcaption>
+      <pre><code><span class="a">def</span> kaçışAdımı(c: <span class="t">Karmaşık</span>): <span class="t">Sayı</span> = {
+  <span class="a">def</span> dön(z: <span class="t">Karmaşık</span>, adım: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
+    <span class="a">if</span> (adım == <span class="n">100</span> || z.büyüklüğü &gt; <span class="n">2</span>) adım
+    <span class="a">else</span> dön(z * z + c, adım + <span class="n">1</span>)
+  dön(<span class="t">Karmaşık</span>(<span class="n">0</span>, <span class="n">0</span>), <span class="n">0</span>)
+}
+
+satıryaz(kaçışAdımı(<span class="t">Karmaşık</span>(<span class="n">0</span>, <span class="n">0</span>)))       <span class="y">// 100: hiç kaçmadı, küme içinde</span>
+satıryaz(kaçışAdımı(<span class="t">Karmaşık</span>(<span class="n">1</span>, <span class="n">1</span>)))       <span class="y">// 2: iki adımda kaçtı</span></code></pre>
+    </figure>
+
+    <p>
+      Resmi çizmek için tuvalin her noktasını bir karmaşık sayıya çevirip
+      <code>kaçışAdımı</code>'na göre renklendirmek kalıyor: erken kaçan
+      noktaya açık, geç kaçana koyu bir renk. Bu son adımı
+      <strong>bilerek yazmıyorum</strong> &mdash; iskeleti kurdunuz, boyası
+      sizin. Kaplumbağayla <code>atla</code> + <code>nokta</code> ikilisi iş
+      görür; sabırsızlananlar için tam sürüm Koco'nun örnekleri arasında da var.
+    </p>
+
+    <div class="galeri uclu">
+      <figure>
+        <img src="../../kitapcik/resim/koco-koh-tanesi.jpeg"
+             alt="Koch tanesi çizen Koco programı ve çıktısı">
+        <figcaption>
+          <b>Koch tanesi.</b> Bölüm IV'te yazdınız. Buradaki sürüm renkli ve
+          derinliği klavyeden ayarlanıyor &mdash; sizinkine eklemesi kolay.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../../kitapcik/resim/koco-mandelbrot.jpeg"
+             alt="Mandelbrot kümesini çizen Koco programı ve çıktısı">
+        <figcaption>
+          <b>Mandelbrot kümesi.</b> Yukarıdaki <code>kaçışAdımı</code>'nın
+          boyanmış hâli. Kenarına yaklaştıkça yeni desenler açılır; sınırı hem
+          var hem yok.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../../kitapcik/resim/koco-uc-cisim-pr-1.jpg"
+             alt="Üç cisim problemini çizen Koco programı">
+        <figcaption>
+          <b>Üç cisim.</b> Birbirini çeken üç gök cismi. Kalem kâğıtla kapalı
+          çözümü <em>yok</em>; tek yol adım adım benzetim &mdash; yani
+          <code>dön(z, adım + 1)</code> kalıbının fizikteki kardeşi.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Son söz</div>
+  <div class="govde">
+    <h2>Yola devam</h2>
+
+    <p>
+      Altı bölüm önce <code>ileri(100)</code> yazmıştınız; bugün değişmez
+      kümelerle çizge geziyor, tümevarım formüllerini koda çeviriyorsunuz.
+      Yol buradan üç kola ayrılıyor, üçü de açık:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>Koco'da derinleşin</h4>
+        <p>
+          <a href="https://docs.kogics.net/fundamentals-index.html">Türkçe temel
+          bilgiler</a> dizisini izleyin; oyunlar, canlandırmalar, müzik &mdash;
+          hepsi bu kitapçıktaki araçlarla yazılıyor.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Kardeş kitapçığa geçin</h4>
+        <p>
+          Aynı kavramların C++ hâli, yarışma dünyasının kapısı:
+          <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/kitapcik">Keyifli
+          Bir Başlangıç</a>. Buradan sonra orası çok daha kolay gelecek.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Soru çözün</h4>
+        <p>
+          <a href="https://projecteuler.net/">Project Euler</a> işlevsel üsluba
+          bayılır; çoğu soru bir <code>işle</code>/<code>ele</code>/<code>indirge</code>
+          zinciridir. <a href="https://cses.fi/problemset/">CSES</a> ile de
+          algoritma kasları çalışır.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Bir şey inşa edin</h4>
+        <p>
+          Bir oyun, bir benzetim, bir fraktal galerisi. Yarışma kodu bir günde
+          ölür; proje kodu sizinle kalır &mdash; ve Koco projeleri
+          gösterişlidir, arkadaşlarınıza izletin.
+        </p>
+      </div>
+    </div>
+
+    <h3>Son üç cümle</h3>
+
+    <p>
+      Bu kitapçık boyunca tuzakları saklamadım: taşan sayılar, durmayan
+      özyinelemeler, iki kere sayılan düğümler, açgözlülüğün yanıldığı paralar.
+      Hepsiyle kardeş sınıfta gerçekten karşılaştık ve hepsini birlikte bulduk.
+      <strong>Hata yapmak öğrenmenin yan etkisi değil, yöntemidir.</strong>
+    </p>
+
+    <p>
+      Takıldığınızda yalnız kalmayın: bir arkadaş, bir kâğıt, küçük bir örnek.
+      Bu iki kitapçığın en çok tekrar ettiği tavsiye buydu; tesadüf değil.
+    </p>
+
+    <p>
+      Ve acele etmeyin. Kaplumbağayla başladık; kaplumbağa gibi bitirelim:
+      yavaş, kararlı ve iz bırakarak. Kolay gelsin, keyifli ve öğretici olsun.
+    </p>
+
+    <div class="alistirmalar">
+      <h4>Son alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Zar dizileri.</strong> Bir zarı defalarca atıyoruz; toplamı
+          <em>n</em> olan kaç farklı zar dizisi var?
+          (<a href="https://cses.fi/problemset/task/1633">CSES DP 1</a>.)
+          Formül: <code>f(n) = f(n−1) + &hellip; + f(n−6)</code>,
+          <code>f(0) = 1</code>. Bu bölümdeki kalıpla, <code>işle</code> ve
+          <code>topla</code> kullanarak yazın.
+        </li>
+        <li>
+          <strong>Hangi paralar?</strong> <code>enAzPara</code> sayıyı veriyor
+          ama paraların dökümünü vermiyor. <code>Dizin[Sayı]</code> döndüren
+          sürümünü yazın: <code>enAzPara(11)</code> yerine
+          <code>Dizin(5, 5, 1)</code> gibi. <span class="zor">ipucu</span>
+          <code>enUfağı(d =&gt; d.boyu)</code>.
+        </li>
+        <li>
+          <strong>Izgarada engel.</strong> Yol sayma problemine yasak kareler
+          ekleyin: yasak karede <code>yol(r, c) = 0</code>. Tümevarımın tek
+          satırı değişiyor &mdash; hangisi?
+        </li>
+        <li>
+          <strong>Mandelbrot'u boyayın.</strong> VI.4'teki iskeleti bitirip
+          resmi çizin. Sonra <code>yaklaş</code> komutuyla kenarına dalın.
+          En güzel köşenin ekran görüntüsünü sınıfla paylaşın.
+        </li>
+        <li>
+          <strong>Kendi kitapçığınızı yazın.</strong> Bu kitapçıktan öğrendiğiniz
+          bir konuyu, bir arkadaşınıza anlatacak biçimde iki sayfa yazın:
+          çalışan kod, gerçek çıktı, bir de alıştırma. Bir şeyi
+          anlatabildiğiniz gün onu gerçekten öğrenmiş olursunuz.
+          <span class="zor">en önemlisi</span>
+        </li>
+      </ol>
+    </div>
+
+    <p class="dipnot">
+      Bu kitapçık, 2024&ndash;26 dönemlerindeki derslerimizden, Koco'nun Türkçe
+      sürümü üzerindeki gönüllü çalışmalardan ve kardeş kitapçık
+      <em>Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</em>'tan
+      damıtıldı. Ders notlarının tamamı
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">GitHub deposunda</a>.
+    </p>
+  </div>
+</div>
+
+<!--GEZINME-->

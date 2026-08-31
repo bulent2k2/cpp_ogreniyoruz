@@ -76,8 +76,15 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   biçemi, `epub.css` e-kitap biçemi, `yap.py` (html), `pdf.mjs` (pdf),
   `epub.py` (epub), `kapak.mjs` (kapak resmi -> `kitap/kapak.png`), `kod/` 24 örnek program.
   Üretilen `cikti/` dizini `.gitignore`'dadır.
-- `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve kitapçığın
-  PDF/EPUB sürümleri.
+- `kitapcik-koco/` — **Koco kitapçığı** (*Programlamaya ve Algoritmalara
+  Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
+  yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,
+  görselleri `../kitapcik/resim/`'den alır; kendi `yap.py`, `pdf.mjs`,
+  `epub.py`, `kapak.mjs` betikleri vardır. Koddaki Türkçe komut/tür adları
+  Kojo'nun Türkçe API'sinden (`TurkishAPI`/`tr` paketinden) gelir;
+  uydurma ad eklemeyin.
+- `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve iki
+  kitapçığın PDF/EPUB sürümleri ile kapak resimleri.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt
   bağlantıları.
 - `python/`, `kojo/` — yan diller/ortamlar için giriş yazıları.

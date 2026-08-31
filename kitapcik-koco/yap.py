@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Kitapçığı yapan betik.
+Koco kitapçığını yapan betik. (kitapcik/yap.py'nin kardeşi.)
 
-Girdi : kitapcik/ortak.css + kitapcik/bolumler/*.html (gövde parçaları)
-Çıktı : kitapcik/cikti/<dosya>.html   -> her biri tek başına yayımlanabilir (artifact)
-        kitapcik/cikti/kitapcik-tam.html -> hepsi bir arada, PDF için
+Girdi : ../kitapcik/ortak.css + ek.css + bolumler/*.html (gövde parçaları)
+Çıktı : cikti/<dosya>.html       -> her biri tek başına yayımlanabilir (artifact)
+        cikti/kitapcik-tam.html  -> hepsi bir arada, PDF için
 
-Kullanım:  python3 kitapcik/yap.py
+Kullanım:  python3 kitapcik-koco/yap.py
 """
 
 import base64
@@ -16,18 +16,19 @@ import pathlib
 import re
 
 KOK = pathlib.Path(__file__).resolve().parent
-ORTAK = (KOK / "ortak.css").read_text(encoding="utf-8")
+# Biçemin tamamı kardeş kitapçıktan geliyor; ek.css yalnızca vurgu rengini
+# değiştiriyor ki iki kitapçık ilk bakışta ayırt edilsin.
+ORTAK = ((KOK.parent / "kitapcik" / "ortak.css").read_text(encoding="utf-8")
+         + "\n" + (KOK / "ek.css").read_text(encoding="utf-8"))
 CIKTI = KOK / "cikti"
 CIKTI.mkdir(exist_ok=True)
-RESIM = KOK / "resim"
 
 # Bölüm metinlerindeki resim yolları cikti/ dizinine göre yazılıyor
-# (../resim/<ad>, ../../kitap/kapak.png). Bu yollar yerel önizleme ve PDF
-# için doğru; ama tek başına yayımlanan sayfaların yanında dosya olmadığı
-# için oralarda resimleri içeri gömmek gerekiyor.
+# (../../kitapcik/resim/<ad>, ../../kitap/kapak-koco.png). Tek başına
+# yayımlanan sayfalarda resimler data URI olarak gömülüyor.
 RESIM_DESENI = re.compile(r'src="((?:\.\./)+[^"]+)"')
 
-BASLIK = "Programlamaya ve Algoritmalara Keyifli Bir Başlangıç"
+BASLIK = "Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş"
 
 FONT = (
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
@@ -41,20 +42,20 @@ FONT = (
 
 # (dosya, kısa ad, artifact başlığı, tek satırlık tanıtım)
 BOLUMLER = [
-    ("00-kapak",     "Kılavuz",              "Keyifli Bir Başlangıç",
-     "Programlamaya ve algoritmalara giriş kitapçığının kapağı, çalışma yöntemi ve içindekiler."),
-    ("01-ilk-adimlar", "I. İlk Adımlar",     "İlk Adımlar",
-     "Değer, değişken, tür ve işlev: ilk çalışan programlarınız ve ilk oyununuz."),
-    ("02-veri",      "II. Veriyi Düzenlemek", "Veriyi Düzenlemek",
-     "Diziler, akıllı diziler, eşlemler, kümeler, yığınlar ve kendi türlerinizi yazmak."),
-    ("03-zanaat",    "III. Zanaat",          "Programcının Zanaatı",
-     "Derleyici, make, testler, hata ayıklama ve hız ölçümü: programı işe yarar kılan alışkanlıklar."),
-    ("04-ozyineleme", "IV. Özyineleme",      "Özyineleme ve Arama",
-     "Kendini çağıran işlevler, bellekle hızlandırma, geri dönüşlü arama ve arama uzayını budamak."),
-    ("05-cizgeler",  "V. Çizgeler",          "Çizgeler ve Gezintiler",
-     "Derinlemesine ve enlemesine gezi, bağlı parçalar, en kısa yol algoritmaları."),
-    ("06-dp",        "VI. Dinamik Programlama", "Dinamik Programlama",
-     "Büyük problemi küçük parçalarına bölmek: zarlar, bozuk paralar, ızgaralar ve yola devam."),
+    ("00-kapak",      "Kılavuz",               "Keyifli ve İşlevsel Bir Giriş",
+     "Koco ile programlamaya ve algoritmalara giriş kitapçığının kapağı, çalışma yöntemi ve içindekiler."),
+    ("01-ilk-adimlar", "I. İlk Adımlar",       "Kaplumbağayla İlk Adımlar",
+     "Kaplumbağa komutları, değerler, türler ve işlevler: ilk çizimleriniz ve ilk oyununuz."),
+    ("02-veri",       "II. Veriyi Düzenlemek", "Veriyi Düzenlemek",
+     "Dizinler, kümeler, eşlemler ve üç sihirli işlem: işle, ele, indirge."),
+    ("03-soyutlama",  "III. Soyutlama",        "Soyutlama Sanatı",
+     "İşlevleri girdi yapan işlevler, değişmez değerler, sınama ve ölçme."),
+    ("04-ozyineleme", "IV. Özyineleme",        "Özyineleme ve Fraktallar",
+     "Kendini çağıran işlevler ve gözle görülür özyineleme: ağaçlar, Koch tanesi, Hanoi."),
+    ("05-cizgeler",   "V. Çizgeler",           "Çizgeler ve Gezintiler",
+     "Derinlemesine ve enlemesine gezi, bu sefer işlevsel: değişmez kümelerle çizge gezmek."),
+    ("06-dp",         "VI. Dinamik Programlama", "Dinamik Programlama",
+     "Bellekle hızlandırma, ızgara yolları, bozuk paralar; Mandelbrot ve yola devam."),
 ]
 
 SIRA = [b[0] for b in BOLUMLER]
@@ -158,7 +159,7 @@ def tam_yaz() -> None:
     """Hepsi bir arada: PDF için tam belge."""
     parcalar = [
         '<section class="pdf-kapak">'
-        f'<img src="../../kitap/kapak.png" alt="{BASLIK}">'
+        f'<img src="../../kitap/kapak-koco.png" alt="{BASLIK}">'
         "</section>"
     ]
     for i, slug in enumerate(SIRA):

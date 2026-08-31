@@ -1,0 +1,314 @@
+<header class="ust">
+  <div class="seri">Fen Lisesi için Koco ve Scala kitapçığı</div>
+  <h1>Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</h1>
+  <p class="ozet">
+    Bu kitapçık, <em>Keyifli Bir Başlangıç</em>'ın kardeşi: aynı kavramlar, bambaşka
+    bir ortam. Bu sefer derleyici beklemek yok &mdash; yazdığınız her satırın
+    sonucunu <em>anında, ekranda, çizim olarak</em> göreceksiniz. Ve yol boyunca
+    programlamanın en zarif üslubuyla tanışacaksınız: <em>işlevsel</em> üslupla.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<figure class="kapak-gorseli">
+  <img src="../../kitap/kapak-koco.png"
+       alt="Kitapçığın kapağı: Koco'da yazılmış dört programın çıktısı">
+  <figcaption>
+    Kapaktaki dört resim Koco'da yazılmış programların çıktıları: Koch tanesi,
+    Mandelbrot kümesi, üç cisim problemi ve çokgen çerçeve. Dördü de bu
+    kitapçıkta karşınıza çıkacak. Aynı kapak, PDF ile EPUB sürümlerinin de
+    ilk sayfası.
+  </figcaption>
+</figure>
+
+<div class="blok">
+  <div class="ray">Önsöz</div>
+  <div class="govde">
+    <h2>Merhaba</h2>
+
+    <p>
+      Derslerimizde C++ öğrenirken ara sıra başka bir pencere açıp size bir şeyler
+      gösterdim: kendini çizen kar taneleri, sonsuz derinlikte desenler, birbirinin
+      çevresinde dans eden gök cisimleri. O pencerenin adı
+      <a href="https://sites.google.com/view/koco-surum">Koco</a> &mdash; ve bu
+      kitapçık, o pencereyi sonuna kadar açıyor.
+    </p>
+
+    <p>
+      Koco, <a href="https://scala-lang.org">Scala</a> diliyle çalışan, tamamı
+      Türkçeleştirilmiş bir öğrenme ortamı. Komutları Türkçe, türleri Türkçe,
+      yardım sayfaları Türkçe &mdash; ve yamalı Scala derleyicisi sayesinde
+      dilin <em>anahtar sözcükleri bile</em> Türkçe. Bunu başka hiçbir dilin
+      Kojo'su yapmıyor. Birkaç iş arkadaşımla yıllardır gönüllü olarak
+      emek verdiğimiz açık kaynak bir proje; kısacası biraz da bizim çocuk.
+      Ama onu bu kitapçığa taşıyan şey duygusallık değil, iki somut üstünlük:
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Anında geri bildirim.</strong> Kod yazarsınız, çalıştırırsınız,
+        <em>o saniye</em> ekranda bir şey olur. Derleme komutu yok, terminal yok,
+        kurulum derdi neredeyse yok. Öğrenmenin en kısa döngüsü budur: dene, gör,
+        değiştir, yine dene.
+      </li>
+      <li>
+        <strong>İşlevsel üslup.</strong> Scala, <em>işlevsel programlamanın</em>
+        (<em>functional programming</em>) en güçlü dillerinden. Bu üslupta
+        programlar değişkenleri değiştire değiştire değil, değerleri
+        <em>dönüştüre dönüştüre</em> ilerler. Kod kısalır, hata azalır, kanıt
+        kolaylaşır. C++ yazarken de bir daha eskisi gibi yazamazsınız &mdash;
+        iyi anlamda.
+      </li>
+    </ol>
+
+    <p>
+      &ldquo;İşlevsel&rdquo; sözcüğü şimdilik havada kalabilir; öyle kalsın.
+      Bu kitapçığın işi onu adım adım elle tutulur yapmak. Altı bölümün sonunda
+      dönüp bu sayfaya baktığınızda, iki anlamını da görmüş olacaksınız:
+      hem <em>işlev</em>lerle örülü, hem de gerçekten işe yarar.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Kardeşlik</div>
+  <div class="govde">
+    <h2>İki kitapçık, tek yol</h2>
+
+    <p>
+      Bu kitapçığın bir kardeşi var:
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/kitapcik">Programlamaya
+      ve Algoritmalara Keyifli Bir Başlangıç</a> &mdash; aynı konuları C++ ile
+      anlatıyor. Bölümleri bilerek paralel kurdum: orada sayı tahmin oyunu varsa
+      burada da var; orada özyineleme Hanoi kuleleriyle geliyorsa burada Koch
+      tanesiyle geliyor; oradaki çizge gezisi burada işlevsel kılıkta karşınıza
+      çıkıyor.
+    </p>
+
+    <p>
+      Hangisinden başlamalı? Fark etmez; ikisi de kendi başına okunuyor.
+      Ama asıl güzeli ikisini <strong>yan yana</strong> okumak. Aynı algoritmayı
+      iki dilde görmek, tek dilde iki kere görmekten çok daha öğretici &mdash;
+      tıpkı iki farklı çözümü karşılaştırmanın tek çözümü ezberlemekten öğretici
+      olması gibi.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Bir bölümü burada bitirince kardeş kitapçıktaki eşine göz atın ve kendinize
+        şu soruyu sorun: <em>hangi kısım orada daha kolaydı, hangisi burada?</em>
+        Bu sorunun yanıtı size dillerin karakterini, dillerin karakteri de
+        programlamanın kendisini öğretir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Tezgâh</div>
+  <div class="govde">
+    <h2>Koco'yu kurun</h2>
+
+    <p>
+      Tezgâh bu sefer çok kısa; Koco tek parça bir uygulama.
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <a href="https://sites.google.com/view/koco-surum">Koco sürüm sayfasından</a>
+        işletim sisteminize uygun paketi indirin ve kurun. Windows, macOS ve
+        Linux'ta çalışıyor.
+      </li>
+      <li>
+        Koco'yu açın. Karşınıza üç bölge çıkacak: üstte <strong>tuval</strong>
+        (çizimlerin yaşadığı yer), altta <strong>yazılımcık düzenleyicisi</strong>
+        (kodunuzu yazdığınız yer), sağda <strong>çıktı penceresi</strong>.
+        &ldquo;Kaplumbağalı Kojo'ya Hoşgeldin!&rdquo; yazısını gördüyseniz
+        hazırsınız.
+      </li>
+      <li>
+        İlk komutunuzu yazın ve çalıştırma düğmesine basın:
+        <code>ileri(100)</code>. Tuvalde yukarı doğru bir çizgi belirecek.
+        Çizen şey bir <em>kaplumbağa</em> &mdash; birazdan tanışacaksınız.
+      </li>
+    </ol>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Kurulumu beklemek istemeyenler için tarayıcıda çalışan bir sürüm de var:
+        <a href="http://ikojo.in">ikojo.in</a>. (Sayfa açılmazsa adresteki
+        <code>https</code> yerine <code>http</code> yazıp yeniden deneyin.)
+        Ders notlarımızdaki çizge oyunları da bu siteye bağlanıyor.
+      </p>
+    </div>
+
+    <p>
+      Bir de yol arkadaşı kaynaklar: Koco'nun kavramlarını anlatan
+      <a href="https://docs.kogics.net/fundamentals-index.html">Türkçe temel
+      bilgiler dizisi</a> ve ders depomuzdaki
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/kocoya-davet.md">Koco'ya
+      davet</a> yazısı. Takıldığınız her komut için Koco'nun içinde de yardım var:
+      komutun üstüne gelip bekleyin ya da <code>Ctrl+Boşluk</code> ile kod
+      tamamlamayı açın.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Yöntem</div>
+  <div class="govde">
+    <h2>Nasıl çalışalım?</h2>
+
+    <p>
+      Kardeş kitapçıktaki altı ilkenin hepsi burada da geçerli; özellikle üçünü
+      hatırlatıp geçiyorum:
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Çalıştırmadan inanmayın.</strong> Koco'da bunun bahanesi hiç yok:
+        çalıştırmak tek tuş, sonuç bir saniye sonra gözünüzün önünde.
+        Her kod parçasını görür görmez çalıştırın; sonra bir yerini değiştirip
+        <em>bir daha</em> çalıştırın.
+      </li>
+      <li>
+        <strong>İkili çalışın.</strong> Biri yazar, öteki bir adım ileriyi düşünür;
+        on beş dakikada bir değişin. Çizim programlarında bu bir de şöyle güzel:
+        yol gösterici &ldquo;şimdi kaplumbağa nereye bakıyor?&rdquo; diye sorar,
+        ve bu soru hataların yarısını daha yazılmadan yakalar.
+      </li>
+      <li>
+        <strong>Yarım bıraktığım yerler kasıtlı.</strong> Bu kitapçıkta da çözümü
+        verilmemiş sorular, bilerek eksik bırakılmış programlar var. Onlar boşluk
+        değil, davet.
+      </li>
+    </ol>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Haftada bir sabit saat belirleyin ve koruyun. Bu kitapçık altı bölüm;
+        her bölüm bir-iki haftalık keyifli bir iş. Bir dönemde, kardeş kitapçıkla
+        birlikte ikisini de bitirmiş olursunuz.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">İçindekiler</div>
+  <div class="govde">
+    <h2>Bu kitapçıkta neler var?</h2>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Bölüm</th><th>Konu</th><th>Sonunda yapabileceğiniz</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="{{01-ilk-adimlar}}"><strong>I. İlk Adımlar</strong></a></td>
+            <td>Kaplumbağa komutları; değer, tür, işlev; yineleme</td>
+            <td>Kendi desenlerinizi çizen programlar ve bir sayı tahmin oyunu</td>
+          </tr>
+          <tr>
+            <td><a href="{{02-veri}}"><strong>II. Veriyi Düzenlemek</strong></a></td>
+            <td>Dizin, küme, eşlem; işle, ele, indirge; Belki</td>
+            <td>Döngü yazmadan veri işleyen, tek satırlık çözümler</td>
+          </tr>
+          <tr>
+            <td><a href="{{03-soyutlama}}"><strong>III. Soyutlama</strong></a></td>
+            <td>İşlevi girdi alan işlevler, değişmez değerler, sınama, ölçme</td>
+            <td>Kendi <code>yinele</code>'nizi yazmak; kendini sınayan program</td>
+          </tr>
+          <tr>
+            <td><a href="{{04-ozyineleme}}"><strong>IV. Özyineleme</strong></a></td>
+            <td>Taban ve adım; ağaçlar, Koch tanesi, Hanoi; bellekle hızlandırma</td>
+            <td>Özyinelemeyi yazmak değil, <em>görmek</em>: kendi fraktallarınız</td>
+          </tr>
+          <tr>
+            <td><a href="{{05-cizgeler}}"><strong>V. Çizgeler</strong></a></td>
+            <td>Çizge temsili; derinlemesine ve enlemesine gezi, işlevsel kılıkta</td>
+            <td>Değişmez kümelerle çizge gezen, kanıtı kolay kod</td>
+          </tr>
+          <tr>
+            <td><a href="{{06-dp}}"><strong>VI. Dinamik Programlama</strong></a></td>
+            <td>Bellek, ızgara yolları, bozuk paralar; Mandelbrot</td>
+            <td>Tümevarım formülünü doğrudan koda çevirmek &mdash; ve yola devam</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="kutu dikkat">
+      <span class="basi">Son bir uyarı</span>
+      <p>
+        Bu kitapçıktaki <strong>alıştırmaların çözümleri yok</strong>. İpucu var,
+        yanıt yok. Yanıt sizde &mdash; ya da yan masadaki arkadaşınızda. Bir de:
+        buradaki bütün kodlar Koco'da çalışacak biçimde yazıldı; birebir yazıp
+        çalıştırın, sonra bozup düzeltin. Kod bozmak serbest, hatta ödev.
+      </p>
+    </div>
+
+    <div class="kutu">
+      <span class="basi">Anahtar sözcükler de Türkçe</span>
+      <p>
+        Koco'nun Türkçesi yüzeyde kalmıyor: dilin çekirdek sözcükleri bile
+        Türkçe. Bu kitapçıkta en çok şunları göreceksiniz:
+        <code>tanım</code> (<em>def</em>), <code>dez</code> (<em>val</em>
+        &mdash; değişmez değer), <code>den</code> (<em>var</em> &mdash;
+        değişken), <code>eğer</code>/<code>yoksa</code> (<em>if/else</em>),
+        <code>eşle</code>/<code>durum</code> (<em>match/case</em>),
+        <code>tür</code> (<em>type</em>), <code>durum sınıf</code>
+        (<em>case class</em>), <code>doğru</code>/<code>yanlış</code>
+        (<em>true/false</em>). Parantez içindeki İngilizce özgün adlar da
+        Koco'da aynen çalışır; Scala kitaplarına geçtiğinizde tanış
+        çıkarsınız.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok kunye">
+  <div class="ray">Künye</div>
+  <div class="govde">
+    <h2>Telif ve lisans</h2>
+
+    <p>
+      <strong>Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</strong><br>
+      Bülent Başaran &middot; 2026 &middot; İlk taslak
+    </p>
+
+    <p>
+      Bu kitapçığın <strong>metni</strong>
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr">Creative Commons
+      Atıf-AynıLisanslaPaylaş 4.0</a> (CC&nbsp;BY-SA&nbsp;4.0) lisansıyla sunuluyor;
+      içindeki <strong>örnek programlar</strong>
+      <a href="https://opensource.org/licenses/MIT">MIT lisansı</a> altında.
+      Kopyalayın, çalıştırın, bozun, düzeltin, paylaşın.
+    </p>
+
+    <p>
+      <a href="https://www.kogics.net/kojo">Kojo</a>, Lalit Pant'ın kurduğu ve
+      dünyanın dört bir yanından gönüllülerin katkı verdiği açık kaynak bir
+      projedir; Türkçe sürümü Koco'ya bu satırların yazarı da katkıda bulunuyor.
+      Kitapçıkta anılan dış kaynaklar kendi sahiplerine ve koşullarına tabidir.
+    </p>
+
+    <p class="dipnot">
+      Bu kitapçıktaki bütün programlar, Koco'nun Türkçe anahtar sözcüklü
+      Scala derleyicisiyle (<code>scala-tr</code>, 2.13.18) derlendi; konsol
+      örnekleri çalıştırıldı ve gösterilen çıktılar gerçek çıktılardır.
+      Çizim örneklerinin görüntüsünü ise kendi Koco'nuzda alacaksınız &mdash;
+      zaten bütün mesele o.
+      Bir hata bulursanız ya da bir bölümün daha iyi anlatılabileceğini
+      düşünüyorsanız,
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">ders deposunda</a>
+      konu açın. Kitapçık da ders gibi, birlikte gelişiyor.
+    </p>
+  </div>
+</div>
+
+<!--GEZINME-->

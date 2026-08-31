@@ -2,12 +2,12 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<title>Kapak</title>
+<title>Kapak (Koco)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
 <style>
   /* Kapak resmi: 1600x2400. kapak.mjs bu sayfanın ekran görüntüsünü alıyor.
-     Çizimler ders notlarındaki saydam png'ler; kareli zemine doğrudan
-     oturuyorlar, deftere elle çizilmiş gibi dursun diye. */
+     Kardeş kitapçığın kapağıyla aynı düzen; vurgu rengi petrol, kolajda
+     Koco'da yazılmış programların çıktıları var. */
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -25,7 +25,7 @@
     position: relative; overflow: hidden;
   }
 
-  .serit { position: absolute; top: 0; left: 0; width: 26px; height: 100%; background: #2A4BC4; }
+  .serit { position: absolute; top: 0; left: 0; width: 26px; height: 100%; background: #0E7490; }
 
   .seri {
     font-family: "IBM Plex Mono", monospace; font-size: 29px;
@@ -34,40 +34,40 @@
 
   h1 {
     font-family: "Bitter", serif; font-weight: 700;
-    font-size: 138px; line-height: 1.04; letter-spacing: -.03em;
-    margin-top: 58px;
+    font-size: 118px; line-height: 1.06; letter-spacing: -.03em;
+    margin-top: 54px;
   }
-  h1 .vurgu { color: #2A4BC4; }
+  h1 .vurgu { color: #0E7490; }
 
   .alt {
-    font-size: 41px; color: #52607C; line-height: 1.5;
-    margin-top: 44px; max-width: 1150px;
+    font-size: 40px; color: #52607C; line-height: 1.5;
+    margin-top: 40px; max-width: 1200px;
   }
 
   /* altı bölümün adları: ince bir şerit, içindekilerin fragmanı */
   .bolumler {
     font-family: "IBM Plex Mono", monospace; font-size: 23px;
     letter-spacing: .01em; color: #8792AA;
-    margin-top: 40px; white-space: nowrap;
+    margin-top: 38px; white-space: nowrap;
   }
-  .bolumler b { color: #2A4BC4; font-weight: 500; }
+  .bolumler b { color: #0E7490; font-weight: 500; }
 
-  /* ---- çizim kolajı ---- */
+  /* ---- çizim kolajı: Koco programlarının çıktıları ---- */
 
-  .kolaj { position: relative; flex: 1; margin-top: 26px; }
+  .kolaj { position: relative; flex: 1; margin-top: 30px; }
   .kolaj img {
     position: absolute; display: block;
+    background: #fff; padding: 10px;
     box-shadow: 0 16px 34px -20px rgba(16, 28, 60, .5);
   }
 
-  .c1 { left:  -26px; top:    6px; width: 496px; transform: rotate(-3.2deg); }
-  .c2 { left:  500px; top:   14px; width: 462px; transform: rotate( 2.6deg); }
-  .c3 { left: 1020px; top:   22px; width: 356px; transform: rotate(-2.2deg); }
-  .c4 { left:  -10px; top:  626px; width: 610px; transform: rotate( 1.8deg); }
-  .c5 { left:  672px; top:  690px; width: 474px; transform: rotate(-4.4deg); }
+  .c1 { left:  -20px; top:   30px; width: 700px; transform: rotate(-2.4deg); }
+  .c2 { left:  740px; top:   -6px; width: 640px; transform: rotate( 2.2deg); }
+  .c3 { left:   30px; top:  620px; width: 600px; transform: rotate( 1.8deg); }
+  .c4 { left:  700px; top:  660px; width: 620px; transform: rotate(-3.0deg); }
 
   .kolaj-not {
-    position: absolute; right: 0px; bottom: 8px; width: 320px;
+    position: absolute; right: 0px; bottom: 8px; width: 380px;
     font-family: "IBM Plex Mono", monospace; font-size: 26px;
     line-height: 1.62; color: #8792AA; text-align: right;
   }
@@ -94,31 +94,30 @@
 <body>
   <div class="serit"></div>
 
-  <div class="seri">Fen Lisesi için C++ ve algoritma</div>
+  <div class="seri">Fen Lisesi için Koco ve Scala</div>
 
-  <h1>Programlamaya<br>ve Algoritmalara<br><span class="vurgu">Keyifli</span> Bir Başlangıç</h1>
+  <h1>Programlamaya<br>ve Algoritmalara<br><span class="vurgu">Keyifli ve İşlevsel</span><br>Bir Giriş</h1>
 
   <p class="alt">
-    Altı bölüm, yirmi dört çalışan program ve bir sürü soru.<br>
-    Yalnız da okunur, ama ikili daha hızlı.
+    Altı bölüm, bir kaplumbağa, bol fraktal ve bir sürü çizim.<br>
+    Her satırın sonucunu anında ekranda görün.
   </p>
 
   <div class="bolumler">
-    <b>I</b> İlk Adımlar &middot; <b>II</b> Veri &middot; <b>III</b> Zanaat &middot;
+    <b>I</b> İlk Adımlar &middot; <b>II</b> Veri &middot; <b>III</b> Soyutlama &middot;
     <b>IV</b> Özyineleme &middot; <b>V</b> Çizgeler &middot; <b>VI</b> Dinamik Programlama
   </div>
 
   <div class="kolaj">
-    <img class="c1" src="../ileri/dersler/resim/bilgisayar-agi.png" alt="bilgisayar ağı">
-    <img class="c2" src="../ileri/dersler/resim/daykstra3.png" alt="Dijkstra adım adım">
-    <img class="c3" src="../ileri/dersler/resim/bellman-ford.png" alt="Bellman-Ford çizgesi">
-    <img class="c4" src="../ileri/dersler/resim/yonlu-cizge1.png" alt="yönlü çizge">
-    <img class="c5" src="../ileri/dersler/resim/omuzda-tasima.png" alt="omuzda taşıma">
-    <div class="kolaj-not">derste tahtaya<br><b>çizdiklerimizden</b></div>
+    <img class="c1" src="../kitapcik/resim/koco-koh-tanesi.jpeg" alt="Koch tanesi">
+    <img class="c2" src="../kitapcik/resim/koco-mandelbrot.jpeg" alt="Mandelbrot kümesi">
+    <img class="c3" src="../kitapcik/resim/koco-uc-cisim-pr-2.jpg" alt="üç cisim problemi">
+    <img class="c4" src="../kitapcik/resim/koco-giysi-cercevesi-cokgen.jpg" alt="çokgen çerçeve">
+    <div class="kolaj-not">hepsi Koco'da yazılmış<br><b>programların çıktısı</b></div>
   </div>
 
   <div class="altbilgi">
-    <div class="yazar">Bülent Başaran<span class="surum">2026 &middot; birinci sürüm</span></div>
+    <div class="yazar">Bülent Başaran<span class="surum">2026 &middot; ilk taslak</span></div>
     <div class="rozet">CC BY-SA 4.0 &middot; kod MIT<br>github.com/bulent2k2/cpp_ogreniyoruz</div>
   </div>
 </body>

@@ -231,6 +231,10 @@ code {
   padding: 0.08em 0.32em;
   white-space: nowrap;
 }
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
 
 /* ---------- terminal kartı ---------- */
 

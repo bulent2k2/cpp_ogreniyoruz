@@ -1,0 +1,366 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm II</div>
+  <h1>Veriyi Düzenlemek</h1>
+  <p class="ozet">
+    Tek sayıyla, tek yazıyla ancak bu kadar oynanır; programların gücü çok veriyi
+    düzenli tutmaktan gelir. Bu bölümde Koco'nun kaplarını tanıyacaksınız &mdash;
+    dizin, küme, eşlem &mdash; ve onların üstünde çalışan üç sihirli işlemi:
+    <strong>işle</strong>, <strong>ele</strong>, <strong>indirge</strong>.
+    Bu üçünü kavrayan, döngülerin yarısını bir daha hiç yazmaz.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">II.1</div>
+  <div class="govde">
+    <h2>Dizin: işlevselin atardamarı</h2>
+
+    <p>
+      İşlevsel dünyanın en sevdiği kap <strong>dizin</strong>
+      (<em>list</em>). Ögeleri art arda dizer ve &mdash; dikkat &mdash;
+      <strong>bir kere kuruldu mu bir daha değişmez</strong>:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">dizin</span></figcaption>
+      <pre><code><span class="a">dez</span> sayılar = <span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>)
+
+satıryaz(sayılar.başı)      <span class="y">// 3  (ilk öge)</span>
+satıryaz(sayılar.kuyruğu)   <span class="y">// List(1, 4, 1, 5, 9)  (gerisi)</span>
+satıryaz(sayılar.boyu)      <span class="y">// 6</span>
+satıryaz(sayılar.tersi)     <span class="y">// List(9, 5, 1, 4, 1, 3)</span>
+satıryaz(sayılar.sıralı)    <span class="y">// List(1, 1, 3, 4, 5, 9)</span>
+satıryaz(sayılar)           <span class="y">// List(3, 1, 4, 1, 5, 9) -- hâlâ aynı!</span></code></pre>
+    </figure>
+
+    <p>
+      Son satır bu bölümün ilk büyük fikri. <code>tersi</code> ve
+      <code>sıralı</code>, <code>sayılar</code>'ı değiştirmedi;
+      <strong>yeni birer dizin</strong> verdi. Değiştirilemeyen veriyle çalışmak
+      ilk başta kısıtlayıcı gelir, sonra özgürleştirir: hiçbir işlev, elinizdeki
+      veriyi arkanızdan bozamaz.
+    </p>
+
+    <p>
+      Baş ve kuyruk ikilisinin bir de tersi var: öne öge <em>eklemek</em>.
+      Buna &ldquo;cons&rdquo; deniyor, imgesi <code>::</code>
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">öne ekleme</span></figcaption>
+      <pre><code><span class="a">dez</span> d1 = <span class="t">Dizin</span>(<span class="n">2</span>, <span class="n">3</span>)
+<span class="a">dez</span> d2 = <span class="n">1</span> :: d1        <span class="y">// List(1, 2, 3) -- d1 yine değişmedi</span>
+<span class="a">dez</span> d3 = <span class="n">0</span> :: d2        <span class="y">// List(0, 1, 2, 3)</span>
+
+satıryaz(<span class="t">Boş</span>)           <span class="y">// List() -- boş dizin de bir değer!</span>
+satıryaz(<span class="n">7</span> :: <span class="t">Boş</span>)      <span class="y">// List(7)</span></code></pre>
+    </figure>
+
+    <p>
+      Her dizin aslında bu ikiliden ibaret: ya <code>Boş</code>tur ya da
+      &ldquo;bir baş ve gerisi&rdquo;. Bu basit gözlem,
+      <a href="{{04-ozyineleme}}">Bölüm IV</a>'te özyinelemeyle birleşince çok
+      iş görecek.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.2</div>
+  <div class="govde">
+    <h2>Üç sihirli işlem</h2>
+
+    <p>
+      Şimdi bu kitapçığın kalbi. Elinizde bir dizin var; onunla yapmak
+      isteyeceğiniz hemen her şey şu üç işlemin bileşimi:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>işle <em>(map)</em></h4>
+        <p>
+          Her ögeye aynı işlevi uygula, sonuçların dizinini ver.
+          Boy değişmez, ögeler dönüşür.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>ele <em>(filter)</em></h4>
+        <p>
+          Her ögeye bir soru sor; yanıtı <code>doğru</code> olanları tut.
+          Ögeler değişmez, boy kısalır.
+        </p>
+      </div>
+      <div class="kart">
+        <h4>indirge <em>(reduce)</em></h4>
+        <p>
+          Ögeleri ikişer ikişer birleştirerek tek değere in:
+          toplam, çarpım, en büyük&hellip;
+        </p>
+      </div>
+    </div>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">üçlü.kojo</span><span class="etiket">işle, ele, indirge</span></figcaption>
+      <pre><code><span class="a">dez</span> sayılar = <span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>)
+
+satıryaz(sayılar.işle(s =&gt; s * s))       <span class="y">// List(9, 1, 16, 1, 25, 81, 4, 36)</span>
+satıryaz(sayılar.ele(s =&gt; s % <span class="n">2</span> == <span class="n">0</span>))   <span class="y">// List(4, 2, 6)</span>
+satıryaz(sayılar.indirge((a, b) =&gt; a + b))  <span class="y">// 31</span>
+
+<span class="y">// en sık kullanılanların kısaltmaları da hazır:</span>
+satıryaz(sayılar.topla)      <span class="y">// 31</span>
+satıryaz(sayılar.çarp)       <span class="y">// 6480</span>
+satıryaz(sayılar.enİrisi)    <span class="y">// 9</span>
+satıryaz(sayılar.enUfağı)    <span class="y">// 1</span></code></pre>
+    </figure>
+
+    <p>
+      <code>s =&gt; s * s</code> yazımına dikkat: bu, <strong>adsız bir işlev</strong>
+      (<em>lambda</em>). &ldquo;<code>s</code>'yi al, <code>s * s</code>'yi
+      ver&rdquo; diyor. İşlevleri böyle, değermiş gibi elden ele vermek
+      işlevsel programlamanın tam kalbidir: <code>işle</code>'ye bir işlev
+      <em>veriyorsunuz</em>.
+    </p>
+
+    <p>
+      Ve asıl güç, zincirlemede. Bölüm I'deki Project Euler çözümünü hatırlayın;
+      şimdi bir yenisi: <em>100'e kadar sayıların karelerinden, 3'e bölünenlerin
+      toplamı.</em>
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">zincir</span></figcaption>
+      <pre><code>(<span class="n">1</span> |-| <span class="n">100</span>).dizine                <span class="y">// 1'den 100'e (100 dahil)</span>
+  .işle(s =&gt; s * s)              <span class="y">// karelerini al</span>
+  .ele(k =&gt; k % <span class="n">3</span> == <span class="n">0</span>)          <span class="y">// 3'e bölünenleri tut</span>
+  .topla                          <span class="y">// ve topla</span></code></pre>
+    </figure>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        <code>1 |-| 100</code> uçları dahil bir aralık, <code>1 |- 100</code>
+        ise son sayı hariç. Zinciri her adımında <code>satıryaz</code> ile kesip
+        ara sonucu yazdırabilirsiniz &mdash; işlevsel kodda hata ayıklamanın en
+        kolay yolu, zinciri kısaltıp bakmaktır.
+      </p>
+    </div>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Biriniz bir görev söylesin (&ldquo;çift sayıların karelerinin en
+        büyüğü&rdquo; gibi), öteki onu <code>işle</code>/<code>ele</code>/<code>indirge</code>
+        zinciriyle yazsın; sonra değişin. On dakikada bir düzine tur atarsınız.
+        Amaç şu refleksi kazanmak: <em>döngü yazmadan önce bir dur, bu bir
+        zincir mi?</em>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.3</div>
+  <div class="govde">
+    <h2>Küme ve eşlem</h2>
+
+    <p>
+      <strong>Küme</strong> (<em>set</em>) matematikten tanıdığınız kümenin ta
+      kendisi: tekrarsız, sırasız. <strong>Eşlem</strong> (<em>map</em>) ise bir
+      şeyi başka bir şeye bağlar: şehirden plakaya, harften sayıya.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">küme</span></figcaption>
+      <pre><code><span class="a">dez</span> k = <span class="t">Küme</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>)   <span class="y">// 1 iki kere girdi...</span>
+satıryaz(k)                     <span class="y">// Set(3, 1, 4, 5) -- ...bir kere kaldı</span>
+satıryaz(k.içeriyorMu(<span class="n">4</span>))       <span class="y">// doğru</span>
+satıryaz(k + <span class="n">9</span>)                 <span class="y">// yeni küme; k değişmedi</span></code></pre>
+    </figure>
+
+    <p>
+      Kümenin işlevsel dünyada tatlı bir sırrı var: <strong>küme aynı zamanda
+      bir işlevdir.</strong> <code>k(4)</code> yazmak &ldquo;4 kümede mi?&rdquo;
+      diye sormaktır. Bu küçük ayrıntı <a href="{{05-cizgeler}}">Bölüm V</a>'te
+      çizge gezerken kodumuzu güzelleştirecek.
+    </p>
+
+    <h3>Harf saymak, döngüsüz</h3>
+
+    <p>
+      Kardeş kitapçıkta bir yazıdaki harfleri <code>map&lt;char,int&gt;</code>
+      ve bir döngüyle saymıştık. Burada iş bölümünü <code>öbekle</code>
+      (<em>group by</em>) yapıyor:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">harfsay.kojo</span><span class="etiket">öbekle</span></figcaption>
+      <pre><code><span class="a">dez</span> harfler = <span class="s">"kelebek kanadi"</span>.ele(h =&gt; h != <span class="s">' '</span>)
+
+<span class="a">dez</span> öbekler = harfler.öbekle(h =&gt; h)
+<span class="y">// 'k' -&gt; "kkk", 'e' -&gt; "eee", 'l' -&gt; "l", ...</span>
+
+<span class="a">dez</span> sayaç = öbekler.işle { <span class="a">durum</span> (harf, öbek) =&gt; (harf, öbek.boyu) }
+
+sayaç.dizine.sıralı.herbiriİçin { <span class="a">durum</span> (harf, kaç) =&gt;
+  satıryaz(<span class="s">s"$harf -&gt; $kaç"</span>)
+}</code></pre>
+    </figure>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>a -&gt; 2
+b -&gt; 1
+d -&gt; 1
+e -&gt; 3
+i -&gt; 1
+k -&gt; 3
+l -&gt; 1
+n -&gt; 1</code></pre>
+    </figure>
+
+    <p>
+      Üç yenilik birden girdi, teker teker: <code>öbekle</code> ögeleri verdiğiniz
+      işleve göre öbeklere ayırır ve bir eşlem verir. <code>(harf, öbek)</code>
+      bir <strong>demet</strong> (<em>tuple</em>): iki değeri yan yana taşıyan
+      en sade paket. <code>durum (harf, kaç) =&gt;</code> ise demeti yakalayıp
+      parçalarına ad veren <strong>eşleştirme</strong> (<em>pattern
+      matching</em>) &mdash; yeni çekirdek sözcüğümüz <code>durum</code>
+      (<em>case</em>) işte bu.
+    </p>
+
+    <h3>Eşlem ve <code>Belki</code></h3>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">plaka.kojo</span><span class="etiket">eşlem</span></figcaption>
+      <pre><code><span class="a">dez</span> plaka = <span class="t">Eşlem</span>(<span class="s">"Adana"</span> -&gt; <span class="n">1</span>, <span class="s">"Ankara"</span> -&gt; <span class="n">6</span>, <span class="s">"İstanbul"</span> -&gt; <span class="n">34</span>)
+
+satıryaz(plaka(<span class="s">"Ankara"</span>))          <span class="y">// 6</span>
+satıryaz(plaka.al(<span class="s">"Ankara"</span>))       <span class="y">// Some(6)  -- Koco'daki adı: Biri(6)</span>
+satıryaz(plaka.al(<span class="s">"Mars"</span>))         <span class="y">// None     -- Koco'daki adı: Hiçbiri</span>
+satıryaz(plaka.alYoksa(<span class="s">"Mars"</span>, <span class="n">0</span>)) <span class="y">// 0</span>
+
+plaka.eşEkle(<span class="s">"İzmir"</span> -&gt; <span class="n">35</span>)        <span class="y">// bu eşlem büyüyebilen cinsten</span>
+satıryaz(plaka.sayı)               <span class="y">// 4</span></code></pre>
+    </figure>
+
+    <p>
+      Buradaki incelik <code>al</code>'ın çıktısı. &ldquo;Mars'ın plakası
+      kaç?&rdquo; sorusunun dürüst yanıtı bir sayı değil;
+      <em>&ldquo;yok öyle bir şey&rdquo;</em>. İşlevsel diller bu yanıtı da bir
+      değere çevirir: <code>Belki</code> (<em>Option</em>) türü ya
+      <code>Biri(6)</code>dır ya <code>Hiçbiri</code>. Kardeş kitapçıkta
+      eşlemde olmayan anahtarı <code>[]</code> ile okumanın anahtarı
+      <em>sessizce yarattığını</em>, bunun yarım saatimizi yediğini anlatmıştım.
+      <code>Belki</code> tam da o tuzağın panzehiri: derleyici,
+      &ldquo;ya yoksa?&rdquo; durumunu ele almayı size <em>hatırlatır</em>.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Dikkat</span>
+      <p>
+        <code>plaka("Mars")</code> yazarsanız program o anda hata verip durur.
+        Emin değilseniz <code>al</code> ya da <code>alYoksa</code> kullanın.
+        &ldquo;Çalışırken patlayan&rdquo; ile &ldquo;derlenmeden yakalanan&rdquo;
+        hata arasındaki fark, bu kitapçığın en çok döneceği ayrımlardan.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.4</div>
+  <div class="govde">
+    <h2>Sırası önemli kaplar</h2>
+
+    <p>
+      Kardeş kitapçıktan tanıdığınız üçlü burada da var; adları Türkçe:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Kap</th><th>Kural</th><th>Yöntemler</th><th>Ne işe yarar</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Yığın</strong> <code>Yığın</code></td>
+            <td>Son giren ilk çıkar</td>
+            <td><code>koy</code> <code>al</code> <code>tepe</code></td>
+            <td>Derinlemesine gezi, geri alma</td>
+          </tr>
+          <tr>
+            <td><strong>Kuyruk</strong> <code>Kuyruk</code></td>
+            <td>İlk giren ilk çıkar</td>
+            <td><code>ekle</code> <code>baştanAl</code> <code>başı</code></td>
+            <td>Enlemesine gezi, sıra bekleyen işler</td>
+          </tr>
+          <tr>
+            <td><strong>Öncelik sırası</strong> <code>ÖncelikSırası</code></td>
+            <td>En öncelikli önce çıkar</td>
+            <td><code>ekle</code> <code>baştanAl</code></td>
+            <td>Dijkstra, &ldquo;en yakın n şey&rdquo;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">yığın ve kuyruk</span></figcaption>
+      <pre><code><span class="a">dez</span> yığın = <span class="t">Yığın</span>[<span class="t">Sayı</span>]()
+<span class="a">dez</span> kuyruk = <span class="t">Kuyruk</span>[<span class="t">Sayı</span>]()
+
+<span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>).herbiriİçin { s =&gt;
+  yığın.koy(s)
+  kuyruk.ekle(s)
+}
+
+satıryaz(yığın.al())      <span class="y">// 4 -- son giren</span>
+satıryaz(kuyruk.baştanAl())  <span class="y">// 3 -- ilk giren</span></code></pre>
+    </figure>
+
+    <p>
+      Bu ikisi <em>değişen</em> kaplar; işlevsel saflıktan taviz veriyorlar ama
+      dert değil &mdash; doğru işte doğru araç. <a href="{{05-cizgeler}}">Bölüm
+      V</a>'te göreceksiniz: aynı gezi kodunda yığını kuyrukla değiştirmek,
+      algoritmayı derinlemesineden enlemesineye çevirecek.
+    </p>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Sesli harfler.</strong> Bir yazıdaki sesli harfleri
+          <code>say</code> ile sayın: <code>"aeıioöuü"</code> kümesini kurun ve
+          kümenin işlev olduğunu kullanın. Tek satır yeter.
+        </li>
+        <li>
+          <strong>Tekrar var mı?</strong> Bir dizinde tekrar eden öge var mı?
+          İpucu: <code>yinelemesiz</code> ve <code>boyu</code>. Tek satır.
+          Sonra aynı soruyu kümeye çevirerek çözün ve iki çözümü karşılaştırın.
+        </li>
+        <li>
+          <strong>En uzun sözcük.</strong> Bir sözcük dizininden en uzununu
+          bulun. İpucu: <code>enİrisi</code>'nin işlev alan hâli var:
+          <code>enİrisi(s =&gt; s.boyu)</code>.
+        </li>
+        <li>
+          <strong>Kelime sayacı.</strong> Harf sayacını kelime sayacına çevirin:
+          bir cümledeki her kelime kaç kere geçiyor? İpucu: yazıyı boşluklardan
+          bölmek için <code>böl(' ')</code> hazır &mdash; bir kelime dizini verir,
+          gerisi harf sayacıyla aynı.
+        </li>
+        <li>
+          <strong>Ters sözlük.</strong> Plaka eşlemini tersine çevirin: sayıdan
+          şehre. <code>işle</code> ve demetlerle tek zincirde olur.
+          <span class="zor">düşündürücü</span> İki şehir aynı plakayı paylaşsaydı
+          ne olurdu? Deneyin ve açıklayın.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

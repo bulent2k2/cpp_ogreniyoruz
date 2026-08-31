@@ -1,0 +1,367 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm IV</div>
+  <h1>Özyineleme ve Fraktallar</h1>
+  <p class="ozet">
+    Bir işlev kendi kendini çağırabilir. Kardeş kitapçıkta bu fikri sayılarla ve
+    kulelerle ehlileştirmiştik; burada bir üstünlüğümüz var:
+    özyinelemeyi <em>çizdireceğiz</em>. Sarmallar, ağaçlar ve bir kar tanesi
+    &mdash; kendini çağıran işlevin neye benzediğini gözünüzle göreceksiniz.
+    Sonra da onu unutkanlıktan kurtarıp kırk bin kat hızlandıracağız.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">IV.1</div>
+  <div class="govde">
+    <h2>Taban ve adım</h2>
+
+    <p>
+      Bölüm III'ün sonunda <code>bizimYinele</code> kendini çağırmıştı. Genel
+      kural şu: her özyinelemeli işlevin iki parçası vardır ve
+      <strong>ikisi de olmazsa olmaz</strong>:
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Taban durumu.</strong> Kendini çağırmadan durduğu, en küçük hâl.
+      </li>
+      <li>
+        <strong>Adım.</strong> Problemi kendinden <em>daha küçük</em> bir
+        problemle ifade etmesi. Küçülmek şart; küçülmeyen özyineleme hiç durmaz.
+      </li>
+    </ol>
+
+    <p>
+      İlk örneğimiz çizsin de görelim: her turda biraz kısalan bir sarmal.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">sarmal.kojo</span></figcaption>
+      <pre><code><span class="a">tanım</span> sarmal(boy: <span class="t">Kesir</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (boy &gt; <span class="n">2</span>) {          <span class="y">// TABAN: boy 2'ye düşünce dur</span>
+    ileri(boy)
+    sağ()
+    sarmal(boy * <span class="n">0.95</span>)     <span class="y">// ADIM: biraz küçüğünü çiz</span>
+  }
+
+sil(); canlandırmaHızınıKur(<span class="n">10</span>)
+sarmal(<span class="n">200</span>)</code></pre>
+    </figure>
+
+    <p>
+      Tuvalde içe içe kıvrılan bir kare sarmalı belirecek. Şimdi kodda iki küçük
+      deney yapın: taban koşulunu <code>boy &gt; 150</code> yapın &mdash; sarmal
+      üç-beş çizgide bitiyor. Sonra <code>boy * 0.95</code>'i
+      <code>boy</code> yapın; yani küçülmeyi kaldırın. Koco bir süre sonra
+      programı durduracaktır: küçülmeyen özyineleme <em>hiç durmaz</em>, buna
+      çarpılmadan öğrenmenin en ucuz yolu da bir çizim programıdır.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Bir numaralı hata</span>
+      <p>
+        Özyinelemede hataların şahı, taban durumunu unutmak ya da yanlış
+        yazmaktır. Alışkanlık edinin: özyinelemeli bir işlev yazarken
+        <strong>ilk yazdığınız satır taban olsun</strong>. Kardeş kitapçık da
+        aynı cümleyi kurar; iki dilde de doğru olan cümleler en değerlileridir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.2</div>
+  <div class="govde">
+    <h2>Bir ağaç çizelim</h2>
+
+    <p>
+      Sarmalda işlev kendini <em>bir</em> kere çağırdı. Ya iki kere çağırırsa?
+      Gövdeden iki dal, her daldan iki dal daha&hellip; Bu bir ağaç:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">ağaç.kojo</span><span class="etiket">iki dallı özyineleme</span></figcaption>
+      <pre><code><span class="a">tanım</span> ağaç(boy: <span class="t">Kesir</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (boy &gt; <span class="n">4</span>) {
+    ileri(boy)               <span class="y">// gövdeyi çiz</span>
+    sol(<span class="n">30</span>)
+    ağaç(boy * <span class="n">0.7</span>)          <span class="y">// sol dal: küçük bir ağaç!</span>
+    sağ(<span class="n">60</span>)
+    ağaç(boy * <span class="n">0.7</span>)          <span class="y">// sağ dal: bir küçük ağaç daha</span>
+    sol(<span class="n">30</span>)
+    geri(boy)                <span class="y">// GERİ DÖN: geldiğin gibi bırak</span>
+  }
+
+silVeSakla(); canlandırmaHızınıKur(<span class="n">1</span>)
+kalemRenginiKur(kahverengi)
+ağaç(<span class="n">90</span>)</code></pre>
+    </figure>
+
+    <p>
+      Tanım bir cümle: <em>ağaç, ucunda iki küçük ağaç taşıyan bir gövdedir.</em>
+      Saçma gibi duran bu cümle, ekranda gerçek bir ağaca dönüşüyor.
+      Son satırdaki <code>geri(boy)</code> hayati: her dal, kaplumbağayı
+      <strong>bulduğu yere geri bırakıyor</strong> ki kardeş dal doğru yerden
+      başlasın. Kardeş kitapçıktaki geri dönüşlü aramanın
+      &ldquo;bıraktığın gibi bırak&rdquo; kuralı, işte bu <code>geri</code>.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        Açıları (30 ve 60), oranı (0.7) ve tabanı (4) değiştirin: söğüt, çam,
+        bodur çalı&hellip; hepsi bu üç sayının içinde saklı. Bir de her dalda
+        kalem kalınlığını <code>boy / 10</code> yapmayı deneyin &mdash; gövde
+        kalın, uçlar ince: bir anda gerçekçi oluverir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.3</div>
+  <div class="govde">
+    <h2>Koch tanesi</h2>
+
+    <p>
+      Kapaktaki kar tanesine geldik. Kural tek cümle: <em>bir doğru parçası al,
+      ortadaki üçte birini kes, yerine iki kenarlı bir çatı koy</em> &mdash;
+      sonra aynı şeyi yeni parçaların her birine yap.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">koh.kojo</span><span class="etiket">kar tanesi</span></figcaption>
+      <pre><code><span class="a">tanım</span> koh(boy: <span class="t">Kesir</span>, derinlik: <span class="t">Sayı</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (derinlik == <span class="n">0</span>)
+    ileri(boy)                 <span class="y">// TABAN: düz çizgi</span>
+  <span class="a">yoksa</span> {
+    koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>); sol(<span class="n">60</span>)
+    koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>); sağ(<span class="n">120</span>)
+    koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>); sol(<span class="n">60</span>)
+    koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>)
+  }
+
+silVeSakla(); canlandırmaHızınıKur(<span class="n">0</span>)
+yinele(<span class="n">3</span>) {           <span class="y">// üç kenarlı "üçgen", her kenarı bir koh eğrisi</span>
+  koh(<span class="n">243</span>, <span class="n">4</span>)
+  sağ(<span class="n">120</span>)
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>derinlik</code> girdisine dikkat: bu sefer küçülen şey uzunluk değil,
+      <strong>derinliğin kendisi</strong>. Sıfırda düz çizgi çiziyoruz; her
+      derinlik katı, çizgiyi dört parçalı bir kıvrıma çeviriyor.
+      <code>derinlik = 0, 1, 2, 3, 4</code> için ayrı ayrı çalıştırın ve
+      şeklin nasıl &ldquo;pürüzlendiğini&rdquo; izleyin.
+    </p>
+
+    <p>
+      Böyle şekillere <strong>fraktal</strong> deniyor: neresine yaklaşırsanız
+      yaklaşın aynı deseni görürsünüz, çünkü tanımı kendine yapılmış bir
+      göndermeden ibaret. Özyinelemeli kod ile fraktal, aynı fikrin biri
+      yazıyla biri çizgiyle hâli.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Bir sayalım</span>
+      <p>
+        Her derinlik katı çizgi sayısını dörde katlar: derinlik 4'te
+        <code>3 &times; 4⁴ = 768</code> çizgi. Derinlik 10'da üç milyondan
+        fazla. Özyinelemenin büyüme hızıyla ilk tanışmanız bu olsun;
+        Hanoi'de sayılar daha da çılgınlaşacak.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.4</div>
+  <div class="govde">
+    <h2>Hanoi kuleleri</h2>
+
+    <p>
+      Çizimden sayıya dönelim; klasiklerin klasiği. Üç çubuk, birincisinde
+      büyükten küçüğe <em>n</em> disk; hepsi üçüncü çubuğa taşınacak. Her
+      seferinde tek disk, büyük disk küçüğün üstüne asla.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">hanoi.kojo</span><span class="etiket">üç satırlık çözüm</span></figcaption>
+      <pre><code><span class="a">den</span> adım = <span class="n">0</span>
+
+<span class="a">tanım</span> taşı(n: <span class="t">Sayı</span>, kaynak: <span class="t">Sayı</span>, hedef: <span class="t">Sayı</span>, yardımcı: <span class="t">Sayı</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (n &gt; <span class="n">0</span>) {                       <span class="y">// taban: taşınacak disk kalmadı</span>
+    taşı(n - <span class="n">1</span>, kaynak, yardımcı, hedef)   <span class="y">// üstteki n-1 diski kenara çek</span>
+    adım = adım + <span class="n">1</span>
+    satıryaz(<span class="s">s"$adım) $n. diski $kaynak -&gt; $hedef"</span>)
+    taşı(n - <span class="n">1</span>, yardımcı, hedef, kaynak)   <span class="y">// n-1 diski üstüne koy</span>
+  }
+
+taşı(<span class="n">3</span>, <span class="n">1</span>, <span class="n">3</span>, <span class="n">2</span>)</code></pre>
+    </figure>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">n = 3</span></figcaption>
+      <pre><code>1) 1. diski 1 -&gt; 3
+2) 2. diski 1 -&gt; 2
+3) 1. diski 3 -&gt; 2
+4) 3. diski 1 -&gt; 3
+5) 1. diski 2 -&gt; 1
+6) 2. diski 2 -&gt; 3
+7) 1. diski 1 -&gt; 3</code></pre>
+    </figure>
+
+    <p>
+      Yedi adım; genel olarak <code>2ⁿ − 1</code>. Kardeş kitapçıkta anlattığım
+      efsaneyi burada da analım: 64 diskli kulenin bitişi, saniyede bir hamleyle
+      yaklaşık <strong>584 milyar yıl</strong> sürer. Rahat olun, kimse
+      beklemiyor.
+    </p>
+
+    <h3>Dizinlerde özyineleme</h3>
+
+    <p>
+      Bölüm II'de demiştik: her dizin ya <code>Boş</code>tur ya da &ldquo;baş
+      ve gerisi&rdquo;. Bu, özyineleme için biçilmiş kaftan &mdash; ve
+      <code>eşle</code>/<code>durum</code> (<em>match/case</em>)
+      eşleştirmesiyle birleşince tanımlar şiire dönüyor:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">dizin özyinelemesi</span><span class="etiket">kendi topla'mız</span></figcaption>
+      <pre><code><span class="a">tanım</span> toplam(d: <span class="t">Dizin</span>[<span class="t">Sayı</span>]): <span class="t">Sayı</span> = d <span class="a">eşle</span> {
+  <span class="a">durum</span> <span class="t">Boş</span>           =&gt; <span class="n">0</span>                     <span class="y">// TABAN: boş dizinin toplamı</span>
+  <span class="a">durum</span> baş :: gerisi =&gt; baş + toplam(gerisi)  <span class="y">// ADIM</span>
+}
+
+<span class="a">tanım</span> altKümeler(d: <span class="t">Dizin</span>[<span class="t">Sayı</span>]): <span class="t">Dizin</span>[<span class="t">Dizin</span>[<span class="t">Sayı</span>]] = d <span class="a">eşle</span> {
+  <span class="a">durum</span> <span class="t">Boş</span>           =&gt; <span class="t">Dizin</span>(<span class="t">Boş</span>)   <span class="y">// boş kümenin tek altkümesi var: kendisi</span>
+  <span class="a">durum</span> baş :: gerisi =&gt;
+    <span class="a">dez</span> başsızlar = altKümeler(gerisi)          <span class="y">// başı ALMAYANLAR</span>
+    başsızlar ++ başsızlar.işle(ak =&gt; baş :: ak)  <span class="y">// ve başı ALANLAR</span>
+}
+
+satıryaz(toplam(<span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">2</span>)))       <span class="y">// 6</span>
+satıryaz(altKümeler(<span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">2</span>)).boyu)  <span class="y">// 8 = 2³</span></code></pre>
+    </figure>
+
+    <p>
+      <code>altKümeler</code>'i kardeş kitapçıkla karşılaştırın: orada
+      &ldquo;al ya da alma&rdquo; kararını bir gezi kalıbıyla, geri alma
+      satırlarıyla yazmıştık. Burada karar iki yarımın birleşimi olarak
+      <em>tanımlanıyor</em>: başı almayan altkümeler, bir de başı eklenmiş
+      hâlleri. Geri alacak bir şey yok, çünkü kimse bir şeyi değiştirmedi.
+      İşlevsel üslubun özyinelemeyle arası işte bu yüzden çok iyi.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.5</div>
+  <div class="govde">
+    <h2>Unutkan işlevi hızlandırmak</h2>
+
+    <p>
+      Özyinelemenin tuzağına gelme sırası bizde. Fibonaççi'yi tanımıyla yazalım:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tanımı yazdık, oldu</span></figcaption>
+      <pre><code><span class="a">tanım</span> fibYavaş(n: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">eğer</span> (n &lt; <span class="n">2</span>) n
+  <span class="a">yoksa</span> fibYavaş(n - <span class="n">1</span>) + fibYavaş(n - <span class="n">2</span>)</code></pre>
+    </figure>
+
+    <p>
+      Doğru &mdash; ama <code>fibYavaş(45)</code> deyin ve çayınızı koyun.
+      Sağdaki iki çağrı ikiye, dörde, sekize çatallanıyor ve aynı değerler
+      milyonlarca kere yeniden hesaplanıyor. Çare, kardeş kitapçıktakiyle
+      birebir aynı: <strong>hesapladığını bir kenara yaz</strong>
+      (<em>memoizasyon</em>). Kenar defterimiz bir eşlem:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">fib.kojo</span><span class="etiket">bellekli sürüm</span></figcaption>
+      <pre><code><span class="a">dez</span> bellek = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Uzun</span>]()
+
+<span class="a">tanım</span> fibHızlı(n: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">eğer</span> (n &lt; <span class="n">2</span>) n
+  <span class="a">yoksa</span> bellek.alYoksa(n, {
+    <span class="a">dez</span> sonuç = fibHızlı(n - <span class="n">1</span>) + fibHızlı(n - <span class="n">2</span>)
+    bellek.eşEkle(n -&gt; sonuç)
+    sonuç
+  })
+
+satıryaz(fibHızlı(<span class="n">45</span>))    <span class="y">// 1134903170, göz açıp kapayana kadar</span>
+satıryaz(fibHızlı(<span class="n">90</span>))    <span class="y">// 2880067194370816120 -- Uzun'a sığıyor, ucu ucuna</span></code></pre>
+    </figure>
+
+    <p>
+      <code>alYoksa(n, &hellip;)</code> şunu diyor: <em>defterde n varsa onu
+      ver; yoksa şu bloğu çalıştır.</em> Blok da hesaplayıp deftere yazıyor.
+      <code>fibYavaş(45)</code> için çağrı sayısı iki milyarı geçer;
+      <code>fibHızlı(45)</code> doksan küsur çağrıyla biter. Aradaki fark,
+      Bölüm III'teki tabloların diliyle: milyonlarca kat &mdash; ve tek
+      kuruşluk fikir: <em>aynı işi iki kere yapma.</em>
+    </p>
+
+    <p>
+      Bu fikrin bir adı ve koca bir bölümü var:
+      <a href="{{06-dp}}">dinamik programlama</a>. Bölüm VI'da oraya döneceğiz.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Biriniz <code>fibYavaş(40)</code>'ı başlatsın; süre işlerken öteki
+        <code>fibHızlı</code>'yı yazsın. Hangisi önce bitirir? Bu yarış
+        &ldquo;algoritma seçimi&rdquo; dersinin tamamıdır ve unutulmaz.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Eğrelti otu.</strong> Ağaç işlevine üçüncü bir dal ekleyin ve
+          açılarla oynayın. Sonra dalların boyuna göre kalem rengini yeşilden
+          kahverengiye değiştirin. En güzel ağacı kim çizecek?
+        </li>
+        <li>
+          <strong>Kare tanesi.</strong> Koch adımındaki &ldquo;çatı&rdquo;yı
+          üçgen yerine kare yapın: <code>sol(90); ileri; sağ(90); ileri;
+          sağ(90); ileri; sol(90)</code> gibi. Ortaya çıkan şekle bakın;
+          derinlik 3'te kaç çizgi çizildi?
+        </li>
+        <li>
+          <strong>Sierpinski üçgeni.</strong> Bir üçgen çizin; köşelerine üç
+          yarı boyutlu üçgen çizin; onların da köşelerine&hellip; Taban ve adımı
+          kendiniz kurun. <span class="zor">ipucu</span> <code>zıpla</code> ve
+          <code>konumVeYönüBelleğeYaz</code>/<code>konumVeYönüGeriYükle</code>
+          işinizi kolaylaştırır.
+        </li>
+        <li>
+          <strong>Permütasyonlar.</strong> <code>altKümeler</code>'in kardeşi
+          <code>permütasyonlar(d: Dizin[Sayı])</code>'ı yazın: bütün
+          sıralanışlar. <span class="zor">ipucu</span> Başı sırayla her öge yapıp
+          gerisinin permütasyonlarının önüne ekleyin. <code>Dizin(1,2,3)</code>
+          için 6 tane çıkmalı &mdash; <code>belirt</code> ile sınayın.
+        </li>
+        <li>
+          <strong>Kümeyi ikiye bölün.</strong>
+          <a href="https://cses.fi/problemset/task/1623">CSES Apple Division</a>:
+          <em>n</em> elmayı iki gruba ayırın, ağırlık farkı en az olsun.
+          <code>altKümeler</code> tam bu iş için. <code>n ≤ 20</code> sınırına
+          dikkat: <code>2²⁰</code> bir milyon &mdash; bilgisayarınıza göre
+          çerez. <span class="zor">devamı</span> Aynı soruyu kardeş kitapçığın
+          IV. bölümündeki gibi C++ ile de çözüp iki kodu yan yana koyun.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

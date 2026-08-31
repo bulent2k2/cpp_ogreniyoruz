@@ -1,0 +1,345 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm V</div>
+  <h1>Çizgeler ve Gezintiler</h1>
+  <p class="ozet">
+    Şehirler ve yollar, bilgisayarlar ve kablolar, insanlar ve arkadaşlıklar
+    &mdash; hepsi aynı matematiksel nesne: <strong>çizge</strong>. Kardeş
+    kitapçık bu konuyu beş satırlık bir gezi kalıbıyla işler; biz aynı kalıbı
+    bir de işlevsel kılıkta göreceğiz: değiştirmeden, geri almadan, kanıtı
+    kendiliğinden gelen bir gezi.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">V.1</div>
+  <div class="govde">
+    <h2>Çizge nedir, nasıl saklanır?</h2>
+
+    <p>
+      Bir <strong>çizge</strong> (<em>graph</em>) iki şeyden ibaret:
+      <strong>düğümler</strong> (<em>vertex</em>) ve onları birleştiren
+      <strong>bağlar</strong> (<em>edge</em>). Kuramın doğum günü bile belli:
+      1736'da Euler, Königsberg'in yedi köprüsünün hepsinden tam bir kere geçen
+      yürüyüş olmadığını kanıtlarken köprü boylarının, ada büyüklüklerinin hiç
+      önemli olmadığını, önemli olanın yalnızca <em>neyin neye bağlı olduğu</em>
+      olduğunu gösterdi.
+    </p>
+
+    <p>
+      &ldquo;Neyin neye bağlı olduğu&rdquo; sözünü Bölüm II'de bir kapla
+      söylemiştik: eşlem. Her düğümü komşularının kümesine eşleyelim; Scala'nın
+      değişmez eşlemi <code>Map</code> tam bu iş için:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çizge.kojo</span><span class="etiket">komşuluk kümesi</span></figcaption>
+      <pre><code><span class="a">tür</span> <span class="t">Düğüm</span> = <span class="t">Harf</span>
+<span class="a">tür</span> <span class="t">Çizge</span> = <span class="t">Map</span>[<span class="t">Düğüm</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]]   <span class="y">// düğümden komşularına</span>
+
+<span class="a">dez</span> ç: <span class="t">Çizge</span> = <span class="t">Map</span>(
+  <span class="s">'A'</span> -&gt; <span class="t">Küme</span>(<span class="s">'B'</span>, <span class="s">'C'</span>),
+  <span class="s">'B'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>),
+  <span class="s">'C'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>, <span class="s">'E'</span>),
+  <span class="s">'D'</span> -&gt; <span class="t">Küme</span>(<span class="s">'F'</span>),
+  <span class="s">'E'</span> -&gt; <span class="t">Küme</span>(<span class="s">'F'</span>),
+  <span class="s">'F'</span> -&gt; <span class="t">Küme</span>(<span class="s">'G'</span>),
+  <span class="s">'G'</span> -&gt; <span class="t">Küme</span>[<span class="t">Düğüm</span>]()          <span class="y">// çıkışı olmayan düğüm</span>
+)</code></pre>
+    </figure>
+
+    <p>
+      <code>tür</code> satırları yeni bir şey <em>yapmıyor</em>, sadece ad
+      takıyor &mdash; ama fark büyük: <code>Map[Harf, Küme[Harf]]</code> yerine
+      <code>Çizge</code> okuyunca kod problemin dilinde konuşuyor. Kardeş
+      kitapçıktaki <code>using Cizge = map&lt;Nokta, set&lt;Nokta&gt;&gt;</code>
+      satırının buradaki ikizi bu. Kâğıda çizin: A'dan iki yol çatallanıp
+      D ile E'de buluşuyor, F'te birleşip G'de bitiyor.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Çizgenin kendisi de bir işlev gibi kullanılır: <code>ç('A')</code> size
+        A'nın komşularını verir. Küme de öyleydi: <code>komşular('D')</code>
+        &ldquo;D komşu mu?&rdquo; demek. Eşlem, küme, işlev &mdash; işlevsel
+        dünyada hepsi aynı kapıya çıkar: <em>girdi ver, çıktı al</em>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.2</div>
+  <div class="govde">
+    <h2>Derinlemesine gezi, iki kılıkta</h2>
+
+    <p>
+      Önce yeni bir aletle tanışın. <code>indirge</code> ögeleri birleştirirken
+      başlangıç değeri alamıyordu; <strong>soldanKatla</strong>
+      (<em>fold left</em>) alır: bir başlangıç değeri, bir de &ldquo;eldeki
+      sonuçla sıradaki ögeyi birleştir&rdquo; işlevi verirsiniz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">soldanKatla</span></figcaption>
+      <pre><code><span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>).soldanKatla(<span class="n">0</span>)((toplam, öge) =&gt; toplam + öge)   <span class="y">// 8</span>
+<span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>).soldanKatla(<span class="s">""</span>)((yazı, öge) =&gt; yazı + öge)     <span class="y">// "314"</span></code></pre>
+    </figure>
+
+    <p>
+      Şimdi gezi. Amaç: bir düğümden başlayıp ulaşılabilen <em>bütün</em>
+      düğümleri bulmak. İşlevsel kılıkta durum &mdash; gezilenler kümesi &mdash;
+      değiştirilmez; her çağrı <strong>yeni bir küme verir</strong>:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">gez.kojo</span><span class="etiket">işlevsel derinlemesine gezi</span></figcaption>
+      <pre><code><span class="a">tanım</span> gez(ç: <span class="t">Çizge</span>, buradan: <span class="t">Düğüm</span>, gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Küme</span>[<span class="t">Düğüm</span>] =
+  <span class="a">eğer</span> (gezilen(buradan)) gezilen             <span class="y">// TABAN: zaten uğramışız</span>
+  <span class="a">yoksa</span> ç(buradan).soldanKatla(gezilen + buradan)(
+    (g, komşu) =&gt; gez(ç, komşu, g)          <span class="y">// her komşudan derine in</span>
+  )
+
+satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]()))
+<span class="y">// HashSet(E, F, A, G, B, C, D) -- yedi düğümün yedisi de bulundu;</span>
+<span class="y">// sıralanış her seferinde değişebilir, çünkü küme sıra tutmaz</span></code></pre>
+    </figure>
+
+    <p>
+      Dört satır. Okunuşu: <em>buraya uğramışsak elimizdeki küme neyse odur;
+      uğramamışsak kendimizi ekleyip her komşunun getirdiklerini üst üste
+      katlarız.</em> Geri alma satırı yok, işaretleme yok, silme yok &mdash;
+      çünkü hiçbir şey değişmiyor. Bu kodun &ldquo;bir düğümü iki kere sayar
+      mı?&rdquo; sorusuna yanıtı, kümenin tanımından çıkıyor: küme, tekrar
+      tutmaz. <strong>Kanıtın yarısını veri yapısı yapıyor.</strong>
+    </p>
+
+    <h3>Aynı gezi, yığınla &mdash; ve kuyruk numarası</h3>
+
+    <p>
+      Şimdi kardeş kitapçığın en sevdiğim numarası, burada da aynen çalışıyor.
+      Geziyi özyineleme yerine bir <strong>yığınla</strong> yazalım:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">gez2.kojo</span><span class="etiket">yığın mı, kuyruk mu?</span></figcaption>
+      <pre><code><span class="a">tanım</span> gez2(ç: <span class="t">Çizge</span>, ilk: <span class="t">Düğüm</span>) = {
+  <span class="a">dez</span> bekleyen = <span class="t">Yığın</span>[<span class="t">Düğüm</span>]()       <span class="y">// yığın: son giren ilk çıkar</span>
+  <span class="a">den</span> gezilen = <span class="t">Küme</span>[<span class="t">Düğüm</span>]()
+  bekleyen.koy(ilk)
+  yineleDoğruysa(bekleyen.tane &gt; <span class="n">0</span>) {
+    <span class="a">dez</span> şimdiki = bekleyen.al()   <span class="y">// "bu" diyemezdik: anahtar sözcük (this)</span>
+    <span class="a">eğer</span> (!gezilen(şimdiki)) {
+      gezilen = gezilen + şimdiki
+      yaz(<span class="s">s"$şimdiki "</span>)
+      ç(şimdiki).herbiriİçin(komşu =&gt; bekleyen.koy(komşu))
+    }
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Şimdi <code>Yığın</code> yerine <code>Kuyruk</code> koyun
+      (<code>koy</code> yerine <code>ekle</code>, <code>al</code> yerine
+      <code>baştanAl</code>). Tek kelimelik bu değişiklik geziyi
+      <strong>derinlemesineden</strong> (<em>DFS</em>)
+      <strong>enlemesineye</strong> (<em>BFS</em>) çevirir: yığın hep en son
+      bulduğu yola dalar, kuyruk ise düğümleri başlangıca <em>uzaklık
+      sırasıyla</em> işler. Aynı iskelet, bambaşka iki algoritma. İkisini de
+      çalıştırdım; aynı çizge, iki farklı sıra:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>yığınla  : A C E F G D B   <span class="y">// C'ye dalıp ta G'ye kadar gitti</span>
+kuyrukla : <span class="v">A B C</span> D E F G   <span class="y">// önce bütün komşular: uzaklık sırası</span></code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">Gerçek bir hata</span>
+      <p>
+        <code>if (!gezilen(bu))</code> denetimini silerseniz program çoğu çizgede
+        yine çalışır &mdash; ama iki yoldan ulaşılan düğümler iki kere işlenir,
+        çevrimli bir çizgede ise hiç durmaz. Kardeş sınıfta bu hatayı C++
+        yazarken yaptık ve ancak çizgeye yedinci düğümü ekleyince fark ettik.
+        Çizge kodunda ilk denetleyeceğiniz soru: <em>&ldquo;buraya daha önce
+        geldim mi?&rdquo;</em> soruluyor mu?
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.3</div>
+  <div class="govde">
+    <h2>Katman katman: en az adım</h2>
+
+    <p>
+      Enlemesine gezinin asıl armağanı şudur: başlangıçtan her düğüme
+      <strong>en az kaç adımda</strong> gidileceğini söyler. İşlevsel kılıkta
+      bunu katmanlarla anlatmak çok doğal: 0. katman başlangıç, 1. katman onun
+      komşuları, 2. katman onların henüz görülmemiş komşuları&hellip;
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">katmanlar.kojo</span><span class="etiket">işlevsel enlemesine gezi</span></figcaption>
+      <pre><code><span class="a">tanım</span> katmanlar(ç: <span class="t">Çizge</span>, sınır: <span class="t">Küme</span>[<span class="t">Düğüm</span>],
+              gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Dizin</span>[<span class="t">Küme</span>[<span class="t">Düğüm</span>]] =
+  <span class="a">eğer</span> (sınır.boşMu) <span class="t">Boş</span>                       <span class="y">// TABAN: yeni düğüm kalmadı</span>
+  <span class="a">yoksa</span> {
+    <span class="a">dez</span> sonraki = sınır.düzİşle(d =&gt; ç(d))     <span class="y">// sınırın bütün komşuları...</span>
+                      .ele(k =&gt; !gezilen(k))   <span class="y">// ...görülmemiş olanları</span>
+    sınır :: katmanlar(ç, sonraki, gezilen ++ sonraki)
+  }
+
+<span class="a">dez</span> kat = katmanlar(ç, <span class="t">Küme</span>(<span class="s">'A'</span>), <span class="t">Küme</span>(<span class="s">'A'</span>))
+kat.ikileSırayla.herbiriİçin { <span class="a">durum</span> (katman, uzaklık) =&gt;
+  satıryaz(<span class="s">s"$uzaklık adım: $katman"</span>)
+}</code></pre>
+    </figure>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>0 adım: Set(A)
+1 adım: Set(B, C)
+2 adım: Set(D, E)
+3 adım: Set(F)
+4 adım: Set(G)</code></pre>
+    </figure>
+
+    <p>
+      <code>düzİşle</code> (<em>flat map</em>) burada ilk kez iş başında:
+      her düğümü komşu <em>kümesine</em> çevirip hepsini tek kümede düzlüyor.
+      Ve neden &ldquo;en az adım&rdquo; sorusunun yanıtı bu? Çünkü bir düğüm
+      hangi katmanda <em>ilk kez</em> görünüyorsa, oraya daha kısa yol olamaz
+      &mdash; olsaydı önceki bir katmanda görünürdü. Kardeş kitapçık bu kanıtı
+      kuyruklu kodun üstüne kurar; burada kanıt, kodun <em>şekline</em> gömülü.
+    </p>
+
+    <h3>Kaç parça?</h3>
+
+    <p>
+      Çizge kopuksa tek gezi her yere ulaşamaz. Bütün düğümleri sırayla deneyip
+      gezilmemiş her birinden yeni bir gezi başlatırsak, kaç gezi başlattıysak
+      çizge o kadar <strong>bağlı parçadır</strong>:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bağlı parçalar</span></figcaption>
+      <pre><code><span class="a">dez</span> düğümler = ç.dizine.işle { <span class="a">durum</span> (d, _) =&gt; d }.sıralı
+
+<span class="a">dez</span> (parçaSayısı, _) =
+  düğümler.soldanKatla((<span class="n">0</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]())) {
+    <span class="a">durum</span> ((sayı, gezilen), d) =&gt;
+      <span class="a">eğer</span> (gezilen(d)) (sayı, gezilen)          <span class="y">// eski bir parçanın içinde</span>
+      <span class="a">yoksa</span> (sayı + <span class="n">1</span>, gez(ç, d, gezilen))      <span class="y">// yeni parça keşfedildi</span>
+  }
+
+satıryaz(<span class="s">s"$parçaSayısı parça"</span>)     <span class="y">// 1 parça: A'dan her yere ulaşılıyor</span></code></pre>
+    </figure>
+
+    <p>
+      Yine <code>soldanKatla</code>, bu sefer taşıdığı şey bir demet:
+      (şimdiye kadarki parça sayısı, şimdiye kadar gezilenler). Döngü + iki
+      değişkenle yazacağınız her şeyi, başlangıç değeri + birleştirme işleviyle
+      de yazabilirsiniz &mdash; bu, işlevsel programlamanın büyük
+      değiş tokuşudur.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Neden sıraladık?</span>
+      <p>
+        <code>düğümler</code>'in sonundaki <code>sıralı</code>'yı silin ve
+        birkaç kere çalıştırın: bazen 1, bazen 2 parça çıkar! Çünkü eşlemin
+        veriliş sırası her seferinde değişebilir ve bizim çizge
+        <strong>yönlü</strong>: A'dan G'ye yol var ama G'den A'ya yok. Geziye
+        A'dan başlarsanız tek parça görürsünüz; G'den başlarsanız G tek başına
+        bir &ldquo;parça&rdquo; olur. Bunu ilk çalıştırmada değil, ancak
+        çıktıyı sınayınca fark ettik &mdash; bağlı parçalar aslında
+        <em>yönsüz</em> çizgelerin kavramı. Yönlü çizgede ne anlama geldiğini
+        düşünmek güzel bir tartışma sorusu.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.4</div>
+  <div class="govde">
+    <h2>Yollar eşit değilse</h2>
+
+    <p>
+      Bütün bağların eşit sayıldığı dünyada &ldquo;en kısa yol&rdquo; demek
+      &ldquo;en az adım&rdquo; demekti ve kuyruk yetiyordu. Bağların ağırlığı
+      olunca &mdash; kilometre, dakika, ücret &mdash; kuyruğun yerini
+      <strong>öncelik sırası</strong> alır ve algoritmanın adı
+      <strong>Dijkstra</strong> olur. Koco'da <code>ÖncelikSırası</code> hazır;
+      iskelet de gördüğünüz gezilerle aynı: <em>bekleyenlerden birini al,
+      işle, komşularını beklet.</em> Değişen tek şey, &ldquo;hangisini önce
+      alacağız?&rdquo;
+    </p>
+
+    <p>
+      Bu kitapçıkta Dijkstra'yı yazmıyorum; bilerek. Tam kodu, kanıtıyla ve
+      tuzaklarıyla birlikte kardeş kitapçığın
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/kitapcik">V.
+      bölümünde</a> bulacaksınız. Buradaki alıştırmanız onu Koco'ya çevirmek
+      &mdash; ve çeviri yaparken iki dilde de aynı kalan çekirdeği görmek.
+      O çekirdek, algoritmanın kendisidir; gerisi kılık.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Çizgeleri konuşmanın en iyi yeri tahta değil, tuval. Kaplumbağayla
+        çizge çizen bir <code>düğümÇiz(ad: Düğüm, x: Kesir, y: Kesir)</code>
+        işlevi yazın: <code>atla(x, y)</code>, küçük bir <code>daire</code>,
+        yanına <code>yazı(ad)</code>. Biriniz düğümleri, öteki bağları çizsin;
+        yukarıdaki yedi düğümlü çizgeyi ekrana alın. Gezilerinizi bu resmin
+        üstünde parmakla izleyin &mdash; kod başka, çizge başka şeymiş gibi
+        durmasın.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Kuyruk sürümü.</strong> <code>gez2</code>'yi kuyrukla yazın ve
+          iki çıktıyı yan yana koyun. Hangi sıra hangi geziye ait, bakar bakmaz
+          söyleyebiliyor musunuz?
+        </li>
+        <li>
+          <strong>Yol var mı?</strong> <code>ulaşırMı(ç, a, b): İkil</code>
+          işlevini yazın. İpucu: <code>gez</code> zaten her şeyi biliyor;
+          tek satır yeter.
+        </li>
+        <li>
+          <strong>İki takım.</strong> Sınıfı iki takıma ayırın; arkadaş olan
+          ikili aynı takıma düşmesin. Gezi kalıbına &ldquo;takım&rdquo; bilgisi
+          ekleyin: komşuya hep karşı takımı verin, çelişki çıkarsa
+          <code>yanlış</code>. Hangi çizgelerde imkânsız?
+          <span class="zor">ipucu</span> Tek sayıda bağdan oluşan çevrim.
+        </li>
+        <li>
+          <strong>Düğüm çözme oyunu.</strong> Ders notlarımızdan iki bulmaca:
+          <a href="http://ikojo.in/sf/OhWWM7U/19">Kocoyla düğüm çözme</a> ve
+          <a href="http://ikojo.in/sf/PGPyOWZ/7">çözülemeyen bir düğüm</a>.
+          İkincisinin neden düzlemsel olamayacağını tartışın.
+          (Sayfa açılmazsa <code>https</code> yerine <code>http</code> deneyin.)
+        </li>
+        <li>
+          <strong>Dijkstra'yı Koco'ya çevirin.</strong> Kardeş kitapçıktaki
+          Dijkstra'yı <code>ÖncelikSırası</code> ile buraya taşıyın.
+          <span class="zor">püf</span> Önceliği <code>(süre, şehir)</code>
+          demetiyle verin; demetler soldan karşılaştırılır &mdash; C++'taki
+          <code>pair</code> gibi.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!--GEZINME-->

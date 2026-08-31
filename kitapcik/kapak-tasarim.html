@@ -44,6 +44,14 @@
     margin-top: 44px; max-width: 1150px;
   }
 
+  /* altı bölümün adları: ince bir şerit, içindekilerin fragmanı */
+  .bolumler {
+    font-family: "IBM Plex Mono", monospace; font-size: 23px;
+    letter-spacing: .01em; color: #8792AA;
+    margin-top: 40px; white-space: nowrap;
+  }
+  .bolumler b { color: #2A4BC4; font-weight: 500; }
+
   /* ---- çizim kolajı ---- */
 
   .kolaj { position: relative; flex: 1; margin-top: 26px; }
@@ -53,7 +61,7 @@
   }
 
   .c1 { left:  -26px; top:    6px; width: 496px; transform: rotate(-3.2deg); }
-  .c2 { left:  500px; top:  -26px; width: 462px; transform: rotate( 2.6deg); }
+  .c2 { left:  500px; top:   14px; width: 462px; transform: rotate( 2.6deg); }
   .c3 { left: 1020px; top:   22px; width: 356px; transform: rotate(-2.2deg); }
   .c4 { left:  -10px; top:  626px; width: 610px; transform: rotate( 1.8deg); }
   .c5 { left:  672px; top:  690px; width: 474px; transform: rotate(-4.4deg); }
@@ -72,6 +80,11 @@
     border-top: 3px solid #16203A; padding-top: 38px;
   }
   .yazar { font-family: "Bitter", serif; font-size: 50px; font-weight: 700; }
+  .yazar .surum {
+    display: block; margin-top: 14px;
+    font-family: "IBM Plex Mono", monospace; font-size: 25px;
+    font-weight: 400; color: #8792AA;
+  }
   .rozet {
     font-family: "IBM Plex Mono", monospace; font-size: 25px;
     color: #52607C; text-align: right; line-height: 1.7;
@@ -90,6 +103,11 @@
     Yalnız da okunur, ama ikili daha hızlı.
   </p>
 
+  <div class="bolumler">
+    <b>I</b> İlk Adımlar &middot; <b>II</b> Veri &middot; <b>III</b> Zanaat &middot;
+    <b>IV</b> Özyineleme &middot; <b>V</b> Çizgeler &middot; <b>VI</b> Dinamik Programlama
+  </div>
+
   <div class="kolaj">
     <img class="c1" src="../ileri/dersler/resim/bilgisayar-agi.png" alt="bilgisayar ağı">
     <img class="c2" src="../ileri/dersler/resim/daykstra3.png" alt="Dijkstra adım adım">
@@ -100,7 +118,7 @@
   </div>
 
   <div class="altbilgi">
-    <div class="yazar">Bülent Başaran</div>
+    <div class="yazar">Bülent Başaran<span class="surum">2026 &middot; birinci sürüm</span></div>
     <div class="rozet">CC BY-SA 4.0 &middot; kod MIT<br>github.com/bulent2k2/cpp_ogreniyoruz</div>
   </div>
 </body>

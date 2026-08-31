@@ -53,7 +53,7 @@ BOLUMLER = [
      "Kendini çağıran işlevler, bellekle hızlandırma, geri dönüşlü arama ve arama uzayını budamak."),
     ("05-cizgeler",  "V. Çizgeler",          "Çizgeler ve Gezintiler",
      "Derinlemesine ve enlemesine gezi, bağlı parçalar, en kısa yol algoritmaları."),
-    ("06-dp",        "VI. Dinamik Program",  "Dinamik Programlama",
+    ("06-dp",        "VI. Dinamik Programlama", "Dinamik Programlama",
      "Büyük problemi küçük parçalarına bölmek: zarlar, bozuk paralar, ızgaralar ve yola devam."),
 ]
 
@@ -146,6 +146,9 @@ def artifact_yaz(baglantilar: dict[str, str]) -> None:
         html = (
             f"<title>{baslik}</title>\n{FONT}\n"
             f"<style>\n{ORTAK}\n</style>\n"
+            # Tek başına yayımlanan sayfada <html lang> bizden çıkmıyor;
+            # Türkçe büyük harf (i -> İ) doğru olsun diye burada kuruyoruz.
+            '<script>document.documentElement.lang = "tr"</script>\n'
             f'<div class="sayfa">\n{icerik}\n</div>\n'
         )
         (CIKTI / f"{slug}.html").write_text(html, encoding="utf-8")

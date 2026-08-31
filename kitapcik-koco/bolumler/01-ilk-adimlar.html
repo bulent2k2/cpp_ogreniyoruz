@@ -113,17 +113,18 @@ yinele(<span class="n">4</span>) {
 <div class="blok">
   <div class="ray">I.2</div>
   <div class="govde">
-    <h2>Kendi komutunuz: <code>def</code></h2>
+    <h2>Kendi komutunuz: <code>tanım</code></h2>
 
     <p>
       Kare çizen kodu her seferinde yeniden yazmak olmaz. Ona bir <strong>ad</strong>
-      verelim ki tek sözcükle çağırabilelim. İşte ilk İngilizce çekirdek
-      sözcüğümüz: <code>def</code>, yani <em>tanımla</em>.
+      verelim ki tek sözcükle çağırabilelim. İşte ilk çekirdek sözcüğümüz:
+      <code>tanım</code>. (Scala'daki özgün adı <code>def</code>; Koco
+      ikisini de anlar, biz Türkçesini kullanacağız.)
     </p>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">kare.kojo</span><span class="etiket">ilk işleviniz</span></figcaption>
-      <pre><code><span class="a">def</span> kare(kenar: <span class="t">Sayı</span>) = {
+      <pre><code><span class="a">tanım</span> kare(kenar: <span class="t">Sayı</span>) = {
   yinele(<span class="n">4</span>) {
     ileri(kenar)
     sağ()
@@ -190,15 +191,16 @@ yineleDizinli(<span class="n">10</span>) { k =&gt;      <span class="y">// k: 0,
     <h2>Değerler ve türler</h2>
 
     <p>
-      İkinci çekirdek sözcük: <code>val</code>, yani <strong>değer</strong>.
-      Bir şeye ad takar ve o ad artık hep o değeri gösterir:
+      İkinci çekirdek sözcük: <code>dez</code>, yani <strong>değişmez
+      değer</strong> (Scala'daki adı <code>val</code>). Bir şeye ad takar ve
+      o ad artık hep o değeri gösterir:
     </p>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">değerler</span></figcaption>
-      <pre><code><span class="a">val</span> kenar = <span class="n">80</span>
-<span class="a">val</span> boşluk = kenar / <span class="n">4</span>
-<span class="a">val</span> ad = <span class="s">"kelebek"</span>
+      <pre><code><span class="a">dez</span> kenar = <span class="n">80</span>
+<span class="a">dez</span> boşluk = kenar / <span class="n">4</span>
+<span class="a">dez</span> ad = <span class="s">"kelebek"</span>
 
 satıryaz(ad)                <span class="y">// çıktı penceresine yazar</span>
 satıryaz(kenar + boşluk)    <span class="y">// 100</span>
@@ -212,7 +214,7 @@ satıryaz(<span class="s">s"kenar $kenar, boşluk $boşluk"</span>)  <span class
     </p>
 
     <p>
-      Dikkat ederseniz <code>val kenar = 80</code> yazarken tür söylemedik.
+      Dikkat ederseniz <code>dez kenar = 80</code> yazarken tür söylemedik.
       Scala türü kendisi <em>çıkarır</em>: 80 bir <code>Sayı</code>,
       <code>"kelebek"</code> bir <code>Yazı</code>. Tür yine var &mdash; sadece
       çoğu zaman yazmak zorunda değilsiniz. En çok göreceğiniz türler:
@@ -244,10 +246,10 @@ satıryaz(<span class="s">s"kenar $kenar, boşluk $boşluk"</span>)  <span class
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">taşma</span><span class="etiket">tanıdık bir hata</span></figcaption>
-      <pre><code><span class="a">val</span> a = <span class="n">2000</span>
+      <pre><code><span class="a">dez</span> a = <span class="n">2000</span>
 satıryaz(a * a * a)          <span class="y">// 2000'in küpü... öyle mi?</span>
 
-<span class="a">val</span> iri: <span class="t">İriSayı</span> = <span class="n">2000</span>     <span class="y">// istediği kadar büyüyebilen tür</span>
+<span class="a">dez</span> iri: <span class="t">İriSayı</span> = <span class="n">2000</span>     <span class="y">// istediği kadar büyüyebilen tür</span>
 satıryaz(iri * iri * iri)</code></pre>
     </figure>
 
@@ -265,10 +267,10 @@ satıryaz(iri * iri * iri)</code></pre>
       Scala'daki kestirmesi budur.
     </p>
 
-    <h3>Ya değişmesi gerekiyorsa: <code>var</code></h3>
+    <h3>Ya değişmesi gerekiyorsa: <code>den</code></h3>
 
     <p>
-      <code>val</code> ile tanımlanan bir ada yeni değer veremezsiniz;
+      <code>dez</code> ile tanımlanan bir ada yeni değer veremezsiniz;
       denerseniz Koco daha çalıştırmadan itiraz eder. Bu bir eksiklik değil,
       bu kitapçığın en önemli fikirlerinden biri: <strong>değişmeyen değere
       güvenilir.</strong> Kimin ne zaman değiştirdiğini düşünmek zorunda
@@ -276,10 +278,11 @@ satıryaz(iri * iri * iri)</code></pre>
     </p>
 
     <p>
-      Yine de arada gerçekten değişen bir şey gerekir; onun için <code>var</code>
-      (<em>değişken</em>) var. Kural şu: <strong>önce <code>val</code> deneyin;
-      <code>var</code>'a ancak mecbur kalınca dönün.</strong> Bu bölümün sonunda
-      bir kere mecbur kalacağız.
+      Yine de arada gerçekten değişen bir şey gerekir; onun için de
+      <code>den</code> var: <strong>değişken</strong> (Scala'daki adı
+      <code>var</code>). Kural şu: <strong>önce <code>dez</code> deneyin;
+      <code>den</code>'e ancak mecbur kalınca dönün.</strong> Bu bölümün
+      sonunda bir kere mecbur kalacağız.
     </p>
   </div>
 </div>
@@ -296,9 +299,9 @@ satıryaz(iri * iri * iri)</code></pre>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">hesaplayan işlevler</span></figcaption>
-      <pre><code><span class="a">def</span> topla(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = a + b
+      <pre><code><span class="a">tanım</span> topla(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = a + b
 
-<span class="a">def</span> bölünüyorMu(sayı: <span class="t">Sayı</span>, bölen: <span class="t">Sayı</span>) = sayı % bölen == <span class="n">0</span>
+<span class="a">tanım</span> bölünüyorMu(sayı: <span class="t">Sayı</span>, bölen: <span class="t">Sayı</span>) = sayı % bölen == <span class="n">0</span>
 
 satıryaz(topla(<span class="n">3</span>, <span class="n">5</span>))            <span class="y">// 8</span>
 satıryaz(bölünüyorMu(<span class="n">15</span>, <span class="n">5</span>))     <span class="y">// true  (yani doğru)</span>
@@ -314,18 +317,18 @@ satıryaz(bölünüyorMu(<span class="n">16</span>, <span class="n">5</span>))  
 
     <p>
       Karar vermek için üçüncü ve dördüncü çekirdek sözcükler:
-      <code>if</code> ve <code>else</code>. Bunlar da deyiş; yani bir
-      <em>değer üretirler</em>:
+      <code>eğer</code> ve <code>yoksa</code> (<em>if/else</em>). Bunlar da
+      deyiş; yani bir <em>değer üretirler</em>:
     </p>
 
     <figure class="kod dar">
-      <figcaption><span class="nokta"></span><span class="ad">if bir deyiştir</span></figcaption>
-      <pre><code><span class="a">def</span> enİri2(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = <span class="a">if</span> (a &gt; b) a <span class="a">else</span> b
+      <figcaption><span class="nokta"></span><span class="ad">eğer bir deyiştir</span></figcaption>
+      <pre><code><span class="a">tanım</span> enİri2(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = <span class="a">eğer</span> (a &gt; b) a <span class="a">yoksa</span> b
 
-<span class="a">def</span> işaret(s: <span class="t">Sayı</span>) =
-  <span class="a">if</span> (s &gt; <span class="n">0</span>) <span class="s">"artı"</span>
-  <span class="a">else if</span> (s &lt; <span class="n">0</span>) <span class="s">"eksi"</span>
-  <span class="a">else</span> <span class="s">"sıfır"</span>
+<span class="a">tanım</span> işaret(s: <span class="t">Sayı</span>) =
+  <span class="a">eğer</span> (s &gt; <span class="n">0</span>) <span class="s">"artı"</span>
+  <span class="a">yoksa eğer</span> (s &lt; <span class="n">0</span>) <span class="s">"eksi"</span>
+  <span class="a">yoksa</span> <span class="s">"sıfır"</span>
 
 satıryaz(enİri2(<span class="n">7</span>, <span class="n">3</span>))     <span class="y">// 7</span>
 satıryaz(işaret(-<span class="n">5</span>))      <span class="y">// eksi</span></code></pre>
@@ -342,7 +345,7 @@ satıryaz(işaret(-<span class="n">5</span>))      <span class="y">// eksi</span
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">pe1.kojo</span><span class="etiket">tek deyişlik çözüm</span></figcaption>
-      <pre><code><span class="a">val</span> toplam = (<span class="n">1</span> |- <span class="n">1000</span>)                <span class="y">// 1'den 1000'e kadar (1000 hariç)</span>
+      <pre><code><span class="a">dez</span> toplam = (<span class="n">1</span> |- <span class="n">1000</span>)                <span class="y">// 1'den 1000'e kadar (1000 hariç)</span>
   .dizine                              <span class="y">// sayıları bir dizine çevir</span>
   .ele(s =&gt; bölünüyorMu(s, <span class="n">3</span>) || bölünüyorMu(s, <span class="n">5</span>))   <span class="y">// uyanları ele: süz</span>
   .topla                               <span class="y">// hepsini topla</span>
@@ -385,34 +388,38 @@ satıryaz(toplam)     <span class="y">// 233168</span></code></pre>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">tahmin.kojo</span><span class="etiket">sayı tahmin oyunu</span></figcaption>
-      <pre><code><span class="a">val</span> gizli = rastgele(<span class="n">100</span>) + <span class="n">1</span>     <span class="y">// 1..100</span>
-<span class="a">var</span> hak = <span class="n">7</span>                       <span class="y">// işte o mecbur kaldığımız var!</span>
-<span class="a">var</span> bulundu = yanlış
+      <pre><code><span class="a">dez</span> tutulan = rastgele(<span class="n">100</span>) + <span class="n">1</span>   <span class="y">// 1..100 -- "gizli" diyemezdik: o bir anahtar sözcük!</span>
+<span class="a">den</span> hak = <span class="n">7</span>                       <span class="y">// işte o mecbur kaldığımız den!</span>
+<span class="a">den</span> bulundu = yanlış
 
 satıryaz(<span class="s">"1 ile 100 arasında bir sayı tuttum. 7 hakkın var."</span>)
 
 yineleDoğruysa(hak &gt; <span class="n">0</span> &amp;&amp; !bulundu) {
-  <span class="a">val</span> tahmin = sayıOku(<span class="s">"Tahminin?"</span>)
+  <span class="a">dez</span> tahmin = sayıOku(<span class="s">"Tahminin?"</span>)
   hak = hak - <span class="n">1</span>
-  <span class="a">if</span> (tahmin == gizli) {
+  <span class="a">eğer</span> (tahmin == tutulan) {
     bulundu = doğru
     satıryaz(<span class="s">s"Bildin! Hem de $hak hakkın artmıştı."</span>)
-  } <span class="a">else if</span> (tahmin &lt; gizli)
+  } <span class="a">yoksa eğer</span> (tahmin &lt; tutulan)
     satıryaz(<span class="s">s"Daha büyük. Kalan hak: $hak"</span>)
-  <span class="a">else</span>
+  <span class="a">yoksa</span>
     satıryaz(<span class="s">s"Daha küçük. Kalan hak: $hak"</span>)
 }
 
-<span class="a">if</span> (!bulundu) satıryaz(<span class="s">s"Hakkın bitti. Tuttuğum sayı $gizli idi."</span>)</code></pre>
+<span class="a">eğer</span> (!bulundu) satıryaz(<span class="s">s"Hakkın bitti. Tuttuğum sayı $tutulan idi."</span>)</code></pre>
     </figure>
 
     <p>
       <code>yineleDoğruysa</code>, koşul doğru kaldıkça yineler &mdash; C++'taki
       <code>while</code>'ın Koco'daki karşılığı. <code>sayıOku</code> sizden bir
       sayı ister, <code>rastgele(100)</code> 0 ile 99 arasında bir sayı verir.
-      Ve evet, iki tane <code>var</code> kullandık: oyunun <em>durumu</em>
+      Ve evet, iki tane <code>den</code> kullandık: oyunun <em>durumu</em>
       (kalan hak, bulundu mu) gerçekten değişiyor. Değişen şeye değişken demek
-      günah değil; alışkanlık hâline getirmek günah.
+      günah değil; alışkanlık hâline getirmek günah. Bir ayrıntı daha: tutulan
+      sayıya <code>gizli</code> diyemedik, çünkü <code>gizli</code> Koco'da bir
+      anahtar sözcük (Scala'daki <code>private</code>). Anahtar sözcükler ad
+      olarak kullanılamaz &mdash; C++'ta <code>if</code> adında değişken
+      olmaması gibi.
     </p>
 
     <h3>Neden tam yedi hak?</h3>
@@ -455,7 +462,7 @@ yineleDoğruysa(hak &gt; <span class="n">0</span> &amp;&amp; !bulundu) {
           <strong>Fibonaççi.</strong>
           <a href="https://projecteuler.net/problem=2">Project Euler 2</a>:
           dört milyonu aşmayan çift Fibonaççi sayılarının toplamı.
-          Şimdilik <code>var</code> ve <code>yineleDoğruysa</code> ile yazın;
+          Şimdilik <code>den</code> ve <code>yineleDoğruysa</code> ile yazın;
           <a href="{{04-ozyineleme}}">Bölüm IV</a>'te bir daha, bambaşka
           yazacağız.
         </li>

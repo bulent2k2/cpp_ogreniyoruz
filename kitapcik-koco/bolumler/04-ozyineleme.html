@@ -39,8 +39,8 @@
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">sarmal.kojo</span></figcaption>
-      <pre><code><span class="a">def</span> sarmal(boy: <span class="t">Kesir</span>): <span class="t">Birim</span> =
-  <span class="a">if</span> (boy &gt; <span class="n">2</span>) {          <span class="y">// TABAN: boy 2'ye düşünce dur</span>
+      <pre><code><span class="a">tanım</span> sarmal(boy: <span class="t">Kesir</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (boy &gt; <span class="n">2</span>) {          <span class="y">// TABAN: boy 2'ye düşünce dur</span>
     ileri(boy)
     sağ()
     sarmal(boy * <span class="n">0.95</span>)     <span class="y">// ADIM: biraz küçüğünü çiz</span>
@@ -83,8 +83,8 @@ sarmal(<span class="n">200</span>)</code></pre>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">ağaç.kojo</span><span class="etiket">iki dallı özyineleme</span></figcaption>
-      <pre><code><span class="a">def</span> ağaç(boy: <span class="t">Kesir</span>): <span class="t">Birim</span> =
-  <span class="a">if</span> (boy &gt; <span class="n">4</span>) {
+      <pre><code><span class="a">tanım</span> ağaç(boy: <span class="t">Kesir</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (boy &gt; <span class="n">4</span>) {
     ileri(boy)               <span class="y">// gövdeyi çiz</span>
     sol(<span class="n">30</span>)
     ağaç(boy * <span class="n">0.7</span>)          <span class="y">// sol dal: küçük bir ağaç!</span>
@@ -133,10 +133,10 @@ ağaç(<span class="n">90</span>)</code></pre>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">koh.kojo</span><span class="etiket">kar tanesi</span></figcaption>
-      <pre><code><span class="a">def</span> koh(boy: <span class="t">Kesir</span>, derinlik: <span class="t">Sayı</span>): <span class="t">Birim</span> =
-  <span class="a">if</span> (derinlik == <span class="n">0</span>)
+      <pre><code><span class="a">tanım</span> koh(boy: <span class="t">Kesir</span>, derinlik: <span class="t">Sayı</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (derinlik == <span class="n">0</span>)
     ileri(boy)                 <span class="y">// TABAN: düz çizgi</span>
-  <span class="a">else</span> {
+  <span class="a">yoksa</span> {
     koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>); sol(<span class="n">60</span>)
     koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>); sağ(<span class="n">120</span>)
     koh(boy / <span class="n">3</span>, derinlik - <span class="n">1</span>); sol(<span class="n">60</span>)
@@ -190,10 +190,10 @@ yinele(<span class="n">3</span>) {           <span class="y">// üç kenarlı "�
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">hanoi.kojo</span><span class="etiket">üç satırlık çözüm</span></figcaption>
-      <pre><code><span class="a">var</span> adım = <span class="n">0</span>
+      <pre><code><span class="a">den</span> adım = <span class="n">0</span>
 
-<span class="a">def</span> taşı(n: <span class="t">Sayı</span>, kaynak: <span class="t">Sayı</span>, hedef: <span class="t">Sayı</span>, yardımcı: <span class="t">Sayı</span>): <span class="t">Birim</span> =
-  <span class="a">if</span> (n &gt; <span class="n">0</span>) {                       <span class="y">// taban: taşınacak disk kalmadı</span>
+<span class="a">tanım</span> taşı(n: <span class="t">Sayı</span>, kaynak: <span class="t">Sayı</span>, hedef: <span class="t">Sayı</span>, yardımcı: <span class="t">Sayı</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (n &gt; <span class="n">0</span>) {                       <span class="y">// taban: taşınacak disk kalmadı</span>
     taşı(n - <span class="n">1</span>, kaynak, yardımcı, hedef)   <span class="y">// üstteki n-1 diski kenara çek</span>
     adım = adım + <span class="n">1</span>
     satıryaz(<span class="s">s"$adım) $n. diski $kaynak -&gt; $hedef"</span>)
@@ -226,21 +226,21 @@ taşı(<span class="n">3</span>, <span class="n">1</span>, <span class="n">3</sp
     <p>
       Bölüm II'de demiştik: her dizin ya <code>Boş</code>tur ya da &ldquo;baş
       ve gerisi&rdquo;. Bu, özyineleme için biçilmiş kaftan &mdash; ve
-      <code>match</code>/<code>case</code> eşleştirmesiyle birleşince tanımlar
-      şiire dönüyor:
+      <code>eşle</code>/<code>durum</code> (<em>match/case</em>)
+      eşleştirmesiyle birleşince tanımlar şiire dönüyor:
     </p>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">dizin özyinelemesi</span><span class="etiket">kendi topla'mız</span></figcaption>
-      <pre><code><span class="a">def</span> toplam(d: <span class="t">Dizin</span>[<span class="t">Sayı</span>]): <span class="t">Sayı</span> = d <span class="a">match</span> {
-  <span class="a">case</span> <span class="t">Boş</span>           =&gt; <span class="n">0</span>                     <span class="y">// TABAN: boş dizinin toplamı</span>
-  <span class="a">case</span> baş :: gerisi =&gt; baş + toplam(gerisi)  <span class="y">// ADIM</span>
+      <pre><code><span class="a">tanım</span> toplam(d: <span class="t">Dizin</span>[<span class="t">Sayı</span>]): <span class="t">Sayı</span> = d <span class="a">eşle</span> {
+  <span class="a">durum</span> <span class="t">Boş</span>           =&gt; <span class="n">0</span>                     <span class="y">// TABAN: boş dizinin toplamı</span>
+  <span class="a">durum</span> baş :: gerisi =&gt; baş + toplam(gerisi)  <span class="y">// ADIM</span>
 }
 
-<span class="a">def</span> altKümeler(d: <span class="t">Dizin</span>[<span class="t">Sayı</span>]): <span class="t">Dizin</span>[<span class="t">Dizin</span>[<span class="t">Sayı</span>]] = d <span class="a">match</span> {
-  <span class="a">case</span> <span class="t">Boş</span>           =&gt; <span class="t">Dizin</span>(<span class="t">Boş</span>)   <span class="y">// boş kümenin tek altkümesi var: kendisi</span>
-  <span class="a">case</span> baş :: gerisi =&gt;
-    <span class="a">val</span> başsızlar = altKümeler(gerisi)          <span class="y">// başı ALMAYANLAR</span>
+<span class="a">tanım</span> altKümeler(d: <span class="t">Dizin</span>[<span class="t">Sayı</span>]): <span class="t">Dizin</span>[<span class="t">Dizin</span>[<span class="t">Sayı</span>]] = d <span class="a">eşle</span> {
+  <span class="a">durum</span> <span class="t">Boş</span>           =&gt; <span class="t">Dizin</span>(<span class="t">Boş</span>)   <span class="y">// boş kümenin tek altkümesi var: kendisi</span>
+  <span class="a">durum</span> baş :: gerisi =&gt;
+    <span class="a">dez</span> başsızlar = altKümeler(gerisi)          <span class="y">// başı ALMAYANLAR</span>
     başsızlar ++ başsızlar.işle(ak =&gt; baş :: ak)  <span class="y">// ve başı ALANLAR</span>
 }
 
@@ -270,9 +270,9 @@ satıryaz(altKümeler(<span class="t">Dizin</span>(<span class="n">3</span>, <sp
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">tanımı yazdık, oldu</span></figcaption>
-      <pre><code><span class="a">def</span> fibYavaş(n: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
-  <span class="a">if</span> (n &lt; <span class="n">2</span>) n
-  <span class="a">else</span> fibYavaş(n - <span class="n">1</span>) + fibYavaş(n - <span class="n">2</span>)</code></pre>
+      <pre><code><span class="a">tanım</span> fibYavaş(n: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">eğer</span> (n &lt; <span class="n">2</span>) n
+  <span class="a">yoksa</span> fibYavaş(n - <span class="n">1</span>) + fibYavaş(n - <span class="n">2</span>)</code></pre>
     </figure>
 
     <p>
@@ -285,12 +285,12 @@ satıryaz(altKümeler(<span class="t">Dizin</span>(<span class="n">3</span>, <sp
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">fib.kojo</span><span class="etiket">bellekli sürüm</span></figcaption>
-      <pre><code><span class="a">val</span> bellek = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Uzun</span>]()
+      <pre><code><span class="a">dez</span> bellek = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Uzun</span>]()
 
-<span class="a">def</span> fibHızlı(n: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
-  <span class="a">if</span> (n &lt; <span class="n">2</span>) n
-  <span class="a">else</span> bellek.alYoksa(n, {
-    <span class="a">val</span> sonuç = fibHızlı(n - <span class="n">1</span>) + fibHızlı(n - <span class="n">2</span>)
+<span class="a">tanım</span> fibHızlı(n: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">eğer</span> (n &lt; <span class="n">2</span>) n
+  <span class="a">yoksa</span> bellek.alYoksa(n, {
+    <span class="a">dez</span> sonuç = fibHızlı(n - <span class="n">1</span>) + fibHızlı(n - <span class="n">2</span>)
     bellek.eşEkle(n -&gt; sonuç)
     sonuç
   })

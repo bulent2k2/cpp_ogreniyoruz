@@ -35,10 +35,10 @@
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">çizge.kojo</span><span class="etiket">komşuluk kümesi</span></figcaption>
-      <pre><code><span class="a">type</span> <span class="t">Düğüm</span> = <span class="t">Harf</span>
-<span class="a">type</span> <span class="t">Çizge</span> = <span class="t">Map</span>[<span class="t">Düğüm</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]]   <span class="y">// düğümden komşularına</span>
+      <pre><code><span class="a">tür</span> <span class="t">Düğüm</span> = <span class="t">Harf</span>
+<span class="a">tür</span> <span class="t">Çizge</span> = <span class="t">Map</span>[<span class="t">Düğüm</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]]   <span class="y">// düğümden komşularına</span>
 
-<span class="a">val</span> ç: <span class="t">Çizge</span> = <span class="t">Map</span>(
+<span class="a">dez</span> ç: <span class="t">Çizge</span> = <span class="t">Map</span>(
   <span class="s">'A'</span> -&gt; <span class="t">Küme</span>(<span class="s">'B'</span>, <span class="s">'C'</span>),
   <span class="s">'B'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>),
   <span class="s">'C'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>, <span class="s">'E'</span>),
@@ -50,7 +50,7 @@
     </figure>
 
     <p>
-      <code>type</code> satırları yeni bir şey <em>yapmıyor</em>, sadece ad
+      <code>tür</code> satırları yeni bir şey <em>yapmıyor</em>, sadece ad
       takıyor &mdash; ama fark büyük: <code>Map[Harf, Küme[Harf]]</code> yerine
       <code>Çizge</code> okuyunca kod problemin dilinde konuşuyor. Kardeş
       kitapçıktaki <code>using Cizge = map&lt;Nokta, set&lt;Nokta&gt;&gt;</code>
@@ -96,14 +96,15 @@
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">gez.kojo</span><span class="etiket">işlevsel derinlemesine gezi</span></figcaption>
-      <pre><code><span class="a">def</span> gez(ç: <span class="t">Çizge</span>, buradan: <span class="t">Düğüm</span>, gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Küme</span>[<span class="t">Düğüm</span>] =
-  <span class="a">if</span> (gezilen(buradan)) gezilen             <span class="y">// TABAN: zaten uğramışız</span>
-  <span class="a">else</span> ç(buradan).soldanKatla(gezilen + buradan)(
+      <pre><code><span class="a">tanım</span> gez(ç: <span class="t">Çizge</span>, buradan: <span class="t">Düğüm</span>, gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Küme</span>[<span class="t">Düğüm</span>] =
+  <span class="a">eğer</span> (gezilen(buradan)) gezilen             <span class="y">// TABAN: zaten uğramışız</span>
+  <span class="a">yoksa</span> ç(buradan).soldanKatla(gezilen + buradan)(
     (g, komşu) =&gt; gez(ç, komşu, g)          <span class="y">// her komşudan derine in</span>
   )
 
 satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]()))
-<span class="y">// Set(A, B, D, F, G, C, E)  -- sıralanış farklı olabilir; küme bu, sırası yok</span></code></pre>
+<span class="y">// HashSet(E, F, A, G, B, C, D) -- yedi düğümün yedisi de bulundu;</span>
+<span class="y">// sıralanış her seferinde değişebilir, çünkü küme sıra tutmaz</span></code></pre>
     </figure>
 
     <p>
@@ -124,16 +125,16 @@ satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">gez2.kojo</span><span class="etiket">yığın mı, kuyruk mu?</span></figcaption>
-      <pre><code><span class="a">def</span> gez2(ç: <span class="t">Çizge</span>, ilk: <span class="t">Düğüm</span>) = {
-  <span class="a">val</span> bekleyen = <span class="t">Yığın</span>[<span class="t">Düğüm</span>]()       <span class="y">// yığın: son giren ilk çıkar</span>
-  <span class="a">var</span> gezilen = <span class="t">Küme</span>[<span class="t">Düğüm</span>]()
+      <pre><code><span class="a">tanım</span> gez2(ç: <span class="t">Çizge</span>, ilk: <span class="t">Düğüm</span>) = {
+  <span class="a">dez</span> bekleyen = <span class="t">Yığın</span>[<span class="t">Düğüm</span>]()       <span class="y">// yığın: son giren ilk çıkar</span>
+  <span class="a">den</span> gezilen = <span class="t">Küme</span>[<span class="t">Düğüm</span>]()
   bekleyen.koy(ilk)
   yineleDoğruysa(bekleyen.tane &gt; <span class="n">0</span>) {
-    <span class="a">val</span> bu = bekleyen.al()
-    <span class="a">if</span> (!gezilen(bu)) {
-      gezilen = gezilen + bu
-      yaz(<span class="s">s"$bu "</span>)
-      ç(bu).herbiriİçin(komşu =&gt; bekleyen.koy(komşu))
+    <span class="a">dez</span> şimdiki = bekleyen.al()   <span class="y">// "bu" diyemezdik: anahtar sözcük (this)</span>
+    <span class="a">eğer</span> (!gezilen(şimdiki)) {
+      gezilen = gezilen + şimdiki
+      yaz(<span class="s">s"$şimdiki "</span>)
+      ç(şimdiki).herbiriİçin(komşu =&gt; bekleyen.koy(komşu))
     }
   }
 }</code></pre>
@@ -146,8 +147,15 @@ satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span
       <strong>derinlemesineden</strong> (<em>DFS</em>)
       <strong>enlemesineye</strong> (<em>BFS</em>) çevirir: yığın hep en son
       bulduğu yola dalar, kuyruk ise düğümleri başlangıca <em>uzaklık
-      sırasıyla</em> işler. Aynı iskelet, bambaşka iki algoritma.
+      sırasıyla</em> işler. Aynı iskelet, bambaşka iki algoritma. İkisini de
+      çalıştırdım; aynı çizge, iki farklı sıra:
     </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>yığınla  : A C E F G D B   <span class="y">// C'ye dalıp ta G'ye kadar gitti</span>
+kuyrukla : <span class="v">A B C</span> D E F G   <span class="y">// önce bütün komşular: uzaklık sırası</span></code></pre>
+    </figure>
 
     <div class="kutu dikkat">
       <span class="basi">Gerçek bir hata</span>
@@ -177,17 +185,17 @@ satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">katmanlar.kojo</span><span class="etiket">işlevsel enlemesine gezi</span></figcaption>
-      <pre><code><span class="a">def</span> katmanlar(ç: <span class="t">Çizge</span>, sınır: <span class="t">Küme</span>[<span class="t">Düğüm</span>],
+      <pre><code><span class="a">tanım</span> katmanlar(ç: <span class="t">Çizge</span>, sınır: <span class="t">Küme</span>[<span class="t">Düğüm</span>],
               gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Dizin</span>[<span class="t">Küme</span>[<span class="t">Düğüm</span>]] =
-  <span class="a">if</span> (sınır.boşMu) <span class="t">Boş</span>                       <span class="y">// TABAN: yeni düğüm kalmadı</span>
-  <span class="a">else</span> {
-    <span class="a">val</span> sonraki = sınır.düzİşle(d =&gt; ç(d))     <span class="y">// sınırın bütün komşuları...</span>
+  <span class="a">eğer</span> (sınır.boşMu) <span class="t">Boş</span>                       <span class="y">// TABAN: yeni düğüm kalmadı</span>
+  <span class="a">yoksa</span> {
+    <span class="a">dez</span> sonraki = sınır.düzİşle(d =&gt; ç(d))     <span class="y">// sınırın bütün komşuları...</span>
                       .ele(k =&gt; !gezilen(k))   <span class="y">// ...görülmemiş olanları</span>
     sınır :: katmanlar(ç, sonraki, gezilen ++ sonraki)
   }
 
-<span class="a">val</span> kat = katmanlar(ç, <span class="t">Küme</span>(<span class="s">'A'</span>), <span class="t">Küme</span>(<span class="s">'A'</span>))
-kat.ikileSırayla.herbiriİçin { <span class="a">case</span> (katman, uzaklık) =&gt;
+<span class="a">dez</span> kat = katmanlar(ç, <span class="t">Küme</span>(<span class="s">'A'</span>), <span class="t">Küme</span>(<span class="s">'A'</span>))
+kat.ikileSırayla.herbiriİçin { <span class="a">durum</span> (katman, uzaklık) =&gt;
   satıryaz(<span class="s">s"$uzaklık adım: $katman"</span>)
 }</code></pre>
     </figure>
@@ -220,16 +228,16 @@ kat.ikileSırayla.herbiriİçin { <span class="a">case</span> (katman, uzaklık)
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">bağlı parçalar</span></figcaption>
-      <pre><code><span class="a">val</span> düğümler = ç.dizine.işle { <span class="a">case</span> (d, _) =&gt; d }
+      <pre><code><span class="a">dez</span> düğümler = ç.dizine.işle { <span class="a">durum</span> (d, _) =&gt; d }.sıralı
 
-<span class="a">val</span> (parçaSayısı, _) =
+<span class="a">dez</span> (parçaSayısı, _) =
   düğümler.soldanKatla((<span class="n">0</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]())) {
-    <span class="a">case</span> ((sayı, gezilen), d) =&gt;
-      <span class="a">if</span> (gezilen(d)) (sayı, gezilen)          <span class="y">// eski bir parçanın içinde</span>
-      <span class="a">else</span> (sayı + <span class="n">1</span>, gez(ç, d, gezilen))      <span class="y">// yeni parça keşfedildi</span>
+    <span class="a">durum</span> ((sayı, gezilen), d) =&gt;
+      <span class="a">eğer</span> (gezilen(d)) (sayı, gezilen)          <span class="y">// eski bir parçanın içinde</span>
+      <span class="a">yoksa</span> (sayı + <span class="n">1</span>, gez(ç, d, gezilen))      <span class="y">// yeni parça keşfedildi</span>
   }
 
-satıryaz(<span class="s">s"$parçaSayısı parça"</span>)     <span class="y">// bizim çizgede: 1 parça</span></code></pre>
+satıryaz(<span class="s">s"$parçaSayısı parça"</span>)     <span class="y">// 1 parça: A'dan her yere ulaşılıyor</span></code></pre>
     </figure>
 
     <p>
@@ -239,6 +247,21 @@ satıryaz(<span class="s">s"$parçaSayısı parça"</span>)     <span class="y">
       de yazabilirsiniz &mdash; bu, işlevsel programlamanın büyük
       değiş tokuşudur.
     </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Neden sıraladık?</span>
+      <p>
+        <code>düğümler</code>'in sonundaki <code>sıralı</code>'yı silin ve
+        birkaç kere çalıştırın: bazen 1, bazen 2 parça çıkar! Çünkü eşlemin
+        veriliş sırası her seferinde değişebilir ve bizim çizge
+        <strong>yönlü</strong>: A'dan G'ye yol var ama G'den A'ya yok. Geziye
+        A'dan başlarsanız tek parça görürsünüz; G'den başlarsanız G tek başına
+        bir &ldquo;parça&rdquo; olur. Bunu ilk çalıştırmada değil, ancak
+        çıktıyı sınayınca fark ettik &mdash; bağlı parçalar aslında
+        <em>yönsüz</em> çizgelerin kavramı. Yönlü çizgede ne anlama geldiğini
+        düşünmek güzel bir tartışma sorusu.
+      </p>
+    </div>
   </div>
 </div>
 

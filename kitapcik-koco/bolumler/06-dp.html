@@ -63,12 +63,12 @@
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">yollar.kojo</span><span class="etiket">yukarıdan aşağı</span></figcaption>
-      <pre><code><span class="a">val</span> bellek = <span class="t">Eşlem</span>[(<span class="t">Sayı</span>, <span class="t">Sayı</span>), <span class="t">Uzun</span>]()
+      <pre><code><span class="a">dez</span> bellek = <span class="t">Eşlem</span>[(<span class="t">Sayı</span>, <span class="t">Sayı</span>), <span class="t">Uzun</span>]()
 
-<span class="a">def</span> yol(r: <span class="t">Sayı</span>, c: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
-  <span class="a">if</span> (r == <span class="n">0</span> || c == <span class="n">0</span>) <span class="n">1</span>          <span class="y">// TABAN: kenar boyunca tek yol var</span>
-  <span class="a">else</span> bellek.alYoksa((r, c), {
-    <span class="a">val</span> s = yol(r - <span class="n">1</span>, c) + yol(r, c - <span class="n">1</span>)
+<span class="a">tanım</span> yol(r: <span class="t">Sayı</span>, c: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">eğer</span> (r == <span class="n">0</span> || c == <span class="n">0</span>) <span class="n">1</span>          <span class="y">// TABAN: kenar boyunca tek yol var</span>
+  <span class="a">yoksa</span> bellek.alYoksa((r, c), {
+    <span class="a">dez</span> s = yol(r - <span class="n">1</span>, c) + yol(r, c - <span class="n">1</span>)
     bellek.eşEkle((r, c) -&gt; s)
     s
   })
@@ -95,12 +95,12 @@ satıryaz(yol(<span class="n">20</span>, <span class="n">20</span>))     <span c
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">yollar2.kojo</span><span class="etiket">aşağıdan yukarı</span></figcaption>
       <pre><code><span class="y">// (1, 1, 1) -&gt; (1, 2, 3) -&gt; (1, 3, 6): her satır bir öncekinin birikimlisi</span>
-<span class="a">def</span> birikimli(satır: <span class="t">Dizin</span>[<span class="t">Uzun</span>]): <span class="t">Dizin</span>[<span class="t">Uzun</span>] =
+<span class="a">tanım</span> birikimli(satır: <span class="t">Dizin</span>[<span class="t">Uzun</span>]): <span class="t">Dizin</span>[<span class="t">Uzun</span>] =
   satır.kuyruğu.soldanKatla(<span class="t">Dizin</span>(satır.başı)) {
     (bina, öge) =&gt; (bina.başı + öge) :: bina
   }.tersi
 
-<span class="a">var</span> satır = (<span class="n">0</span> |-| <span class="n">20</span>).dizine.işle(k =&gt; <span class="n">1L</span>)   <span class="y">// ilk satır: hep 1  (L: Uzun sabiti)</span>
+<span class="a">den</span> satır = (<span class="n">0</span> |-| <span class="n">20</span>).dizine.işle(k =&gt; <span class="n">1L</span>)   <span class="y">// ilk satır: hep 1  (L: Uzun sabiti)</span>
 yinele(<span class="n">20</span>) { satır = birikimli(satır) }
 satıryaz(satır.sonu)     <span class="y">// 137846528820 -- aynı yanıt</span></code></pre>
     </figure>
@@ -139,14 +139,14 @@ f(x) = ∞    (x &lt; 0 için: "böyle ödeme olmaz")</code></pre>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">bozukpara.kojo</span><span class="etiket">formülün birebir çevirisi</span></figcaption>
-      <pre><code><span class="a">val</span> paralar = <span class="t">Dizin</span>(<span class="n">1</span>, <span class="n">5</span>, <span class="n">7</span>)
-<span class="a">val</span> defter = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Sayı</span>]()
+      <pre><code><span class="a">dez</span> paralar = <span class="t">Dizin</span>(<span class="n">1</span>, <span class="n">5</span>, <span class="n">7</span>)
+<span class="a">dez</span> defter = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Sayı</span>]()
 
-<span class="a">def</span> enAzPara(tutar: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
-  <span class="a">if</span> (tutar == <span class="n">0</span>) <span class="n">0</span>
-  <span class="a">else if</span> (tutar &lt; <span class="n">0</span>) <span class="n">1000000</span>      <span class="y">// "sonsuz": enUfağı bunu asla seçmez</span>
-  <span class="a">else</span> defter.alYoksa(tutar, {
-    <span class="a">val</span> s = <span class="n">1</span> + paralar.işle(p =&gt; enAzPara(tutar - p)).enUfağı
+<span class="a">tanım</span> enAzPara(tutar: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
+  <span class="a">eğer</span> (tutar == <span class="n">0</span>) <span class="n">0</span>
+  <span class="a">yoksa eğer</span> (tutar &lt; <span class="n">0</span>) <span class="n">1000000</span>      <span class="y">// "sonsuz": enUfağı bunu asla seçmez</span>
+  <span class="a">yoksa</span> defter.alYoksa(tutar, {
+    <span class="a">dez</span> s = <span class="n">1</span> + paralar.işle(p =&gt; enAzPara(tutar - p)).enUfağı
     defter.eşEkle(tutar -&gt; s)
     s
   })
@@ -187,20 +187,20 @@ satıryaz(enAzPara(<span class="n">11</span>))     <span class="y">// 3</span></
     <p>
       Kitapçığı kapatmadan bir borcumuz var: kapaktaki Mandelbrot kümesi.
       Onun için karmaşık sayılar gerekiyor &mdash; ve bu, kendi türünüzü
-      yazmayı öğrenmenin tam sırası. Scala'da bunun aleti
-      <code>case class</code>:
+      yazmayı öğrenmenin tam sırası. Koco'da bunun aleti
+      <code>durum sınıf</code> (<em>case class</em>):
     </p>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">karmaşık.kojo</span><span class="etiket">kendi türünüz</span></figcaption>
-      <pre><code><span class="a">case class</span> <span class="t">Karmaşık</span>(g: <span class="t">Kesir</span>, s: <span class="t">Kesir</span>) {     <span class="y">// gerçek ve sanal kısım</span>
-  <span class="a">def</span> +(öbürü: <span class="t">Karmaşık</span>) = <span class="t">Karmaşık</span>(g + öbürü.g, s + öbürü.s)
-  <span class="a">def</span> *(öbürü: <span class="t">Karmaşık</span>) =
+      <pre><code><span class="a">durum sınıf</span> <span class="t">Karmaşık</span>(g: <span class="t">Kesir</span>, s: <span class="t">Kesir</span>) {     <span class="y">// gerçek ve sanal kısım</span>
+  <span class="a">tanım</span> +(öbürü: <span class="t">Karmaşık</span>) = <span class="t">Karmaşık</span>(g + öbürü.g, s + öbürü.s)
+  <span class="a">tanım</span> *(öbürü: <span class="t">Karmaşık</span>) =
     <span class="t">Karmaşık</span>(g * öbürü.g - s * öbürü.s, g * öbürü.s + s * öbürü.g)
-  <span class="a">def</span> büyüklüğü = karekökü(g * g + s * s)
+  <span class="a">tanım</span> büyüklüğü = karekökü(g * g + s * s)
 }
 
-<span class="a">val</span> a = <span class="t">Karmaşık</span>(<span class="n">1</span>, <span class="n">2</span>)
+<span class="a">dez</span> a = <span class="t">Karmaşık</span>(<span class="n">1</span>, <span class="n">2</span>)
 satıryaz(a + a)       <span class="y">// Karmaşık(2.0,4.0)</span>
 satıryaz(a * a)       <span class="y">// Karmaşık(-3.0,4.0)</span></code></pre>
     </figure>
@@ -221,10 +221,10 @@ satıryaz(a * a)       <span class="y">// Karmaşık(-3.0,4.0)</span></code></pr
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">kaçış adımı</span></figcaption>
-      <pre><code><span class="a">def</span> kaçışAdımı(c: <span class="t">Karmaşık</span>): <span class="t">Sayı</span> = {
-  <span class="a">def</span> dön(z: <span class="t">Karmaşık</span>, adım: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
-    <span class="a">if</span> (adım == <span class="n">100</span> || z.büyüklüğü &gt; <span class="n">2</span>) adım
-    <span class="a">else</span> dön(z * z + c, adım + <span class="n">1</span>)
+      <pre><code><span class="a">tanım</span> kaçışAdımı(c: <span class="t">Karmaşık</span>): <span class="t">Sayı</span> = {
+  <span class="a">tanım</span> dön(z: <span class="t">Karmaşık</span>, adım: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
+    <span class="a">eğer</span> (adım == <span class="n">100</span> || z.büyüklüğü &gt; <span class="n">2</span>) adım
+    <span class="a">yoksa</span> dön(z * z + c, adım + <span class="n">1</span>)
   dön(<span class="t">Karmaşık</span>(<span class="n">0</span>, <span class="n">0</span>), <span class="n">0</span>)
 }
 

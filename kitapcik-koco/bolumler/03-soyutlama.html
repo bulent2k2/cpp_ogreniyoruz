@@ -28,7 +28,7 @@
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">çokgen.kojo</span><span class="etiket">üç işlev → bir işlev</span></figcaption>
-      <pre><code><span class="a">def</span> çokgen(kenarSayısı: <span class="t">Sayı</span>, kenar: <span class="t">Kesir</span>) = {
+      <pre><code><span class="a">tanım</span> çokgen(kenarSayısı: <span class="t">Sayı</span>, kenar: <span class="t">Kesir</span>) = {
   yinele(kenarSayısı) {
     ileri(kenar)
     sağ(<span class="n">360.0</span> / kenarSayısı)     <span class="y">// dış açıların toplamı hep 360</span>
@@ -75,7 +75,7 @@ sil()
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">dönence.kojo</span><span class="etiket">çizimi girdi yap</span></figcaption>
-      <pre><code><span class="a">def</span> dönence(kaç: <span class="t">Sayı</span>, açı: <span class="t">Kesir</span>)(çizim: =&gt; <span class="t">Birim</span>) = {
+      <pre><code><span class="a">tanım</span> dönence(kaç: <span class="t">Sayı</span>, açı: <span class="t">Kesir</span>)(çizim: =&gt; <span class="t">Birim</span>) = {
   yinele(kaç) {
     çizim
     sağ(açı)
@@ -110,8 +110,8 @@ dönence(<span class="n">8</span>, <span class="n">45</span>) {                 
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">bizimYinele</span></figcaption>
-      <pre><code><span class="a">def</span> bizimYinele(kaç: <span class="t">Sayı</span>)(komutlar: =&gt; <span class="t">Birim</span>): <span class="t">Birim</span> =
-  <span class="a">if</span> (kaç &gt; <span class="n">0</span>) {
+      <pre><code><span class="a">tanım</span> bizimYinele(kaç: <span class="t">Sayı</span>)(komutlar: =&gt; <span class="t">Birim</span>): <span class="t">Birim</span> =
+  <span class="a">eğer</span> (kaç &gt; <span class="n">0</span>) {
     komutlar
     bizimYinele(kaç - <span class="n">1</span>)(komutlar)    <span class="y">// kendini çağırıyor!</span>
   }
@@ -156,10 +156,10 @@ bizimYinele(<span class="n">4</span>) { ileri(<span class="n">100</span>); sağ(
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">asal.kojo</span><span class="etiket">önce denemeler</span></figcaption>
-      <pre><code><span class="a">def</span> asalMı(n: <span class="t">Sayı</span>): <span class="t">İkil</span> =
+      <pre><code><span class="a">tanım</span> asalMı(n: <span class="t">Sayı</span>): <span class="t">İkil</span> =
   n &gt; <span class="n">1</span> &amp;&amp; (<span class="n">2</span> |- n).diziye.hepsiDoğruMu(b =&gt; n % b != <span class="n">0</span>)
 
-<span class="a">def</span> dene() = {
+<span class="a">tanım</span> denemeler() = {   <span class="y">// "dene" diyemezdik: o bir anahtar sözcük (try)</span>
   belirt(asalMı(<span class="n">2</span>), <span class="s">"2 asaldır"</span>)
   belirt(asalMı(<span class="n">97</span>), <span class="s">"97 asaldır"</span>)
   belirt(!asalMı(<span class="n">1</span>), <span class="s">"1 asal sayılmaz"</span>)
@@ -167,7 +167,7 @@ bizimYinele(<span class="n">4</span>) { ileri(<span class="n">100</span>); sağ(
   satıryaz(<span class="s">"denemeler geçti."</span>)
 }
 
-dene()</code></pre>
+denemeler()</code></pre>
     </figure>
 
     <p>
@@ -190,7 +190,7 @@ dene()</code></pre>
       <span class="basi">Deneyin</span>
       <p>
         <code>asalMı</code> içindeki <code>n &gt; 1</code> koşulunu silin ve
-        <code>dene()</code>'yi çalıştırın. Hangi deneme, hangi mesajla patlıyor?
+        <code>denemeler()</code>'i çalıştırın. Hangi deneme, hangi mesajla patlıyor?
         Denemelerin işi tam olarak bu: siz kodu bozar bozmaz, hangi sözünüzü
         bozduğunuzu söylemek.
       </p>
@@ -234,8 +234,8 @@ dene()</code></pre>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">süre tutmak</span></figcaption>
-      <pre><code><span class="a">def</span> süresi(iş: =&gt; <span class="t">Birim</span>): <span class="t">Kesir</span> = {
-  <span class="a">val</span> t0 = buSaniye         <span class="y">// şu anın saniyesi</span>
+      <pre><code><span class="a">tanım</span> süresi(iş: =&gt; <span class="t">Birim</span>): <span class="t">Kesir</span> = {
+  <span class="a">dez</span> t0 = buSaniye         <span class="y">// şu anın saniyesi</span>
   iş
   buSaniye - t0
 }
@@ -286,7 +286,7 @@ satıryaz(süresi { asalMı(<span class="n">999999937</span>) })       <span cla
         </li>
         <li>
           <strong>asalMıHızlı.</strong> Karekök sınırlı sürümü yazın.
-          <code>dene()</code>'ye iki sürümü karşılaştıran bir satır ekleyin:
+          <code>denemeler()</code>'e iki sürümü karşılaştıran bir satır ekleyin:
           <code>belirt((1 |-| 1000).dizine.hepsiDoğruMu(n =&gt; asalMı(n) ==
           asalMıHızlı(n)), "iki sürüm anlaşamadı")</code>. Bu tür denemeye
           <em>eşleme denemesi</em> denir: yavaş ama basit sürüm, hızlı sürümün

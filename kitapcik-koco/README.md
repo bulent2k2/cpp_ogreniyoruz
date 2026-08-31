@@ -6,10 +6,15 @@ aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-su
 (Kojo'nun Türkçe sürümü) ve Scala ile. Bölümler bilerek paralel kuruldu;
 iki kitapçık yan yana okunmak için yazıldı.
 
-**Durum: ilk taslak.** Metin bütün, ama örnek kodlar henüz Koco'da tek tek
-çalıştırılıp doğrulanmadı; kod adları Kojo kaynak kodundaki Türkçe API'ye
-(`trInit.scala` ve `tr/` dosyalarına) göre yazıldı. Yayımlamadan önce her
-kod parçasını Koco'da çalıştırıp çıktılarla karşılaştırmak gerekiyor.
+**Durum: ilk taslak.** Kod örnekleri **Türkçe anahtar sözcüklerle**
+(`tanım`, `dez`, `den`, `eğer`, `yoksa`, `eşle`, `durum`, `tür`&hellip;)
+yazıldı ve Koco'nun yamalı Scala derleyicisiyle (`bulent2k2/kojo` deposundaki
+`scala-tr/build/pack/lib` jar'ları, 2.13.18) **derlenip çalıştırılarak
+doğrulandı**: konsol örneklerinin kitapçıktaki çıktıları gerçek çıktılardır.
+Kaplumbağa örnekleri aynı derleyiciyle derlendi ama çizimler başsız (GUI'siz)
+ortamda görülemediği için görsel doğrulamaları Koco'nun kendisinde yapılmalı.
+Komut/tür/yöntem adları Kojo kaynak kodundaki Türkçe API'den (`trInit.scala`
+ve `tr/` dosyaları) birebir alındı.
 
 Bölümler
 --
@@ -56,6 +61,12 @@ Yazarken dikkat edilenler
   birebir alındı: `yinele`, `yineleDoğruysa`, `satıryaz`, `sayıOku`,
   `belirt`, `Dizin`, `Küme`, `Eşlem`, `işle`, `ele`, `indirge`,
   `soldanKatla`, `Yığın`, `Kuyruk`, `ÖncelikSırası`, `buSaniye` vb.
+  Anahtar sözcükler `scala-tr/turkish-keywords.patch`'ten alındı.
++ **Anahtar sözcük çakışmalarına dikkat.** `gizli`, `dene`, `bu`, `son`,
+  `yeni`, `tür`, `yap` gibi sözcükler Koco'da anahtar sözcük olduğu için
+  değişken/işlev adı olarak kullanılamaz; kitapçıkta bu yüzden `tutulan`,
+  `denemeler`, `şimdiki` gibi adlar seçildi (ikisi metinde ders konusu da
+  yapıldı).
 
 Lisans
 --

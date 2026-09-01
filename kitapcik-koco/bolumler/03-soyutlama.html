@@ -157,7 +157,7 @@ bizimYinele(<span class="n">4</span>) { ileri(<span class="n">100</span>); sağ(
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">asal.kojo</span><span class="etiket">önce denemeler</span></figcaption>
       <pre><code><span class="a">tanım</span> asalMı(n: <span class="t">Sayı</span>): <span class="t">İkil</span> =
-  n &gt; <span class="n">1</span> &amp;&amp; (<span class="n">2</span> |- n).diziye.hepsiDoğruMu(b =&gt; n % b != <span class="n">0</span>)
+  n &gt; <span class="n">1</span> &amp;&amp; (<span class="n">2</span> |- n).hepsiDoğruMu(b =&gt; n % b != <span class="n">0</span>)
 
 <span class="a">tanım</span> denemeler() = {   <span class="y">// "dene" diyemezdik: o bir anahtar sözcük (try)</span>
   belirt(asalMı(<span class="n">2</span>), <span class="s">"2 asaldır"</span>)
@@ -287,7 +287,7 @@ satıryaz(süresi { asalMı(<span class="n">999999937</span>) })       <span cla
         <li>
           <strong>asalMıHızlı.</strong> Karekök sınırlı sürümü yazın.
           <code>denemeler()</code>'e iki sürümü karşılaştıran bir satır ekleyin:
-          <code>belirt((1 |-| 1000).dizine.hepsiDoğruMu(n =&gt; asalMı(n) ==
+          <code>belirt((1 |-| 1000).hepsiDoğruMu(n =&gt; asalMı(n) ==
           asalMıHızlı(n)), "iki sürüm anlaşamadı")</code>. Bu tür denemeye
           <em>eşleme denemesi</em> denir: yavaş ama basit sürüm, hızlı sürümün
           hakemidir.

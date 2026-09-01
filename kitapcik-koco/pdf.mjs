@@ -1,7 +1,26 @@
 // Koco kitapçığını PDF'e çevirir.  Kullanım: node kitapcik-koco/pdf.mjs
-import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+
+// Playwright'ı önce yerel kurulumdan (npm install playwright), olmazsa
+// bilinen konumlardan yükle. Kurulum için README'deki "Gerekli araçlar"
+// bölümüne bakın.
+const require = createRequire(import.meta.url);
+function playwrightYükle() {
+  const adaylar = [
+    'playwright',                                // depo kökünde: npm install playwright
+    'playwright-core',
+    '/opt/node22/lib/node_modules/playwright',   // bulut çalışma ortamı
+  ];
+  for (const aday of adaylar) {
+    try { return require(aday); } catch { /* sıradakini dene */ }
+  }
+  console.error("Playwright bulunamadı. Depo kökünde şunları çalıştırın:\n" +
+    "    npm install playwright\n    npx playwright install chromium");
+  process.exit(1);
+}
+const { chromium } = playwrightYükle();
 
 const kok = path.dirname(fileURLToPath(import.meta.url));
 const girdi = path.join(kok, 'cikti', 'kitapcik-tam.html');

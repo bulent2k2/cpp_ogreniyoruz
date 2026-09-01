@@ -18,18 +18,75 @@ ve `tr/` dosyaları) birebir alındı; doğrulama hem `litan/kojo`'daki hem de
 `bulent2k2/kojo`'daki (güncel) `tr/` dosyalarıyla ayrı ayrı yapıldı, ikisi de
 aynı sonuçları verdi.
 
-Bölümler
+Kitapçığı okumak
 --
 
-| Bölüm | Konu |
-|---|---|
-| Kılavuz | Koco nedir, kurulum, çalışma yöntemi, içindekiler |
-| I. İlk Adımlar | kaplumbağa komutları; değer, tür, işlev; tahmin oyunu |
-| II. Veriyi Düzenlemek | dizin, küme, eşlem; `işle`, `ele`, `indirge`; `Belki` |
-| III. Soyutlama | işlevi girdi alan işlevler; `belirt` ile sınama; ölçme |
-| IV. Özyineleme | sarmal, ağaç, Koch tanesi; Hanoi; bellekle hızlandırma |
-| V. Çizgeler | işlevsel derinlemesine/enlemesine gezi, bağlı parçalar |
-| VI. Dinamik Programlama | ızgara yolları, bozuk para; Mandelbrot; yola devam |
+**PDF (A4'e basmaya hazır):**
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
+
+**EPUB (telefon, tablet, e-kitap okuyucu):**
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
+
+Çevrimiçi bölümler
+--
+
+Kitapçık bölüm bölüm çevrimiçi sayfalar hâlinde de yayımlandı. Bağlantısı
+olan herkes açabilir; telefondan okumak için elverişli. Her bölümün başındaki
+şeritten kılavuza ve öbür bölümlere geçilebilir:
+
++ [Kapak ve kılavuz](https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702) Koco nedir, kurulum, çalışma yöntemi, içindekiler
++ [I. İlk Adımlar](https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3) kaplumbağa komutları; değer, tür, işlev; tahmin oyunu
++ [II. Veriyi Düzenlemek](https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec) dizin, küme, eşlem; `işle`, `ele`, `indirge`; `Belki`
++ [III. Soyutlama Sanatı](https://claude.ai/code/artifact/1bff2e2b-9d1a-435e-901e-974e6acced99) işlevi girdi alan işlevler; `belirt` ile sınama; ölçme
++ [IV. Özyineleme ve Fraktallar](https://claude.ai/code/artifact/7d214fb0-5fd4-4074-a4ab-fe8ca99820dd) sarmal, ağaç, Koch tanesi; Hanoi; bellekle hızlandırma
++ [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c) işlevsel derinlemesine/enlemesine gezi, bağlı parçalar
++ [VI. Dinamik Programlama](https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9) ızgara yolları, bozuk para; Mandelbrot; yola devam
+
+Adresler `baglantilar.txt` dosyasında; `yap.py` bunları bölümler arası
+bağlantılara yerleştiriyor.
+
+
+Gerekli araçlar
+--
+
+Kitapçığı yeniden üretmek için üç araç gerekiyor: **Python 3.10+**
+(`yap.py`, `epub.py`), **Node.js 18+** ve **Playwright + Chromium**
+(`pdf.mjs`, `kapak.mjs`). Playwright'ı depo kökünde bir kere kurmak
+yeterli; betikler onu önce yerel `node_modules`'tan, bulamazsa bilinen
+konumlardan arar.
+
+**macOS** ([Homebrew](https://brew.sh) ile):
+
+```bash
+brew install python3 node
+cd <depo-kökü>
+npm install playwright
+npx playwright install chromium
+```
+
+**Windows** (PowerShell; `winget` yerine [python.org](https://python.org) ve
+[nodejs.org](https://nodejs.org) kurucuları da olur):
+
+```powershell
+winget install Python.Python.3.12 OpenJS.NodeJS.LTS
+cd <depo-kökü>
+npm install playwright
+npx playwright install chromium
+```
+
+**Linux** (Debian/Ubuntu):
+
+```bash
+sudo apt install python3 nodejs npm
+cd <depo-kökü>
+npm install playwright
+npx playwright install chromium
+npx playwright install-deps chromium   # tarayıcının sistem bağımlılıkları
+```
+
+EPUB doğrulaması için (isteğe bağlı): `pip install epubcheck`.
+`npm install`'ın depo köküne bıraktığı `node_modules/`, `package.json` ve
+`package-lock.json` sürüm denetiminin dışındadır (`.gitignore`).
 
 Kitapçığı yapmak
 --

@@ -28,11 +28,11 @@
       <pre><code><span class="a">dez</span> sayılar = <span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>)
 
 satıryaz(sayılar.başı)      <span class="y">// 3  (ilk öge)</span>
-satıryaz(sayılar.kuyruğu)   <span class="y">// List(1, 4, 1, 5, 9)  (gerisi)</span>
+satıryaz(sayılar.kuyruğu)   <span class="y">// Dizin(1, 4, 1, 5, 9)  (gerisi)</span>
 satıryaz(sayılar.boyu)      <span class="y">// 6</span>
-satıryaz(sayılar.tersi)     <span class="y">// List(9, 5, 1, 4, 1, 3)</span>
-satıryaz(sayılar.sıralı)    <span class="y">// List(1, 1, 3, 4, 5, 9)</span>
-satıryaz(sayılar)           <span class="y">// List(3, 1, 4, 1, 5, 9) -- hâlâ aynı!</span></code></pre>
+satıryaz(sayılar.tersi)     <span class="y">// Dizin(9, 5, 1, 4, 1, 3)</span>
+satıryaz(sayılar.sıralı)    <span class="y">// Dizin(1, 1, 3, 4, 5, 9)</span>
+satıryaz(sayılar)           <span class="y">// Dizin(3, 1, 4, 1, 5, 9) -- hâlâ aynı!</span></code></pre>
     </figure>
 
     <p>
@@ -51,11 +51,11 @@ satıryaz(sayılar)           <span class="y">// List(3, 1, 4, 1, 5, 9) -- hâl�
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">öne ekleme</span></figcaption>
       <pre><code><span class="a">dez</span> d1 = <span class="t">Dizin</span>(<span class="n">2</span>, <span class="n">3</span>)
-<span class="a">dez</span> d2 = <span class="n">1</span> :: d1        <span class="y">// List(1, 2, 3) -- d1 yine değişmedi</span>
-<span class="a">dez</span> d3 = <span class="n">0</span> :: d2        <span class="y">// List(0, 1, 2, 3)</span>
+<span class="a">dez</span> d2 = <span class="n">1</span> :: d1        <span class="y">// Dizin(1, 2, 3) -- d1 yine değişmedi</span>
+<span class="a">dez</span> d3 = <span class="n">0</span> :: d2        <span class="y">// Dizin(0, 1, 2, 3)</span>
 
-satıryaz(<span class="t">Boş</span>)           <span class="y">// List() -- boş dizin de bir değer!</span>
-satıryaz(<span class="n">7</span> :: <span class="t">Boş</span>)      <span class="y">// List(7)</span></code></pre>
+satıryaz(<span class="t">Boş</span>)           <span class="y">// Dizin() -- boş dizin de bir değer!</span>
+satıryaz(<span class="n">7</span> :: <span class="t">Boş</span>)      <span class="y">// Dizin(7)</span></code></pre>
     </figure>
 
     <p>
@@ -105,8 +105,8 @@ satıryaz(<span class="n">7</span> :: <span class="t">Boş</span>)      <span cl
       <figcaption><span class="nokta"></span><span class="ad">üçlü.kojo</span><span class="etiket">işle, ele, indirge</span></figcaption>
       <pre><code><span class="a">dez</span> sayılar = <span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>)
 
-satıryaz(sayılar.işle(s =&gt; s * s))       <span class="y">// List(9, 1, 16, 1, 25, 81, 4, 36)</span>
-satıryaz(sayılar.ele(s =&gt; s % <span class="n">2</span> == <span class="n">0</span>))   <span class="y">// List(4, 2, 6)</span>
+satıryaz(sayılar.işle(s =&gt; s * s))       <span class="y">// Dizin(9, 1, 16, 1, 25, 81, 4, 36)</span>
+satıryaz(sayılar.ele(s =&gt; s % <span class="n">2</span> == <span class="n">0</span>))   <span class="y">// Dizin(4, 2, 6)</span>
 satıryaz(sayılar.indirge((a, b) =&gt; a + b))  <span class="y">// 31</span>
 
 <span class="y">// en sık kullanılanların kısaltmaları da hazır:</span>
@@ -132,7 +132,7 @@ satıryaz(sayılar.enUfağı)    <span class="y">// 1</span></code></pre>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">zincir</span></figcaption>
-      <pre><code>(<span class="n">1</span> |-| <span class="n">100</span>).dizine                <span class="y">// 1'den 100'e (100 dahil)</span>
+      <pre><code>(<span class="n">1</span> |-| <span class="n">100</span>)                       <span class="y">// 1'den 100'e (100 dahil)</span>
   .işle(s =&gt; s * s)              <span class="y">// karelerini al</span>
   .ele(k =&gt; k % <span class="n">3</span> == <span class="n">0</span>)          <span class="y">// 3'e bölünenleri tut</span>
   .topla                          <span class="y">// ve topla</span></code></pre>
@@ -175,7 +175,7 @@ satıryaz(sayılar.enUfağı)    <span class="y">// 1</span></code></pre>
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">küme</span></figcaption>
       <pre><code><span class="a">dez</span> k = <span class="t">Küme</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>)   <span class="y">// 1 iki kere girdi...</span>
-satıryaz(k)                     <span class="y">// Set(3, 1, 4, 5) -- ...bir kere kaldı</span>
+satıryaz(k)                     <span class="y">// Küme(3, 1, 4, 5) -- ...bir kere kaldı</span>
 satıryaz(k.içeriyorMu(<span class="n">4</span>))       <span class="y">// doğru</span>
 satıryaz(k + <span class="n">9</span>)                 <span class="y">// yeni küme; k değişmedi</span></code></pre>
     </figure>

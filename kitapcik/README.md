@@ -75,6 +75,49 @@ make test   # altın dosyayla karşılaştır
 make temizle
 ```
 
+
+Gerekli araçlar
+--
+
+Kitapçığı yeniden üretmek için üç araç gerekiyor: **Python 3.10+**
+(`yap.py`, `epub.py`), **Node.js 18+** ve **Playwright + Chromium**
+(`pdf.mjs`, `kapak.mjs`). Playwright'ı depo kökünde bir kere kurmak
+yeterli; betikler onu önce yerel `node_modules`'tan, bulamazsa bilinen
+konumlardan arar.
+
+**macOS** ([Homebrew](https://brew.sh) ile):
+
+```bash
+brew install python3 node
+cd <depo-kökü>
+npm install playwright
+npx playwright install chromium
+```
+
+**Windows** (PowerShell; `winget` yerine [python.org](https://python.org) ve
+[nodejs.org](https://nodejs.org) kurucuları da olur):
+
+```powershell
+winget install Python.Python.3.12 OpenJS.NodeJS.LTS
+cd <depo-kökü>
+npm install playwright
+npx playwright install chromium
+```
+
+**Linux** (Debian/Ubuntu):
+
+```bash
+sudo apt install python3 nodejs npm
+cd <depo-kökü>
+npm install playwright
+npx playwright install chromium
+npx playwright install-deps chromium   # tarayıcının sistem bağımlılıkları
+```
+
+EPUB doğrulaması için (isteğe bağlı): `pip install epubcheck`.
+`npm install`'ın depo köküne bıraktığı `node_modules/`, `package.json` ve
+`package-lock.json` sürüm denetiminin dışındadır (`.gitignore`).
+
 Kitapçığı yeniden yapmak
 --
 

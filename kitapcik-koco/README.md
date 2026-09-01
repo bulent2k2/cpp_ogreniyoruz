@@ -14,7 +14,9 @@ doğrulandı**: konsol örneklerinin kitapçıktaki çıktıları gerçek çıkt
 Kaplumbağa örnekleri aynı derleyiciyle derlendi ama çizimler başsız (GUI'siz)
 ortamda görülemediği için görsel doğrulamaları Koco'nun kendisinde yapılmalı.
 Komut/tür/yöntem adları Kojo kaynak kodundaki Türkçe API'den (`trInit.scala`
-ve `tr/` dosyaları) birebir alındı.
+ve `tr/` dosyaları) birebir alındı; doğrulama hem `litan/kojo`'daki hem de
+`bulent2k2/kojo`'daki (güncel) `tr/` dosyalarıyla ayrı ayrı yapıldı, ikisi de
+aynı sonuçları verdi.
 
 Bölümler
 --

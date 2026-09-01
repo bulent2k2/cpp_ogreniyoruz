@@ -1,0 +1,8 @@
+sil()
+hızıKur(orta)
+kalemRenginiKur(Renkler.koyuMavi)
+boyamaRenginiKur(sarı)
+kalemKalınlığınıKur(19)
+daire(60)
+sol()
+yay(60, 270)

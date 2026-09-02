@@ -25,3 +25,18 @@
 @media print {
   a { color: #0E6E86; }
 }
+
+/* ---------- bölüm içi ekran görüntüleri ---------- */
+/* Kaplumbağa çıktıları yazı sütununu aşmasın, ufak dursun:
+   .galeri'nin geniş ekrandaki sağa taşmasını (-4.5rem) geri alıyoruz,
+   tek resimli galeride resmi de yarı genişlikte tutuyoruz. */
+
+.galeri.dar { margin-right: 0; }
+.galeri.dar figure { max-width: 19rem; width: 100%; margin: 0 auto; }
+.galeri.dar.uclu {
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+}
+
+@media print {
+  .galeri.dar figure { max-width: 15em; }
+}

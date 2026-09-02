@@ -48,7 +48,28 @@ yinele(<span class="n">4</span>) {
       <code>yinele(4) { &hellip; }</code> kıvrık parantezin içindeki komutları
       dört kere çalıştırır. Kısa, okunaklı ve Türkçe bir cümle gibi:
       &ldquo;dört kere yinele: ileri git, sağa dön.&rdquo;
+      İkisinin tuvaldeki hâli şöyle:
     </p>
+
+    <div class="galeri uclu">
+      <figure>
+        <img src="../../kitapcik/resim/koco-1-ilk-cizim.png"
+             alt="Koco tuvalinde dikey bir çizgi ve ucunda kaplumbağa">
+        <figcaption>
+          <b>İlk çizim.</b> <code>ileri(100)</code> tek çizgi bıraktı;
+          kaplumbağa <code>sağ()</code> ile doğuya döndü, bekliyor.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../../kitapcik/resim/koco-1-ilk-yineleme.png"
+             alt="Koco tuvalinde kaplumbağanın çizdiği kare">
+        <figcaption>
+          <b>Kare.</b> <code>yinele(4)</code>'ün işi. Kaplumbağa başladığı
+          köşede, başladığı yöne dönmüş olarak durur &mdash; dört dönüş
+          tam 360 derece.
+        </figcaption>
+      </figure>
+    </div>
 
     <div class="kutu deneyin">
       <span class="basi">Deneyin</span>
@@ -106,6 +127,37 @@ yinele(<span class="n">4</span>) {
         Deseninizin her koluna bir <code>kalemRenginiKur(rastgeleRenk)</code>
         koyun, ne olacağını görün.
       </p>
+    </div>
+
+    <p>
+      Tablodaki komutların çoğunu tek seferde deneyen sekiz satırlık bir
+      program &mdash; ve tuvalde bıraktığı iz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">çeşitli komutlar</span></figcaption>
+      <pre><code>sil()
+hızıKur(orta)
+kalemRenginiKur(Renkler.koyuMavi)
+boyamaRenginiKur(sarı)
+kalemKalınlığınıKur(<span class="n">19</span>)
+daire(<span class="n">60</span>)
+sol()
+yay(<span class="n">60</span>, <span class="n">270</span>)</code></pre>
+    </figure>
+
+    <div class="galeri uclu">
+      <figure>
+        <img src="../../kitapcik/resim/koco-1-cesitli-komutlar.png"
+             alt="Sarı dolgulu, koyu mavi kalın çizgili bir daire ve dörtte üçlük bir yay">
+        <figcaption>
+          <b>Daire ve yay.</b> Kalın kalem, dolgu rengi, tam daire ve 270
+          derecelik yay &mdash; hepsi bir arada. <code>hızıKur(orta)</code>
+          da <code>canlandırmaHızınıKur</code>'un sözle söyleneni:
+          <code>yavaş</code>, <code>orta</code>, <code>hızlı</code>,
+          <code>çokHızlı</code> olur.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </div>
@@ -172,6 +224,32 @@ yineleDizinli(<span class="n">10</span>) { k =&gt;      <span class="y">// k: 0,
   kare(<span class="n">20</span> + <span class="n">15</span> * k)          <span class="y">// her kare bir öncekinden büyük</span>
 }</code></pre>
     </figure>
+
+    <div class="galeri uclu">
+      <figure>
+        <img src="../../kitapcik/resim/koco-1-ilk-isleviniz.png"
+             alt="Aynı köşeden büyüyen iç içe üç kare">
+        <figcaption>
+          <b>kare.kojo.</b> Aynı işlev, üç boy:
+          <code>kare(50)</code>, <code>kare(100)</code>, <code>kare(150)</code>.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../../kitapcik/resim/koco-1-doner-desen.png"
+             alt="Otuzar derece döndürülmüş on iki kareden oluşan çiçek deseni">
+        <figcaption>
+          <b>Döner desen.</b> On iki kare, 30'ar derece: çiçek.
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="../../kitapcik/resim/koco-1-sayacli-yineleme.png"
+             alt="Sayaçla her adımda büyüyen on iç içe kare">
+        <figcaption>
+          <b>Sayaçlı yineleme.</b> <code>k</code> büyüdükçe kare büyüyor:
+          20, 35, 50&hellip;
+        </figcaption>
+      </figure>
+    </div>
 
     <div class="kutu takim">
       <span class="basi">Takım işi</span>
@@ -304,8 +382,8 @@ satıryaz(iri * iri * iri)</code></pre>
 <span class="a">tanım</span> bölünüyorMu(sayı: <span class="t">Sayı</span>, bölen: <span class="t">Sayı</span>) = sayı % bölen == <span class="n">0</span>
 
 satıryaz(topla(<span class="n">3</span>, <span class="n">5</span>))            <span class="y">// 8</span>
-satıryaz(bölünüyorMu(<span class="n">15</span>, <span class="n">5</span>))     <span class="y">// true  (yani doğru)</span>
-satıryaz(bölünüyorMu(<span class="n">16</span>, <span class="n">5</span>))     <span class="y">// false (yani yanlış)</span></code></pre>
+satıryaz(bölünüyorMu(<span class="n">15</span>, <span class="n">5</span>))     <span class="y">// doğru</span>
+satıryaz(bölünüyorMu(<span class="n">16</span>, <span class="n">5</span>))     <span class="y">// yanlış</span></code></pre>
     </figure>
 
     <p>
@@ -346,7 +424,6 @@ satıryaz(işaret(-<span class="n">5</span>))      <span class="y">// eksi</span
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">pe1.kojo</span><span class="etiket">tek deyişlik çözüm</span></figcaption>
       <pre><code><span class="a">dez</span> toplam = (<span class="n">1</span> |- <span class="n">1000</span>)                <span class="y">// 1'den 1000'e kadar (1000 hariç)</span>
-  .dizine                              <span class="y">// sayıları bir dizine çevir</span>
   .ele(s =&gt; bölünüyorMu(s, <span class="n">3</span>) || bölünüyorMu(s, <span class="n">5</span>))   <span class="y">// uyanları ele: süz</span>
   .topla                               <span class="y">// hepsini topla</span>
 

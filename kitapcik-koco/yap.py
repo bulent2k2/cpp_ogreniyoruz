@@ -93,8 +93,8 @@ def icerik_seridi(slug: str, baglantilar: dict[str, str] | None) -> str:
     """Başlıktaki bölüm şeridi. Bağlantı yoksa düz yazı olarak basılır."""
     ogeler = []
     for s in SIRA:
-        if s == "00-kapak":
-            continue
+        if s == "00-kapak" and slug == "00-kapak":
+            continue   # kapak sayfası kendi kendine bağlantı vermesin
         etiket = AD[s]
         if s == slug:
             ogeler.append(

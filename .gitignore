@@ -13,3 +13,7 @@ kitapcik/cikti/
 kitapcik-koco/cikti/
 __pycache__/
 *.pyc
+# playwright kurulumu (bkz. kitapcik/README.md, Gerekli araçlar)
+node_modules/
+package.json
+package-lock.json

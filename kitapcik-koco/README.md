@@ -3,8 +3,9 @@ Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş
 
 [`kitapcik/`](../kitapcik/) içindeki *Keyifli Bir Başlangıç*'ın kardeşi:
 aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-surum)
-(Kojo'nun Türkçe sürümü) ve Scala ile. Bölümler bilerek paralel kuruldu;
-iki kitapçık yan yana okunmak için yazıldı.
+(Kojo'nun Türkçe sürümü) ve Scala ile. Kurulum istemeyenler örnekleri
+tarayıcıda, Türkçe [iKojo](https://ikojo.fly.dev/) üzerinde çalıştırabilir.
+Bölümler bilerek paralel kuruldu; iki kitapçık yan yana okunmak için yazıldı.
 
 **Durum: ilk taslak.** Kod örnekleri **Türkçe anahtar sözcüklerle**
 (`tanım`, `dez`, `den`, `eğer`, `yoksa`, `eşle`, `durum`, `tür`&hellip;)

@@ -3,16 +3,19 @@ Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş
 
 [`kitapcik/`](../kitapcik/) içindeki *Keyifli Bir Başlangıç*'ın kardeşi:
 aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-surum)
-(Kojo'nun Türkçe sürümü) ve Scala ile. Bölümler bilerek paralel kuruldu;
-iki kitapçık yan yana okunmak için yazıldı.
+(Kojo'nun Türkçe sürümü) ve Scala ile. Kurulum istemeyenler örnekleri
+tarayıcıda, Türkçe [iKojo](https://ikojo.fly.dev/) üzerinde çalıştırabilir.
+Bölümler bilerek paralel kuruldu; iki kitapçık yan yana okunmak için yazıldı.
 
 **Durum: ilk taslak.** Kod örnekleri **Türkçe anahtar sözcüklerle**
 (`tanım`, `dez`, `den`, `eğer`, `yoksa`, `eşle`, `durum`, `tür`&hellip;)
 yazıldı ve Koco'nun yamalı Scala derleyicisiyle (`bulent2k2/kojo` deposundaki
 `scala-tr/build/pack/lib` jar'ları, 2.13.18) **derlenip çalıştırılarak
 doğrulandı**: konsol örneklerinin kitapçıktaki çıktıları gerçek çıktılardır.
-Kaplumbağa örnekleri aynı derleyiciyle derlendi ama çizimler başsız (GUI'siz)
-ortamda görülemediği için görsel doğrulamaları Koco'nun kendisinde yapılmalı.
+Kaplumbağa (çizim) örnekleri ise çevrimiçi
+[iKojo](https://ikojo.fly.dev/) üzerinde tek tek çalıştırıldı; kitapçıktaki
+çizim görselleri (`kitapcik/resim/koco-*.png`) o çıktıların ekran
+görüntüleridir.
 Komut/tür/yöntem adları Kojo kaynak kodundaki Türkçe API'den (`trInit.scala`
 ve `tr/` dosyaları) birebir alındı; doğrulama hem `litan/kojo`'daki hem de
 `bulent2k2/kojo`'daki (güncel) `tr/` dosyalarıyla ayrı ayrı yapıldı, ikisi de

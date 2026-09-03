@@ -1,7 +1,7 @@
 Fen Lisesinde C++ ve Algoritma Öğreniyoruz
 =============================
 
-Dersler sırasıyla [burada](ileri/icindekiler.md).
+Dersler sırasıyla [burada](ileri/icindekiler.md). Test.
 
 Yeni: [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](kitapcik/README.md)
 --

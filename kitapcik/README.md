@@ -85,6 +85,13 @@ Kitapçığı yeniden üretmek için üç araç gerekiyor: **Python 3.10+**
 yeterli; betikler onu önce yerel `node_modules`'tan, bulamazsa bilinen
 konumlardan arar.
 
+Yazı tipleri (Bitter, IBM Plex Sans, IBM Plex Mono) `yazitipi/` dizininde,
+depoda duruyor; PDF ve kapak onları yerelden okur, ağ bağlantısı gerekmez ve
+çıktı her makinede aynı olur. (Eskiden Google Fonts'tan yükleniyordu; ağ
+yoksa Chromium sessizce sistem yazı tipine düşüyor, PDF başka görünüyordu.)
+Çevrimiçi yayımlanan sayfalar Google Fonts'u kullanmaya devam eder. Yazı
+tiplerini yenilemek gerekirse `python3 kitapcik/yazitipi/indir.py`.
+
 **macOS** ([Homebrew](https://brew.sh) ile):
 
 ```bash
@@ -161,6 +168,23 @@ python3 -m epubcheck kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.
 `baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor; `yap.py` bunları
 bölümler arası bağlantılara yerleştiriyor. Bölüm eklerseniz `yap.py` içindeki
 `BOLUMLER` listesine de eklemeyi unutmayın.
+
+Çevrimiçi sayfa ile kaynak ayrışırsa
+--
+
+Bir bölüm çevrimiçi sayfada düzeltilip yeniden yayımlanır ama kaynak dosya
+depoya işlenmezse PDF ile EPUB geride kalır (bir kere oldu). `geri_al.py`
+yayımlanan sayfayı alıp `yap.py`'nin dönüşümlerini tersine çevirir ve kaynakla
+karşılaştırır; resimleri bayt bayt denetler:
+
+```bash
+# sayfayı tarayıcıdan kaydedin (ya da artifact'in ham HTML'ini alın), sonra:
+python3 kitapcik/geri_al.py kitapcik 02-veri ~/indirilen/sayfa.html         # farkı göster
+python3 kitapcik/geri_al.py kitapcik 02-veri ~/indirilen/sayfa.html --yaz   # kaynağı sayfaya eşitle
+```
+
+Çıkış kodu 0 ise aynı, 1 ise farklı. Aynı betik Koco kitapçığı için de
+çalışır: ilk bağımsız değişkeni `kitapcik-koco` yapın.
 
 Yazarken dikkat edilenler
 --

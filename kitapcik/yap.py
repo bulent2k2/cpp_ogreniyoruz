@@ -12,6 +12,7 @@ Kullanım:  python3 kitapcik/yap.py
 
 import base64
 import mimetypes
+import os
 import pathlib
 import re
 
@@ -20,6 +21,8 @@ ORTAK = (KOK / "ortak.css").read_text(encoding="utf-8")
 CIKTI = KOK / "cikti"
 CIKTI.mkdir(exist_ok=True)
 RESIM = KOK / "resim"
+# PDF ve kapak için yazı tipleri yerelde (bkz. yazitipi/indir.py)
+YAZITIPI = KOK / "yazitipi" / "yazitipi.css"
 
 # Bölüm metinlerindeki resim yolları cikti/ dizinine göre yazılıyor
 # (../resim/<ad>, ../../kitap/kapak.png). Bu yollar yerel önizleme ve PDF
@@ -154,6 +157,18 @@ def artifact_yaz(baglantilar: dict[str, str]) -> None:
         (CIKTI / f"{slug}.html").write_text(html, encoding="utf-8")
 
 
+def yerel_yazitipi() -> str:
+    """PDF için yazı tipleri yerelden gelsin: ağ yoksa ya da Google Fonts
+    yüklenemezse Chromium sessizce sistem yazı tipine düşüyor ve PDF başka
+    görünüyordu. Yayımlanan sayfalar (artifact) Google Fonts'u kullanmaya
+    devam ediyor; oralarda yerel dosya yok."""
+    if not YAZITIPI.exists():
+        return FONT
+    css = YAZITIPI.read_text(encoding="utf-8")
+    yol = os.path.relpath(YAZITIPI.parent, CIKTI).replace(os.sep, "/")
+    return "<style>\n" + css.replace("url('", f"url('{yol}/") + "</style>"
+
+
 def tam_yaz() -> None:
     """Hepsi bir arada: PDF için tam belge."""
     parcalar = [
@@ -170,7 +185,7 @@ def tam_yaz() -> None:
         "<!doctype html>\n"
         '<html lang="tr" data-theme="light">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-        f"<title>{BASLIK}</title>\n{FONT}\n"
+        f"<title>{BASLIK}</title>\n{yerel_yazitipi()}\n"
         f"<style>\n{ORTAK}\n</style>\n</head>\n<body>\n"
         f'<div class="sayfa">\n' + "\n".join(parcalar) + "\n</div>\n</body>\n</html>\n"
     )

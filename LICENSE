@@ -88,6 +88,11 @@ KAPSAMAZ. Yeniden dağıtmadan önce ilgili sahibine danışın:
         Mustafa Tacettin Hoca'nın ders notları, izniyle paylaşıldı.
   - notlar/ dizinindeki pdf dosyaları
         Kaynakları kendi içlerinde belirtilmiştir.
+  - kitapcik/yazitipi/ dizinindeki yazı tipi dosyaları (*.woff2)
+        Bitter (Sol Matas / Huerta Tipográfica) ile IBM Plex Sans ve
+        IBM Plex Mono (IBM). Üçü de SIL Open Font License 1.1 ile
+        dağıtılıyor; PDF ve kapak üretimi için depoda tutuluyor.
+            https://openfontlicense.org
   - ileri/dersler/resim/floyd-warshall.png
         Vikipedi kaynaklı. Kendi lisans koşulları geçerlidir.
   - ileri/dersler/resim/konigsberg-kopruleri.png

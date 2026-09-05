@@ -118,6 +118,14 @@ make denetle    # epubcheck ile doğrula
 kitapçıktakiyle aynı, `yap.py` bunları bölümler arası bağlantılara
 yerleştiriyor.
 
+Bir bölüm çevrimiçi sayfada düzeltilip kaynağa işlenmezse PDF ile EPUB geride
+kalır; kardeş kitapçıktaki `../kitapcik/geri_al.py` sayfayı kaynakla
+karşılaştırır ve istenirse eşitler:
+
+```bash
+python3 kitapcik/geri_al.py kitapcik-koco 01-ilk-adimlar ~/indirilen/sayfa.html --yaz
+```
+
 Yazarken dikkat edilenler
 --
 

@@ -74,8 +74,9 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
 - `kitapcik/` — **Giriş kitapçığı** (*Programlamaya ve Algoritmalara Keyifli
   Bir Başlangıç*): `bolumler/*.html` bölüm metinleri, `ortak.css` ekran
   biçemi, `epub.css` e-kitap biçemi, `yap.py` (html), `pdf.mjs` (pdf),
-  `epub.py` (epub), `kapak.mjs` (kapak resmi -> `kitap/kapak.png`), `kod/` 24 örnek program.
-  Üretilen `cikti/` dizini `.gitignore`'dadır.
+  `epub.py` (epub), `kapak.mjs` (kapak resmi -> `kitap/kapak.png`), `kod/` 24 örnek program,
+  `yazitipi/` PDF ve kapak için yerel yazı tipleri (woff2, OFL; `indir.py` ile
+  yenilenir). Üretilen `cikti/` dizini `.gitignore`'dadır.
 - `kitapcik-koco/` — **Koco kitapçığı** (*Programlamaya ve Algoritmalara
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
   yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,

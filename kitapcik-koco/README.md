@@ -91,6 +91,11 @@ EPUB doğrulaması için (isteğe bağlı): `pip install epubcheck`.
 `npm install`'ın depo köküne bıraktığı `node_modules/`, `package.json` ve
 `package-lock.json` sürüm denetiminin dışındadır (`.gitignore`).
 
+Yazı tipleri (Bitter, IBM Plex Sans, IBM Plex Mono) `../kitapcik/yazitipi/`
+dizininde, depoda duruyor; PDF ve kapak onları yerelden okur. Ağ bağlantısı
+gerekmez, çıktı her makinede aynı olur. Çevrimiçi yayımlanan sayfalar ise
+Google Fonts'u kullanmaya devam eder.
+
 Kitapçığı yapmak
 --
 
@@ -109,8 +114,9 @@ make kapak      # kitap/kapak-koco.png (kapak-tasarim.html'den)
 make denetle    # epubcheck ile doğrula
 ```
 
-`baglantilar.txt` (henüz yok) bölümler çevrimiçi yayımlanınca adreslerini
-tutacak; biçimi kardeş kitapçıktakiyle aynı.
+`baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor; biçimi kardeş
+kitapçıktakiyle aynı, `yap.py` bunları bölümler arası bağlantılara
+yerleştiriyor.
 
 Yazarken dikkat edilenler
 --

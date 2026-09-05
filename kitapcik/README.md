@@ -85,6 +85,13 @@ Kitapçığı yeniden üretmek için üç araç gerekiyor: **Python 3.10+**
 yeterli; betikler onu önce yerel `node_modules`'tan, bulamazsa bilinen
 konumlardan arar.
 
+Yazı tipleri (Bitter, IBM Plex Sans, IBM Plex Mono) `yazitipi/` dizininde,
+depoda duruyor; PDF ve kapak onları yerelden okur, ağ bağlantısı gerekmez ve
+çıktı her makinede aynı olur. (Eskiden Google Fonts'tan yükleniyordu; ağ
+yoksa Chromium sessizce sistem yazı tipine düşüyor, PDF başka görünüyordu.)
+Çevrimiçi yayımlanan sayfalar Google Fonts'u kullanmaya devam eder. Yazı
+tiplerini yenilemek gerekirse `python3 kitapcik/yazitipi/indir.py`.
+
 **macOS** ([Homebrew](https://brew.sh) ile):
 
 ```bash

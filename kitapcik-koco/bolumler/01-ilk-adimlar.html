@@ -462,7 +462,7 @@ satıryaz(toplam)     <span class="y">// 233168</span></code></pre>
 
     <p>
       Bilgisayar 1 ile 100 arasında bir sayı tutsun, siz bulmaya çalışın.
-      Kaplumbağa bu sefer dinlensin; oyun çıktı penceresinde geçiyor:
+      Kaplumbağa bu sefer dinlensin; oyun küçük bir soru penceresinde geçiyor:
     </p>
 
     <figure class="kod">
@@ -471,36 +471,59 @@ satıryaz(toplam)     <span class="y">// 233168</span></code></pre>
 <span class="a">den</span> hak = <span class="n">7</span>                       <span class="y">// işte o mecbur kaldığımız den!</span>
 <span class="a">den</span> bulundu = yanlış
 
-<span class="y">// çıktıyıSil                   // masaüstü Koco'da çıktı penceresini temizler; iKojo zaten her çalıştırmada temizliyor</span>
-satıryaz(<span class="s">"1 ile 100 arasında bir sayı tuttum. 7 hakkın var."</span>)
+<span class="a">den</span> msj = <span class="s">s"1 ile 100 arasında bir sayı tuttum. $hak hakkın var."</span>
 
 yineleDoğruysa(hak &gt; <span class="n">0</span> &amp;&amp; !bulundu) {
-  <span class="a">dez</span> tahmin = sayıOku(<span class="s">"Tahminin?"</span>)
+  <span class="a">dez</span> tahmin = sayıOku(msj + <span class="s">" Tahminin?"</span>)
   hak = hak - <span class="n">1</span>
-  satıryaz(<span class="s">s"$tahmin girdin."</span>)
   <span class="a">eğer</span> (tahmin == tutulan) {
     bulundu = doğru
-    satıryaz(<span class="s">s"Bildin! Hem de $hak hakkın artmıştı."</span>)
-  } <span class="a">yoksa eğer</span> (tahmin &lt; tutulan)
-    satıryaz(<span class="s">s"Tuttuğum sayı daha büyük. Kalan hakkın: $hak"</span>)
-  <span class="a">yoksa</span>
-    satıryaz(<span class="s">s"Tuttuğum sayı daha küçük. Kalan hakkın: $hak"</span>)
+    satıryaz(<span class="s">s"Bildin! $hak hakkın kalmıştı."</span>)
+  } <span class="a">yoksa</span> {
+    <span class="a">dez</span> ne = <span class="a">eğer</span> (tahmin &lt; tutulan) <span class="s">"büyük"</span> <span class="a">yoksa</span> <span class="s">"küçük"</span>
+    msj = <span class="s">s"Daha $ne olmalı. $hak hakkın kaldı."</span>
+  }
 }
 
 <span class="a">eğer</span> (!bulundu) satıryaz(<span class="s">s"Hakkın bitti. Tuttuğum sayı $tutulan idi."</span>)</code></pre>
     </figure>
 
     <p>
+      Oyun hazır olarak da duruyor: tek satır yazmadan
+      <a href="https://ikojo.fly.dev/sf/M77AkK2/3">iKojo'da açıp</a>
+      <strong>Çalıştır</strong>'a basabilirsiniz.
+    </p>
+
+    <p>
       <code>yineleDoğruysa</code>, koşul doğru kaldıkça yineler &mdash; C++'taki
       <code>while</code>'ın Koco'daki karşılığı. <code>sayıOku</code> sizden bir
       sayı ister, <code>rastgele(100)</code> 0 ile 99 arasında bir sayı verir.
-      Ve evet, iki tane <code>den</code> kullandık: oyunun <em>durumu</em>
-      (kalan hak, bulundu mu) gerçekten değişiyor. Değişen şeye değişken demek
-      günah değil; alışkanlık hâline getirmek günah. Bir ayrıntı daha: tutulan
-      sayıya <code>gizli</code> diyemedik, çünkü <code>gizli</code> Koco'da bir
-      anahtar sözcük (Scala'daki <code>private</code>). Anahtar sözcükler ad
-      olarak kullanılamaz &mdash; C++'ta <code>if</code> adında değişken
-      olmaması gibi.
+      Ve evet, üç tane <code>den</code> kullandık: oyunun <em>durumu</em>
+      (kalan hak, bulundu mu, sıradaki ileti) gerçekten değişiyor. Değişen şeye
+      değişken demek günah değil; alışkanlık hâline getirmek günah.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Küçük bir tasarım kararı</span>
+      <p>
+        İpuçlarını neden <code>satıryaz</code> ile yazdırmadık da
+        <code>msj</code>'de biriktirip <code>sayıOku</code>'nun sorusuna
+        koyduk? Çünkü soru penceresi açıkken altındaki çıktı penceresini
+        kapatıyor; yazdırdığınız ipucunu göremiyorsunuz. İletiyi sorunun
+        <em>içine</em> koyunca ipucu hep gözünüzün önünde oluyor. Arayüzün bir
+        kısıtı kodun tasarımını değiştirdi &mdash; programcılıkta bu çok olur.
+      </p>
+    </div>
+
+    <p>
+      Bir de şu satıra bakın:
+      <code>dez ne = eğer (tahmin &lt; tutulan) "büyük" yoksa "küçük"</code>.
+      Az önce &ldquo;<code>eğer</code> bir deyiştir&rdquo; demiştik; işte tam da
+      o: koşul bir <em>değer</em> üretiyor, biz de o değere ad takıyoruz.
+      Son bir ayrıntı: tutulan sayıya <code>gizli</code> diyemedik, çünkü
+      <code>gizli</code> Koco'da bir anahtar sözcük (Scala'daki
+      <code>private</code>). Anahtar sözcükler ad olarak kullanılamaz &mdash;
+      C++'ta <code>if</code> adında değişken olmaması gibi.
     </p>
 
     <h3>Neden tam yedi hak?</h3>

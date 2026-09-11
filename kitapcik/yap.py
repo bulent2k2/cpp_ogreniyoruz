@@ -23,6 +23,8 @@ CIKTI.mkdir(exist_ok=True)
 RESIM = KOK / "resim"
 # PDF ve kapak için yazı tipleri yerelde (bkz. yazitipi/indir.py)
 YAZITIPI = KOK / "yazitipi" / "yazitipi.css"
+# kod bloklarındaki "Hepsini seç" düğmesinin betiği
+KOPYALA = KOK / "kopyala.js"
 
 # Bölüm metinlerindeki resim yolları cikti/ dizinine göre yazılıyor
 # (../resim/<ad>, ../../kitap/kapak.png). Bu yollar yerel önizleme ve PDF
@@ -153,8 +155,18 @@ def artifact_yaz(baglantilar: dict[str, str]) -> None:
             # Türkçe büyük harf (i -> İ) doğru olsun diye burada kuruyoruz.
             '<script>document.documentElement.lang = "tr"</script>\n'
             f'<div class="sayfa">\n{icerik}\n</div>\n'
+            f"{kopyala_betigi()}"
         )
         (CIKTI / f"{slug}.html").write_text(html, encoding="utf-8")
+
+
+def kopyala_betigi() -> str:
+    """Kod bloklarına "Hepsini seç" düğmesini ekleyen betik, sayfanın içine
+    gömülü. Tek başına yayımlanan sayfanın yanında ayrı dosya bulunmadığı için
+    gömmek gerekiyor; EPUB'da ise paketin içine dosya olarak konuyor."""
+    if not KOPYALA.exists():
+        return ""
+    return "<script>\n" + KOPYALA.read_text(encoding="utf-8") + "</script>\n"
 
 
 def yerel_yazitipi() -> str:
@@ -187,7 +199,8 @@ def tam_yaz() -> None:
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         f"<title>{BASLIK}</title>\n{yerel_yazitipi()}\n"
         f"<style>\n{ORTAK}\n</style>\n</head>\n<body>\n"
-        f'<div class="sayfa">\n' + "\n".join(parcalar) + "\n</div>\n</body>\n</html>\n"
+        f'<div class="sayfa">\n' + "\n".join(parcalar) + "\n</div>\n"
+        + kopyala_betigi() + "</body>\n</html>\n"
     )
     (CIKTI / "kitapcik-tam.html").write_text(html, encoding="utf-8")
 

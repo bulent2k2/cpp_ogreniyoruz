@@ -126,6 +126,16 @@ karşılaştırır ve istenirse eşitler:
 python3 kitapcik/geri_al.py kitapcik-koco 01-ilk-adimlar ~/indirilen/sayfa.html --yaz
 ```
 
+Kod bloklarındaki &ldquo;Hepsini seç&rdquo; düğmesi kardeş kitapçıkla ortak
+(`../kitapcik/kopyala.js`): bloğun tamamını seçip panoya kopyalıyor, örneği
+iKojo'ya yapıştırmak kolay olsun diye. Baskıda gizli, betik çalıştırmayan
+e-kitap okuyucularında hiç oluşmuyor. Ayrıntısı
+[kardeş kitapçığın README'sinde](../kitapcik/README.md).
+
+Örnekler `sil()` ile başlamıyor: iKojo her çalıştırmada tuvali kendiliğinden
+temizliyor. Komut Bölüm I'deki komut tablosunda duruyor, yanında da bunu
+anlatan bir not var.
+
 Yazarken dikkat edilenler
 --
 

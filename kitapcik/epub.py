@@ -17,6 +17,10 @@ import zipfile
 
 import yap  # bölüm listesi ve gövde birleştirme mantığı oradan geliyor
 
+# Kod bloklarındaki "Hepsini seç" düğmesi. Düğmeyi bu betik ekliyor; betiği
+# çalıştırmayan okuyucularda hiç oluşmuyor, yani ölü düğme görünmüyor.
+KOPYALA_VAR = yap.KOPYALA.exists()
+
 KOK = pathlib.Path(__file__).resolve().parent
 RESIM = KOK / "resim"
 # bölüm metinlerindeki ../resim/<ad> yolları EPUB içinde resim/<ad> oluyor
@@ -111,6 +115,8 @@ def bolum_sayfalari() -> tuple[list[tuple[str, str, str]], list[str]]:
         # kapak resmi EPUB'da zaten OEBPS/kapak.png olarak duruyor
         govde = govde.replace('src="../../kitap/kapak.png"', 'src="kapak.png"')
         govde = RESIM_DESENI.sub(r'src="resim/\1"', govde)
+        if KOPYALA_VAR:
+            govde += '\n<script src="kopyala.js"></script>'
         sayfa = XHTML.format(dil=DIL, baslik=baslik, govde=xhtml_yap(govde))
         denetle(slug, sayfa)
         sayfalar.append((dosya_adi(slug), baslik, sayfa))
@@ -152,6 +158,10 @@ def opf(sayfalar, kapak_var: bool, resimler=()) -> str:
         'media-type="application/xhtml+xml"/>',
         '    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>',
     ]
+    if KOPYALA_VAR:
+        manifest.append(
+            '    <item id="kopyala" href="kopyala.js" media-type="text/javascript"/>'
+        )
     if kapak_var:
         manifest.append(
             '    <item id="kapakresmi" href="kapak.png" media-type="image/png" '
@@ -165,7 +175,8 @@ def opf(sayfalar, kapak_var: bool, resimler=()) -> str:
     omurga = ['    <itemref idref="kapaksayfa"/>', '    <itemref idref="nav"/>']
     for i, (ad, _baslik, _icerik) in enumerate(sayfalar):
         manifest.append(
-            f'    <item id="b{i}" href="{ad}" media-type="application/xhtml+xml"/>'
+            f'    <item id="b{i}" href="{ad}" media-type="application/xhtml+xml"'
+            + (' properties="scripted"/>' if KOPYALA_VAR else "/>")
         )
         omurga.append(f'    <itemref idref="b{i}"/>')
 
@@ -262,6 +273,8 @@ def main() -> None:
         yaz(z, "OEBPS/nav.xhtml", nav_sayfasi(sayfalar))
         yaz(z, "OEBPS/kapak.xhtml", kapak_sayfasi(kapak_var))
         yaz(z, "OEBPS/bicem.css", (KOK / "epub.css").read_text(encoding="utf-8"))
+        if KOPYALA_VAR:
+            yaz(z, "OEBPS/kopyala.js", yap.KOPYALA.read_text(encoding="utf-8"))
         if kapak_var:
             yaz(z, "OEBPS/kapak.png", kapak_png.read_bytes())
         for ad in resimler:

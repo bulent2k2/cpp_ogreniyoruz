@@ -5,7 +5,7 @@
    bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
    (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
 
-   Üç karar ve nedenleri:
+   Dört karar ve nedenleri:
 
    1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
       çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
@@ -14,9 +14,19 @@
    2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
       çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
       ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
-      basıp devam edebilir, düğme de bunu yazıyor.
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
 
-   3. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
       dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
       doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
       duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
@@ -26,11 +36,11 @@
 (function () {
   "use strict";
 
-  var SEC = "Hepsini seç";                     // Hepsini seç
-  var TAMAM = "Kopyalandı";                    // Kopyalandı
-  var SECILDI = "Seçildi — Ctrl+C";       // Seçildi — Ctrl+C
-  var CIKTI = "çıktı";               // çıktı
-  var YARDIM = "Kod bloğunun tamamını seç ve kopyala";
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
   var SURE = 1800;                                  // geri bildirim, milisaniye
 
   /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
@@ -72,8 +82,10 @@
     var kopyalandi = false;
     // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
     // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
     try {
-      kopyalandi = !!(document.execCommand && document.execCommand("copy"));
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
     } catch (e) {
       kopyalandi = false;
     }
@@ -94,17 +106,13 @@
   }
 
   function kur() {
-    var bloklar = document.querySelectorAll("figure.kod");
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
     for (var i = 0; i < bloklar.length; i++) {
       var blok = bloklar[i];
       var basi = blok.querySelector("figcaption");
       var kod = blok.querySelector("pre code") || blok.querySelector("pre");
       if (!basi || !kod || basi.querySelector(".kopyala")) {
-        continue;
-      }
-      // Çıktı blokları yapıştırılacak bir betik değil; onlara düğme koymuyoruz.
-      var ad = basi.querySelector(".ad");
-      if (ad && ad.textContent.replace(/\s+/g, "") === CIKTI) {
         continue;
       }
       var dugme = document.createElement("button");

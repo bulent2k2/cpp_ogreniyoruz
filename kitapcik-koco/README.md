@@ -129,7 +129,9 @@ python3 kitapcik/geri_al.py kitapcik-koco 01-ilk-adimlar ~/indirilen/sayfa.html 
 Kod bloklarındaki &ldquo;Hepsini seç&rdquo; düğmesi kardeş kitapçıkla ortak
 (`../kitapcik/kopyala.js`): bloğun tamamını seçip panoya kopyalıyor, örneği
 iKojo'ya yapıştırmak kolay olsun diye. Baskıda gizli, betik çalıştırmayan
-e-kitap okuyucularında hiç oluşmuyor. Ayrıntısı
+e-kitap okuyucularında hiç oluşmuyor. Çıktı blokları
+`<figure class="kod kopyalanmaz">` diye işaretli ve düğme almıyor; yeni bir
+çıktı bloğu yazarken sınıfı koyun. Ayrıntısı
 [kardeş kitapçığın README'sinde](../kitapcik/README.md).
 
 Örnekler `sil()` ile başlamıyor: iKojo her çalıştırmada tuvali kendiliğinden

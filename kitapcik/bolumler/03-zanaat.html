@@ -22,7 +22,7 @@
       ayıklayıcı orada zayıftır ve gerçek projeler tek dosyaya sığmaz.
     </p>
 
-    <figure class="kod">
+    <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">bilmeniz gereken sekiz komut</span></figcaption>
       <pre><code>pwd                     <span class="y"># neredeyim?</span>
 ls                      <span class="y"># burada ne var?</span>
@@ -48,7 +48,7 @@ cat dosya.cpp           <span class="y"># dosyayı ekrana bas</span>
       İkisini ayırabilirsiniz:
     </p>
 
-    <figure class="kod">
+    <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">derleme ve bağlama</span></figcaption>
       <pre><code><span class="y"># tek adımda</span>
 $ c++ -std=c++23 ana.cpp asal.cpp -o prog
@@ -94,7 +94,7 @@ $ c++ -std=c++23 -O2 ana.cpp -o prog             <span class="y"># iyileştirmel
       <code>Makefile</code> adlı dosyaya yazarsınız. Biçim çok basit:
     </p>
 
-    <figure class="kod dar">
+    <figure class="kod dar kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">Makefile biçimi</span></figcaption>
       <pre><code><span class="a">&lt;hedef&gt;</span>: <span class="t">&lt;bağlı olduğu şeyler&gt;</span>
 <span class="y">&lt;SEKME&gt;</span>çalıştırılacak komut</code></pre>
@@ -151,7 +151,7 @@ $ c++ -std=c++23 -O2 ana.cpp -o prog             <span class="y"># iyileştirmel
       dosyası değişirse yeniden derlenmesi gerek.
     </p>
 
-    <figure class="kod">
+    <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">çalışırken</span></figcaption>
       <pre><code>$ make
 c++ -std=c++23 -c ana.cpp
@@ -227,7 +227,7 @@ make: 'hedef' hedefi için yapılacak bir şey yok.</code></pre>
       Ne olduğuna bakın:
     </p>
 
-    <figure class="kod">
+    <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">yakalandı</span></figcaption>
       <pre><code>$ make test
 c++ -std=c++23 -c asal.cpp
@@ -265,7 +265,7 @@ make: *** [Makefile:18: test] Error 134</code></pre>
       Çıktıda tek bir boşluk bile kaysa <code>diff</code> haber veriyor:
     </p>
 
-    <figure class="kod">
+    <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">diff yakaladı</span></figcaption>
       <pre><code>$ make test
 ./prog 360 &gt; test-ciktisi
@@ -330,7 +330,7 @@ dout &lt;&lt; <span class="s">"k="</span> &lt;&lt; k &lt;&lt; <span class="s">" 
       Önce <code>-g</code> ile derleyin:
     </p>
 
-    <figure class="kod">
+    <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">gdb</span></figcaption>
       <pre><code>$ c++ -std=c++23 -g ana.cpp -o prog
 $ gdb ./prog
@@ -441,7 +441,7 @@ std::cout &lt;&lt; <span class="s">"inşa süresi: "</span> &lt;&lt; insa.count(
       Terminalde bütün programın süresini ölçmenin daha da kolay bir yolu var:
     </p>
 
-    <figure class="kod dar">
+    <figure class="kod dar kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">time</span></figcaption>
       <pre><code>$ time ./prog &lt; buyuk-test
 ...

@@ -19,14 +19,13 @@
 
     <p>
       Koco'yu açın (ya da tarayıcıda
-      <a href="https://ikojo.fly.dev/">ikojo.fly.dev</a>'i), aşağıdaki üç
+      <a href="https://ikojo.fly.dev/">ikojo.fly.dev</a>'i), aşağıdaki iki
       satırı yazın ve çalıştırın:
     </p>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">ilk çizim</span></figcaption>
-      <pre><code>sil()          <span class="y">// tuvali temizle, kaplumbağayı başa getir</span>
-ileri(100)     <span class="y">// 100 adım ileri</span>
+      <pre><code>ileri(100)     <span class="y">// 100 adım ileri</span>
 sağ()          <span class="y">// 90 derece sağa dön</span></code></pre>
     </figure>
 
@@ -39,8 +38,7 @@ sağ()          <span class="y">// 90 derece sağa dön</span></code></pre>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">kare</span><span class="etiket">ilk yineleme</span></figcaption>
-      <pre><code>sil()
-yinele(<span class="n">4</span>) {
+      <pre><code>yinele(<span class="n">4</span>) {
   ileri(<span class="n">100</span>)
   sağ()
 }</code></pre>
@@ -82,6 +80,16 @@ yinele(<span class="n">4</span>) {
         <code>yinele(6)</code> ile <code>sağ(60)</code>? Peki
         <code>yinele(5)</code> ile <code>sağ(144)</code>?
         (Sonuncusu güzel bir sürpriz.)
+      </p>
+    </div>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Örneklerimiz <code>sil()</code> ile başlamıyor: iKojo her çalıştırmada
+        tuvali kendiliğinden temizliyor, o satıra gerek kalmıyor. Ortamınız
+        çizimi silmiyorsa ya da çizimin ortasında tuvali boşaltmak isterseniz
+        komut elinizin altında &mdash; aşağıdaki tabloda.
       </p>
     </div>
 
@@ -132,14 +140,13 @@ yinele(<span class="n">4</span>) {
     </div>
 
     <p>
-      Tablodaki komutların çoğunu tek seferde deneyen sekiz satırlık bir
+      Tablodaki komutların çoğunu tek seferde deneyen yedi satırlık bir
       program &mdash; ve tuvalde bıraktığı iz:
     </p>
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">çeşitli komutlar</span></figcaption>
-      <pre><code>sil()
-hızıKur(orta)
+      <pre><code>hızıKur(orta)
 kalemRenginiKur(Renkler.koyuMavi)
 boyamaRenginiKur(sarı)
 kalemKalınlığınıKur(<span class="n">19</span>)
@@ -185,7 +192,6 @@ yay(<span class="n">60</span>, <span class="n">270</span>)</code></pre>
   }
 }
 
-sil()
 kare(<span class="n">50</span>)
 kare(<span class="n">100</span>)
 kare(<span class="n">150</span>)      <span class="y">// iç içe üç kare</span></code></pre>
@@ -205,8 +211,7 @@ kare(<span class="n">150</span>)      <span class="y">// iç içe üç kare</spa
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">döner desen</span></figcaption>
-      <pre><code>sil()
-canlandırmaHızınıKur(<span class="n">10</span>)
+      <pre><code>canlandırmaHızınıKur(<span class="n">10</span>)
 yinele(<span class="n">12</span>) {
   kare(<span class="n">100</span>)
   sağ(<span class="n">30</span>)     <span class="y">// 12 × 30 = 360: tam tur</span>
@@ -221,8 +226,7 @@ yinele(<span class="n">12</span>) {
 
     <figure class="kod dar">
       <figcaption><span class="nokta"></span><span class="ad">sayaçlı yineleme</span></figcaption>
-      <pre><code>sil()
-yineleDizinli(<span class="n">10</span>) { k =&gt;      <span class="y">// k: 0, 1, 2, ... 9</span>
+      <pre><code>yineleDizinli(<span class="n">10</span>) { k =&gt;      <span class="y">// k: 0, 1, 2, ... 9</span>
   kare(<span class="n">20</span> + <span class="n">15</span> * k)          <span class="y">// her kare bir öncekinden büyük</span>
 }</code></pre>
     </figure>
@@ -333,7 +337,7 @@ satıryaz(a * a * a)          <span class="y">// 2000'in küpü... öyle mi?</sp
 satıryaz(iri * iri * iri)</code></pre>
     </figure>
 
-    <figure class="kod dar">
+    <figure class="kod dar kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
       <pre><code><span class="v">-589934592</span>
 8000000000</code></pre>

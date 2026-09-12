@@ -77,7 +77,11 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   `epub.py` (epub), `kapak.mjs` (kapak resmi -> `kitap/kapak.png`), `kod/` 24 örnek program,
   `yazitipi/` PDF ve kapak için yerel yazı tipleri (woff2, OFL; `indir.py` ile
   yenilenir), `geri_al.py` (yayımlanmış sayfayı kaynakla karşılaştırır; iki
-  kitapçık için de). Üretilen `cikti/` dizini `.gitignore`'dadır.
+  kitapçık için de), `kopyala.js` (kod bloklarındaki &ldquo;Hepsini seç&rdquo;
+  düğmesi; iki kitapçıkta da kullanılıyor, baskıda gizli. Çıktı/uçbirim
+  blokları `<figure class="kod kopyalanmaz">` ile işaretlenir ve düğme
+  almaz; yeni çıktı bloğu yazarken sınıfı koyun).
+  Üretilen `cikti/` dizini `.gitignore`'dadır.
 - `kitapcik-koco/` — **Koco kitapçığı** (*Programlamaya ve Algoritmalara
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
   yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,

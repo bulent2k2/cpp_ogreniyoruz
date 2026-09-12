@@ -169,6 +169,26 @@ python3 -m epubcheck kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.
 bölümler arası bağlantılara yerleştiriyor. Bölüm eklerseniz `yap.py` içindeki
 `BOLUMLER` listesine de eklemeyi unutmayın.
 
+Kod bloklarındaki &ldquo;Hepsini seç&rdquo; düğmesi
+--
+
+Kod bloklarının sağ üst köşesinde bir düğme var: tıklayınca bloğun tamamını
+seçip panoya kopyalıyor, örneği çevrimiçi bir derleyiciye yapıştırmak kolay
+olsun diye. Kodu `kopyala.js` içinde; `yap.py` sayfaların içine gömüyor,
+`epub.py` de EPUB paketine dosya olarak koyuyor.
+
+Yapıştırılacak bir betik olmayan bloklar düğme almıyor: program çıktısı,
+uçbirim dökümü, derleyici hatası, izleme, tümevarım formülü. Bunlar
+`<figure class="kod kopyalanmaz">` diye işaretli &mdash; **yeni bir çıktı bloğu
+yazarken sınıfı koymayı unutmayın.** Eskiden başlıktaki ada (`çıktı`)
+bakılıyordu; adlar çeşitlenince (`terminal`, `izleme`, `çalışırken`,
+`tümevarım`, `derleyici` ...) eleme sessizce eskiyordu.
+
+Düğme HTML'e yazılmıyor, betik ekliyor. Böylece betiğin çalışmadığı yerde ölü
+bir düğme görünmüyor: baskıda `ortak.css` zaten gizliyor, betik çalıştırmayan
+e-kitap okuyucularında ise düğme hiç oluşmuyor. Kâğıtta panosu olmadığı için
+PDF'te düğme yok. Aynı düğme Koco kitapçığında da var; betik ikisi için ortak.
+
 Çevrimiçi sayfa ile kaynak ayrışırsa
 --
 

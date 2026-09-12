@@ -1,4 +1,3 @@
-sil()
 hızıKur(orta)
 kalemRenginiKur(Renkler.koyuMavi)
 boyamaRenginiKur(sarı)

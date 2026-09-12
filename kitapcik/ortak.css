@@ -267,6 +267,38 @@ code {
 }
 .kod > figcaption .ad { color: #A9B8D4; }
 .kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
 .kod pre {
   margin: 0;
   padding: 0.95rem 1.1rem 1.05rem;
@@ -588,6 +620,7 @@ hr.ayrac {
   .blok > .govde { grid-column: 2; }
   .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
   .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
   .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
   .kod pre code { white-space: pre-wrap; word-break: break-word; }
   .kart-izgara { margin-right: 0; }

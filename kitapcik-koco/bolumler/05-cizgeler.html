@@ -30,15 +30,15 @@
     <p>
       &ldquo;Neyin neye bağlı olduğu&rdquo; sözünü Bölüm II'de bir kapla
       söylemiştik: eşlem. Her düğümü komşularının kümesine eşleyelim; Scala'nın
-      değişmez eşlemi <code>Map</code> tam bu iş için:
+      değişmez kalıplarından <code>Eşlem</code> tam bu iş için:
     </p>
 
     <figure class="kod">
       <figcaption><span class="nokta"></span><span class="ad">çizge.kojo</span><span class="etiket">komşuluk kümesi</span></figcaption>
       <pre><code><span class="a">tür</span> <span class="t">Düğüm</span> = <span class="t">Harf</span>
-<span class="a">tür</span> <span class="t">Çizge</span> = <span class="t">Map</span>[<span class="t">Düğüm</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]]   <span class="y">// düğümden komşularına</span>
+<span class="a">tür</span> <span class="t">Çizge</span> = <span class="t">Eşlem</span>[<span class="t">Düğüm</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]]   <span class="y">// düğümden komşularına</span>
 
-<span class="a">dez</span> ç: <span class="t">Çizge</span> = <span class="t">Map</span>(
+<span class="a">dez</span> ç: <span class="t">Çizge</span> = <span class="t">Eşlem</span>(
   <span class="s">'A'</span> -&gt; <span class="t">Küme</span>(<span class="s">'B'</span>, <span class="s">'C'</span>),
   <span class="s">'B'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>),
   <span class="s">'C'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>, <span class="s">'E'</span>),
@@ -51,7 +51,7 @@
 
     <p>
       <code>tür</code> satırları yeni bir şey <em>yapmıyor</em>, sadece ad
-      takıyor &mdash; ama fark büyük: <code>Map[Harf, Küme[Harf]]</code> yerine
+      takıyor &mdash; ama fark büyük: <code>Eşlem[Harf, Küme[Harf]]</code> yerine
       <code>Çizge</code> okuyunca kod problemin dilinde konuşuyor. Kardeş
       kitapçıktaki <code>using Cizge = map&lt;Nokta, set&lt;Nokta&gt;&gt;</code>
       satırının buradaki ikizi bu. Kâğıda çizin: A'dan iki yol çatallanıp

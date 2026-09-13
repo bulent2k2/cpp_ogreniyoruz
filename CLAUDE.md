@@ -95,6 +95,10 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt
   bağlantıları.
 - `python/`, `kojo/` — yan diller/ortamlar için giriş yazıları.
+  `kojo/temel-bilgiler/` Kogics'in "Fundamentals" dizisinin Türkçe
+  çevirisidir; **CC BY-NC-SA**, yani deponun CC BY-SA 4.0 lisansının
+  dışında (bkz. `LICENSE` 3. bölüm). O dizindeki yazıları kitapçıklara
+  taşımayın, lisans bulaşır.
 
 ## Geliştirme İş Akışları
 

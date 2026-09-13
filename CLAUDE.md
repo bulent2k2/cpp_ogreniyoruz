@@ -86,7 +86,8 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
   yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,
   görselleri `../kitapcik/resim/`'den alır; kendi `yap.py`, `pdf.mjs`,
-  `epub.py`, `kapak.mjs` betikleri vardır. Koddaki Türkçe komut/tür adları
+  `epub.py`, `kapak.mjs` betikleri vardır. `kod/` iki Koco betiği tutar
+  (Bölüm V'in düğüm bulmacaları). Koddaki Türkçe komut/tür adları
   Kojo'nun Türkçe API'sinden (`TurkishAPI`/`tr` paketinden) gelir;
   uydurma ad eklemeyin.
 - `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve iki

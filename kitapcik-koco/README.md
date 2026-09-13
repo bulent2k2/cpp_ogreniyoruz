@@ -138,6 +138,20 @@ e-kitap okuyucularında hiç oluşmuyor. Çıktı blokları
 temizliyor. Komut Bölüm I'deki komut tablosunda duruyor, yanında da bunu
 anlatan bir not var.
 
+`kod/` dizini
+--
+
+Bölüm V'in son alıştırmasındaki iki düğüm bulmacası burada duruyor:
+`düğüm-çözme.kojo` (mavi düğümleri sürükleyip kırmızı bağların
+kesişmesini önleyin) ve `çözülemeyen-düğüm.kojo` (düzlemsel olamayan
+çizge; kırmızı düğme düğümler arası uzaklıkları yazar). İkisi de ders
+notlarımızdaki İngilizce iKojo betiklerinin Türkçeye çevrilmiş hâli.
+
+Çeviride üç ad değiştirildi, çünkü kullanıcı tanımı kütüphanenin adını
+gölgeliyordu: `çiz` &rarr; `bağlarıÇiz`, `rasgele` &rarr; `rastgeleDağıt`,
+`kırmızı` &rarr; `kırmızıKare`. `override def toString` yerine de açık bir
+`adı` yöntemi kondu.
+
 Yazarken dikkat edilenler
 --
 

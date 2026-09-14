@@ -25,8 +25,8 @@ Programınızda bir renk gereken her yerde `rastgeleRenk` işlevini
 kullanabilirsiniz. Örneğin:
 
 ```scala
-sil()
 hızıKur(hızlı)
+kalemRenginiKur(renksiz)
 yinele(10) {
     boyamaRenginiKur(rastgeleRenk)
     yinele(4) {
@@ -36,6 +36,17 @@ yinele(10) {
     sağ(36)
 }
 ```
+
+Çıktı: on karenin 36 derecelik aralıklarla dönüp iç içe geçmesinden çıkan
+bir fırıldak; her karenin içi başka bir rastgele renk.
+
+İki satır özgün sayfadan farklı. `sil()` yok, çünkü iKojo her çalıştırmada
+tuvali kendiliğinden temizliyor. `kalemRenginiKur(renksiz)` ise iKojo'daki
+bir çizim sırası hatasının geçici çözümü: o satır olmadan, önce çizilen
+kalem çizgileri sonradan gelen boyamaların üstünde kalıyor ve desenin
+netliğini bozuyor
+([kojojs-dev sorun #86](https://github.com/bulent2k2/kojojs-dev/issues/86)).
+Hata düzelince satır gerekmeyecek.
 
 Üst üste binen şekiller yapıyorsanız (yukarıdaki çizimde olduğu gibi),
 rastgele renklerinizi `rastgeleRenk.soluk(oran)` işleviyle saydam
@@ -48,8 +59,8 @@ anlamına gelir. Aradaki değerler istediğiniz etkiyi ayarlamanızı sağlar:
 + 0.5 solma orta saydamlıkta bir renk verir
 
 ```scala
-sil()
 hızıKur(hızlı)
+kalemRenginiKur(renksiz)
 yinele(10) {
     boyamaRenginiKur(rastgeleRenk.soluk(0.5))
     yinele(4) {
@@ -59,6 +70,9 @@ yinele(10) {
     sağ(36)
 }
 ```
+
+Çıktı: aynı fırıldak, ama kareler yarı saydam olduğu için üst üste bindikleri
+yerler renklerin karışımını gösteriyor.
 
 
 Önceden tanımlı renkler

@@ -4,6 +4,6 @@ Koco uygulaması *C++* değil *Scala* diliyle çalışıyor. *Scala* en modern b
 
 Ufak bir örnek olarak dizileri sıraya sokan en iyi yöntemlerden biri olan [*quick sort* algoritmasını](https://en.m.wikipedia.org/wiki/Quicksort) programlayalım:  
 [C++ kodu](https://onlinegdb.com/CKvmETRyJ).   
-[Scala kodu](https://scastie.scala-lang.org/IS5ZkOOiSmWfDW63MhVw2g)).
+[Scala kodu](https://ikojo.fly.dev/sf/cE4bcR3/1).  
 
 Algoritmayı daha iyi anlamak için şu kısa görsel faydalı olabilir: [Haskell diliyle Quick Sort](https://youtu.be/OKc2hAmMOY4?si=FRQC07Jwz8UyVaeO).  

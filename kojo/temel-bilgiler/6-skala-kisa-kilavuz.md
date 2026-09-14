@@ -2,7 +2,7 @@ Skala kısa kılavuzu
 ===================
 
 > Kogics Foundation'ın Kojo belgelerindeki
-> [Scala Quick Reference](https://docs.kogics.net/reference/scala-quick-reference.html)
+> [Scala Quick Reference](https://docs.kogics.net/reference/scala.html)
 > sayfasının çevirisi. Özgün metin: © 2010-2025 Kogics Foundation,
 > CC BY-NC-SA. Çeviri de aynı lisansta; deponun CC BY-SA 4.0 lisansı bu
 > dosyayı kapsamaz (bkz. [`LICENSE`](../../LICENSE), 3. bölüm).

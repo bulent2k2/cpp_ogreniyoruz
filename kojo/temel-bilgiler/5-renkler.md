@@ -208,6 +208,10 @@ saydamlığını ayarlayabilirsiniz:
 Koco'nun **Renk seçin** penceresinin beş sekmesi var: Swatches, HSV, HSL,
 RGB ve CMYK. Yukarıdaki dört madde HSL sekmesini anlatıyor.
 
+*Çevirmen notu:* bu pencere **masaüstü Koco'nun** özelliğidir; tarayıcıda
+çalışan iKojo'da yok. Orada rengi elle yazmanız gerekir &mdash; nasıl
+yazıldığı aşağıda, RGB sekmesinin altında.
+
 ![Renk seçin penceresinin Swatches sekmesi: hazır renklerden oluşan bir
 ızgara, sağda son kullanılanlar, altta önizleme](resim/resim-secici-1.png)
 

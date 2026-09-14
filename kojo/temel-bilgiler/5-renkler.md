@@ -37,6 +37,9 @@ yinele(10) {
 }
 ```
 
+![On karenin dönerek iç içe geçmesinden çıkan, her parçası başka renkte
+bir fırıldak](resim/rastgele-renkler.png)
+
 Çıktı: on karenin 36 derecelik aralıklarla dönüp iç içe geçmesinden çıkan
 bir fırıldak; her karenin içi başka bir rastgele renk.
 
@@ -71,8 +74,11 @@ yinele(10) {
 }
 ```
 
+![Aynı fırıldak, bu kez yarı saydam karelerle; üst üste binen yerlerde
+renkler karışıyor](resim/rastgele-renkler-saydam.png)
+
 Çıktı: aynı fırıldak, ama kareler yarı saydam olduğu için üst üste bindikleri
-yerler renklerin karışımını gösteriyor.
+yerler renklerin karışımını gösteriyor. Ortada kaplumbağa da görünüyor.
 
 
 Önceden tanımlı renkler
@@ -199,9 +205,31 @@ saydamlığını ayarlayabilirsiniz:
   50'den küçük sayılar giderek daha çok siyah katar.
 + Rengin saydamlığını **Saydamlık** kaydıracıyla artırın.
 
-*Çevirmen notu:* renk seçicisi masaüstü Koco'nun özelliğidir; tarayıcıda
-çalışan iKojo'da bulunmayabilir. Orada rengi elle yazmak için `ada(ton,
-doygunluk, açıklık)` işlevini kullanabilirsiniz.
+Koco'nun **Renk seçin** penceresinin beş sekmesi var: Swatches, HSV, HSL,
+RGB ve CMYK. Yukarıdaki dört madde HSL sekmesini anlatıyor.
+
+![Renk seçin penceresinin Swatches sekmesi: hazır renklerden oluşan bir
+ızgara, sağda son kullanılanlar, altta önizleme](resim/resim-secici-1.png)
+
+Hazır bir renk seçmek için **Swatches** yeter; sağdaki *Recent* kutusu son
+kullandıklarınızı tutuyor.
+
+![HSL sekmesi: Hue 60, Saturation 100, Lightness 70, Transparency 0
+kaydıraçları ve sarı bir önizleme](resim/resim-secici-2.png)
+
+**HSL** sekmesi yukarıda anlatılan dört kaydıracı verir. Resimdeki değerler
+`Hue 60`, `Saturation 100`, `Lightness 70`, `Transparency 0` — yani arı ve
+açık bir sarı.
+
+![RGB sekmesi: Red 255, Green 255, Blue 102, Alpha 255 ve Color Code
+FFFF66](resim/resim-secici-3.png)
+
+**RGB** sekmesi aynı rengi kırmızı-yeşil-mavi olarak verir: `255, 255, 102`.
+Alttaki *Color Code* kutusunda onaltılık karşılığı yazıyor: `FFFF66`. Bu
+sayıyı programınızda doğrudan da kullanabilirsiniz: `Renk(0xFFFF66)`. Aynı
+rengi sayılarla yazmanın bir yolu daha var: `Renk.kym(255, 255, 102)` —
+*kym*, kırmızı-yeşil-mavi demek. Ton/doygunluk/açıklıkla yazmak için de
+`Renk.ada(...)` var (*ada*: arı renk, doygunluk, açıklık).
 
 
 Renk geçişleri

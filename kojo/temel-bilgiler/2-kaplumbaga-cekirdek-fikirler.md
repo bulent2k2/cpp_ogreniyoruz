@@ -62,7 +62,6 @@ fikirlere aşina olmanız yeter:
 Yukarıdaki fikirlerin bir kısmını iş başında gösteren bir örnek:
 
 ```scala
-sil()
 tanım kare(): Birim = {
     yinele(4) {
         ileri(100)
@@ -70,7 +69,6 @@ tanım kare(): Birim = {
     }
 }
 
-sil()
 hızıKur(hızlı)
 kalemRenginiKur(Renkler.siyah)
 yinele(20) {
@@ -82,3 +80,7 @@ yinele(20) {
 
 Çıktı: siyah kenarlı, içleri yarı saydam rastgele renklerle boyanmış,
 18 derecelik aralıklarla dönmüş yirmi kareden oluşan bir çiçek deseni.
+
+Özgün örnek `sil()` ile başlıyordu, burada yok: iKojo her çalıştırmada
+tuvali kendiliğinden temizliyor. Komut yine de yukarıdaki listede duruyor,
+çünkü çizimin ortasında tuvali boşaltmak isterseniz elinizin altında.

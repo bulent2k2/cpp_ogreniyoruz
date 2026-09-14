@@ -3,11 +3,11 @@
 
 dez ilkİleti = "Çizge kuramının\ndüğümleriyle ve bağlarıyla\nkeyifli oyunlar"
 dez yç = 10 // düğümlerin yarıçapı
-
+dez yb = 12 // yazının boyu, büyütebilirsin istersen
 // bir miktar yazı tutacak bir Resim nesnesi yapar
 tanım yazıResmi(içerik: Yazı) =
-  öteleme(tuvalSınırları.solu + yç, -tuvalSınırları.altı - 4 * yç) ->
-    Resim.renkliYazı(içerik, 10, yeşil)
+  ötele(tuvalSınırları.solu + yç, -tuvalSınırları.altı - 4 * yç) ->
+    Resim.renkliYazı(içerik, yb, yeşil)
 
 den bilgi = yazıResmi(ilkİleti)
 bilgi.çiz() // tuvale çizen satır bu
@@ -28,7 +28,7 @@ durum sınıf Bağ(d1: Düğüm, d2: Düğüm) {
 den bağlar = Dizi[Bağ]() // şimdilik bağ yok
 
 durum sınıf Düğüm(no: Sayı, den x: Kesir, den y: Kesir) {
-  dez resim = öteleme(x, y) * boyaRengi(mavi) -> Resim.daire(yç)
+  dez resim = ötele(x, y) * boyaRengi(mavi) -> Resim.daire(yç)
   resim.çiz()
   resim.fareyleSürükleyince { (nx, ny) =>
     x = nx; y = ny; resim.konumuKur(nx, ny); bağlarıÇiz(bağlar)
@@ -44,7 +44,7 @@ tür Yazılar = Dizi[Yazı]
 
 // bağları temsil eden çizgiyi çizer
 tanım çizgiÇiz(xa: Kesir, ya: Kesir, xb: Kesir, yb: Kesir) = {
-  dez ç = öteleme(xa, ya) -> Resim.çizgi(xb - xa, yb - ya)
+  dez ç = ötele(xa, ya) -> Resim.çizgi(xb - xa, yb - ya)
   çiz(ç)
   ç
 }
@@ -87,7 +87,7 @@ tanım bağlıMı(a: Düğüm, b: Düğüm) = bağlar.varMı {
 }
 
 dez kırmızıDüğme =
-  öteleme(tuvalSınırları.solu + yç, -tuvalSınırları.altı - 3 * yç) *
+  ötele(tuvalSınırları.solu + yç, -tuvalSınırları.altı - 3 * yç) *
     boyaRengi(kırmızı) -> Resim.kare(3 * yç)
 kırmızıDüğme.çiz()
 den açık = doğru

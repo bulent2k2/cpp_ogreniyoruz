@@ -94,7 +94,9 @@ KAPSAMAZ. Yeniden dağıtmadan önce ilgili sahibine danışın:
         dağıtılıyor; PDF ve kapak üretimi için depoda tutuluyor.
             https://openfontlicense.org
   - kojo/temel-bilgiler/ dizininin tamamı
-        Kogics Foundation'ın "Fundamentals" dizisinin (beş yazı)
+        Kogics Foundation'ın "Fundamentals" dizisinin (beş yazı) ve onun
+        işaret ettiği iki başvuru sayfasının ("Scala Quick Reference",
+        "Gaming How-to code snippets")
         Türkçe çevirisi. Özgün metin: Telif hakkı (c) 2010-2025 Kogics
         Foundation, CC BY-NC-SA lisansıyla. Çeviri türev çalışma olduğu
         için AYNI lisansta kalır; yukarıdaki CC BY-SA 4.0 bu dizini
@@ -103,6 +105,9 @@ KAPSAMAZ. Yeniden dağıtmadan önce ilgili sahibine danışın:
             https://docs.kogics.net/fundamentals-index.html
         Kod örnekleri Koco'nun Türkçe adlarıyla yeniden yazıldı; özgün
         sayfalardaki görseller alınmadı. Her dosyanın başında künyesi var.
+        AYRIK: kojo/temel-bilgiler/resim/ altındaki ekran görüntüleri
+        özgün sayfalardan değil, depo sahibinin kendi çalıştırdığı
+        Koco ekranlarından; onlar yukarıdaki CC BY-SA 4.0 kapsamındadır.
   - ileri/dersler/resim/floyd-warshall.png
         Vikipedi kaynaklı. Kendi lisans koşulları geçerlidir.
   - ileri/dersler/resim/konigsberg-kopruleri.png

@@ -142,10 +142,14 @@ anlatan bir not var.
 --
 
 Bölüm V'in son alıştırmasındaki iki düğüm bulmacası burada duruyor:
-`düğüm-çözme.kojo` (mavi düğümleri sürükleyip kırmızı bağların
-kesişmesini önleyin) ve `çözülemeyen-düğüm.kojo` (düzlemsel olamayan
-çizge; kırmızı düğme düğümler arası uzaklıkları yazar). İkisi de ders
-notlarımızdaki İngilizce iKojo betiklerinin Türkçeye çevrilmiş hâli.
+
++ `düğüm-çözme.kojo` — mavi düğümleri sürükleyip kırmızı bağların
+  kesişmesini önleyin: <https://ikojo.fly.dev/sf/Iy4oXa6/2>
++ `çözülemeyen-düğüm.kojo` — düzlemsel olamayan çizge; kırmızı düğme
+  düğümler arası uzaklıkları yazar: <https://ikojo.fly.dev/sf/OK5yfFR/2>
+
+İkisi de ders notlarımızdaki İngilizce iKojo betiklerinin Türkçeye
+çevrilmiş hâli. Dosyalar, çevrimiçi çalışan sürümlerin birebir aynısıdır.
 
 Çeviride üç ad değiştirildi, çünkü kullanıcı tanımı kütüphanenin adını
 gölgeliyordu: `çiz` &rarr; `bağlarıÇiz`, `rasgele` &rarr; `rastgeleDağıt`,

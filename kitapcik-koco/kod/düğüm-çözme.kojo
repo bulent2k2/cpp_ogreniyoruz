@@ -1,21 +1,16 @@
-// Mavi düğümleri sürükleyerek
-// kırmızı bağların kesişmemelerini
-// sağlayın.
+// Mavi topları (düğümleri) sürükleyerek
+// kırmızı bağların kesişmemelerini sağlayın.
 
-// Kırmızı kareye basarak
-// düğümleri rastgele dağıtabilir,
-// yeniden oynayabilirsiniz.
+// Kırmızı kareye basarak düğümleri rastgele
+// dağıtabilir, yeniden oynayabilirsiniz.
 
 // Tam ekranda oynamak daha kolay olur.
 
 // Bunu değiştirip tekrar çalıştırın:
 dez tane = 4 // 5 daha zor. 3 kolay. 6 epey uğraştırır
 
-// Şundan esinlendik:
+// Şundan esinlendik (Çizgelerin düzlemselliği)
 //   https://en.wikipedia.org/wiki/Planarity
-// Tam Türkçesi Koco Ögrenim Ortamında:
-//   https://ozetle.com
-//   https://sites.google.com/view/koco-surum
 
 dez düğümSayısı = tane * tane
 dez yç = 10 // düğümün yarıçapı
@@ -25,7 +20,7 @@ durum sınıf Bağ(d1: Düğüm, d2: Düğüm) {
 }
 
 tanım çizgiÇiz(xa: Kesir, ya: Kesir, xb: Kesir, yb: Kesir) = {
-  dez czg = öteleme(xa, ya) -> Resim.çizgi(xb - xa, yb - ya)
+  dez czg = ötele(xa, ya) -> Resim.çizgi(xb - xa, yb - ya)
   czg.çiz()
   czg
 }
@@ -33,7 +28,7 @@ tanım çizgiÇiz(xa: Kesir, ya: Kesir, xb: Kesir, yb: Kesir) = {
 den bağlar = Dizi[Bağ]()
 
 durum sınıf Düğüm(den x: Kesir, den y: Kesir) {
-  dez dgm = öteleme(x, y) * boyaRengi(mavi) -> Resim.daire(yç)
+  dez dgm = ötele(x, y) * boyaRengi(mavi) -> Resim.daire(yç)
   çiz(dgm)
   tanım git(gx: Kesir, gy: Kesir): Birim = {
     x = gx; y = gy
@@ -62,7 +57,7 @@ rastgeleDağıt(dgmler) // düğümleri rastgele yerleştirip bağları çizelim
 
 // yeni oyun düğmesi
 tanım kırmızıKare(x: Kesir, y: Kesir, en: Kesir) = {
-  dez dörtgen = öteleme(x, y) * boyaRengi(kırmızı) -> Resim.kare(en)
+  dez dörtgen = ötele(x, y) * boyaRengi(kırmızı) -> Resim.kare(en)
   çiz(dörtgen)
   dörtgen
 }
@@ -84,4 +79,3 @@ tanım bağlarıÇiz(dizi: Dizi[Bağ]) = dizi.herbiriİçin { b =>
   b.czg.sil()
   b.czg = çizgiÇiz(x1 + xr, y1 + yr, x2 - xr, y2 - yr)
 }
-// 80 satırda bitti

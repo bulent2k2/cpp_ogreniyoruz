@@ -4,13 +4,20 @@ En Temel Bilgiler Kojo'yla Çok Kolay
 Kogics Foundation'ın **Fundamentals** dizisinin Türkçesi. Beş yazı, Koco'yla
 program yazmaya başlamak için gereken en az kuramı anlatıyor: neden program
 yazmalı, kaplumbağayla çizimin çekirdek fikirleri, bilişimin temelleri,
-programın kafamızdaki modeli ve renkler.
+programın kafamızdaki modeli ve renkler. Yanına, üçüncü yazının işaret
+ettiği iki başvuru sayfası da çevrildi: Skala kısa kılavuzu ve oyun
+tarifleri.
 
 1. [Program yazmaya ne gerek var? Neden Kojo?](1-neden-program-yazmali.md)
 2. [Kaplumbağayla çizim — çekirdek fikirler](2-kaplumbaga-cekirdek-fikirler.md)
 3. [Koco için bilişim temelleri](3-bilisim-temelleri.md)
 4. [Koco için kavramsal bir makine](4-kavramsal-makine.md)
 5. [Renkler](5-renkler.md)
+
+Üçüncü yazının içindekiler listesinden gelen iki başvuru sayfası:
+
+6. [Skala kısa kılavuzu](6-skala-kisa-kilavuz.md)
+7. [Oyun tarifleri](7-oyun-tarifleri.md)
 
 Yanında iki kaynak daha: iKojo'nun içindeki
 [Türkçe Skala kılavuzu](https://ikojo.fly.dev/yardim/skala) (19 bölüm) ve

@@ -326,10 +326,17 @@ canlandır {
 ```
 
 
-Çevrilmeyen iki bölüm
+İçindekiler listesindeki iki bölüm daha
 --
 
 Özgün sayfanın içindekiler listesinde iki başlık daha var —
-**Scala Quickref** ve **How-tos**. İkisi de ayrı sayfalara bağlanıyor ve
-İngilizcedir. Türkçe karşılıkları için
-[Skala kılavuzuna](https://ikojo.fly.dev/yardim/skala) bakın.
+**Scala Quickref** ve **How-tos**. İkisi de ayrı sayfalara bağlanıyor.
+Onları da çevirdik:
+
++ [Skala kısa kılavuzu](6-skala-kisa-kilavuz.md) — türler, akış denetimi,
+  soyutlama; bol örnekle.
++ [Oyun tarifleri](7-oyun-tarifleri.md) — oyun yazarken sık gereken altı
+  küçük yazılımcık.
+
+Daha geniş bir Türkçe Skala anlatımı isterseniz iKojo'nun içindeki
+[19 bölümlük kılavuza](https://ikojo.fly.dev/yardim/skala) bakın.

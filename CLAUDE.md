@@ -86,7 +86,8 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
   yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,
   görselleri `../kitapcik/resim/`'den alır; kendi `yap.py`, `pdf.mjs`,
-  `epub.py`, `kapak.mjs` betikleri vardır. Koddaki Türkçe komut/tür adları
+  `epub.py`, `kapak.mjs` betikleri vardır. `kod/` iki Koco betiği tutar
+  (Bölüm V'in düğüm bulmacaları). Koddaki Türkçe komut/tür adları
   Kojo'nun Türkçe API'sinden (`TurkishAPI`/`tr` paketinden) gelir;
   uydurma ad eklemeyin.
 - `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve iki
@@ -94,6 +95,10 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt
   bağlantıları.
 - `python/`, `kojo/` — yan diller/ortamlar için giriş yazıları.
+  `kojo/temel-bilgiler/` Kogics'in "Fundamentals" dizisinin Türkçe
+  çevirisidir; **CC BY-NC-SA**, yani deponun CC BY-SA 4.0 lisansının
+  dışında (bkz. `LICENSE` 3. bölüm). O dizindeki yazıları kitapçıklara
+  taşımayın, lisans bulaşır.
 
 ## Geliştirme İş Akışları
 

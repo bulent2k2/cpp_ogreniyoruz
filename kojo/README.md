@@ -4,7 +4,8 @@ Ama nasıl olabilir böyle bir şey ve size uyar mı?
 
 Buyrun okumaya ve yazmaya başlayıverelim ki bu sorulara kendimiz yanıt bulalım:
 
-[En Temel Bilgiler Kojo'yla Çok Kolay](https://docs.kogics.net/fundamentals-index.html)
+[En Temel Bilgiler Kojo'yla Çok Kolay](temel-bilgiler/) (Türkçesi bu depoda;
+[özgün İngilizce dizi](https://docs.kogics.net/fundamentals-index.html))
 
 Program yazmak üç temel becerinin bir araya gelmesi demek:
 
@@ -17,11 +18,11 @@ Program yazmak üç temel becerinin bir araya gelmesi demek:
 Çok soyut oldu! Kocoyla örnekler görerek pekiştirmek gerek. 
 
 Ama önce arkaplanı da görelim kısaca ki havada kalmasın. Sonra da deneyimle daha iyi anlayıverelim bu yeni kavramları ve becerileri:  
-1. [Program yazmaya ne gerek var? Neden Kojo?](https://docs.kogics.net/concepts/why-program-kojo.html)
-2. [Kaplumbağa için Çekirdek Bilgiler ve Komutlar](https://docs.kogics.net/concepts/turtle-core-ideas.html)
-3. [Bilgisayar Mühendiliğinin ve Biliminin Temelleri](https://docs.kogics.net/concepts/computing-essentials.html)
-4. [Bilgisayar Donanımının Kavramsal Temeli](https://docs.kogics.net/concepts/notional-machine.html)
-5. [Renklensin!](https://docs.kogics.net/concepts/colors.html)
+1. [Program yazmaya ne gerek var? Neden Kojo?](temel-bilgiler/1-neden-program-yazmali.md)
+2. [Kaplumbağa için Çekirdek Bilgiler ve Komutlar](temel-bilgiler/2-kaplumbaga-cekirdek-fikirler.md)
+3. [Bilgisayar Mühendiliğinin ve Biliminin Temelleri](temel-bilgiler/3-bilisim-temelleri.md)
+4. [Bilgisayar Donanımının Kavramsal Temeli](temel-bilgiler/4-kavramsal-makine.md)
+5. [Renklensin!](temel-bilgiler/5-renkler.md)
 
 Bir de şuna bakıverin: 
 

@@ -9,8 +9,8 @@ Yepyeni, 2026 tarihli bir kitap. Sağolsun çok emek vermiş:
 
 Derslerimizde çok faydasını gördüğümüz [CSES sitesinin](https://cses.fi/problemset/) kurucusu *Antti Laaksonen*
 tarafından 2018'de yazılmış güzel bir kitap da var. Yarışmalarda daha başarılı daha hızlı olmak için okuyalım:  
-- [Türkçesi](kitap/Rekabetci-Programlama-ElKitabi.pdf)  2022'de Arda ve Arkın Kaz tarafından Türkçeye çevrilmiş!  
-- [İngilizce orijinali](kitap/Competitive-Programmers-Handbook.pdf)  isteyenlere, merak edenlere.  
+- [Türkçesi](Rekabetci-Programlama-ElKitabi.pdf)  2022'de Arda ve Arkın Kaz tarafından Türkçeye çevrilmiş!  
+- [İngilizce orijinali](Competitive-Programmers-Handbook.pdf)  isteyenlere, merak edenlere.  
 Bende ikinci baskısı da var, arzu eden olursa özelden paylaşırım. 
 
 Daha kısa bir kıtapçıkla ve daha hızlı bir giriş yapmak isteyenler de olur diye düşünüyorum. Onlar için de iki paralel yol var (acele etmemek koşuluyla 8-): 

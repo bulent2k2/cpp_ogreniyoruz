@@ -22,9 +22,9 @@ Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi
 [Jupyter: Okuryazar Programlama](https://jupyter.org/).  *Literate programming*. *C++* için aşağıdaki linki kullanın.  
 [Jupyter + C++](https://mybinder.org/v2/gh/jupyter-xeus/xeus-cling/stable?filepath=notebooks/xcpp.ipynb).  
 
-Yarışmacılar için faydalı Kitaplar ve Kılavuzlar
+Küçük Kitaplık
 --
-[Burada](kitap/ReadMe.md).
+[Burada](kitap/ReadMe.md). Programlamaya ve algoritmalara giriş kitapları. Hem de ücretsiz.
 
 Çevirimiçi Yarışma Alanları
 --

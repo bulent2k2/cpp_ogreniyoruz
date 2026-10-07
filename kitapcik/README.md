@@ -32,14 +32,6 @@ bir bölüme bakmak isteyenler için:
 + [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc) derinlemesine/enlemesine gezi, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford
 + [VI. Dinamik Programlama](https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb) beş adımlık reçete, ızgara yolları, bozuk para soruları
 
-Kitapçığı yeniden üretmek
---
-
-Kaynak dosyaların düzeni, gerekli araçlar (Python, Node.js, Playwright),
-PDF/EPUB üretimi, kod bloklarındaki &ldquo;Hepsini seç&rdquo; düğmesi ve
-çevrimiçi sayfayla kaynağı eşitleyen betik ayrı bir belgede:
-[yapim.md](yapim.md).
-
 Yazarken dikkat edilenler
 --
 
@@ -50,6 +42,15 @@ Yazarken dikkat edilenler
   &ldquo;bir arkadaşınız&rdquo;, &ldquo;sınıftan biri&rdquo; dendi.
 + **Bütün kod çıktıları gerçek.** Uydurma çıktı yok; her biri bu depoda
   derlenip çalıştırıldı.
+
+Kitapçığa değişiklik ve yeni baskı gerekirse
+--
+
+Kaynak dosyaların düzeni, gerekli araçlar (Python, Node.js, Playwright),
+PDF/EPUB üretimi, kod bloklarındaki &ldquo;Hepsini seç&rdquo; düğmesi ve
+çevrimiçi sayfayla kaynağı eşitleyen betik ayrı bir belgede:
+[yapim.md](yapim.md).
+
 
 Lisans
 --

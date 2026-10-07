@@ -132,7 +132,7 @@ iKojo'ya yapıştırmak kolay olsun diye. Baskıda gizli, betik çalıştırmaya
 e-kitap okuyucularında hiç oluşmuyor. Çıktı blokları
 `<figure class="kod kopyalanmaz">` diye işaretli ve düğme almıyor; yeni bir
 çıktı bloğu yazarken sınıfı koyun. Ayrıntısı
-[kardeş kitapçığın README'sinde](../kitapcik/README.md).
+[kardeş kitapçığın yapım belgesinde](../kitapcik/yapim.md).
 
 Örnekler `sil()` ile başlamıyor: iKojo her çalıştırmada tuvali kendiliğinden
 temizliyor. Komut Bölüm I'deki komut tablosunda duruyor, yanında da bunu

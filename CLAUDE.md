@@ -81,6 +81,8 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   düğmesi; iki kitapçıkta da kullanılıyor, baskıda gizli. Çıktı/uçbirim
   blokları `<figure class="kod kopyalanmaz">` ile işaretlenir ve düğme
   almaz; yeni çıktı bloğu yazarken sınıfı koyun).
+  Yapım adımları, araçlar ve bu yardımcıların anlatımı `yapim.md`'de;
+  `README.md` yalnızca okuyucuya hitap eder.
   Üretilen `cikti/` dizini `.gitignore`'dadır.
 - `kitapcik-koco/` — **Koco kitapçığı** (*Programlamaya ve Algoritmalara
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile

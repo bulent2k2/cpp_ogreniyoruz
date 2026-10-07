@@ -6,10 +6,10 @@ Amacı öğrencilere programlamayı anlatmak değil, kendi kendilerine
 öğrenebileceklerini &mdash; ama ikili üçlü küçük takımlarla daha hızlı yol
 alacaklarını &mdash; hissettirmek.
 
-Kitapçığı okumak ve baskı için seçenekler
+Kitapçığı okumak ve basmak için seçenekler
 --
 
-**Çevirim içi okuyun, bağlantılar hemen altta
+**Çevirim içi okuyun.** Bağlantılar hemen altta. Bir sonraki bölümde.
 
 **PDF (64 sayfa, A4'e basmaya hazır):**
 [kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)

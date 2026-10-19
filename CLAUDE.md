@@ -84,6 +84,15 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   Yapım adımları, araçlar ve bu yardımcıların anlatımı `yapim.md`'de;
   `README.md` yalnızca okuyucuya hitap eder.
   Üretilen `cikti/` dizini `.gitignore`'dadır.
+- `alistirma/` — **Keyifli Alıştırmalar**, giriş kitapçığının alıştırma
+  defteri (C++ cildi). Her konuda dört basamak: Isınma / Alıştırma /
+  Zorlayıcı / Keşif. `bolumler/*.html` kitapçıkla aynı düzende, biçemi
+  `../kitapcik/ortak.css` + `ek.css`; `yap.py` ile üretilir. `kod/<id>/`
+  dizinlerinde `ana.cpp` (başlangıç), varsa `girdi`, ve `beklenen-cikti`;
+  `make test` karşılaştırır. **Depoda çözüm yoktur ve eklenmez**; bazı
+  başlangıç dosyaları (Hazırlık'taki hata alıştırmaları, "işlevi siz yazın"
+  dizinleri) bilerek derlenmez. Yeni alıştırma eklerken çözümü depo dışında
+  derleyip çalıştırın, yalnızca çıktısını `beklenen-cikti`'ye koyun.
 - `kitapcik-koco/` — **Koco kitapçığı** (*Programlamaya ve Algoritmalara
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
   yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,

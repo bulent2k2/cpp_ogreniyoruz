@@ -1,0 +1,258 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar</div>
+  <div class="no">Hazırlık</div>
+  <h1>Tarayıcıda, Hiçbir Şey Yüklemeden</h1>
+  <p class="ozet">
+    Kitapçık ilk bölümde hemen tür ve taşmaya giriyor. Buradaki üç konu, o kapıdan girmeden önce elinizin alışması için: yazdırmak, okumak, hesaplamak; derleyicinin söylediğini anlamak; ikili çalışmak. Hepsi tarayıcıda, hiçbir şey yüklemeden.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">H.1</div>
+  <div class="govde">
+    <h2>Yazdır, oku, hesapla</h2>
+    <p>Bir program dünyayla üç yoldan konuşur: ekrana yazar, klavyeden okur, arada hesap yapar. Bu beş alıştırma başka hiçbir şey yapmıyor. Hepsini <a href="https://www.onlinegdb.com/online_c++_compiler">OnlineGDB</a>'de çözebilirsiniz; girdi isteyenler için sayfanın altındaki <em>Input</em> kutusunu kullanın.</p>
+    <p class="merdiven"><span class="basamak isinma">2</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63">kitapçık: Tezgâhınızı kurun</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cheatsheets.md">kopya sayfaları</a></p>
+    </div>
+
+<section class="soru" id="H-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-1-I1</span> İlk satır, ikinci satır</h3>
+<p>Aşağıdaki program tek satır yazıyor. Çalıştırın. Sonra ikinci bir satır daha yazsın: <code>Ben bir programım.</code> İki ayrı <code>cout</code> satırı mı, tek satırda iki <code>endl</code> mi &mdash; ikisini de deneyin, çıktı aynı mı?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// H-1-I1 · İlk satır, ikinci satır</span>
+<span class="y">// İkinci bir satır ekleyin: Ben bir programım.</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;Merhaba!&quot;</span> &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Merhaba!
+Ben bir programım.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-1-I1"><code>alistirma/kod/H-1-I1/</code></a></p>
+</section>
+<section class="soru" id="H-1-I2">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-1-I2</span> Bölme üç türlü</h3>
+<p>Programı önce olduğu gibi çalıştırın ve üç satırı dikkatle okuyun: <code>7 / 2</code> neden <code>3</code>? <code>7 % 2</code> ne demek? Sonra <code>7</code>'leri <code>9</code> yapın. Beklenen çıktı aşağıda; <code>9.0 / 2</code> satırına dikkat.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// H-1-I2 · Bölme üç türlü</span>
+<span class="y">// Çalıştırın, sonra 7&#x27;leri 9 yapın.</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;7 / 2 = &quot;</span>   &lt;&lt; <span class="n">7</span> / <span class="n">2</span>   &lt;&lt; endl;   <span class="y">// tam bölme</span>
+  cout &lt;&lt; <span class="s">&quot;7 % 2 = &quot;</span>   &lt;&lt; <span class="n">7</span> % <span class="n">2</span>   &lt;&lt; endl;   <span class="y">// kalan</span>
+  cout &lt;&lt; <span class="s">&quot;7.0 / 2 = &quot;</span> &lt;&lt; <span class="n">7.0</span> / <span class="n">2</span> &lt;&lt; endl;   <span class="y">// kesirli bölme</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>9 / 2 = 4
+9 % 2 = 1
+9.0 / 2 = 4.5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-1-I2"><code>alistirma/kod/H-1-I2/</code></a></p>
+</section>
+<section class="soru" id="H-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-1-A1</span> İki sayı, üç sonuç</h3>
+<p>Klavyeden iki tam sayı okuyun; toplamını, farkını ve çarpımını üç satırda yazın. Girdi <code>12 5</code> olsun. <code>cin &gt;&gt; a &gt;&gt; b;</code> iki sayıyı art arda okur, aralarındaki boşluğu kendisi atlar.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 12 5</span></figcaption>
+<pre><code>Toplam: 17
+Fark: 7
+Çarpım: 60</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-1-A1"><code>alistirma/kod/H-1-A1/</code></a></p>
+</section>
+<section class="soru" id="H-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-1-A2</span> Bir sözcük, bir sayı</h3>
+<p>Bu sefer bir sözcük ve bir sayı okuyun: <code>elma 3</code>. Çıktı tek satır: <code>3 tane elma</code>. Sözcük için <code>string</code> türü gerekiyor; <code>#include &lt;string&gt;</code> satırını unutmayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: elma 3</span></figcaption>
+<pre><code>3 tane elma</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-1-A2"><code>alistirma/kod/H-1-A2/</code></a></p>
+</section>
+<section class="soru" id="H-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">H-1-Z1</span> Üç sayının ortalaması</h3>
+<p>Üç tam sayı okuyun, ortalamasını yazın. Girdi <code>3 4 4</code>; beklenen çıktı <code>Ortalama: 3.66667</code>. İlk denemenizde büyük ihtimalle <code>3</code> çıkacak. Neden? <code>H-1-I2</code>'deki üç satırı yeniden okuyun; toplamı bölmeden önce kesirli bir türe çevirmenin bir yolunu bulun.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 4</span></figcaption>
+<pre><code>Ortalama: 3.66667</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-1-Z1"><code>alistirma/kod/H-1-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">H.2</div>
+  <div class="govde">
+    <h2>Hata iletisini okumak</h2>
+    <p>Derleyici bağırınca çoğu kişi iletiyi okumadan koda bakar. Tersini yapın: önce iletiyi okuyun. Satır numarası, sözcük, bazen de öneri orada. Bu dört programın her birinde bir şey bozuk; görev kodu değil, iletiyi okuyup düzeltmek.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">ders 5: derleyici ve terminal</a> <a href="https://claude.ai/code/artifact/6a403229-5395-4258-adc4-496f5c79a5a1">kitapçık III: Hata bulmanın üç yolu</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cheatsheets.md">kopya sayfaları</a></p>
+    </div>
+
+<section class="soru" id="H-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-2-I1</span> Bir karakter eksik</h3>
+<p>Program derlenmiyor. İletide satır numarasını bulun, o satıra bakın. Düzeltince aşağıdaki çıktıyı vermeli.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// H-2-I1 · Bir karakter eksik</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;Virgül değil, noktalı virgül.&quot;</span> &lt;&lt; endl
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Virgül değil, noktalı virgül.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-2-I1"><code>alistirma/kod/H-2-I1/</code></a></p>
+</section>
+<section class="soru" id="H-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-2-A1</span> Üç hata, üç ileti</h3>
+<p>Bu sefer üç ayrı hata var. Derleyici hepsini birden söyleyebilir ya da ilkini düzeltince yenisi çıkabilir. Her ileti için önce &ldquo;hangi satır, hangi sözcük&rdquo; diye sorun. İpucu: hatalardan biri bir harfin büyüklüğü, biri bir başlık dosyası, biri de yine o noktalı virgül.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// H-2-A1 · Üç hata, üç ileti</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  Int kac{<span class="n">5</span>};
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; kac; ++k)
+    cout &lt;&lt; <span class="s">&quot;merhaba &quot;</span> &lt;&lt; k + <span class="n">1</span> &lt;&lt; endl
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>merhaba 1
+merhaba 2
+merhaba 3
+merhaba 4
+merhaba 5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-2-A1"><code>alistirma/kod/H-2-A1/</code></a></p>
+</section>
+<section class="soru" id="H-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-2-A2</span> Derleyici kızmıyor ama yanlış</h3>
+<p>Bu program derleniyor, çalışıyor ve yanlış yanıt veriyor: <code>sayi</code> 3 olduğu hâlde <code>yedi</code> yazıyor. <code>if</code> satırına çok dikkatli bakın. <code>-Wall</code> ile derlerseniz derleyici bir uyarı da verir; onu da okuyun, ne öneriyor?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// H-2-A2 · Derleyici kızmıyor ama yanlış</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> sayi{<span class="n">3</span>};
+  <span class="a">if</span> (sayi = <span class="n">7</span>) cout &lt;&lt; <span class="s">&quot;yedi&quot;</span> &lt;&lt; endl;
+  <span class="a">else</span>          cout &lt;&lt; <span class="s">&quot;yedi değil&quot;</span> &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>yedi değil</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-2-A2"><code>alistirma/kod/H-2-A2/</code></a></p>
+</section>
+<section class="soru" id="H-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">H-2-Z1</span> diff ne diyor?</h3>
+<p>Bu program da derleniyor, çalışıyor, ama beklenen çıktıyla <em>bir</em> farkı var. Kodu okumadan önce <code>make test</code> çalıştırın ve <code>diff</code>'in söylediğini anlamaya çalışın: <code>&lt;</code> ile başlayan satır beklenen, <code>&gt;</code> ile başlayan sizin çıktınız. Bu defterin bütün alıştırmaları bu yöntemle sınanıyor; <code>diff</code> okumayı burada öğrenin. Tarayıcıda çalışıyorsanız iki çıktıyı gözle karşılaştırın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// H-2-Z1 · diff ne diyor?</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">1</span>}; k &lt; <span class="n">10</span>; ++k)
+    cout &lt;&lt; k &lt;&lt; <span class="s">&quot; &quot;</span>;
+  cout &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 2 3 4 5 6 7 8 9 10 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-2-Z1"><code>alistirma/kod/H-2-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">H.3</div>
+  <div class="govde">
+    <h2>İkili çalışma: sürücü ve seyrüseferci</h2>
+    <p>Kitapçık ikili çalışmayı öneriyor; burada deneyin. Biri klavyede (<em>sürücü</em>), öteki yanında sesli düşünüyor, hataları görüyor, sıradaki adımı söylüyor (<em>seyrüseferci</em>). On beş dakikada bir yer değiştirin. Tek başınaysanız da olur: sürücü sizsiniz, seyrüseferci de siz; yüksek sesle konuşun.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63">kitapçık: Yalnız gidebilirsiniz, ama ikili daha hızlı</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a></p>
+    </div>
+
+<section class="soru" id="H-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-3-I1</span> Çerçeve</h3>
+<p>Seyrüseferci okusun, sürücü yazsın: üç satırlık bir çerçeve. Üstte ve altta on bir yıldız, ortada <code>* Merhaba *</code>. Yıldız sayısını elle sayın; <code>diff</code> bir fazlasını bile affetmez.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>***********
+* Merhaba *
+***********</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-3-I1"><code>alistirma/kod/H-3-I1/</code></a></p>
+</section>
+<section class="soru" id="H-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-3-A1</span> Yedinin çarpım tablosu</h3>
+<p>Yer değiştirin. <code>7 x 1 = 7</code>'den <code>7 x 10 = 70</code>'e, on satır. Döngüyle yazın; on tane <code>cout</code> satırı yazan takım kendi kendine &ldquo;Kendini tekrar etme&rdquo; diye fısıldasın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>7 x 1 = 7
+7 x 2 = 14
+7 x 3 = 21
+7 x 4 = 28
+7 x 5 = 35
+7 x 6 = 42
+7 x 7 = 49
+7 x 8 = 56
+7 x 9 = 63
+7 x 10 = 70</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-3-A1"><code>alistirma/kod/H-3-A1/</code></a></p>
+</section>
+<section class="soru" id="H-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">H-3-K1</span> Yıldızlardan bir harf</h3>
+<p>Takımınızın adının baş harfini yıldızlarla, yedi satırda çizin. Doğru çıktı yok, bu yüzden <code>beklenen-cikti</code> de yok; <code>make</code> ile derleyip bakın. Önce kâğıda çizin, sonra satır satır yazın. Sıkı takımlar döngüyle çizer: <code>K</code> harfinin çaprazını <code>for</code> ile yazabilir misiniz?</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-3-K1"><code>alistirma/kod/H-3-K1/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

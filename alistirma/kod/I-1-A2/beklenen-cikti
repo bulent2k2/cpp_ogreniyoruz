@@ -1,0 +1,5 @@
+char      : 1 bayt
+int       : 4 bayt
+long long : 8 bayt
+double    : 8 bayt
+bool      : 1 bayt

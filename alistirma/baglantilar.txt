@@ -1,0 +1,3 @@
+# Yayımlanan bölümlerin adresleri. yap.py bunları bölümler arası
+# bağlantılara yerleştirir. Bölüm yayımlanınca satırını ekleyin:
+# 00-hazirlik    https://claude.ai/code/artifact/...

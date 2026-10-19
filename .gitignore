@@ -11,6 +11,7 @@ code-deneme1.dSYM
 # kitapçıkların üretilen html çıktıları (kaynak: bolumler/ + ortak.css)
 kitapcik/cikti/
 kitapcik-koco/cikti/
+alistirma/cikti/
 __pycache__/
 *.pyc
 # playwright kurulumu (bkz. kitapcik/README.md, Gerekli araçlar)

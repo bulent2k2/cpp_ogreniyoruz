@@ -1,0 +1,4 @@
+short en büyük     : 32767
+int en büyük       : 2147483647
+long long en büyük : 9223372036854775807
+double epsilon     : 2.22045e-16

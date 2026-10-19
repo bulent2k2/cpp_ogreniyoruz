@@ -33,10 +33,12 @@ Tarayıcıda çalışıyorsanız ([OnlineGDB](https://www.onlinegdb.com/online_c
 Bölümler
 --
 
+Çevrimiçi sayfalar bağlantısı olan herkese açık; telefondan da okunur.
+
 | | Bölüm | Konu | Alıştırma |
 |---|---|---|---|
-| Hazırlık | [Tarayıcıda, hiçbir şey yüklemeden](bolumler/00-hazirlik.html) | 3 | 12 |
-| I | [İlk Adımlar](bolumler/01-ilk-adimlar.html) | 6 | 29 |
+| Hazırlık | [Tarayıcıda, hiçbir şey yüklemeden](https://claude.ai/artifact/XKDtPcu8csxWMu6YZULS3A) ([kaynak](bolumler/00-hazirlik.html)) | 3 | 12 |
+| I | [İlk Adımlar](https://claude.ai/artifact/Bhazr8dwrYRPikNxW9X9Yv) ([kaynak](bolumler/01-ilk-adimlar.html)) | 6 | 29 |
 | II&ndash;VI | yazılıyor | | |
 
 Bölüm metinleri `bolumler/*.html` dosyalarında, kitapçıkla aynı düzende;

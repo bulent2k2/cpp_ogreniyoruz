@@ -39,7 +39,7 @@ Bölümler
 |---|---|---|---|
 | Hazırlık | [Tarayıcıda, hiçbir şey yüklemeden](https://claude.ai/artifact/XKDtPcu8csxWMu6YZULS3A) ([kaynak](bolumler/00-hazirlik.html)) | 3 | 12 |
 | I | [İlk Adımlar](https://claude.ai/artifact/Bhazr8dwrYRPikNxW9X9Yv) ([kaynak](bolumler/01-ilk-adimlar.html)) | 6 | 29 |
-| II | [Veriyi Düzenlemek](bolumler/02-veri.html) | 7 | 35 |
+| II | [Veriyi Düzenlemek](https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w) ([kaynak](bolumler/02-veri.html)) | 7 | 35 |
 | III&ndash;VI | yazılıyor | | |
 
 Bölüm metinleri `bolumler/*.html` dosyalarında, kitapçıkla aynı düzende;

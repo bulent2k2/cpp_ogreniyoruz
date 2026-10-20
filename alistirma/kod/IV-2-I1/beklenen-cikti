@@ -1,0 +1,4 @@
+fib(40) = 102334155
+yavaş: 331160281 çağrı
+hızlı: 79 çağrı
+kontrol: aynı sonuç

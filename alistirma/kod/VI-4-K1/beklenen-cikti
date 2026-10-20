@@ -1,0 +1,9 @@
+dizi (önce hedef, sonra para):
+x=1: 1 0 0 0 0 0
+x=2: 1 0 1 0 0 0
+x=3: 1 0 1 1 0 0
+x=4: 1 0 1 1 1 0
+x=5: 1 0 1 1 1 2
+küme (önce para, sonra hedef):
+p=2: 1 0 1 0 1 0
+p=3: 1 0 1 1 1 1

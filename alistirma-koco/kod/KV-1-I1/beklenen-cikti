@@ -1,0 +1,15 @@
+A: B C
+B: D
+C: D E
+D: F
+E: F
+F: G
+G: 
+
+A: B C
+B: D
+C: D E
+D: F
+E: F
+F: G
+G: A

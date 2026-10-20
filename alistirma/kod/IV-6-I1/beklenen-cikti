@@ -1,0 +1,16 @@
+n=20
+  log n   : 4 sığar
+  n       : 20 sığar
+  n log n : 80 sığar
+  n^2     : 400 sığar
+  2^n     : 1048576 sığar
+n=1000
+  log n   : 10 sığar
+  n       : 1000 sığar
+  n log n : 10000 sığar
+  n^2     : 1000000 sığar
+n=1000000
+  log n   : 20 sığar
+  n       : 1000000 sığar
+  n log n : 20000000 sığar
+  n^2     : 1000000000000 sığmaz

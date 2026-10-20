@@ -1,0 +1,493 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar</div>
+  <div class="no">Bölüm I</div>
+  <h1>İlk Adımlar</h1>
+  <p class="ozet">
+    Kitapçığın birinci bölümü beş yapıtaşı veriyor: değer, ad, tür, karar, tekrar; bir de işlev. Burada her birine bir merdiven var. Isınmalar kitapçıktaki programla başlıyor; Keşifler Project Euler'e çıkıyor.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">I.1</div>
+  <div class="govde">
+    <h2>Değer, ad, tür</h2>
+    <p>Kitapçığın <code>01-turler.cpp</code> programı dört türü gösteriyor. Aşağıdaki beş alıştırma o programdan başlayıp türlerin sınırlarına kadar gidiyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">kitapçık I.1: Değer, ad, tür</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/01-turler.cpp">kod: 01-turler.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-1-I1</span> Deneyin kutusu</h3>
+<p>Kitapçığın <em>Deneyin</em> kutusu: <code>ogrenci</code>'yi <code>false</code> yapın, <code>char basHarfi{'B'}</code> yerine <code>int basHarfi{'B'}</code> yazın. Çalıştırmadan önce dört satırın nasıl değişeceğini tahmin edin, sonra beklenen çıktıyla karşılaştırın. <code>66</code> nereden geldi?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Merhaba! Ben senin ilk programın.
+Yaş      : 16
+Boy      : 1.72 m
+Baş harfi: 66
+Öğrenci  : 0
+Öğrenci  : false
+On yıl sonra: 26</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-I1"><code>alistirma/kod/I-1-I1/</code></a></p>
+</section>
+<section class="soru" id="I-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-1-A1</span> Dört değişken, dört tür</h3>
+<p>Bir kitabı dört değişkenle tanımlayın: adı (<code>string</code>), sayfa sayısı (<code>int</code>), fiyatı (<code>double</code>), rafta mı (<code>bool</code>). Değerler: <code>Keyifli Alıştırmalar</code>, <code>120</code>, <code>49.9</code>, <code>true</code>. Dört satırda, aşağıdaki biçimde yazın. <code>boolalpha</code>'yı hatırlayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Kitap : Keyifli Alıştırmalar
+Sayfa : 120
+Fiyat : 49.9 TL
+Rafta : true</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-A1"><code>alistirma/kod/I-1-A1/</code></a></p>
+</section>
+<section class="soru" id="I-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-1-A2</span> Kaç bayt?</h3>
+<p>Kitapçık &ldquo;bellek upuzun bir şerit&rdquo; diyor. Her tür o şeritten kaç bayt alıyor? <code>sizeof(int)</code> söyler. Beş tür için yazın: <code>char</code>, <code>int</code>, <code>long long</code>, <code>double</code>, <code>bool</code>. (Beklenen çıktı bugünkü yaygın bilgisayarlar için; başka bir makinede başka çıkarsa bu bir hata değil, bir keşif.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>char      : 1 bayt
+int       : 4 bayt
+long long : 8 bayt
+double    : 8 bayt
+bool      : 1 bayt</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-A2"><code>alistirma/kod/I-1-A2/</code></a></p>
+</section>
+<section class="soru" id="I-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-1-Z1</span> Harfler de sayı</h3>
+<p><code>I-1-I1</code>'deki 66, <code>'B'</code> harfinin bellekteki sayısı (ASCII). Madem harf sayıdır, harfle hesap yapılır: bir döngüyle <code>A</code>'dan <code>Z</code>'ye bütün büyük harfleri tek satırda yazın. Sonra iki satır daha: <code>'B' + 1</code> kaç eder, <code>char('B' + 1)</code> hangi harf? Döngü değişkeninin türünü iyi seçin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ
+&#x27;B&#x27; + 1 = 67
+char(&#x27;B&#x27; + 1) = C</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-Z1"><code>alistirma/kod/I-1-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-1-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-1-K1</span> Sınırları keşfedin</h3>
+<p>Kitapçık <code>numeric_limits&lt;int&gt;::max()</code>'i gösterdi. <code>&lt;limits&gt;</code> başlığını kurcalayın: <code>short</code>, <code>int</code>, <code>long long</code> için en büyük değer; <code>double</code> için <code>epsilon()</code> (birden sonra temsil edilebilen ilk sayı ile 1 arasındaki fark). Beklenen çıktı bu dördü için; sonra <code>min()</code>, <code>digits</code>, <code>lowest()</code> ile kendiniz oynayın. Hangi tür ne zaman gerekir, takımınızla tartışın: nüfus, sıcaklık, bir harf notu, kapı açık mı.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>short en büyük     : 32767
+int en büyük       : 2147483647
+long long en büyük : 9223372036854775807
+double epsilon     : 2.22045e-16</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-K1"><code>alistirma/kod/I-1-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.2</div>
+  <div class="govde">
+    <h2>Her türün bir sınırı var: taşma</h2>
+    <p>Yarışma sorularında en çok can yakan hata. Kitapçığın <code>02-tasma.cpp</code> programıyla başlayıp sınırın tam yerini bulana kadar gidiyoruz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">kitapçık I.1: Her türün bir sınırı var</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/02-tasma.cpp">kod: 02-tasma.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-2-I1</span> Küp küçülünce</h3>
+<p><code>a</code>'yı <code>2000</code> yerine <code>1000</code> yapın. Hangi satırlar değişir, hangileri değişmez? Önce tahmin edin: 1000'in küpü <code>int</code>'e sığar mı? Kitapçıktaki sınırla karşılaştırın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1000&#x27;in küpü (int) : 1000000000
+3000&#x27;ün küpü (int) : 1230196224
+3000&#x27;ün küpü (long): 27000000000
+karekök(1000&#x27;in küpü) : 31622.8
+int&#x27;in en büyüğü           : 2147483647
+unsigned long&#x27;un en büyüğü : 18446744073709551615</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-I1"><code>alistirma/kod/I-2-I1/</code></a></p>
+</section>
+<section class="soru" id="I-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-2-A1</span> Faktöriyel nerede taşar?</h3>
+<p><code>n! = 1 · 2 · … · n</code>. Bir döngüyle hesaplayın; <code>12!</code> ve <code>13!</code>'ü önce <code>int</code>, sonra <code>long long</code> ile. <code>20!</code>'i de <code>long long</code> ile ekleyin. Dört satır. Hangi noktada <code>int</code> yalan söylemeye başlıyor?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>12! (int)       : 479001600
+13! (int)       : 1932053504
+13! (long long) : 6227020800
+20! (long long) : 2432902008176640000</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-A1"><code>alistirma/kod/I-2-A1/</code></a></p>
+</section>
+<section class="soru" id="I-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-2-A2</span> Sıfırın bir eksiği</h3>
+<p><code>unsigned int</code> eksi sayı tutamaz. Peki <code>0</code>'dan <code>1</code> çıkarınca ne olur? Ya en büyük değere <code>1</code> eklenince? İki satırda yazın. Kilometre saati benzetmesini hatırlayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>unsigned 0 - 1          = 4294967295
+unsigned en büyük + 1   = 0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-A2"><code>alistirma/kod/I-2-A2/</code></a></p>
+</section>
+<section class="soru" id="I-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-2-Z1</span> Neden tam 2147483647?</h3>
+<p>Kitapçığın <em>Takım işi</em> kutusundaki soru. Kâğıtta çözdükten sonra programla doğrulayın: <code>2³¹</code>, <code>2³¹ − 1</code>, <code>2³²</code> ve <code>2⁶³ − 1</code>. Çarpı işaretiyle değil, kaydırma işleciyle: <code>1LL &lt;&lt; 31</code> ne demek? <code>1 &lt;&lt; 31</code> yazarsanız ne olur, neden <code>LL</code> gerekti? Son satır için dikkat: <code>1LL &lt;&lt; 63</code> taşar; önce <code>62</code>'yi düşünün.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>2^31     = 2147483648
+2^31 - 1 = 2147483647
+2^32     = 4294967296
+2^63 - 1 = 9223372036854775807</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-Z1"><code>alistirma/kod/I-2-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.3</div>
+  <div class="govde">
+    <h2>Kararlar ve tekrarlar</h2>
+    <p><code>if</code>, <code>for</code>, <code>while</code>. Kitapçık bu üçünü Project Euler'in birinci sorusuyla gösterdi; biz de oradan başlıyoruz ve ikinci soruya kadar gidiyoruz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">kitapçık I.2: Kararlar ve tekrarlar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">ders 5: PE 1</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders6.md">ders 6: Fibonaççi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/04-pe1.cpp">kod: 04-pe1.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-3-I1</span> Bin yerine yüz</h3>
+<p>Kitapçığın <code>04-pe1.cpp</code> programında sınırı <code>1000</code> yerine <code>100</code> yapın. Çalıştırmadan tahmin etmeyin, kâğıtta hesaplayın: 3'ün katları, 5'in katları, 15'in katları. Sonra çalıştırıp karşılaştırın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Project Euler, birinci problem: 2318</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-I1"><code>alistirma/kod/I-3-I1/</code></a></p>
+</section>
+<section class="soru" id="I-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-3-A1</span> Fizz, Buzz, FizzBuzz</h3>
+<p>Dünyanın en çok sorulan iş görüşmesi sorusu. 1'den 20'ye kadar sayın; 3'e bölünende <code>Fizz</code>, 5'e bölünende <code>Buzz</code>, ikisine de bölünende <code>FizzBuzz</code>, yoksa sayının kendisini yazın. Her biri ayrı satır. <code>if</code>'lerin sırası önemli; 15'i düşünün.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-A1"><code>alistirma/kod/I-3-A1/</code></a></p>
+</section>
+<section class="soru" id="I-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-3-A2</span> Basamaklar</h3>
+<p>Bir tam sayı okuyun; kaç basamağı olduğunu ve basamaklarının toplamını tek satırda yazın. <code>H-1-I2</code>'deki <code>%</code> ve <code>/</code> burada iş görüyor: <code>2026 % 10</code> son basamak, <code>2026 / 10</code> gerisi. Sayı sıfır olana kadar <code>while</code>.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 2026</span></figcaption>
+<pre><code>2026 sayısının 4 basamağı var, basamakları toplamı 10.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-A2"><code>alistirma/kod/I-3-A2/</code></a></p>
+</section>
+<section class="soru" id="I-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-3-Z1</span> Klasik tuzağı kendiniz kurun</h3>
+<p>Kitapçığın <em>Klasik tuzak</em> kutusu: <code>if</code>'i ikiye bölünce 15'in katları iki kere sayılıyor. Tuzağı bilerek kurun: iki ayrı <code>if</code> ile &ldquo;yanlış&rdquo; toplamı hesaplayın, sonra 15'in katlarını çıkararak düzeltin, sonra da <code>or</code>'lu doğru hâlle karşılaştırın. Üç satır: yanlış, yamalı, doğru. Yamalı ile doğru eşit çıkmalı. Hangisi daha okunaklı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>iki if ile  : 266333
+15 çıkarınca: 233168
+or ile      : 233168</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-Z1"><code>alistirma/kod/I-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-3-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-3-Z2</span> Collatz&#x27;ın inatçı dizisi</h3>
+<p>Bir sayı alın: çiftse ikiye bölün, tekse üçle çarpıp bir ekleyin; 1'e varana kadar. Kimse bunun her sayı için bittiğini kanıtlayamadı, ama 27 için biter: kaç adımda? Yolda görülen en yüksek değer ne? Girdi <code>27</code>. Sayı taşabilir mi diye düşünün, türünüzü ona göre seçin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 27</span></figcaption>
+<pre><code>27 için 111 adım, en yüksek değer 9232.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-Z2"><code>alistirma/kod/I-3-Z2/</code></a></p>
+</section>
+<section class="soru" id="I-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-3-K1</span> Project Euler 2</h3>
+<p><a href="https://projecteuler.net/problem=2">İkinci soru</a>: Fibonaççi dizisinde (1, 2, 3, 5, 8, …) dört milyonu aşmayan <em>çift</em> terimlerin toplamı. Döngüyle; özyineleme Bölüm IV'te. Yanıtı bulunca Project Euler hesabınıza girin, yeşil tik alın. Sonra bir adım öteye: her üçüncü Fibonaççi sayısının çift olduğunu fark ettiniz mi? Neden?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Project Euler, ikinci problem: 4613732</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-K1"><code>alistirma/kod/I-3-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.4</div>
+  <div class="govde">
+    <h2>İşlev: bir kere yaz, çok kere kullan</h2>
+    <p>Kitapçık <code>bolunuyorMu()</code> için &ldquo;tek satır, buna değer mi? Kesinlikle&rdquo; dedi. Burada beş işlev yazacaksınız; her biri bir satırdan biraz uzun.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">kitapçık I.2: İşlev</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders8.md">ders 8: Kendini tekrar etme</a></p>
+    </div>
+
+<section class="soru" id="I-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-4-I1</span> Kare ve küp</h3>
+<p>İki işlev: <code>kare(int)</code> ve <code>kup(int)</code>. İkisi de <code>int</code> döndürsün. <code>main</code> hazır, yalnız işlevleri yazın. Sonra <code>kup</code>'u <code>kare</code>'yi kullanarak yazabilir misiniz?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-4-I1 · Kare ve küp</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="y">// kare(int) ve kup(int) işlevlerini buraya yazın</span>
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;12&#x27;nin karesi: &quot;</span> &lt;&lt; kare(<span class="n">12</span>) &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">&quot;12&#x27;nin küpü  : &quot;</span> &lt;&lt; kup(<span class="n">12</span>) &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>12&#x27;nin karesi: 144
+12&#x27;nin küpü  : 1728</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-I1"><code>alistirma/kod/I-4-I1/</code></a></p>
+</section>
+<section class="soru" id="I-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-4-A1</span> Üçün en büyüğü</h3>
+<p><code>enBuyuk(int, int, int)</code> üç sayının en büyüğünü döndürsün. Girdi <code>7 42 19</code>. Önce <code>if</code>'lerle yazın; sonra önce ikisinin en büyüğünü bulan iki girdili bir işlev yazıp üçlüyü onunla kurun. Hangisi kısa?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 42 19</span></figcaption>
+<pre><code>En büyük: 42</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-A1"><code>alistirma/kod/I-4-A1/</code></a></p>
+</section>
+<section class="soru" id="I-4-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-4-A2</span> Asal mı?</h3>
+<p><code>asalMi(int)</code> bir <code>bool</code> döndürsün. Sonra 50'den küçük asalları tek satırda yazın: her sayıdan sonra bir boşluk, en sonda <code>endl</code>. Bölenleri nereye kadar denemek gerekir: <code>n</code>'e kadar mı, <code>n/2</code>'ye mi, <code>√n</code>'e mi? Üçü de doğru yanıt verir; farkı Bölüm III'te ölçeceksiniz.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-A2"><code>alistirma/kod/I-4-A2/</code></a></p>
+</section>
+<section class="soru" id="I-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-4-Z1</span> Öklid&#x27;in işlevi</h3>
+<p>İki sayının en büyük ortak böleni için Öklid'in 2300 yıllık yöntemi: büyük sayıyı küçüğe böl, kalanı al; kalan sıfır olana kadar. <code>ebob(int, int)</code> işlevini döngüyle yazın (özyinelemesini Bölüm IV'te göreceksiniz). Sonra <code>ekok</code>'u <code>ebob</code>'dan türetin: <code>a · b / ebob</code>. Girdi <code>1071 462</code>.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1071 462</span></figcaption>
+<pre><code>ebob(1071, 462) = 21
+ekok(1071, 462) = 23562</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-Z1"><code>alistirma/kod/I-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-4-K1</span> Project Euler 3</h3>
+<p><a href="https://projecteuler.net/problem=3">Üçüncü soru</a>: <code>600851475143</code> sayısının en büyük asal çarpanı. Kitapçığın uyarısı: bu sayı <code>int</code>'e sığmıyor. <code>I-4-A2</code>'deki <code>asalMi</code>'yi her bölen için çağırmak çok yavaş olur; başka bir yol düşünün: en küçük bölenden başlayıp sayıyı bölerek küçültün. Asallık sınaması gerekmeyebilir. Neden?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Project Euler, üçüncü problem: 6857</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-K1"><code>alistirma/kod/I-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.5</div>
+  <div class="govde">
+    <h2>İlk oyununuz</h2>
+    <p>Kitapçığın tahmin oyunu rastgele sayı tutuyor; rastgele programı sınamak zordur. İlk alıştırma oyunu sınanabilir yapıyor, gerisi o temelin üstüne çıkıyor. Girdi isteyen alıştırmalarda tahminler <code>girdi</code> dosyasından geliyor; tarayıcıda <em>Input</em> kutusuna yazın.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">kitapçık I.3: İlk oyununuz</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4: rastgele sayılar, girdi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/03-tahmin.cpp">kod: 03-tahmin.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-5-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-5-I1</span> Rastgeleyi kapatın</h3>
+<p><code>03-tahmin.cpp</code>'de <code>gizli</code>'yi rastgele seçen satırı <code>const int gizli{37};</code> yapın. Artık oyun sınanabilir: girdi <code>50 25 37</code> ile aşağıdaki konuşma çıkmalı. &ldquo;Bildin! 3 tahminde&rdquo; sayısı nereden geliyor, <code>7 - hak</code> ifadesini okuyun.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 50 25 37</span></figcaption>
+<pre><code>1 ile 100 arasında bir sayı tuttum. 7 hakkın var.
+Tahminin: Daha küçük. Kalan hak: 6
+Tahminin: Daha büyük. Kalan hak: 5
+Tahminin: Bildin! 3 tahminde.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-I1"><code>alistirma/kod/I-5-I1/</code></a></p>
+</section>
+<section class="soru" id="I-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-5-A1</span> Kaç hak yeter?</h3>
+<p>Kitapçığın <em>Deneyin</em> kutusu: hak sayısını sınıra bakarak hesaplayın. Bir <code>hakSayisi(int sinir)</code> işlevi yazın: <code>2ⁿ</code> sınırı geçene kadar sayan bir <code>while</code>. Üç sınır için yazın: 100, 1000, 1000000. <code>log2</code> kullanmayın, elle; sonra <code>&lt;cmath&gt;</code> ile doğrulayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>100 için 7 hak
+1000 için 10 hak
+1000000 için 20 hak</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-A1"><code>alistirma/kod/I-5-A1/</code></a></p>
+</section>
+<section class="soru" id="I-5-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-5-Z1</span> Tersine oyun</h3>
+<p>Kitapçığın birinci alıştırması: siz sayı tutun, bilgisayar bulsun. Her tahminden sonra siz <code>b</code> (daha büyük), <code>k</code> (daha küçük) ya da <code>d</code> (doğru) yazın. Bilgisayar akıllı oyuncu olsun: her seferinde kalan aralığın ortasını söylesin. Girdi <code>b k b d</code> ile tahminler 50, 75, 62, 68 olmalı. İki değişken yeter: <code>alt</code> ve <code>ust</code>. Bu, ikili aramanın ta kendisi.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: b k b d</span></figcaption>
+<pre><code>1 ile 100 arasında bir sayı tutun. Ben bulayım.
+Tahminim: 50 (b/k/d) 
+Tahminim: 75 (b/k/d) 
+Tahminim: 62 (b/k/d) 
+Tahminim: 68 (b/k/d) 
+4 tahminde buldum: 68</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-Z1"><code>alistirma/kod/I-5-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-5-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-5-Z2</span> Bozuk girdiye dayanmak</h3>
+<p>Kitapçığın oyunu bozuk girdide (<code>abc</code> gibi) oyunu bitiriyor: <code>if (not (cin &gt;&gt; tahmin)) break;</code>. Daha nazik olun: &ldquo;Bu bir sayı değil, hak yanmadı.&rdquo; deyip devam edin. Bunun için <code>cin.clear()</code> ile hatayı silmek, sonra bozuk sözcüğü okuyup atmak gerekiyor. Girdi gerçekten bitmişse yine çıkın (<code>cin.eof()</code>). <code>gizli</code> 37 olsun; girdi <code>abc 37</code>.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: abc 37</span></figcaption>
+<pre><code>1 ile 100 arasında bir sayı tuttum. 7 hakkın var.
+Tahminin: Bu bir sayı değil, hak yanmadı.
+Tahminin: Bildin! 1 tahminde.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-Z2"><code>alistirma/kod/I-5-Z2/</code></a></p>
+</section>
+<section class="soru" id="I-5-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-5-K1</span> Oyunu büyütün</h3>
+<p>Beklenen çıktı yok; oyun sizin. Birkaç yön: oyun bitince &ldquo;bir daha?&rdquo; diye sorsun; iki oyuncu sırayla tahmin etsin, bilen kazansın; sınırı kullanıcı seçsin, hak sayısı <code>I-5-A1</code>'deki işlevle hesaplansın. En az birini yapın, ikili çalışın, sonra sınıftan birine oynatın: oyununuz onun yaptığı tuhaf şeylere dayanıyor mu?</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-K1"><code>alistirma/kod/I-5-K1/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.6</div>
+  <div class="govde">
+    <h2>Adların nerede geçerli olduğu</h2>
+    <p>Kapsam. Kitapçık &ldquo;yanıtı vermiyorum, çalıştırın&rdquo; dedi. Biz de vermiyoruz; dört alıştırma, her biri bir tuzak.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">kitapçık I.4: Adların nerede geçerli olduğu</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/neden-namespace-kullanırız.md">neden-namespace-kullanırız</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/05-kapsam.cpp">kod: 05-kapsam.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-6-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-6-I1</span> Bir sözcük silin</h3>
+<p>Önce <code>05-kapsam.cpp</code>'yi olduğu gibi çalıştırıp iki soru işaretini doldurun. Sonra <code>g()</code> içindeki <code>int</code> sözcüğünü silin. Şimdi ne yazar? Çalıştırmadan önce yanıtı kâğıda yazın; beklenen çıktı değişmiş hâli için.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>5 99</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-I1"><code>alistirma/kod/I-6-I1/</code></a></p>
+</section>
+<section class="soru" id="I-6-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-6-A1</span> Döngüden sonra</h3>
+<p>Program derlenmiyor: <code>k</code> döngünün dışında tanınmıyor. Döngüyü değiştirmeden, <code>k</code>'yı döngüden sonra da yaşayacak biçimde tanımlayın. Çıktı <code>k = 10</code> olmalı. Kitapçığın kuralını hatırlayın: en dar kapsam &mdash; ama bu sefer döngüden <em>bir</em> adım geniş.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-6-A1 · Döngüden sonra</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; <span class="n">10</span>; ++k) {
+    <span class="y">// bir şey yapıyormuş gibi</span>
+  }
+  cout &lt;&lt; <span class="s">&quot;k = &quot;</span> &lt;&lt; k &lt;&lt; endl;   <span class="y">// derlenmez: k burada yok</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>k = 10</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-A1"><code>alistirma/kod/I-6-A1/</code></a></p>
+</section>
+<section class="soru" id="I-6-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-6-A2</span> İç içe gölgeler</h3>
+<p>Her süslü parantez yeni bir kapsam, her kapsamda yeni bir <code>x</code>. Program beş sayı yazıyor. Çalıştırmadan önce sırayı tahmin edin; sonra sınayın. Bu kod da kitapçığın dediği gibi &ldquo;kasıtlı olarak kafa karıştırmak için&rdquo; yazıldı. Kendi programınızda yapmayın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-6-A2 · İç içe gölgeler: önce tahmin edin</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> x{<span class="n">1</span>};
+  cout &lt;&lt; x;
+  {
+    <span class="t">int</span> x{<span class="n">2</span>};
+    cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x;
+    {
+      <span class="t">int</span> x{<span class="n">3</span>};
+      cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x;
+    }
+    cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x;
+  }
+  cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 2 3 2 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-A2"><code>alistirma/kod/I-6-A2/</code></a></p>
+</section>
+<section class="soru" id="I-6-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-6-Z1</span> Küreselsiz sayaç</h3>
+<p>Aşağıdaki program küresel bir <code>sayac</code> kullanıyor; <code>say()</code> onu artırıp yazıyor. Şimdi <em>ikinci</em> bir sayaç gerekiyor: <code>b</code> satırı ayrıca 1'den 2'ye saysın. Küresel değişkenle bunu yapmak ya iki işlev ya iki küresel demek. Küreseli tamamen kaldırın: <code>say</code> sayacı girdi olarak alsın, bir fazlasını döndürsün. Çıktı iki satır.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-6-Z1 · Küreselsiz sayaç</span>
+<span class="y">// Küreseli kaldırın; ikinci satır: &quot;b: 1 2&quot;</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> sayac{<span class="n">0</span>};               <span class="y">// küresel: bundan kurtulun</span>
+
+<span class="t">void</span> say() {
+  ++sayac;
+  cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; sayac;
+}
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;a:&quot;</span>;
+  say(); say(); say();
+  cout &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>a: 1 2 3
+b: 1 2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-Z1"><code>alistirma/kod/I-6-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

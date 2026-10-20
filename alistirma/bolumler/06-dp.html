@@ -1,0 +1,478 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar</div>
+  <div class="no">Bölüm VI</div>
+  <h1>Dinamik Programlama</h1>
+  <p class="ozet">
+    Kitapçığın son bölümü bir cümleyi reçeteye çeviriyor: büyük problemi küçük parçalara böl, her parçayı bir kere çöz. Burada altı konu, yirmi sekiz alıştırma: Fibonaççi'yi iki biçimde yazmak, ızgarada yol saymak, zar dizileri, bozuk paralar, kanıtın neden şart olduğu ve yola devam. Keşifler CSES'in ve AtCoder'ın DP bölümlerinden; yarım bırakılan <code>bul2()</code> burada da yarım, ama son Keşif ona tırmanıyor.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">VI.1</div>
+  <div class="govde">
+    <h2>Aslında bunu zaten yaptınız</h2>
+    <p>Bölüm IV'teki tek satırlık bellek dinamik programlamanın ta kendisiydi. Burada aynı Fibonaççi'yi iki biçimde yazıyoruz: yukarıdan aşağı (özyineleme + bellek) ve aşağıdan yukarı (çizelge). Kitapçığın önerdiği sıra: YA ile düşün, AY ile yaz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb">kitapçık VI.1: Aslında bunu zaten yaptınız</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/dp-sade.md">dp-sade: YA ve AY</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders7.md">ders 7: memoizasyon</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/30-fib.cpp">kod: 30-fib.cpp</a></p>
+    </div>
+
+<section class="soru" id="VI-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-1-I1</span> Çizelgeyle Fibonaççi</h3>
+<p>Program Fibonaççi'yi Bölüm IV'ün yöntemiyle, yukarıdan aşağı ve bellekle hesaplıyor. <code>fibAY</code>'yi yazın: özyineleme yok, 0'dan n'e dolan bir çizelge (<code>Dizi&lt;S&gt;</code>). Üç n için iki sonuç yan yana çıksın; eşit olmalılar. Hangisi daha kısa? Hangisinin kanıtı tanımın kendisi?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;map&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+#include <span class="s">&lt;cassert&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> S = <span class="t">long</span> <span class="t">long</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// VI-1-I1 · Çizelgeyle Fibonaççi</span>
+<span class="y">// Çıktı: &quot;n=10: YA 55, AY 55&quot; biçiminde üç satır (10, 50, 90)</span>
+map&lt;<span class="t">int</span>, S&gt; bellek;
+S fibYA(<span class="t">int</span> n) {                 <span class="y">// yukarıdan aşağı + bellek (Bölüm IV)</span>
+  <span class="a">if</span> (n &lt; <span class="n">2</span>) <span class="a">return</span> n;
+  <span class="a">if</span> (bellek.contains(n)) <span class="a">return</span> bellek[n];
+  <span class="a">return</span> bellek[n] = fibYA(n - <span class="n">1</span>) + fibYA(n - <span class="n">2</span>);
+}
+
+S fibAY(<span class="t">int</span> n) {                 <span class="y">// aşağıdan yukarı: çizelgeyi 0&#x27;dan n&#x27;e doldurun</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}
+
+<span class="t">int</span> main() {
+  <span class="a">for</span> (<span class="t">int</span> n : {<span class="n">10</span>, <span class="n">50</span>, <span class="n">90</span>})
+    cout &lt;&lt; <span class="s">&quot;n=&quot;</span> &lt;&lt; n &lt;&lt; <span class="s">&quot;: YA &quot;</span> &lt;&lt; fibYA(n) &lt;&lt; <span class="s">&quot;, AY &quot;</span> &lt;&lt; fibAY(n) &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>n=10: YA 55, AY 55
+n=50: YA 12586269025, AY 12586269025
+n=90: YA 2880067194370816120, AY 2880067194370816120</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-1-I1"><code>alistirma/kod/VI-1-I1/</code></a></p>
+</section>
+<section class="soru" id="VI-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-1-A1</span> İki değişken yeter</h3>
+<p>Çizelgenin her hücresi yalnız önceki iki hücreye bakıyor. Öyleyse çizelgeyi saklamayın: iki değişkenle (<code>a</code>, <code>b</code>) yazın, bellek sabit. n = 90 ve n = 92 için yazdırın. n = 93'ü neden yazdırmadık? (Bölüm I'in taşmasını hatırlayın: <code>long long</code>'un sınırı 9,22·10¹⁸.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>fib(90) = 2880067194370816120
+fib(92) = 7540113804746346429</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-1-A1"><code>alistirma/kod/VI-1-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-1-A2</span> Bellek olarak vector</h3>
+<p>Kitapçığın belleği <code>map&lt;int, S&gt;</code>; her bakış O(log n). n'i bildiğimize göre <code>Dizi&lt;S&gt; bellek(n + 1, -1)</code> de olur: O(1) bakış, &ldquo;henüz yok&rdquo; için <code>-1</code>. <code>fibVec</code>'i yazın, üç sürümün çağrı sayısını yazdırın. Girdi n = 30. Belleksizle bellekli arasındaki oran kaç?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 30</span></figcaption>
+<pre><code>fib(30) = 832040
+belleksiz: 2692537 çağrı
+map ile  : 59 çağrı
+vector ile: 59 çağrı</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-1-A2"><code>alistirma/kod/VI-1-A2/</code></a></p>
+</section>
+<section class="soru" id="VI-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-1-Z1</span> Derin çağrı</h3>
+<p>Kitapçık uyarıyor: YA &ldquo;derin çağrılarda yığın taşabilir&rdquo;. Program n = 1 000 000 için YA + bellekle (mod 10⁹+7) hesaplamaya çalışıyor. Çalıştırın: ne oluyor? (Terminalde <code>ulimit -s</code> yığının boyunu söyler.) Sonra aynı sonucu AY ile, iki değişkenle hesaplayın; o taşmaz. Çıktı tek satır. Bir yan soru: mod alırken <code>(a + b) % MOD</code> taşar mı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1000000</span></figcaption>
+<pre><code>fib(1000000) mod 1e9+7 = 918091266</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-1-Z1"><code>alistirma/kod/VI-1-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.2</div>
+  <div class="govde">
+    <h2>Izgarada kaç yol var?</h2>
+    <p>Project Euler 15: sağa ve aşağı giderek köşeden köşeye kaç yol? Kitapçığın <code>50-izgara.cpp</code>'si aynı soruyu dört kere çözüyor. Burada çizelgeyi görmek, dikdörtgen, engel, toplamak yerine en küçüğü seçmek ve yolu geri kurmak.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb">kitapçık VI.2: Izgarada kaç yol var</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders6.md">ders 6: PE 15</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260424.md">algoritma ders 27: DP&#x27;ye giriş</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dp/README.md">dp/README: patikalar ve engelli saha</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/50-izgara.cpp">kod: 50-izgara.cpp</a></p>
+    </div>
+
+<section class="soru" id="VI-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-2-I1</span> Çizelgeyi görün</h3>
+<p>Kitapçığın &ldquo;Deneyin&rdquo;i: 3×3 çizelgeyi kâğıda çizin. Sonra makineye çizdirin: <code>yol3</code>'e <code>bool yazdir = false</code> girdisi ekleyin; doğruysa çizelgeyi satır satır yazsın (sayılar tek boşlukla). <code>main</code>'in başına <code>yol3(4, true)</code> koyun; dört eski satır olduğu gibi kalsın. Çizelgede tanıdık bir üçgen göreceksiniz; adı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 1 1 1 1
+1 2 3 4 5
+1 3 6 10 15
+1 4 10 20 35
+1 5 15 35 70
+12x12 belleksiz : 2704156  (5408311 çağrı)
+12x12 bellekli  : 2704156  (289 çağrı)
+20x20 çizelgeyle: 137846528820
+20x20 tek satır : 137846528820</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-2-I1"><code>alistirma/kod/VI-2-I1/</code></a></p>
+</section>
+<section class="soru" id="VI-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-2-A1</span> Dikdörtgen ızgara</h3>
+<p>Kitapçığın ızgarası kare. r satır, c sütunu girdiden okuyun (dosya bitene kadar çiftler); kitapçığın <em>tek satır bellek</em> numarasıyla hesaplayın. Girdi: <code>2 2</code>, <code>3 4</code>, <code>10 10</code>, <code>20 20</code>. 20×20 kitapçığın sayısını vermeli. Sonra kâğıtta: 3×4'ün yanıtı 35, bu <code>C(7, 3)</code>; neden?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 2 2 3 4 10 10 20 20</span></figcaption>
+<pre><code>2x2: 6
+3x4: 35
+10x10: 184756
+20x20: 137846528820</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-2-A1"><code>alistirma/kod/VI-2-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-2-A2</span> Engelli ızgara</h3>
+<p><a href="https://atcoder.jp/contests/dp/tasks/dp_h">AtCoder DP H</a>, kitapçığın son alıştırmalarından: bazı kareler duvar (<code>#</code>), yol sayısı mod 10⁹+7. Kitapçık &ldquo;tek satır değişecek&rdquo; diyor: duvar karesine kaç yol gelir? Girdi AtCoder'ın örneği. Sol üst kareyi 1'le başlatıp çizelgeyi doldurun; dp/README'deki ders iki konumlamayı da anlatıyor.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 ...# .#.. ....</span></figcaption>
+<pre><code>3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-2-A2"><code>alistirma/kod/VI-2-A2/</code></a></p>
+</section>
+<section class="soru" id="VI-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-2-Z1</span> Toplamak yerine en küçüğü</h3>
+<p><a href="https://projecteuler.net/problem=81">Project Euler 81</a>: her karede bir sayı; sağa ve aşağı giderek sol üstten sağ alta en ucuz yol. Aynı çizelge, tek fark: iki komşudan geleni toplamak yerine küçüğünü alıp karenin sayısını ekliyorsunuz. Beş adımlık reçeteyi yazın: işlev ne, taban ne, formül ne? Girdi PE'nin 5×5 örneği; yanıt 2427 olmalı.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 131 673 234 103 18 201 96 342 965 150 630 803 746 422 111 537 699 497 121 956 805 732 524 37 331</span></figcaption>
+<pre><code>en ucuz yol: 2427</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-2-Z1"><code>alistirma/kod/VI-2-Z1/</code></a></p>
+</section>
+<section class="soru" id="VI-2-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-2-K1</span> Yolu geri kurmak</h3>
+<p>VI-2-Z1'in programı maliyeti veriyor, yolu değil. Bölüm V'teki &ldquo;nereden geldim&rdquo; numarası burada da işler: sağ alt kareden başlayın, üst ve sol komşudan hangisi <code>t[r][c] - m[r][c]</code>'ye eşitse oraya gidin, sol üste varınca ters çevirin. Karelerin sayılarını sırayla yazın; PE'nin sayfasındaki yolla aynı mı? Sonra: AtCoder DP H'yi gönderin; PE 81'in 80×80 dosyasını indirip çözün (<em>girdi dosyasını okuma</em> alıştırması da olur).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 131 673 234 103 18 201 96 342 965 150 630 803 746 422 111 537 699 497 121 956 805 732 524 37 331</span></figcaption>
+<pre><code>yol: 131 201 96 342 746 422 121 37 331
+toplam: 2427</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-2-K1"><code>alistirma/kod/VI-2-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.3</div>
+  <div class="govde">
+    <h2>Beş adımlık reçete; zar dizileri</h2>
+    <p>İşlev, taban, formül, kanıt, kod. Kitapçığın birinci sorusu: toplamı n olan kaç zar dizisi var (CSES DP 1, <code>52-zar.cpp</code>). Burada reçeteyi dört kez uyguluyorsunuz; her seferinde önce kâğıda, sonra koda.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb">kitapçık VI.3: Beş adımlık reçete</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/dp-sade.md">dp-sade: zar dizileri</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20251010-1128.md">algoritma ders 1-8: ilk DP soruları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/52-zar.cpp">kod: 52-zar.cpp</a></p>
+    </div>
+
+<section class="soru" id="VI-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-3-I1</span> Dört yüzlü zar</h3>
+<p>Kitapçıkta altı yüzlü zarla ilk yedi değer ikinin kuvvetleri gibi gidiyor, f(7) = 63'te bozuluyor. Zarı dört yüzlü yapın (1&ndash;4) ve f(0)..f(10)'u yazdırın. Düzen nerede bozuluyor, neden orada? Formülü kâğıda yazın: f(n) = f(n−1) + … + f(n−4).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>f(0) = 1
+f(1) = 1
+f(2) = 2
+f(3) = 4
+f(4) = 8
+f(5) = 15
+f(6) = 29
+f(7) = 56
+f(8) = 108
+f(9) = 208
+f(10) = 401</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-3-I1"><code>alistirma/kod/VI-3-I1/</code></a></p>
+</section>
+<section class="soru" id="VI-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-3-A1</span> Dice Combinations</h3>
+<p><a href="https://cses.fi/problemset/task/1633">CSES 1633</a>: n girdiden okunur (10⁶'ya kadar), yanıt mod 10⁹+7. Kitapçığın beş satırını girdili programa çevirin; girdi n = 1 000 000. Çıktı yalnız sayı. CSES'e gönderin. Çizelge bir milyon <code>long long</code>: kaç megabayt?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1000000</span></figcaption>
+<pre><code>874273980</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-3-A1"><code>alistirma/kod/VI-3-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-3-A2</span> Yukarıdan aşağı zar</h3>
+<p>Aynı soruyu YA yazın: özyinelemeli <code>f(n)</code>, bellek olarak <code>Dizi&lt;S&gt;</code> (−1: henüz yok), çağrı sayacı. Girdi n = 50. AY'yle aynı sonucu veriyor mu? Kaç çağrı yapıldı; n'e göre yaklaşık kaç katı? (Her değer bir kere hesaplanır, her hesap altı çağrı.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 50</span></figcaption>
+<pre><code>AY: 660641036
+YA: 660641036
+çağrı: 301</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-3-A2"><code>alistirma/kod/VI-3-A2/</code></a></p>
+</section>
+<section class="soru" id="VI-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-3-Z1</span> Tam k zar</h3>
+<p>Yeni soru, aynı reçete: toplamı n olan ve <em>tam k zarlı</em> dizi sayısı. İşlev iki girdili: f(n, k). Taban: f(0, 0) = 1, k = 0 ve n &gt; 0 ise 0. Formül: son zar 1..6, kalanı k−1 zarla. Kanıt iki cümle. Çizelge iki boyutlu. Girdi <code>10 3</code>. Sağlama: k = 1..n üzerinden f(10, k)'leri toplayın; kitapçığın f(10)'una (492) eşit çıkmalı. Neden?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 10 3</span></figcaption>
+<pre><code>toplamı 10 olan 3 zarlı dizi: 27
+k=1..10 toplamı: 492 (= f(10))</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-3-Z1"><code>alistirma/kod/VI-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="VI-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-3-K1</span> Hepsini yazın</h3>
+<p>Saymak başka, görmek başka. Bölüm IV'ün özyinelemesiyle toplamı 4 olan <em>bütün</em> zar dizilerini satır satır yazın (küçükten büyüğe), sonra kaç tane olduğunu f(4)'le karşılaştırın. İki program aynı şeyi sayıyor; biri listeyi kurmadan sayıyor. n = 100 için listeyi yazmak neden imkânsız (f(100) kaç basamaklı, tahmin edin)? Sonra CSES 1633'ü gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 1 1 1
+1 1 2
+1 2 1
+1 3
+2 1 1
+2 2
+3 1
+4
+toplam: 8, f(4) = 8</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-3-K1"><code>alistirma/kod/VI-3-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.4</div>
+  <div class="govde">
+    <h2>En az kaç bozuk para? Diziler mi, kümeler mi?</h2>
+    <p>Kitapçığın ikinci ve üçüncü soruları (CSES DP 2, 3, 4): aceleci yöntem neden yanılır, iki döngünün yeri değişince neden 8 yerine 3 çıkar. <code>51-bozukpara.cpp</code> üç soruyu bir arada çözüyor; burada parçalara ayırıp girdili hâle getiriyorsunuz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb">kitapçık VI.3: bozuk paralar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260501.md">algoritma ders 28: DP kanıtları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260508.md">algoritma ders 29: kanıttan koda</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/dp-sade.md">dp-sade: bozuk para soruları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/51-bozukpara.cpp">kod: 51-bozukpara.cpp</a></p>
+    </div>
+
+<section class="soru" id="VI-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-4-I1</span> Aceleci yanılsın</h3>
+<p>Paraları <code>{1, 4, 6}</code>, hedefi 8 yapın. Aceleci 6 + 1 + 1 der (3 para); en iyi 4 + 4 (2 para). Programın ilk bloğu bunu hesaplar; <code>cout</code> satırlarındaki yazıları da (paralar, aceleci açıklaması) yeni duruma göre düzeltin. İkinci blok olduğu gibi kalsın. Hangi para kümelerinde aceleci hep doğru olur, aklınıza bir tane geliyor mu?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>paralar: 1, 4, 6   hedef: 8
+en az para sayısı : 2
+  (aç gözlü çözüm 6+1+1 yani 3 para kullanırdı)
+
+paralar: 2, 3, 5   hedef: 9
+kaç farklı dizi : 8
+kaç farklı küme : 3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-4-I1"><code>alistirma/kod/VI-4-I1/</code></a></p>
+</section>
+<section class="soru" id="VI-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-4-A1</span> Minimizing Coins</h3>
+<p><a href="https://cses.fi/problemset/task/1634">CSES 1634</a>: ilk satırda para sayısı n ve hedef x, ikinci satırda paralar. En az para sayısı; hedefe varılamıyorsa <code>-1</code>. Girdi CSES'in örneği. <code>SONSUZ</code> için <code>x + 1</code> yeter (ders 29'un numarası); neden? CSES'e gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 11 1 5 7</span></figcaption>
+<pre><code>3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-4-A1"><code>alistirma/kod/VI-4-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-4-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-4-A2</span> Coin Combinations I ve II</h3>
+<p><a href="https://cses.fi/problemset/task/1635">CSES 1635</a> ve <a href="https://cses.fi/problemset/task/1636">1636</a> aynı programda: dizi sayısı ve küme sayısı, ikisi de mod 10⁹+7. Girdi biçimi VI-4-A1'inki; CSES örneği <code>2 3 5</code> ile 9: dizi 8, küme 3. İki döngü, iki sıra; hangisi hangisi, ezberlemeden söyleyebilmelisiniz.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 9 2 3 5</span></figcaption>
+<pre><code>dizi: 8
+küme: 3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-4-A2"><code>alistirma/kod/VI-4-A2/</code></a></p>
+</section>
+<section class="soru" id="VI-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-4-Z1</span> Hangi paralar?</h3>
+<p>En az para sayısı 3; peki hangi üç para? İkinci bir dizi tutun: <code>son[t]</code>, t hedefine en iyi çözümde son konan para. <code>f[t]</code> iyileştiğinde onu da yazın; sonunda x'ten geriye <code>son</code>'u izleyin. Girdi CSES örneği. Birden çok en iyi çözüm olabilir; sizinki paraları hangi sırada denediğinize bağlı. Beklenen çıktı, paraları girdideki sırayla deneyip yalnız <em>katı</em> iyileşmede yazan sürümünki.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 11 1 5 7</span></figcaption>
+<pre><code>3 para: 1 5 5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-4-Z1"><code>alistirma/kod/VI-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="VI-4-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-4-Z2</span> Aceleci ne zaman doğru?</h3>
+<p>Gerçek paralar (1, 5, 10, 25) için aceleci yöntem her hedefte doğru; <code>{1, 5, 7}</code> için değil. Bunu makineye kanıtlatmayın, <em>sınatın</em>: 1'den 100'e her hedef için aceleci sayıyı ve DP sayısını hesaplayın, kaç hedefte ayrıştıklarını ve ilk ayrışan hedefi yazın. İki para kümesi için. Sonra düşünün: aceleciyi doğru kılan özellik ne? (Adı &ldquo;kanonik para sistemi&rdquo;; kâğıt için bir soru.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 5 10 25: 0 fark
+1 5 7: 26 fark, ilki hedef 10</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-4-Z2"><code>alistirma/kod/VI-4-Z2/</code></a></p>
+</section>
+<section class="soru" id="VI-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-4-K1</span> Takım işi, makineyle</h3>
+<p>Kitapçığın &ldquo;Takım işi&rdquo;: hedef 5, paralar {2, 3}; biriniz dizi kodunu, öteki küme kodunu kâğıtta işletsin. Sonra makine aynı şeyi yapsın: dizi sürümünde her hedef adımından sonra, küme sürümünde her para adımından sonra çizelgenin tamamını yazdırın. Kâğıttakiyle karşılaştırın; 5 için 2 ve 1 çıkmalı. Sonra CSES DP bölümünün ilk dördünü (1633&ndash;1636) gönderin; hepsinde yeşil görünce bu bölüm bitmiş sayılır.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>dizi (önce hedef, sonra para):
+x=1: 1 0 0 0 0 0
+x=2: 1 0 1 0 0 0
+x=3: 1 0 1 1 0 0
+x=4: 1 0 1 1 1 0
+x=5: 1 0 1 1 1 2
+küme (önce para, sonra hedef):
+p=2: 1 0 1 0 1 0
+p=3: 1 0 1 1 1 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-4-K1"><code>alistirma/kod/VI-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.5</div>
+  <div class="govde">
+    <h2>Kanıt neden bu kadar önemli?</h2>
+    <p>Yanlış bir formül küçük örneklerde doğru yanıt verebilir; test kanıtın yerini tutmaz. Burada yanlış formülün nerede bozulduğunu görmek, kanıtı makineyle <em>sağlamak</em>, Floyd&ndash;Warshall'ın döngü sırasını bozmak ve yarım bırakılan <code>bul2()</code>.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb">kitapçık VI.4: Kanıt neden bu kadar önemli</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260410.md">algoritma ders 25-26: kanıtlar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/floyd-warshall.md">floyd-warshall: DP kanıtı</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dp/README.md">dp/README: bul2 yarım</a></p>
+    </div>
+
+<section class="soru" id="VI-5-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-5-I1</span> Küçük örnekte doğru, aslında yanlış</h3>
+<p>Zar dizileri için biri şu formülü önerdi: g(n) = 2·g(n−1) (n ≥ 2), g(0) = g(1) = 1. n = 0..6'da kitapçığın f'siyle birebir aynı, yedi değer! Programa g'yi ekleyin, n = 0..10 için ikisini yan yana yazdırın ve ilk ayrıştıkları n'i bulun. Neden tam orada? (Kitapçığın &ldquo;f(0) listeden düşüyor&rdquo; cümlesi.) Altı testle geçen bir formülün yanlış olabileceğini bir daha unutmayın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;map&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+#include <span class="s">&lt;cassert&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> S = <span class="t">long</span> <span class="t">long</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// VI-5-I1 · Küçük örnekte doğru, aslında yanlış</span>
+<span class="y">// Çıktı: &quot;n doğru yanlış&quot; başlığı, 11 satır, sonra &quot;ilk ayrışma: n=?&quot;</span>
+<span class="t">int</span> main() {
+  <span class="a">const</span> <span class="t">int</span> n{<span class="n">10</span>};
+  Dizi&lt;S&gt; f(n + <span class="n">1</span>, <span class="n">0</span>), g(n + <span class="n">1</span>, <span class="n">0</span>);
+  f[<span class="n">0</span>] = <span class="n">1</span>;
+  <span class="a">for</span> (<span class="t">int</span> x{<span class="n">1</span>}; x &lt;= n; ++x)
+    <span class="a">for</span> (<span class="t">int</span> zar{<span class="n">1</span>}; zar &lt;= <span class="n">6</span>; ++zar)
+      <span class="a">if</span> (x - zar &gt;= <span class="n">0</span>) f[x] += f[x - zar];
+  <span class="y">// g: g[0] = g[1] = 1, sonra bir öncekinin iki katı</span>
+  cout &lt;&lt; <span class="s">&quot;n doğru yanlış&quot;</span> &lt;&lt; endl;
+  <span class="a">for</span> (<span class="t">int</span> x{<span class="n">0</span>}; x &lt;= n; ++x) cout &lt;&lt; x &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; f[x] &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; g[x] &lt;&lt; endl;
+  <span class="y">// ilk ayrışma</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>n doğru yanlış
+0 1 1
+1 1 1
+2 2 2
+3 4 4
+4 8 8
+5 16 16
+6 32 32
+7 63 64
+8 125 128
+9 248 256
+10 492 512
+ilk ayrışma: n=7</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-5-I1"><code>alistirma/kod/VI-5-I1/</code></a></p>
+</section>
+<section class="soru" id="VI-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-5-A1</span> Kanıtı sağlayın</h3>
+<p>Kanıt kâğıtta; makine onu <em>sağlar</em>. Paralar {2, 3, 5}: dizi ve küme sayılarını iki yoldan hesaplayın. Biri kitapçığın DP'si; öteki Bölüm IV'ün kaba kuvveti: dizileri özyinelemeyle tek tek kurup sayın, kümeleri de paraları artmayan sırada kurarak. Hedef 1..12'de hepsi eşleşiyor mu? Eşleşmesi kanıt değil (neden?), ama bir yazım hatasını anında yakalar.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>dizi: 12 hedefte eşleşti
+küme: 12 hedefte eşleşti</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-5-A1"><code>alistirma/kod/VI-5-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-5-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-5-Z1</span> Döngü sırasını bozun</h3>
+<p>Kitapçık: &ldquo;formülü gördüğünüzde k'nın en dış döngü olması gerektiği kendiliğinden anlaşılıyor&rdquo;. Anlaşılmazsa ne olur? Floyd&ndash;Warshall'ı iki kere yazın: k en dışta ve k en içte. Girdi dört şehirlik yönlü bir çizge: zincir 2→3→4→1 (hepsi 1). İki sürümün 2→1 yanıtını yazın (ulaşılamıyorsa −1). Bozuk sürüm neden yanılıyor; kanıtın hangi cümlesini çiğniyor? (Şehir numaralarını değiştirince bozuk sürüm bazen doğru çıkar; neden?)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 2 3 1 3 4 1 4 1 1</span></figcaption>
+<pre><code>k en dışta: 2-&gt;1 = 3
+k en içte : 2-&gt;1 = -1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-5-Z1"><code>alistirma/kod/VI-5-Z1/</code></a></p>
+</section>
+<section class="soru" id="VI-5-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-5-K1</span> bul2&#x27;yu bitirin</h3>
+<p>Kitapçığın (ve ders notlarının) yarım bıraktığı işlev: iki yazının en uzun ortak <em>altdizisi</em> (bitişik harfler). Yedi deneme hazır; başlangıç dosyası ilk denemede duruyor (<code>assert</code>). Eksik birkaç satır: <code>m</code> şimdiye kadarkinden uzunsa <code>enUzun</code>'u ve bittiği yeri güncelleyin. Hepsi geçince &ldquo;7 deneme geçti&rdquo;. Devamı: aynı işi YA (özyineleme + bellek) ile yazın; sonra <a href="https://cses.fi/problemset/task/3403">CSES 3403</a>'e bakın: orada &ldquo;altdizi&rdquo; bitişik <em>değil</em>, formül değişir. Nasıl?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>7 deneme geçti</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-5-K1"><code>alistirma/kod/VI-5-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.6</div>
+  <div class="govde">
+    <h2>Yola devam</h2>
+    <p>Kitapçık altı bölümü &ldquo;haftada üç soru, kitabı okuyun, yarışmalara girin, bir şey inşa edin&rdquo; diye kapatıyor. Burada dördü de var: AtCoder'ın ilk DP sorusu, ders 18'in sınav sorusu, yaşam oyunu ve sıradaki CSES soruları.</p>
+    <p class="merdiven"><span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb">kitapçık: Son söz, Yola devam</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/yasam-oyunu.md">yaşam oyunu</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders18.md">ders 18: sınav soruları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260514.md">algoritma ders 30</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/">Rekabetçi Programlama El Kitabı (TR)</a></p>
+    </div>
+
+<section class="soru" id="VI-6-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-6-A1</span> Zıplayan kurbağa</h3>
+<p><a href="https://atcoder.jp/contests/dp/tasks/dp_a">AtCoder DP A</a>, kitapçığın önerdiği klasik: n taş, i'nci taşın yüksekliği h<sub>i</sub>; kurbağa 1'den n'e 1 ya da 2 taş atlayarak gider, her atlayışın bedeli |h<sub>i</sub> − h<sub>j</sub>|. En ucuz bedel. Beş adım: işlev f(i), taban f(1) = 0, formül iki seçenekten küçüğü. Girdi AtCoder'ın üçüncü örneği (yanıt 40). Gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 30 10 60 10 60 50</span></figcaption>
+<pre><code>40</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-6-A1"><code>alistirma/kod/VI-6-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-6-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-6-Z1</span> Başı sonu aynı altdizi</h3>
+<p>Ders 18'in sınav sorusu: <code>{4, 2, 3, 1, 3, 2, 1}</code> dizisinde başı ve sonu aynı olan altdiziler var; toplamı en büyük olanınki 11 (<code>2 3 1 3 2</code>). Verilen dizi için bu toplamı bulan <code>altToplam</code>'ı yazın. Kaba kuvvet O(n²) kolay; dersin ipucu <code>std::map</code>: her değerin ilk göründüğü konumu tutun, ön toplamlarla (<em>prefix sum</em>) O(n log n). İkisini de yazın, aynı çıksın. Girdi: n ve dizi.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 4 2 3 1 3 2 1</span></figcaption>
+<pre><code>kaba: 11
+eşlemle: 11</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-6-Z1"><code>alistirma/kod/VI-6-Z1/</code></a></p>
+</section>
+<section class="soru" id="VI-6-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-6-K1</span> Yaşam oyunu</h3>
+<p>Kitapçığın &ldquo;bir şey inşa edin&rdquo; önerisi için en keyifli başlangıç: Conway'in yaşam oyunu (dört kural, ders notunda). Girdi: satır, sütun, nesil sayısı ve tahta (<code>#</code> canlı, <code>.</code> cansız); tahtanın dışı cansız. O kadar nesil ilerletip tahtayı yazın. Girdideki desen bir <em>planör</em>: dört nesilde bir sağ alta kayar. Sonra tahtayı büyütün, nesilleri terminalde art arda yazdırın (<code>sleep</code> ile), kendi desenlerinizi deneyin; peryodik desenlerle ilgili yazı ders notunda.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5 4 ..... ..#.. ...#. .###. .....</span></figcaption>
+<pre><code>.....
+.....
+...#.
+....#
+..###</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-6-K1"><code>alistirma/kod/VI-6-K1/</code></a></p>
+</section>
+<section class="soru" id="VI-6-K2">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-6-K2</span> Haftada üç soru</h3>
+<p>Kitapçığın programı: CSES Problem Set'i sırayla, haftada üç soru. DP bölümünün sıradaki dördü: <a href="https://cses.fi/problemset/task/1637">Removing Digits</a>, <a href="https://cses.fi/problemset/task/1638">Grid Paths</a>, <a href="https://cses.fi/problemset/task/1158">Book Shop</a>, <a href="https://cses.fi/problemset/task/1746">Array Description</a>. Her biri için önce beş adımlık reçeteyi kâğıda yazın (işlev, taban, formül, kanıt), sonra kodlayın; bu dizin sizin. Ve kitapçığın &ldquo;en önemlisi&rdquo;: öğrendiğiniz bir konuyu iki sayfada bir arkadaşınıza anlatın. Koco cildi de sizi bekliyor: aynı reçete, çizen bir dil.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-6-K2"><code>alistirma/kod/VI-6-K2/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

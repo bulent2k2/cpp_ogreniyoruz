@@ -1,0 +1,364 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar · Koco</div>
+  <div class="no">Bölüm V</div>
+  <h1>Çizgeler ve Gezintiler</h1>
+  <p class="ozet">
+    Kitapçığın beş satırlık gezisi işlevsel kılıkta: değişmez kümeler, soldanKatla, katman katman enlemesine gezi. Dört konu, on sekiz alıştırma; kitapçığın yedi düğümlü çizgesi hemen her soruda. Kümeleri sıralayıp yazdırıyoruz (kıyma kümesi sıra tutmaz); C++ cildinin V. bölümüyle aynı sorular var, iki dilde yan yana koyun.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">V.1</div>
+  <div class="govde">
+    <h2>Çizge nedir, nasıl saklanır?</h2>
+    <p>Düğümler ve bağlar; neyin neye bağlı olduğu. Her düğümü komşularının kümesine eşleyen bir Eşlem: <code>tür Çizge = Eşlem[Düğüm, Küme[Düğüm]]</code>. Çizge de işlev gibi kullanılır: <code>ç('A')</code>. Dört alıştırma; dereceler ve Königsberg.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c">kitapçık V.1: Çizge nedir</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cizge-kurami.md">çizge kuramı</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik-koco/kod/düğüm-çözme.kojo">kod: düğüm-çözme.kojo</a> <a href="https://claude.ai/artifact/FJjmyqnb9eYtXs1FC3Hte9">C++ cildi V.1</a></p>
+    </div>
+
+<section class="soru" id="KV-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KV-1-I1</span> Komşuları yazdırın</h3>
+<p>Kitapçığın çizgesi. Her düğümün komşularını bir satırda yazdırın: düğümler alfabetik (<code>ç.dizine.sırala(ç => ç._1)</code>), komşular da sıralı (<code>dizine.sıralı</code>). Sonra bir bağ ekleyin, <code>G -> A</code> (<code>eşEkle</code>), ve yeniden yazdırın. Çizge artık çevrimli: Bölüm V'in tuzaklarından biri bu çizgede bekliyor.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KV-1-I1 · Komşuları yazdırın</span>
+<span class="y">// Çıktı: &quot;A: B C&quot; biçiminde yedi satır, boş satır, yedi satır daha</span>
+<span class="a">tür</span> Düğüm = <span class="t">Harf</span>
+<span class="a">tür</span> Çizge = <span class="t">Eşlem</span>[Düğüm, <span class="t">Küme</span>[Düğüm]]
+<span class="a">dez</span> ç: Çizge = <span class="t">Eşlem</span>(
+  <span class="s">&#x27;A&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;B&#x27;</span>, <span class="s">&#x27;C&#x27;</span>),
+  <span class="s">&#x27;B&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;D&#x27;</span>),
+  <span class="s">&#x27;C&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;D&#x27;</span>, <span class="s">&#x27;E&#x27;</span>),
+  <span class="s">&#x27;D&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;F&#x27;</span>),
+  <span class="s">&#x27;E&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;F&#x27;</span>),
+  <span class="s">&#x27;F&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;G&#x27;</span>),
+  <span class="s">&#x27;G&#x27;</span> -&gt; <span class="t">Küme</span>[Düğüm]()
+)
+<span class="y">// ç.dizine.sırala(...) ile dolaşın</span>
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A: B C
+B: D
+C: D E
+D: F
+E: F
+F: G
+G: 
+
+A: B C
+B: D
+C: D E
+D: F
+E: F
+F: G
+G: A</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-1-I1"><code>alistirma-koco/kod/KV-1-I1/</code></a></p>
+</section>
+<section class="soru" id="KV-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-1-A1</span> Dereceler</h3>
+<p>Yönlü çizgede her düğümün iki derecesi var: çıkan (komşu kümesinin boyu) ve gelen (kaç düğümün kümesinde geçtiği: <code>ç.say { durum (_, k) =&gt; k(d) }</code>, küme yine işlev). Yedi düğüm için ikisini de yazdırın. Çıkanların toplamı gelenlerin toplamına eşit mi; neden? Kaynak (geleni 0) ve çıkmaz (çıkanı 0) düğümler hangileri?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A: çıkan 2, gelen 0
+B: çıkan 1, gelen 1
+C: çıkan 2, gelen 1
+D: çıkan 1, gelen 2
+E: çıkan 1, gelen 1
+F: çıkan 1, gelen 2
+G: çıkan 0, gelen 1
+toplam: çıkan 8, gelen 8</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-1-A1"><code>alistirma-koco/kod/KV-1-A1/</code></a></p>
+</section>
+<section class="soru" id="KV-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-1-A2</span> Yönsüze çevirin</h3>
+<p>Kitapçığın çizgesi yönlü. <code>yönsüz(ç: Çizge): Çizge</code> yazın: her A→B bağı için B→A da olsun. Yeni bir <code>Eşlem</code> kurun (eskisi değişmesin): her düğüm için komşuları, bir de onu komşu sayan düğümler (<code>ele</code> ile). Yönsüz çizgede komşuları yazdırın; derece artık tek: her düğümün derecesini de yazın. Derecelerin toplamı bağ sayısının kaç katı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A: B C (2)
+B: A D (2)
+C: A D E (3)
+D: B C F (3)
+E: C F (2)
+F: D E G (3)
+G: F (1)
+dereceler toplamı: 16</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-1-A2"><code>alistirma-koco/kod/KV-1-A2/</code></a></p>
+</section>
+<section class="soru" id="KV-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KV-1-Z1</span> Königsberg&#x27;in köprüleri</h3>
+<p>1736: dört kara parçası, yedi köprü; hepsinden tam bir kere geçen yürüyüş var mı? Küme burada yetmez: iki kara parçası arasında iki köprü olabilir. Köprüleri bir <code>Dizin[(Düğüm, Düğüm)]</code> olarak tutun. Her düğümün derecesini (kaç köprüde geçiyor) <code>say</code> ile hesaplayın; tek dereceli düğüm sayısını yazdırın. Euler: 0 ya da 2 ise yol var. Köprüler: A-B, A-B, A-C, A-C, A-D, B-D, C-D.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A: 5
+B: 3
+C: 3
+D: 3
+tek dereceli: 4, Euler yolu yok</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-1-Z1"><code>alistirma-koco/kod/KV-1-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.2</div>
+  <div class="govde">
+    <h2>Derinlemesine gezi, iki kılıkta</h2>
+    <p><code>soldanKatla</code>: başlangıç değeri + birleştirme işlevi. İşlevsel gezi dört satır: uğramışsak elimizdeki küme, yoksa kendimizi ekleyip her komşunun getirdiklerini üst üste katla. Aynı gezi yığınla; yığın kuyruk olunca bambaşka bir algoritma. Beş alıştırma.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c">kitapçık V.2: Derinlemesine gezi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260130.md">algoritma ders 16: derinlemesine gezi</a> <a href="https://claude.ai/artifact/FJjmyqnb9eYtXs1FC3Hte9">C++ cildi V.2: gezi kalıbı</a></p>
+    </div>
+
+<section class="soru" id="KV-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KV-2-I1</span> Üç yerden gezi</h3>
+<p>Kitapçığın işlevsel <code>gez</code>'i. A'dan başlayınca yedi düğümün yedisi; D'den, G'den başlayınca kaçı? Üç geziyi de kümeyi sıralayıp yazdırın. <code>gez</code> hiç <code>den</code> kullanmıyor; gezilenler nerede birikiyor? (Her çağrının döndürdüğü kümeyi izleyin.)</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KV-2-I1 · Üç yerden gezi</span>
+<span class="y">// Çıktı: &quot;A: A B C D E F G&quot;, &quot;D: ...&quot;, &quot;G: ...&quot;</span>
+<span class="a">tür</span> Düğüm = <span class="t">Harf</span>
+<span class="a">tür</span> Çizge = <span class="t">Eşlem</span>[Düğüm, <span class="t">Küme</span>[Düğüm]]
+<span class="a">dez</span> ç: Çizge = <span class="t">Eşlem</span>(
+  <span class="s">&#x27;A&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;B&#x27;</span>, <span class="s">&#x27;C&#x27;</span>),
+  <span class="s">&#x27;B&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;D&#x27;</span>),
+  <span class="s">&#x27;C&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;D&#x27;</span>, <span class="s">&#x27;E&#x27;</span>),
+  <span class="s">&#x27;D&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;F&#x27;</span>),
+  <span class="s">&#x27;E&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;F&#x27;</span>),
+  <span class="s">&#x27;F&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;G&#x27;</span>),
+  <span class="s">&#x27;G&#x27;</span> -&gt; <span class="t">Küme</span>[Düğüm]()
+)
+<span class="a">tanım</span> gez(ç: Çizge, buradan: Düğüm, gezilen: <span class="t">Küme</span>[Düğüm]): <span class="t">Küme</span>[Düğüm] =
+  <span class="a">eğer</span> (gezilen(buradan)) gezilen
+  <span class="a">yoksa</span> ç(buradan).soldanKatla(gezilen + buradan)(
+    (g, komşu) =&gt; gez(ç, komşu, g)
+  )
+satıryaz(<span class="s">s&quot;A: ${gez(ç, &#x27;A&#x27;, Küme[Düğüm]()).dizine.sıralı.yazıYap(&quot;</span> <span class="s">&quot;)}&quot;</span>)
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A: A B C D E F G
+D: D F G
+G: G</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-2-I1"><code>alistirma-koco/kod/KV-2-I1/</code></a></p>
+</section>
+<section class="soru" id="KV-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-2-A1</span> Yol var mı?</h3>
+<p>Kitapçığın ikinci alıştırması: <code>ulaşırMı(ç, a, b): İkil</code>. <code>gez</code> zaten her şeyi biliyor; tek satır: a'dan gezilenler kümesi b'yi içeriyor mu (küme işlev!). A→G, G→A, B→E, E→F için evet/hayır. Bir düğüm kendine ulaşır mı; bu tanıma göre ne çıkıyor, doğru mu?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A -&gt; G: evet
+G -&gt; A: hayır
+B -&gt; E: hayır
+E -&gt; F: evet</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-2-A1"><code>alistirma-koco/kod/KV-2-A1/</code></a></p>
+</section>
+<section class="soru" id="KV-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-2-A2</span> Yığın mı, kuyruk mu?</h3>
+<p>Kitapçığın birinci alıştırması: <code>gez2</code>'yi kuyrukla yazın (<code>koy</code>→<code>ekle</code>, <code>al</code>→<code>baştanAl</code>) ve iki çıktıyı alt alta koyun. Kitapçığın çıktısıyla aynı mı: <code>A C E F G D B</code> ve <code>A B C D E F G</code>? Hangi sıra hangi geziye ait, bakar bakmaz söyleyin: biri derinlere dalıyor, öteki katman katman.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>yığınla : A C E F G D B 
+kuyrukla: A B C D E F G </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-2-A2"><code>alistirma-koco/kod/KV-2-A2/</code></a></p>
+</section>
+<section class="soru" id="KV-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KV-2-Z1</span> Gerçek bir hata, sayılarla</h3>
+<p>Kitapçığın &ldquo;Gerçek bir hata&rdquo;sı: <code>eğer (!gezilen(şimdiki))</code> silinirse iki yoldan ulaşılan düğümler iki kere işlenir, çevrimde ise hiç durmaz. Ölçün: <code>gez2</code>'nin denetimsiz bir sürümünü yazın ama en çok <code>sınır</code> işlemde dursun ve kaç işlem yaptığını döndürsün. Kitapçığın çizgesinde (çevrimsiz) kaç işlem? Denetimli 7; sonra <code>G -&gt; A</code> bağını ekleyin: sınıra (1000) çarpıyor mu?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>denetimsiz: 12 işlem
+denetimli: 7 işlem
+çevrimle: 1000 işlemde durduruldu</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-2-Z1"><code>alistirma-koco/kod/KV-2-Z1/</code></a></p>
+</section>
+<section class="soru" id="KV-2-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KV-2-K1</span> Çizgeyi tuvale çizin</h3>
+<p>Kitapçığın &ldquo;Takım işi&rdquo;: <code>düğümÇiz(ad, x, y)</code> (<code>atla</code>, küçük <code>daire</code>, yanına <code>yazı(ad)</code>) ve iki düğüm arasına çizgi çeken <code>bağÇiz</code> (<code>atla</code>, <code>noktayaDön</code>, uzaklık kadar <code>ileri</code>; uzaklık <code>karekökü</code> ile). Konumları bir <code>Eşlem[Düğüm, (Kesir, Kesir)]</code>'de tutun; yedi düğümlü çizgeyi ekrana alın. Kaç düğüm, kaç bağ çizdiniz, yazdırın. Gezilerinizi resmin üstünde parmakla izleyin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>7 düğüm, 8 bağ</code></pre>
+</figure>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Soldan sağa akan yedi düğüm (A'dan G'ye), aralarında sekiz çizgi; her düğüm küçük bir daire ve harfi.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-2-K1"><code>alistirma-koco/kod/KV-2-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.3</div>
+  <div class="govde">
+    <h2>Katman katman: en az adım; kaç parça?</h2>
+    <p>0. katman başlangıç, 1. katman komşuları, 2. katman onların görülmemiş komşuları… <code>düzİşle</code> ile. Bir düğüm hangi katmanda ilk görünüyorsa oraya daha kısa yol olamaz; kanıt kodun şeklinde. Sonra parça saymak: <code>soldanKatla</code>'nın taşıdığı bir demet. Beş alıştırma.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c">kitapçık V.3: Katman katman</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260123.md">algoritma ders 15: enlemesine gezi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260206.md">algoritma ders 17: bağlı parçalar</a> <a href="https://claude.ai/artifact/FJjmyqnb9eYtXs1FC3Hte9">C++ cildi V.3-4</a></p>
+    </div>
+
+<section class="soru" id="KV-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KV-3-I1</span> Katmanları yazdırın</h3>
+<p>Kitapçığın <code>katmanlar</code>'ı, kümeler sıralı yazdırılmış hâliyle. A'dan beş katman; sonra C'den başlayın: kaç katman, G hangisinde? Üçüncü girdi <code>gezilen</code> neden başlangıçta <code>Küme(başlangıç)</code>; boş küme verince ne olur (deneyin, açıklayın)?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KV-3-I1 · Katmanları yazdırın</span>
+<span class="y">// Çıktı: &quot;0 adım: A&quot; biçiminde katmanlar; A&#x27;dan, sonra C&#x27;den</span>
+<span class="a">tür</span> Düğüm = <span class="t">Harf</span>
+<span class="a">tür</span> Çizge = <span class="t">Eşlem</span>[Düğüm, <span class="t">Küme</span>[Düğüm]]
+<span class="a">dez</span> ç: Çizge = <span class="t">Eşlem</span>(
+  <span class="s">&#x27;A&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;B&#x27;</span>, <span class="s">&#x27;C&#x27;</span>),
+  <span class="s">&#x27;B&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;D&#x27;</span>),
+  <span class="s">&#x27;C&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;D&#x27;</span>, <span class="s">&#x27;E&#x27;</span>),
+  <span class="s">&#x27;D&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;F&#x27;</span>),
+  <span class="s">&#x27;E&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;F&#x27;</span>),
+  <span class="s">&#x27;F&#x27;</span> -&gt; <span class="t">Küme</span>(<span class="s">&#x27;G&#x27;</span>),
+  <span class="s">&#x27;G&#x27;</span> -&gt; <span class="t">Küme</span>[Düğüm]()
+)
+<span class="a">tanım</span> katmanlar(ç: Çizge, sınır: <span class="t">Küme</span>[Düğüm], gezilen: <span class="t">Küme</span>[Düğüm]): <span class="t">Dizin</span>[<span class="t">Küme</span>[Düğüm]] =
+  <span class="a">eğer</span> (sınır.boşMu) <span class="t">Boş</span>
+  <span class="a">yoksa</span> {
+    <span class="a">dez</span> sonraki = sınır.düzİşle(d =&gt; ç(d)).ele(k =&gt; !gezilen(k))
+    sınır :: katmanlar(ç, sonraki, gezilen ++ sonraki)
+  }
+<span class="a">dez</span> kat = katmanlar(ç, <span class="t">Küme</span>(<span class="s">&#x27;A&#x27;</span>), <span class="t">Küme</span>(<span class="s">&#x27;A&#x27;</span>))
+kat.ikileSırayla.herbiriİçin { <span class="a">durum</span> (katman, uzaklık) =&gt;
+  satıryaz(<span class="s">s&quot;$uzaklık adım: ${katman.dizine.sıralı.yazıYap(&quot;</span> <span class="s">&quot;)}&quot;</span>)
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>başlangıç A:
+0 adım: A
+1 adım: B C
+2 adım: D E
+3 adım: F
+4 adım: G
+başlangıç C:
+0 adım: C
+1 adım: D E
+2 adım: F
+3 adım: G</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-3-I1"><code>alistirma-koco/kod/KV-3-I1/</code></a></p>
+</section>
+<section class="soru" id="KV-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-3-A1</span> En az kaç adım?</h3>
+<p><code>uzaklık(ç, a, b): Sayı</code>: a'dan katmanları alın, b'nin ilk geçtiği katmanın sırası (<code>nerede(k =&gt; k(b))</code>, bulamazsa −1 verir, tam istediğimiz). A→G, A→E, D→G, G→A için yazdırın. Neden bu en az adım; kitapçığın tek cümlelik kanıtını kendi sözlerinizle yazın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A -&gt; G: 4
+A -&gt; E: 2
+D -&gt; G: 2
+G -&gt; A: -1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-3-A1"><code>alistirma-koco/kod/KV-3-A1/</code></a></p>
+</section>
+<section class="soru" id="KV-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-3-A2</span> Kaç parça?</h3>
+<p>Yönsüz bir çizge: A-B, A-C, B-D, C-D ve ayrı bir E-F. Kitapçığın parça sayan <code>soldanKatla</code>'sını (demet taşıyan) kurun; 2 parça çıkmalı. Sonra D-E bağını (iki yönlü!) ekleyin: 1 parça. Yönsüz çizgeyi iki yönlü girerek kurduğunuza dikkat.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>2 parça
+1 parça</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-3-A2"><code>alistirma-koco/kod/KV-3-A2/</code></a></p>
+</section>
+<section class="soru" id="KV-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KV-3-Z1</span> Neden sıraladık?</h3>
+<p>Kitapçığın &ldquo;Neden sıraladık?&rdquo; kutusu: yönlü çizgede parça sayısı düğümleri hangi sırayla denediğinize bağlı. Kitapçığın yönlü çizgesinde parça sayısını iki kere hesaplayın: düğümler alfabetik ve tersten (<code>sıralı.tersi</code>). İki sayıyı yazdırın. Fark neden? Bir cümleyle: &ldquo;bağlı parça&rdquo; hangi çizgelerin kavramı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>alfabetik: 1 parça
+tersten: 7 parça</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-3-Z1"><code>alistirma-koco/kod/KV-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="KV-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KV-3-K1</span> Labirentte katmanlar</h3>
+<p>Çizge yazılı olmak zorunda değil: bir labirentin kareleri düğüm, yan yana boş kareler bağ. <code>katmanlar</code>'ı genelleştirin: çizge yerine bir <code>komşular: Kare =&gt; Küme[Kare]</code> işlevi alsın (<code>tür Kare = (Sayı, Sayı)</code>). CSES'in Labyrinth örneğinde A'dan B'ye en az kaç adım? (C++ cildinde aynı soru kuyrukla: <code>V-4-A1</code>, yanıt 9.) Plan: satırlar bir <code>Dizin[Yazı]</code>; <code>#</code> duvar.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>A&#x27;dan B&#x27;ye 9 adım</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-3-K1"><code>alistirma-koco/kod/KV-3-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.4</div>
+  <div class="govde">
+    <h2>Yollar eşit değilse</h2>
+    <p>Bağların ağırlığı olunca kuyruğun yerini öncelik sırası alır, algoritmanın adı Dijkstra olur. Kitapçık bu kodu bilerek yazmıyor; kardeş kitapçıktaki sürümü Koco'ya çevirmek sizin işiniz. KII-4-Z1'in eksi numarasını hatırlayın. Dört alıştırma.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c">kitapçık V.4: Yollar eşit değilse</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260327.md">algoritma ders 23: Dijkstra</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/7-oyun-tarifleri.md">temel-bilgiler 7: oyun tarifleri</a> <a href="https://claude.ai/artifact/FJjmyqnb9eYtXs1FC3Hte9">C++ cildi V.7: Dijkstra</a></p>
+    </div>
+
+<section class="soru" id="KV-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KV-4-I1</span> Ağırlıklı çizge</h3>
+<p>Yollar: her şehirden (komşu, süre) ikililerinin dizini: <code>tür Yollar = Eşlem[Sayı, Dizin[(Sayı, Sayı)]]</code>. Kardeş kitapçığın üç şehirlik örneği: 1→2 (6), 1→3 (2), 3→2 (3). Kurun; her şehrin yollarını yazdırın. Sonra kâğıtta: 1'den 2'ye en kısa süre kaç? Doğrudan 6, dolaylı 2 + 3 = 5; programa hesaplatmadan önce elle bulun ve yazdırın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KV-4-I1 · Ağırlıklı çizge</span>
+<span class="y">// Çıktı: &quot;1: 2(6) 3(2)&quot;, &quot;2: -&quot;, &quot;3: 2(3)&quot;, &quot;1&#x27;den 2&#x27;ye elle: 5&quot;</span>
+<span class="a">tür</span> Yollar = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Dizin</span>[(<span class="t">Sayı</span>, <span class="t">Sayı</span>)]]
+<span class="a">dez</span> yollar: Yollar = <span class="t">Eşlem</span>(<span class="n">1</span> -&gt; <span class="t">Dizin</span>((<span class="n">2</span>, <span class="n">6</span>), (<span class="n">3</span>, <span class="n">2</span>)), <span class="n">2</span> -&gt; <span class="t">Boş</span>, <span class="n">3</span> -&gt; <span class="t">Dizin</span>((<span class="n">2</span>, <span class="n">3</span>)))
+<span class="y">// yazdırın</span>
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1: 2(6) 3(2)
+2: -
+3: 2(3)
+1&#x27;den 2&#x27;ye elle: 5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-4-I1"><code>alistirma-koco/kod/KV-4-I1/</code></a></p>
+</section>
+<section class="soru" id="KV-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KV-4-A1</span> Dijkstra&#x27;yı Koco&#x27;ya çevirin</h3>
+<p>Kitapçığın beşinci alıştırması. İskelet gezilerle aynı: bekleyenlerden birini al, işle, komşularını beklet; tek fark &ldquo;hangisini önce&rdquo;: en küçük süreyi. <code>ÖncelikSırası[(Sayı, Sayı)]</code> en büyüğü verdiği için (−süre, şehir) koyun. Uzaklıkları bir <code>Eşlem[Sayı, Sayı]</code>'de tutun; eski kayıt gelirse atlayın. Üç şehir için 0 5 2 çıkmalı.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1: 0
+2: 5
+3: 2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-4-A1"><code>alistirma-koco/kod/KV-4-A1/</code></a></p>
+</section>
+<section class="soru" id="KV-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KV-4-Z1</span> Yolu da yazın</h3>
+<p>Uzaklık yetmez, yol da lazım. Dijkstra'ya ikinci bir eşlem ekleyin: <code>nereden</code>, her şehre en kısa yolda hangi şehirden gelindiği. Sonunda hedeften geriye izleyip (başlangıca gelene kadar) dizini ters çevirin. Kardeş kitapçığın beş şehirlik örneği: 1→2 (4), 1→3 (1), 3→2 (2), 2→4 (5), 3→4 (8), 4→5 (3), 3→5 (10). Uzaklıklar 0 3 1 8 11; 1'den 5'e yol? Dikkat: 11'e iki yol var (1 3 5 ve 1 3 2 4 5); sizinki hangisini buluyor, neden? (Kardeş kitapçık ötekini buldu.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>uzaklıklar: 0 3 1 8 11
+1&#x27;den 5&#x27;e: 1 3 5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-4-Z1"><code>alistirma-koco/kod/KV-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="KV-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KV-4-K1</span> Düğüm çözme oyununa ağırlık</h3>
+<p>Kitapçığın düğüm çözme oyunu (<code>kitapcik-koco/kod/düğüm-çözme.kojo</code>; <a href="https://ikojo.fly.dev/sf/Iy4oXa6/2">iKojo'da</a>) düğümleri sürükleyip bağların kesişmesini önletiyor. Oyuna bir ölçü ekleyin: bütün bağların toplam uzunluğunu (ya da en uzununu) yazdıran bir düğme; her sürüklemeden sonra güncellensin. Kazanan: kesişmeyen ve en kısa toplam. Sonra tartışın: &ldquo;en kısa toplam&rdquo; ile &ldquo;en kısa yol&rdquo; aynı şey mi? Bu dizin sizin; betiği kopyalayıp başlayın.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KV-4-K1"><code>alistirma-koco/kod/KV-4-K1/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

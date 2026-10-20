@@ -1,0 +1,13 @@
+a -> 2
+g -> 1
+i -> 1
+l -> 1
+m -> 1
+o -> 1
+r -> 1
+t -> 1
+kaç ayrı harf: 8
+z kaç kere: 0
+kaç ayrı harf: 9  <- arttı!
+q var mı: hayır
+kaç ayrı harf: 9  <- değişmedi

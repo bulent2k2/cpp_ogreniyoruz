@@ -1,0 +1,318 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar · Koco</div>
+  <div class="no">Bölüm VI</div>
+  <h1>Dinamik Programlama</h1>
+  <p class="ozet">
+    Tümevarım formülü zaten bir işlev tanımı: kenar defteriyle ızgara yolları, bozuk paralar; sonra kendi türünüz ve Mandelbrot; sonunda yola devam. Dört konu, on dokuz alıştırma. Mandelbrot'u bir kere de metinle çiziyoruz: beklenen çıktı bir resim.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">VI.1</div>
+  <div class="govde">
+    <h2>Izgarada kaç yol; işlevsel çizelge</h2>
+    <p>Bir kareye ya üstten ya soldan gelinir: <code>yol(r, c) = yol(r−1, c) + yol(r, c−1)</code>. Kenar defteriyle her kare bir kere. Sonra aşağıdan yukarı: her satır bir öncekinin birikimli toplamı, <code>soldanKatla</code> ile. Beş alıştırma; zar dizileri de burada.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9">kitapçık VI.1-2: Izgarada kaç yol</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/dp-sade.md">dp-sade</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260424.md">algoritma ders 27</a> <a href="https://claude.ai/artifact/YaxiipjtgYnrsTgEh6EXxC">C++ cildi VI.2</a></p>
+    </div>
+
+<section class="soru" id="KVI-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KVI-1-I1</span> Defterde kaç kayıt?</h3>
+<p>Kitapçığın <code>yol</code>'u. 20×20'yi yazdırın; sonra <code>bellek.sayı</code>: kitapçık 441 diyor, siz kaç buldunuz, neden? (Taban durumları deftere yazılıyor mu?) Belleği kapatıp (<code>alYoksa</code> yerine doğrudan toplam) <code>yol(12, 12)</code>'yi deneyin: ne kadar sürüyor? 20×20'yi denemeyin.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KVI-1-I1 · Defterde kaç kayıt?</span>
+<span class="y">// Çıktı: &quot;20x20: 137846528820&quot; ve &quot;kayıt: ...&quot;</span>
+<span class="a">dez</span> bellek = <span class="t">Eşlem</span>[(<span class="t">Sayı</span>, <span class="t">Sayı</span>), <span class="t">Uzun</span>]()
+<span class="a">tanım</span> yol(r: <span class="t">Sayı</span>, c: <span class="t">Sayı</span>): <span class="t">Uzun</span> =
+  <span class="a">eğer</span> (r == <span class="n">0</span> || c == <span class="n">0</span>) <span class="n">1</span>
+  <span class="a">yoksa</span> bellek.alYoksa((r, c), {
+    <span class="a">dez</span> s = yol(r - <span class="n">1</span>, c) + yol(r, c - <span class="n">1</span>)
+    bellek.eşEkle((r, c) -&gt; s)
+    s
+  })
+satıryaz(<span class="s">s&quot;20x20: ${yol(20, 20)}&quot;</span>)
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>20x20: 137846528820
+kayıt: 400</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-1-I1"><code>alistirma-koco/kod/KVI-1-I1/</code></a></p>
+</section>
+<section class="soru" id="KVI-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KVI-1-A1</span> Birikimli toplam, dikdörtgen</h3>
+<p>Kitapçığın <code>birikimli</code>'si ve <code>yinele(20) { satır = birikimli(satır) }</code>. Bunu bir işleve koyun: <code>yollarAY(r: Sayı, c: Sayı): Uzun</code> (c + 1 birlik satır, r kere birikimli, sonu). 2×2, 3×4 ve 20×20 için yazdırın; sonuncusu <code>yol(20, 20)</code>'yle aynı olmalı. Hangisi daha az bellek kullanıyor, neden?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>2x2: 6
+3x4: 35
+20x20: 137846528820</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-1-A1"><code>alistirma-koco/kod/KVI-1-A1/</code></a></p>
+</section>
+<section class="soru" id="KVI-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KVI-1-A2</span> Izgarada engel</h3>
+<p>Kitapçığın üçüncü son alıştırması: yasak kareler. Yasakları bir <code>Küme[(Sayı, Sayı)]</code>'de tutun; tümevarımın tek satırı değişiyor: yasak karede <code>yol = 0</code>. Bu sefer sol üstten sayın: <code>yol(0, 0) = 1</code>, ızgara dışı 0. AtCoder DP H'nin örneği: 3 satır, 4 sütun, yasaklar (0, 3) ve (1, 1); sağ alta kaç yol? (C++ cildinde aynı örnek: 3.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>3x4, iki engel: 3 yol</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-1-A2"><code>alistirma-koco/kod/KVI-1-A2/</code></a></p>
+</section>
+<section class="soru" id="KVI-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KVI-1-Z1</span> Zar dizileri</h3>
+<p>Kitapçığın birinci son alıştırması, CSES DP 1: toplamı n olan kaç zar dizisi? f(0) = 1, f(n) = f(n−1) + … + f(n−6), eksi n için 0. Bu bölümün kalıbıyla: <code>(1 |-| 6).işle(z =&gt; f(n − z)).topla</code> ve kenar defteri. f(0)..f(10)'u tek satırda yazdırın; sonra f(100)'ü <code>İriSayı</code> ile (kaç basamak?).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 1 2 4 8 16 32 63 125 248 492
+f(100) = 290078479914610587823630044098 (30 basamak)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-1-Z1"><code>alistirma-koco/kod/KVI-1-Z1/</code></a></p>
+</section>
+<section class="soru" id="KVI-1-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-1-K1</span> Dice Combinations, bir milyon</h3>
+<p><a href="https://cses.fi/problemset/task/1633">CSES 1633</a>: n bir milyona kadar, yanıt mod 10⁹ + 7. Özyineleme bir milyon derinliğe inemez (yığın taşar); aşağıdan yukarı gidin: son altı değeri bir <code>Dizin[Uzun]</code>'da taşıyan bir <code>soldanKatla</code> ile (<code>(1 |-| n)</code> üstünde). Her adımda yeni değer = altının toplamı mod, dizin kaydırılır (<code>al(6)</code>). n = 10⁶ için yazdırın; C++ cildiyle aynı sayı çıkmalı (874273980). CSES'e gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>f(1000000) mod 1e9+7 = 874273980</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-1-K1"><code>alistirma-koco/kod/KVI-1-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.2</div>
+  <div class="govde">
+    <h2>En az kaç bozuk para?</h2>
+    <p>Aceleci 7 + 1 + 1 + 1 + 1 der, doğrusu 5 + 5 + 1. Son parayı sorun: <code>1 + paralar.işle(p =&gt; enAzPara(tutar − p)).enUfağı</code>, formülün birebir çevirisi. &ldquo;Sonsuz&rdquo; için kocaman sayı. Altı alıştırma; paraların dökümü, diziler ve kümeler, Belki ile dürüst sonsuz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9">kitapçık VI.3: En az kaç bozuk para</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260501.md">algoritma ders 28: DP kanıtları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260508.md">algoritma ders 29: kanıttan koda</a> <a href="https://claude.ai/artifact/YaxiipjtgYnrsTgEh6EXxC">C++ cildi VI.4</a></p>
+    </div>
+
+<section class="soru" id="KVI-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KVI-2-I1</span> Aceleci yanılsın</h3>
+<p>Kitapçığın <code>enAzPara</code>'sı: 11 için 3. Programı 8 için de çalıştırın; sonra paraları <code>Dizin(1, 4, 6)</code> yapıp 8'i yeniden: 2 çıkmalı (4 + 4), aceleci 3 derdi (6 + 1 + 1). Dikkat: paralar değişince defteri de boşaltmak gerekir (<code>defter.boşalt()</code>) — neden?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KVI-2-I1 · Aceleci yanılsın</span>
+<span class="y">// Çıktı: &quot;1,5,7 ile 11: 3&quot;, &quot;1,5,7 ile 8: ...&quot;, &quot;1,4,6 ile 8: 2&quot;</span>
+<span class="a">dez</span> paralar = <span class="t">Dizin</span>(<span class="n">1</span>, <span class="n">5</span>, <span class="n">7</span>)
+<span class="a">dez</span> defter = <span class="t">Eşlem</span>[<span class="t">Sayı</span>, <span class="t">Sayı</span>]()
+<span class="a">tanım</span> enAzPara(tutar: <span class="t">Sayı</span>): <span class="t">Sayı</span> =
+  <span class="a">eğer</span> (tutar == <span class="n">0</span>) <span class="n">0</span>
+  <span class="a">yoksa</span> <span class="a">eğer</span> (tutar &lt; <span class="n">0</span>) <span class="n">1000000</span>
+  <span class="a">yoksa</span> defter.alYoksa(tutar, {
+    <span class="a">dez</span> s = <span class="n">1</span> + paralar.işle(p =&gt; enAzPara(tutar - p)).enUfağı
+    defter.eşEkle(tutar -&gt; s)
+    s
+  })
+satıryaz(<span class="s">s&quot;1,5,7 ile 11: ${enAzPara(11)}&quot;</span>)
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1,5,7 ile 11: 3
+1,5,7 ile 8: 2
+1,4,6 ile 8: 2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-I1"><code>alistirma-koco/kod/KVI-2-I1/</code></a></p>
+</section>
+<section class="soru" id="KVI-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KVI-2-A1</span> Hangi paralar?</h3>
+<p>Kitapçığın ikinci son alıştırması: sayı yerine döküm. <code>enAzParalar(tutar): Dizin[Sayı]</code>: tutar 0 için Boş; eksi için &ldquo;imkânsız&rdquo; anlamına çok uzun bir dizin (1000 tane 1 gibi); yoksa her p için <code>p :: enAzParalar(tutar − p)</code>, en kısası (<code>enUfağı(d =&gt; d.boyu)</code>). 11 ve 23 için dökümü ve boyunu yazdırın. Birden çok en kısa döküm olabilir; sizinki hangisini seçiyor?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>11: 1 5 5 (3 para)
+23: 1 1 7 7 7 (5 para)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-A1"><code>alistirma-koco/kod/KVI-2-A1/</code></a></p>
+</section>
+<section class="soru" id="KVI-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KVI-2-A2</span> Diziler mi, kümeler mi?</h3>
+<p>Kardeş kitapçığın üçüncü sorusu, işlevsel kılıkta. Paralar 2, 3, 5; hedef 9. Dizi sayısı: f(x) = Σ f(x − p), f(0) = 1, eksi 0 (sıra önemli: 8). Küme sayısı: paraları sırayla kullanın, g(x, k) = &ldquo;yalnız ilk k parayla x&rdquo;: g(x, k) = g(x, k−1) + g(x − pₖ, k) (sıra önemsiz: 3). İkisini de kenar defteriyle yazın, 9 için yazdırın. Döngü sırası yerine özyineleme sırası.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>dizi: 8
+küme: 3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-A2"><code>alistirma-koco/kod/KVI-2-A2/</code></a></p>
+</section>
+<section class="soru" id="KVI-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KVI-2-Z1</span> Aceleci ne zaman doğru?</h3>
+<p>Gerçek paralarla (1, 5, 10, 25) aceleci yöntem hep doğru; (1, 5, 7) ile değil. Sınatın: <code>aceleci(tutar, paralar)</code> büyükten küçüğe sığdıkça alsın; <code>enAzPara</code>'yı paraları girdi alan hâle getirin (defter de her para kümesi için ayrı). 1..100'de kaç tutarda ayrışıyorlar, ilk ayrışan tutar hangisi? İki para kümesi için yazdırın. (C++ cildinde aynı deney: 26 fark, ilki 10.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 5 10 25: 0 fark
+1 5 7: 26 fark, ilki 10</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-Z1"><code>alistirma-koco/kod/KVI-2-Z1/</code></a></p>
+</section>
+<section class="soru" id="KVI-2-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KVI-2-Z2</span> Sonsuz yerine Belki</h3>
+<p>&ldquo;Kocaman sayı&rdquo; bir hile. Dürüst sürüm: <code>enAz(tutar): Belki[Sayı]</code>; eksi tutar <code>Hiçbiri</code>, 0 <code>Biri(0)</code>, yoksa komşu sonuçlardan dolu olanların en küçüğünün bir fazlası, hiç dolu yoksa <code>Hiçbiri</code>. Paralar 5 ve 7: 11 için &ldquo;yok&rdquo;, 12 için 2, 23 için ? (<code>ele(_.varMı)</code>, <code>işle(_.al)</code>; ya da <code>düzleştir</code>.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>11: yok
+12: 2
+23: yok</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-Z2"><code>alistirma-koco/kod/KVI-2-Z2/</code></a></p>
+</section>
+<section class="soru" id="KVI-2-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-2-K1</span> Minimizing Coins, aşağıdan yukarı</h3>
+<p><a href="https://cses.fi/problemset/task/1634">CSES 1634</a>: tutar bir milyona kadar; özyineleme derinliği yetmez. Aşağıdan yukarı: <code>Dizik.doldur(x + 1)(SONSUZ)</code>, <code>f(0) = 0</code>, 1'den x'e her t için paraları gezip <code>enUfağı</code>. İmkânsızsa −1. CSES'in örneği (1, 5, 7 ile 11) → 3; sonra 1 000 000 için (1, 5, 7). Gönderin; dizik ile Eşlem arasındaki hız farkını da ölçün (<code>buSaniye</code>).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>11: 3
+1000000: 142858</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-K1"><code>alistirma-koco/kod/KVI-2-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.3</div>
+  <div class="govde">
+    <h2>Kendi türünüz: karmaşık sayılar</h2>
+    <p><code>durum sınıf Karmaşık(g, s)</code>, iki satırlık <code>+</code> ve <code>*</code>; kendi türünüz sayılar kadar rahat. Mandelbrot'un kuralı tek satır: z ← z² + c; yüz adımda kaçmazsa içeride. Dört alıştırma; biri resmi metinle çiziyor, biri tuvale boyuyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9">kitapçık VI.4: Kendi türünüz</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: durum sınıf</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/5-renkler.md">temel-bilgiler 5: renkler</a> <a href="https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w">C++ cildi II.5: kendi türünüz</a></p>
+    </div>
+
+<section class="soru" id="KVI-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KVI-3-I1</span> Bir işleç daha</h3>
+<p>Kitapçığın <code>Karmaşık</code>'ı: <code>a + a</code> ve <code>a * a</code>. Bir de <code>-</code> ekleyin (çıkarma) ve <code>büyüklüğü</code>'nü yazın. Sonra şu üç satırı sırayla yazdırın: <code>a - Karmaşık(1, 1)</code>, <code>(a * a).büyüklüğü</code> ve <code>i² = −1</code> sınaması olarak <code>Karmaşık(0, 1) * Karmaşık(0, 1)</code>. Durum sınıfın kendi yazımı var: <code>Karmaşık(2.0,4.0)</code>; bunu iKojo da Koco da aynı basar.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KVI-3-I1 · Bir işleç daha</span>
+<span class="y">// Çıktı: a + a, a * a, a - Karmaşık(1, 1), (a * a).büyüklüğü, Karmaşık(0, 1) * Karmaşık(0, 1)</span>
+<span class="a">durum</span> <span class="a">sınıf</span> Karmaşık(g: <span class="t">Kesir</span>, s: <span class="t">Kesir</span>) {
+  <span class="a">tanım</span> +(öbürü: Karmaşık) = Karmaşık(g + öbürü.g, s + öbürü.s)
+  <span class="a">tanım</span> *(öbürü: Karmaşık) =
+    Karmaşık(g * öbürü.g - s * öbürü.s, g * öbürü.s + s * öbürü.g)
+  <span class="a">tanım</span> büyüklüğü = karekökü(g * g + s * s)
+}
+<span class="a">dez</span> a = Karmaşık(<span class="n">1</span>, <span class="n">2</span>)
+satıryaz(a + a)
+satıryaz(a * a)
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Karmaşık(2.0,4.0)
+Karmaşık(-3.0,4.0)
+Karmaşık(0.0,1.0)
+5.0
+Karmaşık(-1.0,0.0)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-3-I1"><code>alistirma-koco/kod/KVI-3-I1/</code></a></p>
+</section>
+<section class="soru" id="KVI-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KVI-3-A1</span> Kaçış adımları</h3>
+<p>Kitapçığın <code>kaçışAdımı</code>'nı beş noktada çalıştırın: (0, 0), (1, 1), (−1, 0), (0.3, 0.5), (−0.75, 0.1). Hangileri kümenin içinde (100)? Sonra adım sınırını 20 yapın: aynı noktalar için sonuç değişiyor mu? &ldquo;İçinde&rdquo; dediğimiz şeyin bir karar olduğunu görün.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>(0.0, 0.0): 100
+(1.0, 1.0): 2
+(-1.0, 0.0): 100
+(0.3, 0.5): 100
+(-0.75, 0.1): 33</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-3-A1"><code>alistirma-koco/kod/KVI-3-A1/</code></a></p>
+</section>
+<section class="soru" id="KVI-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KVI-3-Z1</span> Mandelbrot, metinle</h3>
+<p>Boyamadan önce metinle çizin: 24 satır, 60 sütun; satır y'yi −1.2..1.2'ye, sütun x'i −2.2..0.8'e eşleyin. Her nokta için kaçış adımı: 100 ise <code>#</code>, 10'dan çoksa <code>+</code>, 4'ten çoksa <code>.</code>, yoksa boşluk. Satırları <code>satıryaz</code> ile basın. Beklenen çıktı bir resim; sizinki aynı mı? Sınırda farklı karakterler çıkarsa nedeni kayan noktalı sayılar olabilir, tartışın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>                                                            
+                                      ..+..                 
+                                    .....++..               
+                                  ......+#+....             
+                                ......++###+......          
+                            ...+++..++++###++.+.....        
+                       .........+##+###########++#++..      
+                  ............+++################++...      
+               ........+.....++####################++.      
+             .......+#++++++++#####################+..      
+           .......++########+######################+..      
+     ...........+#################################+...      
+     ...........+#################################+...      
+           .......++########+######################+..      
+             .......+#++++++++#####################+..      
+               ........+.....++####################++.      
+                  ............+++################++...      
+                       .........+##+###########++#++..      
+                            ...+++..++++###++.+.....        
+                                ......++###+......          
+                                  ......+#+....             
+                                    .....++..               
+                                      ..+..                 
+                                                            </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-3-Z1"><code>alistirma-koco/kod/KVI-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="KVI-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-3-K1</span> Mandelbrot&#x27;u boyayın</h3>
+<p>Kitapçığın dördüncü son alıştırması: tuvalin her noktasını bir karmaşık sayıya çevirip kaçış adımına göre boyayın. Kaplumbağayla: <code>atla(x, y)</code>, rengi kur (<code>Renk.kym</code> ya da hazır renklerden adım sayısına göre seçin), <code>ileri(1)</code>. 200×200 nokta yeter; <code>canlandırmaHızınıKur(0)</code> ve <code>görünmez()</code> şart. Sonra pencerede yakınlaştırıp kenarına dalın; en güzel köşenin görüntüsünü sınıfla paylaşın. Bu dizin sizin.</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Siyah bir Mandelbrot kümesi, kenarları mor-mavi-camgöbeği halkalarla; 200×200 nokta.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-3-K1"><code>alistirma-koco/kod/KVI-3-K1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">VI.4</div>
+  <div class="govde">
+    <h2>Yola devam</h2>
+    <p>Kitapçık üç kolla bitiyor: Koco'da derinleşin, kardeş kitapçığa geçin, soru çözün; bir de bir şey inşa edin. Dört alıştırma: yaşam oyunu değişmez kümelerle, zıplayan kurbağa, ve iki açık uçlu Keşif.</p>
+    <p class="merdiven"><span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9">kitapçık: Son söz</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/yasam-oyunu.md">yaşam oyunu</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/7-oyun-tarifleri.md">temel-bilgiler 7: oyun tarifleri</a> <a href="https://claude.ai/artifact/YaxiipjtgYnrsTgEh6EXxC">C++ cildi VI.6: yola devam</a></p>
+    </div>
+
+<section class="soru" id="KVI-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KVI-4-A1</span> Yaşam oyunu, kümeyle</h3>
+<p>Conway'in yaşam oyunu, değişmez kümelerle: canlı hücreler bir <code>Küme[(Sayı, Sayı)]</code>. Bir nesil: adayları (canlıların kendileri ve komşuları) al, her aday için canlı komşu sayısı; 3 ise canlı, 2 ise canlıysa canlı. <code>nesil(canlılar): Küme[...]</code> yazın; planörü dört nesil ilerletin ve hücreleri sıralı yazdırın: hepsi (1, 1) kaymış mı? Döngü yok, değişen yok; her nesil yeni bir küme.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>başlangıç: (1,2) (2,3) (3,1) (3,2) (3,3)
+4 nesil sonra: (2,3) (3,4) (4,2) (4,3) (4,4)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-4-A1"><code>alistirma-koco/kod/KVI-4-A1/</code></a></p>
+</section>
+<section class="soru" id="KVI-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KVI-4-Z1</span> Zıplayan kurbağa</h3>
+<p><a href="https://atcoder.jp/contests/dp/tasks/dp_a">AtCoder DP A</a>, kardeş kitapçığın klasiği: n taş, yükseklikler; kurbağa 1 ya da 2 taş atlar, bedel yükseklik farkının mutlak değeri; son taşa en ucuz bedel. Reçete: <code>bedel(i)</code> = i'nci taşa en ucuz varış; taban <code>bedel(0) = 0</code>; formül iki seçenekten küçüğü; kenar defteri. Yükseklikler 30 10 60 10 60 50 → 40. Gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>en ucuz: 40</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-4-Z1"><code>alistirma-koco/kod/KVI-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="KVI-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-4-K1</span> Bir şey inşa edin</h3>
+<p>Kitapçığın &ldquo;bir şey inşa edin&rdquo;i: yaşam oyununu tuvale alın (her hücre küçük bir kare; <code>canlandır</code> ile her karede bir nesil; <code>temel-bilgiler 7</code>'deki oyun tarifleri yol gösterir), ya da Koch tanesinin derinliğini klavyeden ayarlayan sürümü, ya da üç cisim benzetimini. Proje kodu sizinle kalır; arkadaşlarınıza izletin. Bu dizin sizin.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-4-K1"><code>alistirma-koco/kod/KVI-4-K1/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+<section class="soru" id="KVI-4-K2">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-4-K2</span> Haftada üç soru, iki dilde</h3>
+<p>Project Euler işlevsel üsluba bayılır; CSES algoritma kaslarını çalıştırır. Program: haftada üç soru, önce Koco'da, sonra aynı soruyu C++ cildindeki kardeşiyle. Başlangıç: PE 5, 7, 10; CSES 1068, 1083, 1069. Her birinde önce reçeteyi kâğıda yazın. Ve kitapçığın &ldquo;en önemlisi&rdquo;: öğrendiğiniz bir konuyu iki sayfada bir arkadaşınıza anlatın; çalışan kod, gerçek çıktı, bir de alıştırma.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-4-K2"><code>alistirma-koco/kod/KVI-4-K2/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

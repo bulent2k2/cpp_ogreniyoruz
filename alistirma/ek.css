@@ -1,0 +1,69 @@
+/* ===========================================================
+   Alıştırma defteri için ek biçem.
+   Biçemin tamamı kardeş kitapçıktan (kitapcik/ortak.css) geliyor.
+   Burada iki şey var: vurgu rengi (mavi yerine mürdüm) ve alıştırma
+   basamaklarının biçemi: Isınma / Alıştırma / Zorlayıcı / Keşif.
+   =========================================================== */
+
+:root {
+  --mavi: #6B3FA0;          /* mürdüm: alıştırma defterinin vurgu rengi */
+  --mavi-yumusak: #EEE7F8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mavi: #B79BE6;
+    --mavi-yumusak: #241A36;
+  }
+}
+
+:root[data-theme="dark"] {
+  --mavi: #B79BE6;
+  --mavi-yumusak: #241A36;
+}
+
+@media print {
+  a { color: #5A338A; }
+}
+
+/* ---------- basamaklar ---------- */
+/* Dört basamak, dört renk; kitapçığın kutu renkleriyle aynı aile:
+   Isınma yeşil, Alıştırma mavi (vurgu), Zorlayıcı sarı, Keşif kırmızı. */
+
+.basamak {
+  display: inline-block;
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.18em 0.5em; border-radius: 4px;
+  vertical-align: 0.15em; margin-right: 0.45rem;
+}
+.basamak.isinma    { background: var(--yesil-yumusak);   color: var(--yesil); }
+.basamak.alistirma { background: var(--mavi-yumusak);    color: var(--mavi); }
+.basamak.zor       { background: var(--sari-yumusak);    color: var(--sari); }
+.basamak.kesif     { background: var(--kirmizi-yumusak); color: var(--kirmizi); }
+
+/* konu başındaki özet: her basamaktan kaç soru var */
+.merdiven { display: flex; gap: 0.35rem; margin: -0.4rem 0 1.2rem; }
+.merdiven .basamak { margin: 0; min-width: 1.6em; text-align: center; }
+.merdiven .basamak::after { content: ""; }
+
+/* ---------- tek alıştırma ---------- */
+
+.soru {
+  margin: 2rem 0 0;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--cizgi);
+}
+.soru > h3 { margin-top: 0; }
+.soru-no {
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+  color: var(--kod-soluk); margin-right: 0.45rem;
+}
+.soru .dizin {
+  font-size: 0.86rem; color: var(--kod-soluk); margin-top: 0.6rem;
+}
+.soru .kod.dar { margin-top: 1rem; }
+
+@media print {
+  .soru { break-inside: avoid; }
+}

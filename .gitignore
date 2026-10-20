@@ -11,9 +11,17 @@ code-deneme1.dSYM
 # kitapçıkların üretilen html çıktıları (kaynak: bolumler/ + ortak.css)
 kitapcik/cikti/
 kitapcik-koco/cikti/
+alistirma/cikti/
+alistirma/kod/**/prog-O*
+alistirma/kod/**/test-ciktisi
 __pycache__/
 *.pyc
 # playwright kurulumu (bkz. kitapcik/README.md, Gerekli araçlar)
 node_modules/
 package.json
 package-lock.json
+alistirma-koco/cikti/
+alistirma-koco/kod/**/test-ciktisi
+alistirma-koco/konsol/kojo/
+alistirma-koco/konsol/src/
+alistirma-koco/konsol/out/

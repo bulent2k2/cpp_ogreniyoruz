@@ -1,0 +1,350 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar · Koco</div>
+  <div class="no">Bölüm II</div>
+  <h1>Veriyi Düzenlemek</h1>
+  <p class="ozet">
+    Kitapçığın ikinci bölümü dizin, küme ve eşlemi, üstlerinde çalışan üç sihirli işlemi (işle, ele, indirge) ve Belki'yi anlatıyor. Burada dört konu, on dokuz alıştırma; hepsi çıktı penceresine yazıyor. Kapları <code>yazıYap</code> ile yazdırıyoruz ki beklenen çıktı iKojo'da da Koco'da da aynı olsun. Amaç bir refleks: döngü yazmadan önce bir dur, bu bir zincir mi?
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">II.1</div>
+  <div class="govde">
+    <h2>Dizin: işlevselin atardamarı</h2>
+    <p>Dizin bir kere kuruldu mu değişmez: <code>tersi</code> ve <code>sıralı</code> yeni dizin verir, eskisi yerinde durur. Baş, kuyruk ve <code>::</code> ile öne ekleme. Dört alıştırma; kitapçığın ilk büyük fikrini elle tutmak için.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec">kitapçık II.1: Dizin</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: kaplar</a> <a href="https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w">C++ cildi II.1: dizi</a></p>
+    </div>
+
+<section class="soru" id="KII-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KII-1-I1</span> Baş, kuyruk, son</h3>
+<p>Kitapçığın dizin örneği, kapları <code>yazıYap(" ")</code> ile yazdıran hâliyle. Çalıştırın; sonra iki satır ekleyin: <code>sayılar.sonu</code> ve <code>Boş.boyu</code>. Son satır <code>sayılar</code>'ın hâlâ aynı olduğunu gösteriyor: hangi satırlar onu değiştirebilirdi de değiştirmedi?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KII-1-I1 · Baş, kuyruk, son</span>
+<span class="a">dez</span> sayılar = <span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>)
+satıryaz(sayılar.başı)
+satıryaz(sayılar.kuyruğu.yazıYap(<span class="s">&quot; &quot;</span>))
+satıryaz(sayılar.boyu)
+satıryaz(sayılar.tersi.yazıYap(<span class="s">&quot; &quot;</span>))
+satıryaz(sayılar.sıralı.yazıYap(<span class="s">&quot; &quot;</span>))
+satıryaz(sayılar.yazıYap(<span class="s">&quot; &quot;</span>))      <span class="y">// hâlâ aynı!</span>
+<span class="y">// sonu ve Boş.boyu</span>
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>3
+1 4 1 5 9
+6
+9 5 1 4 1 3
+1 1 3 4 5 9
+3 1 4 1 5 9
+9
+0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-1-I1"><code>alistirma-koco/kod/KII-1-I1/</code></a></p>
+</section>
+<section class="soru" id="KII-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-1-A1</span> İlk üçün toplamı</h3>
+<p>Yalnız <code>başı</code> ve <code>kuyruğu</code> ile bir dizinin ilk üç ögesinin toplamını veren <code>ilkÜç(d: Dizin[Sayı])</code> yazın (kuyruğun kuyruğunun başı…). Sonra aynı şeyi <code>al(3).topla</code> ile yazıp iki sonucu yan yana yazdırın. Dizin üç ögeden kısaysa birinci sürüm ne yapar? (Deneyin: <code>Dizin(1, 2)</code>; hata iletisini okuyun, sonra satırı silin.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>başla: 8, alla: 8
+başla: 60, alla: 60</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-1-A1"><code>alistirma-koco/kod/KII-1-A1/</code></a></p>
+</section>
+<section class="soru" id="KII-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-1-A2</span> Hiçbir şey değişmedi</h3>
+<p><code>dez a = Dizin(3, 1, 2)</code>; <code>a.sıralı</code>, <code>a.tersi</code> ve <code>0 :: a</code> üç yeni dizin. Üçünü de ada bağlayıp yazdırın, en sonda yine <code>a</code>'yı. Beş satır; beşincisi birinciyle aynı olmalı. Sonra C++ cildini hatırlayın: <code>sort(v.begin(), v.end())</code> oradaki diziyi yerinde değiştiriyordu. Hangisini daha güvenli buluyorsunuz, neden?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>a: 3 1 2
+sıralı: 1 2 3
+tersi: 2 1 3
+öne 0: 0 3 1 2
+a: 3 1 2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-1-A2"><code>alistirma-koco/kod/KII-1-A2/</code></a></p>
+</section>
+<section class="soru" id="KII-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KII-1-Z1</span> Dizini öne ekleyerek kurun</h3>
+<p><code>Dizin(1, 2, 3, 4, 5)</code>'i <code>Dizin(...)</code> yazmadan, yalnız <code>::</code> ve <code>yineleDizinli</code> ile kurun: <code>den d: Dizin[Sayı] = Boş</code> ile başlayın, her adımda öne bir sayı ekleyin. Öne eklediğiniz için sıra ters çıkar; 1 2 3 4 5 çıkması için hangi sayıyı eklemelisiniz? İki sürümü de yazdırın: önce ters çıkan, sonra düzelttiğiniz. <code>den</code> burada mecburi mi? (Bölüm IV'te özyinelemeyle <code>den</code>'siz yazacağız.)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>ters: 5 4 3 2 1
+düz: 1 2 3 4 5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-1-Z1"><code>alistirma-koco/kod/KII-1-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.2</div>
+  <div class="govde">
+    <h2>Üç sihirli işlem: işle, ele, indirge</h2>
+    <p>Her ögeye aynı işlevi uygula; soruya doğru yanıt verenleri tut; ikişer ikişer birleştirip tek değere in. Kısaltmaları <code>topla</code>, <code>çarp</code>, <code>enİrisi</code>, <code>enUfağı</code>. Asıl güç zincirlemede; bu konunun altı alıştırması zincir kurduruyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec">kitapçık II.2: Üç sihirli işlem</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: Dizi (herbiriİçin, işle, ele)</a> <a href="https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w">C++ cildi II: döngülü karşılıkları</a></p>
+    </div>
+
+<section class="soru" id="KII-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KII-2-I1</span> Üçlü, bir de zincir</h3>
+<p>Kitapçığın <code>üçlü.kojo</code>'su: işle, ele, indirge ve dört kısaltma. Çalıştırın, sonra kitapçığın zincirini ekleyin: 100'e kadar sayıların karelerinden 3'e bölünenlerin toplamı. İpucu: kitapçık sonucu yazmıyor; önce tahmin edin (3'e bölünen 33 sayının kareleri…), sonra çalıştırın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KII-2-I1 · Üçlü, bir de zincir</span>
+<span class="a">dez</span> sayılar = <span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>)
+satıryaz(sayılar.işle(s =&gt; s * s).yazıYap(<span class="s">&quot; &quot;</span>))
+satıryaz(sayılar.ele(s =&gt; s % <span class="n">2</span> == <span class="n">0</span>).yazıYap(<span class="s">&quot; &quot;</span>))
+satıryaz(sayılar.indirge((a, b) =&gt; a + b))
+satıryaz(sayılar.topla)
+satıryaz(sayılar.çarp)
+satıryaz(sayılar.enİrisi)
+satıryaz(sayılar.enUfağı)
+<span class="y">// zincir: (1 |-| 100) kareler, 3&#x27;e bölünenler, toplam</span>
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>9 1 16 1 25 81 4 36
+4 2 6
+31
+31
+6480
+9
+1
+112761</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-2-I1"><code>alistirma-koco/kod/KII-2-I1/</code></a></p>
+</section>
+<section class="soru" id="KII-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-2-A1</span> Takım işi zincirleri</h3>
+<p>Kitapçığın &ldquo;Takım işi&rdquo;nden üç görev, hepsi <code>sayılar</code> üstünde: çift sayıların karelerinin en büyüğü; tek sayıların toplamı; 1'den 20'ye 3'e bölünenlerin <em>kaç tane</em> olduğu (<code>say</code> hazır: <code>say(s => ...)</code>). Üç zincir, üç satır. Döngü yok.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>çift karelerin en büyüğü: 36
+teklerin toplamı: 19
+3&#x27;e bölünen: 6 tane</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-2-A1"><code>alistirma-koco/kod/KII-2-A1/</code></a></p>
+</section>
+<section class="soru" id="KII-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-2-A2</span> Dört kısaltmayı indirge ile</h3>
+<p><code>topla</code>, <code>çarp</code>, <code>enİrisi</code>, <code>enUfağı</code> birer kısaltma. Dördünü de yalnız <code>indirge</code> ile yazın ve kısaltmalarla aynı sonucu verdiklerini yazdırın (<code>a.enİrisi(b)</code> iki sayının büyüğünü verir; <code>eğer</code> de olur). Sonra düşünün: <code>indirge</code> boş dizinde ne yapar? <code>Boş.topla</code> ne veriyor; <code>Dizin[Sayı]().indirge(...)</code> ne veriyor? İkincisini deneyin, hatayı görün, satırı silin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>toplam: 31 31
+çarpım: 6480 6480
+en büyük: 9 9
+en küçük: 1 1
+boşun toplamı: 0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-2-A2"><code>alistirma-koco/kod/KII-2-A2/</code></a></p>
+</section>
+<section class="soru" id="KII-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KII-2-Z1</span> Sıra önemli mi?</h3>
+<p>Kitapçığın zinciri &ldquo;önce kare al, sonra 3'e bölünenleri ele&rdquo;. Sırayı değiştirin: önce 3'e bölünenleri ele, sonra karelerini al. Aynı sonuç mu? Şimdi 3 yerine 4 ile ikisini de yazın: bu sefer farklı! Neden? (Hangi sayıların karesi 4'e bölünür?) Dört sayıyı yazdırın; sonra bir cümleyle: işle ile ele'nin sırası ne zaman önemlidir?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>3: 112761 112761
+4: 171700 88400</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-2-Z1"><code>alistirma-koco/kod/KII-2-Z1/</code></a></p>
+</section>
+<section class="soru" id="KII-2-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KII-2-Z2</span> Collatz, zincirle</h3>
+<p>C++ cildinin Collatz'ı burada da: n çiftse yarısı, tekse 3n + 1; 1'e kaç adımda iner? <code>adım(n)</code> işlevini <code>den</code> ve <code>yineleDoğruysa</code> ile yazın (içeride döngü serbest). Sonra zincir: 1'den 30'a kadar hangi sayı en çok adım atıyor? İpucu: <code>işle(n => (adım(n), n))</code> demetler verir, <code>enİrisi</code> demetleri soldan karşılaştırır. Yanıt bir satır.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>en uzun: 27 (111 adım)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-2-Z2"><code>alistirma-koco/kod/KII-2-Z2/</code></a></p>
+</section>
+<section class="soru" id="KII-2-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KII-2-K1</span> Project Euler 4</h3>
+<p><a href="https://projecteuler.net/problem=4">PE 4</a>: iki üç basamaklı sayının çarpımı olan en büyük palindrom. Palindrom sınaması tek satır: sayının yazısı tersine eşit mi (<code>yazıya</code> ve <code>tersi</code>). Çarpımlar için <code>için ... ver</code> (KI-3-K1) ya da iç içe <code>düzİşle</code>/<code>işle</code>. Yanıtı yazdırın; PE'ye gönderin. Kaç çarpım sınadınız, hesaplayın: 900 × 900'ü yarıya indirmenin yolu var mı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>906609</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-2-K1"><code>alistirma-koco/kod/KII-2-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.3</div>
+  <div class="govde">
+    <h2>Küme ve eşlem; harf saymak döngüsüz</h2>
+    <p>Küme tekrarsız ve sırasız; üstelik bir işlev: <code>k(4)</code> &ldquo;4 kümede mi?&rdquo; demek. Eşlem bir şeyi başka bir şeye bağlar; olmayan anahtar için dürüst yanıt <code>Belki</code>. Kitapçığın harf sayacı <code>öbekle</code> ile döngüsüz. Beş alıştırma: kitapçığın bölüm sonu alıştırmaları, teker teker.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec">kitapçık II.3: Küme ve eşlem</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: Eşlek, Küme, Belki</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/hızlı-kume-islemleri.md">hızlı küme işlemleri</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders21.md">ders 21: küme ve eşlem (C++)</a> <a href="https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w">C++ cildi II.3: harf sayacı</a></p>
+    </div>
+
+<section class="soru" id="KII-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KII-3-I1</span> Harf sayacı, başka sözcük</h3>
+<p>Kitapçığın <code>harfsay.kojo</code>'su olduğu gibi. Çalıştırıp çıktıyı kitapçıkla karşılaştırın; sonra yazıyı <code>"programlama dili"</code> yapın. Hangi harf en çok? Çıktı neden alfabetik; sıralamayı hangi satır yapıyor, silerseniz ne olur (birkaç kere çalıştırın)?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KII-3-I1 · Harf sayacı, başka sözcük</span>
+<span class="a">dez</span> harfler = <span class="s">&quot;kelebek kanadi&quot;</span>.ele(h =&gt; h != <span class="s">&#x27; &#x27;</span>)
+<span class="a">dez</span> öbekler = harfler.öbekle(h =&gt; h)
+<span class="a">dez</span> sayaç = öbekler.işle { <span class="a">durum</span> (harf, öbek) =&gt; (harf, öbek.boyu) }
+sayaç.dizine.sıralı.herbiriİçin { <span class="a">durum</span> (harf, kaç) =&gt;
+  satıryaz(<span class="s">s&quot;$harf -&gt; $kaç&quot;</span>)
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>a -&gt; 3
+d -&gt; 1
+g -&gt; 1
+i -&gt; 2
+l -&gt; 2
+m -&gt; 2
+o -&gt; 1
+p -&gt; 1
+r -&gt; 2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-3-I1"><code>alistirma-koco/kod/KII-3-I1/</code></a></p>
+</section>
+<section class="soru" id="KII-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-3-A1</span> Sesli harfler</h3>
+<p>Kitapçığın birinci alıştırması: bir yazıdaki sesli harfleri <code>say</code> ile sayın. <code>"aeıioöuü"</code>'yü bir kümeye çevirin (<code>kümeye</code>) ve kümenin işlev olduğunu kullanın: <code>yazı.say(sesliler)</code>. Tek satır. İki yazı için yazdırın. Büyük harfleri de saymak isteseniz ne eklerdiniz?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>kelebek kanadi: 6 sesli
+programlama dili: 6 sesli</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-3-A1"><code>alistirma-koco/kod/KII-3-A1/</code></a></p>
+</section>
+<section class="soru" id="KII-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-3-A2</span> Tekrar var mı?</h3>
+<p>Kitapçığın ikinci alıştırması, iki çözümle: <code>yinelemesiz</code> (tekrarları atılmış dizin) ile <code>boyu</code> karşılaştırması; ve <code>kümeye</code> ile aynı karşılaştırma. İkisi de tek satır. Üç dizin için evet/hayır yazdırın; iki çözüm hep aynı yanıtı vermeli. Hangisinin daha hızlı olduğunu Bölüm III'te ölçeceğiz.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>3 1 4 1 5: evet evet
+1 2 3: hayır hayır
+7 7: evet evet</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-3-A2"><code>alistirma-koco/kod/KII-3-A2/</code></a></p>
+</section>
+<section class="soru" id="KII-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KII-3-Z1</span> Kelime sayacı</h3>
+<p>Kitapçığın dördüncü alıştırması: harf sayacını kelime sayacına çevirin. Yazıyı <code>böl(' ')</code> ile kelime dizinine ayırın; gerisi harf sayacıyla aynı: <code>öbekle</code>, <code>işle</code>, sırala, yazdır. Cümle: <code>"bir iki bir üç iki bir"</code>. En sık kelimeyi de ayrıca yazdırın (<code>enİrisi</code>'nin işlev alan hâli: <code>enİrisi(ç => ç._2)</code>).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>bir -&gt; 3
+iki -&gt; 2
+üç -&gt; 1
+en sık: bir (3)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-3-Z1"><code>alistirma-koco/kod/KII-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="KII-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KII-3-K1</span> Ters sözlük</h3>
+<p>Kitapçığın beşinci alıştırması: plaka eşlemini tersine çevirin, sayıdan şehre. Boş bir <code>Eşlem[Sayı, Yazı]()</code> açıp <code>herbiriİçin</code> ile <code>eşEkle</code> yapmak en kısası; <code>işle</code> ile demetleri çevirip <code>eşleğe</code> de olur. Sonra <code>ters(6)</code>'yı ve olmayan bir plakayı yazdırın: <code>ters(99)</code> patlar, <code>ters.al(99)</code> <code>Hiçbiri</code> verir (<code>Belki</code>), <code>ters.alYoksa(99, "yok")</code> dürüst ve kısa. Düşündürücü kısım: iki şehir aynı plakayı paylaşsaydı? Ekleyin (<code>"Deneme" -> 6</code>), çalıştırın, açıklayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>6 -&gt; Ankara
+99 -&gt; yok
+6 -&gt; Deneme</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-3-K1"><code>alistirma-koco/kod/KII-3-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.4</div>
+  <div class="govde">
+    <h2>Sırası önemli kaplar</h2>
+    <p>Yığın (son giren ilk çıkar), Kuyruk (ilk giren ilk çıkar), ÖncelikSırası (en öncelikli önce). Değişen kaplar; işlevsel saflıktan taviz ama doğru işte doğru araç. Bölüm V'te yığını kuyrukla değiştirmek bir geziyi başka bir geziye çevirecek; buradaki dört alıştırma o güne hazırlık.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec">kitapçık II.4: Sırası önemli kaplar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: EsnekDizik, Aralık</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders21.md">ders 21: yığın ve kuyruk (C++)</a> <a href="https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w">C++ cildi II.4</a></p>
+    </div>
+
+<section class="soru" id="KII-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KII-4-I1</span> Hepsini boşaltın</h3>
+<p>Kitapçığın örneği 3, 1, 4'ü hem yığına hem kuyruğa koyup birer tane alıyor. Siz hepsini alın: <code>yineleDoğruysa(yığın.tane &gt; 0)</code> ile yığın boşalana kadar <code>al()</code>, kuyruk için <code>baştanAl()</code>. İki satırda iki sıra; hangisi hangisi, bakar bakmaz söyleyin. <code>tepe</code> (yığın) ve <code>başı</code> (kuyruk) almadan bakmanın yolu; onları da deneyin.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KII-4-I1 · Hepsini boşaltın</span>
+<span class="y">// Çıktı: &quot;yığın: 4 1 3&quot; ve &quot;kuyruk: 3 1 4&quot;</span>
+<span class="a">dez</span> yığın = <span class="t">Yığın</span>[<span class="t">Sayı</span>]()
+<span class="a">dez</span> kuyruk = <span class="t">Kuyruk</span>[<span class="t">Sayı</span>]()
+<span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>).herbiriİçin { s =&gt;
+  yığın.koy(s)
+  kuyruk.ekle(s)
+}
+satıryaz(yığın.al())        <span class="y">// 4 -- son giren</span>
+satıryaz(kuyruk.baştanAl()) <span class="y">// 3 -- ilk giren</span>
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>yığın: 4 1 3
+kuyruk: 3 1 4</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-4-I1"><code>alistirma-koco/kod/KII-4-I1/</code></a></p>
+</section>
+<section class="soru" id="KII-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KII-4-A1</span> Parantez dengesi</h3>
+<p>Yığının klasik işi: <code>"(()())"</code> dengeli, <code>"(()"</code> ve <code>")("</code> değil. Yazıyı harf harf gezin (<code>herbiriİçin</code>): açılış parantezini yığına koyun, kapanışta yığından bir tane alın; yığın boşken kapanış gelirse ya da sonunda yığın boş kalmazsa dengesiz. <code>dengeliMi(yazı: Yazı): İkil</code>; üç yazı için evet/hayır. Üç çeşit parantezle (<code>[{</code>) nasıl genişler?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>(()()): evet
+((): hayır
+)(: hayır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-4-A1"><code>alistirma-koco/kod/KII-4-A1/</code></a></p>
+</section>
+<section class="soru" id="KII-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KII-4-Z1</span> Öncelik sırası, ters yüz</h3>
+<p><code>ÖncelikSırası</code> &ldquo;en öncelikli önce&rdquo; verir; Scala'da öntanımlı öncelik <em>en büyük</em>. Şehirleri (uzaklık, ad) demetleriyle koyup <code>baştanAl</code> ile boşaltın: en uzak önce çıkar. Dijkstra en yakını ister (Bölüm V). (Dikkat: öncelik sırasında <code>tane</code> yok, <code>boyu</code> var.) Numara: uzaklığı eksi işaretiyle koyun (−uzaklık, ad); en büyük eksi = en yakın. İki sırayı da yazdırın. Demetler soldan karşılaştırılır: eşit uzaklıkta ad belirler.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>en uzak önce: Bolu(7) Sakarya(5) İzmit(2) Gebze(2)
+en yakın önce: İzmit(2) Gebze(2) Sakarya(5) Bolu(7)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-4-Z1"><code>alistirma-koco/kod/KII-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="KII-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KII-4-K1</span> Gişe kuyruğu</h3>
+<p>Bir gişe, beş müşteri; her biri (ad, işlem süresi) ile sırayla kuyruğa giriyor. Gişe kuyruğun başındakini alır, işlemi bitirir, sonrakine geçer. Her müşterinin <em>bekleme</em> süresini (gişeye gelene kadar geçen) ve ortalamayı yazdırın. Sonra aynı veriyi yığınla işleyin (son gelen önce): ortalama bekleme değişir mi, adil mi? Bir adım ötesi: en kısa işlemi önce alan bir gişe (ÖncelikSırası) ortalamayı ne yapar?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>kuyrukla:
+Ayşe: 0 dk bekledi
+Berk: 5 dk bekledi
+Ceren: 7 dk bekledi
+Deniz: 15 dk bekledi
+Ece: 16 dk bekledi
+ortalama: 8.6 dk
+yığınla:
+Ece: 0 dk bekledi
+Deniz: 4 dk bekledi
+Ceren: 5 dk bekledi
+Berk: 13 dk bekledi
+Ayşe: 15 dk bekledi
+ortalama: 7.4 dk</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KII-4-K1"><code>alistirma-koco/kod/KII-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

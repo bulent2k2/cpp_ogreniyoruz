@@ -1,0 +1,324 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar · Koco</div>
+  <div class="no">Bölüm I</div>
+  <h1>Kaplumbağayla İlk Adımlar</h1>
+  <p class="ozet">
+    Kitapçığın ilk bölümü dört yapıtaşını kaplumbağayla öğretiyor: tanım, dez/den, çıktısı olan işlev, yineleme; sonunda bir oyun. Burada dört konu, on dokuz alıştırma. Çizenler tuvalde, hesaplayanlar çıktı penceresinde: ikincilerin beklenen çıktısı var, kendi çıktınızla satır satır karşılaştırın. C++ cildinin I. bölümüyle aynı sorular bazen aynı sayılarla geliyor (Project Euler 1, 2, 3, 6, 9); iki dilde yan yana koyun.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">I.1</div>
+  <div class="govde">
+    <h2>Kendi komutunuz: tanım</h2>
+    <p><code>tanım kare(kenar: Sayı) = { ... }</code>: dört satır, ve kare artık bir komut. Kitapçığın çiçeği (on iki kare, 30'ar derece) ile sayaçlı yineleme <code>yineleDizinli</code> buradan. Bu konunun alıştırmaları çiziyor; biri de sayıyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3">kitapçık I.2: Kendi komutunuz</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/2-kaplumbaga-cekirdek-fikirler.md">temel-bilgiler 2: çekirdek fikirler (tanım)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: tanım (def)</a> <a href="https://ikojo.fly.dev/yardim/skala">iKojo Skala kılavuzu</a></p>
+    </div>
+
+<section class="soru" id="KI-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KI-1-I1</span> Bir de üçgen</h3>
+<p><code>kare</code> hazır. Yanına <code>üçgen(kenar: Sayı)</code> yazın: üç kere ileri, 120 derece dön. Sonra ikisiyle bir ev çizin: önce kare, üstüne üçgen çatı. Çatının yerine oturması için kareden sonra kaplumbağayı nereye getirmeli, hangi yöne çevirmeli? Kâğıda çizip düşünün; sonra kodlayın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KI-1-I1 · Bir de üçgen: üçgen&#x27;i yazın, ev çizin</span>
+<span class="a">tanım</span> kare(kenar: <span class="t">Sayı</span>) = {
+  yinele(<span class="n">4</span>) {
+    ileri(kenar)
+    sağ()
+  }
+}
+kare(<span class="n">100</span>)
+</code></pre>
+</figure>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Kenarı 100 olan bir kare, üstünde kenarı 100 olan eşkenar üçgen çatı: bir ev.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-1-I1"><code>alistirma-koco/kod/KI-1-I1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KI-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-1-A1</span> Yel değirmeni, sonra çiçek</h3>
+<p>Dört kare, her biri 90 derece dönük: bir yel değirmeni. Sonra kitapçığın çiçeği gibi: on iki üçgen, 30'ar derece. İkisini aynı tuvale, biri sola biri sağa (<code>atla</code>) çizin. Dönüş açısı ile tekrar sayısının çarpımı iki desende de kaç? Bu çarpım 360 olmazsa ne olur, deneyin.</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Solda dört kareden bir yel değirmeni, sağda on iki üçgenden bir çiçek; iki desende de açı × tekrar = 360.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-1-A1"><code>alistirma-koco/kod/KI-1-A1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KI-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-1-A2</span> Sayaçlı yineleme, sayarak</h3>
+<p>Kitapçığın <code>yineleDizinli(10) { k => kare(20 + 15 * k) }</code> satırı. Beş kare çizin ama her karenin kenarını da çıktı penceresine yazın: <code>satıryaz(s"$k: $kenar")</code>. k 0'dan mı başlıyor, 1'den mi? Son karenin kenarı kaç? Beklenen çıktıyla karşılaştırın; çizim de tuvalde.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>0: 20
+1: 35
+2: 50
+3: 65
+4: 80</code></pre>
+</figure>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Aynı köşeden başlayan, kenarları 20, 35, 50, 65, 80 olan beş iç içe kare.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-1-A2"><code>alistirma-koco/kod/KI-1-A2/</code></a></p>
+</section>
+<section class="soru" id="KI-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KI-1-Z1</span> Üç sarmal</h3>
+<p>Kare sarmal: her adımda biraz daha uzun yürü, 90 derece dön: <code>yineleDizinli(20) { k => ileri(8 * (k + 1)); sağ() }</code>. Sonra aynı kodu <code>sağ(120)</code> ile (üçgen sarmal) ve <code>sağ(60)</code> ile (altıgen sarmal) çizin, üçünü yan yana koyun. Hangisi daha sık sarıyor, neden? Bir de <code>sağ(89)</code> deneyin: kare neden &ldquo;dönmeye&rdquo; başlıyor?</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Soldan sağa kare, üçgen ve altıgen sarmallar; açı küçüldükçe sarmal daha çok kol (6) ve daha yavaş açılan bir biçim alır. 89 derece: her turda bir derece kayan, dönen bir kare.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-1-Z1"><code>alistirma-koco/kod/KI-1-Z1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KI-1-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KI-1-K1</span> Kâğıttan koda</h3>
+<p>Kitapçığın &ldquo;Takım işi&rdquo;: biriniz kâğıda makul bir desen çizsin (iç içe üçgenler, bir merdiven, bir yel değirmeni, bir ızgara), öteki onu <code>tanım</code>'larla koda çevirsin; sonra roller değişsin. Kural: her tekrar eden parça bir <code>tanım</code> olsun, hiçbir sayı iki kere yazılmasın. Bu dizin sizin; <code>ana.kojo</code>'ya iki desenin kodunu koyun.</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Sizin deseniniz.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-1-K1"><code>alistirma-koco/kod/KI-1-K1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.2</div>
+  <div class="govde">
+    <h2>Değerler ve türler; dez / den</h2>
+    <p><code>dez</code> ad takar ve bir daha değişmez; <code>den</code> mecbur kalınca. Türler çoğu zaman yazılmaz ama hep vardır: Sayı, Kesir, Yazı, Harf, İkil, Uzun, İriSayı. Ve kardeş kitapçıktan tanıdık bir hata: taşma. Bu konunun alıştırmaları çıktı penceresine yazıyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3">kitapçık I.3: Değerler ve türler</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/6-skala-kisa-kilavuz.md">Skala kılavuzu: veri türleri</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/4-kavramsal-makine.md">temel-bilgiler 4: kavramsal makine</a> <a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">C++ cildi I.2: taşma</a></p>
+    </div>
+
+<section class="soru" id="KI-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KI-2-I1</span> Yazı kalıbı</h3>
+<p>Kitapçığın &ldquo;değerler&rdquo; örneği olduğu gibi. <code>kenar</code>'ı 100 yapın ve çalıştırın: üç satır nasıl değişiyor? Sonra son satırdaki yazı kalıbına üçüncü bir değer ekleyin: <code>${kenar * boşluk}</code>. Kıvrık parantez ne zaman gerekiyor, ne zaman <code>$ad</code> yetiyor?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KI-2-I1 · Yazı kalıbı: kenar = 100, sonra kalıba çarpımı ekleyin</span>
+<span class="a">dez</span> kenar = <span class="n">80</span>
+<span class="a">dez</span> boşluk = kenar / <span class="n">4</span>
+<span class="a">dez</span> ad = <span class="s">&quot;kelebek&quot;</span>
+satıryaz(ad)
+satıryaz(kenar + boşluk)
+satıryaz(<span class="s">s&quot;kenar $kenar, boşluk $boşluk&quot;</span>)
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>kelebek
+125
+kenar 100, boşluk 25, çarpım 2500</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-2-I1"><code>alistirma-koco/kod/KI-2-I1/</code></a></p>
+</section>
+<section class="soru" id="KI-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-2-A1</span> Taşma avı</h3>
+<p>Kitapçıkta 2000'in küpü eksi çıkıyor: Sayı 32 bitlik bir kutu. Peki küpü Sayı'ya sığan en büyük n kaç? 1289, 1290, 1291, 1292 için küpü hem <code>Sayı</code> hem <code>Uzun</code> olarak yazdırın (<code>dez u: Uzun = n</code> deyince çarpım Uzun'da yapılır). Hangi satırda iki sütun ayrışıyor? Sayı'nın sınırı <code>Sayı.Enİrisi</code>; 1290³ onun altında mı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1289: 2141700569 2141700569
+1290: 2146689000 2146689000
+1291: -2143282125 2151685171
+1292: -2138278208 2156689088
+Sayı.Enİrisi = 2147483647</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-2-A1"><code>alistirma-koco/kod/KI-2-A1/</code></a></p>
+</section>
+<section class="soru" id="KI-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-2-A2</span> Hangi tür?</h3>
+<p>Her satır bir soru: <code>7 / 2</code> kaç, <code>7.0 / 2</code> kaç, <code>7 % 2</code> kaç? <code>"kelebek".boyu</code>? <code>'B'</code> bir Harf; <code>5 &gt; 3</code> bir İkil. Önce kâğıda tahminlerinizi yazın, sonra programı tamamlayıp çalıştırın. İkil'i doğrudan yazdırmak yerine <code>eğer (5 &gt; 3) "evet" yoksa "hayır"</code> ile yazdırın (iKojo İngilizce <code>true</code> basar, Koco <code>doğru</code>; biz ikisine de karışmayalım).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>3
+3.5
+1
+7
+B
+evet</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-2-A2"><code>alistirma-koco/kod/KI-2-A2/</code></a></p>
+</section>
+<section class="soru" id="KI-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KI-2-Z1</span> Değişmezi değiştirmek</h3>
+<p>Program bilerek derlenmiyor: <code>dez</code> ile tanımlanan <code>sayaç</code>'a yeni değer veriliyor. Hata iletisini okuyun (iKojo altta gösterir; &ldquo;reassignment to val&rdquo; arayın). Düzeltmenin iki yolu var: <code>den</code> yapmak ya da yeni bir <code>dez</code> tanımlamak. İkisini de deneyin; hangisi kitapçığın &ldquo;önce dez&rdquo; kuralına uyuyor? Sonra son iki satır: Sayı'nın en büyüğüne 1 eklenince ne olur?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KI-2-Z1 · Değişmezi değiştirmek (bilerek derlenmiyor)</span>
+<span class="y">// Çıktı: 11, 2147483647, -2147483648</span>
+<span class="a">dez</span> sayaç = <span class="n">10</span>
+sayaç = sayaç + <span class="n">1</span>
+satıryaz(sayaç)
+<span class="a">dez</span> enBüyük = <span class="t">Sayı</span>.Enİrisi
+satıryaz(enBüyük)
+satıryaz(enBüyük + <span class="n">1</span>)
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>11
+2147483647
+-2147483648</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-2-Z1"><code>alistirma-koco/kod/KI-2-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.3</div>
+  <div class="govde">
+    <h2>Çıktısı olan işlevler; ilk Project Euler</h2>
+    <p><code>tanım topla(a: Sayı, b: Sayı) = a + b</code>: gövde bir deyiş, değeri neyse çıktı o. <code>eğer</code> de bir deyiş. Ve ilk Project Euler çözümü, döngüsüz: <code>(1 |- 1000).ele(...).topla</code>. Bu konunun beş alıştırması da sayı veriyor; beklenen çıktılarla karşılaştırın, sonra Project Euler'e girin.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3">kitapçık I.4: Çıktısı olan işlevler</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/3-bilisim-temelleri.md">temel-bilgiler 3: bilişim temelleri (işlev)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">ders 5: PE 1, C++&#x27;ta</a> <a href="https://projecteuler.net/archives">Project Euler</a></p>
+    </div>
+
+<section class="soru" id="KI-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KI-3-I1</span> İki işlev daha</h3>
+<p>Kitapçığın <code>topla</code>, <code>bölünüyorMu</code> ve <code>işaret</code>'i hazır. İki işlev ekleyin: <code>mutlak(s: Sayı)</code> (eksiyse ters çevir) ve <code>enİri3(a, b, c)</code> (üç sayının en büyüğü; <code>enİri2</code>'yi iki kere kullanın). Beşini de çağırıp yazdırın. İkil döndüren <code>bölünüyorMu</code>'yu yine <code>eğer</code> ile &ldquo;bölünür/bölünmez&rdquo;e çevirin.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KI-3-I1 · İki işlev daha: mutlak ve enİri3</span>
+<span class="y">// Çıktı: 8, bölünür, bölünmez, eksi, 5, 9  (ayrı satırlarda)</span>
+<span class="a">tanım</span> topla(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = a + b
+<span class="a">tanım</span> bölünüyorMu(sayı: <span class="t">Sayı</span>, bölen: <span class="t">Sayı</span>) = sayı % bölen == <span class="n">0</span>
+<span class="a">tanım</span> enİri2(a: <span class="t">Sayı</span>, b: <span class="t">Sayı</span>) = <span class="a">eğer</span> (a &gt; b) a <span class="a">yoksa</span> b
+<span class="a">tanım</span> işaret(s: <span class="t">Sayı</span>) =
+  <span class="a">eğer</span> (s &gt; <span class="n">0</span>) <span class="s">&quot;artı&quot;</span>
+  <span class="a">yoksa</span> <span class="a">eğer</span> (s &lt; <span class="n">0</span>) <span class="s">&quot;eksi&quot;</span>
+  <span class="a">yoksa</span> <span class="s">&quot;sıfır&quot;</span>
+satıryaz(topla(<span class="n">3</span>, <span class="n">5</span>))
+satıryaz(<span class="a">eğer</span> (bölünüyorMu(<span class="n">15</span>, <span class="n">5</span>)) <span class="s">&quot;bölünür&quot;</span> <span class="a">yoksa</span> <span class="s">&quot;bölünmez&quot;</span>)
+satıryaz(<span class="a">eğer</span> (bölünüyorMu(<span class="n">16</span>, <span class="n">5</span>)) <span class="s">&quot;bölünür&quot;</span> <span class="a">yoksa</span> <span class="s">&quot;bölünmez&quot;</span>)
+satıryaz(işaret(-<span class="n">5</span>))
+<span class="y">// mutlak(-5) ve enİri3(4, 9, 7)</span>
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>8
+bölünür
+bölünmez
+eksi
+5
+9</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-3-I1"><code>alistirma-koco/kod/KI-3-I1/</code></a></p>
+</section>
+<section class="soru" id="KI-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-3-A1</span> Project Euler 1, üç kere</h3>
+<p>Kitapçığın tek deyişlik çözümünü bir işleve koyun: <code>pe1(sınır: Sayı)</code>. Üç kere çağırın: 1000 (233168 çıkmalı), 10 000, ve 1000 ama bu sefer 3, 5 <em>ya da 7</em>'ye bölünenler. <code>|-</code> ile <code>|-|</code> farkına dikkat: sınır dahil mi?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>233168
+23331668
+271066</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-3-A1"><code>alistirma-koco/kod/KI-3-A1/</code></a></p>
+</section>
+<section class="soru" id="KI-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-3-A2</span> Project Euler 6</h3>
+<p><a href="https://projecteuler.net/problem=6">PE 6</a>: ilk yüz sayının toplamının karesi ile karelerinin toplamı arasındaki fark. İki zincir yeter: <code>(1 |-| 100).topla</code> ve <code>(1 |-| 100).işle(s => s * s).topla</code>. Yanıt 25164150. Sonra 1000 için deneyin: Sayı'ya sığıyor mu? (Toplamın karesi 2,5·10¹¹.) Hangi türe geçmeli?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>25164150
+250166416500</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-3-A2"><code>alistirma-koco/kod/KI-3-A2/</code></a></p>
+</section>
+<section class="soru" id="KI-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KI-3-Z1</span> Klasik tuzağı ölçün</h3>
+<p>Kitapçığın &ldquo;klasik tuzak&rdquo;ı: 3'e bölünenler + 5'e bölünenler, 15'e bölünenleri iki kere sayar. Tuzağı bilerek kurun: iki ayrı toplamı toplayın, doğru yanıtla farkını alın. (Toplama <code>yanlış</code> adını veremezsiniz: Koco'da anahtar sözcük, tıpkı <code>doğru</code> gibi; <code>yanlışToplam</code> deyin.) Fark neye eşit olmalı? Üçüncü bir zincirle onu da hesaplayıp eşitliği gösterin. 1000 için üç sayı.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>yanlış: 266333
+doğru: 233168
+fark: 33165
+15&#x27;e bölünenler: 33165</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-3-Z1"><code>alistirma-koco/kod/KI-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="KI-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KI-3-K1</span> Project Euler 9</h3>
+<p><a href="https://projecteuler.net/problem=9">PE 9</a>: a &lt; b &lt; c, a + b + c = 1000 ve a² + b² = c² olan tek üçlü; çarpımı isteniyor. İki iç içe aralık: a için 1'den 1000'e, b için a'dan 1000'e; c = 1000 − a − b. Scala'nın <code>için ... ver</code> yazımı tam buna göre (Skala kılavuzunda); <code>eğer</code> ile süzün. Çarpımı yazdırın; sonra Project Euler'de hesap açıp 1, 6 ve 9'u gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>a=200 b=375 c=425 çarpım 31875000</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-3-K1"><code>alistirma-koco/kod/KI-3-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.4</div>
+  <div class="govde">
+    <h2>İlk oyununuz</h2>
+    <p>Kitapçığın tahmin oyunu: <code>rastgele</code>, <code>sayıOku</code>, <code>yineleDoğruysa</code> ve mecbur kalınan üç <code>den</code>. Asıl ders oyunun arkasındaki hesap: yedi hak neden yeter? İkili arama. Bu konunun alıştırmaları o hesabı makineye yaptırıyor; biri de oyunu tersine çeviriyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3">kitapçık I.5: İlk oyununuz</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/7-oyun-tarifleri.md">temel-bilgiler 7: oyun tarifleri</a> <a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7">C++ cildi I.5: tahmin oyunu</a></p>
+    </div>
+
+<section class="soru" id="KI-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KI-4-I1</span> Kaç hak yeter?</h3>
+<p>Kitapçığın &ldquo;Deneyin&rdquo;i: sınır 1000 olsa kaç hak gerekir? Önce <code>yineleDoğruysa</code> ile: 1'den başlayıp sınırı geçene kadar ikiye katlayın, kaç katlama yaptığınızı sayın. <code>hak(sınır: Sayı)</code> işlevini yazın; 100, 1000 ve 1 000 000 için yazdırın. Sonra <code>log2tabanlı</code> ile karşılaştırın: hangisi tam sayı veriyor?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>100 için 7 hak
+1000 için 10 hak
+1000000 için 20 hak</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-4-I1"><code>alistirma-koco/kod/KI-4-I1/</code></a></p>
+</section>
+<section class="soru" id="KI-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KI-4-A1</span> Bilgisayar bulsun</h3>
+<p>Oyunu tersine çevirmeden önce bilgisayara kendi kendine oynatın: tutulan sayı 73 olsun (şimdilik rastgele değil, sınanabilsin diye). Program her turda aralığın ortasını söylesin, kendi tahminini 73'le karşılaştırıp &ldquo;büyük&rdquo; ya da &ldquo;küçük&rdquo; desin ve aralığı daraltsın. Her tahmini yazdırın; kaç adımda buldu? Beklenen çıktıyla aynı adımları atmalısınız: orta = (altSınır + üstSınır) / 2.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>50 büyük
+75 küçük
+62 büyük
+68 büyük
+71 büyük
+73 bildim, 6 adım</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-4-A1"><code>alistirma-koco/kod/KI-4-A1/</code></a></p>
+</section>
+<section class="soru" id="KI-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KI-4-Z1</span> En kötü durum</h3>
+<p>Yedi hak <em>her</em> sayı için yeter mi? KI-4-A1'in aramasını bir işleve koyun: <code>adımSayısı(tutulan: Sayı, sınır: Sayı): Sayı</code>, yazdırmadan yalnız adım saysın. Sonra 1'den 100'e bütün sayılar için çağırıp en büyüğünü bulun (<code>(1 |-| 100).işle(...).enİrisi</code>). 1000 ve 1 000 000 için de. KI-4-I1'in hesabıyla uyuşuyor mu?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>100: en çok 7 adım
+1000: en çok 10 adım
+1000000: en çok 20 adım</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-4-Z1"><code>alistirma-koco/kod/KI-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="KI-4-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KI-4-Z2</span> Tahmini tersine çevirin</h3>
+<p>Kitapçığın beşinci alıştırması: siz tutun, bilgisayar bulsun. Program ortayı söylesin, siz <code>satıroku</code> ile <code>b</code> (daha büyük), <code>k</code> (daha küçük) ya da <code>=</code> girin. KI-4-A1'in döngüsü, yalnız karşılaştırma yerine sizin yanıtınız. Sınamak için <code>girdi</code> dosyası hazır: 73'ü tutan bir oyuncunun yanıtları. iKojo'da ise gerçekten oynayın; yanlış yanıt verirseniz program ne yapıyor?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: b k b b b =</span></figcaption>
+<pre><code>50?
+75?
+62?
+68?
+71?
+73?
+73 bildim, 6 adım</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-4-Z2"><code>alistirma-koco/kod/KI-4-Z2/</code></a></p>
+</section>
+<section class="soru" id="KI-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KI-4-K1</span> Project Euler 2 ve 3</h3>
+<p>Kitapçığın üçüncü ve dördüncü alıştırmaları, bu sefer kodla. <a href="https://projecteuler.net/problem=2">PE 2</a>: dört milyonu aşmayan çift Fibonaççi sayılarının toplamı; <code>den</code> ve <code>yineleDoğruysa</code> ile (Bölüm IV'te bambaşka yazacağız). <a href="https://projecteuler.net/problem=3">PE 3</a>: 600851475143'ün en büyük asal çarpanı; sayı Sayı'ya sığmaz, <code>Uzun</code> gerekir (sabitin sonuna <code>L</code>). En küçük bölenden başlayıp bölebildikçe bölün; kalan son sayı yanıt. İki sayıyı yazdırın, PE'ye gönderin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>PE2: 4613732
+PE3: 6857</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KI-4-K1"><code>alistirma-koco/kod/KI-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

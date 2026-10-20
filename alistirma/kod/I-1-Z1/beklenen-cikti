@@ -1,0 +1,3 @@
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+'B' + 1 = 67
+char('B' + 1) = C

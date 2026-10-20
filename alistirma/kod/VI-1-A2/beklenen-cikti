@@ -1,0 +1,4 @@
+fib(30) = 832040
+belleksiz: 2692537 çağrı
+map ile  : 59 çağrı
+vector ile: 59 çağrı

@@ -1,0 +1,72 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar · Koco</div>
+  <div class="no">Hazırlık</div>
+  <h1>iKojo&#x27;da, Hiçbir Şey Yüklemeden</h1>
+  <p class="ozet">
+    Koco cildinde hazırlık kısa: kaplumbağa zaten yumuşak bir giriş. Tek konu, beş alıştırma; hepsi tarayıcıda, <a href="https://ikojo.fly.dev/">ikojo.fly.dev</a>'de. Amaç kitapçığın I.1 komut tablosunu elinize alıştırmak: ileri, dön, zıpla, renk. Bu cildin bütün alıştırmaları iKojo'da (ya da Koco'da) çalışır; konsola yazan alıştırmaların beklenen çıktısı var, çizenlerin ise tuvalde ne görmeniz gerektiğini anlatan bir satır.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">H.1</div>
+  <div class="govde">
+    <h2>Kaplumbağayı tanımak</h2>
+    <p>Kitapçığın ilk sayfası: <code>ileri(100)</code>, <code>sağ()</code> ve <code>yinele(4)</code>. Beş alıştırma, hepsi çizim; kodu iKojo'ya yapıştırıp Çalıştır'a basın. Her birinden sonra bir sayıyı değiştirip yeniden çalıştırmak, bu cildin ana alışkanlığı.</p>
+    <p class="merdiven"><span class="basamak isinma">2</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702">kitapçık: Kılavuz (kurulum, iKojo)</a> <a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3">kitapçık I.1: Kaplumbağayla tanışın</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/kocoya-davet.md">Koco&#x27;ya davet</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/2-kaplumbaga-cekirdek-fikirler.md">temel-bilgiler 2: çekirdek fikirler</a> <a href="https://ikojo.fly.dev/yardim/komutlar">iKojo komut kılavuzu</a></p>
+    </div>
+
+<section class="soru" id="KH-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KH-1-I1</span> İlk çizgi, sonra L</h3>
+<p>Kitapçığın ilk iki satırı: yukarı bir çizgi, sonra doğuya dön. Üçüncü bir satır ekleyin: kaplumbağa 50 adım daha yürüsün. Tuvalde ters bir L belirmeli. Şimdi sorun: ilk satırı <code>ileri(100)</code> yerine <code>geri(100)</code> yapınca L nereye döner? Çalıştırmadan tahmin edin, sonra çalıştırın.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KH-1-I1 · İlk çizgi, sonra L</span>
+ileri(<span class="n">100</span>)   <span class="y">// 100 adım ileri</span>
+sağ()        <span class="y">// 90 derece sağa dön</span>
+<span class="y">// üçüncü satır sizin</span>
+</code></pre>
+</figure>
+<p class="gorunum"><span class="etk">Tuvalde:</span> 100 adımlık dikey bir çizgi, üst ucundan sağa uzanan 50 adımlık yatay bir çizgi; kaplumbağa doğuya bakıyor.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-I1"><code>alistirma-koco/kod/KH-1-I1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KH-1-I2">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">KH-1-I2</span> Kitapçığın sürprizi</h3>
+<p>Kare kodunda iki sayı var: 4 ve 100; bir de <code>sağ()</code>'ın gizli 90'ı. Kitapçığın &ldquo;Deneyin&rdquo;ini yapın: <code>yinele(3)</code> ile <code>sağ(120)</code>, <code>yinele(6)</code> ile <code>sağ(60)</code>, sonra <code>yinele(5)</code> ile <code>sağ(144)</code>. Sonuncusu neden kapalı bir şekil veriyor, üstelik beş köşeli? İpucu: dönüşlerin toplamı kaç derece? 360 değil.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// KH-1-I2 · Kitapçığın sürprizi: 4 ve 90&#x27;ı değiştirin</span>
+yinele(<span class="n">4</span>) {
+  ileri(<span class="n">100</span>)
+  sağ()
+}
+</code></pre>
+</figure>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Beş köşeli bir yıldız; kaplumbağa başladığı yerde, başladığı yöne bakıyor (5 × 144 = 720: iki tam tur).</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-I2"><code>alistirma-koco/kod/KH-1-I2/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KH-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KH-1-A1</span> Renkli kare</h3>
+<p>Kitapçığın komut tablosundan dört komut: <code>kalemRenginiKur</code>, <code>boyamaRenginiKur</code>, <code>kalemKalınlığınıKur</code> ve <code>hızıKur</code>. Kareyi mavi kalemle, sarı dolguyla, kalın çizgiyle ve hızlı çizdirin. Sonra <code>kalemRenginiKur(rastgeleRenk)</code> satırını <em>döngünün içine</em> alın: dört kenar dört renk olur mu?</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> İçi sarı, kenarları kalın bir kare; döngü içindeki rastgeleRenk ile her kenar başka renk.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-A1"><code>alistirma-koco/kod/KH-1-A1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KH-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KH-1-A2</span> Zıpla ve atla</h3>
+<p>İki kare yan yana, aralarında çizgi olmadan. <code>zıpla(150)</code> kalemi kaldırıp yürür; <code>atla(x, y)</code> ise çizmeden verilen noktaya gider. Birinci kareden sonra zıplayın, ikinciyi çizin; sonra <code>atla(-150, 0)</code> ile sola gidip üçüncüyü çizin. Dikkat: zıpladıktan sonra kaplumbağa hangi yöne bakıyor? Kareler yan yana mı çıktı, yoksa biri yukarıda mı?</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Üç eş kare yan yana (x = -150, 0, 150), aralarında çizgi yok. sağ()/sol() olmadan ikinci kare yukarıya çıkar: kaplumbağa kuzeye bakıyordu.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-A2"><code>alistirma-koco/kod/KH-1-A2/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+<section class="soru" id="KH-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KH-1-Z1</span> Kesik çizgili kare</h3>
+<p>Kesik çizgi: on kere &ldquo;10 adım çiz, 10 adım zıpla&rdquo;. Bunu bir karenin dört kenarına uygulayın: <code>yinele</code>'nin içinde <code>yinele</code>. İç döngü bitince kaplumbağa kenarın sonunda mı? Kaç tane kısa çizgi çizildi (sayın: 4 × ?)? Sonra zıplama boyunu 5 yapıp kareyi yeniden çizin: kenar uzunluğu değişti mi, çizgi sayısı mı?</p>
+<p class="gorunum"><span class="etk">Tuvalde:</span> Kenarı 200 adım olan, her kenarı on kısa çizgiden oluşan kesik çizgili bir kare: 40 kısa çizgi. Zıplama 5 olunca kenar 150'ye iner, çizgi sayısı yine 40.</p>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-Z1"><code>alistirma-koco/kod/KH-1-Z1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

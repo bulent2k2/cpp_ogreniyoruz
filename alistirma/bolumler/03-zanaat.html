@@ -413,15 +413,17 @@ köke kadar: 17984 asal</code></pre>
 </section>
 <section class="soru" id="III-5-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-5-Z1</span> Tekrar var mı, üç yol, üç boy</h3>
-<p>Kitapçığın üçüncü alıştırması. II-3-A1'in küme çözümüne iki rakip ekleyin: sıralayıp komşuları karşılaştırmak (<code>sort</code>) ve iç içe iki döngü. Veri üretimi hazır (tekrar en sonda). Üç boy: 10&nbsp;000, 100&nbsp;000, 1&nbsp;000&nbsp;000 &mdash; iç içe döngüyü bir milyonda çalıştırmayın, 100&nbsp;000'de bile bekleyeceksiniz. Sonuçlar <code>cout</code>'a, süreler <code>cerr</code>'e; tabloyu yorum olarak dosyanın başına yazın. Boy on katına çıkınca süre kaç katına çıkıyor? Üç yöntem için üç ayrı yanıt var.</p>
+<p>Kitapçığın üçüncü alıştırması. II-3-A1'in küme çözümüne iki rakip ekleyin: sıralayıp komşuları karşılaştırmak (<code>sort</code>) ve iç içe iki döngü. Veri üretimi hazır (tekrar en sonda). Dört boy: 10&nbsp;000, 30&nbsp;000, 100&nbsp;000, 1&nbsp;000&nbsp;000 &mdash; iç içe döngü yalnız ilk ikisinde; 100&nbsp;000'de yarım dakika, bir milyonda saatler sürer (deneyin, sonra <code>Ctrl-C</code>). Sonuçlar <code>cout</code>'a, süreler <code>cerr</code>'e; tabloyu yorum olarak dosyanın başına yazın. Boy üç katına çıkınca döngünün süresi kaç katına çıkıyor? On katına çıkınca kümenin ve sıralamanın? Üç yöntem, üç ayrı yanıt.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>küme    n=10000: tekrar var
 sırala  n=10000: tekrar var
 döngü   n=10000: tekrar var
+küme    n=30000: tekrar var
+sırala  n=30000: tekrar var
+döngü   n=30000: tekrar var
 küme    n=100000: tekrar var
 sırala  n=100000: tekrar var
-döngü   n=100000: tekrar var
 küme    n=1000000: tekrar var
 sırala  n=1000000: tekrar var</code></pre>
 </figure>

@@ -33,10 +33,10 @@ void olc(const char* ad, F f, int n) {
 }
 
 int main() {
-  for (int n : {10000, 100000, 1000000}) {
+  for (int n : {10000, 30000, 100000, 1000000}) {
     olc("küme   ", tekrarKume, n);
     olc("sırala ", tekrarSirala, n);
-    if (n <= 100000) olc("döngü  ", tekrarDongu, n);
+    if (n <= 30000) olc("döngü  ", tekrarDongu, n);
   }
   return 0;
 }

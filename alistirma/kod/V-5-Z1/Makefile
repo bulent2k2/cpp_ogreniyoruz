@@ -1,4 +1,4 @@
-# V-5-Z1 · Round Trip
+# V-5-Z1 · Gidiş dönüş
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

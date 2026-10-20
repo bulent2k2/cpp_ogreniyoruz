@@ -1,4 +1,4 @@
-# VI-3-A1 · Dice Combinations
+# VI-3-A1 · Zar kombinasyonları
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

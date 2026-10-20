@@ -8,7 +8,7 @@ using namespace std;
 using Nokta = int;
 template <class T> using Dizi = vector<T>;
 
-// V-9-A1 · High Score (CSES 1673)
+// V-9-A1 · Yüksek skor (CSES 1673)
 // Çıktı: en büyük skor ya da -1
 using S = long long;
 const S SONSUZ{(S)1e18};

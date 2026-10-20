@@ -1,4 +1,4 @@
-# IV-6-K1 · Grid Paths
+# IV-6-K1 · Izgara yolları
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

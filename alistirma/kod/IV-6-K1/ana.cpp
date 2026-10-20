@@ -1,4 +1,4 @@
-// IV-6-K1 · Grid Paths (CSES 1625)
+// IV-6-K1 · Izgara yolları (CSES 1625)
 // Girdi: 48 karakterlik desen. Çıktı: "uyan patika: 201"
 #include <iostream>
 #include <string>

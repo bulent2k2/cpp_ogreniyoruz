@@ -1,4 +1,4 @@
-# IV-3-K1 · Apple Division, tam boy
+# IV-3-K1 · Elma paylaşımı, tam boy
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

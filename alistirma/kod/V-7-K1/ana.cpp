@@ -8,7 +8,7 @@ using namespace std;
 using Nokta = int;
 template <class T> using Dizi = vector<T>;
 
-// V-7-K1 · Flight Discount (CSES 1195)
+// V-7-K1 · Uçuş indirimi (CSES 1195)
 // Çıktı: en ucuz bedel
 using U = long long;
 const U SONSUZ{(U)1e18};

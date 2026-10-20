@@ -490,7 +490,7 @@ geç: 4 çözüm, 55987 çağrı</code></pre>
 
 <section class="soru" id="IV-6-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-6-I1</span> Tabloyu üretin</h3>
-<p>Kitapçığın karmaşıklık tablosunu program yazdırsın: n = 20, 1000, 10⁶ için <code>log₂n</code>, <code>n</code>, <code>n·log₂n</code>, <code>n²</code> ve (yalnız n = 20 için) <code>2ⁿ</code>. Değerleri tam sayı olarak, <code>long long</code> ile. Sonra kaba kuralı uygulayın: her satırın yanına bir saniyede (10⁸ işlem) sığıp sığmadığını yazın.</p>
+<p>Kitapçığın karmaşıklık tablosunu program yazdırsın: n = 20, 1000, 10⁶ için <code>log₂n</code>, <code>n</code>, <code>n·log₂n</code>, <code>n²</code> ve (yalnız n = 20 için) <code>2ⁿ</code>. Değerleri tam sayı olarak, <code>long long</code> ile; <code>log₂n</code>'i en yakın tam sayıya yuvarlayın (<code>round</code>; 1000 için 10). Sonra kaba kuralı uygulayın: her satırın yanına bir saniyede (10⁸ işlem) sığıp sığmadığını yazın.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>n=20

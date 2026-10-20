@@ -5,7 +5,7 @@ Alıştırma defterini yapan betik. (kitapcik/yap.py'nin kardeşi.)
 
 Girdi : ../kitapcik/ortak.css + ek.css + bolumler/*.html (gövde parçaları)
 Çıktı : cikti/<dosya>.html       -> her biri tek başına yayımlanabilir (artifact)
-        cikti/kitapcik-tam.html  -> hepsi bir arada, PDF için
+        cikti/defter-tam.html    -> yazılmış bölümler bir arada, PDF için
 
 Kullanım:  python3 alistirma/yap.py
 """
@@ -64,7 +64,9 @@ BOLUMLER = [
      "Izgara yolları, zar dizileri, bozuk paralar, kanıt ve yola devam."),
 ]
 
-SIRA = [b[0] for b in BOLUMLER]
+# Yalnız yazılmış bölümler sayfaya, şeride ve birleşik belgeye girer;
+# BOLUMLER'deki ötekiler henüz başlık.
+SIRA = [b[0] for b in BOLUMLER if (KOK / "bolumler" / f"{b[0]}.html").exists()]
 AD = {b[0]: b[1] for b in BOLUMLER}
 BAS = {b[0]: b[2] for b in BOLUMLER}
 
@@ -147,6 +149,8 @@ def resimleri_goem(metin: str) -> str:
 def artifact_yaz(baglantilar: dict[str, str]) -> None:
     """Her bölüm için tek başına yayımlanabilir dosya."""
     for slug, _kisa, baslik, _tanit in BOLUMLER:
+        if slug not in SIRA:
+            continue
         icerik = resimleri_goem(kur(slug, baglantilar, tam=False))
         html = (
             f"<title>{baslik}</title>\n{FONT}\n"
@@ -203,7 +207,7 @@ def tam_yaz() -> None:
         f'<div class="sayfa">\n' + "\n".join(parcalar) + "\n</div>\n"
         + kopyala_betigi() + "</body>\n</html>\n"
     )
-    (CIKTI / "kitapcik-tam.html").write_text(html, encoding="utf-8")
+    (CIKTI / "defter-tam.html").write_text(html, encoding="utf-8")
 
 
 if __name__ == "__main__":
@@ -218,4 +222,4 @@ if __name__ == "__main__":
             baglantilar[k] = v.strip()
     artifact_yaz(baglantilar)
     tam_yaz()
-    print(f"{len(BOLUMLER)} bölüm + tam belge yazıldı -> {CIKTI}")
+    print(f"{len(SIRA)} bölüm + tam belge yazıldı -> {CIKTI}")

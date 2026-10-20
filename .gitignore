@@ -12,6 +12,8 @@ code-deneme1.dSYM
 kitapcik/cikti/
 kitapcik-koco/cikti/
 alistirma/cikti/
+alistirma/kod/**/prog-O*
+alistirma/kod/**/test-ciktisi
 __pycache__/
 *.pyc
 # playwright kurulumu (bkz. kitapcik/README.md, Gerekli araçlar)

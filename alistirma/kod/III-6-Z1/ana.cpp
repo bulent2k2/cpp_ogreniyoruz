@@ -14,8 +14,8 @@ int main() {
       int c{0};
       if (i - 1 >= 0 and g[i - 1][j] == '#') ++c;
       if (i + 1 < a and g[i + 1][j] == '#') ++c;
-      if (j - 1 >= 0 and g[i][j - 1] == '#') ++c;
-      if (j + 1 <= b and g[i][j + 1] == '#') ++c;
+      if (j - 1 > 0 and g[i][j - 1] == '#') ++c;
+      if (j + 1 < b and g[i][j + 1] == '#') ++c;
       cout << c;
     }
     cout << endl;

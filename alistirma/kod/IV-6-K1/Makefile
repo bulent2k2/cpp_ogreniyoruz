@@ -4,7 +4,7 @@
 hedef: derle calistir
 
 derle:
-	g++ -std=c++23 -Wall ana.cpp -o prog
+	g++ -std=c++23 -Wall -O2 ana.cpp -o prog
 
 calistir: derle
 	./prog < girdi

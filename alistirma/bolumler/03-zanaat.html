@@ -312,7 +312,7 @@ ostream&amp; dout = yaz ? cout : nout;
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-4-A1</span> Küçülterek</h3>
 <p>Program kırk sayının tek olanlarını topluyor; beklenen çıktıyla uyuşmuyor. Kırk sayıya bakarak hatayı bulmak zor. Kitapçığın yöntemi: <code>girdi</code>'yi kopyalayıp yarıya indirin, hata duruyor mu? Yine yarıya. Üç dört adımda iki üç sayıya iner ve hata görünür. Hatayı bulunca girdiyi geri koyun (<code>git checkout girdi</code> ya da yedek), <code>make test</code>.</p>
 <figure class="kod kopyalanmaz dar">
-<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 40 37 74 10 47 84 20 57 94 30 67 3 40 77 13 50 87 23 60 97 33 70 6 43 80 16 53 90 26 63 100 36 73 9 46 83 19 56 93 29 66</span></figcaption>
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 40 66 29 93 56 19 83 46 9 73 36 100 63 26 90 53 16 80 43 6 70 33 97 60 23 87 50 13 77 40 3 67 30 94 57 20 84 47 10 74 37</span></figcaption>
 <pre><code>Teklerin toplamı: 1006</code></pre>
 </figure>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-4-A1"><code>alistirma/kod/III-4-A1/</code></a></p>
@@ -530,7 +530,7 @@ sırala  n=1000000: tekrar var</code></pre>
 </section>
 <section class="soru" id="III-6-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-6-Z1</span> Dört yön, bir sınır denetimi</h3>
-<p>Izgaradaki her hücre için dolu komşularını sayan program: dört yön, dört kopya sınır denetimi, biri yanlış. <code>icerdeMi(satir, sutun)</code> işlevi ve yön listesi (<code>{{-1,0},{1,0},{0,-1},{0,1}}</code>) ile yeniden yazın; <code>Izgara</code>, <code>Satir</code> gibi takma adlar koyun; <code>a</code>, <code>b</code>, <code>c</code> adlarını anlamlı adlarla değiştirin. Bölüm V'teki gezi kalıpları tam olarak bu düzeni kullanacak; şimdiden alışın. Girdi: satır sütun, sonra ızgara (<code>#</code> dolu, <code>.</code> boş).</p>
+<p>Izgaradaki her hücre için dolu komşularını sayan program: dört yön, dört kopya sınır denetimi, biri yanlış; <code>make test</code> farkı gösteriyor, hangi satır olduğunu değil. <code>icerdeMi(satir, sutun)</code> işlevi ve yön listesi (<code>{{-1,0},{1,0},{0,-1},{0,1}}</code>) ile yeniden yazın; <code>Izgara</code>, <code>Satir</code> gibi takma adlar koyun; <code>a</code>, <code>b</code>, <code>c</code> adlarını anlamlı adlarla değiştirin. Bölüm V'teki gezi kalıpları tam olarak bu düzeni kullanacak; şimdiden alışın. Girdi: satır sütun, sonra ızgara (<code>#</code> dolu, <code>.</code> boş).</p>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-6-Z1 · Dört yön, bir sınır denetimi</span>
@@ -549,8 +549,8 @@ sırala  n=1000000: tekrar var</code></pre>
       <span class="t">int</span> c{<span class="n">0</span>};
       <span class="a">if</span> (i - <span class="n">1</span> &gt;= <span class="n">0</span> <span class="a">and</span> g[i - <span class="n">1</span>][j] == <span class="s">&#x27;#&#x27;</span>) ++c;
       <span class="a">if</span> (i + <span class="n">1</span> &lt; a <span class="a">and</span> g[i + <span class="n">1</span>][j] == <span class="s">&#x27;#&#x27;</span>) ++c;
-      <span class="a">if</span> (j - <span class="n">1</span> &gt;= <span class="n">0</span> <span class="a">and</span> g[i][j - <span class="n">1</span>] == <span class="s">&#x27;#&#x27;</span>) ++c;
-      <span class="a">if</span> (j + <span class="n">1</span> &lt;= b <span class="a">and</span> g[i][j + <span class="n">1</span>] == <span class="s">&#x27;#&#x27;</span>) ++c;
+      <span class="a">if</span> (j - <span class="n">1</span> &gt; <span class="n">0</span> <span class="a">and</span> g[i][j - <span class="n">1</span>] == <span class="s">&#x27;#&#x27;</span>) ++c;
+      <span class="a">if</span> (j + <span class="n">1</span> &lt; b <span class="a">and</span> g[i][j + <span class="n">1</span>] == <span class="s">&#x27;#&#x27;</span>) ++c;
       cout &lt;&lt; c;
     }
     cout &lt;&lt; endl;

@@ -20,3 +20,8 @@ __pycache__/
 node_modules/
 package.json
 package-lock.json
+alistirma-koco/cikti/
+alistirma-koco/kod/**/test-ciktisi
+alistirma-koco/konsol/kojo/
+alistirma-koco/konsol/src/
+alistirma-koco/konsol/out/

@@ -1,0 +1,4 @@
+# Yayımlanan bölümlerin adresleri. yap.py bunları bölümler arası
+# bağlantılara yerleştirir. Yeniden yayımlarken adresler değişmez.
+00-hazirlik    https://claude.ai/artifact/FwDRrhtE1EdJwcoQHSzNqK
+01-ilk-adimlar https://claude.ai/artifact/JBkHFPVcsbMPhzLj6eQa23

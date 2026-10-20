@@ -93,6 +93,16 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   başlangıç dosyaları (Hazırlık'taki hata alıştırmaları, "işlevi siz yazın"
   dizinleri) bilerek derlenmez. Yeni alıştırma eklerken çözümü depo dışında
   derleyip çalıştırın, yalnızca çıktısını `beklenen-cikti`'ye koyun.
+- `alistirma-koco/` — Keyifli Alıştırmalar'ın **Koco cildi**: `alistirma/` ile aynı
+  düzen (dört basamak, `bolumler/*.html`, `yap.py`), biçemi
+  `../kitapcik/ortak.css` + `../alistirma/ek.css` + `../kitapcik-koco/ek.css` +
+  `ek.css`. `kod/<id>/` dizinlerinde `ana.kojo` (başlangıç), varsa `girdi` ve
+  konsola yazan alıştırmalar için `beklenen-cikti`; çizim alıştırmalarının
+  beklenen çıktısı yok (defterdeki "Tuvalde" satırı). `konsol/` Koco'nun
+  Türkçe derleyicisiyle konsol alıştırmalarını sınayan düzenek (`kur.sh`,
+  `koco.sh`; `make -C kod test`). **Depoda çözüm yoktur ve eklenmez.** Koddaki
+  Türkçe adlar Kojo'nun Türkçe API'sinden; `üst`, `son`, `yeni`, `bu`, `yanlış`,
+  `doğru` gibi anahtar sözcükleri ad olarak kullanmayın.
 - `kitapcik-koco/` — **Koco kitapçığı** (*Programlamaya ve Algoritmalara
   Keyifli ve İşlevsel Bir Giriş*): `kitapcik/`'in Koco (Kojo) + Scala ile
   yazılmış kardeşi. Biçemi `../kitapcik/ortak.css` + `ek.css`'ten,

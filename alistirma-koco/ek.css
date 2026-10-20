@@ -1,0 +1,12 @@
+/* ===========================================================
+   Koco cildi için ek biçem. Vurgu rengi kitapcik-koco/ek.css'ten (petrol),
+   basamaklar alistirma/ek.css'ten geliyor; burada yalnız çizim
+   alıştırmalarının "Tuvalde:" tarifi var.
+   =========================================================== */
+
+.soru .gorunum {
+  font-size: 0.92rem; margin-top: 0.8rem;
+  padding: 0.55rem 0.8rem; border-left: 3px solid var(--mavi);
+  background: var(--mavi-yumusak); border-radius: 0 6px 6px 0;
+}
+.soru .gorunum .etk { font-weight: 600; color: var(--mavi); margin-right: 0.3rem; }

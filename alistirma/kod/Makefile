@@ -23,6 +23,6 @@ test:
 	echo "---"; echo "$$dogru doğru, $$yanlis henüz değil"
 
 temizle:
-	@for d in $(DIZINLER); do $(MAKE) -s -C $$d temizle; done
+	@for d in $(DIZINLER); do $(MAKE) -s -C $$d temizle 2>/dev/null || true; done
 
 .PHONY: derle test temizle

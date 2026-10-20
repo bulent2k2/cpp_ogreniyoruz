@@ -41,7 +41,7 @@ Bölümler
 | I | [İlk Adımlar](https://claude.ai/artifact/Bhazr8dwrYRPikNxW9X9Yv) ([kaynak](bolumler/01-ilk-adimlar.html)) | 6 | 29 |
 | II | [Veriyi Düzenlemek](https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w) ([kaynak](bolumler/02-veri.html)) | 7 | 35 |
 | III | [Programcının Zanaatı](https://claude.ai/artifact/4SQxFr36xx7nHEiqpTWF3S) ([kaynak](bolumler/03-zanaat.html)) | 6 | 25 |
-| IV | [Özyineleme ve Arama](bolumler/04-ozyineleme.html) | 6 | 29 |
+| IV | [Özyineleme ve Arama](https://claude.ai/artifact/1CZqZ1HJC1WQneFCw6qyDJ) ([kaynak](bolumler/04-ozyineleme.html)) | 6 | 29 |
 | V&ndash;VI | yazılıyor | | |
 
 Bölüm metinleri `bolumler/*.html` dosyalarında, kitapçıkla aynı düzende;

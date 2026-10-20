@@ -40,7 +40,7 @@ Bölümler
 | Hazırlık | [Tarayıcıda, hiçbir şey yüklemeden](https://claude.ai/artifact/XKDtPcu8csxWMu6YZULS3A) ([kaynak](bolumler/00-hazirlik.html)) | 3 | 12 |
 | I | [İlk Adımlar](https://claude.ai/artifact/Bhazr8dwrYRPikNxW9X9Yv) ([kaynak](bolumler/01-ilk-adimlar.html)) | 6 | 29 |
 | II | [Veriyi Düzenlemek](https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w) ([kaynak](bolumler/02-veri.html)) | 7 | 35 |
-| III | [Programcının Zanaatı](bolumler/03-zanaat.html) | 6 | 25 |
+| III | [Programcının Zanaatı](https://claude.ai/artifact/4SQxFr36xx7nHEiqpTWF3S) ([kaynak](bolumler/03-zanaat.html)) | 6 | 25 |
 | IV&ndash;VI | yazılıyor | | |
 
 Bölüm metinleri `bolumler/*.html` dosyalarında, kitapçıkla aynı düzende;

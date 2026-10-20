@@ -3,3 +3,4 @@
 00-hazirlik    https://claude.ai/artifact/XKDtPcu8csxWMu6YZULS3A
 01-ilk-adimlar https://claude.ai/artifact/Bhazr8dwrYRPikNxW9X9Yv
 02-veri        https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w
+03-zanaat      https://claude.ai/artifact/4SQxFr36xx7nHEiqpTWF3S

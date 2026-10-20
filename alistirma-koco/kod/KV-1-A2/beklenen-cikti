@@ -1,0 +1,8 @@
+A: B C (2)
+B: A D (2)
+C: A D E (3)
+D: B C F (3)
+E: C F (2)
+F: D E G (3)
+G: F (1)
+dereceler toplamı: 16

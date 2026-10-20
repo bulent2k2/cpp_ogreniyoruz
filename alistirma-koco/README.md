@@ -28,7 +28,8 @@ Bölümler
 | II | [Veriyi Düzenlemek](https://claude.ai/artifact/QTdneCZbUatA4nnG7fj3cg) ([kaynak](bolumler/02-veri.html)) | 4 | 19 |
 | III | [Soyutlama Sanatı](https://claude.ai/artifact/CWD4GvcNUNrUHiBhjfMkVc) ([kaynak](bolumler/03-soyutlama.html)) | 4 | 18 |
 | IV | [Özyineleme ve Fraktallar](https://claude.ai/artifact/Xb1fHfS7a1uUiV9tX8zVPk) ([kaynak](bolumler/04-ozyineleme.html)) | 4 | 18 |
-| V&ndash;VI | yazılıyor | | |
+| V | [Çizgeler ve Gezintiler](https://claude.ai/artifact/UkwaywCDT7d3GRkxY3HDZc) ([kaynak](bolumler/05-cizgeler.html)) | 4 | 18 |
+| VI | [Dinamik Programlama](https://claude.ai/artifact/YJrUEgeuxn8hEZDeBwSVLJ) ([kaynak](bolumler/06-dp.html)) | 4 | 19 |
 
 Bağlantısı olan herkes sayfaları açabilir; adresler `baglantilar.txt`'de,
 `yap.py` onları bölümler arası gezinmeye yerleştiriyor.

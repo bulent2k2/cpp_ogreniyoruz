@@ -5,3 +5,5 @@
 02-veri        https://claude.ai/artifact/QTdneCZbUatA4nnG7fj3cg
 03-soyutlama   https://claude.ai/artifact/CWD4GvcNUNrUHiBhjfMkVc
 04-ozyineleme  https://claude.ai/artifact/Xb1fHfS7a1uUiV9tX8zVPk
+05-cizgeler    https://claude.ai/artifact/UkwaywCDT7d3GRkxY3HDZc
+06-dp          https://claude.ai/artifact/YJrUEgeuxn8hEZDeBwSVLJ

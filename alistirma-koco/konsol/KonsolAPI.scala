@@ -70,7 +70,7 @@ object KonsolAPI
   def rastgeleDiziden[T](dizi: Dizi[T]): T = dizi(üreteç.nextInt(dizi.size))
   def rastgeleKarıştır[T](d: Dizi[T]): Dizi[T] = üreteç.shuffle(d)
   // girdi: konsol sınamasında standart girdiden okunur
-  def satıroku(istem: Yazı = ""): Yazı = { val s = scala.io.StdIn.readLine(); if (s == null) "" else s }
+  def satıroku(istem: Yazı = ""): Yazı = { val s = scala.io.StdIn.readLine(); if (s == null) sys.error("girdi bitti") else s }
   def sayıOku(istem: Yazı = ""): Sayı = satıroku(istem).trim.toInt
   def kesirOku(istem: Yazı = ""): Kesir = satıroku(istem).trim.toDouble
   // süre

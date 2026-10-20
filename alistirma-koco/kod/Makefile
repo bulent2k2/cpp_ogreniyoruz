@@ -2,6 +2,7 @@
 #   make test     -> her dizinde ana.kojo'yu çalıştır, beklenen-cikti ile karşılaştır
 #   make temizle  -> test-ciktisi dosyalarını sil
 # Düzenek: ../konsol/koco.sh (bir kere ../konsol/kur.sh ile kurulur; Java gerekir).
+# Her betiğe 60 saniye tanınır: sonsuz döngüye giren bir çözüm "henüz değil" sayılır.
 # Çizim alıştırmalarının beklenen çıktısı yok; onlar iKojo'da gözle sınanır.
 
 KOCO = ../konsol/koco.sh
@@ -12,7 +13,7 @@ test:
 	for d in $(DIZINLER); do \
 	  printf "%-10s " $$d; \
 	  g=/dev/null; [ -f $$d/girdi ] && g=$$d/girdi; \
-	  if $(KOCO) $$d/ana.kojo $$g > $$d/test-ciktisi 2>/dev/null && diff -q $$d/beklenen-cikti $$d/test-ciktisi >/dev/null; then \
+	  if timeout 60 $(KOCO) $$d/ana.kojo $$g > $$d/test-ciktisi 2>/dev/null && diff -q $$d/beklenen-cikti $$d/test-ciktisi >/dev/null; then \
 	    echo "doğru"; dogru=$$((dogru+1)); rm -f $$d/test-ciktisi; \
 	  else echo "henüz değil"; yanlis=$$((yanlis+1)); fi; \
 	done; \

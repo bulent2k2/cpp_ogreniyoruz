@@ -192,11 +192,11 @@ küme: 3</code></pre>
 
 <section class="soru" id="KVI-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KVI-3-I1</span> Bir işleç daha</h3>
-<p>Kitapçığın <code>Karmaşık</code>'ı: <code>a + a</code> ve <code>a * a</code>. Bir de <code>-</code> ekleyin (çıkarma) ve <code>büyüklüğü</code>'nü yazdırın. Durum sınıfın kendi yazımı var: <code>Karmaşık(2.0,4.0)</code>; bunu iKojo da Koco da aynı basar. <code>i² = −1</code>'i de sınayın: <code>Karmaşık(0, 1) * Karmaşık(0, 1)</code>.</p>
+<p>Kitapçığın <code>Karmaşık</code>'ı: <code>a + a</code> ve <code>a * a</code>. Bir de <code>-</code> ekleyin (çıkarma) ve <code>büyüklüğü</code>'nü yazın. Sonra şu üç satırı sırayla yazdırın: <code>a - Karmaşık(1, 1)</code>, <code>(a * a).büyüklüğü</code> ve <code>i² = −1</code> sınaması olarak <code>Karmaşık(0, 1) * Karmaşık(0, 1)</code>. Durum sınıfın kendi yazımı var: <code>Karmaşık(2.0,4.0)</code>; bunu iKojo da Koco da aynı basar.</p>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KVI-3-I1 · Bir işleç daha</span>
-<span class="y">// Çıktı: Karmaşık(2.0,4.0), Karmaşık(-3.0,4.0), sonra çıkarma, büyüklük ve i²</span>
+<span class="y">// Çıktı: a + a, a * a, a - Karmaşık(1, 1), (a * a).büyüklüğü, Karmaşık(0, 1) * Karmaşık(0, 1)</span>
 <span class="a">durum</span> <span class="a">sınıf</span> Karmaşık(g: <span class="t">Kesir</span>, s: <span class="t">Kesir</span>) {
   <span class="a">tanım</span> +(öbürü: Karmaşık) = Karmaşık(g + öbürü.g, s + öbürü.s)
   <span class="a">tanım</span> *(öbürü: Karmaşık) =

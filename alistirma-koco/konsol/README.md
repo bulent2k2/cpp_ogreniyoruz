@@ -27,5 +27,7 @@ Beklenen çıktılar bu düzenekle üretildi. Üç ayrıntı:
   `yazıYap` ile, İkil'leri `eğer (...) "evet" yoksa "hayır"` ile yazdırır.
 
 `kojo/`, `src/` ve `out/` dizinleri `kur.sh`'ın ürünüdür ve sürüm denetiminde
-değildir. Kojo'nun kaynak kodu kendi lisansına tabidir; buradaki üç Scala
+değildir. `kur.sh` kojo deposunun sınanmış bir sürümünü çeker
+(`KOJO_SURUM`, şu an `965de1e7`); Türkçe API değişince yeni sürümü orada
+güncelleyip `make -C ../kod test` ile yeniden sınayın. Kojo'nun kaynak kodu kendi lisansına tabidir; buradaki üç Scala
 dosyası ve betikler MIT.

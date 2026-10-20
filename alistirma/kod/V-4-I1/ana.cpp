@@ -1,4 +1,4 @@
-// V-4-I1 · Bir duvarı yıkın: A'nın sağındaki #
+// V-4-I1 · Önce B'yi taşıyın (4. satır #.#.B.#.#, 6. satırdaki B -> .), sonra A'nın sağındaki duvarı yıkın
 #include <iostream>
 #include <vector>
 #include <queue>

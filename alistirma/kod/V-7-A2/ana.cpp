@@ -21,6 +21,7 @@ int main() {
   Dizi<Dizi<Hat>> hatlar(n + 1);
   Dizi<Bag> baglar;
   for (int k{0}; k < m; ++k) { Nokta a, b; U x; cin >> a >> b >> x; hatlar[a].push_back({x, b}); baglar.push_back({a, b, x}); }
-  // 1) Dijkstra  2) n-1 tur: her bağ için uzaklik[b] = min(uzaklik[b], uzaklik[a] + x)
+  // 1) klasik Dijkstra: bitti[] dizisi; bitmiş şehre dokunma (kitapçığın 'eski kayıt' sürümü DEĞİL)
+  // 2) n-1 tur: her bağ için uzaklik[b] = min(uzaklik[b], uzaklik[a] + x)
   return 0;
 }

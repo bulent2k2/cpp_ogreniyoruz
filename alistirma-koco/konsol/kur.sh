@@ -6,12 +6,14 @@
 set -e
 export LC_ALL=C.UTF-8 LANG=C.UTF-8
 K="$(cd "$(dirname "$0")" && pwd)"
+KOJO_SURUM=965de1e7784e4b6b2c427d79f45ea026c5c6676d   # sınanmış kojo sürümü; yenilerken README'yi de güncelleyin
 if [ ! -d "$K/kojo/.git" ]; then
   git clone --depth 1 --filter=blob:none --no-checkout https://github.com/bulent2k2/kojo "$K/kojo"
   git -C "$K/kojo" sparse-checkout init --cone
   git -C "$K/kojo" sparse-checkout set scala-tr/build/pack/lib src/main/scala/net/kogics/kojo/lite/i18n/tr
-  git -C "$K/kojo" checkout HEAD -- .
 fi
+git -C "$K/kojo" fetch --depth 1 --filter=blob:none origin "$KOJO_SURUM"
+git -C "$K/kojo" checkout --detach "$KOJO_SURUM"
 rm -rf "$K/src" "$K/out"; mkdir -p "$K/src" "$K/out"
 python3 "$K/yama.py" "$K/kojo" "$K/src"
 cp "$K/package.scala" "$K/KonsolAPI.scala" "$K/Kaplumbaga.scala" "$K/src/"

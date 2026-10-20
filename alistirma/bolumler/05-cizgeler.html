@@ -120,7 +120,7 @@ Euler yolu yok: her köprüden tam bir kere geçmek olanaksız</code></pre>
 
 <section class="soru" id="V-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-2-I1</span> Üçten başlayın</h3>
-<p>Üç geziyi de 1 yerine 3'ten başlatın. Hangi noktalar hiç görünmez, neden? (Çizge yönlü; 3'ten 2'ye giden yol var mı?) Sonra bir satır daha: <code>bagla(5, 2)</code> ekleyip tekrar bakın.</p>
+<p>Üç geziyi de 1 yerine 3'ten başlatın. Çizge yönlü; 3'ten 2'ye bir yol var mı, yedi nokta da görünüyor mu? Önce kâğıtta okları izleyin, sonra çalıştırın. Sonra <code>bagla(6, 1)</code> satırını silip tekrar bakın: şimdi hangileri kayboldu, neden?</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>derinlemesine (özyineleme): 3 4 6 1 2 5 7 
@@ -288,11 +288,11 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
     </div>
 
 <section class="soru" id="V-4-I1">
-<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-4-I1</span> Bir duvarı yıkın</h3>
-<p>Kitapçığın labirentinde A'dan B'ye 10 adım. Planın ikinci satırındaki <code>#A#.....#</code>'de A'nın sağındaki duvarı yıkın (<code>#A......#</code>). Yeni en kısa yol kaç adım, tarifi ne? Çalıştırmadan önce kâğıtta sayın.</p>
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-4-I1</span> Önce B&#x27;yi taşıyın, sonra bir duvar yıkın</h3>
+<p>Kitapçığın labirentinde A'dan B'ye 10 adım: dört aşağı, altı sağa; bu kadar kısa bir yolu hiçbir duvar yıkımı kısaltamaz (neden?). İki değişiklik yapın. Önce B'yi ortadaki odaya taşıyın: dördüncü satırı <code>#.#.B.#.#</code> yapın, altıncı satırdaki B'yi <code>.</code> yapın; yol kaç adıma uzadı? Sonra ikinci satırda A'nın sağındaki duvarı yıkın (<code>#A......#</code>); şimdi kaç adım, tarifi ne? Her ikisini de çalıştırmadan önce kâğıtta sayın. Beklenen çıktı ikinci durumun.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
-<pre><code>en kısa yol 10 adım: DDDDRRRRRR</code></pre>
+<pre><code>en kısa yol 5 adım: RRDDR</code></pre>
 </figure>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-I1"><code>alistirma/kod/V-4-I1/</code></a></p>
 </section>
@@ -360,7 +360,7 @@ LDDRRRRRU</code></pre>
 
 <section class="soru" id="V-5-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-5-I1</span> Kitapçığın ilk hatası</h3>
-<p>Program iki takım kuruyor; ama kitapçığın <em>İki hata, iki ders</em> kutusundaki ilk hata burada: bir <code>else</code> eksik, taban durumu yok, gezi durmuyor (çökene kadar kendini çağırır). Satırı bulup <code>else</code>'i koyun. Girdi: beş kişi, üç arkadaşlık. Kitapçık bu hatayı <code>gdb</code> ile bulmuş; siz de deneyin: <code>backtrace</code> sonsuz tekrarı gösterir.</p>
+<p>Program iki takım kuruyor; ama kitapçığın <em>İki hata, iki ders</em> kutusundaki ilk hata burada: bir <code>else</code> eksik (süslü ayraçlar yerinde, yalnız sözcük yok), taban durumu yok, gezi durmuyor (çökene kadar kendini çağırır). Yeri bulup <code>else</code>'i koyun. Girdi: beş kişi, üç arkadaşlık. Kitapçık bu hatayı <code>gdb</code> ile bulmuş; siz de deneyin: <code>backtrace</code> sonsuz tekrarı gösterir.</p>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -383,8 +383,10 @@ Dizi&lt;Takim&gt; takim;
     <span class="a">if</span> (takim[b] != Takim::Yok) {
       <span class="a">if</span> (takim[b] == takim[a]) <span class="a">return</span> <span class="a">false</span>;
     }
-    takim[b] = (takim[a] == Takim::Bir) ? Takim::Iki : Takim::Bir;
-    <span class="a">if</span> (<span class="a">not</span> gez(b)) <span class="a">return</span> <span class="a">false</span>;
+    {                                   <span class="y">// buraya bir sözcük eksik</span>
+      takim[b] = (takim[a] == Takim::Bir) ? Takim::Iki : Takim::Bir;
+      <span class="a">if</span> (<span class="a">not</span> gez(b)) <span class="a">return</span> <span class="a">false</span>;
+    }
   }
   <span class="a">return</span> <span class="a">true</span>;
 }
@@ -548,7 +550,7 @@ DRRRDRRRURRRRURRRRU</code></pre>
 </section>
 <section class="soru" id="V-7-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A2</span> Dijkstra&#x27;yı kırın</h3>
-<p>Kitapçığın yedinci alıştırması. Girdide eksi ağırlıklı bir bağ var (beş şehir). Aynı programda iki hesap yapın: Dijkstra ve <em>n−1 tur gevşetme</em> (Bellman–Ford'un en sade hâli, V.9'da ayrıntısı). İki sonucu alt alta yazın; hangi şehirlerde ayrışıyorlar, neden? Dijkstra 2'yi &ldquo;işi bitti&rdquo; sayıp bir daha bakmıyor (bitmiş şehre dokunmuyor); eksi bağ o kararı sonradan bozuyor, hata 5'e de taşınıyor.</p>
+<p>Kitapçığın yedinci alıştırması. Girdide eksi ağırlıklı bir bağ var (beş şehir). Aynı programda iki hesap yapın: <em>klasik</em> Dijkstra ve <em>n−1 tur gevşetme</em> (Bellman–Ford'un en sade hâli, V.9'da ayrıntısı). Klasik Dijkstra: sıradan çıkan şehri bir <code>bitti</code> dizisinde işaretleyin ve bitmiş şehre bir daha dokunmayın (ne yeniden işleyin ne uzaklığını güncelleyin). Dikkat, kitapçığın <code>41-dijkstra.cpp</code>'si farklı: o yalnız eski kaydı atlar, 2'yi yeniden açar ve bu girdide doğru sonucu verir; neden? İki sonucu alt alta yazın; hangi şehirlerde ayrışıyorlar, neden? Dijkstra 2'yi &ldquo;işi bitti&rdquo; sayıp bir daha bakmıyor (bitmiş şehre dokunmuyor); eksi bağ o kararı sonradan bozuyor, hata 5'e de taşınıyor.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5 1 2 1 2 5 1 1 3 5 3 4 -6 4 2 1</span></figcaption>
 <pre><code>Dijkstra : 0 1 5 -1 2

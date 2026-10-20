@@ -1,4 +1,4 @@
-# V-4-I1 · Bir duvarı yıkın
+# V-4-I1 · Önce B'yi taşıyın, sonra bir duvar yıkın
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

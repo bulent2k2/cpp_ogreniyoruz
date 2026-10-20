@@ -1,5 +1,5 @@
 // KVI-3-I1 · Bir işleç daha
-// Çıktı: Karmaşık(2.0,4.0), Karmaşık(-3.0,4.0), sonra çıkarma, büyüklük ve i²
+// Çıktı: a + a, a * a, a - Karmaşık(1, 1), (a * a).büyüklüğü, Karmaşık(0, 1) * Karmaşık(0, 1)
 durum sınıf Karmaşık(g: Kesir, s: Kesir) {
   tanım +(öbürü: Karmaşık) = Karmaşık(g + öbürü.g, s + öbürü.s)
   tanım *(öbürü: Karmaşık) =

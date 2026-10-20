@@ -18,8 +18,10 @@ bool gez(Nokta a) {
     if (takim[b] != Takim::Yok) {
       if (takim[b] == takim[a]) return false;
     }
-    takim[b] = (takim[a] == Takim::Bir) ? Takim::Iki : Takim::Bir;
-    if (not gez(b)) return false;
+    {                                   // buraya bir sözcük eksik
+      takim[b] = (takim[a] == Takim::Bir) ? Takim::Iki : Takim::Bir;
+      if (not gez(b)) return false;
+    }
   }
   return true;
 }

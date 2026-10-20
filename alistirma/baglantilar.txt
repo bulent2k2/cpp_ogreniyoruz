@@ -5,3 +5,4 @@
 02-veri        https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w
 03-zanaat      https://claude.ai/artifact/4SQxFr36xx7nHEiqpTWF3S
 04-ozyineleme  https://claude.ai/artifact/1CZqZ1HJC1WQneFCw6qyDJ
+05-cizgeler    https://claude.ai/artifact/FJjmyqnb9eYtXs1FC3Hte9

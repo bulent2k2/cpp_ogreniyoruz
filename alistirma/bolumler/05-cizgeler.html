@@ -1,0 +1,744 @@
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar</div>
+  <div class="no">Bölüm V</div>
+  <h1>Çizgeler ve Gezintiler</h1>
+  <p class="ozet">
+    Kitapçığın beşinci bölümü beş satırlık bir kalıp öğretiyor ve onu değiştire değiştire yarım düzine ünlü problemi çözüyor. Burada dokuz konu, kırk alıştırma: çizgeyi saklamak, derinlemesine ve enlemesine gezi, odalar, labirent, iki takım, çok kaynaklı gezi, Dijkstra, Floyd–Warshall, Bellman–Ford. Keşiflerin çoğu CSES'in çizge bölümünden; girdiler CSES'in örnekleri.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">V.1</div>
+  <div class="govde">
+    <h2>Çizge nedir, nasıl saklanır?</h2>
+    <p>Noktalar ve bağlar. Bu konunun girdi biçimi bölüm boyunca aynı: ilk satırda nokta ve bağ sayısı, sonra her satırda bir bağ. Komşuluk listesi, komşuluk matrisi, dereceler ve 1736'dan kalma bir soru.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.1: Çizge nedir</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders19.md">ders 19: çizgeler ve ağlar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cizge-kurami.md">çizge kuramı</a></p>
+    </div>
+
+<section class="soru" id="V-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-1-I1</span> Yönsüzden yönlüye</h3>
+<p>Program bağları <em>yönsüz</em> okuyor: her <code>a b</code> satırı için hem <code>a</code>'nın listesine <code>b</code> hem <code>b</code>'nin listesine <code>a</code> ekleniyor. Tek satır silip çizgeyi <em>yönlü</em> yapın: yalnız <code>a → b</code>. Çıktıdaki hangi satırlar değişir? Girdi altı noktalı, altı bağlı bir çizge; sonraki alıştırmalar da aynı dosyayı kullanacak.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-1-I1 · Yönsüzden yönlüye: bir satır silin</span>
+<span class="t">int</span> main() {
+  <span class="t">int</span> n{<span class="n">0</span>}, m{<span class="n">0</span>};
+  cin &gt;&gt; n &gt;&gt; m;
+  Dizi&lt;Dizi&lt;Nokta&gt;&gt; komsular(n + <span class="n">1</span>);
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; m; ++k) {
+    Nokta a, b; cin &gt;&gt; a &gt;&gt; b;
+    komsular[a].push_back(b);
+    komsular[b].push_back(a);     <span class="y">// yönsüz: iki yöne de</span>
+  }
+  <span class="a">for</span> (Nokta p{<span class="n">1</span>}; p &lt;= n; ++p) {
+    cout &lt;&lt; p &lt;&lt; <span class="s">&quot;:&quot;</span>;
+    <span class="a">for</span> (Nokta q : komsular[p]) cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; q;
+    cout &lt;&lt; endl;
+  }
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>1: 2 3
+2: 4
+3: 4
+4: 5
+5: 6
+6:</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-I1"><code>alistirma/kod/V-1-I1/</code></a></p>
+</section>
+<section class="soru" id="V-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-1-A1</span> Komşuluk matrisi</h3>
+<p>Aynı girdi, öteki temsil: <code>n × n</code> bir matris, <code>km[a][b]</code> bağ varsa 1. Yönsüz okuyun, matrisi satır satır yazın (sayılar arasında boşluk). Matris neden simetrik? Yönlü olsaydı olmazdı; bir deneyin. Kitapçığın tablosu: bu temsil ne zaman iyi?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>0 1 1 0 0 0
+1 0 0 1 0 0
+1 0 0 1 0 0
+0 1 1 0 1 0
+0 0 0 1 0 1
+0 0 0 0 1 0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-A1"><code>alistirma/kod/V-1-A1/</code></a></p>
+</section>
+<section class="soru" id="V-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-1-A2</span> Dereceler</h3>
+<p>Bir noktanın <strong>derecesi</strong> komşu sayısı. Her nokta için derecesini yazın; sonra en çok komşusu olan noktayı (eşitlikte küçük numaralı). Derecelerin toplamı bağ sayısının neden tam iki katı? Bu, çizge kuramının ilk teoremi.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>1: 2
+2: 2
+3: 2
+4: 3
+5: 2
+6: 1
+en çok komşusu olan: 4 (3)
+derece toplamı: 12</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-A2"><code>alistirma/kod/V-1-A2/</code></a></p>
+</section>
+<section class="soru" id="V-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-1-Z1</span> Königsberg&#x27;in köprüleri</h3>
+<p>Euler'in 1736'daki yanıtı tek bir sayıya bakıyor: derecesi <em>tek</em> olan nokta sayısı. Sıfırsa her köprüden bir kere geçip başa dönen bir yürüyüş var (Euler çevrimi); tam ikiyse başa dönmeyen bir yürüyüş var (Euler yolu); başka bir sayıysa yok. Girdi Königsberg'in kendisi: dört kara parçası, yedi köprü (aynı iki nokta arasında birden çok bağ olabilir, buna dikkat). Programınız üç durumdan hangisi olduğunu söylesin; sonra girdiyi değiştirip öteki iki durumu da üretin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 7 1 2 1 2 1 3 1 3 1 4 2 4 3 4</span></figcaption>
+<pre><code>tek dereceli nokta sayısı: 4
+Euler yolu yok: her köprüden tam bir kere geçmek olanaksız</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-Z1"><code>alistirma/kod/V-1-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.2</div>
+  <div class="govde">
+    <h2>Beş satırlık kalıp: derinlemesine gezi</h2>
+    <p>Kitapçığın <code>40-gezi.cpp</code>'si: aynı çizge, üç gezi. Buradan erişilebilen noktalara, &ldquo;yol var mı&rdquo; sorularına, gezi ağacına ve yığınlı gezinin sırasını özyinelemeliyle eşleştirmeye.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.2: Beş satırlık kalıp</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders20.md">ders 20: çizgelerde gezintiler</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260130.md">algoritma ders 16: derinlemesine gezi kalıpları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/40-gezi.cpp">kod: 40-gezi.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-2-I1</span> Üçten başlayın</h3>
+<p>Üç geziyi de 1 yerine 3'ten başlatın. Hangi noktalar hiç görünmez, neden? (Çizge yönlü; 3'ten 2'ye giden yol var mı?) Sonra bir satır daha: <code>bagla(5, 2)</code> ekleyip tekrar bakın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>derinlemesine (özyineleme): 3 4 6 1 2 5 7 
+derinlemesine (yığınla)   : 3 4 7 5 6 1 2 
+enlemesine    (kuyrukla)  : 3 4 6 7 1 5 2 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-I1"><code>alistirma/kod/V-2-I1/</code></a></p>
+</section>
+<section class="soru" id="V-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-2-A1</span> Erişilebilenler</h3>
+<p>Girdiden yönlü çizge okuyun (kitapçığın yedi noktalı çizgesi), 1'den derinlemesine gezin; erişilebilen noktaları küçükten büyüğe ve sayısını yazın. Gezinin sırası değil, kümesi önemli: <code>gezildi</code> dizisini sonunda tarayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
+<pre><code>1&#x27;den erişilebilen: 1 2 3 4 5 6 7
+7 nokta</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-A1"><code>alistirma/kod/V-2-A1/</code></a></p>
+</section>
+<section class="soru" id="V-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-2-A2</span> Yol var mı?</h3>
+<p>Çizgeden sonra sorular geliyor: her satırda <code>a b</code>; <code>a</code>'dan <code>b</code>'ye yol var mı? Her soru için geziyi sıfırlayıp <code>a</code>'dan başlatın; <code>evet</code> ya da <code>hayır</code>. Girdi kitapçığın çizgesi ve dört soru. Sorular çoğalınca her seferinde baştan gezmek pahalı olur; V.3 bunun çaresini gösterecek (yönsüz çizgede).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5 4 1 7 3 2 6 5 7 6</span></figcaption>
+<pre><code>1 -&gt; 7: evet
+3 -&gt; 2: evet
+6 -&gt; 5: evet
+7 -&gt; 6: hayır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-A2"><code>alistirma/kod/V-2-A2/</code></a></p>
+</section>
+<section class="soru" id="V-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-2-Z1</span> Gezi ağacı</h3>
+<p>Derinlemesine gezi bir ağaç çizer: her noktaya ilk kez hangi noktadan geldik? Kalıba iki girdi ekleyin: <code>gez(bu, nereden, derinlik)</code>. Her nokta için &ldquo;nereden, derinlik&rdquo; yazın (1 için kök). Girdi kitapçığın çizgesi. En derin nokta hangisi? Kitapçığın çıktısındaki sırayla (<code>1 2 5 7 3 4 6</code>) karşılaştırın: ağaç o sırayı açıklıyor mu?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
+<pre><code>1: kök
+2: nereden=1 derinlik=1
+3: nereden=1 derinlik=1
+4: nereden=3 derinlik=2
+5: nereden=2 derinlik=2
+6: nereden=4 derinlik=3
+7: nereden=5 derinlik=3
+en derin: 6 (3)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-Z1"><code>alistirma/kod/V-2-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-2-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-2-K1</span> Yığın, özyinelemeyle aynı sırada</h3>
+<p>Kitapçığın çıktısında yığınlı gezi (<code>1 3 4 7 5 6 2</code>) özyinelemeliden (<code>1 2 5 7 3 4 6</code>) farklı sıra veriyor. Neden? Komşular yığına 2, 3 sırasıyla giriyor, 3 üstte kalıyor, önce o çıkıyor. <code>gez2</code>'yi öyle değiştirin ki sıra özyinelemeliyle aynı olsun; tek satır yeter (<code>&lt;algorithm&gt;</code>'da tersten yineleyici var, ya da döngüyü tersten kurun). Sonra düşünün: iki gezi de <em>doğru</em>; sıra ne zaman önemli olur?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>derinlemesine (özyineleme): 1 2 5 7 3 4 6 
+derinlemesine (yığınla)   : 1 2 5 7 3 4 6 
+enlemesine    (kuyrukla)  : 1 2 3 5 4 7 6 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-K1"><code>alistirma/kod/V-2-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.3</div>
+  <div class="govde">
+    <h2>Kaç oda var? Bağlı parçalar</h2>
+    <p>Izgarada görünmez çizge. Kitapçığın &ldquo;etrafı duvarla çevirin&rdquo; numarası, CSES'in <em>Counting Rooms</em> ve <em>Building Roads</em> soruları. Girdi biçimi CSES'inki: satır sütun, sonra plan.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.3: Kaç oda var</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260123.md">algoritma ders 15: oda sayımı</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260130.md">algoritma ders 16: yol ağı tasarımı</a></p>
+    </div>
+
+<section class="soru" id="V-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-3-I1</span> Çapraz da komşu olsun</h3>
+<p>Program odaları sayıyor; dört yönlü komşuluk. Komşuluğu sekiz yöne çıkarın (çaprazlar da bağlasın): oda sayısı ne olur? Girdi CSES'in örneğinin bir duvarı açılmış hâli (dört yönlüde yine 3 oda). Çıktı iki satır olsun: dört yönlü ve sekiz yönlü sayım. Duvar çerçevesi sayesinde köşegen çağrılar da taşmıyor; neden?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-3-I1 · Çapraz da komşu olsun</span>
+<span class="y">// Çıktı: &quot;4 yönlü: 3&quot; ve &quot;8 yönlü: ?&quot;</span>
+<span class="a">using</span> Tahta = Dizi&lt;Dizi<span class="s">&lt;bool&gt;</span>&gt;;   <span class="y">// true: boş ve gezilmemiş</span>
+
+<span class="t">bool</span> gez(<span class="t">int</span> y, <span class="t">int</span> x, Tahta&amp; t) {
+  <span class="a">if</span> (<span class="a">not</span> t[y][x]) <span class="a">return</span> <span class="a">false</span>;
+  t[y][x] = <span class="a">false</span>;
+  gez(y - <span class="n">1</span>, x, t); gez(y + <span class="n">1</span>, x, t); gez(y, x - <span class="n">1</span>, t); gez(y, x + <span class="n">1</span>, t);
+  <span class="a">return</span> <span class="a">true</span>;
+}
+
+Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) {
+  cin &gt;&gt; n &gt;&gt; m;
+  Tahta t(n + <span class="n">2</span>, Dizi<span class="s">&lt;bool&gt;</span>(m + <span class="n">2</span>, <span class="a">false</span>));     <span class="y">// çerçeve: duvar</span>
+  <span class="a">for</span> (<span class="t">int</span> y{<span class="n">1</span>}; y &lt;= n; ++y) {
+    <span class="t">string</span> satir; cin &gt;&gt; satir;
+    <span class="a">for</span> (<span class="t">int</span> x{<span class="n">1</span>}; x &lt;= m; ++x) t[y][x] = satir[x - <span class="n">1</span>] == <span class="s">&#x27;.&#x27;</span>;
+  }
+  <span class="a">return</span> t;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> n, m;
+  Tahta t{oku(n, m)};
+  <span class="t">int</span> oda{<span class="n">0</span>};
+  <span class="a">for</span> (<span class="t">int</span> y{<span class="n">1</span>}; y &lt;= n; ++y) <span class="a">for</span> (<span class="t">int</span> x{<span class="n">1</span>}; x &lt;= m; ++x) <span class="a">if</span> (gez(y, x, t)) ++oda;
+  cout &lt;&lt; <span class="s">&quot;4 yönlü: &quot;</span> &lt;&lt; oda &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ###..#.# #..#...# ########</span></figcaption>
+<pre><code>4 yönlü: 3
+8 yönlü: 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-I1"><code>alistirma/kod/V-3-I1/</code></a></p>
+</section>
+<section class="soru" id="V-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-3-A1</span> Odaları sayın, yığınla</h3>
+<p>Kitapçığın birinci alıştırması: <a href="https://cses.fi/problemset/task/1192">CSES 1192</a>, bu sefer özyineleme yerine <code>std::stack</code> ile. V-3-I1'in <code>gez</code>'ini yığınlı yazın (40-gezi'deki <code>gez2</code> kalıbı, karelerle). Çıktı yalnız oda sayısı; CSES'e gönderin. Büyük haritada (1000×1000) özyinelemeli sürüm neden çökebilir, yığınlı neden çökmez?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ####.#.# #..#...# ########</span></figcaption>
+<pre><code>3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-A1"><code>alistirma/kod/V-3-A1/</code></a></p>
+</section>
+<section class="soru" id="V-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-3-A2</span> En büyük oda</h3>
+<p>Odaları saymak yetmiyor; en büyüğü kaç kare? <code>gez</code> bir <code>bool</code> yerine <em>kare sayısı</em> döndürsün: kendisi 1, artı dört komşudan dönenlerin toplamı. Girdi aynı; çıktı oda sayısı ve en büyük odanın kare sayısı.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ####.#.# #..#...# ########</span></figcaption>
+<pre><code>3 oda, en büyüğü 8 kare</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-A2"><code>alistirma/kod/V-3-A2/</code></a></p>
+</section>
+<section class="soru" id="V-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-3-Z1</span> Yol ağı tasarımı</h3>
+<p><a href="https://cses.fi/problemset/task/1666">CSES 1666</a>, kitapçığın üçüncü alıştırması: n şehir, bazıları arasında yol; herkesin herkese ulaşması için en az kaç yeni yol gerekir, hangileri? Kitapçığın <code>parcayaEkle</code> kalıbı: parçaları numaralayın, her parçanın temsilcisini saklayın, temsilcileri zincir gibi bağlayın. Girdi CSES örneği (<code>4 2</code>, yollar 1-2, 3-4). Çıktı: yeni yol sayısı, sonra yollar. Başka bir doğru yanıt da olabilir; CSES hepsini kabul eder, bizim beklenen çıktı temsilcileri küçükten büyüğe zincirliyor.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 2 1 2 3 4</span></figcaption>
+<pre><code>1
+1 3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-Z1"><code>alistirma/kod/V-3-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.4</div>
+  <div class="govde">
+    <h2>Labirentte en kısa yol: enlemesine gezi</h2>
+    <p>Kuyruk, noktaları başlangıca uzaklık sırasıyla işler; bu yüzden ilk varış en kısa yoldur. Kitapçığın <code>43-labirent.cpp</code>'sinden uzaklık haritasına, CSES'in <em>Labyrinth</em>'ine, genel çizgede en kısa yola ve satranç atına.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.3: Labirentte en kısa yol</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260123.md">algoritma ders 15: labirentte yol bulma</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260206.md">algoritma ders 17: enlemesine gezi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/43-labirent.cpp">kod: 43-labirent.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-4-I1</span> Bir duvarı yıkın</h3>
+<p>Kitapçığın labirentinde A'dan B'ye 10 adım. Planın ikinci satırındaki <code>#A#.....#</code>'de A'nın sağındaki duvarı yıkın (<code>#A......#</code>). Yeni en kısa yol kaç adım, tarifi ne? Çalıştırmadan önce kâğıtta sayın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>en kısa yol 10 adım: DDDDRRRRRR</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-I1"><code>alistirma/kod/V-4-I1/</code></a></p>
+</section>
+<section class="soru" id="V-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-4-A1</span> Uzaklık haritası</h3>
+<p>Yol tarifi yerine harita: A'dan her kareye kaç adım? Enlemesine gezi her karenin uzaklığını &ldquo;geldiğim karenin uzaklığı + 1&rdquo; diye yazsın. Haritayı basın: duvar <code>##</code>, ulaşılamayan <code>..</code>, ötekiler iki haneli uzaklık (<code>setw(2)</code>). Girdi CSES biçiminde (satır sütun, plan; A başlangıç, B hedef). B'deki sayı V-4-A2'nin yanıtı olacak.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #.A#...# #.##.#B# #......# ########</span></figcaption>
+<pre><code>################
+## 1 0## 8 910##
+## 2#### 7## 9##
+## 3 4 5 6 7 8##
+################</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-A1"><code>alistirma/kod/V-4-A1/</code></a></p>
+</section>
+<section class="soru" id="V-4-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-4-A2</span> Labyrinth</h3>
+<p><a href="https://cses.fi/problemset/task/1193">CSES 1193</a>, kitapçığın ikinci alıştırması: A'dan B'ye var mı, kaç adım, tarifi (<code>U D L R</code>). Kitapçığın &ldquo;nereden geldim&rdquo; numarası: her kareye geliş yönünü yazın, B'den geriye yürüyüp tarifi okuyun, ters çevirin. Çıktı CSES biçimi: <code>YES</code>, adım sayısı, tarif; ya da <code>NO</code>. Birden çok en kısa yol olabilir; bizim beklenen çıktı yönleri U, D, L, R sırasıyla deneyen sürümünki.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #.A#...# #.##.#B# #......# ########</span></figcaption>
+<pre><code>YES
+9
+LDDRRRRRU</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-A2"><code>alistirma/kod/V-4-A2/</code></a></p>
+</section>
+<section class="soru" id="V-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-4-Z1</span> Genel çizgede en kısa yol</h3>
+<p>Izgara değil, komşuluk listesi: yönsüz çizgede 1'den her noktaya en az kaç bağ? Enlemesine gezi, <code>uzaklik</code> ve <code>nereden</code> dizileriyle. Her nokta için uzaklığı yazın, sonra 1'den n'e yolu (<code>nereden</code> zincirini geri sararak). Girdi altı noktalı çizge. Yol yoksa <code>yol yok</code>.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>1: 0
+2: 1
+3: 1
+4: 2
+5: 3
+6: 4
+1 -&gt; 6: 1 2 4 5 6</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-Z1"><code>alistirma/kod/V-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-4-K1</span> Satranç atı</h3>
+<p>At, 8×8 tahtada <code>a1</code>'den <code>h8</code>'e en az kaç hamlede gider? Çizge görünmez: her karenin komşuları atın sekiz sıçraması. Enlemesine gezi; girdi iki kare (<code>a1 h8</code>). Sonra kitapçığın <em>Neden en kısa?</em> kutusunu kendi sözlerinizle yazın: kuyruktan çıkan karelerin uzaklığı neden hiç azalmaz? Bu bir tümevarım; dört beş cümle yeter, kod yazmaktan daha değerli.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: a1 h8</span></figcaption>
+<pre><code>a1 -&gt; h8: 6 hamle</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-K1"><code>alistirma/kod/V-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.5</div>
+  <div class="govde">
+    <h2>İki takım kurmak; çevrim bulmak</h2>
+    <p>Aynı kalıp, &ldquo;gezildi&rdquo; yerine &ldquo;hangi takımda&rdquo;. Kitapçığın iki gerçek hatasından birini siz bulacaksınız; sonra CSES'in <em>Building Teams</em> ve <em>Round Trip</em> soruları.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.3: İki takım kurmak</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260213.md">algoritma ders 18: iki parça çizgeler</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260220.md">algoritma ders 19: çevrim bulma</a></p>
+    </div>
+
+<section class="soru" id="V-5-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-5-I1</span> Kitapçığın ilk hatası</h3>
+<p>Program iki takım kuruyor; ama kitapçığın <em>İki hata, iki ders</em> kutusundaki ilk hata burada: bir <code>else</code> eksik, taban durumu yok, gezi durmuyor (çökene kadar kendini çağırır). Satırı bulup <code>else</code>'i koyun. Girdi: beş kişi, üç arkadaşlık. Kitapçık bu hatayı <code>gdb</code> ile bulmuş; siz de deneyin: <code>backtrace</code> sonsuz tekrarı gösterir.</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-5-I1 · Kitapçığın ilk hatası: eksik else</span>
+enum <span class="a">class</span> Takim { Yok, Bir, Iki };
+Dizi&lt;Dizi&lt;Nokta&gt;&gt; sinif;
+Dizi&lt;Takim&gt; takim;
+
+<span class="t">bool</span> gez(Nokta a) {
+  <span class="a">for</span> (Nokta b : sinif[a]) {
+    <span class="a">if</span> (takim[b] != Takim::Yok) {
+      <span class="a">if</span> (takim[b] == takim[a]) <span class="a">return</span> <span class="a">false</span>;
+    }
+    takim[b] = (takim[a] == Takim::Bir) ? Takim::Iki : Takim::Bir;
+    <span class="a">if</span> (<span class="a">not</span> gez(b)) <span class="a">return</span> <span class="a">false</span>;
+  }
+  <span class="a">return</span> <span class="a">true</span>;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> n{<span class="n">0</span>}, m{<span class="n">0</span>};
+  cin &gt;&gt; n &gt;&gt; m;
+  sinif.assign(n + <span class="n">1</span>, {}); takim.assign(n + <span class="n">1</span>, Takim::Yok);
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; m; ++k) { Nokta a, b; cin &gt;&gt; a &gt;&gt; b; sinif[a].push_back(b); sinif[b].push_back(a); }
+  <span class="a">for</span> (Nokta p{<span class="n">1</span>}; p &lt;= n; ++p)
+    <span class="a">if</span> (takim[p] == Takim::Yok) {
+      takim[p] = Takim::Bir;
+      <span class="a">if</span> (<span class="a">not</span> gez(p)) { cout &lt;&lt; <span class="s">&quot;IMPOSSIBLE&quot;</span> &lt;&lt; endl; <span class="a">return</span> <span class="n">0</span>; }
+    }
+  <span class="a">for</span> (Nokta p{<span class="n">1</span>}; p &lt;= n; ++p) cout &lt;&lt; (takim[p] == Takim::Bir ? <span class="n">1</span> : <span class="n">2</span>) &lt;&lt; <span class="s">&quot; &quot;</span>;
+  cout &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 1 2 1 3 4 5</span></figcaption>
+<pre><code>1 2 2 1 2 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-I1"><code>alistirma/kod/V-5-I1/</code></a></p>
+</section>
+<section class="soru" id="V-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-5-A1</span> Üçgen</h3>
+<p>Kitapçığın dördüncü alıştırması: <a href="https://cses.fi/problemset/task/1668">CSES 1668</a>. V-5-I1'in düzeltilmiş programı bunu zaten çözüyor; şimdi mümkün olmayan bir girdi: 1-2, 2-3, 3-1 üçgeni. Çıktı <code>IMPOSSIBLE</code>. Sonra düşünün: hangi çizgeler ikiye bölünemez? Kitapçığın ipucu: tek sayıda bağdan oluşan bir çevrim. Girdiye bir dörtgen (çift çevrim) ekleyip bölünebildiğini de görün.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 3 1 2 2 3 3 1</span></figcaption>
+<pre><code>IMPOSSIBLE</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-A1"><code>alistirma/kod/V-5-A1/</code></a></p>
+</section>
+<section class="soru" id="V-5-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-5-A2</span> Çevrim var mı?</h3>
+<p>Yönsüz çizgede çevrim var mı? Derinlemesine gezide zaten gezilmiş bir komşuya rastlamak çevrim demek &mdash; <em>bir istisnayla</em>: az önce geldiğimiz nokta (yönsüz bağ iki yöne de görünür). Kalıba &ldquo;bir önceki nokta&rdquo; girdisini ekleyin. Girdi altı noktalı çizge: çevrim var (1-2-4-3). Çıktı <code>çevrim var</code> ya da <code>çevrim yok</code>; 5-6 bağını silip bir de ağaç deneyin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>çevrim var</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-A2"><code>alistirma/kod/V-5-A2/</code></a></p>
+</section>
+<section class="soru" id="V-5-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-5-Z1</span> Round Trip</h3>
+<p><a href="https://cses.fi/problemset/task/1669">CSES 1669</a>, kitapçığın beşinci alıştırması: çevrimi <em>yazın</em>. V-5-A2'ye <code>nereden</code> dizisini ekleyin; gezilmiş bir komşuya (<code>su</code>) rastlayınca <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar geri yürüyün, başa <code>su</code>'yu da koyun. Çıktı CSES biçimi: çevrimin nokta sayısı (başlangıç iki kere sayılır), sonra noktalar. Girdi CSES örneği. Başka çevrimler de doğru; bizim beklenen çıktı komşuları girdi sırasıyla gezen sürümünki.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 6 1 3 1 2 5 3 1 5 2 4 4 5</span></figcaption>
+<pre><code>4
+1 5 3 1 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-Z1"><code>alistirma/kod/V-5-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.6</div>
+  <div class="govde">
+    <h2>Bir kuyruk, birçok başlangıç</h2>
+    <p>Bütün kaynakları aynı kuyruğa koyun; tek gezi, iş bölümü. Kitapçığın kırk kat hızlanan canavar problemi burada: önce uzaklık haritası, sonra iki yöntemin karşılaştırması, sonra CSES'in <em>Monsters</em> sorusu.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.4: Bir kuyruk, birçok başlangıç</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260227.md">algoritma ders 20: canavarlardan kaçış, giriş</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260306.md">algoritma ders 21: canavarlardan kaçış</a></p>
+    </div>
+
+<section class="soru" id="V-6-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-6-I1</span> En yakın canavar</h3>
+<p>Program her karenin en yakın canavara uzaklığını hesaplıyor: bütün <code>M</code>'ler önce kuyruğa, sonra tek gezi. Haritayı basıyor. Bir satır ekleyin: canavardan en uzak kare kaç adım uzakta? Girdi CSES'in canavar örneği.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>################
+## 0 1 2 1 2 3##
+## 1## 1 0## 4##
+## 0## 2 1## 5 6
+## 1############
+en uzak kare: 6 adım</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-I1"><code>alistirma/kod/V-6-I1/</code></a></p>
+</section>
+<section class="soru" id="V-6-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-6-A1</span> Yavaş ve hızlı, yan yana</h3>
+<p>Kitapçığın iki parçasını aynı programda yazın: <em>yavaş</em> (her canavar için ayrı gezi, her karede küçüğü tut) ve <em>hızlı</em> (hepsi aynı kuyrukta). İkisi de aynı haritayı vermeli; kuyruktan kaç kare çıktığını sayın. Çıktı: <code>aynı</code> ya da <code>FARKLI</code>, sonra iki sayı. Girdi aynı. Kitapçığın <code>c × n × m</code> / <code>c + n × m</code> oranı burada kaç?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>aynı
+yavaş: 48 çıkarma
+hızlı: 16 çıkarma</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-A1"><code>alistirma/kod/V-6-A1/</code></a></p>
+</section>
+<section class="soru" id="V-6-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-6-Z1</span> Monsters</h3>
+<p><a href="https://cses.fi/problemset/task/1194">CSES 1194</a>: labirentin kenarına canavarlardan önce varabilir misiniz? İki gezi: önce canavarların uzaklık haritası (V-6-I1), sonra sizin geziniz &mdash; bir kareye yalnız canavardan <em>daha erken</em> varabiliyorsanız girin. Kenara varınca <code>YES</code>, adım sayısı ve tarif (V-4-A2'deki &ldquo;nereden&rdquo; numarası). Girdi CSES örneği; beklenen çıktı U, D, L, R sırasıyla deneyen sürümünki, başka tarifler de doğru.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>YES
+5
+RRDDR</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-Z1"><code>alistirma/kod/V-6-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-6-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-6-Z2</span> En güvenli kare</h3>
+<p>Tersine soru: duvarlardan en uzak kare hangisi? Bütün duvarları (ve tahtanın dışını) kaynak yapın; her boş karenin en yakın duvara uzaklığı çıkar; en büyüğünü bulun. Çerçeve numarası burada işinize yarar: dışarıyı da duvar sayın. Girdi aynı plan; çıktı en güvenli kare(ler)in uzaklığı ve kaç kare olduğu.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>en yakın duvara en uzak: 1 adım, 16 kare</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-Z2"><code>alistirma/kod/V-6-Z2/</code></a></p>
+</section>
+<section class="soru" id="V-6-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-6-K1</span> Monsters, büyük haritada</h3>
+<p>V-6-Z1'in programı, 40×60'lık üretilmiş bir haritada (girdi hazır). Önce yanıtı alın; sonra III.5'teki gibi ölçün: canavar sayısını kat kat artırsanız &ldquo;yavaş&rdquo; yöntem kaç kat yavaşlar, &ldquo;hızlı&rdquo; ne kadar? Sonra CSES'e gönderin (1000×1000, 1 s sınırı). Bir adım ötesi: canavarın da sizin de aynı anda vardığınız kareyi kim alır; CSES'in kuralı ile programınızın <code>&gt;=</code>'si uyuşuyor mu?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 40 60 ###############.############################################ #A..####..#......#.#....#..........#...##..#...............# #.....#..........#....#....#..#......###..#...#.....#......# ##.#......#...#....#.#.....#....#..#.......#...####.#..##..# #....#......##..##.........##...#..#.##.........#....##....# #....##.#...#.#...##.......#..#....#...........#...##...#.## #.#.#......##........##..............##.###.##.....#....##.# ##............#....#.......#..#...#.#......##...#...#.....## #.......##.####...#..##.#.#................#....#...#.#....# #........#...........##..#...#......#....#.....#.#....#.##.# #..#.##......##.....##........#..#..####....####.#...#.....# #.#..........##..#..##..####.......###...#.....#.#......#### #..###..#.######.#.#..........#..#.....##.#..##....#.##....# ##.....##........#.#..##..................#....####.#.##..## #.......###....#.#....#....#...#..#....##.##.#.##....#.#...# #........##...##.......#....##....###.###.###..#.........#.# #..#.....#.....#....#..........####.#.##..#..#...##..#..##.# #.#...#.........#...###....#.#................#..####.###### #....#.##...#.#.#.##...........###...#..#.....#.#......##..# ###..###....#.......###....#..#..##.##....#...##...##...#### #.#....#.....##..#..##....#.#........#.......#.............. #...#..#.....##..#............##.#.....#.#....#.#.##.......# #.##.#.........##...#.#..#..###...##...#.#.#.#....#.#......# #..................#..#.#..##.....#.#........###....###..### #.#..#.#.##......#.......##.......#..##....#.##.........##.# #.#.....#..#......#............#..#.....#.###....##.#.#....# ##.#..#..#..#...#....#..##..#..#.....#....#........##..#..## ###.#...#...#.#..#..#....##....#..#######..#.....#M.#..#.#.# #........#......##......#.#.........#..#.##.#.##..#....#...# ##..#...........................#........#.#.#.M#..#....#..# ###..#.....#...###.###...#.......#......#.#....M.......##..# #...#.........#.......#........#.#.....#.....#.......#.#..## ##......#.....#.#....#...#..#.#M.....#.#.......M......#...## #.#...#....#.##..###........##...#.#.....#.#...#......#..### #.##..#........#..#...#.#.#.#......###..M#......###........# #.##...#..#.#.#...##............#.#.#..##.#..##...#.##.#..M# ##.##.............#.#.......#..M.........#......#M..#.#....# #...#..#....#...#.#.#............###..###.#...#..##.#####..# #.##.........#...#..#......###............##....#..#.....### ##############################.#############################</span></figcaption>
+<pre><code>YES
+19
+DRRRDRRRURRRRURRRRU</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-K1"><code>alistirma/kod/V-6-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.7</div>
+  <div class="govde">
+    <h2>Dijkstra: bir noktadan hepsine</h2>
+    <p>Enlemesine gezi, kuyruğu öncelik sırasıyla değiştirince ağırlıklı yollara da çalışır. Kitapçığın <code>41-dijkstra.cpp</code>'si, yol kurma, Dijkstra'yı kırmak (eksi ağırlık), &ldquo;eski kayıt&rdquo; satırı ve CSES'in <em>Flight Discount</em>'u.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.5: Dijkstra</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260327.md">algoritma ders 23: en kısa yol (Dijkstra)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260313.md">algoritma ders 22: omuzda taşıyarak (USACO)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/41-dijkstra.cpp">kod: 41-dijkstra.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-7-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-7-I1</span> Ulaşılamayan şehir</h3>
+<p>Kitapçığın girdisine ulaşılamayan dördüncü bir şehir ekledik. Program onun uzaklığı için <code>SONSUZ</code>'u (10¹⁸) basıyor; bunu <code>-1</code> yapın. Tek satır. Sonra sorun: <code>SONSUZ</code> neden <code>1e18</code>, neden <code>numeric_limits&lt;long long&gt;::max()</code> değil? (İpucu: <code>u + sure</code> taşar mı?)</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 4 1 2 6 1 3 2 3 2 3 1 3 4</span></figcaption>
+<pre><code>0 5 2 -1 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-I1"><code>alistirma/kod/V-7-I1/</code></a></p>
+</section>
+<section class="soru" id="V-7-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A1</span> Yolu da yazın</h3>
+<p>Uzaklık yetmez, rota lazım: <code>nereden[su] = bu</code> kaydını uzaklık iyileştiğinde tutun; sonunda n'den geriye yürüyün (V-4-Z1'deki gibi). Çıktı: 1'den her şehre uzaklık satırı, sonra <code>1 -> n</code> yolu. Girdi beş şehir, yedi hat (yönlü). Bir şehre iki yoldan aynı uzaklıkla varılırsa hangisi kaydedilir?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 7 1 2 4 1 3 1 3 2 2 2 4 5 3 4 8 4 5 3 3 5 10</span></figcaption>
+<pre><code>1: 0
+2: 3
+3: 1
+4: 8
+5: 11
+1 -&gt; 5: 1 3 5 (uzaklık 11)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-A1"><code>alistirma/kod/V-7-A1/</code></a></p>
+</section>
+<section class="soru" id="V-7-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A2</span> Dijkstra&#x27;yı kırın</h3>
+<p>Kitapçığın yedinci alıştırması. Girdide eksi ağırlıklı bir bağ var (beş şehir). Aynı programda iki hesap yapın: Dijkstra ve <em>n−1 tur gevşetme</em> (Bellman–Ford'un en sade hâli, V.9'da ayrıntısı). İki sonucu alt alta yazın; hangi şehirlerde ayrışıyorlar, neden? Dijkstra 2'yi &ldquo;işi bitti&rdquo; sayıp bir daha bakmıyor (bitmiş şehre dokunmuyor); eksi bağ o kararı sonradan bozuyor, hata 5'e de taşınıyor.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5 1 2 1 2 5 1 1 3 5 3 4 -6 4 2 1</span></figcaption>
+<pre><code>Dijkstra : 0 1 5 -1 2
+gevşetme : 0 0 5 -1 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-A2"><code>alistirma/kod/V-7-A2/</code></a></p>
+</section>
+<section class="soru" id="V-7-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-7-Z1</span> Eski kayıt</h3>
+<p><code>if (uzaklik[bu] &lt; u) continue;</code> satırı ne yapıyor? Bir şehir sıraya birden çok kere girebilir (her iyileşmede bir kayıt); eskisi çıkınca atlanır. Satırı sayaçlı yapın: kaç kayıt atlandı? Sonra satırı silip programı yine çalıştırın: sonuç değişir mi, kaç hat gevşetildi? İki sayıyı da yazın. Girdi V-7-A1'inki.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 7 1 2 4 1 3 1 3 2 2 2 4 5 3 4 8 4 5 3 3 5 10</span></figcaption>
+<pre><code>1: 0
+2: 3
+3: 1
+4: 8
+5: 11
+atlanan eski kayıt: 2
+satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-Z1"><code>alistirma/kod/V-7-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-7-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-7-K1</span> Flight Discount</h3>
+<p><a href="https://cses.fi/problemset/task/1195">CSES 1195</a>: bir uçuşun bedelini yarıya indirme hakkınız var (bir kere, aşağı yuvarlayarak); 1'den n'e en ucuz yolculuk? Hile: her şehrin iki hâli var, &ldquo;indirim kullanılmadı&rdquo; ve &ldquo;kullanıldı&rdquo;; Dijkstra'yı <code>2n</code> düğümlü bu çizgede çalıştırın. Girdi CSES örneği; yanıt 2. Bir adım ötesi: indirim hakkı k olsaydı?</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 1 2 3 2 3 1 1 3 7 2 1 5</span></figcaption>
+<pre><code>2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-K1"><code>alistirma/kod/V-7-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.8</div>
+  <div class="govde">
+    <h2>Floyd–Warshall: herkesten herkese</h2>
+    <p>Üç döngü, o kadar. Kitapçığın <code>42-floyd.cpp</code>'si, CSES'in <em>Shortest Routes II</em>'si, yolu geri kurmak ve erişilebilirlik matrisi.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.5: Floyd–Warshall</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260403.md">algoritma ders 24: bütün uzaklıklar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/floyd-warshall.md">floyd-warshall (kanıt)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/42-floyd.cpp">kod: 42-floyd.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-8-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-8-I1</span> Bir yol daha</h3>
+<p>Kitapçığın dört şehrine bir yol ekleyin: <code>yol(1, 3, 1)</code>. Matristeki hangi hücreler değişir? Önce kâğıtta: 1'den 3'e artık 1; 2'den 4'e? 1 üzerinden 5+1+... Hesaplayın, sonra çalıştırın.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>        1   2   3   4
+     ----------------
+  1 |   0   3   1   8
+  2 |   3   0   2   9
+  3 |   1   2   0   7
+  4 |   8   9   7   0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-I1"><code>alistirma/kod/V-8-I1/</code></a></p>
+</section>
+<section class="soru" id="V-8-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-8-A1</span> Shortest Routes II</h3>
+<p><a href="https://cses.fi/problemset/task/1672">CSES 1672</a>: n şehir, m çift yönlü yol, q soru; her soru için iki şehir arasındaki en kısa uzaklık, yol yoksa <code>-1</code>. Girdi CSES örneği. Aynı iki şehir arasında birden çok yol olabilir: <code>min</code> ile okuyun. <code>SONSUZ + SONSUZ</code> taşmasın diye <code>1e15</code>'in neden yeterli olduğunu düşünün.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 5 1 2 5 1 3 9 2 3 3 1 2 2 1 1 3 1 4 3 2</span></figcaption>
+<pre><code>5
+5
+8
+-1
+3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-A1"><code>alistirma/kod/V-8-A1/</code></a></p>
+</section>
+<section class="soru" id="V-8-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-8-Z1</span> Yolu geri kurmak</h3>
+<p>Floyd–Warshall uzaklığı veriyor, yolu değil. İkinci bir matris tutun: <code>sonraki[a][b]</code>, a'dan b'ye giderken ilk adım. Yol okununca (<code>f[a][b] &gt; f[a][o] + f[o][b]</code>) <code>sonraki[a][b] = sonraki[a][o]</code>. Sonunda a'dan b'ye yolu <code>sonraki</code>'yi izleyerek yazın. Girdi kitapçığın dört şehri ve iki soru (<code>1 4</code>, <code>2 4</code>).</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 4 2 1 2 5 1 4 9 2 3 2 3 4 7 1 4 2 4</span></figcaption>
+<pre><code>1 -&gt; 4: 1 4 (uzaklık 9)
+2 -&gt; 4: 2 3 4 (uzaklık 9)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-Z1"><code>alistirma/kod/V-8-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-8-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-8-K1</span> Kim kime ulaşır?</h3>
+<p>Ağırlıkları atın, <code>bool</code> kalsın: <code>erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b])</code>. Yönlü çizgede erişilebilirlik matrisi (<em>geçişli kapanış</em>). Girdi kitapçığın yedi noktalı yönlü çizgesi; matrisi basın, sonra her nokta için kaç noktaya ulaştığını. n = 500'de <code>n³</code> = 1,25·10⁸: kaba kurala göre bir saniye; deneyin.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
+<pre><code>1 1 1 1 1 1 1
+0 1 0 0 1 0 1
+1 1 1 1 1 1 1
+1 1 1 1 1 1 1
+0 0 0 0 1 0 1
+1 1 1 1 1 1 1
+0 0 0 0 1 0 1
+1: 7 noktaya ulaşır
+2: 3 noktaya ulaşır
+3: 7 noktaya ulaşır
+4: 7 noktaya ulaşır
+5: 2 noktaya ulaşır
+6: 7 noktaya ulaşır
+7: 2 noktaya ulaşır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-K1"><code>alistirma/kod/V-8-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.9</div>
+  <div class="govde">
+    <h2>Bellman–Ford: eksi ağırlıklar da olabilir</h2>
+    <p>n−1 tur gevşetme; n'inci turda hâlâ iyileşen varsa çevrim. Kitapçığın ödüllü tünelleri (en büyük skor), CSES'in <em>High Score</em> ve <em>Cycle Finding</em> soruları.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc">kitapçık V.5: Bellman–Ford</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260410.md">algoritma ders 25: en iyi yol ve sonsuz çevrim</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260417.md">algoritma ders 26: Bellman–Ford kanıtı</a></p>
+    </div>
+
+<section class="soru" id="V-9-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-9-I1</span> Kaç tur yetti?</h3>
+<p>Program kitapçığın skor sürümü: her tünelin ödülü/cezası, 1'den n'e en büyük skor, n−1 tur. Çoğu çizgede daha az tur yeter: bir turda hiçbir skor değişmediyse durun ve kaç tur attığınızı yazın. Girdi CSES'in <em>High Score</em> örneği (yanıt 5). Neden n−1 tur hep <em>yeterli</em>, ama çoğu zaman <em>gerekli</em> değil?</p>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-9-I1 · Kaç tur yetti? Erken durun, tur sayısını yazın</span>
+<span class="a">using</span> S = <span class="t">long</span> <span class="t">long</span>;
+<span class="a">const</span> S SONSUZ{(S)1e18};
+<span class="a">struct</span> Tunel { <span class="t">int</span> a, b; S x; };
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> n{<span class="n">0</span>}, m{<span class="n">0</span>};
+  cin &gt;&gt; n &gt;&gt; m;
+  Dizi&lt;Tunel&gt; tuneller(m);
+  <span class="a">for</span> (<span class="a">auto</span>&amp; t : tuneller) cin &gt;&gt; t.a &gt;&gt; t.b &gt;&gt; t.x;
+  Dizi&lt;S&gt; skor(n + <span class="n">1</span>, -SONSUZ);
+  skor[<span class="n">1</span>] = <span class="n">0</span>;
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">1</span>}; k &lt; n; ++k)
+    <span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller)
+      <span class="a">if</span> (skor[a] != -SONSUZ) skor[b] = max(skor[b], skor[a] + x);
+  cout &lt;&lt; <span class="s">&quot;en büyük skor: &quot;</span> &lt;&lt; skor[n] &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 3 2 4 -1 1 3 -2 3 4 7 1 4 4</span></figcaption>
+<pre><code>en büyük skor: 5
+2 turda durdu</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-I1"><code>alistirma/kod/V-9-I1/</code></a></p>
+</section>
+<section class="soru" id="V-9-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-9-A1</span> High Score</h3>
+<p><a href="https://cses.fi/problemset/task/1673">CSES 1673</a>: 1'den n'e en büyük skor; sonsuza kadar artırılabiliyorsa <code>-1</code>. n'inci turda hâlâ iyileşen bir tünel varsa <em>o tünelin vardığı nokta</em> bir kârlı çevrimde ya da onun etkisinde. Ama dikkat: çevrim n'e ulaşmıyorsa sonsuz skor olmaz. Bu girdi (CSES örneği) çevrimsiz; yanıt 5. V-9-Z1 çevrimli hâlini verecek.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 3 2 4 -1 1 3 -2 3 4 7 1 4 4</span></figcaption>
+<pre><code>5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-A1"><code>alistirma/kod/V-9-A1/</code></a></p>
+</section>
+<section class="soru" id="V-9-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-9-Z1</span> Çevrim n&#x27;e ulaşmıyorsa</h3>
+<p>İki girdi düşünün: birinde kârlı çevrim 1'den n'e giden yolun üstünde, ötekinde kenarda, n'e ulaşmayan bir çıkmazda. İkincide yanıt <code>-1</code> değil. V-9-A1'in çözümü bunu nasıl ayırıyor? Girdide iki çizge art arda (her biri <code>n m</code> ile başlıyor); programınız ikisi için de yanıt versin. Kârlı çevrim 2-3-2 ikisinde de var; farkı 3'ten n'e yol olup olmaması.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 3 2 3 2 2 3 4 1 1 4 10 5 5 1 2 1 2 3 2 3 2 2 1 4 3 4 5 1</span></figcaption>
+<pre><code>-1
+4</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-Z1"><code>alistirma/kod/V-9-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-9-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-9-K1</span> Cycle Finding</h3>
+<p><a href="https://cses.fi/problemset/task/1197">CSES 1197</a>: çizgede toplam ağırlığı eksi bir çevrim var mı; varsa yazın. Bu sefer en <em>küçük</em> uzaklık (min), başlangıç noktası yok: bütün uzaklıkları 0'dan başlatın (sanki her noktaya sıfır maliyetli bir kaynak bağlı). n'inci turda hâlâ iyileşen bir nokta bulun; <code>nereden</code> zincirini n kere geri sarıp çevrimin içine girdiğinizden emin olun, sonra çevrimi okuyun. Girdi CSES örneği; beklenen çıktı bizim sürümünki, başka çevrim de doğru.</p>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 4 1 3 1 1 4 1 -3 4 3 -2</span></figcaption>
+<pre><code>YES
+4 1 2 4 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-K1"><code>alistirma/kod/V-9-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<!--GEZINME-->

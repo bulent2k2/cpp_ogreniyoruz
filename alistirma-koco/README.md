@@ -26,7 +26,9 @@ Bölümler
 | Hazırlık | [iKojo'da, hiçbir şey yüklemeden](https://claude.ai/artifact/FwDRrhtE1EdJwcoQHSzNqK) ([kaynak](bolumler/00-hazirlik.html)) | 1 | 5 |
 | I | [Kaplumbağayla İlk Adımlar](https://claude.ai/artifact/JBkHFPVcsbMPhzLj6eQa23) ([kaynak](bolumler/01-ilk-adimlar.html)) | 4 | 19 |
 | II | [Veriyi Düzenlemek](https://claude.ai/artifact/QTdneCZbUatA4nnG7fj3cg) ([kaynak](bolumler/02-veri.html)) | 4 | 19 |
-| III&ndash;VI | yazılıyor | | |
+| III | [Soyutlama Sanatı](https://claude.ai/artifact/CWD4GvcNUNrUHiBhjfMkVc) ([kaynak](bolumler/03-soyutlama.html)) | 4 | 18 |
+| IV | [Özyineleme ve Fraktallar](https://claude.ai/artifact/Xb1fHfS7a1uUiV9tX8zVPk) ([kaynak](bolumler/04-ozyineleme.html)) | 4 | 18 |
+| V&ndash;VI | yazılıyor | | |
 
 Bağlantısı olan herkes sayfaları açabilir; adresler `baglantilar.txt`'de,
 `yap.py` onları bölümler arası gezinmeye yerleştiriyor.
@@ -49,7 +51,9 @@ Dizin yapısı
 
 Bazı başlangıç dosyaları bilerek derlenmiyor ya da bitmiyor (`KI-2-Z1` değişmezi
 değiştiriyor; `KI-4-A1` ve `KI-4-Z2`'nin döngüleri siz bitirene kadar
-dönüyor). Koco'da `üst`, `son`, `yeni`, `bu`, `doğru`, `yanlış` gibi sözcükler
+dönüyor). Süre ölçen iki alıştırmanın (`KIII-4-A1`, `KIII-4-Z1`) beklenen
+çıktısı yok: kendi sayılarınızı üretin. Koco'da `üst`, `son`, `yeni`, `bu`,
+`dene`, `doğru`, `yanlış` gibi sözcükler
 anahtar sözcük olduğu için ad olarak kullanılamaz; takıldığınız yerde
 derleyicinin iletisini okuyun, defter de o yerlerde uyarıyor.
 

@@ -25,7 +25,8 @@ Bölümler
 |---|---|---|---|
 | Hazırlık | [iKojo'da, hiçbir şey yüklemeden](https://claude.ai/artifact/FwDRrhtE1EdJwcoQHSzNqK) ([kaynak](bolumler/00-hazirlik.html)) | 1 | 5 |
 | I | [Kaplumbağayla İlk Adımlar](https://claude.ai/artifact/JBkHFPVcsbMPhzLj6eQa23) ([kaynak](bolumler/01-ilk-adimlar.html)) | 4 | 19 |
-| II&ndash;VI | yazılıyor | | |
+| II | [Veriyi Düzenlemek](https://claude.ai/artifact/QTdneCZbUatA4nnG7fj3cg) ([kaynak](bolumler/02-veri.html)) | 4 | 19 |
+| III&ndash;VI | yazılıyor | | |
 
 Bağlantısı olan herkes sayfaları açabilir; adresler `baglantilar.txt`'de,
 `yap.py` onları bölümler arası gezinmeye yerleştiriyor.

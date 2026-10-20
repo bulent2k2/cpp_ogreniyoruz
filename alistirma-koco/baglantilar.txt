@@ -2,3 +2,4 @@
 # bağlantılara yerleştirir. Yeniden yayımlarken adresler değişmez.
 00-hazirlik    https://claude.ai/artifact/FwDRrhtE1EdJwcoQHSzNqK
 01-ilk-adimlar https://claude.ai/artifact/JBkHFPVcsbMPhzLj6eQa23
+02-veri        https://claude.ai/artifact/QTdneCZbUatA4nnG7fj3cg

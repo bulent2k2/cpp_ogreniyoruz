@@ -1,4 +1,4 @@
-# V-9-A1 · High Score
+# V-9-A1 · Yüksek skor
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

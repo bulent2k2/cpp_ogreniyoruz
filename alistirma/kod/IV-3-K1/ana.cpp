@@ -1,4 +1,4 @@
-// IV-3-K1 · Apple Division, tam boy
+// IV-3-K1 · Elma paylaşımı, tam boy
 // Çıktı: "En küçük fark: <sayı>"
 #include <iostream>
 #include <vector>

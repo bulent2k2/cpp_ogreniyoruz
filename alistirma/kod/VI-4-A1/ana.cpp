@@ -8,7 +8,7 @@ using namespace std;
 using S = long long;
 template <class T> using Dizi = vector<T>;
 
-// VI-4-A1 · Minimizing Coins (CSES 1634)
+// VI-4-A1 · En az para (CSES 1634)
 // Çıktı: en az para sayısı ya da -1
 int main() {
   int n, x; cin >> n >> x;

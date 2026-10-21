@@ -1,4 +1,4 @@
-// KVI-2-K1 · Minimizing Coins, aşağıdan yukarı
+// KVI-2-K1 · En az para, aşağıdan yukarı
 // Çıktı: "11: 3" ve "1000000: ..."
 dez SONSUZ = 1000000000
 tanım enAzAY(x: Sayı, paralar: Dizin[Sayı]): Sayı = {

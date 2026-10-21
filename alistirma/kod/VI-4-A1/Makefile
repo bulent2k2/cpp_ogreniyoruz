@@ -1,4 +1,4 @@
-# VI-4-A1 · Minimizing Coins
+# VI-4-A1 · En az para
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

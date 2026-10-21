@@ -1,4 +1,4 @@
-# V-7-K1 · Flight Discount
+# V-7-K1 · Uçuş indirimi
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

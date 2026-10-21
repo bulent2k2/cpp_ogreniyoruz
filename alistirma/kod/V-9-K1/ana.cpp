@@ -8,7 +8,7 @@ using namespace std;
 using Nokta = int;
 template <class T> using Dizi = vector<T>;
 
-// V-9-K1 · Cycle Finding (CSES 1197)
+// V-9-K1 · Çevrim bulma (CSES 1197)
 // Çıktı: "YES" ve çevrim (ilk ve son aynı) ya da "NO"
 using S = long long;
 struct Bag { int a, b; S x; };

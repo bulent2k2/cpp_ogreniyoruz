@@ -432,8 +432,8 @@ Dizi&lt;Takim&gt; takim;
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-A2"><code>alistirma/kod/V-5-A2/</code></a></p>
 </section>
 <section class="soru" id="V-5-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-5-Z1</span> Round Trip</h3>
-<p><a href="https://cses.fi/problemset/task/1669">CSES 1669</a>, kitapçığın beşinci alıştırması: çevrimi <em>yazın</em>. V-5-A2'ye <code>nereden</code> dizisini ekleyin; gezilmiş bir komşuya (<code>su</code>) rastlayınca <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar geri yürüyün, başa <code>su</code>'yu da koyun. Çıktı CSES biçimi: çevrimin nokta sayısı (başlangıç iki kere sayılır), sonra noktalar. Girdi CSES örneği. Başka çevrimler de doğru; bizim beklenen çıktı komşuları girdi sırasıyla gezen sürümünki.</p>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-5-Z1</span> Gidiş dönüş</h3>
+<p><a href="https://cses.fi/problemset/task/1669">CSES 1669</a> (<em>Round Trip</em>), kitapçığın beşinci alıştırması: çevrimi <em>yazın</em>. V-5-A2'ye <code>nereden</code> dizisini ekleyin; gezilmiş bir komşuya (<code>su</code>) rastlayınca <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar geri yürüyün, başa <code>su</code>'yu da koyun. Çıktı CSES biçimi: çevrimin nokta sayısı (başlangıç iki kere sayılır), sonra noktalar. Girdi CSES örneği. Başka çevrimler de doğru; bizim beklenen çıktı komşuları girdi sırasıyla gezen sürümünki.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 6 1 3 1 2 5 3 1 5 2 4 4 5</span></figcaption>
 <pre><code>4
@@ -574,8 +574,8 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-Z1"><code>alistirma/kod/V-7-Z1/</code></a></p>
 </section>
 <section class="soru" id="V-7-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-7-K1</span> Flight Discount</h3>
-<p><a href="https://cses.fi/problemset/task/1195">CSES 1195</a>: bir uçuşun bedelini yarıya indirme hakkınız var (bir kere, aşağı yuvarlayarak); 1'den n'e en ucuz yolculuk? Hile: her şehrin iki hâli var, &ldquo;indirim kullanılmadı&rdquo; ve &ldquo;kullanıldı&rdquo;; Dijkstra'yı <code>2n</code> düğümlü bu çizgede çalıştırın. Girdi CSES örneği; yanıt 2. Bir adım ötesi: indirim hakkı k olsaydı?</p>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-7-K1</span> Uçuş indirimi</h3>
+<p><a href="https://cses.fi/problemset/task/1195">CSES 1195</a> (<em>Flight Discount</em>): bir uçuşun bedelini yarıya indirme hakkınız var (bir kere, aşağı yuvarlayarak); 1'den n'e en ucuz yolculuk? Hile: her şehrin iki hâli var, &ldquo;indirim kullanılmadı&rdquo; ve &ldquo;kullanıldı&rdquo;; Dijkstra'yı <code>2n</code> düğümlü bu çizgede çalıştırın. Girdi CSES örneği; yanıt 2. Bir adım ötesi: indirim hakkı k olsaydı?</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 1 2 3 2 3 1 1 3 7 2 1 5</span></figcaption>
 <pre><code>2</code></pre>
@@ -611,8 +611,8 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-I1"><code>alistirma/kod/V-8-I1/</code></a></p>
 </section>
 <section class="soru" id="V-8-A1">
-<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-8-A1</span> Shortest Routes II</h3>
-<p><a href="https://cses.fi/problemset/task/1672">CSES 1672</a>: n şehir, m çift yönlü yol, q soru; her soru için iki şehir arasındaki en kısa uzaklık, yol yoksa <code>-1</code>. Girdi CSES örneği. Aynı iki şehir arasında birden çok yol olabilir: <code>min</code> ile okuyun. <code>SONSUZ + SONSUZ</code> taşmasın diye <code>1e15</code>'in neden yeterli olduğunu düşünün.</p>
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-8-A1</span> En kısa yollar II</h3>
+<p><a href="https://cses.fi/problemset/task/1672">CSES 1672</a> (<em>Shortest Routes II</em>): n şehir, m çift yönlü yol, q soru; her soru için iki şehir arasındaki en kısa uzaklık, yol yoksa <code>-1</code>. Girdi CSES örneği. Aynı iki şehir arasında birden çok yol olabilir: <code>min</code> ile okuyun. <code>SONSUZ + SONSUZ</code> taşmasın diye <code>1e15</code>'in neden yeterli olduğunu düşünün.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 5 1 2 5 1 3 9 2 3 3 1 2 2 1 1 3 1 4 3 2</span></figcaption>
 <pre><code>5
@@ -712,8 +712,8 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-I1"><code>alistirma/kod/V-9-I1/</code></a></p>
 </section>
 <section class="soru" id="V-9-A1">
-<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-9-A1</span> High Score</h3>
-<p><a href="https://cses.fi/problemset/task/1673">CSES 1673</a>: 1'den n'e en büyük skor; sonsuza kadar artırılabiliyorsa <code>-1</code>. n'inci turda hâlâ iyileşen bir tünel varsa <em>o tünelin vardığı nokta</em> bir kârlı çevrimde ya da onun etkisinde. Ama dikkat: çevrim n'e ulaşmıyorsa sonsuz skor olmaz. Bu girdi (CSES örneği) çevrimsiz; yanıt 5. V-9-Z1 çevrimli hâlini verecek.</p>
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-9-A1</span> Yüksek skor</h3>
+<p><a href="https://cses.fi/problemset/task/1673">CSES 1673</a> (<em>High Score</em>): 1'den n'e en büyük skor; sonsuza kadar artırılabiliyorsa <code>-1</code>. n'inci turda hâlâ iyileşen bir tünel varsa <em>o tünelin vardığı nokta</em> bir kârlı çevrimde ya da onun etkisinde. Ama dikkat: çevrim n'e ulaşmıyorsa sonsuz skor olmaz. Bu girdi (CSES örneği) çevrimsiz; yanıt 5. V-9-Z1 çevrimli hâlini verecek.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 3 2 4 -1 1 3 -2 3 4 7 1 4 4</span></figcaption>
 <pre><code>5</code></pre>
@@ -731,8 +731,8 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-Z1"><code>alistirma/kod/V-9-Z1/</code></a></p>
 </section>
 <section class="soru" id="V-9-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-9-K1</span> Cycle Finding</h3>
-<p><a href="https://cses.fi/problemset/task/1197">CSES 1197</a>: çizgede toplam ağırlığı eksi bir çevrim var mı; varsa yazın. Bu sefer en <em>küçük</em> uzaklık (min), başlangıç noktası yok: bütün uzaklıkları 0'dan başlatın (sanki her noktaya sıfır maliyetli bir kaynak bağlı). n'inci turda hâlâ iyileşen bir nokta bulun; <code>nereden</code> zincirini n kere geri sarıp çevrimin içine girdiğinizden emin olun, sonra çevrimi okuyun. Girdi CSES örneği; beklenen çıktı bizim sürümünki, başka çevrim de doğru.</p>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-9-K1</span> Çevrim bulma</h3>
+<p><a href="https://cses.fi/problemset/task/1197">CSES 1197</a> (<em>Cycle Finding</em>): çizgede toplam ağırlığı eksi bir çevrim var mı; varsa yazın. Bu sefer en <em>küçük</em> uzaklık (min), başlangıç noktası yok: bütün uzaklıkları 0'dan başlatın (sanki her noktaya sıfır maliyetli bir kaynak bağlı). n'inci turda hâlâ iyileşen bir nokta bulun; <code>nereden</code> zincirini n kere geri sarıp çevrimin içine girdiğinizden emin olun, sonra çevrimi okuyun. Girdi CSES örneği; beklenen çıktı bizim sürümünki, başka çevrim de doğru.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 4 1 3 1 1 4 1 -3 4 3 -2</span></figcaption>
 <pre><code>YES

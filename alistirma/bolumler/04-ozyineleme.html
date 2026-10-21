@@ -3,7 +3,7 @@
   <div class="no">Bölüm IV</div>
   <h1>Özyineleme ve Arama</h1>
   <p class="ozet">
-    Kitapçığın dördüncü bölümü tek bir fikri ehlileştiriyor: kendini çağıran işlev. Burada altı konu, yirmi dokuz alıştırma: Hanoi, memoizasyon, altkümeler, permütasyonlar, sekiz vezir, karmaşıklık ve budama. Keşifler CSES'in Apple Division ve Grid Paths sorularına, bir de Sudoku'ya çıkıyor.
+    Kitapçığın dördüncü bölümü tek bir fikri ehlileştiriyor: kendini çağıran işlev. Burada altı konu, yirmi dokuz alıştırma: Hanoi, memoizasyon, altkümeler, permütasyonlar, sekiz vezir, karmaşıklık ve budama. Keşifler CSES'in Elma paylaşımı ve Izgara yolları sorularına, bir de Sudoku'ya çıkıyor.
   </p>
   <!--ICERIK-SERIDI-->
 </header>
@@ -149,7 +149,7 @@ C(60, 30) = 118264581564861424</code></pre>
   <div class="ray">IV.3</div>
   <div class="govde">
     <h2>Bütün altkümeler</h2>
-    <p>Geri dönüşlü aramanın kalıbı: seç, derine in, bıraktığın gibi bırak. Kitapçığın <code>31-altkume.cpp</code>'siyle başlıyoruz; Zorlayıcı ve Keşif, kitapçığın birinci alıştırması olan CSES Apple Division.</p>
+    <p>Geri dönüşlü aramanın kalıbı: seç, derine in, bıraktığın gibi bırak. Kitapçığın <code>31-altkume.cpp</code>'siyle başlıyoruz; Zorlayıcı ve Keşif, kitapçığın birinci alıştırması olan CSES Elma paylaşımı.</p>
     <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
     <div class="kutu puf">
       <span class="basi">Yanıt yerine</span>
@@ -227,7 +227,7 @@ toplam 32</code></pre>
 </section>
 <section class="soru" id="IV-3-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-3-Z1</span> Elmaları bölmek</h3>
-<p><a href="https://cses.fi/problemset/task/1623">CSES Apple Division</a>, küçük hâli: n elmayı iki gruba ayırın, ağırlık farkı en az olsun. Her elma için &ldquo;birinci gruba mı&rdquo; kararı; taban durumunda farkı hesaplayıp en küçüğü güncelleyin. Girdi <code>5</code> / <code>3 2 7 4 1</code>. Sonra aynısını bitlerle (II-3-K1) yazıp iki sonucu karşılaştırın. <code>n ≤ 20</code>: kaba kural ne diyor?</p>
+<p><a href="https://cses.fi/problemset/task/1623">CSES Elma paylaşımı</a> (<em>Apple Division</em>), küçük hâli: n elmayı iki gruba ayırın, ağırlık farkı en az olsun. Her elma için &ldquo;birinci gruba mı&rdquo; kararı; taban durumunda farkı hesaplayıp en küçüğü güncelleyin. Girdi <code>5</code> / <code>3 2 7 4 1</code>. Sonra aynısını bitlerle (II-3-K1) yazıp iki sonucu karşılaştırın. <code>n ≤ 20</code>: kaba kural ne diyor?</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 2 7 4 1</span></figcaption>
 <pre><code>En küçük fark: 1</code></pre>
@@ -235,7 +235,7 @@ toplam 32</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-3-Z1"><code>alistirma/kod/IV-3-Z1/</code></a></p>
 </section>
 <section class="soru" id="IV-3-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-3-K1</span> Apple Division, tam boy</h3>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-3-K1</span> Elma paylaşımı, tam boy</h3>
 <p>Aynı soru, CSES'in sınırlarında: <code>n = 20</code>, ağırlıklar 10⁹'a kadar. Girdi dosyası hazır. 2²⁰ ≈ bir milyon dal; kaba kurala göre saniyenin altı, ölçün. Sonra CSES'e gönderin, yeşil tik alın. Bir adım ötesi: ilk elmayı hep birinci gruba koyarak dalların yarısını atabilirsiniz; neden sonuç değişmez? Bu bir budama mı, simetri mi?</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 20 829348952 658697903 488046854 317395805 146744756 976093707 805442658 634791609 464140560 293489511 122838462 952187413 781536364 610885315 440234266 269583217 98932168 928281119 757630070 586979021</span></figcaption>
@@ -481,7 +481,7 @@ geç: 4 çözüm, 55987 çağrı</code></pre>
   <div class="ray">IV.6</div>
   <div class="govde">
     <h2>Karmaşıklık ve budama</h2>
-    <p>Kaba kural: saniyede 10⁸ işlem. Önce kitapçığın tablosunu kendiniz üretin; sonra ızgarada Hamilton patikaları: budamasız, kitapçığın budamasıyla, kendi budamanızla. Keşif, CSES'in meşhur Grid Paths sorusu.</p>
+    <p>Kaba kural: saniyede 10⁸ işlem. Önce kitapçığın tablosunu kendiniz üretin; sonra ızgarada Hamilton patikaları: budamasız, kitapçığın budamasıyla, kendi budamanızla. Keşif, CSES'in meşhur Izgara yolları sorusu.</p>
     <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
     <div class="kutu puf">
       <span class="basi">Yanıt yerine</span>
@@ -542,8 +542,8 @@ sizinki: 104 patika, 7959 çağrı</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-6-Z1"><code>alistirma/kod/IV-6-Z1/</code></a></p>
 </section>
 <section class="soru" id="IV-6-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-6-K1</span> Grid Paths</h3>
-<p><a href="https://cses.fi/problemset/task/1625">CSES 1625</a>: 7×7 ızgara, sol üstten sol alta, her kareden bir kere; 48 adımlık bir desen veriliyor, <code>?</code> serbest, <code>U D L R</code> zorunlu. Desene uyan patikaları sayın. Girdi CSES'in örneği; yanıt 201. Budamasız bitmez; kitapçığın kuralı ve IV-6-Z1'deki &ldquo;hedefe erken varma&rdquo; ile saniyeler. Daha hızlısı için CSES'in kendi kitabında bir bölüm var (depodaki <code>kitap/</code> dizininde Türkçesi).</p>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-6-K1</span> Izgara yolları</h3>
+<p><a href="https://cses.fi/problemset/task/1625">CSES 1625</a> (<em>Grid Paths</em>): 7×7 ızgara, sol üstten sol alta, her kareden bir kere; 48 adımlık bir desen veriliyor, <code>?</code> serbest, <code>U D L R</code> zorunlu. Desene uyan patikaları sayın. Girdi CSES'in örneği; yanıt 201. Budamasız bitmez; kitapçığın kuralı ve IV-6-Z1'deki &ldquo;hedefe erken varma&rdquo; ile saniyeler. Daha hızlısı için CSES'in kendi kitabında bir bölüm var (depodaki <code>kitap/</code> dizininde Türkçesi).</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: ??????R??????U??????????????????????????LD????D?</span></figcaption>
 <pre><code>uyan patika: 201</code></pre>

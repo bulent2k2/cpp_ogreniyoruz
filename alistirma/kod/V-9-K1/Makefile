@@ -1,4 +1,4 @@
-# V-9-K1 · Cycle Finding
+# V-9-K1 · Çevrim bulma
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

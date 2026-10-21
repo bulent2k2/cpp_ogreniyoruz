@@ -8,7 +8,7 @@ using namespace std;
 using S = long long;
 template <class T> using Dizi = vector<T>;
 
-// VI-3-A1 · Dice Combinations (CSES 1633)
+// VI-3-A1 · Zar kombinasyonları (CSES 1633)
 // Çıktı: f(n) mod 1e9+7
 const S MOD{1'000'000'007};
 

@@ -8,7 +8,7 @@ using namespace std;
 using Nokta = int;
 template <class T> using Dizi = vector<T>;
 
-// V-5-Z1 · Round Trip (CSES 1669)
+// V-5-Z1 · Gidiş dönüş (CSES 1669)
 // Çıktı: k, sonra k nokta (ilk ve son aynı); çevrim yoksa "IMPOSSIBLE"
 Dizi<Dizi<Nokta>> komsular;
 Dizi<bool> gezildi;

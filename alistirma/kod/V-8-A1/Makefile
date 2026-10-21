@@ -1,4 +1,4 @@
-# V-8-A1 · Shortest Routes II
+# V-8-A1 · En kısa yollar II
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

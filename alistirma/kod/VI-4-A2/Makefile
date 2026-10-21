@@ -1,4 +1,4 @@
-# VI-4-A2 · Coin Combinations I ve II
+# VI-4-A2 · Para kombinasyonları I ve II
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

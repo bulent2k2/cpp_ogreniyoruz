@@ -75,8 +75,8 @@ f(100) = 290078479914610587823630044098 (30 basamak)</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-1-Z1"><code>alistirma-koco/kod/KVI-1-Z1/</code></a></p>
 </section>
 <section class="soru" id="KVI-1-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-1-K1</span> Dice Combinations, bir milyon</h3>
-<p><a href="https://cses.fi/problemset/task/1633">CSES 1633</a>: n bir milyona kadar, yanıt mod 10⁹ + 7. Özyineleme bir milyon derinliğe inemez (yığın taşar); aşağıdan yukarı gidin: son altı değeri bir <code>Dizin[Uzun]</code>'da taşıyan bir <code>soldanKatla</code> ile (<code>(1 |-| n)</code> üstünde). Her adımda yeni değer = altının toplamı mod, dizin kaydırılır (<code>al(6)</code>). n = 10⁶ için yazdırın; C++ cildiyle aynı sayı çıkmalı (874273980). CSES'e gönderin.</p>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-1-K1</span> Zar kombinasyonları, bir milyon</h3>
+<p><a href="https://cses.fi/problemset/task/1633">CSES 1633</a> (<em>Dice Combinations</em>): n bir milyona kadar, yanıt mod 10⁹ + 7. Özyineleme bir milyon derinliğe inemez (yığın taşar); aşağıdan yukarı gidin: son altı değeri bir <code>Dizin[Uzun]</code>'da taşıyan bir <code>soldanKatla</code> ile (<code>(1 |-| n)</code> üstünde). Her adımda yeni değer = altının toplamı mod, dizin kaydırılır (<code>al(6)</code>). n = 10⁶ için yazdırın; C++ cildiyle aynı sayı çıkmalı (874273980). CSES'e gönderin.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>f(1000000) mod 1e9+7 = 874273980</code></pre>
@@ -167,8 +167,8 @@ küme: 3</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KVI-2-Z2"><code>alistirma-koco/kod/KVI-2-Z2/</code></a></p>
 </section>
 <section class="soru" id="KVI-2-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-2-K1</span> Minimizing Coins, aşağıdan yukarı</h3>
-<p><a href="https://cses.fi/problemset/task/1634">CSES 1634</a>: tutar bir milyona kadar; özyineleme derinliği yetmez. Aşağıdan yukarı: <code>Dizik.doldur(x + 1)(SONSUZ)</code>, <code>f(0) = 0</code>, 1'den x'e her t için paraları gezip <code>enUfağı</code>. İmkânsızsa −1. CSES'in örneği (1, 5, 7 ile 11) → 3; sonra 1 000 000 için (1, 5, 7). Gönderin; dizik ile Eşlem arasındaki hız farkını da ölçün (<code>buSaniye</code>).</p>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KVI-2-K1</span> En az para, aşağıdan yukarı</h3>
+<p><a href="https://cses.fi/problemset/task/1634">CSES 1634</a> (<em>Minimizing Coins</em>): tutar bir milyona kadar; özyineleme derinliği yetmez. Aşağıdan yukarı: <code>Dizik.doldur(x + 1)(SONSUZ)</code>, <code>f(0) = 0</code>, 1'den x'e her t için paraları gezip <code>enUfağı</code>. İmkânsızsa −1. CSES'in örneği (1, 5, 7 ile 11) → 3; sonra 1 000 000 için (1, 5, 7). Gönderin; dizik ile Eşlem arasındaki hız farkını da ölçün (<code>buSaniye</code>).</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>11: 3

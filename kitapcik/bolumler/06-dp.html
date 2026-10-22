@@ -303,21 +303,23 @@ f[<span class="n">0</span>] = <span class="n">0</span>;
         (<a href="https://cses.fi/problemset/task/1635">CSES DP 3</a>)
       </li>
       <li>
-        Toplamı 9 olan kaç <strong>küme</strong> var? Sıra önemsiz:
-        <code>2+2+5</code> ile <code>5+2+2</code> aynı.
+        Toplamı 9 olan kaç <strong>çoklu küme</strong> var? Sıra önemsiz ama
+        tekrar sayılır: <code>2+2+5</code> ile <code>5+2+2</code> aynı,
+        ikisi de <code>{2,2,5}</code>. (Bölüm II'nin kümesi tekrarı yutardı;
+        buradaki yutmuyor, o yüzden &ldquo;çoklu&rdquo;.)
         (<a href="https://cses.fi/problemset/task/1636">CSES DP 4</a>)
       </li>
     </ul>
 
     <div class="tablo-sar">
       <table>
-        <thead><tr><th>Diziler (8 tane)</th><th>Kümeler (3 tane)</th></tr></thead>
+        <thead><tr><th>Diziler (8 tane)</th><th>Çoklu kümeler (3 tane)</th></tr></thead>
         <tbody>
           <tr>
             <td><code>2+2+5</code>, <code>2+5+2</code>, <code>5+2+2</code>,
                 <code>2+2+2+3</code>, <code>2+2+3+2</code>, <code>2+3+2+2</code>,
                 <code>3+2+2+2</code>, <code>3+3+3</code></td>
-            <td><code>{2,5}</code>, <code>{2,3}</code>, <code>{3}</code></td>
+            <td><code>{2,2,5}</code>, <code>{2,2,2,3}</code>, <code>{3,3,3}</code></td>
           </tr>
         </tbody>
       </table>
@@ -408,10 +410,13 @@ f(a, b, k) = min( f(a, b, k-1),          <span class="y">// k şehrine UĞRAMAZS
     <h3>Yarım bıraktığımız bir problem</h3>
 
     <p>
-      İki yazının en uzun <strong>ortak altdizisi</strong>ni bulmak, çizelgeli
-      dinamik programlamanın en klasik örneği.
+      İki yazının en uzun <strong>bitişik ortak altdizisi</strong>ni
+      (<em>longest common substring</em>) bulmak, çizelgeli dinamik
+      programlamanın en klasik örneklerinden.
       <code>tane[k1][k2]</code>, birinci yazının <em>k1</em>, ikinci yazının
-      <em>k2</em> konumunda biten ortak altdizinin uzunluğu olsun.
+      <em>k2</em> konumunda biten bitişik ortak altdizinin uzunluğu olsun.
+      (Yarışma dilindeki &ldquo;en uzun ortak altdizi&rdquo;, <em>LCS</em>,
+      bitişiklik istemez; onun çizelgesi başka. O da size kalsın.)
     </p>
 
     <figure class="kod">

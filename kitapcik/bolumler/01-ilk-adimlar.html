@@ -92,14 +92,14 @@
 
   cout &lt;&lt; <span class="s">"2000'in küpü (int) : "</span> &lt;&lt; a * a * a &lt;&lt; endl;   <span class="y">// eksi!</span>
   cout &lt;&lt; <span class="s">"3000'ün küpü (int) : "</span> &lt;&lt; b * b * b &lt;&lt; endl;   <span class="y">// yanlış!</span>
-  cout &lt;&lt; <span class="s">"3000'ün küpü (long): "</span> &lt;&lt; <span class="n">1L</span> * b * b * b &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"3000'ün küpü (long long): "</span> &lt;&lt; <span class="n">1LL</span> * b * b * b &lt;&lt; endl;
 
   cout &lt;&lt; <span class="s">"karekök(2000'in küpü) : "</span> &lt;&lt; sqrt(a * a * a) &lt;&lt; endl; <span class="y">// nan</span>
 
-  cout &lt;&lt; <span class="s">"int'in en büyüğü           : "</span>
+  cout &lt;&lt; <span class="s">"int'in en büyüğü                : "</span>
        &lt;&lt; numeric_limits&lt;<span class="t">int</span>&gt;::max() &lt;&lt; endl;
-  cout &lt;&lt; <span class="s">"unsigned long'un en büyüğü : "</span>
-       &lt;&lt; numeric_limits&lt;<span class="t">unsigned long</span>&gt;::max() &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"unsigned long long'un en büyüğü : "</span>
+       &lt;&lt; numeric_limits&lt;<span class="t">unsigned long long</span>&gt;::max() &lt;&lt; endl;
   <span class="a">return</span> <span class="n">0</span>;
 }</code></pre>
     </figure>
@@ -108,10 +108,10 @@
       <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">gerçek sonuç</span></figcaption>
       <pre><code>2000'in küpü (int) : <span class="v">-589934592</span>
 3000'ün küpü (int) : <span class="v">1230196224</span>
-3000'ün küpü (long): 27000000000
+3000'ün küpü (long long): 27000000000
 karekök(2000'in küpü) : <span class="v">-nan</span>
-int'in en büyüğü           : 2147483647
-unsigned long'un en büyüğü : 18446744073709551615</code></pre>
+int'in en büyüğü                : 2147483647
+unsigned long long'un en büyüğü : 18446744073709551615</code></pre>
     </figure>
 
     <p>
@@ -120,15 +120,23 @@ unsigned long'un en büyüğü : 18446744073709551615</code></pre>
       başa dönüyor, tıpkı kilometre saati gibi. Buna <strong>taşma</strong>
       (<em>overflow</em>) deniyor. Eksi bir sayının karekökü de haliyle
       <code>nan</code>, yani &ldquo;sayı değil&rdquo; (<em>not a number</em>).
+      Bir uyarı: C++ işaretli bir sayı taşınca ne olacağını <em>tanımlamaz</em>
+      (<em>undefined behavior</em>); gördüğünüz, bu derleyicinin bu seferki
+      kararı. Başka bir derleyici, hatta aynı derleyicinin <code>-O2</code>
+      bayrağı, başka bir şey yapabilir. Kilometre saati benzetmesi yalnızca
+      <code>unsigned</code> türler için kesin: onlarda başa dönmek kuralın
+      kendisidir.
     </p>
 
     <p>
       Bu hata, yarışma sorularında en çok can yakan hatadır: kodunuz küçük örneklerde
       mükemmel çalışır, büyük testte sessizce yanlış yanıt verir.
       <strong>Çarpım yapıyorsanız türünüzü büyütün</strong> &mdash;
-      <code>long long</code> kullanın ya da <code>1L *</code> ile çarpıma
-      başlayın. Son satırdaki <code>unsigned long</code> sınırına bakın:
-      18 milyar kere milyardan fazla. Neredeyse her şeye yeter.
+      <code>long long</code> kullanın ya da <code>1LL *</code> ile çarpıma
+      başlayın. (<code>long long</code> her yerde 64 bit; <code>long</code>
+      Windows'ta 32 bit kalır, ona güvenmeyin.) Son satırdaki
+      <code>unsigned long long</code> sınırına bakın: 18 milyar kere milyardan
+      fazla. Neredeyse her şeye yeter.
     </p>
 
     <div class="kutu takim">
@@ -259,7 +267,8 @@ unsigned long'un en büyüğü : 18446744073709551615</code></pre>
 <span class="t">int</span> main() {
   srand(time(<span class="a">nullptr</span>));            <span class="y">// her çalıştırışta farklı olsun</span>
   <span class="a">const</span> <span class="t">int</span> gizli{rand() % <span class="n">100</span> + <span class="n">1</span>};  <span class="y">// 1..100</span>
-  <span class="t">int</span> hak{<span class="n">7</span>};
+  <span class="a">const</span> <span class="t">int</span> toplamHak{<span class="n">7</span>};
+  <span class="t">int</span> hak{toplamHak};
 
   cout &lt;&lt; <span class="s">"1 ile 100 arasında bir sayı tuttum. "</span>
        &lt;&lt; hak &lt;&lt; <span class="s">" hakkın var."</span> &lt;&lt; endl;
@@ -271,7 +280,7 @@ unsigned long'un en büyüğü : 18446744073709551615</code></pre>
     --hak;
 
     <span class="a">if</span> (tahmin == gizli) {
-      cout &lt;&lt; <span class="s">"Bildin! "</span> &lt;&lt; (<span class="n">7</span> - hak) &lt;&lt; <span class="s">" tahminde."</span> &lt;&lt; endl;
+      cout &lt;&lt; <span class="s">"Bildin! "</span> &lt;&lt; (toplamHak - hak) &lt;&lt; <span class="s">" tahminde."</span> &lt;&lt; endl;
       <span class="a">return</span> <span class="n">0</span>;
     }
     cout &lt;&lt; (tahmin &lt; gizli ? <span class="s">"Daha büyük."</span> : <span class="s">"Daha küçük."</span>)

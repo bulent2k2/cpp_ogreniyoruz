@@ -503,7 +503,11 @@ vector&lt;<span class="t">Takim</span>&gt; takim;
       en yakın şehri istiyoruz. İkincisi: <code>greater&lt;T&gt;</code>. Varsayılan
       <code>priority_queue</code> en <em>büyüğü</em> verir; biz en küçüğü istiyoruz.
       (<code>greater</code> bir <em>işlevci</em> &mdash; nesnesi işlev gibi
-      çağrılabilen bir tür.)
+      çağrılabilen bir tür.) Bir de <code>continue</code> satırı: aynı şehir
+      sıraya birkaç kere girebilir, eski kayıt gelince atlıyoruz. Bu,
+      Dijkstra'nın <em>tembel</em> sürümü; klasik sürüm sıradan çıkan şehri bir
+      <code>bitti</code> dizisinde işaretler ve ona bir daha dokunmaz. İkisi
+      eksi ağırlıkta farklı davranır; alıştırmada göreceksiniz.
     </p>
 
     <figure class="kod dar kopyalanmaz">
@@ -572,15 +576,25 @@ vector&lt;<span class="t">Takim</span>&gt; takim;
 skor[<span class="n">1</span>] = <span class="n">0</span>;
 
 <span class="a">for</span> (K k = <span class="n">1</span>; k &lt; n; ++k)                     <span class="y">// en fazla n-1 tünel gerekir</span>
-  <span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller)
+  <span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller) {
+    <span class="a">if</span> (skor[a] == -SONSUZ) <span class="a">continue</span>;        <span class="y">// ulaşılamayan şehirden bağ çıkmaz</span>
     skor[b] = max(skor[b], skor[a] + x);
+  }
 
 <span class="y">// bir tur daha atıp hâlâ iyileşen var mı diye bakarsak,</span>
 <span class="y">// sonsuza kadar artan bir ÇEVRİM bulmuş oluruz:</span>
 <span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller)
-  <span class="a">if</span> (skor[a] + x &gt; skor[b])
+  <span class="a">if</span> (skor[a] != -SONSUZ <span class="a">and</span> skor[a] + x &gt; skor[b])
     cevrim.push_back(b);</code></pre>
     </figure>
+
+    <p>
+      İki küçük tuzak. <code>SONSUZ</code> için türün en büyük değerini
+      seçmeyin; <code>1e18</code> gibi büyük ama toplayınca taşmayan bir sayı
+      seçin. Ve ulaşılamayan bir şehirden çıkan bağı atlayın: yoksa
+      <code>-SONSUZ + x</code> &ldquo;neredeyse sonsuz&rdquo; bir skor olur,
+      ulaşılamayan şehir ulaşılmış görünür.
+    </p>
 
     <p>
       Neden <code>n−1</code> tur? Çünkü en uzun basit yol en fazla
@@ -672,10 +686,15 @@ skor[<span class="n">1</span>] = <span class="n">0</span>;
           sayfada karşılaştırın: hangi satır hangisini ötekinden ayırıyor?
         </li>
         <li>
-          <strong>Dijkstra'yı kırın.</strong> Eksi ağırlıklı bir bağ içeren,
-          <em>en fazla dört noktalı</em> bir çizge çizin; öyle ki Dijkstra
+          <strong>Dijkstra'yı kırın.</strong> Önce klasik sürümü yazın: sıradan
+          çıkan şehri bir <code>bitti</code> dizisinde işaretleyin ve bitmiş
+          şehre bir daha dokunmayın. Sonra eksi ağırlıklı bir bağ içeren,
+          <em>en fazla dört noktalı</em> bir çizge çizin; öyle ki bu sürüm
           yanlış yanıt versin. Bulduğunuzda algoritmanın neden aceleci olduğunu
-          gerçekten anlamış olacaksınız.
+          gerçekten anlamış olacaksınız. Yukarıdaki tembel sürüm aynı çizgede
+          doğru yanıtı verir, çünkü eski kaydı atlar ama şehri yeniden açar;
+          onu kırmak için eksi toplamlı bir <em>çevrim</em> gerekir, o zaman
+          hiç durmaz. Deneyin.
         </li>
       </ol>
     </div>

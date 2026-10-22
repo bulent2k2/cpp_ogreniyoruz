@@ -77,6 +77,7 @@ TURKCE = str.maketrans("çğıöşüâîûÇĞİÖŞÜÂÎÛ", "cgiosuaiuCGIOSUA
 
 
 def kimlik(metin: str) -> str:
+    metin = re.sub(r'<span class="yol[^"]*">.*?</span>', "", metin, flags=re.S)  # okuma yolu imi kimliğe girmesin
     t = html.unescape(re.sub(r"<[^>]+>", "", metin)).translate(TURKCE).lower()
     return re.sub(r"[^a-z0-9]+", "-", t).strip("-") or "kesim"
 

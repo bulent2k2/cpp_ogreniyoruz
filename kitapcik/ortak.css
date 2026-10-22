@@ -589,6 +589,35 @@ hr.ayrac {
 @media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
 @media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
 
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
 /* ---------- sözlük ---------- */
 
 .sozluk { margin: 1rem 0 0; }

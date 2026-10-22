@@ -383,7 +383,7 @@ k[<span class="n">0</span>] = <span class="n">1</span>;
 <div class="blok">
   <div class="ray">VI.4</div>
   <div class="govde">
-    <h2>Kanıt neden bu kadar önemli?</h2>
+    <h2>Kanıt neden bu kadar önemli? <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       Bir dinamik program yazdığınızda, doğru olup olmadığını test ederek
@@ -535,7 +535,7 @@ dene(<span class="s">"1110111011"</span>,<span class="s">"10011"</span>,      <s
       </div>
     </div>
 
-    <h3>Başka ortamlar, başka keyifler</h3>
+    <h3>Başka ortamlar, başka keyifler <span class="yol hizli">hızlı yol</span></h3>
 
     <p>
       C++ hızlı ve sağlam, ama tek dil değil &mdash; ve bazı şeyleri anlamanın
@@ -702,6 +702,36 @@ dene(<span class="s">"1110111011"</span>,<span class="s">"10011"</span>,      <s
           <span class="zor">en önemlisi</span>
         </li>
       </ol>
+    </div>
+
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · en az adımlı çözüm</span>
+      <p>
+        Labirentin karelerine bedel verin: düz yol 1, çamur 3, su 5. Girişten çıkışa en ucuz yolu dinamik programlamayla (ya da Dijkstra ile; ikisini de deneyip karşılaştırın) bulun ve oyun bitince oyuncunun ödediği bedelle en ucuz bedeli yan yana yazın: puan, aradaki fark. Böylece proje tamamlandı: I'de bir oyun, II'de skor tablosu, III'te test, IV'te bilgisayar oyuncusu, V'te labirent, VI'da en iyi çözüm. Son dokunuş olarak <code>proje/README.md</code> yazın: ne yapar, nasıl derlenir, nasıl oynanır.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Bir problemin örtüşen alt problemleri olup olmadığını söyleyebilirim.</li>
+        <li>Tümevarım formülünü önce kâğıda, sonra koda yazabilirim.</li>
+        <li>Aynı problemi yukarıdan aşağı (bellekli özyineleme) ve aşağıdan yukarı (çizelge) çözebilirim.</li>
+        <li>Döngü sırasının diziyle kümeyi ayırdığını örnekle gösterebilirim.</li>
+        <li>Bir formülün bütün durumları kapsadığını ve hiçbirini iki kere saymadığını denetleyebilirim.</li>
+        <li>Izgarada yol sayma ve bozuk para problemlerini kendi başıma kurabilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru; yanıtı kitapçıkta değil, kesimde:</p>
+      <ol>
+        <li>Paralar <code>{1, 5, 7}</code>, hedef 11: <code>f(0)</code>'dan <code>f(11)</code>'e kadar çizelgeyi kâğıtta doldurun. Aceleci yöntem nerede yanılıyor? <a href="#soru-2-en-az-kac-bozuk-para">En az kaç bozuk para?</a></li>
+        <li>Dizileri sayarken hangi döngü dışta, kümeleri sayarken hangisi? Yer değiştirince 8'in neden 3 olduğunu bir cümleyle anlatın. <a href="#soru-3-diziler-mi-kumeler-mi">Diziler mi, kümeler mi?</a></li>
+        <li>Izgaraya engel kareler eklenince formülün hangi satırı değişir? Çizelgenin ilk satır ve sütunu için ne olur? <a href="#izgarada-kac-yol-var">Izgarada kaç yol var?</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
     </div>
 
     <p class="dipnot">

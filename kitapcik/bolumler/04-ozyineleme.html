@@ -14,7 +14,7 @@
 <div class="blok">
   <div class="ray">IV.1</div>
   <div class="govde">
-    <h2>Kendini çağıran işlev</h2>
+    <h2>Kendini çağıran işlev <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       Alışık olduğumuz işlev tanımı şöyle: <code>y = f(x)</code>. Girdi ver, çıktı al.
@@ -451,7 +451,7 @@ vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>)
 <div class="blok">
   <div class="ray">IV.5</div>
   <div class="govde">
-    <h2>Ne kadar sürer? Karmaşıklık</h2>
+    <h2>Ne kadar sürer? Karmaşıklık <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       &ldquo;Bütün olasılıkları dene&rdquo; iyi bir fikir, ta ki olasılıklar
@@ -496,7 +496,7 @@ vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>)
       </p>
     </div>
 
-    <h3>Arama uzayını budamak</h3>
+    <h3>Arama uzayını budamak <span class="yol ileri">ileri</span></h3>
 
     <p>
       Üstel bir arama uzayıyla karşılaştığınızda ne yapılır? Bütünüyle
@@ -576,6 +576,36 @@ vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>)
         </li>
       </ol>
     </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · bilgisayar tahmin etsin</span>
+      <p>
+        Roller değişsin: bu sefer siz tutun, bilgisayar bulsun. <code>tahminEt(alt, ust)</code> işlevi aralığın ortasını sorsun, &ldquo;büyük/küçük&rdquo; yanıtına göre kendini daralan aralıkla çağırsın; yani ikili arama, özyinelemeli. En kötü durumda kaç tahmin gerekiyor? 1&ndash;100 ve 1&ndash;1000 için deneyin, I. bölümdeki tabloyla karşılaştırın. Oyunun iki kipi artık tek programda: &ldquo;ben tutayım&rdquo; ve &ldquo;sen tut&rdquo;.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Taban durumu ve küçülen adımla özyinelemeli bir işlev yazabilirim; ilk satırım hep taban.</li>
+        <li>Hanoi'nin üç satırlık çözümünü bir arkadaşıma anlatabilirim.</li>
+        <li>Yavaş bir özyinelemeye eşlemle bellekle hızlandırma ekleyebilirim.</li>
+        <li>Seç, derine in, geri al kalıbıyla altkümeleri ve permütasyonları üretebilirim.</li>
+        <li>&ldquo;Uygun mu?&rdquo; koşulunu değiştirerek sekiz veziri çözebilirim.</li>
+        <li>Bir çözümün karmaşıklığını tahmin edip girdi sınırına göre uygun olup olmadığını söyleyebilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru; yanıtı kitapçıkta değil, kesimde:</p>
+      <ol>
+        <li><code>fibYavas(30)</code> kaç kere çağrılır, <code>fibHizli(30)</code> kaç kere? Saydırın, sonra 40 için tahmin edin. <a href="#ayni-isi-iki-kere-yapmayin">Aynı işi iki kere yapmayın</a></li>
+        <li>Altküme üreten işlevden <code>secilen.pop_back()</code> satırını silin. Çıktı ne olur; neden &ldquo;sessizce yanlış&rdquo;? <a href="#butun-olasiliklari-gezmek">Bütün olasılıkları gezmek</a></li>
+        <li>Soruda <code>n ≤ 2000</code> yazıyor. Karesel çözüm güvenli mi, üstel? Kaba kuralla hesaplayın. <a href="#ne-kadar-surer-karmasiklik">Karmaşıklık</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
   </div>
 </div>
 

@@ -226,7 +226,7 @@ toplam 32</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-3-A2"><code>alistirma/kod/IV-3-A2/</code></a></p>
 </section>
 <section class="soru" id="IV-3-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-3-Z1</span> Elmaları bölmek</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">IV-3-Z1</span> Elmaları bölmek</h3>
 <p><a href="https://cses.fi/problemset/task/1623">CSES Elma paylaşımı</a> (<em>Apple Division</em>), küçük hâli: n elmayı iki gruba ayırın, ağırlık farkı en az olsun. Her elma için &ldquo;birinci gruba mı&rdquo; kararı; taban durumunda farkı hesaplayıp en küçüğü güncelleyin. Girdi <code>5</code> / <code>3 2 7 4 1</code>. Sonra aynısını bitlerle (II-3-K1) yazıp iki sonucu karşılaştırın. <code>n ≤ 20</code>: kaba kural ne diyor?</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 2 7 4 1</span></figcaption>
@@ -366,7 +366,7 @@ doğrudan: 2 4 6 1 3 5 7</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-4-Z1"><code>alistirma/kod/IV-4-Z1/</code></a></p>
 </section>
 <section class="soru" id="IV-4-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-4-K1</span> Gezgin satıcı, altı şehir</h3>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-4-K1</span> Gezgin satıcı, altı şehir <span class="sure">~2 saat</span></h3>
 <p>Altı şehir, aralarındaki uzaklıklar bir tabloda (girdi). 0'dan başlayıp hepsini bir kere dolaşıp 0'a dönen en kısa tur. Öteki beş şehrin bütün dizilişleri: 120 tur, her birinin uzunluğu. En kısasını ve uzunluğunu yazın. Sonra düşünün: 15 şehirde kaç tur? 20'de? Kaba kural ne diyor; bu sorunun neden &ldquo;zor&rdquo; sayıldığını bir cümleyle yazın.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 0 7 9 4 8 6 7 0 3 5 9 8 9 3 0 6 2 7 4 5 6 0 5 3 8 9 2 5 0 4 6 8 7 3 4 0</span></figcaption>
@@ -448,7 +448,7 @@ Q.......
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-5-Z1"><code>alistirma/kod/IV-5-Z1/</code></a></p>
 </section>
 <section class="soru" id="IV-5-Z2">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-5-Z2</span> Erken mi, geç mi?</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">IV-5-Z2</span> Erken mi, geç mi?</h3>
 <p>İki sayım: kitapçığınki her veziri koymadan önce denetliyor (<em>erken</em>); öteki her satıra rastgele bir vezir koyup ancak tahta dolunca denetliyor (<em>geç</em>). İkisi de doğru sayar; <code>koy()</code>'un kaç kere çağrıldığını sayın. <code>N = 6</code> için iki çağrı sayısını ve çözüm sayısını yazın. Geç denetim kaç kat fazla iş yapıyor? Bu, &ldquo;uygun mu&rdquo; koşulunu döngünün içine koymanın değeri; IV.6'daki budamanın ilk örneği.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
@@ -458,7 +458,7 @@ geç: 4 çözüm, 55987 çağrı</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-5-Z2"><code>alistirma/kod/IV-5-Z2/</code></a></p>
 </section>
 <section class="soru" id="IV-5-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-5-K1</span> Sudoku</h3>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-5-K1</span> Sudoku <span class="sure">~3 saat</span></h3>
 <p>Aynı kalıp, 81 kare: boş kareyi bul, 1'den 9'a dene, satırda-sütunda-kutuda yoksa koy, derine in, olmadıysa geri al. Girdi 9 satır, boşlar <code>0</code>. Çözülmüş tahtayı yazın. Önce <code>uygun(satir, sutun, rakam)</code> işlevini yazın ve tek başına sınayın; kutu numarası <code>(satir/3)*3 + sutun/3</code>. Kaç çağrıda çözüldü? Zor bir bulmaca bulup onu da deneyin.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079</span></figcaption>

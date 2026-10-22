@@ -14,7 +14,7 @@
 <div class="blok">
   <div class="ray">II.1</div>
   <div class="govde">
-    <h2>Dizi: bellekte yan yana</h2>
+    <h2>Dizi: bellekte yan yana <span class="yol hizli">hızlı yol</span></h2>
 
     <p>
       En eski, en sade ve en hızlı kap: <strong>dizi</strong> (<em>array</em>).
@@ -114,7 +114,7 @@ std::vector&lt;std::vector&lt;<span class="t">int</span>&gt;&gt; tablo(<span cla
 <div class="blok">
   <div class="ray">II.2</div>
   <div class="govde">
-    <h2>Eşlem: en çok işinize yarayacak kap</h2>
+    <h2>Eşlem: en çok işinize yarayacak kap <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       <strong>Eşlem</strong> (<em>map</em>) bir şeyi başka bir şeye bağlar:
@@ -349,7 +349,7 @@ ostream&amp; <span class="a">operator</span>&lt;&lt;(ostream&amp; o, <span class
       yazdırabiliyorsunuz. Hata ayıklarken bunun değeri paha biçilmez.
     </p>
 
-    <h3><code>struct</code> mu, <code>class</code> mı?</h3>
+    <h3><code>struct</code> mu, <code>class</code> mı? <span class="yol ileri">ileri</span></h3>
 
     <p>
       Teknik olarak tek fark: <code>struct</code>'ta üyeler varsayılan olarak
@@ -401,7 +401,7 @@ ostream&amp; <span class="a">operator</span>&lt;&lt;(ostream&amp; o, <span class
       </li>
     </ul>
 
-    <h4>Az sayıda değeri olan türler: <code>enum class</code></h4>
+    <h4>Az sayıda değeri olan türler: <code>enum class</code> <span class="yol ileri">ileri</span></h4>
 
     <p>
       Bir öğrencinin takımı 1 mi 2 mi? <code>int</code> kullanırsanız 7. takıma da
@@ -429,7 +429,7 @@ takim[b] = (takim[a] == Bir) ? İki : Bir;</code></pre>
 <div class="blok">
   <div class="ray">II.5</div>
   <div class="govde">
-    <h2>Kalıplar: tür de bir değişken olabilir</h2>
+    <h2>Kalıplar: tür de bir değişken olabilir <span class="yol ileri">ileri</span></h2>
 
     <p>
       Şimdiye kadar her değişkenin bir değeri, bir adı ve bir türü olduğunu söyledik.
@@ -476,7 +476,7 @@ takim[b] = (takim[a] == Bir) ? İki : Bir;</code></pre>
       zaman kazandırır.
     </p>
 
-    <h3>Tür kalıpları</h3>
+    <h3>Tür kalıpları <span class="yol ileri">ileri</span></h3>
 
     <p>
       Aynı fikir türler için de geçerli &mdash; ve aslında bu bölümde kullandığımız
@@ -518,7 +518,7 @@ takim[b] = (takim[a] == Bir) ? İki : Bir;</code></pre>
 <div class="blok">
   <div class="ray">II.6</div>
   <div class="govde">
-    <h2>Adres ve takma ad</h2>
+    <h2>Adres ve takma ad <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       Son bir kavram, ve belki de C++'ın en çok korkulan kavramı. Aslında çok basit:
@@ -652,6 +652,36 @@ cin.clear();                           <span class="y">// bozuk girdiden sonra c
         </li>
       </ol>
     </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · skor tablosu</span>
+      <p>
+        Oyuna birden çok oyuncu girsin: oyunun başında oyuncu adını okuyun, her oyuncunun en iyi (en az) tahmin sayısını bir <code>map&lt;string,int&gt;</code>'te tutun ve her oyundan sonra tabloyu addan sıralı yazdırın. Aynı oyuncu daha kötü bir sonuç alırsa tablo değişmesin. İsteğe bağlı: program kapanınca tabloyu bir dosyaya yazın, açılınca geri okuyun; <code>ofstream</code> ve <code>ifstream</code> ders notlarında.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Bir <code>vector</code>'ü doldurup aralık tabanlı <code>for</code> ile gezebilir, <code>sort</code> ile sıralayabilirim.</li>
+        <li>Bir yazıdaki harfleri eşlemle sayıp alfabetik yazdırabilirim; olmayan anahtarı <code>[]</code> ile okumanın ne yaptığını bilirim.</li>
+        <li>Yığın, kuyruk ve öncelik sırasından hangisinin hangi işe yaradığını bir cümleyle söyleyebilirim.</li>
+        <li>Verisi ve işlevleri olan küçük bir tür yazıp <code>operator&lt;&lt;</code> ile yazdırabilirim.</li>
+        <li>Bir işlevi kalıp yapıp hem <code>int</code> hem <code>double</code> ile çağırabilirim.</li>
+        <li>Bir diziyi işleve kopyasız (<code>const&amp;</code>) verebilir, değiştirmesi gerekiyorsa <code>&amp;</code> ile verebilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru; yanıtı kitapçıkta değil, kesimde:</p>
+      <ol>
+        <li><code>map&lt;string,int&gt; m; if (m["x"] == 0) {}</code> satırlarından sonra <code>m.size()</code> kaç? Neden? <a href="#eslem-en-cok-isinize-yarayacak-kap">Eşlem</a></li>
+        <li>Bir kuyruğu ve bir yığını aynı üç sayıyla doldurup boşaltın. Çıkış sıraları neden farklı; hangisi geziyi enlemesine yapar? <a href="#siranin-onemli-oldugu-kaplar">Sıranın önemli olduğu kaplar</a></li>
+        <li><code>void ekle(vector&lt;int&gt; v)</code> ile <code>void ekle(vector&lt;int&gt;&amp; v)</code> arasındaki fark bir milyon öğelik dizide neye mal olur? Ölçmeden tahmin edin, sonra III. bölümde ölçün. <a href="#adres-ve-takma-ad">Adres ve takma ad</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
   </div>
 </div>
 

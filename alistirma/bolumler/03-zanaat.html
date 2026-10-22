@@ -207,7 +207,7 @@ ebob(1071, 462) = 21</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-3-A2"><code>alistirma/kod/III-3-A2/</code></a></p>
 </section>
 <section class="soru" id="III-3-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-3-Z1</span> Kesir&#x27;e denemeler</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">III-3-Z1</span> Kesir&#x27;e denemeler</h3>
 <p>II-5-Z1'deki <code>Kesir</code> türü için <code>dene()</code> yazın: sadeleştirme (<code>Kesir{2, 4}</code> payı 1 paydası 2), toplama, çarpma, eşitlik. Eşitlik için <code>operator==</code> gerekecek. Bir tuzak: <code>assert(Kesir{1, 2} == Kesir{1, 2})</code> derlenmez, çünkü <code>assert</code> bir makro ve süslü parantezin içindeki virgülü argüman ayracı sanır; ifadeyi bir çift parantez daha içine alın. Sonra <code>-DNDEBUG</code> ile derleyin: <code>c++ -std=c++23 -DNDEBUG ana.cpp</code>. Denemeler ne oldu? Bu seçenek ne işe yarar, yarışmada açık mı kapalı mı olmalı?</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
@@ -412,7 +412,7 @@ köke kadar: 17984 asal</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-5-A1"><code>alistirma/kod/III-5-A1/</code></a></p>
 </section>
 <section class="soru" id="III-5-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-5-Z1</span> Tekrar var mı, üç yol, üç boy</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">III-5-Z1</span> Tekrar var mı, üç yol, üç boy</h3>
 <p>Kitapçığın üçüncü alıştırması. II-3-A1'in küme çözümüne iki rakip ekleyin: sıralayıp komşuları karşılaştırmak (<code>sort</code>) ve iç içe iki döngü. Veri üretimi hazır (tekrar en sonda). Dört boy: 10&nbsp;000, 30&nbsp;000, 100&nbsp;000, 1&nbsp;000&nbsp;000 &mdash; iç içe döngü yalnız ilk ikisinde; 100&nbsp;000'de yarım dakika, bir milyonda saatler sürer (deneyin, sonra <code>Ctrl-C</code>). Sonuçlar <code>cout</code>'a, süreler <code>cerr</code>'e; tabloyu yorum olarak dosyanın başına yazın. Boy üç katına çıkınca döngünün süresi kaç katına çıkıyor? On katına çıkınca kümenin ve sıralamanın? Üç yöntem, üç ayrı yanıt.</p>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

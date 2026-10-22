@@ -67,3 +67,10 @@
 @media print {
   .soru { break-inside: avoid; }
 }
+
+/* ikili çalışma imi (P9) ve süre notu (P4) */
+.basamak.ikili { background: var(--kagit-3); color: var(--murekkep-2); border: 1px dashed var(--cizgi-2); }
+.sure {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--murekkep-3); margin-left: 0.4rem; white-space: nowrap; vertical-align: 0.1em;
+}

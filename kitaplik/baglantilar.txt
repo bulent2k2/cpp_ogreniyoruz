@@ -1,0 +1,4 @@
+# Yayımlanan sayfaların adresleri. Yeniden yayımlarken adresler değişmez.
+kitaplik   https://claude.ai/artifact/2HmYGoMWQRpLJ6siGq7qxY
+dizin      https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT
+inceleme   https://claude.ai/artifact/Kcz4QboYQ7KUwpkNi1T1GW

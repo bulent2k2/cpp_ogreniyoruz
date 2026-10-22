@@ -111,6 +111,15 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   (Bölüm V'in düğüm bulmacaları). Koddaki Türkçe komut/tür adları
   Kojo'nun Türkçe API'sinden (`TurkishAPI`/`tr` paketinden) gelir;
   uydurma ad eklemeyin.
+- `kitaplik/` — **Keyifli Kitaplık**: dört eseri (iki kitapçık, iki defter)
+  bir bütün olarak sunan genel sayfa, A'dan Z'ye kavram dizini
+  (`dizin.html` + `dizin-veri.js`, 300 girdi) ve inceleme raporu
+  (`inceleme.html`). Dosyalar yayımlanan sayfaların kaynağıdır
+  (`<title>` ve `<style>` ile başlar; `<html>`/`<body>` sarmalayıcısı
+  yoktur); `yap.py` tam HTML'i `cikti/`'ye yazar, yayım adresleri
+  `baglantilar.txt`'de. Dizine kavram eklerken alıştırma kimlikleri
+  `alistirma*/bolumler/*.html` içindeki `section id` değerleriyle aynı
+  olmalı; girdi biçimi `dizin-veri.js`'nin başında.
 - `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve iki
   kitapçığın PDF/EPUB sürümleri ile kapak resimleri.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt

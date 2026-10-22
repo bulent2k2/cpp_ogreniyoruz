@@ -10,6 +10,8 @@ Metin [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr), ko
 
 Kitapçığın bir de kardeşi var: [Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş](kitapcik-koco/README.md) &mdash; aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-surum) ve Scala ile, bölüm bölüm paralel. Henüz ilk taslak; [PDF](kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf) ve [EPUB](kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub) sürümleri de hazır.
 
+Hepsini bir arada görmek için [Keyifli Kitaplık](https://claude.ai/artifact/2HmYGoMWQRpLJ6siGq7qxY) sayfasına bakın: iki kitapçık, iki alıştırma defteri ([C++ cildi](alistirma/README.md), [Koco cildi](alistirma-koco/README.md)), kime hangi yol, nasıl çalışılır. Bir de [A'dan Z'ye kavram dizini](https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT) var: her kavramın yanında kitapçık bölümü, alıştırması ve ders notu. Kaynakları [kitaplik/](kitaplik/README.md) dizininde.
+
 [Derslerimizin görsel kayıtları](mp4ler/gorsel-kayitlar.md)
 -----
 Derslerimizi [meet uygulaması](https://meet.google.com) kullanarak çevirimiçi yapıyoruz. Katılmak için bağlantı [burada](https://meet.google.com/rhc-jgcs-vre).  Geçen yılki (2024-25) giriş derslerinin notları ve kayıtları [burada](mp4ler/gorsel-kayitlar.md). Bu yılki dersler de [burada](ileri/dersler).

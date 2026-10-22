@@ -21,6 +21,7 @@ node_modules/
 package.json
 package-lock.json
 alistirma-koco/cikti/
+kitaplik/cikti/
 alistirma-koco/kod/**/test-ciktisi
 alistirma-koco/konsol/kojo/
 alistirma-koco/konsol/src/

@@ -1,0 +1,139 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Sözlük</div>
+  <h1>Küçük Sözlük</h1>
+  <p class="ozet">
+    Kitapçıkta geçen terimlerin Türkçesi, Scala'daki ya da İngilizcedeki
+    karşılığı ve bir cümlelik anlamı; yanında ilk geçtiği bölüm. Koco'nun Türkçe
+    adlarıyla Scala'nın özgün adlarını yan yana görmek için de bakın. Daha
+    geniş ve aranabilir sürümü, her kavramın alıştırmasıyla birlikte,
+    <a href="https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT">Keyifli Kavram
+    Dizini</a>'nde.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">A &ndash; D</div>
+  <div class="govde">
+    <h2>A'dan D'ye</h2>
+    <dl class="sozluk">
+      <dt>Aceleci algoritma <em>greedy algorithm</em> <span class="bolum">VI</span></dt>
+      <dd>Her adımda o an en iyi görüneni seçmek. 11 kuruşu 7+1+1+1+1 diye ödeyen yöntem; doğrusu 5+5+1.</dd>
+      <dt>Alt problem <em>subproblem</em> <span class="bolum">IV, VI</span></dt>
+      <dd>Büyük problemin aynı biçimdeki küçük hâli. Küçük ağaç büyük ağacın dalı; kısa sarmal uzun sarmalın içi.</dd>
+      <dt>Aşağıdan yukarı <em>bottom-up</em> <span class="bolum">VI</span></dt>
+      <dd>DP çizelgesini küçük durumlardan büyüğe doldurmak; işlevsel üslupta katlamayla (<code>indirge</code>) yazılır.</dd>
+      <dt>Bağ <em>edge</em> <span class="bolum">V</span></dt>
+      <dd>Çizgede iki düğümü birleştiren çizgi. Komşuluk eşleminde her düğümün karşısındaki küme, bağlarının öteki uçları.</dd>
+      <dt>Bağlı parça <em>connected component</em> <span class="bolum">V</span></dt>
+      <dd>Birbirine bir yolla ulaşılabilen düğümlerin kümesi. Gezi işlevini gezilmemiş her düğümden bir kere başlatınca sayılır.</dd>
+      <dt>Baş ve kuyruk <em>head and tail</em> <span class="bolum">II</span></dt>
+      <dd>Dizinin ilk ögesi ve gerisi: <code>başı</code>, <code>kuyruğu</code>. Her dizin ya <code>Boş</code>tur ya da bir baş ve gerisi.</dd>
+      <dt>Belki <em>Option</em> <span class="bolum">II</span></dt>
+      <dd>&ldquo;Var mı, yok mu?&rdquo; sorusunun değer hâli: ya <code>Biri(6)</code> ya <code>Hiçbiri</code>. Eşlemde <code>al</code> bunu verir.</dd>
+      <dt>Bellekle hızlandırma <em>memoization</em> <span class="bolum">IV, VI</span></dt>
+      <dd>Hesaplanan sonucu bir eşleme (<em>deftere</em>) yazıp bir daha hesaplamamak. <code>alYoksa</code> ile tek deyişte.</dd>
+      <dt>Birim <em>Unit</em> <span class="bolum">III</span></dt>
+      <dd>&ldquo;Değer vermiyorum&rdquo; türü. Çizen işlevlerin çıktı türü; C++'taki <code>void</code>'in akrabası.</dd>
+      <dt>Çizge <em>graph</em> <span class="bolum">V</span></dt>
+      <dd>Düğümler ve aralarındaki bağlar. Koco'da <code>Eşlem[Düğüm, Küme[Düğüm]]</code> olarak saklanır ve tuvale çizilebilir.</dd>
+      <dt>Değişmezlik <em>immutability</em> <span class="bolum">II</span></dt>
+      <dd>Bir kere kurulan değerin bir daha değişmemesi. <code>sıralı</code> yeni dizin verir, eskisini bozmaz; kimse veriyi arkanızdan değiştiremez.</dd>
+      <dt>Derinlemesine gezi <em>depth-first search, DFS</em> <span class="bolum">V</span></dt>
+      <dd>Bir komşuya dalıp gidebildiğin kadar gitmek. İşlevsel kılığı gezilen kümeyi girdi alıp yenisini döndürür; yığınlı kılığı da var.</dd>
+      <dt>Deyiş <em>expression</em> <span class="bolum">I</span></dt>
+      <dd>Değer üreten kod parçası. Scala'da <code>eğer</code> bile bir deyiş: <code>eğer (a &gt; b) a yoksa b</code>.</dd>
+      <dt>dez, den <em>val, var</em> <span class="bolum">I</span></dt>
+      <dd>Değişmez değer ve değişken. Önce <code>dez</code> deneyin; <code>den</code>'e ancak mecbur kalınca dönün.</dd>
+      <dt>Dijkstra <span class="bolum">V</span></dt>
+      <dd>Ağırlıklı çizgede en kısa yol: enlemesine gezinin kuyruğu öncelik sırasıyla değişmiş hâli.</dd>
+      <dt>Dinamik programlama <em>dynamic programming, DP</em> <span class="bolum">VI</span></dt>
+      <dd>Örtüşen alt problemleri bir kere çözüp saklamak. Tümevarım formülü zaten bir işlev tanımıdır; çeviri kaybı sıfır.</dd>
+      <dt>Dizin <em>List</em> <span class="bolum">II</span></dt>
+      <dd>İşlevselin atardamarı: değişmez bağlı liste. <code>Dizin(3, 1, 4)</code>; masaüstü Koco <code>List(3, 1, 4)</code> diye yazdırır.</dd>
+      <dt>durum <em>case</em> <span class="bolum">II</span></dt>
+      <dd>Örüntü eşlemede bir dal: <code>durum (harf, kaç) =&gt;</code> demeti yakalayıp parçalarına ad verir.</dd>
+      <dt>Düğüm <em>vertex, node</em> <span class="bolum">V</span></dt>
+      <dd>Çizgenin noktası. Kodda <code>Düğüm</code> türü çoğu zaman bir <code>Yazı</code> ya da <code>Sayı</code>.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">E &ndash; K</div>
+  <div class="govde">
+    <h2>E'den K'ye</h2>
+    <dl class="sozluk">
+      <dt>eğer, yoksa <em>if, else</em> <span class="bolum">I</span></dt>
+      <dd>Koşul; değer üretir. <code>eğer (a = b)</code> yazarsanız Koco çalıştırmadan itiraz eder: <code>==</code> gerekir.</dd>
+      <dt>ele <em>filter</em> <span class="bolum">I, II</span></dt>
+      <dd>Her ögeye bir soru sorar, yanıtı <code>doğru</code> olanları tutar. Ögeler değişmez, boy kısalır.</dd>
+      <dt>Enlemesine gezi <em>breadth-first search, BFS</em> <span class="bolum">V</span></dt>
+      <dd>Katman katman: önce bütün komşular, sonra komşuların komşuları. En az adımı verir.</dd>
+      <dt>Eşlem <em>Map</em> <span class="bolum">II</span></dt>
+      <dd>Anahtardan değere: <code>Eşlem("Ankara" -&gt; 6)</code>. Koco'daki <code>Eşlem</code> değişebilir (<code>eşEkle</code>); değişmez kardeşi <code>Eşlek</code>.</dd>
+      <dt>Fraktal <em>fractal</em> <span class="bolum">IV</span></dt>
+      <dd>Parçası bütününe benzeyen şekil: ağaç, Koch tanesi, Sierpinski üçgeni. Gözle görülür özyineleme.</dd>
+      <dt>Gezildi işareti <em>visited marker</em> <span class="bolum">V</span></dt>
+      <dd>Aynı düğüme iki kere girmemek için tutulan küme: <code>eğer (!gezilen(bu))</code>. Çizge kodunda ilk denetlenecek satır.</dd>
+      <dt>indirge <em>reduce, fold</em> <span class="bolum">II</span></dt>
+      <dd>Ögeleri ikişer ikişer birleştirip tek değere iner: <code>indirge((a, b) =&gt; a + b)</code>. Kısaltmaları <code>topla</code>, <code>çarp</code>, <code>enİrisi</code>.</dd>
+      <dt>iKojo <span class="bolum">Kılavuz</span></dt>
+      <dd>Koco'nun tarayıcıda çalışan sürümü: <a href="https://ikojo.fly.dev/">ikojo.fly.dev</a>. Kurulum yok; tuvali her çalıştırmada kendiliğinden temizler.</dd>
+      <dt>işle <em>map</em> <span class="bolum">II</span></dt>
+      <dd>Her ögeye aynı işlevi uygular, sonuçların dizinini verir. Boy değişmez, ögeler dönüşür.</dd>
+      <dt>İşlevsel programlama <em>functional programming</em> <span class="bolum">II, III</span></dt>
+      <dd>Değişmez veri ve değer gibi elden ele verilen işlevlerle programlama. Döngülerin yarısı <code>işle</code>/<code>ele</code>/<code>indirge</code> zincirine döner.</dd>
+      <dt>Kaplumbağa <em>turtle</em> <span class="bolum">I</span></dt>
+      <dd>Tuvalde baktığı yöne yürüyen, yürürken çizen küçük robot. <code>ileri</code>, <code>sağ</code>, <code>sol</code>, <code>zıpla</code>.</dd>
+      <dt>Kesir <em>Double</em> <span class="bolum">I</span></dt>
+      <dd>Virgüllü sayı türü. <code>7 / 2</code> üç eder; <code>7.0 / 2</code> üç buçuk.</dd>
+      <dt>Komşuluk eşlemi <em>adjacency map</em> <span class="bolum">V</span></dt>
+      <dd>Her düğümün karşısında komşularının kümesi: çizgeyi saklamanın Koco'daki yolu.</dd>
+      <dt>Kuyruk, Yığın <em>Queue, Stack</em> <span class="bolum">II</span></dt>
+      <dd>İlk giren ilk çıkar / son giren ilk çıkar. Aynı gezi kodunda birini ötekiyle değiştirmek algoritmayı değiştirir.</dd>
+      <dt>Küme <em>Set</em> <span class="bolum">II</span></dt>
+      <dd>Tekrarsız, sırasız. Aynı zamanda bir işlev: <code>k(4)</code> &ldquo;4 kümede mi?&rdquo; diye sorar.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">L &ndash; Z</div>
+  <div class="govde">
+    <h2>L'den Z'ye</h2>
+    <dl class="sozluk">
+      <dt>Lambda <em>anonymous function</em> <span class="bolum">II</span></dt>
+      <dd>Adsız işlev: <code>s =&gt; s * s</code>. &ldquo;<code>s</code>'yi al, karesini ver.&rdquo; <code>işle</code>'ye böyle verilir.</dd>
+      <dt>Öncelik sırası <em>priority queue</em> <span class="bolum">II, V</span></dt>
+      <dd>En öncelikli öğeyi önce veren kap: <code>ÖncelikSırası</code>. Dijkstra'nın kuyruğu.</dd>
+      <dt>Öne ekleme <em>cons</em> <span class="bolum">II</span></dt>
+      <dd><code>1 :: Dizin(2, 3)</code>: dizinin önüne öge ekleyip yeni dizin almak; eski dizin değişmez.</dd>
+      <dt>Örüntü eşleme <em>pattern matching</em> <span class="bolum">II</span></dt>
+      <dd>Bir değeri biçimine göre ayırıp parçalarına ad vermek; <code>durum</code> ile yazılır.</dd>
+      <dt>Özyineleme <em>recursion</em> <span class="bolum">IV</span></dt>
+      <dd>İşlevin kendini çağırması. Kendini çağıran tanıma çıktı türünü siz yazarsınız: <code>: Birim</code>, <code>: Sayı</code>.</dd>
+      <dt>Sayı, Uzun, İriSayı <em>Int, Long, BigInt</em> <span class="bolum">I</span></dt>
+      <dd>Tam sayı türleri: iki milyara kadar, dokuz kentilyona kadar, sınırsız. Taşma burada da var; <code>İriSayı</code> taşmaz.</dd>
+      <dt>Taban durumu <em>base case</em> <span class="bolum">IV</span></dt>
+      <dd>Özyinelemenin kendini çağırmadan durduğu en küçük hâl: <code>eğer (boy &gt; 2)</code>. İlk yazılacak satır.</dd>
+      <dt>tanım <em>def</em> <span class="bolum">I</span></dt>
+      <dd>İşlev tanımı: <code>tanım kare(kenar: Sayı) = { ... }</code>. Gövde bir deyiştir, değeri neyse çıktı odur.</dd>
+      <dt>Tuval <em>canvas</em> <span class="bolum">I</span></dt>
+      <dd>Kaplumbağanın çizdiği alan. <code>sil()</code> temizler; iKojo her çalıştırmada kendiliğinden temizler.</dd>
+      <dt>Tümevarım formülü <em>recurrence</em> <span class="bolum">VI</span></dt>
+      <dd>Büyük durumu küçüklerle anlatan eşitlik: <code>f(x) = 1 + enUfağı(f(x&minus;1), f(x&minus;5), f(x&minus;7))</code>. Koco'da birebir koda çevrilir.</dd>
+      <dt>Yazı <em>String</em> <span class="bolum">I</span></dt>
+      <dd>Karakter dizisi. <code>s"$harf -&gt; $kaç"</code> yazı kalıbı; <code>ele</code> ve <code>öbekle</code> yazıda da çalışır.</dd>
+      <dt>yinele, yineleDizinli <em>repeat, repeatFor</em> <span class="bolum">I</span></dt>
+      <dd>Bir bloğu <em>n</em> kere çalıştırmak; sayaçlısı <code>yineleDizinli(10) { k =&gt; ... }</code>. III. bölümde kendi <code>yinele</code>'nizi yazarsınız.</dd>
+      <dt>Yukarıdan aşağı <em>top-down</em> <span class="bolum">VI</span></dt>
+      <dd>Bellekli özyinelemeyle DP: büyük tutardan başla, gerektikçe küçükleri çöz, deftere yaz.</dd>
+      <dt>Yüksek mertebeli işlev <em>higher-order function</em> <span class="bolum">III</span></dt>
+      <dd>İşlev alan ya da işlev veren işlev: <code>dönence(12, 30) { çokgen(4, 100) }</code>, <code>işle</code>, <code>süresi</code>.</dd>
+    </dl>
+  </div>
+</div>
+
+<!--GEZINME-->

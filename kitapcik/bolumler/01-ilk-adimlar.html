@@ -213,6 +213,26 @@ unsigned long long'un en büyüğü : 18446744073709551615</code></pre>
       okunaklı oluyor, ders notlarımızda genelde onları kullandık.
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong><code>=</code> ile <code>==</code>.</strong> Tek eşittir
+          <em>atar</em>, çift eşittir <em>karşılaştırır</em>.
+          <code>if (hak = 0)</code> yazarsanız derleyici en fazla bir uyarı
+          verir, programı yine de üretir: önce <code>hak</code>'a sıfır atar,
+          sonra o sıfıra bakıp koşulu yanlış sayar. Karşılaştırma yazarken
+          parmağınız iki kere bassın.
+        </li>
+        <li>
+          <strong><code>7 / 2</code> üç eder.</strong> İki tam sayının bölümü
+          tam sayıdır; kesir atılır. <code>3.5</code> istiyorsanız taraflardan
+          biri kesirli olmalı: <code>7 / 2.0</code>. Kalanı da <code>7 % 2</code>
+          verir.
+        </li>
+      </ul>
+    </div>
+
     <h3>İşlev: bir kere yaz, çok kere kullan</h3>
 
     <p>

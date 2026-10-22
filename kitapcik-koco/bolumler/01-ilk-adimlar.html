@@ -418,6 +418,30 @@ satıryaz(enİri2(<span class="n">7</span>, <span class="n">3</span>))     <span
 satıryaz(işaret(-<span class="n">5</span>))      <span class="y">// eksi</span></code></pre>
     </figure>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong><code>=</code> ile <code>==</code>.</strong> Tek eşittir ad
+          verir ya da değer atar, çift eşittir karşılaştırır.
+          <code>eğer (a = b)</code> yazarsanız Koco çalıştırmadan itiraz eder;
+          kardeş dilde aynı satır sessizce geçer. Bu kitapçığın bir yararı da
+          bu: derleyici çok şeyi daha baştan yakalar.
+        </li>
+        <li>
+          <strong><code>7 / 2</code> üç eder.</strong> İki <code>Sayı</code>'nın
+          bölümü yine <code>Sayı</code>; kesir atılır. <code>3.5</code>
+          isterseniz taraflardan biri <code>Kesir</code> olmalı:
+          <code>7.0 / 2</code>. Kalan için <code>7 % 2</code>.
+        </li>
+        <li>
+          <strong>Bir eksik, bir fazla.</strong> <code>1 |- 10</code> dokuz sayı
+          verir (10 hariç), <code>1 |-| 10</code> on sayı. Aralık yazarken son
+          sayının içeride mi dışarıda mı kaldığını her seferinde sorun.
+        </li>
+      </ul>
+    </div>
+
     <h3>İlk Project Euler çözümünüz</h3>
 
     <p>

@@ -439,6 +439,18 @@ READ of size 4 at 0x50200000001c thread T0
       sürümü böyle derleyin. Ders deposundaki <code>sablon/Makefile</code>'da
       bunun için bir <code>ayikla</code> hedefi var: <code>make ayikla</code>.
     </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>Bir eksik, bir fazla.</strong> <code>sinir.cpp</code>'deki hata
+        programcılığın en eski hatası: üç öğeli dizide geçerli konumlar 0, 1, 2;
+        döngü <code>k &lt;= 3</code> deyince dördüncüye uzanıyor. Sınır yazarken
+        her seferinde iki soru sorun: ilk tur hangi konuma bakıyor, son tur
+        hangisine? <code>&lt;</code> ile <code>&lt;=</code> arasındaki fark
+        çoğu zaman tam bir öğedir.
+      </p>
+    </div>
   </div>
 </div>
 

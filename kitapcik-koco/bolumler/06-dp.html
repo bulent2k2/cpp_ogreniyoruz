@@ -167,6 +167,18 @@ satıryaz(enAzPara(<span class="n">11</span>))     <span class="y">// 3</span></
       eler, biz de eksi tutarlar için ayrı ayrı koşul yazmaktan kurtuluruz.
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>Defteri unutmak.</strong> <code>defter.eşEkle</code> satırını
+        silerseniz program yine doğru yanıt verir; ama 11 yerine 40 istediğinizde
+        bir daha dönmez. Bellekle hızlandırma gitti, üstel özyineleme geri geldi.
+        &ldquo;Sonsuz&rdquo; için de kocaman ama <em>taşmayan</em> bir sayı
+        seçin: <code>1 + Int.MaxValue</code> eksiye döner ve
+        <code>enUfağı</code> onu sevinçle seçer.
+      </p>
+    </div>
+
     <div class="kutu takim">
       <span class="basi">Takım işi</span>
       <p>

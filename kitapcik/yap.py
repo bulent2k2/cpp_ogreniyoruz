@@ -61,6 +61,8 @@ BOLUMLER = [
      "Derinlemesine ve enlemesine gezi, bağlı parçalar, en kısa yol algoritmaları."),
     ("06-dp",        "VI. Dinamik Programlama", "Dinamik Programlama",
      "Büyük problemi küçük parçalarına bölmek: zarlar, bozuk paralar, ızgaralar ve yola devam."),
+    ("07-sozluk",     "Sözlük",               "Küçük Sözlük",
+     "Kitapçıktaki terimlerin Türkçesi, İngilizcesi ve bir cümlelik anlamı; ilk geçtiği bölümle."),
 ]
 
 SIRA = [b[0] for b in BOLUMLER]

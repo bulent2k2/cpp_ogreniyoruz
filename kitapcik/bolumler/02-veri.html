@@ -559,6 +559,18 @@ takma addan sonra: 30</code></pre>
       değişkenin kendisine <strong>takma ad</strong> (<em>reference</em>) veriyor.
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>İşleve giden şey kopyadır.</strong> <code>ekleK</code>'nin başına
+        gelen her işlev için geçerli: girdiyi düz yazarsanız işlev bir
+        <em>ikiz</em> alır, ikizi değiştirir, siz dışarıda eski değere bakarsınız.
+        Bir diziyi işleve verip &ldquo;neden sıralanmadı?&rdquo; diye bakakalmak
+        bu yüzden. İşlev değişkenin kendisini değiştirsin istiyorsanız takma ad
+        (<code>&amp;</code>) verin.
+      </p>
+    </div>
+
     <p>
       C dilinde sadece adresler vardı; takma ad C++'la geldi. Modern kodda tercih
       genelde takma ad: daha sade ve daha güvenli, çünkü takma ad hiçbir zaman

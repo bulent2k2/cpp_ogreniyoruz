@@ -355,6 +355,18 @@ k[<span class="n">0</span>] = <span class="n">1</span>;
       üretiliyor, tekrarlar kendiliğinden yok oluyor.
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>Döngü sırası yanıtın parçasıdır.</strong> İki döngünün yerini
+        değiştirmek &ldquo;aynı işi başka sırayla yapmak&rdquo; değil; burada
+        gördüğünüz gibi başka bir soruyu çözmek. Bir DP kodu yanlış sayı
+        veriyorsa ilk bakacağınız yer formül değil, döngülerin sırası ve
+        başlangıç satırı: <code>d[0] = 1</code>'i unutursanız bütün tablo sıfır
+        kalır ve program hiç şikâyet etmeden 0 yazar.
+      </p>
+    </div>
+
     <div class="kutu takim">
       <span class="basi">Takım işi</span>
       <p>

@@ -62,6 +62,8 @@ BOLUMLER = [
      "Derinlemesine ve enlemesine gezi, bu sefer işlevsel: değişmez kümelerle çizge gezmek."),
     ("06-dp",         "VI. Dinamik Programlama", "Dinamik Programlama",
      "Bellekle hızlandırma, ızgara yolları, bozuk paralar; Mandelbrot ve yola devam."),
+    ("07-sozluk",     "Sözlük",                "Küçük Sözlük",
+     "Kitapçıktaki terimlerin Türkçesi, Scala'daki ve İngilizcedeki karşılığı, bir cümlelik anlamı."),
 ]
 
 SIRA = [b[0] for b in BOLUMLER]

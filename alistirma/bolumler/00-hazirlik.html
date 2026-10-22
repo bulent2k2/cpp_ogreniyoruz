@@ -7,6 +7,26 @@
   </p>
   <!--ICERIK-SERIDI-->
 </header>
+<div class="blok">
+  <div class="ray">Kural</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Yapay zekâ ile çalışma kuralı</span>
+      <p>
+        Bugün hepinizin elinde bir model var; bu defter onu yasaklamıyor, yerini
+        söylüyor. <strong>Isınma ve Alıştırma</strong> basamaklarında sormayın:
+        o sorular kas yapmak için, kası başkası çalıştıramaz.
+        <strong>Zorlayıcı</strong>'da yalnızca ipucu isteyin, kod istemeyin
+        (&ldquo;hangi veri yapısı?&rdquo;, &ldquo;neyi gözden
+        kaçırıyorum?&rdquo;). <strong>Keşif</strong>'te serbest; ama
+        yapıştırdığınız her satırı bir arkadaşınıza açıklayabilmelisiniz,
+        açıklayamadığınız satır sizin değildir. &ldquo;Yanıt yerine&rdquo;
+        kutusu da aynı ilkenin uzantısı: önce kitapçıktaki kesim, sonra model.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <div class="blok">
   <div class="ray">H.1</div>
@@ -109,6 +129,31 @@ Fark: 7
     <div class="kutu puf">
       <span class="basi">Yanıt yerine</span>
       <p><a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">ders 5: derleyici ve terminal</a> <a href="https://claude.ai/code/artifact/6a403229-5395-4258-adc4-496f5c79a5a1#hata-bulmanin-uc-yolu">kitapçık III: Hata bulmanın üç yolu</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cheatsheets.md">kopya sayfaları</a></p>
+    </div>
+
+    <p>
+      İletiler İngilizce; ilk hafta en sık karşılaşacağınız on tanesinin Türkçesi
+      ve çoğu zamanki nedeni aşağıda. Satır numarası her zaman iletinin
+      başında: <code>ana.cpp:7:12</code> yedinci satır, on ikinci sütun demek.
+    </p>
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>İleti</th><th>Türkçesi</th><th>Çoğu zaman nedeni</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>expected ';' before ...</code></td><td>... öncesinde ';' bekleniyordu</td><td>Bir <em>önceki</em> satırın sonunda noktalı virgül eksik.</td></tr>
+          <tr><td><code>'x' was not declared in this scope</code></td><td>'x' bu kapsamda tanımlanmamış</td><td>Adı yanlış yazdınız, tanımlamayı unuttunuz ya da başka bir kapsamda tanımladınız.</td></tr>
+          <tr><td><code>'cout' was not declared</code> / <code>'string' does not name a type</code></td><td>'cout' tanımlı değil / 'string' bir tür adı değil</td><td><code>#include</code> ya da <code>using namespace std;</code> eksik.</td></tr>
+          <tr><td><code>no match for 'operator&lt;&lt;'</code> / <code>no matching function for call to</code></td><td>uyan işleç / işlev yok</td><td>Türler uyuşmuyor: bir diziyi doğrudan <code>cout</code>'a vermek, işleve yanlış sayıda girdi.</td></tr>
+          <tr><td><code>expected '}' at end of input</code></td><td>girdinin sonunda '}' bekleniyordu</td><td>Açılan bir süslü parantez kapanmamış; eşleştirerek sayın.</td></tr>
+          <tr><td><code>warning: unused variable 'x'</code></td><td>uyarı: 'x' kullanılmıyor</td><td>Hata değil; ama çoğu zaman bir yazım hatasının izi: başka adla yazıp bunu unuttunuz.</td></tr>
+          <tr><td><code>warning: comparison of integer expressions of different signedness</code></td><td>uyarı: işaretli ile işaretsiz karşılaştırılıyor</td><td><code>int k</code> ile <code>v.size()</code> karşılaştırması; sayaç için <code>size_t</code> kullanın.</td></tr>
+          <tr><td><code>warning: control reaches end of non-void function</code></td><td>uyarı: değer döndüren işlevin sonuna return'süz ulaşılıyor</td><td>Bir dalda <code>return</code> unutulmuş; o dal rastgele değer döndürür.</td></tr>
+          <tr><td><code>undefined reference to 'f()'</code></td><td>'f()' için tanım bulunamadı</td><td>Bağlayıcı hatası: işlevi bildirdiniz ama gövdesini yazmadınız (ya da <code>main</code> yok).</td></tr>
+          <tr><td><code>Segmentation fault</code></td><td>bellek sınırı ihlali (çalışırken)</td><td>Dizinin dışına çıktınız ya da özyineleme taban durumsuz kaldı. <code>-fsanitize=address</code> satırı gösterir (kitapçık III.4).</td></tr>
+        </tbody>
+      </table>
     </div>
 
 <section class="soru" id="H-2-I1">

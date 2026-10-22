@@ -33,6 +33,7 @@ bir bölüme bakmak isteyenler için:
 + [IV. Özyineleme ve Arama](https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff) Hanoi, memoizasyon, geri dönüşlü arama, sekiz vezir, budama
 + [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc) derinlemesine/enlemesine gezi, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford
 + [VI. Dinamik Programlama](https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb) beş adımlık reçete, ızgara yolları, bozuk para soruları
++ [Küçük Sözlük](https://claude.ai/artifact/MQsSVarxjXcUiczTtanFn5) terimlerin Türkçesi, İngilizcesi, bir cümlelik anlamı
 
 Yazarken dikkat edilenler
 --

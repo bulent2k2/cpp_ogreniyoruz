@@ -7,7 +7,7 @@ aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-su
 tarayıcıda, Türkçe [iKojo](https://ikojo.fly.dev/) üzerinde çalıştırabilir.
 Bölümler bilerek paralel kuruldu; iki kitapçık yan yana okunmak için yazıldı.
 
-**Durum: ilk taslak.** Kod örnekleri **Türkçe anahtar sözcüklerle**
+**Sürüm 1, Ekim 2026.** Kod örnekleri **Türkçe anahtar sözcüklerle**
 (`tanım`, `dez`, `den`, `eğer`, `yoksa`, `eşle`, `durum`, `tür`&hellip;)
 yazıldı ve Koco'nun yamalı Scala derleyicisiyle (`bulent2k2/kojo` deposundaki
 `scala-tr/build/pack/lib` jar'ları, 2.13.18) **derlenip çalıştırılarak
@@ -44,6 +44,7 @@ olan herkes açabilir; telefondan okumak için elverişli. Her bölümün başı
 + [IV. Özyineleme ve Fraktallar](https://claude.ai/code/artifact/7d214fb0-5fd4-4074-a4ab-fe8ca99820dd) sarmal, ağaç, Koch tanesi; Hanoi; bellekle hızlandırma
 + [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c) işlevsel derinlemesine/enlemesine gezi, bağlı parçalar
 + [VI. Dinamik Programlama](https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9) ızgara yolları, bozuk para; Mandelbrot; yola devam
++ [Küçük Sözlük](https://claude.ai/artifact/RBmX55BsV339Foquk6b6oT) terimlerin Türkçesi, Scala'daki ve İngilizcedeki karşılığı
 
 Adresler `baglantilar.txt` dosyasında; `yap.py` bunları bölümler arası
 bağlantılara yerleştiriyor.

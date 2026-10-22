@@ -40,7 +40,7 @@ Derste baktığımız sorular
 
 [AtCoder.jp sitesinden engelli sahada yolları sayma problemi](https://atcoder.jp/contests/dp/tasks/dp_h). [Çözüm burada](https://www.onlinegdb.com/BJ7qjYXnN). Bir önceki problemin daha genel hali, çünkü engeller ve veri girdisi var. Ama yine bellek ekleyerek DP YA yöntemiyle güzel bir çözüm oldu. Sahanın kutularını sol üst köşeye `(1, 1)` konumunu vererek çözdük. Sağ alt köşe `(H, W)` konumunda oldu, yani satır ve sütun sayıları. Genel haliyle problemimiz `(r, c)` kutusundan `(H, W)` kutusuna giden yolların sayısını bulmak. Alt problemleri de `(r+1, c)` yani aşağıya giden patikalar ve `(r, c+1)` yani sağa giden patikaların sayısı olarak ifade ettik. Konumlamayı başka türlü yapmanın da mümkün olduğunu gördük. Örneğin `(1, 1)` sağ alt kutu olsun ve sola ve yukarı doğru satır ve sütun sayıları artsın da diyebilirdik. Öyle yapınca kodumuz daha da doğal oldu: Alt problemleri bu sefer de `(r-1, c)` ve `(r, c-1)` olarak oluşturduk. Görünen o ki önemli olan alt problemleri nasıl ifade ettiğimiz değil, alt problemlerin ana problemden daha küçük olması. [İkinci çözüm de burada](https://www.onlinegdb.com/19X5NIcu7).  
 
-İki dizinin ortak altdizilerinden en uzununu bulma problemine de giriş yaptık. [Yarım çözüm burada](https://www.onlinegdb.com/UEyDuzjdfB). Bu problemi seçme nedenim çizelge kullanan DP AY, yani aşağıdan yukarıya arama yöntemine güzel bir örnek olması. Önce birim denemeler (unit testing) ile başlamakta fayda var:  
+İki dizinin bitişik ortak altdizilerinden (*substring*; bitişiklik istemeyen *subsequence* başka bir problem) en uzununu bulma problemine de giriş yaptık. [Yarım çözüm burada](https://www.onlinegdb.com/UEyDuzjdfB). Bu problemi seçme nedenim çizelge kullanan DP AY, yani aşağıdan yukarıya arama yöntemine güzel bir örnek olması. Önce birim denemeler (unit testing) ile başlamakta fayda var:  
 ```c++
 using yazı=std::string;
 void dene(yazı y1, yazı y2, yazı ortak) {
@@ -56,7 +56,7 @@ dene("123", "345", "3");
 dene("1010110010","10110", "10110");
 dene("1110111011","10011", "011");
 ```
-Bunu çözmek için de ana problemi iki boyutlu bir çizelge kullanarak ifade edilebiliriz: `tane[k1][k2]` yani `y1` yazısının `k1` konumunda biten ve `y2` yazısının `k2` konumunda biten ortak altdizinin içinde kaç tane harf olduğunu kaydedelim. `(k1, k2)` konumlarındaki harfler farklı olduğunda sıfır olacak. Yani çoğu sıfır olabilir. Onun ilk değeri için de iki boyutlu akıllı dizi kullandık:
+Bunu çözmek için de ana problemi iki boyutlu bir çizelge kullanarak ifade edilebiliriz: `tane[k1][k2]` yani `y1` yazısının `k1` konumunda biten ve `y2` yazısının `k2` konumunda biten bitişik ortak altdizinin içinde kaç tane harf olduğunu kaydedelim. `(k1, k2)` konumlarındaki harfler farklı olduğunda sıfır olacak. Yani çoğu sıfır olabilir. Onun ilk değeri için de iki boyutlu akıllı dizi kullandık:
 ```std::vector<std::vector<int>> tane(y1.size()+1, std::vector<int>(y2.size()+1, 0));```
 
 Gerisi epey kolay:

@@ -21,7 +21,9 @@
       Aynı türden birkaç değer, bellekte yan yana. Öğelerin yerini hesaplamak
       bedava &mdash; ilk öğenin adresini biliyorsanız, üçüncü öğe
       &ldquo;ilk adres + 2 &times; öğe boyu&rdquo; adresindedir. Bu yüzden dizide
-      arama değil ama <em>erişim</em> anlıktır.
+      arama değil ama <em>erişim</em> anlıktır. Bölüm I'deki <code>std::string</code>
+      de aslında böyle bir dizi: harfler bellekte yan yana, <code>ad[0]</code>
+      ilk harf, <code>ad.size()</code> kaç tane olduğu.
     </p>
 
     <figure class="kod">
@@ -557,6 +559,18 @@ takma addan sonra: 30</code></pre>
       değişkenin kendisine <strong>takma ad</strong> (<em>reference</em>) veriyor.
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>İşleve giden şey kopyadır.</strong> <code>ekleK</code>'nin başına
+        gelen her işlev için geçerli: girdiyi düz yazarsanız işlev bir
+        <em>ikiz</em> alır, ikizi değiştirir, siz dışarıda eski değere bakarsınız.
+        Bir diziyi işleve verip &ldquo;neden sıralanmadı?&rdquo; diye bakakalmak
+        bu yüzden. İşlev değişkenin kendisini değiştirsin istiyorsanız takma ad
+        (<code>&amp;</code>) verin.
+      </p>
+    </div>
+
     <p>
       C dilinde sadece adresler vardı; takma ad C++'la geldi. Modern kodda tercih
       genelde takma ad: daha sade ve daha güvenli, çünkü takma ad hiçbir zaman
@@ -572,6 +586,34 @@ takma addan sonra: 30</code></pre>
         <code>&amp;</code> ise &ldquo;kopyalamayın&rdquo; demek. Bir milyon öğelik
         bir diziyi her çağrıda kopyalamak, çözümünüzün neden yavaş olduğunu
         anlayamadığınız durumların en yaygın nedenidir.
+      </p>
+    </div>
+
+    <div class="kutu puf">
+      <span class="basi">Hazır araçlar</span>
+      <p>
+        Bu bölümün kapları kadar sık kullanacağınız birkaç hazır işlev var;
+        alıştırmalarda karşınıza çıkınca &ldquo;nereden geldi?&rdquo; demeyin.
+        <code>&lt;algorithm&gt;</code> başlığından:
+      </p>
+      <figure class="kod dar">
+        <figcaption><span class="nokta"></span><span class="ad">hazır araçlar</span></figcaption>
+        <pre><code><span class="a">#include</span> <span class="s">&lt;algorithm&gt;</span>
+vector&lt;<span class="t">int</span>&gt; v{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>};
+sort(v.begin(), v.end());              <span class="y">// küçükten büyüğe sıralar: 1 1 3 4 5</span>
+reverse(v.begin(), v.end());           <span class="y">// tersine çevirir</span>
+<span class="t">int</span> enB = *max_element(v.begin(), v.end());   <span class="y">// en büyük öge (min_element de var)</span>
+<span class="t">int</span> kac = count(v.begin(), v.end(), <span class="n">1</span>);       <span class="y">// 1 kaç kere geçiyor</span>
+next_permutation(v.begin(), v.end());  <span class="y">// sıradaki dizilim; Bölüm IV'te işe yarayacak</span>
+
+pair&lt;<span class="t">int</span>, <span class="t">string</span>&gt; p{<span class="n">7</span>, <span class="s">"yedi"</span>};         <span class="y">// iki değeri bir arada tutan çift: p.first, p.second</span>
+cin.clear();                           <span class="y">// bozuk girdiden sonra cin'i yeniden açar</span></code></pre>
+      </figure>
+      <p>
+        Hepsi <code>begin()</code>, <code>end()</code> çiftiyle çalışıyor: &ldquo;şuradan
+        şuraya kadar&rdquo;. Ayrıntıları
+        <a href="https://en.cppreference.com/w/cpp/algorithm">cppreference</a>'ta;
+        oraya bakmayı şimdiden alışkanlık edinin.
       </p>
     </div>
 

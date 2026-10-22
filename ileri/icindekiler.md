@@ -26,7 +26,7 @@ C++ (2024-25)
 + [ders 10](ders10.md) Bileşik Geliştirme Ortamları (*IDE*), kapsama/koruma, soyutlama, kalıtım ve bileşim, `Araba` türü, `this`
 + [ders 11](ders11.md) `Temel` adlı yeni bir tür, yapıcı yöntemler, `protected`, `private`, `friend`, `operator<<()` ve `operator>>()`
 + [ders 12](ders12.md) eşlemlere devam, işlev ve tür kalıplarına giriş 
-+ [ders 13](ders13.md) ana işleve girdi: `int main(int, char**)`, iki ve üç boyutlu diziler, yöney (vektor=, matris ve tensör
++ [ders 13](ders13.md) ana işleve girdi: `int main(int, char**)`, iki ve üç boyutlu diziler, yöney (vektör; kitapçıktaki adıyla akıllı dizi), matris ve tensör
 + [ders 14](ders14.md) sarmal çizim, girdi okuma kalıbı, yapay zeka ile olimpiyat sorusu, başka pek çok şey
 + [ders 15](ders15.md) kağıt katlama, meşhur Monty Hall adlı tv yarışması, `cout` yerine `dout`, `ostream&`, `throw`, `try`, `catch` ve `static`
 + [ders 16](ders16.md) çizim projesi, *lambda*, Cinder kütüp, kağıt katlayarak Evren'in ucuna!

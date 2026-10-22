@@ -1,0 +1,167 @@
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Sözlük</div>
+  <h1>Küçük Sözlük</h1>
+  <p class="ozet">
+    Kitapçıkta geçen terimlerin Türkçesi, İngilizcesi ve bir cümlelik anlamı;
+    yanında ilk geçtiği bölüm. Ders notlarında ya da bir yarışma sitesinde
+    İngilizcesiyle karşılaşınca buraya bakın. Daha geniş ve aranabilir sürümü,
+    her kavramın alıştırmasıyla birlikte,
+    <a href="https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT">Keyifli Kavram
+    Dizini</a>'nde.
+  </p>
+  <!--ICERIK-SERIDI-->
+</header>
+
+<div class="blok">
+  <div class="ray">A &ndash; D</div>
+  <div class="govde">
+    <h2>A'dan D'ye</h2>
+    <dl class="sozluk">
+      <dt>Aceleci algoritma <em>greedy algorithm</em> <span class="bolum">VI</span></dt>
+      <dd>Her adımda o an en iyi görüneni seçmek. Bazen doğru yanıtı verir, çoğu zaman vermez; bozuk para problemi bunun kanıtı.</dd>
+      <dt>Ad alanı <em>namespace</em> <span class="bolum">I</span></dt>
+      <dd>Adların çakışmasını önleyen bölme. <code>std::cout</code>'taki <code>std::</code> &ldquo;standart kütübün <code>cout</code>'u&rdquo; demek.</dd>
+      <dt>Adres <em>pointer</em> <span class="bolum">II</span></dt>
+      <dd>Bir değişkenin bellekteki yeri: <code>int* p = &amp;a;</code>. <code>*p</code> o adresteki değere uzanır.</dd>
+      <dt>Akıllı dizi <em>vector</em> <span class="bolum">II</span></dt>
+      <dd>Boyu büyüyüp küçülebilen dizi: <code>std::vector</code>. Ders notlarında yöney (vektör) de denir.</dd>
+      <dt>Alt problem <em>subproblem</em> <span class="bolum">IV, VI</span></dt>
+      <dd>Büyük problemin aynı biçimdeki küçük hâli. Özyineleme de dinamik programlama da bunun üstüne kurulu.</dd>
+      <dt>Altın dosya <em>golden file</em> <span class="bolum">III</span></dt>
+      <dd>Doğru olduğu bilinen çıktıyı dosyada tutup her çalıştırmada <code>diff</code> ile karşılaştırmak; deponun tek test yöntemi.</dd>
+      <dt>Altküme <em>subset</em> <span class="bolum">IV</span></dt>
+      <dd>Bir kümenin öğelerinden bir kısmı. <em>n</em> öğeli kümenin 2ⁿ altkümesi vardır; al/alma kararıyla üretilir.</dd>
+      <dt>Aşağıdan yukarı <em>bottom-up</em> <span class="bolum">VI</span></dt>
+      <dd>DP çizelgesini en küçük durumlardan başlayıp döngüyle doldurmak. Karşıtı: yukarıdan aşağı.</dd>
+      <dt>Bağ <em>edge</em> <span class="bolum">V</span></dt>
+      <dd>Çizgede iki düğümü birleştiren çizgi. Ders notlarında kenar da denir; ağırlıklı çizgede her bağın bir bedeli vardır.</dd>
+      <dt>Bağlı parça <em>connected component</em> <span class="bolum">V</span></dt>
+      <dd>Birbirine bir yolla ulaşılabilen düğümlerin kümesi. Bir gezi başlattığınızda eriştiğiniz her şey tek parçadır.</dd>
+      <dt>Bellekle hızlandırma <em>memoization</em> <span class="bolum">IV</span></dt>
+      <dd>Hesaplanan sonucu bir eşleme yazıp bir daha hesaplamamak. Tek satırla kırk bin kat hız.</dd>
+      <dt>Bellman&ndash;Ford <span class="bolum">V</span></dt>
+      <dd>Eksi ağırlıklı bağlarla da çalışan en kısa yol algoritması; bütün bağları <em>n</em>&minus;1 kere gevşetir, eksi çevrimi de yakalar.</dd>
+      <dt>Budama <em>pruning</em> <span class="bolum">IV</span></dt>
+      <dd>Arama ağacında meyve vermeyeceği kesin olan dalları kesmek. Dakikaları saniyeye indirir; ama kesilen dalın gerçekten boş olduğunu kanıtlayın.</dd>
+      <dt>Çağrı yığını <em>call stack</em> <span class="bolum">IV</span></dt>
+      <dd>Çalışmakta olan işlevlerin üst üste dizildiği yer. Taban durumsuz özyineleme onu taşırır: <em>stack overflow</em>.</dd>
+      <dt>Çalışma zamanı hatası <em>runtime error</em> <span class="bolum">III</span></dt>
+      <dd>Derlenen ama çalışırken çöken program: dizi sınırı aşımı, sıfıra bölme. Derleme hatası ve mantık hatasıyla üç kardeş.</dd>
+      <dt>Çizelge <em>DP table</em> <span class="bolum">VI</span></dt>
+      <dd>Alt problemlerin yanıtlarının saklandığı dizi. Döngü sırası ve başlangıç değeri yanıtın parçasıdır.</dd>
+      <dt>Çizge <em>graph</em> <span class="bolum">V</span></dt>
+      <dd>Düğümler ve aralarındaki bağlar: şehirler ve yollar, kişiler ve arkadaşlıklar, kareler ve komşulukları.</dd>
+      <dt>Değer, ad, tür <em>value, name, type</em> <span class="bolum">I</span></dt>
+      <dd>Programlamanın üçlüsü: <code>16</code> değeri, <code>yas</code> adı, <code>int</code> türü.</dd>
+      <dt>Derinlemesine gezi <em>depth-first search, DFS</em> <span class="bolum">V</span></dt>
+      <dd>Bir komşuya dalıp gidebildiğin kadar gitmek, sonra geri dönüp ötekine dalmak. Özyinelemeyle ya da yığınla yazılır.</dd>
+      <dt>Derleyici <em>compiler</em> <span class="bolum">III</span></dt>
+      <dd>Kaynak kodu makine koduna çeviren program: <code>g++</code>, <code>clang++</code>. Uyarılarını açın: <code>-Wall</code>.</dd>
+      <dt>Dijkstra <span class="bolum">V</span></dt>
+      <dd>Eksi ağırlık yoksa en kısa yolu öncelik sırasıyla bulan algoritma: enlemesine gezinin kuyruğu öncelik sırasıyla değişmiş hâli.</dd>
+      <dt>Dinamik programlama <em>dynamic programming, DP</em> <span class="bolum">VI</span></dt>
+      <dd>Örtüşen alt problemleri bir kere çözüp saklamak. Adı korkutucu, fikri bir cümle.</dd>
+      <dt>Dizi <em>array</em> <span class="bolum">II</span></dt>
+      <dd>Aynı türden öğelerin bellekte yan yana durduğu, boyu sabit kap: <code>int d[10]</code>, <code>std::array</code>.</dd>
+      <dt>Dizin <em>list</em> <span class="bolum">II</span></dt>
+      <dd>Bağlı liste: <code>std::list</code>; ortadan ekleme çıkarma ucuz, rastgele erişim yok. Klasör anlamında kullanmıyoruz.</dd>
+      <dt>Döngü <em>loop</em> <span class="bolum">I</span></dt>
+      <dd><code>for</code> ve <code>while</code>: aynı satırları defalarca çalıştırmak. Sınırını iki kere kontrol edin: bir eksik, bir fazla.</dd>
+      <dt>Düğüm <em>vertex, node</em> <span class="bolum">V</span></dt>
+      <dd>Çizgenin noktası. Kodda ve ders notlarında hep düğüm; bazı kitaplar köşe der.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">E &ndash; K</div>
+  <div class="govde">
+    <h2>E'den K'ye</h2>
+    <dl class="sozluk">
+      <dt>Enlemesine gezi <em>breadth-first search, BFS</em> <span class="bolum">V</span></dt>
+      <dd>Önce bütün komşular, sonra komşuların komşuları; kuyrukla yazılır. Ağırlıksız çizgede en kısa yolu verir.</dd>
+      <dt>Eşlem <em>map, dictionary</em> <span class="bolum">II</span></dt>
+      <dd>Anahtardan değere giden kap: <code>std::map&lt;string,int&gt;</code>. Anahtarları sıralı tutar; <code>[]</code> olmayan anahtarı sessizce yaratır.</dd>
+      <dt>Geri dönüşlü arama <em>backtracking</em> <span class="bolum">IV</span></dt>
+      <dd>Seç, derine in, geri al. Altküme, permütasyon ve sekiz vezir aynı kalıbın üç yüzü.</dd>
+      <dt>Gevşetme <em>relaxation</em> <span class="bolum">V</span></dt>
+      <dd>Bir bağ üzerinden daha kısa bir yol bulununca hedefin uzaklığını güncellemek. Dijkstra'nın da Bellman&ndash;Ford'un da tek adımı.</dd>
+      <dt>Gezildi işareti <em>visited marker</em> <span class="bolum">V</span></dt>
+      <dd>Aynı düğüme iki kere girmemek için tutulan dizi. Unutulması çizge kodunun bir numaralı hatası.</dd>
+      <dt>Hata ayıklama <em>debugging</em> <span class="bolum">III</span></dt>
+      <dd>Hatayı bulup düzeltmek. Dört yol: yazdırmak, hata ayıklayıcı (<code>gdb</code>), küçültmek, temizleyici.</dd>
+      <dt>İkil <em>bool</em> <span class="bolum">I</span></dt>
+      <dd>Yalnızca <code>true</code> ya da <code>false</code> değeri alan tür. Ekrana <code>1</code>/<code>0</code> yazar; <code>boolalpha</code> ile sözcük.</dd>
+      <dt>İkili arama <em>binary search</em> <span class="bolum">I</span></dt>
+      <dd>Sıralı bir aralığı her adımda yarıya bölerek aramak: tahmin oyununun yedi hakkı buradan gelir.</dd>
+      <dt>İşlev <em>function</em> <span class="bolum">I</span></dt>
+      <dd>Ad verilmiş, girdi alıp çıktı veren kod parçası. Bir kere yaz, çok kere kullan.</dd>
+      <dt>Kalıp <em>template</em> <span class="bolum">II</span></dt>
+      <dd>Türden bağımsız yazılmış kod; <code>vector&lt;int&gt;</code>'teki <code>&lt;int&gt;</code> kalıbı doldurur.</dd>
+      <dt>Kapsam <em>scope</em> <span class="bolum">I</span></dt>
+      <dd>Bir adın geçerli olduğu bölge; süslü parantezler bir kapsam açıp kapatır.</dd>
+      <dt>Karmaşıklık <em>complexity, big O</em> <span class="bolum">IV</span></dt>
+      <dd>Girdi büyüdükçe sürenin nasıl büyüdüğü: <code>O(n)</code>, <code>O(n log n)</code>, <code>O(2ⁿ)</code>. Kaba kural: saniyede 10⁸ işlem.</dd>
+      <dt>Kesirli sayı <em>floating-point, double</em> <span class="bolum">I</span></dt>
+      <dd>Virgüllü sayı türü. <code>7 / 2</code> üç eder; kesir için <code>7 / 2.0</code>.</dd>
+      <dt>Komşuluk listesi <em>adjacency list</em> <span class="bolum">V</span></dt>
+      <dd>Her düğüm için komşularının listesi; çizgeyi saklamanın en yaygın yolu. Matris, yoğun çizgeler için.</dd>
+      <dt>Kuyruk <em>queue</em> <span class="bolum">II</span></dt>
+      <dd>İlk giren ilk çıkar: <code>std::queue</code>. Enlemesine gezinin motoru.</dd>
+      <dt>Küme <em>set</em> <span class="bolum">II</span></dt>
+      <dd>Tekrarsız öğeler: <code>std::set</code>. &ldquo;Daha önce gördüm mü?&rdquo; sorusunun yanıtı.</dd>
+      <dt>Kütüp <em>library</em> <span class="bolum">II</span></dt>
+      <dd>Hazır kod topluluğu. Standart kütüp (<em>STL</em>): kaplar, algoritmalar, akışlar.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">M &ndash; Z</div>
+  <div class="govde">
+    <h2>M'den Z'ye</h2>
+    <dl class="sozluk">
+      <dt>make, Makefile <span class="bolum">III</span></dt>
+      <dd>Derleme adımlarını dosyadan okuyup yalnızca gerekeni yeniden yapan araç. Hedef, bağımlılık, komut.</dd>
+      <dt>Mantık hatası <em>logic error</em> <span class="bolum">III</span></dt>
+      <dd>Derlenen, çalışan, ama yanlış yanıt veren program. En sinsisi; testle yakalanır.</dd>
+      <dt>Öncelik sırası <em>priority queue</em> <span class="bolum">II, V</span></dt>
+      <dd>En öncelikli öğeyi önce veren kap: <code>std::priority_queue</code>. Dijkstra'nın kuyruğu.</dd>
+      <dt>Örtüşen alt problemler <em>overlapping subproblems</em> <span class="bolum">VI</span></dt>
+      <dd>Aynı alt problemin defalarca karşımıza çıkması: <code>fib(3)</code>'ün milyonlarca kere hesaplanması. DP'nin var olma nedeni.</dd>
+      <dt>Özyineleme <em>recursion</em> <span class="bolum">IV</span></dt>
+      <dd>İşlevin kendini çağırması. İki parça: taban durumu ve küçülen adım.</dd>
+      <dt>Permütasyon <em>permutation</em> <span class="bolum">IV</span></dt>
+      <dd>Öğelerin bütün sıralanışları; <em>n</em> öğe için <em>n</em>! tane. <code>next_permutation</code> hazırı.</dd>
+      <dt>Sihirli sayı <em>magic number</em> <span class="bolum">I</span></dt>
+      <dd>Kodun ortasında açıklamasız duran sabit. Ad verin: <code>const int toplamHak{7};</code></dd>
+      <dt>Sınıf, yapı <em>class, struct</em> <span class="bolum">II</span></dt>
+      <dd>Veriyi ve üstünde çalışan işlevleri bir araya getiren tür. Kendi türünüzü yazmanın yolu.</dd>
+      <dt>Taban durumu <em>base case</em> <span class="bolum">IV</span></dt>
+      <dd>Özyinelemenin kendini çağırmadan durduğu en küçük hâl. İlk yazılacak satır.</dd>
+      <dt>Takma ad <em>reference</em> <span class="bolum">II</span></dt>
+      <dd><code>&amp;</code> ile değişkenin kendisine verilen ikinci ad. İşlevin kopya değil aslını almasını sağlar; <code>const&amp;</code> kopyasız salt okuma.</dd>
+      <dt>Tam bölme ve kalan <em>integer division, modulo</em> <span class="bolum">I</span></dt>
+      <dd><code>7 / 2</code> üç, <code>7 % 2</code> bir. İki tam sayının bölümü tam sayıdır.</dd>
+      <dt>Tanımsız davranış <em>undefined behaviour</em> <span class="bolum">I, III</span></dt>
+      <dd>Dilin hiçbir söz vermediği durum: işaretli taşma, dizi sınırı dışına çıkmak. Bugün çalışır, yarın çöker; temizleyici yakalar.</dd>
+      <dt>Taşma <em>overflow</em> <span class="bolum">I</span></dt>
+      <dd>Sayının türünün sınırını aşması: <code>int</code>'te iki milyarın üstü. <code>long long</code> sekiz, <code>unsigned long long</code> on sekiz haneye kadar.</dd>
+      <dt>Temizleyici <em>sanitizer</em> <span class="bolum">III</span></dt>
+      <dd><code>-fsanitize=address,undefined</code>: çalışma zamanı hatalarını dosya ve satır numarasıyla yakalayan derleyici eklentisi.</dd>
+      <dt>Tümevarım formülü <em>recurrence</em> <span class="bolum">VI</span></dt>
+      <dd>Büyük durumu küçüklerle anlatan eşitlik: <code>f(x) = 1 + min f(x&minus;p)</code>. DP'nin kalbi; önce kâğıda yazılır.</dd>
+      <dt>Tür çıkarımı <em>type inference, auto</em> <span class="bolum">II</span></dt>
+      <dd>Türü siz yazmayınca derleyicinin ilk değerden bulması: <code>auto k = v.begin();</code></dd>
+      <dt>Yazı <em>string</em> <span class="bolum">I, II</span></dt>
+      <dd>Karakter dizisi: <code>std::string</code>. Aslında bir dizidir; <code>s[0]</code>, <code>s.size()</code>, döngüyle gezilir.</dd>
+      <dt>Yığın <em>stack</em> <span class="bolum">II</span></dt>
+      <dd>Son giren ilk çıkar: <code>std::stack</code>. Derinlemesine gezinin döngülü hâli bununla yazılır.</dd>
+      <dt>Yukarıdan aşağı <em>top-down</em> <span class="bolum">VI</span></dt>
+      <dd>Bellekli özyinelemeyle DP: büyük durumdan başla, gerektikçe küçükleri çöz, çözdüğünü sakla.</dd>
+    </dl>
+  </div>
+</div>
+
+<!--GEZINME-->

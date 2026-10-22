@@ -9,13 +9,13 @@ int main() {
 
   cout << "2000'in küpü (int) : " << a * a * a << endl;   // eksi!
   cout << "3000'ün küpü (int) : " << b * b * b << endl;   // yanlış!
-  cout << "3000'ün küpü (long): " << 1L * b * b * b << endl;
+  cout << "3000'ün küpü (long long): " << 1LL * b * b * b << endl;
 
   cout << "karekök(2000'in küpü) : " << sqrt(a * a * a) << endl; // nan
 
-  cout << "int'in en büyüğü           : "
+  cout << "int'in en büyüğü                : "
        << numeric_limits<int>::max() << endl;
-  cout << "unsigned long'un en büyüğü : "
-       << numeric_limits<unsigned long>::max() << endl;
+  cout << "unsigned long long'un en büyüğü : "
+       << numeric_limits<unsigned long long>::max() << endl;
   return 0;
 }

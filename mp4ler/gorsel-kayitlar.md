@@ -25,8 +25,8 @@ Arkası gelecek döneme...
 
 Gelecek dönem (2025-26) geldi, ama her dersi kaydetmedik, bilmem neden. Öğrencilerimizden istek geldikçe kayıt oldu.
 Onlar da burada:  
-[20 Şubat ders notları](../ileri/dersler/20260220.md) ve [görsel kaydı](https://drive.google.com/file/d/1O6xMJihVeMSkkUIbu2sVi1NgI9YSwjbH) (46 dakika).  
-[27 Şubat ders notları](../ileri/dersler/20260227.md). Görsel kayıt iki bölümden oluşuyor. [İlk bölüm](
+[20 Şubat ders notları](../ileri/dersler/d20260220.md) ve [görsel kaydı](https://drive.google.com/file/d/1O6xMJihVeMSkkUIbu2sVi1NgI9YSwjbH) (46 dakika).  
+[27 Şubat ders notları](../ileri/dersler/d20260227.md). Görsel kayıt iki bölümden oluşuyor. [İlk bölüm](
 https://drive.google.com/file/d/1H92Zgy5KsjGs_uVeNFd8Lowzwc4ox2Hk) (35 dakika) ve [ikinci bölüm](
 https://drive.google.com/file/d/1RvqqoVTpBPi5ul-E8xrOW76H1Xi2LmYS) (31 dakika).  
 

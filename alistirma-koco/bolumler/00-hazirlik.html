@@ -7,6 +7,26 @@
   </p>
   <!--ICERIK-SERIDI-->
 </header>
+<div class="blok">
+  <div class="ray">Kural</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Yapay zekâ ile çalışma kuralı</span>
+      <p>
+        Bugün hepinizin elinde bir model var; bu defter onu yasaklamıyor, yerini
+        söylüyor. <strong>Isınma ve Alıştırma</strong> basamaklarında sormayın:
+        o sorular kas yapmak için, kası başkası çalıştıramaz.
+        <strong>Zorlayıcı</strong>'da yalnızca ipucu isteyin, kod istemeyin
+        (&ldquo;hangi veri yapısı?&rdquo;, &ldquo;neyi gözden
+        kaçırıyorum?&rdquo;). <strong>Keşif</strong>'te serbest; ama
+        yapıştırdığınız her satırı bir arkadaşınıza açıklayabilmelisiniz,
+        açıklayamadığınız satır sizin değildir. &ldquo;Yanıt yerine&rdquo;
+        kutusu da aynı ilkenin uzantısı: önce kitapçıktaki kesim, sonra model.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <div class="blok">
   <div class="ray">H.1</div>
@@ -16,7 +36,32 @@
     <p class="merdiven"><span class="basamak isinma">2</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
     <div class="kutu puf">
       <span class="basi">Yanıt yerine</span>
-      <p><a href="https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702">kitapçık: Kılavuz (kurulum, iKojo)</a> <a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3">kitapçık I.1: Kaplumbağayla tanışın</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/kocoya-davet.md">Koco&#x27;ya davet</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/2-kaplumbaga-cekirdek-fikirler.md">temel-bilgiler 2: çekirdek fikirler</a> <a href="https://ikojo.fly.dev/yardim/komutlar">iKojo komut kılavuzu</a></p>
+      <p><a href="https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702">kitapçık: Kılavuz (kurulum, iKojo)</a> <a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3#kaplumbagayla-tanisin">kitapçık I.1: Kaplumbağayla tanışın</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/kocoya-davet.md">Koco&#x27;ya davet</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kojo/temel-bilgiler/2-kaplumbaga-cekirdek-fikirler.md">temel-bilgiler 2: çekirdek fikirler</a> <a href="https://ikojo.fly.dev/yardim/komutlar">iKojo komut kılavuzu</a></p>
+    </div>
+
+    <p>
+      iKojo bir şeye itiraz ettiğinde iletiyi çıktı penceresinde İngilizce
+      gösterir ve hatalı satırı kırmızıyla çizer. İlk hafta en sık göreceğiniz
+      on ileti, Türkçesi ve çoğu zamanki nedeni:
+    </p>
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>İleti</th><th>Türkçesi</th><th>Çoğu zaman nedeni</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>not found: value ilerı</code></td><td>'ilerı' diye bir değer yok</td><td>Komutun adı yanlış yazılmış; Türkçe harflere dikkat (<code>ileri</code>, <code>sağ</code>).</td></tr>
+          <tr><td><code>type mismatch; found: Int required: String</code></td><td>tür uyuşmazlığı; bulunan Sayı, gereken Yazı</td><td>İşlev başka tür bekliyor; <code>satıryaz</code> hariç çoğu komut girdisinin türünü seçer.</td></tr>
+          <tr><td><code>not enough arguments for method ileri</code></td><td>ileri için girdi eksik</td><td><code>ileri</code> yerine <code>ileri(100)</code>; parantezi ve sayıyı unutmayın.</td></tr>
+          <tr><td><code>too many arguments for method sağ</code></td><td>sağ için fazla girdi</td><td>Komut o kadar girdi almıyor; kitapçığın I.1 tablosuna bakın.</td></tr>
+          <tr><td><code>';' expected but ')' found</code></td><td>';' bekleniyordu, ')' bulundu</td><td>Parantez ya da süslü parantez düzeni bozuk; çoğu zaman bir <code>)</code> fazla ya da bir <code>{</code> eksik.</td></tr>
+          <tr><td><code>unclosed string literal</code></td><td>tırnak kapanmamış</td><td>Yazı sabitinin sonundaki <code>"</code> eksik.</td></tr>
+          <tr><td><code>reassignment to val</code></td><td>dez'e yeniden değer atanıyor</td><td><code>dez</code> ile tanımlanan ad değişmez; değişmesi gerekiyorsa <code>den</code> (kitapçık I.3).</td></tr>
+          <tr><td><code>value boy is not a member of List[Int]</code></td><td>Dizin'in 'boy' diye bir üyesi yok</td><td>Yöntem adı yanlış: <code>boy</code> değil <code>boyu</code>; büyük/küçük harf de sayılır.</td></tr>
+          <tr><td><code>recursive method f needs result type</code></td><td>özyinelemeli f'nin çıktı türü yazılmalı</td><td>Kendini çağıran tanıma çıktı türünü siz yazın: <code>tanım f(n: Sayı): Sayı = ...</code></td></tr>
+          <tr><td><code>java.lang.StackOverflowError</code></td><td>çağrı yığını taştı (çalışırken)</td><td>Özyineleme hiç durmuyor: taban durumu yok ya da küçülmüyor (kitapçık IV.1).</td></tr>
+        </tbody>
+      </table>
     </div>
 
 <section class="soru" id="KH-1-I1">

@@ -13,7 +13,7 @@ test:
 	for d in $(DIZINLER); do \
 	  printf "%-10s " $$d; \
 	  g=/dev/null; [ -f $$d/girdi ] && g=$$d/girdi; \
-	  if timeout 60 $(KOCO) $$d/ana.kojo $$g > $$d/test-ciktisi 2>/dev/null && diff -q $$d/beklenen-cikti $$d/test-ciktisi >/dev/null; then \
+	  if timeout 60 $(KOCO) $$d/ana.kojo $$g > $$d/test-ciktisi 2>/dev/null && diff -q -Z --strip-trailing-cr $$d/beklenen-cikti $$d/test-ciktisi >/dev/null; then \
 	    echo "doğru"; dogru=$$((dogru+1)); rm -f $$d/test-ciktisi; \
 	  else echo "henüz değil"; yanlis=$$((yanlis+1)); fi; \
 	done; \

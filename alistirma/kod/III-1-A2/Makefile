@@ -10,7 +10,7 @@ calistir: derle
 
 test: derle
 	./prog > test-ciktisi
-	diff beklenen-cikti test-ciktisi && echo "Doğru!"
+	diff -Z --strip-trailing-cr beklenen-cikti test-ciktisi && echo "Doğru!"
 	rm -rf test-ciktisi
 
 temizle:

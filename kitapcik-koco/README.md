@@ -7,7 +7,7 @@ aynı kavramlar, bu sefer yalnızca [Koco](https://sites.google.com/view/koco-su
 tarayıcıda, Türkçe [iKojo](https://ikojo.fly.dev/) üzerinde çalıştırabilir.
 Bölümler bilerek paralel kuruldu; iki kitapçık yan yana okunmak için yazıldı.
 
-**Durum: ilk taslak.** Kod örnekleri **Türkçe anahtar sözcüklerle**
+**Sürüm 1, Ekim 2026.** Kod örnekleri **Türkçe anahtar sözcüklerle**
 (`tanım`, `dez`, `den`, `eğer`, `yoksa`, `eşle`, `durum`, `tür`&hellip;)
 yazıldı ve Koco'nun yamalı Scala derleyicisiyle (`bulent2k2/kojo` deposundaki
 `scala-tr/build/pack/lib` jar'ları, 2.13.18) **derlenip çalıştırılarak

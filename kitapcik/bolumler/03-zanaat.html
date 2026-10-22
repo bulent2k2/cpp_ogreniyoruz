@@ -27,9 +27,9 @@
       <pre><code>pwd                     <span class="y"># neredeyim?</span>
 ls                      <span class="y"># burada ne var?</span>
 ls -l                   <span class="y"># ayrıntılı liste</span>
-cd ileri/dersler        <span class="y"># dizine gir</span>
+cd ileri/dersler        <span class="y"># klasöre gir</span>
 cd ..                   <span class="y"># bir üste çık</span>
-mkdir yeni-alistirma    <span class="y"># dizin aç</span>
+mkdir yeni-alistirma    <span class="y"># klasör aç</span>
 cat dosya.cpp           <span class="y"># dosyayı ekrana bas</span>
 ./prog &lt; test1          <span class="y"># programa dosyadan girdi ver</span></code></pre>
     </figure>
@@ -80,6 +80,30 @@ $ c++ -std=c++23 -O2 ana.cpp -o prog             <span class="y"># iyileştirmel
         yarım saat kazanacaktık.
       </p>
     </div>
+
+    <h3>Kodunuzu saklayın</h3>
+
+    <p>
+      Terminale alıştığınız gün <code>git</code>'e de alışın. Ders deposunu
+      <code>git clone</code> ile indirdiniz; kendi çalışmalarınızı da bir depoda
+      tutun. Her çalışma oturumunun sonunda üç komut:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">git</span></figcaption>
+      <pre><code>$ git status                      <span class="y"># ne değişti?</span>
+$ git add ana.cpp beklenen-cikti  <span class="y"># bunları kaydedeceğim</span>
+$ git commit -m "labirent: yol tarifi eklendi"
+$ git push                        <span class="y"># GitHub'a gönder (hesabınız varsa)</span></code></pre>
+    </figure>
+
+    <p>
+      Faydası iki: bir gün bozduğunuz programı <code>git diff</code> ile bir
+      önceki hâliyle karşılaştırırsınız, ve &ldquo;dün çalışıyordu&rdquo; artık
+      bir cümle değil, geri dönebileceğiniz bir kayıt olur. Derlenmiş
+      <code>prog</code> dosyasını depoya koymayın; onu derleyici her seferinde
+      yeniden üretir.
+    </p>
   </div>
 </div>
 
@@ -170,7 +194,7 @@ make: 'hedef' hedefi için yapılacak bir şey yok.</code></pre>
       <p>
         Yeni bir alıştırmaya başlarken hazır bir düzenden kopyalayın: bir
         <code>Makefile</code>, bir <code>ana.cpp</code>, bir de
-        <code>beklenen-cikti</code>. Ders deposundaki <code>sablon/</code> dizini
+        <code>beklenen-cikti</code>. Ders deposundaki <code>sablon/</code> klasörü
         tam olarak bunun için var. Takımca bir kere kurun, dönem boyunca
         kopyalayın &mdash; her seferinde sıfırdan Makefile yazmak zaman kaybı.
       </p>
@@ -377,6 +401,44 @@ $ gdb ./prog
         çift göz bu körlüğü kırar.
       </p>
     </div>
+
+    <h3>Ve dördüncüsü: temizleyiciler</h3>
+
+    <p>
+      Üç yol dedim; bugün neredeyse bedava bir dördüncüsü var.
+      <strong>Temizleyiciler</strong> (<em>sanitizers</em>) derleyiciye iki
+      bayrakla eklenir ve programınız çalışırken dizi sınırı aşımını, taşmayı,
+      serbest bırakılmış belleğe dokunmayı olduğu satırda yakalar. Bölüm I'deki
+      taşma ve şu klasik hata, ikisi de anında görünür:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">sinir.cpp</span><span class="etiket">bir fazla</span></figcaption>
+      <pre><code>vector&lt;<span class="t">int</span>&gt; v{<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>};
+<span class="t">int</span> toplam = <span class="n">0</span>;
+<span class="a">for</span> (<span class="t">int</span> k = <span class="n">0</span>; k &lt;= <span class="n">3</span>; ++k)   <span class="y">// &lt;= yerine &lt; olmalıydı</span>
+  toplam += v[k];</code></pre>
+    </figure>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">temizleyici</span></figcaption>
+      <pre><code>$ g++ -std=c++23 -Wall -g -fsanitize=address,undefined sinir.cpp -o sinir
+$ ./sinir
+==1406==ERROR: AddressSanitizer: <span class="v">heap-buffer-overflow</span> on address 0x50200000001c
+READ of size 4 at 0x50200000001c thread T0
+    #0 0x55aad589872f in main <span class="v">sinir.cpp:9</span>
+0x50200000001c is located <span class="v">0 bytes after 12-byte region</span></code></pre>
+    </figure>
+
+    <p>
+      Temizleyicisiz derlenen aynı program <code>6</code> da yazabilir,
+      <code>-589934592</code> de, hiç şikâyet etmeden &mdash; dizinin bir ötesinde
+      ne varsa onu toplar. Temizleyiciyle ise hata, dosya adı ve satır
+      numarasıyla elinizde. Program yavaşlar (iki üç kat), o yüzden
+      yarışmaya göndereceğiniz sürümü değil, <em>hata ararken</em> derlediğiniz
+      sürümü böyle derleyin. Ders deposundaki <code>sablon/Makefile</code>'da
+      bunun için bir <code>ayikla</code> hedefi var: <code>make ayikla</code>.
+    </p>
   </div>
 </div>
 
@@ -543,7 +605,7 @@ std::cout &lt;&lt; <span class="s">"inşa süresi: "</span> &lt;&lt; insa.count(
       <h4>Alıştırmalar</h4>
       <ol>
         <li>
-          <strong>Kendi şablonunuzu kurun.</strong> Bir dizin açın; içine
+          <strong>Kendi şablonunuzu kurun.</strong> Bir klasör açın; içine
           <code>Makefile</code>, <code>ana.cpp</code> ve <code>beklenen-cikti</code>
           koyun. <code>make</code>, <code>make test</code> ve <code>make temizle</code>
           çalışsın. Bundan sonraki her alıştırmada bunu kopyalayın.

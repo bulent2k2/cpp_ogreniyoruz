@@ -73,6 +73,31 @@
       </p>
     </div>
 
+    <div class="kutu puf">
+      <span class="basi">Yazı: std::string</span>
+      <p>
+        Beş temel türün yanında bir de <strong>yazı</strong> var: adı
+        <code>std::string</code>, <code>&lt;string&gt;</code> başlığından gelir.
+        Bu kitapçıkta ve alıştırmalarda sık göreceksiniz; altı satırla tanışın:
+      </p>
+      <figure class="kod dar">
+        <figcaption><span class="nokta"></span><span class="ad">yazı</span></figcaption>
+        <pre><code><span class="a">#include</span> <span class="s">&lt;string&gt;</span>
+<span class="t">string</span> ad{<span class="s">"Ada"</span>};
+ad += <span class="s">" Lovelace"</span>;          <span class="y">// yazılar + ile birleşir</span>
+cout &lt;&lt; ad.size() &lt;&lt; endl;    <span class="y">// 12: kaç karakter</span>
+cout &lt;&lt; ad[<span class="n">0</span>] &lt;&lt; endl;        <span class="y">// A: harflerine dizi gibi erişilir</span>
+getline(cin, ad);             <span class="y">// boşluklu bir satırın tamamını okur</span></code></pre>
+      </figure>
+      <p>
+        <code>cin &gt;&gt; ad</code> ilk boşlukta durur; satırın tamamı için
+        <code>getline</code>. Türkçe harfler bellekte iki bayt tutar ve
+        <code>size()</code> harfi değil baytı sayar &mdash; şimdilik bilin,
+        <a href="{{02-veri}}">Bölüm II</a>'de yazının diziyle akrabalığını
+        göreceksiniz.
+      </p>
+    </div>
+
     <h3>Her türün bir sınırı var</h3>
 
     <p>

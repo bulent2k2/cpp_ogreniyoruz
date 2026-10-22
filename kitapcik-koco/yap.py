@@ -11,6 +11,7 @@ Kullanım:  python3 kitapcik-koco/yap.py
 """
 
 import base64
+import html
 import mimetypes
 import os
 import pathlib
@@ -67,12 +68,40 @@ SIRA = [b[0] for b in BOLUMLER]
 AD = {b[0]: b[1] for b in BOLUMLER}
 BAS = {b[0]: b[2] for b in BOLUMLER}
 
+# Başlıklara kimlik (id): "Her türün bir sınırı var" -> her-turun-bir-siniri-var.
+# Alıştırma defteri ve kavram dizini bölüm sayfasına değil, doğrudan kesime
+# bağlanabilsin; PDF'te de yer imi olsun. Aynı dönüşümü defterin üreteci de
+# kullanıyor; değiştirirseniz orayı da değiştirin.
+TURKCE = str.maketrans("çğıöşüâîûÇĞİÖŞÜÂÎÛ", "cgiosuaiuCGIOSUAIU")
+
+
+def kimlik(metin: str) -> str:
+    t = html.unescape(re.sub(r"<[^>]+>", "", metin)).translate(TURKCE).lower()
+    return re.sub(r"[^a-z0-9]+", "-", t).strip("-") or "kesim"
+
+
+def kimlik_ver(govde_html: str) -> str:
+    gorulen: set[str] = set()
+
+    def yap(m):
+        etiket, nitelik, icerik = m.group(1), m.group(2), m.group(3)
+        if " id=" in nitelik:
+            return m.group(0)
+        k = kimlik(icerik)
+        n, i = k, 2
+        while n in gorulen:
+            n, i = f"{k}-{i}", i + 1
+        gorulen.add(n)
+        return f'<{etiket} id="{n}"{nitelik}>{icerik}</{etiket}>'
+
+    return re.sub(r"<(h[23])([^>]*)>(.*?)</\1>", yap, govde_html, flags=re.S)
+
 
 def govde(slug: str) -> str:
     yol = KOK / "bolumler" / f"{slug}.html"
     if not yol.exists():          # henüz yazılmamış bölüm: yapıyı bozmasın
         return f'<header class="ust"><h1>{BAS[slug]}</h1></header>'
-    return yol.read_text(encoding="utf-8").strip()
+    return kimlik_ver(yol.read_text(encoding="utf-8").strip())
 
 
 def gezinme(slug: str, baglantilar: dict[str, str] | None) -> str:

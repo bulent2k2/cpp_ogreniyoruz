@@ -271,10 +271,13 @@
 
     <ul>
       <li>
-        <strong>Windows:</strong> <a href="https://cygwin.com/install.html">Cygwin</a>
-        kurun, içine <code>gcc-g++</code> paketini ekleyin. Cygwin terminalinde
-        <code>pwd</code> yazınca <code>/home/&lt;kullanıcı&gt;</code> görmelisiniz.
-        Alternatif olarak WSL de çok iyi çalışıyor.
+        <strong>Windows:</strong> <a href="https://learn.microsoft.com/windows/wsl/install">WSL</a>
+        kurun (Ubuntu seçin); açılan terminalde
+        <code>sudo apt install build-essential git</code> yazın. Böylece
+        Linux'taki her şey &mdash; <code>g++</code>, <code>make</code>,
+        <code>diff</code> &mdash; elinizin altında olur, kitapçıktaki komutlar
+        birebir çalışır. WSL kuramıyorsanız ikinci seçenek
+        <a href="https://www.msys2.org/">MSYS2</a>.
       </li>
       <li>
         <strong>macOS:</strong> terminalde <code>c++ --version</code> yazın. Yoksa
@@ -283,6 +286,13 @@
       <li>
         <strong>Linux:</strong> zaten hazır. Değilse dağıtımınızın paket yöneticisiyle
         <code>g++</code> kurun.
+      </li>
+      <li>
+        <strong>Git:</strong> kodunuzu saklamak ve geri almak için. macOS ve
+        Linux'ta çoğu zaman hazır; <code>git --version</code> ile bakın. Üç komut
+        yeter: <code>git clone</code> (depoyu indir), <code>git pull</code>
+        (yenilikleri al), <code>git status</code> (ne değişti). Gerisi
+        <a href="{{03-zanaat}}">Bölüm III</a>'te.
       </li>
       <li>
         <strong>Editör:</strong>

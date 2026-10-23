@@ -22,6 +22,7 @@
 <section class="soru" id="VI-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-1-I1</span> Çizelgeyle Fibonaççi</h3>
 <p>Program Fibonaççi'yi Bölüm IV'ün yöntemiyle, yukarıdan aşağı ve bellekle hesaplıyor. <code>fibAY</code>'yi yazın: özyineleme yok, 0'dan n'e dolan bir çizelge (<code>Dizi&lt;S&gt;</code>). Üç n için iki sonuç yan yana çıksın; eşit olmalılar. Hangisi daha kısa? Hangisinin kanıtı tanımın kendisi?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -65,6 +66,7 @@ n=90: YA 2880067194370816120, AY 2880067194370816120</code></pre>
 <section class="soru" id="VI-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-1-A1</span> İki değişken yeter</h3>
 <p>Çizelgenin her hücresi yalnız önceki iki hücreye bakıyor. Öyleyse çizelgeyi saklamayın: iki değişkenle (<code>a</code>, <code>b</code>) yazın, bellek sabit. n = 90 ve n = 92 için yazdırın. n = 93'ü neden yazdırmadık? (Bölüm I'in taşmasını hatırlayın: <code>long long</code>'un sınırı 9,22·10¹⁸.)</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>fib(90) = 2880067194370816120
@@ -75,6 +77,7 @@ fib(92) = 7540113804746346429</code></pre>
 <section class="soru" id="VI-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-1-A2</span> Bellek olarak vector</h3>
 <p>Kitapçığın belleği <code>map&lt;int, S&gt;</code>; her bakış O(log n). n'i bildiğimize göre <code>Dizi&lt;S&gt; bellek(n + 1, -1)</code> de olur: O(1) bakış, &ldquo;henüz yok&rdquo; için <code>-1</code>. <code>fibVec</code>'i yazın, üç sürümün çağrı sayısını yazdırın. Girdi n = 30. Belleksizle bellekli arasındaki oran kaç?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 30</span></figcaption>
 <pre><code>fib(30) = 832040
@@ -87,6 +90,11 @@ vector ile: 59 çağrı</code></pre>
 <section class="soru" id="VI-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-1-Z1</span> Derin çağrı</h3>
 <p>Kitapçık uyarıyor: YA &ldquo;derin çağrılarda yığın taşabilir&rdquo;. Program n = 1 000 000 için YA + bellekle (mod 10⁹+7) hesaplamaya çalışıyor. Çalıştırın: ne oluyor? (Terminalde <code>ulimit -s</code> yığının boyunu söyler.) Sonra aynı sonucu AY ile, iki değişkenle hesaplayın; o taşmaz. Çıktı tek satır. Bir yan soru: mod alırken <code>(a + b) % MOD</code> taşar mı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Bir milyon iç içe çağrı yığını taşırır; döngü taşırmaz.</p></details>
+<details><summary>Yaklaşım</summary><p>Aşağıdan yukarı: <code>a = 0, b = 1</code>, n kere <code>(a, b) = (b, (a + b) % MOD)</code>. Mod toplamı <code>2·10⁹</code>'u geçmez, <code>long long</code>'da güvenli.</p></details>
+<details><summary>İlk satır</summary><p><code>S a{0}, b{1}; for (int k{0}; k &lt; n; ++k) { S c{(a + b) % MOD}; a = b; b = c; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1000000</span></figcaption>
 <pre><code>fib(1000000) mod 1e9+7 = 918091266</code></pre>
@@ -110,6 +118,7 @@ vector ile: 59 çağrı</code></pre>
 <section class="soru" id="VI-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-2-I1</span> Çizelgeyi görün</h3>
 <p>Kitapçığın &ldquo;Deneyin&rdquo;i: 3×3 çizelgeyi kâğıda çizin. Sonra makineye çizdirin: <code>yol3</code>'e <code>bool yazdir = false</code> girdisi ekleyin; doğruysa çizelgeyi satır satır yazsın (sayılar tek boşlukla). <code>main</code>'in başına <code>yol3(4, true)</code> koyun; dört eski satır olduğu gibi kalsın. Çizelgede tanıdık bir üçgen göreceksiniz; adı?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1 1 1 1 1
@@ -127,6 +136,7 @@ vector ile: 59 çağrı</code></pre>
 <section class="soru" id="VI-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-2-A1</span> Dikdörtgen ızgara</h3>
 <p>Kitapçığın ızgarası kare. r satır, c sütunu girdiden okuyun (dosya bitene kadar çiftler); kitapçığın <em>tek satır bellek</em> numarasıyla hesaplayın. Girdi: <code>2 2</code>, <code>3 4</code>, <code>10 10</code>, <code>20 20</code>. 20×20 kitapçığın sayısını vermeli. Sonra kâğıtta: 3×4'ün yanıtı 35, bu <code>C(7, 3)</code>; neden?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 2 2 3 4 10 10 20 20</span></figcaption>
 <pre><code>2x2: 6
@@ -139,6 +149,7 @@ vector ile: 59 çağrı</code></pre>
 <section class="soru" id="VI-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-2-A2</span> Engelli ızgara</h3>
 <p><a href="https://atcoder.jp/contests/dp/tasks/dp_h">AtCoder DP H</a>, kitapçığın son alıştırmalarından: bazı kareler duvar (<code>#</code>), yol sayısı mod 10⁹+7. Kitapçık &ldquo;tek satır değişecek&rdquo; diyor: duvar karesine kaç yol gelir? Girdi AtCoder'ın örneği. Sol üst kareyi 1'le başlatıp çizelgeyi doldurun; dp/README'deki ders iki konumlamayı da anlatıyor.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 ...# .#.. ....</span></figcaption>
 <pre><code>3</code></pre>
@@ -148,6 +159,11 @@ vector ile: 59 çağrı</code></pre>
 <section class="soru" id="VI-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-2-Z1</span> Toplamak yerine en küçüğü</h3>
 <p><a href="https://projecteuler.net/problem=81">Project Euler 81</a>: her karede bir sayı; sağa ve aşağı giderek sol üstten sağ alta en ucuz yol. Aynı çizelge, tek fark: iki komşudan geleni toplamak yerine küçüğünü alıp karenin sayısını ekliyorsunuz. Beş adımlık reçeteyi yazın: işlev ne, taban ne, formül ne? Girdi PE'nin 5×5 örneği; yanıt 2427 olmalı.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her karenin en ucuz yolu: üst ve soldan gelenin küçüğü artı karenin sayısı.</p></details>
+<details><summary>Yaklaşım</summary><p><code>t[0][0] = m[0][0]</code>; ilk satır ve sütun tek komşudan; gerisi <code>min(t[r-1][c], t[r][c-1]) + m[r][c]</code>. Yanıt <code>t[n-1][n-1]</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>t[r][c] = m[r][c] + min(r &gt; 0 ? t[r-1][c] : SONSUZ, c &gt; 0 ? t[r][c-1] : SONSUZ);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 131 673 234 103 18 201 96 342 965 150 630 803 746 422 111 537 699 497 121 956 805 732 524 37 331</span></figcaption>
 <pre><code>en ucuz yol: 2427</code></pre>
@@ -157,6 +173,11 @@ vector ile: 59 çağrı</code></pre>
 <section class="soru" id="VI-2-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-2-K1</span> Yolu geri kurmak</h3>
 <p>VI-2-Z1'in programı maliyeti veriyor, yolu değil. Bölüm V'teki &ldquo;nereden geldim&rdquo; numarası burada da işler: sağ alt kareden başlayın, üst ve sol komşudan hangisi <code>t[r][c] - m[r][c]</code>'ye eşitse oraya gidin, sol üste varınca ters çevirin. Karelerin sayılarını sırayla yazın; PE'nin sayfasındaki yolla aynı mı? Sonra: AtCoder DP H'yi gönderin; PE 81'in 80×80 dosyasını indirip çözün (<em>girdi dosyasını okuma</em> alıştırması da olur).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Çizelge dolunca yolu sondan başa okuyun: hangi komşu bu kareye getirdi?</p></details>
+<details><summary>Yaklaşım</summary><p><code>(r, c)</code>'den geriye: <code>t[r][c] - m[r][c]</code> üst komşuya eşitse yukarı, yoksa sola; (0, 0)'da durun. Topladığınız sayıları ters çevirin.</p></details>
+<details><summary>İlk satır</summary><p><code>while (r &gt; 0 or c &gt; 0) { if (r &gt; 0 and t[r-1][c] == t[r][c] - m[r][c]) --r; else --c; yol.push_back(m[r][c]); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 131 673 234 103 18 201 96 342 965 150 630 803 746 422 111 537 699 497 121 956 805 732 524 37 331</span></figcaption>
 <pre><code>yol: 131 201 96 342 746 422 121 37 331
@@ -181,6 +202,7 @@ toplam: 2427</code></pre>
 <section class="soru" id="VI-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-3-I1</span> Dört yüzlü zar</h3>
 <p>Kitapçıkta altı yüzlü zarla ilk yedi değer ikinin kuvvetleri gibi gidiyor, f(7) = 63'te bozuluyor. Zarı dört yüzlü yapın (1&ndash;4) ve f(0)..f(10)'u yazdırın. Düzen nerede bozuluyor, neden orada? Formülü kâğıda yazın: f(n) = f(n−1) + … + f(n−4).</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>f(0) = 1
@@ -200,6 +222,7 @@ f(10) = 401</code></pre>
 <section class="soru" id="VI-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-3-A1</span> Zar kombinasyonları</h3>
 <p><a href="https://cses.fi/problemset/task/1633">CSES 1633</a> (<em>Dice Combinations</em>): n girdiden okunur (10⁶'ya kadar), yanıt mod 10⁹+7. Kitapçığın beş satırını girdili programa çevirin; girdi n = 1 000 000. Çıktı yalnız sayı. CSES'e gönderin. Çizelge bir milyon <code>long long</code>: kaç megabayt?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1000000</span></figcaption>
 <pre><code>874273980</code></pre>
@@ -209,6 +232,7 @@ f(10) = 401</code></pre>
 <section class="soru" id="VI-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-3-A2</span> Yukarıdan aşağı zar</h3>
 <p>Aynı soruyu YA yazın: özyinelemeli <code>f(n)</code>, bellek olarak <code>Dizi&lt;S&gt;</code> (−1: henüz yok), çağrı sayacı. Girdi n = 50. AY'yle aynı sonucu veriyor mu? Kaç çağrı yapıldı; n'e göre yaklaşık kaç katı? (Her değer bir kere hesaplanır, her hesap altı çağrı.)</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 50</span></figcaption>
 <pre><code>AY: 660641036
@@ -220,6 +244,11 @@ YA: 660641036
 <section class="soru" id="VI-3-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-3-Z1</span> Tam k zar</h3>
 <p>Yeni soru, aynı reçete: toplamı n olan ve <em>tam k zarlı</em> dizi sayısı. İşlev iki girdili: f(n, k). Taban: f(0, 0) = 1, k = 0 ve n &gt; 0 ise 0. Formül: son zar 1..6, kalanı k−1 zarla. Kanıt iki cümle. Çizelge iki boyutlu. Girdi <code>10 3</code>. Sağlama: k = 1..n üzerinden f(10, k)'leri toplayın; kitapçığın f(10)'una (492) eşit çıkmalı. Neden?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki boyutlu durum: kaç zar, hangi toplam; son zar 1..6 olabilir.</p></details>
+<details><summary>Yaklaşım</summary><p><code>f[j][x] = f[j-1][x-1] + … + f[j-1][x-6]</code> (x−z ≥ 0 olanlar); <code>f[0][0] = 1</code>. Sağlama: <code>j</code> üstünden toplam, kitapçığın tek boyutlu <code>f(10)</code>'u.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int j{1}; j &lt;= k; ++j) for (int x{1}; x &lt;= n; ++x) for (int z{1}; z &lt;= 6 and z &lt;= x; ++z) f[j][x] += f[j-1][x-z];</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 10 3</span></figcaption>
 <pre><code>toplamı 10 olan 3 zarlı dizi: 27
@@ -230,6 +259,11 @@ k=1..10 toplamı: 492 (= f(10))</code></pre>
 <section class="soru" id="VI-3-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-3-K1</span> Hepsini yazın</h3>
 <p>Saymak başka, görmek başka. Bölüm IV'ün özyinelemesiyle toplamı 4 olan <em>bütün</em> zar dizilerini satır satır yazın (küçükten büyüğe), sonra kaç tane olduğunu f(4)'le karşılaştırın. İki program aynı şeyi sayıyor; biri listeyi kurmadan sayıyor. n = 100 için listeyi yazmak neden imkânsız (f(100) kaç basamaklı, tahmin edin)? Sonra CSES 1633'ü gönderin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Saymak yerine kurmak: IV. bölümün geri dönüşlü aramasıyla her diziyi yazın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>yaz(kalan)</code>: <code>kalan == 0</code> ise diziyi yazdır ve say; yoksa <code>z = 1..min(6, kalan)</code> için <code>dizi.push_back(z); yaz(kalan - z); dizi.pop_back();</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int z{1}; z &lt;= 6 and z &lt;= kalan; ++z) { dizi.push_back(z); yaz(kalan - z); dizi.pop_back(); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1 1 1 1
@@ -261,6 +295,7 @@ toplam: 8, f(4) = 8</code></pre>
 <section class="soru" id="VI-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-4-I1</span> Aceleci yanılsın</h3>
 <p>Paraları <code>{1, 4, 6}</code>, hedefi 8 yapın. Aceleci 6 + 1 + 1 der (3 para); en iyi 4 + 4 (2 para). Programın ilk bloğu bunu hesaplar; <code>cout</code> satırlarındaki yazıları da (paralar, aceleci açıklaması) yeni duruma göre düzeltin. İkinci blok olduğu gibi kalsın. Hangi para kümelerinde aceleci hep doğru olur, aklınıza bir tane geliyor mu?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>paralar: 1, 4, 6   hedef: 8
@@ -276,6 +311,7 @@ kaç farklı küme : 3</code></pre>
 <section class="soru" id="VI-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-4-A1</span> En az para</h3>
 <p><a href="https://cses.fi/problemset/task/1634">CSES 1634</a> (<em>Minimizing Coins</em>): ilk satırda para sayısı n ve hedef x, ikinci satırda paralar. En az para sayısı; hedefe varılamıyorsa <code>-1</code>. Girdi CSES'in örneği. <code>SONSUZ</code> için <code>x + 1</code> yeter (ders 29'un numarası); neden? CSES'e gönderin.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 11 1 5 7</span></figcaption>
 <pre><code>3</code></pre>
@@ -285,6 +321,7 @@ kaç farklı küme : 3</code></pre>
 <section class="soru" id="VI-4-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-4-A2</span> Para kombinasyonları I ve II</h3>
 <p><a href="https://cses.fi/problemset/task/1635">CSES 1635</a> (<em>Coin Combinations</em>) ve <a href="https://cses.fi/problemset/task/1636">1636</a> aynı programda: dizi sayısı ve küme sayısı, ikisi de mod 10⁹+7. Girdi biçimi VI-4-A1'inki; CSES örneği <code>2 3 5</code> ile 9: dizi 8, küme 3. İki döngü, iki sıra; hangisi hangisi, ezberlemeden söyleyebilmelisiniz.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 9 2 3 5</span></figcaption>
 <pre><code>dizi: 8
@@ -295,6 +332,11 @@ küme: 3</code></pre>
 <section class="soru" id="VI-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-4-Z1</span> Hangi paralar?</h3>
 <p>En az para sayısı 3; peki hangi üç para? İkinci bir dizi tutun: <code>son[t]</code>, t hedefine en iyi çözümde son konan para. <code>f[t]</code> iyileştiğinde onu da yazın; sonunda x'ten geriye <code>son</code>'u izleyin. Girdi CSES örneği. Birden çok en iyi çözüm olabilir; sizinki paraları hangi sırada denediğinize bağlı. Beklenen çıktı, paraları girdideki sırayla deneyip yalnız <em>katı</em> iyileşmede yazan sürümünki.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Çizelge en az sayıyı verir; hangi paranın son konduğunu da yazarsanız geriye yürüyebilirsiniz.</p></details>
+<details><summary>Yaklaşım</summary><p><code>f[t]</code> güncellenirken <code>son[t] = p</code>; sonunda <code>t = x</code>'ten <code>t -= son[t]</code> ile sıfıra inene kadar paraları toplayın.</p></details>
+<details><summary>İlk satır</summary><p><code>if (t - p &gt;= 0 and f[t - p] + 1 &lt; f[t]) { f[t] = f[t - p] + 1; son[t] = p; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 11 1 5 7</span></figcaption>
 <pre><code>3 para: 1 5 5</code></pre>
@@ -304,6 +346,11 @@ küme: 3</code></pre>
 <section class="soru" id="VI-4-Z2">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">VI-4-Z2</span> Aceleci ne zaman doğru?</h3>
 <p>Gerçek paralar (1, 5, 10, 25) için aceleci yöntem her hedefte doğru; <code>{1, 5, 7}</code> için değil. Bunu makineye kanıtlatmayın, <em>sınatın</em>: 1'den 100'e her hedef için aceleci sayıyı ve DP sayısını hesaplayın, kaç hedefte ayrıştıklarını ve ilk ayrışan hedefi yazın. İki para kümesi için. Sonra düşünün: aceleciyi doğru kılan özellik ne? (Adı &ldquo;kanonik para sistemi&rdquo;; kâğıt için bir soru.)</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aceleci: büyükten küçüğe sığdıkça al; DP: en az; ikisini 100 hedefte karşılaştırın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>aceleci</code>: paraları büyükten küçüğe gezip <code>sayi += hedef / p; hedef %= p;</code>. <code>enAz</code>: kitapçığın çizelgesi. Döngüde ilk farkı ve fark sayısını tutun.</p></details>
+<details><summary>İlk satır</summary><p><code>for (S hedef{1}; hedef &lt;= 100; ++hedef) if (aceleci(hedef, paralar) != enAz(hedef, paralar)) { ++fark; if (ilk == 0) ilk = hedef; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1 5 10 25: 0 fark
@@ -314,6 +361,11 @@ küme: 3</code></pre>
 <section class="soru" id="VI-4-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-4-K1</span> Takım işi, makineyle <span class="sure">~2 saat</span></h3>
 <p>Kitapçığın &ldquo;Takım işi&rdquo;: hedef 5, paralar {2, 3}; biriniz dizi kodunu, öteki küme kodunu kâğıtta işletsin. Sonra makine aynı şeyi yapsın: dizi sürümünde her hedef adımından sonra, küme sürümünde her para adımından sonra çizelgenin tamamını yazdırın. Kâğıttakiyle karşılaştırın; 5 için 2 ve 1 çıkmalı. Sonra CSES DP bölümünün ilk dördünü (1633&ndash;1636) gönderin; hepsinde yeşil görünce bu bölüm bitmiş sayılır.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki kodun her adımından sonra çizelgenin tamamı; kâğıttaki izle karşılaştırma.</p></details>
+<details><summary>Yaklaşım</summary><p>Dizi sürümünde dış döngü hedef: her <code>x</code> bitince <code>yaz(d)</code>; küme sürümünde dış döngü para: her <code>p</code> bitince <code>yaz(k)</code>. Başlangıç <code>d[0] = k[0] = 1</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int x{1}; x &lt;= hedef; ++x) { for (S p : paralar) if (x - p &gt;= 0) d[x] += d[x - p]; cout &lt;&lt; "x=" &lt;&lt; x &lt;&lt; ": "; yaz(d); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>dizi (önce hedef, sonra para):
@@ -345,6 +397,7 @@ p=3: 1 0 1 1 1 1</code></pre>
 <section class="soru" id="VI-5-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">VI-5-I1</span> Küçük örnekte doğru, aslında yanlış</h3>
 <p>Zar dizileri için biri şu formülü önerdi: g(n) = 2·g(n−1) (n ≥ 2), g(0) = g(1) = 1. n = 0..6'da kitapçığın f'siyle birebir aynı, yedi değer! Programa g'yi ekleyin, n = 0..10 için ikisini yan yana yazdırın ve ilk ayrıştıkları n'i bulun. Neden tam orada? (Kitapçığın &ldquo;f(0) listeden düşüyor&rdquo; cümlesi.) Altı testle geçen bir formülün yanlış olabileceğini bir daha unutmayın.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -395,6 +448,7 @@ ilk ayrışma: n=7</code></pre>
 <section class="soru" id="VI-5-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-5-A1</span> Kanıtı sağlayın</h3>
 <p>Kanıt kâğıtta; makine onu <em>sağlar</em>. Paralar {2, 3, 5}: dizi ve küme sayılarını iki yoldan hesaplayın. Biri kitapçığın DP'si; öteki Bölüm IV'ün kaba kuvveti: dizileri özyinelemeyle tek tek kurup sayın, kümeleri de paraları artmayan sırada kurarak. Hedef 1..12'de hepsi eşleşiyor mu? Eşleşmesi kanıt değil (neden?), ama bir yazım hatasını anında yakalar.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>dizi: 12 hedefte eşleşti
@@ -405,6 +459,11 @@ küme: 12 hedefte eşleşti</code></pre>
 <section class="soru" id="VI-5-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">VI-5-Z1</span> Döngü sırasını bozun</h3>
 <p>Kitapçık: &ldquo;formülü gördüğünüzde k'nın en dış döngü olması gerektiği kendiliğinden anlaşılıyor&rdquo;. Anlaşılmazsa ne olur? Floyd&ndash;Warshall'ı iki kere yazın: k en dışta ve k en içte. Girdi dört şehirlik yönlü bir çizge: zincir 2→3→4→1 (hepsi 1). İki sürümün 2→1 yanıtını yazın (ulaşılamıyorsa −1). Bozuk sürüm neden yanılıyor; kanıtın hangi cümlesini çiğniyor? (Şehir numaralarını değiştirince bozuk sürüm bazen doğru çıkar; neden?)</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>k</code> ara şehir; o en içteyken <code>f[a][b]</code> daha küçük <code>k</code>'lar için henüz güncellenmemiş olabilir.</p></details>
+<details><summary>Yaklaşım</summary><p>İki işlev, döngü sırası tek fark: <code>(k, a, b)</code> ve <code>(a, b, k)</code>. 2→3→4→1 zincirinde bozuk sürüm 2→1'i bulmak için 2→3→4 ve 4→1'in önceden hazır olmasına muhtaç.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int a{1}; a &lt;= n; ++a) for (int b{1}; b &lt;= n; ++b) for (int k{1}; k &lt;= n; ++k) f[a][b] = min(f[a][b], f[a][k] + f[k][b]);   // bozuk</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 2 3 1 3 4 1 4 1 1</span></figcaption>
 <pre><code>k en dışta: 2-&gt;1 = 3
@@ -415,6 +474,11 @@ k en içte : 2-&gt;1 = -1</code></pre>
 <section class="soru" id="VI-5-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-5-K1</span> bul2&#x27;yu bitirin</h3>
 <p>Kitapçığın (ve ders notlarının) yarım bıraktığı işlev: iki yazının en uzun ortak <em>altdizisi</em> (bitişik harfler). Yedi deneme hazır; başlangıç dosyası ilk denemede duruyor (<code>assert</code>). Eksik birkaç satır: <code>m</code> şimdiye kadarkinden uzunsa <code>enUzun</code>'u ve bittiği yeri güncelleyin. Hepsi geçince &ldquo;7 deneme geçti&rdquo;. Devamı: aynı işi YA (özyineleme + bellek) ile yazın; sonra <a href="https://cses.fi/problemset/task/3403">CSES 3403</a>'e bakın: orada &ldquo;altdizi&rdquo; bitişik <em>değil</em>, formül değişir. Nasıl?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>tane[k1+1][k2+1]</code> bu karede biten ortak parçanın boyu; en uzununu ve bittiği yeri hatırlayın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>if (m &gt; enUzun) { enUzun = m; k = k1 + 1; }</code>; sonunda <code>y1.substr(k - enUzun, enUzun)</code>. Yedi denemeyi birer birer geçirin.</p></details>
+<details><summary>İlk satır</summary><p><code>if (m &gt; enUzun) { enUzun = m; k = k1 + 1; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>7 deneme geçti</code></pre>
@@ -438,6 +502,7 @@ k en içte : 2-&gt;1 = -1</code></pre>
 <section class="soru" id="VI-6-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-6-A1</span> Zıplayan kurbağa</h3>
 <p><a href="https://atcoder.jp/contests/dp/tasks/dp_a">AtCoder DP A</a>, kitapçığın önerdiği klasik: n taş, i'nci taşın yüksekliği h<sub>i</sub>; kurbağa 1'den n'e 1 ya da 2 taş atlayarak gider, her atlayışın bedeli |h<sub>i</sub> − h<sub>j</sub>|. En ucuz bedel. Beş adım: işlev f(i), taban f(1) = 0, formül iki seçenekten küçüğü. Girdi AtCoder'ın üçüncü örneği (yanıt 40). Gönderin.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 30 10 60 10 60 50</span></figcaption>
 <pre><code>40</code></pre>
@@ -447,6 +512,11 @@ k en içte : 2-&gt;1 = -1</code></pre>
 <section class="soru" id="VI-6-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">VI-6-Z1</span> Başı sonu aynı altdizi</h3>
 <p>Ders 18'in sınav sorusu: <code>{4, 2, 3, 1, 3, 2, 1}</code> dizisinde başı ve sonu aynı olan altdiziler var; toplamı en büyük olanınki 11 (<code>2 3 1 3 2</code>). Verilen dizi için bu toplamı bulan <code>altToplam</code>'ı yazın. Kaba kuvvet O(n²) kolay; dersin ipucu <code>std::map</code>: her değerin ilk göründüğü konumu tutun, ön toplamlarla (<em>prefix sum</em>) O(n log n). İkisini de yazın, aynı çıksın. Girdi: n ve dizi.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Başı ve sonu aynı değer: ilk görüldüğü konumla şimdiki konum arasındaki toplam.</p></details>
+<details><summary>Yaklaşım</summary><p>Ön toplam <code>on[i] = d[0] + … + d[i-1]</code>; <code>map&lt;S, int&gt; ilk</code> değerin ilk konumu; her <code>j</code> için değer daha önce <code>i</code>'de görüldüyse aday <code>on[j+1] - on[i]</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>if (ilk.contains(d[j])) enIyi = max(enIyi, on[j + 1] - on[ilk[d[j]]]); else ilk[d[j]] = j;</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 4 2 3 1 3 2 1</span></figcaption>
 <pre><code>kaba: 11
@@ -457,6 +527,11 @@ eşlemle: 11</code></pre>
 <section class="soru" id="VI-6-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-6-K1</span> Yaşam oyunu <span class="sure">~bir hafta</span></h3>
 <p>Kitapçığın &ldquo;bir şey inşa edin&rdquo; önerisi için en keyifli başlangıç: Conway'in yaşam oyunu (dört kural, ders notunda). Girdi: satır, sütun, nesil sayısı ve tahta (<code>#</code> canlı, <code>.</code> cansız); tahtanın dışı cansız. O kadar nesil ilerletip tahtayı yazın. Girdideki desen bir <em>planör</em>: dört nesilde bir sağ alta kayar. Sonra tahtayı büyütün, nesilleri terminalde art arda yazdırın (<code>sleep</code> ile), kendi desenlerinizi deneyin; peryodik desenlerle ilgili yazı ders notunda.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her nesil, her hücre: sekiz komşudan kaçı canlı; dört kural yeni tahtayı yazar.</p></details>
+<details><summary>Yaklaşım</summary><p>Yeni tahtayı ayrı bir <code>vector&lt;string&gt;</code>'e kurun (yerinde değiştirmeyin); komşu sayımı için 8 yönlü döngü ve sınır denetimi; sonunda <code>tahta = yeni</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>int canli{komsuSay(r, c)}; yeni[r][c] = (tahta[r][c] == '#') ? ((canli == 2 or canli == 3) ? '#' : '.') : (canli == 3 ? '#' : '.');</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5 4 ..... ..#.. ...#. .###. .....</span></figcaption>
 <pre><code>.....
@@ -470,9 +545,76 @@ eşlemle: 11</code></pre>
 <section class="soru" id="VI-6-K2">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">VI-6-K2</span> Haftada üç soru <span class="sure">her hafta</span></h3>
 <p>Kitapçığın programı: CSES Problem Set'i sırayla, haftada üç soru. DP bölümünün sıradaki dördü: <a href="https://cses.fi/problemset/task/1637">Removing Digits</a>, <a href="https://cses.fi/problemset/task/1638">Grid Paths</a>, <a href="https://cses.fi/problemset/task/1158">Book Shop</a>, <a href="https://cses.fi/problemset/task/1746">Array Description</a>. Her biri için önce beş adımlık reçeteyi kâğıda yazın (işlev, taban, formül, kanıt), sonra kodlayın; bu dizin sizin. Ve kitapçığın &ldquo;en önemlisi&rdquo;: öğrendiğiniz bir konuyu iki sayfada bir arkadaşınıza anlatın. Koco cildi de sizi bekliyor: aynı reçete, çizen bir dil.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Dört soru, dört reçete; kod reçeteden sonra.</p></details>
+<details><summary>Yaklaşım</summary><p>Her soru için önce kâğıda: işlev ne (durum), taban, formül, kanıt; sonra kitapçığın çizelge kalıbı. Takıldığınızda CSES'in kitabındaki ilgili bölüm (depoda Türkçesi).</p></details>
+<details><summary>İlk satır</summary><p><code>// f(x): ... (bir cümle); taban: ...; formül: ...</code> yorumuyla başlayın.</p></details>
+</div>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-6-K2"><code>alistirma/kod/VI-6-K2/</code></a> &mdash; beklenen çıktı yok</p>
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">VI.7</div>
+  <div class="govde">
+    <h2>Geri dönüş: çizelgeyi eşlemle, ızgarayı iki yolla</h2>
+    <p>Dinamik programlamanın çizelgesi bir dizi olmak zorunda değil; II. bölümün eşlemi de olur. Ve bir ızgara problemi hem V. bölümün gezisiyle hem bu bölümün çizelgesiyle çözülebilir: ikisi aynı soruyu mu yanıtlıyor?</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f#eslem-en-cok-isinize-yarayacak-kap">kitapçık II.2: Eşlem</a> <a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc#2-labirentte-en-kisa-yol">kitapçık V.3: Labirentte en kısa yol</a> <a href="https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb#izgarada-kac-yol-var">kitapçık VI.1: Izgarada kaç yol var</a></p>
+    </div>
+
+<section class="soru" id="VI-7-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-7-A1</span> Çizelgeyi eşlemle tutun</h3>
+<p>Izgarada yol sayma, yukarıdan aşağı ve bellek olarak bir <code>map&lt;pair&lt;int,int&gt;, long long&gt;</code>: <code>yol(s, k)</code> <em>s</em>×<em>k</em> ızgarada sol üstten sağ alta (yalnız sağ ve aşağı) kaç yol olduğunu versin; taban <code>s == 1 || k == 1</code>. Girdi: kaç soru, sonra her satırda <em>s k</em>. Çıktı: her soru için <code>5x5: 70 yol</code>, son satırda eşlemde kaç kayıt biriktiği. Aynı eşlemi üç soruda da kullanın; 16×16'dan sonra kayıt sayısı neden 256 değil de 225?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 2 2 5 5 16 16</span></figcaption>
+<pre><code>2x2: 2 yol
+5x5: 70 yol
+16x16: 155117520 yol
+bellekte 225 kayıt</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-7-A1"><code>alistirma/kod/VI-7-A1/</code></a></p>
+</section>
+<section class="soru" id="VI-7-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">VI-7-A2</span> Engelli ızgara, iki yolla</h3>
+<p>Girdi: satır ve sütun sayısı, sonra ızgara (<code>S</code> başlangıç sol üstte, <code>C</code> çıkış sağ altta, <code>#</code> engel). İki soru, iki yöntem: V. bölümün enlemesine gezisiyle dört yöne yürüyerek en az kaç adımda çıkışa varılır; VI. bölümün çizelgesiyle yalnız sağa ve aşağı giderek kaç farklı yol var (engel kareye 0). Çıktı: <code>en kısa yol: 7 adım</code> ve <code>sağ-aşağı yol sayısı: 4</code>. İki yanıt birbirinden bağımsız; neden?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 S..#. .#... ...#. #...C</span></figcaption>
+<pre><code>en kısa yol: 7 adım
+sağ-aşağı yol sayısı: 4</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/VI-7-A2"><code>alistirma/kod/VI-7-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#VI-3-Z1"><code>VI-3-Z1</code> Tam k zar</a> <a href="#VI-4-Z1"><code>VI-4-Z1</code> Hangi paralar?</a> <a href="#VI-2-Z1"><code>VI-2-Z1</code> Toplamak yerine en küçüğü</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

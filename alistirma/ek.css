@@ -74,3 +74,25 @@
   font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
   color: var(--murekkep-3); margin-left: 0.4rem; white-space: nowrap; vertical-align: 0.1em;
 }
+
+/* üç kademeli ipucu (P3): kapalı details; çözüm yok */
+.ipucu { margin: 0.6rem 0 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; }
+.ipucu details {
+  flex: 1 1 100%;
+  border: 1px solid var(--cizgi); border-left: 3px solid var(--sari);
+  border-radius: 0 4px 4px 0; background: var(--kagit-2);
+  padding: 0.3rem 0.8rem; font-size: 0.94rem;
+}
+.ipucu summary {
+  cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--sari); font-weight: 600; list-style: none;
+}
+.ipucu summary::before { content: "+ "; }
+.ipucu details[open] summary::before { content: "\2212 "; }
+.ipucu details p { margin: 0.35rem 0 0.25rem; }
+@media print { .ipucu details { break-inside: avoid; } }
+
+/* bölüm sınavı (P8): üç soru bağlantısı */
+.sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
+.sinav-sorular a { text-decoration: none; border: 1px solid var(--cizgi-2); border-radius: 4px; padding: 0.2rem 0.6rem; background: var(--kagit-2); color: var(--murekkep); }
+.sinav-sorular a:hover { border-color: var(--kirmizi); }

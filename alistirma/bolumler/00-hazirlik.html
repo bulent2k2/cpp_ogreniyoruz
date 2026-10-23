@@ -85,6 +85,7 @@
 <section class="soru" id="H-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-1-I1</span> İlk satır, ikinci satır</h3>
 <p>Aşağıdaki program tek satır yazıyor. Çalıştırın. Sonra ikinci bir satır daha yazsın: <code>Ben bir programım.</code> İki ayrı <code>cout</code> satırı mı, tek satırda iki <code>endl</code> mi &mdash; ikisini de deneyin, çıktı aynı mı?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// H-1-I1 · İlk satır, ikinci satır</span>
@@ -108,6 +109,7 @@ Ben bir programım.</code></pre>
 <section class="soru" id="H-1-I2">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-1-I2</span> Bölme üç türlü</h3>
 <p>Programı önce olduğu gibi çalıştırın ve üç satırı dikkatle okuyun: <code>7 / 2</code> neden <code>3</code>? <code>7 % 2</code> ne demek? Sonra <code>7</code>'leri <code>9</code> yapın. Beklenen çıktı aşağıda; <code>9.0 / 2</code> satırına dikkat.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// H-1-I2 · Bölme üç türlü</span>
@@ -134,6 +136,7 @@ Ben bir programım.</code></pre>
 <section class="soru" id="H-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-1-A1</span> İki sayı, üç sonuç</h3>
 <p>Klavyeden iki tam sayı okuyun; toplamını, farkını ve çarpımını üç satırda yazın. Girdi <code>12 5</code> olsun. <code>cin &gt;&gt; a &gt;&gt; b;</code> iki sayıyı art arda okur, aralarındaki boşluğu kendisi atlar.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 12 5</span></figcaption>
 <pre><code>Toplam: 17
@@ -145,6 +148,7 @@ Fark: 7
 <section class="soru" id="H-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-1-A2</span> Bir sözcük, bir sayı</h3>
 <p>Bu sefer bir sözcük ve bir sayı okuyun: <code>elma 3</code>. Çıktı tek satır: <code>3 tane elma</code>. Sözcük için <code>string</code> türü gerekiyor; <code>#include &lt;string&gt;</code> satırını unutmayın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: elma 3</span></figcaption>
 <pre><code>3 tane elma</code></pre>
@@ -154,6 +158,11 @@ Fark: 7
 <section class="soru" id="H-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">H-1-Z1</span> Üç sayının ortalaması</h3>
 <p>Üç tam sayı okuyun, ortalamasını yazın. Girdi <code>3 4 4</code>; beklenen çıktı <code>Ortalama: 3.66667</code>. İlk denemenizde büyük ihtimalle <code>3</code> çıkacak. Neden? <code>H-1-I2</code>'deki üç satırı yeniden okuyun; toplamı bölmeden önce kesirli bir türe çevirmenin bir yolunu bulun.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Üç tam sayının toplamı tam sayı; 11'i 3'e bölünce C++ kesri atar, 3 kalır.</p></details>
+<details><summary>Yaklaşım</summary><p>Bölmeden önce taraflardan birini kesirli türe çevirin: <code>3.0</code> ile bölmek ya da toplamı <code>double</code>'a atamak yeter.</p></details>
+<details><summary>İlk satır</summary><p><code>double ortalama{(a + b + c) / 3.0};</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 4</span></figcaption>
 <pre><code>Ortalama: 3.66667</code></pre>
@@ -202,6 +211,7 @@ Fark: 7
 <section class="soru" id="H-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-2-I1</span> Bir karakter eksik</h3>
 <p>Program derlenmiyor. İletide satır numarasını bulun, o satıra bakın. Düzeltince aşağıdaki çıktıyı vermeli.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// H-2-I1 · Bir karakter eksik</span>
@@ -223,6 +233,7 @@ Fark: 7
 <section class="soru" id="H-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-2-A1</span> Üç hata, üç ileti</h3>
 <p>Bu sefer üç ayrı hata var. Derleyici hepsini birden söyleyebilir ya da ilkini düzeltince yenisi çıkabilir. Her ileti için önce &ldquo;hangi satır, hangi sözcük&rdquo; diye sorun. İpucu: hatalardan biri bir harfin büyüklüğü, biri bir başlık dosyası, biri de yine o noktalı virgül.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// H-2-A1 · Üç hata, üç ileti</span>
@@ -249,6 +260,7 @@ merhaba 5</code></pre>
 <section class="soru" id="H-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-2-A2</span> Derleyici kızmıyor ama yanlış</h3>
 <p>Bu program derleniyor, çalışıyor ve yanlış yanıt veriyor: <code>sayi</code> 3 olduğu hâlde <code>yedi</code> yazıyor. <code>if</code> satırına çok dikkatli bakın. <code>-Wall</code> ile derlerseniz derleyici bir uyarı da verir; onu da okuyun, ne öneriyor?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// H-2-A2 · Derleyici kızmıyor ama yanlış</span>
@@ -272,6 +284,11 @@ merhaba 5</code></pre>
 <section class="soru" id="H-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">H-2-Z1</span> diff ne diyor?</h3>
 <p>Bu program da derleniyor, çalışıyor, ama beklenen çıktıyla <em>bir</em> farkı var. Kodu okumadan önce <code>make test</code> çalıştırın ve <code>diff</code>'in söylediğini anlamaya çalışın: <code>&lt;</code> ile başlayan satır beklenen, <code>&gt;</code> ile başlayan sizin çıktınız. Bu defterin bütün alıştırmaları bu yöntemle sınanıyor; <code>diff</code> okumayı burada öğrenin. Tarayıcıda çalışıyorsanız iki çıktıyı gözle karşılaştırın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Program 1'den 9'a kadar yazıyor; beklenen çıktıda bir sayı daha var.</p></details>
+<details><summary>Yaklaşım</summary><p><code>diff</code>'teki <code>&lt;</code> satırı doğrusu, <code>&gt;</code> satırı sizinki; ikisini yan yana koyup hangi sayının eksik olduğuna bakın, sonra döngünün sınırına.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int k{1}; k &lt;= 10; ++k)</code> satırının <code>&lt;</code> mü <code>&lt;=</code> mi olacağına diff karar versin.</p></details>
+</div>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// H-2-Z1 · diff ne diyor?</span>
@@ -309,6 +326,7 @@ merhaba 5</code></pre>
 <section class="soru" id="H-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">H-3-I1</span> Çerçeve</h3>
 <p>Seyrüseferci okusun, sürücü yazsın: üç satırlık bir çerçeve. Üstte ve altta on bir yıldız, ortada <code>* Merhaba *</code>. Yıldız sayısını elle sayın; <code>diff</code> bir fazlasını bile affetmez.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>***********
@@ -320,6 +338,7 @@ merhaba 5</code></pre>
 <section class="soru" id="H-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">H-3-A1</span> Yedinin çarpım tablosu</h3>
 <p>Yer değiştirin. <code>7 x 1 = 7</code>'den <code>7 x 10 = 70</code>'e, on satır. Döngüyle yazın; on tane <code>cout</code> satırı yazan takım kendi kendine &ldquo;Kendini tekrar etme&rdquo; diye fısıldasın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>7 x 1 = 7
@@ -338,9 +357,15 @@ merhaba 5</code></pre>
 <section class="soru" id="H-3-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">H-3-K1</span> Yıldızlardan bir harf</h3>
 <p>Takımınızın adının baş harfini yıldızlarla, yedi satırda çizin. Doğru çıktı yok, bu yüzden <code>beklenen-cikti</code> de yok; <code>make</code> ile derleyip bakın. Önce kâğıda çizin, sonra satır satır yazın. Sıkı takımlar döngüyle çizer: <code>K</code> harfinin çaprazını <code>for</code> ile yazabilir misiniz?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yedi satırlık bir resim; her satır yıldız ve boşluklardan oluşan bir yazı.</p></details>
+<details><summary>Yaklaşım</summary><p>Önce kâğıda 7×7 kareli bir ızgara çizip harfi yıldızlayın; her satırı bir <code>cout</code> satırı yapın, sonra tekrar eden satırları döngüye alın.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int k{0}; k &lt; 7; ++k) cout &lt;&lt; satir(k) &lt;&lt; endl;</code> gibi bir yardımcı işlev de olur.</p></details>
+</div>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/H-3-K1"><code>alistirma/kod/H-3-K1/</code></a> &mdash; beklenen çıktı yok</p>
 </section>
   </div>
 </div>
+
 
 <!--GEZINME-->

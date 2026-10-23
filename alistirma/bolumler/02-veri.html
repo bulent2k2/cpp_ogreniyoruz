@@ -22,6 +22,7 @@
 <section class="soru" id="II-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-1-I1</span> short yerine int</h3>
 <p>Programdaki <code>short</code>'u <code>int</code> yapın. Üç sayı değişecek; çalıştırmadan önce hangileri, kaç olacak? <code>sizeof(dizi) / sizeof(dizi[0])</code> hesabı neden değişmiyor?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// II-1-I1 · short yerine int</span>
@@ -54,6 +55,7 @@ bir öğenin boyu  : 4 bayt
 <section class="soru" id="II-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-1-A1</span> Toplam, en büyük, en küçük</h3>
 <p>Önce bir <code>n</code>, sonra <code>n</code> sayı okuyun; bir <code>vector&lt;int&gt;</code>'e koyun. Dört satır yazın: toplam, en büyük, en küçük, ortalama. Girdi <code>5</code> ve <code>3 1 4 1 5</code>. En büyüğü bulmak için ilk öğeyle başlayın, sıfırla değil; eksi sayılarda neden fark eder?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 1 4 1 5</span></figcaption>
 <pre><code>Toplam: 14
@@ -66,6 +68,7 @@ Ortalama: 2.8</code></pre>
 <section class="soru" id="II-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-1-A2</span> Tersten</h3>
 <p>Bu sefer kaç sayı geleceği belli değil: girdi bitene kadar okuyun (<code>while (cin &gt;&gt; x)</code>), <code>push_back</code> ile biriktirin, sonra tersten yazın. Girdi <code>3 1 4 1 5 9 2 6</code>. Sondan başa giden döngünün sınırlarına dikkat: <code>size()</code> işaretsizdir, <code>i &gt;= 0</code> hiç yanlış olmaz.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 1 4 1 5 9 2 6</span></figcaption>
 <pre><code>6 2 9 5 1 4 1 3 </code></pre>
@@ -75,6 +78,11 @@ Ortalama: 2.8</code></pre>
 <section class="soru" id="II-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-1-Z1</span> Kimse uyarmıyor, biri uyarıyor</h3>
 <p>Kitapçık <code>dizi[12]</code>'nin sessizce çöp okuduğunu gösterdi. <code>vector</code>'ün <code>at()</code> yöntemi ise bağırır: <code>out_of_range</code> adlı bir kuraldışı durum (<em>exception</em>) fırlatır. <code>d.at(2)</code>'yi yazın; sonra <code>d.at(12)</code>'yi bir <code>try</code> bloğuna alıp <code>catch (const out_of_range&amp;)</code> ile yakalayın ve <code>sınır dışı!</code> yazın. <code>&lt;stdexcept&gt;</code> başlığı gerekir.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>at()</code> sınırı denetler ve aşımda bir istisna fırlatır; onu yakalamak sizin işiniz.</p></details>
+<details><summary>Yaklaşım</summary><p><code>try { d.at(12); } catch (const out_of_range&amp;) { ... }</code>; <code>&lt;stdexcept&gt;</code> başlığı. <code>at(2)</code> try'ın dışında da olur.</p></details>
+<details><summary>İlk satır</summary><p><code>try { cout &lt;&lt; d.at(12) &lt;&lt; endl; } catch (const out_of_range&amp; e) { cout &lt;&lt; "sınır dışı!" &lt;&lt; endl; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>at(2) = 4
@@ -85,6 +93,11 @@ at(12) = at(12): sınır dışı!</code></pre>
 <section class="soru" id="II-1-Z2">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-1-Z2</span> Sütun toplamları</h3>
 <p>İki boyutlu akıllı dizi: önce satır ve sütun sayısı, sonra tablo. Her sütunun toplamını tek satırda yazın. Girdi <code>2 3</code>, sonra <code>1 2 3</code> ve <code>4 5 6</code>. Kitapçıktaki <code>vector&lt;vector&lt;int&gt;&gt; tablo(satir, vector&lt;int&gt;(sutun, 0))</code> kalıbını kullanın; döngülerin hangisinin dışta olacağını düşünün.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Tabloyu okuduktan sonra her sütun için satırları dolaşıp toplayın.</p></details>
+<details><summary>Yaklaşım</summary><p>Dış döngü sütun, iç döngü satır: <code>tablo[s][c]</code>. Okurken ise dış döngü satır. Toplamları ayrı bir <code>vector&lt;int&gt;</code>'te tutmak da olur.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int c{0}; c &lt; sutun; ++c) { int t{0}; for (int s{0}; s &lt; satir; ++s) t += tablo[s][c]; ... }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 2 3 1 2 3 4 5 6</span></figcaption>
 <pre><code>Sütun toplamları: 5 7 9</code></pre>
@@ -94,6 +107,11 @@ at(12) = at(12): sınır dışı!</code></pre>
 <section class="soru" id="II-1-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">II-1-K1</span> Eratosthenes&#x27;in kalburu</h3>
 <p><a href="https://projecteuler.net/problem=10">Project Euler 10</a>: iki milyondan küçük asalların toplamı. <code>I-4-A2</code>'deki <code>asalMi</code> ile tek tek denemek dakikalar sürer. Kalbur: <code>vector&lt;bool&gt; asal(2000000, true)</code>; 2'den başlayıp her asalın katlarını eleyin. Toplam <code>int</code>'e sığmaz; I-2'yi hatırlayın. Kaç saniye sürdüğünü de ölçün (Bölüm III'te öğreneceksiniz; şimdilik duvar saatiyle).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her asalın katlarını işaretleyin; işaretlenmeyenler asaldır.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (int p{2}; p &lt; sinir; ++p) if (asal[p]) for (int k{p * 2}; k &lt; sinir; k += p) asal[k] = false;</code> — iç döngü <code>p * p</code>'den başlarsa daha hızlı; <code>long long</code> toplam.</p></details>
+<details><summary>İlk satır</summary><p><code>for (long long k{p * p}; k &lt; sinir; k += p) asal[k] = false;</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>Project Euler, onuncu problem: 142913828922</code></pre>
@@ -117,6 +135,7 @@ at(12) = at(12): sınır dışı!</code></pre>
 <section class="soru" id="II-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-2-I1</span> Başka bir sözcük</h3>
 <p><code>yazi</code>'yi <code>"kelebek kanadi"</code> yerine <code>"algoritma"</code> yapın. Kaç ayrı harf çıkar? Sondaki <code>z</code> ve <code>q</code> satırları ne olur? Çalıştırmadan önce harfleri elle sayın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>a -&gt; 2
@@ -138,6 +157,7 @@ kaç ayrı harf: 9  &lt;- değişmedi</code></pre>
 <section class="soru" id="II-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-2-A1</span> Sözcük sayacı</h3>
 <p>Harf yerine sözcük: girdi bitene kadar sözcük okuyun (<code>string</code>), <code>map&lt;string, int&gt;</code> ile sayın, <code>sözcük -&gt; adet</code> biçiminde yazın. Girdi <code>elma armut elma kiraz armut elma</code>. Çıktının alfabetik gelmesi için hiçbir şey yapmanız gerekmiyor; neden?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: elma armut elma kiraz armut elma</span></figcaption>
 <pre><code>armut -&gt; 2
@@ -149,6 +169,7 @@ kiraz -&gt; 1</code></pre>
 <section class="soru" id="II-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-2-A2</span> Plaka defteri</h3>
 <p>Üç şehrin plakası bir eşlemde: Ankara 6, İstanbul 34, İzmir 35. Girdiden şehir adları okuyun; her biri için <code>şehir: plaka</code> ya da <code>şehir: yok</code> yazın. Girdi <code>İzmir</code> ve <code>Bursa</code>. <code>[]</code> ile <em>okumayın</em>; neden olmadığını bir sonraki alıştırma gösterecek.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: İzmir Bursa</span></figcaption>
 <pre><code>İzmir: 35
@@ -159,6 +180,11 @@ Bursa: yok</code></pre>
 <section class="soru" id="II-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">II-2-Z1</span> Tuzağı kuran program</h3>
 <p>Aşağıdaki program kaç ayrı şehir sorulduğunu saymak istiyor ama yanlış sayıyor: <code>[]</code> ile okuduğu her şehri eşleme ekliyor. Önce olduğu gibi çalıştırıp yanlış sayıyı görün, sonra <code>contains</code> ile düzeltin. Girdi <code>İzmir Bursa Ankara Bursa</code>; doğru yanıt üç şehir sorulmuş, ikisi defterde.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>plaka[sehir]</code> olmayan şehri 0 değerle eşleme ekler; sayım bu yüzden şişiyor.</p></details>
+<details><summary>Yaklaşım</summary><p>Okumak için <code>plaka.contains(sehir)</code> (ya da <code>find</code>); <code>[]</code>'yi yalnız yazarken kullanın. Değişiklikten sonra <code>plaka.size()</code>'ı da yazdırıp farkı görün.</p></details>
+<details><summary>İlk satır</summary><p><code>if (plaka.contains(sehir)) ++bulunan;</code></p></details>
+</div>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// II-2-Z1 · Tuzağı kuran program</span>
@@ -195,6 +221,11 @@ defterin boyu     : 3</code></pre>
 <section class="soru" id="II-2-Z2">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-2-Z2</span> Anagram öbekleri</h3>
 <p>Harfleri aynı olan sözcükler bir öbek: <code>kalem</code>, <code>elmak</code>, <code>emlak</code>. Anahtar, harfleri sıralanmış sözcük (<code>&lt;algorithm&gt;</code> içindeki <code>sort</code>); değer, o anahtara düşen sözcüklerin <code>vector</code>'ü. Kitapçığın &ldquo;bir şeyden bir şey kümesine eşlem&rdquo; dediği yapı. Girdi <code>kalem elmak lame emlak masa sama</code>; her öbek bir satır; satırlar anahtar sırasıyla (eşlem sıralar), öbek içi geliş sırasıyla.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Anagramların ortak anahtarı var: harfleri sıralanmış sözcük.</p></details>
+<details><summary>Yaklaşım</summary><p>Her sözcüğün kopyasını <code>sort(k.begin(), k.end())</code> ile sıralayıp anahtar yapın; <code>obek[anahtar].push_back(sozcuk)</code>. Eşlem anahtarları sıralı tutar.</p></details>
+<details><summary>İlk satır</summary><p><code>string anahtar{sozcuk}; sort(anahtar.begin(), anahtar.end()); obek[anahtar].push_back(sozcuk);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: kalem elmak lame emlak masa sama</span></figcaption>
 <pre><code>aams: masa sama
@@ -206,6 +237,11 @@ aelm: lame</code></pre>
 <section class="soru" id="II-2-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">II-2-K1</span> Çok tanımlı sözlük</h3>
 <p>Kitapçığın birinci alıştırması: <code>map&lt;string, vector&lt;string&gt;&gt;</code> ile bir sözcüğün birden çok anlamı olsun. Girdi komut satırları: <code>ekle sözcük anlam</code> ve <code>ara sözcük</code>. Arama, anlamları virgülle ayırıp yazsın; sözcük yoksa <code>yok</code>. Bir <code>ekle</code> bir de <code>ara</code> işlevi yazın; <code>main</code> yalnız komutları dağıtsın. Sonra kendiniz büyütün: <code>sil</code> komutu, anlam sayısı, en çok anlamlı sözcük.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Bir sözcüğün birden çok anlamı: değer bir yazı değil, yazı dizisi.</p></details>
+<details><summary>Yaklaşım</summary><p><code>map&lt;string, vector&lt;string&gt;&gt;</code>; <code>ekle</code> <code>push_back</code> yapar, <code>ara</code> önce <code>contains</code> ile bakar sonra virgülle yazar. Komutu okuyup <code>if (komut == "ekle")</code> ile dağıtın.</p></details>
+<details><summary>İlk satır</summary><p><code>void ekle(Sozluk&amp; s, const string&amp; sozcuk, const string&amp; anlam) { s[sozcuk].push_back(anlam); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: ekle kalem yazma_aracı ekle kalem tükenmez ara kalem ara defter</span></figcaption>
 <pre><code>kalem: yazma_aracı, tükenmez
@@ -230,6 +266,7 @@ defter: yok</code></pre>
 <section class="soru" id="II-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-3-I1</span> Harf kümesi</h3>
 <p>Program bir yazının harflerini kümeye atıp yazıyor: tekrarlar düşüyor, sıra alfabetik. <code>yazi</code>'yi <code>"programlama"</code> yapın; kaç ayrı harf?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// II-3-I1 · Harf kümesi: yazi -&gt; &quot;programlama&quot;</span>
@@ -259,6 +296,7 @@ defter: yok</code></pre>
 <section class="soru" id="II-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-3-A1</span> Tekrar var mı?</h3>
 <p>Kitapçığın üçüncü alıştırmasının küme sürümü: sayıları okurken kümeye ekleyin; <code>insert</code> bir çift döndürür, ikincisi &ldquo;yeni miydi&rdquo; der. İlk tekrar edeni yazın, yoksa <code>Tekrar yok</code>. Girdi <code>3 1 4 1 5</code>. Öteki iki yöntemi (sıralama, iç içe döngü) Bölüm III'te ölçeceksiniz.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 1 4 1 5</span></figcaption>
 <pre><code>Tekrar eden: 1</code></pre>
@@ -268,6 +306,7 @@ defter: yok</code></pre>
 <section class="soru" id="II-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-3-A2</span> Kesişim, birleşim, fark</h3>
 <p>İki küme okuyun: önce boy, sonra öğeler; iki kere. Üç satır: kesişim, birleşim, birinciden ikincinin farkı. Girdi <code>4</code> / <code>1 4 6 9</code> / <code>3</code> / <code>4 9 10</code>. <code>contains</code> ile döngü yeter; <code>&lt;algorithm&gt;</code>'daki <code>set_intersection</code> sonra.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 1 4 6 9 3 4 9 10</span></figcaption>
 <pre><code>Kesişim: 4 9
@@ -279,6 +318,11 @@ Fark: 1 6</code></pre>
 <section class="soru" id="II-3-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-3-Z1</span> Bölenler eşlemi</h3>
 <p>Kitapçıktaki <code>map&lt;int, set&lt;int&gt;&gt;</code> yapısı: 1'den 12'ye her sayı için bölenlerinin kümesi. Kurduktan sonra iki soru: tam iki böleni olanlar hangileri (asallar), en çok böleni olan hangisi? İkinci soruda eşitlik olursa küçüğü seçin. Çıktı iki satır.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Eşlem kurulu; iki soru iki döngü: kümesinin boyu 2 olanlar, boyu en büyük olan.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (const auto&amp; [n, kume] : bolenler)</code> ile gezin; <code>kume.size() == 2</code> asal demek. En çok için <code>&gt;</code> ile karşılaştırın ki eşitlikte küçük kalsın.</p></details>
+<details><summary>İlk satır</summary><p><code>if (kume.size() &gt; enCok) { enCok = kume.size(); hangisi = n; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>asallar: 2 3 5 7 11
@@ -289,6 +333,11 @@ en çok böleni olan: 12 (6 bölen)</code></pre>
 <section class="soru" id="II-3-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">II-3-K1</span> İkiye bölünür mü?</h3>
 <p>Bir sayı kümesi iki parçaya, toplamları eşit olacak biçimde bölünebilir mi? Depodaki <em>sayı kümesini ikiye bölmek</em> yazısı bu sorunun peşinde. Burada küçük bir başlangıç: en çok 20 sayı; her sayının &ldquo;birinci parçada mı&rdquo; kararını bir bit olarak düşünün, <code>0</code>'dan <code>2ⁿ−1</code>'e bütün desenleri deneyin. Girdi <code>5</code> / <code>3 1 4 2 2</code>; çıktı <code>Evet, 6 ve 6</code> ya da <code>Hayır</code>. Bölüm IV bunu özyinelemeyle yeniden yapacak.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her sayı için iki seçenek; <em>n</em> sayı için 2ⁿ desen; desen bir sayının bitleri.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (int desen{0}; desen &lt; (1 &lt;&lt; n); ++desen)</code>; k'ıncı bit açıksa (<code>desen &amp; (1 &lt;&lt; k)</code>) sayı birinci parçada. İki toplamı karşılaştırın, ilk eşitlikte durun.</p></details>
+<details><summary>İlk satır</summary><p><code>if (desen &amp; (1 &lt;&lt; k)) birinci += d[k]; else ikinci += d[k];</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 1 4 2 2</span></figcaption>
 <pre><code>Evet, 6 ve 6</code></pre>
@@ -312,6 +361,7 @@ en çok böleni olan: 12 (6 bölen)</code></pre>
 <section class="soru" id="II-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-4-I1</span> Küçükten büyüğe</h3>
 <p>Kitapçığın <em>Deneyin</em> kutusu: <code>priority_queue</code>'nun üçüncü tür girdisine <code>greater&lt;int&gt;</code> verin: <code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt;</code>. <code>&lt;vector&gt;</code> ve <code>&lt;functional&gt;</code> başlıkları gerekebilir. Yalnız öncelik satırı değişmeli.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>yığın  : 5 1 4 1 3 
@@ -323,6 +373,7 @@ kuyruk : 3 1 4 1 5
 <section class="soru" id="II-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-4-A1</span> Parantez: tek sayaçla</h3>
 <p>Kitapçığın ikinci alıştırmasının ilk yarısı: yalnız <code>(</code> ve <code>)</code>. Her satır bir yazı; <code>dengeli</code> ya da <code>dengesiz</code> yazın. Yığın gerekmez: bir sayaç, açılınca artır, kapanınca azalt; sıfırın altına inerse ya da sonda sıfır değilse dengesiz. Girdi <code>(()())</code>, <code>(()</code>, <code>)(</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: (()()) (() )(</span></figcaption>
 <pre><code>dengeli
@@ -334,6 +385,7 @@ dengesiz</code></pre>
 <section class="soru" id="II-4-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-4-A2</span> Parantez: üç çeşit, yığınla</h3>
 <p>İkinci yarı: <code>()</code>, <code>[]</code>, <code>{}</code>. Tek sayaç artık yetmez: <code>([)]</code> sayaçla dengeli görünür ama değil. Açılanı yığına atın; kapanan gelince tepedekiyle eşleşiyor mu bakın. Girdi <code>([]{})</code>, <code>([)]</code>, <code>{[}</code>. Sayaç neden yetmedi, bir cümleyle yazın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: ([]{}) ([)] {[}</span></figcaption>
 <pre><code>dengeli
@@ -345,6 +397,11 @@ dengesiz</code></pre>
 <section class="soru" id="II-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">II-4-Z1</span> Acil servis sırası</h3>
 <p>Hastalar numarayla geliyor, her birinin bir aciliyet derecesi var (büyük önce). Aynı derecedekilerde önce gelen önce. <code>priority_queue&lt;pair&lt;int,int&gt;&gt;</code> çiftleri önce birinci, eşitse ikinci üyeye göre sıralar; ikinci üyeyi öyle seçin ki önce gelen kazansın (ipucu: geliş sırasının eksilisi). Girdi <code>5</code>, sonra <code>derece numara</code> çiftleri. Çıktı: numaralar çağrılma sırasıyla, tek satır.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Öncelik sırası en büyük çifti önce verir; eşit derecede önce gelen önce çıkmalı.</p></details>
+<details><summary>Yaklaşım</summary><p>Çiftin ikinci üyesi geliş sırasının eksilisi olsun: daha önce gelen daha büyük (daha az eksi). Numara ayrıca bir eşlemde tutulur ya da üçlü kullanılır.</p></details>
+<details><summary>İlk satır</summary><p><code>sira.push({derece, -k}); numara[k] = no;</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 2 101 5 102 2 103 9 104 5 105</span></figcaption>
 <pre><code>Çağrılma sırası: 104 102 105 101 103</code></pre>
@@ -354,6 +411,11 @@ dengesiz</code></pre>
 <section class="soru" id="II-4-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">II-4-K1</span> Ters Lehçe hesap makinesi</h3>
 <p><code>3 4 + 2 *</code> yazımında işleç sayılardan sonra gelir; parantez gerekmez. Yığınla hesaplanır: sayı gelince yığına, işleç gelince iki sayı çek, işle, sonucu yığına. Girdi bir satır; sonucu yazın. Girdi <code>3 4 + 2 *</code>. Bölme ve çıkarmada sıraya dikkat: önce çekilen sağdaki. Sonra kendiniz büyütün: hatalı girdi, kesirli sayılar, <code>^</code>.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Sayı gelince yığına, işleç gelince iki sayı çekip işle; sonuç tek sayı kalır.</p></details>
+<details><summary>Yaklaşım</summary><p>Sözcüğü okuyun; işleçse <code>b = y.top(); y.pop(); a = y.top(); y.pop();</code> sonra <code>a op b</code> (sıra önemli); değilse <code>stoll</code> ile sayıya çevirip <code>push</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>if (s == "+" or s == "-" or s == "*" or s == "/") { ... } else y.push(stoll(s));</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 + 2 *</span></figcaption>
 <pre><code>Sonuç: 14</code></pre>
@@ -377,6 +439,7 @@ dengesiz</code></pre>
 <section class="soru" id="II-5-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-5-I1</span> Başka bir nokta</h3>
 <p><code>Konum k{3, 4}</code>'ü <code>{6, 8}</code> yapın. Uzaklık neden tam 10 çıkıyor? Kaydırmadan sonraki uzaklığı çalıştırmadan önce yaklaşık tahmin edin.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>(6, 8) başlangıca uzaklığı: 10
@@ -387,6 +450,7 @@ dengesiz</code></pre>
 <section class="soru" id="II-5-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-5-A1</span> Dikdörtgen</h3>
 <p><code>struct Dikdortgen</code>: <code>en</code> ve <code>boy</code>; <code>alan()</code> ve <code>cevre()</code> yöntemleri, ikisi de <code>const</code>. Girdiden <code>en boy</code> çiftleri okuyun, her biri için bir satır. Girdi <code>3 4</code> ve <code>10 2</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 10 2</span></figcaption>
 <pre><code>3x4: alan 12, çevre 14
@@ -397,6 +461,7 @@ dengesiz</code></pre>
 <section class="soru" id="II-5-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-5-A2</span> Konum artı Konum</h3>
 <p><code>Konum</code> için <code>operator+</code> yazın: iki konumun toplamı, bileşenleri toplanmış yeni bir konum. Üye olmayan bir işlev olarak, <code>operator&lt;&lt;</code>'ın yanına. Sonra <code>(3, 4) + (1, 2) = (4, 6)</code> satırını yazdırın. <code>const Konum&amp;</code> almanın nedenini II.7'de göreceksiniz.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>(3, 4) + (1, 2) = (4, 6)</code></pre>
@@ -406,6 +471,11 @@ dengesiz</code></pre>
 <section class="soru" id="II-5-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-5-Z1</span> Kendi Kesir türünüz</h3>
 <p>Kitapçığın dördüncü alıştırması. Pay ve payda; yapıcı kesri sadeleştirsin (I-4-Z1'deki <code>ebob</code>); <code>+</code>, <code>*</code> ve <code>&lt;&lt;</code>. İki satır yazdırın; ikincisi <code>2/4</code> ile <code>3/6</code>'dan kurulsa da çıktıda <code>1/2 * 1/2 = 1/4</code> görünmeli, çünkü yapıcı daha baştan sadeleştirir. Yapıcı sözdizimi: <code>Kesir(int p, int q) : pay{p}, payda{q} { ... }</code>. Payda sıfır gelirse ne yapacağınızı şimdilik yorum satırına yazın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yapıcı kesri en baştan sadeleştirir; sonra <code>+</code>, <code>*</code> ve <code>&lt;&lt;</code> olağan tanımlar.</p></details>
+<details><summary>Yaklaşım</summary><p>Yapıcıda <code>ebob(pay, payda)</code> ile ikisini de bölün; <code>operator+</code> yeni bir <code>Kesir</code> döndürsün (yapıcı yine sadeleştirir). Payda eksi gelirse işareti paya taşımayı düşünün.</p></details>
+<details><summary>İlk satır</summary><p><code>Kesir operator+(const Kesir&amp; a, const Kesir&amp; b) { return {a.pay * b.payda + b.pay * a.payda, a.payda * b.payda}; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1/2 + 1/3 = 5/6
@@ -416,6 +486,11 @@ dengesiz</code></pre>
 <section class="soru" id="II-5-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">II-5-K1</span> Küçük robot <span class="sure">~bir hafta</span></h3>
 <p>Kitapçığın <code>enum class</code>'ı iş başında. Bir robot <code>(0, 0)</code>'da, kuzeye bakıyor. Komut dizisi okuyun: <code>I</code> bir adım ileri, <code>D</code> sağa dön. Sonunda konumunu ve yönünü yazın. <code>enum class Yon { Kuzey, Dogu, Guney, Bati }</code>; sağa dönmek bir sonraki yöne geçmek (Batı'dan sonra Kuzey). Girdi <code>IIDIDDI</code>. Sonra büyütün: <code>S</code> sola dön, <code>G</code> geri, izlediği yolu çizdirin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Robotun durumu üç şey: x, y ve yön; her komut bunlardan birini değiştirir.</p></details>
+<details><summary>Yaklaşım</summary><p><code>enum class</code> değerini <code>int</code>'e çevirip bir artırıp 4'e göre kalan alarak dönün: <code>Yon((int(yon) + 1) % 4)</code>. İleri için yöne göre <code>switch</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>void sagaDon() { yon = Yon((int(yon) + 1) % 4); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: IIDIDDI</span></figcaption>
 <pre><code>Konum (0, 2), yön Batı</code></pre>
@@ -439,6 +514,7 @@ dengesiz</code></pre>
 <section class="soru" id="II-6-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-6-I1</span> Yazılar da karşılaştırılır</h3>
 <p><code>enBuyuk('a', 'z')</code> satırını <code>enBuyuk(string("elma"), string("armut"))</code> yapın. Hangisi büyük çıkıyor, neden? Yorumdaki <code>ekle("ke", "lebek")</code> satırını da bir kere açıp derleyicinin ne dediğini okuyun, sonra geri kapatın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>7
@@ -451,6 +527,7 @@ elma</code></pre>
 <section class="soru" id="II-6-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-6-A1</span> Her türden toplam</h3>
 <p><code>template &lt;typename T&gt; T toplam(const vector&lt;T&gt;&amp; d)</code>: öğeleri toplayıp döndürsün. Bir <code>vector&lt;int&gt;{1,2,3,4,5}</code> ve bir <code>vector&lt;double&gt;{1.5, 2.5, 3.5}</code> ile çağırın. Toplamı hangi değerle başlatacaksınız: <code>0</code> mı, <code>T{}</code> mi? İkisini de deneyin.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>15
@@ -461,6 +538,11 @@ elma</code></pre>
 <section class="soru" id="II-6-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-6-Z1</span> Kutu ve Konum</h3>
 <p>Kitapçığın <code>Kutu&lt;X&gt;</code> tür kalıbını yazın; sonra <code>Kutu&lt;int&gt; k1{42}</code> ve kendi <code>Konum</code> türünüzle <code>Kutu&lt;Konum&gt; k2{{3, 4}}</code>. İkisinin <code>al()</code> çıktısını yazdırın. <code>Konum</code> için <code>operator&lt;&lt;</code> gerekiyor; II-5-A2'den alın. Bir de takma ad: <code>template &lt;typename T&gt; using Dizi = vector&lt;T&gt;;</code> deyip <code>Dizi&lt;Kutu&lt;int&gt;&gt;</code> kurabiliyor musunuz?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Tek bir değeri saran kalıp tür: içinde <code>X</code> türünde bir alan ve onu veren <code>al()</code>.</p></details>
+<details><summary>Yaklaşım</summary><p><code>template &lt;typename X&gt; struct Kutu { X icerik; X al() const { return icerik; } };</code> — <code>Kutu&lt;Konum&gt; k2{{3, 4}}</code> iç süslü parantezle Konum'u kurar.</p></details>
+<details><summary>İlk satır</summary><p><code>template &lt;typename X&gt; struct Kutu { X icerik; ... };</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>42
@@ -471,6 +553,11 @@ elma</code></pre>
 <section class="soru" id="II-6-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">II-6-K1</span> Kendi yığınınız</h3>
 <p><code>std::stack</code>'i siz yazın: <code>template &lt;typename T&gt; class Yigin</code>, içinde bir <code>vector&lt;T&gt;</code>; <code>koy</code>, <code>cikar</code>, <code>tepe</code>, <code>bosMu</code>. Bir <code>Yigin&lt;int&gt;</code>'e 3, 1, 4 koyup boşalana kadar yazdırın; bir <code>Yigin&lt;string&gt;</code>'e <code>bir</code>, <code>iki</code> koyup aynısını yapın. Sonra II-4-A2'deki parantez denetimini kendi yığınınızla çalıştırın: değişen tek şey tür adı olmalı. Depodaki <code>generic-containers</code> dizini aynı fikrin daha büyük hâli.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yığın aslında sonundan eklenip çıkarılan bir <code>vector</code>.</p></details>
+<details><summary>Yaklaşım</summary><p><code>koy</code> → <code>push_back</code>, <code>cikar</code> → <code>pop_back</code>, <code>tepe</code> → <code>back()</code>, <code>bosMu</code> → <code>empty()</code>. Kalıp parametresi <code>T</code> her yere.</p></details>
+<details><summary>İlk satır</summary><p><code>template &lt;typename T&gt; class Yigin { vector&lt;T&gt; v; public: void koy(const T&amp; x) { v.push_back(x); } ... };</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>4 1 3 
@@ -495,6 +582,7 @@ iki bir </code></pre>
 <section class="soru" id="II-7-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">II-7-I1</span> Kopyayı takma ada çevirin</h3>
 <p><code>ekleK</code>'nin girdisini <code>Sayi k</code> yerine <code>Sayi&amp; k</code> yapın; başka hiçbir şeye dokunmayın. Üç satır nasıl değişir? Tek bir <code>&amp;</code> imgesiyle &ldquo;etkisiz&rdquo; işlev neden etkili oldu?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>kopyadan sonra   : 20
@@ -506,6 +594,7 @@ takma addan sonra: 40</code></pre>
 <section class="soru" id="II-7-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-7-A1</span> Değiş tokuş</h3>
 <p><code>void degisTokus(int&amp; a, int&amp; b)</code>: iki değişkenin değerlerini takas etsin. Üçüncü bir değişken gerekir. Girdi <code>3 7</code>, çıktı <code>7 3</code>. Aynı işlevi <code>int a, int b</code> ile yazıp neden işe yaramadığını görün; <code>std::swap</code>'ı sonra söyleyeceğiz.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 7</span></figcaption>
 <pre><code>7 3</code></pre>
@@ -515,6 +604,7 @@ takma addan sonra: 40</code></pre>
 <section class="soru" id="II-7-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-7-A2</span> Kopyalamayın, değiştirmeyin</h3>
 <p>Kitapçığın <em>Püf noktası</em>: iki işlev yazın. <code>int toplam(const vector&lt;int&gt;&amp; d)</code> kabı kopyalamadan toplasın; <code>void ikiyeKatla(vector&lt;int&gt;&amp; d)</code> her öğeyi yerinde iki katına çıkarsın. Dizi <code>{3, 1, 4, 1, 5}</code>; toplam, katlanmış dizi, yeni toplam: üç satır. <code>toplam</code> içinde bir öğeyi değiştirmeyi deneyin; derleyici ne der?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>toplam 14
@@ -526,6 +616,11 @@ toplam 28</code></pre>
 <section class="soru" id="II-7-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-7-Z1</span> Adresle yürümek</h3>
 <p>Temel dizide adres aritmetiği: <code>int* p = dizi;</code> ile başlayıp <code>p != dizi + n</code> olana kadar <code>++p</code>; her adımda <code>*p</code>'yi yazın. Sonra <code>*(dizi + 3)</code> ile <code>dizi[3]</code>'ün aynı şey olduğunu gösterin. <code>++p</code> adresi kaç bayt ilerletiyor? Kitapçığın <code>10-dizi</code> çıktısındaki &ldquo;ikincininki&rdquo; satırıyla bağlayın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Adres bir konum; <code>++p</code> bir sonraki öğeye, yani <code>sizeof(int)</code> bayt ileri.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (int* p{dizi}; p != dizi + n; ++p) cout &lt;&lt; *p;</code> — adresleri <code>cout &lt;&lt; p</code> ile yazdırıp iki ardışık adresin farkına bakın.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int* p{dizi}; p != dizi + n; ++p) cout &lt;&lt; *p &lt;&lt; " ";</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>3 1 4 1 5 9 2 6 
@@ -535,5 +630,66 @@ dördüncü öğe: 1 = 1</code></pre>
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">II.8</div>
+  <div class="govde">
+    <h2>Geri dönüş: taşma ve tahmin oyunu, kaplarla</h2>
+    <p>Unutma eğrisi tam burada çalışır: I. bölümde öğrendiğiniz iki şey, bu bölümün kaplarıyla bir daha. Kısa iki soru; ikisi de yirmi dakikalık.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7#her-turun-bir-siniri-var">kitapçık I.1: Her türün bir sınırı var</a> <a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7#ilk-oyununuz">kitapçık I.3: İlk oyununuz</a> <a href="https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f#eslem-en-cok-isinize-yarayacak-kap">kitapçık II.2: Eşlem</a></p>
+    </div>
+
+<section class="soru" id="II-8-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-8-A1</span> Toplamın taştığı yer</h3>
+<p>I. bölümün taşması, bu sefer bir dizide. Girdi: <em>n</em>, sonra <em>n</em> tane artı tam sayı (her biri <code>int</code>'e sığar). Sayıları baştan toplarken ara toplam ilk kez <code>2147483647</code>'yi hangi sayıda aşıyor? Toplamı <code>long long</code>'da tutun; <code>int</code>'te tutsaydınız ne olurdu, bir yorum satırıyla yazın. Çıktı: <code>toplam 3. sayıda int'i aştı</code> ve son satırda gerçek toplam; hiç aşmıyorsa <code>taşma yok</code>.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 2000000000 100000000 50000000 1 1</span></figcaption>
+<pre><code>toplam 3. sayıda int&#x27;i aştı
+toplam: 2150000002</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/II-8-A1"><code>alistirma/kod/II-8-A1/</code></a></p>
+</section>
+<section class="soru" id="II-8-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-8-A2</span> Skor tablosu</h3>
+<p>Tahmin oyununun oyuncuları ve kaç tahminde bildikleri satır satır geliyor: <code>ada 5</code>, <code>can 7</code>&hellip; Girdi bitene kadar okuyun (<code>while (cin &gt;&gt; ad &gt;&gt; sayi)</code>), her oyuncunun <strong>en iyi</strong> (en küçük) sonucunu bir <code>map&lt;string,int&gt;</code>'te tutun ve sonunda tabloyu yazdırın: <code>ada: en iyi 4</code>. Eşlem adları kendiliğinden sıraladı, siz bir şey yapmadınız; sırayı tahmin sayısına göre vermek isteseydiniz ne yapardınız?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: ada 5 can 7 ada 4 ece 6 can 9</span></figcaption>
+<pre><code>ada: en iyi 4
+can: en iyi 7
+ece: en iyi 6</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/II-8-A2"><code>alistirma/kod/II-8-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#II-2-Z2"><code>II-2-Z2</code> Anagram öbekleri</a> <a href="#II-4-Z1"><code>II-4-Z1</code> Acil servis sırası</a> <a href="#II-3-K1"><code>II-3-K1</code> İkiye bölünür mü?</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

@@ -22,6 +22,7 @@
 <section class="soru" id="IV-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-1-I1</span> Dört disk</h3>
 <p><code>n</code>'i 3 yerine 4 yapın. Kaç adım? Çalıştırmadan önce <code>2ⁿ − 1</code>'den hesaplayın; sonra çıktıda 4. diskin yalnız bir kere, 1. diskin sekiz kere taşındığını sayın. Neden?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1) 1. diski 1 -&gt; 2
@@ -46,6 +47,7 @@ toplam 15 adım (2^4 - 1 = 15)</code></pre>
 <section class="soru" id="IV-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-1-A1</span> Faktöriyel ve toplam</h3>
 <p>İki özyinelemeli işlev: <code>faktoriyel(n)</code> ve <code>toplam(n)</code> (1'den n'e). İkisinde de önce taban durumunu yazın, sonra adımı. Girdi <code>10</code>. Döngüyle de yazılır; burada amaç özyinelemeli tanımı koda birebir çevirmek: <code>n! = n · (n−1)!</code>, <code>0! = 1</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 10</span></figcaption>
 <pre><code>10! = 3628800
@@ -56,6 +58,7 @@ toplam 15 adım (2^4 - 1 = 15)</code></pre>
 <section class="soru" id="IV-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-1-A2</span> Öklid, bu sefer özyinelemeli</h3>
 <p>I-4-Z1'deki döngülü <code>ebob</code>'u özyinelemeli yazın: <code>ebob(a, 0) = a</code>, <code>ebob(a, b) = ebob(b, a % b)</code>. Her çağrıda ekrana <code>ebob(a, b)</code> yazın ki zincir görünsün; en sonda sonuç. Girdi <code>1071 462</code>. Döngülü sürümle yan yana koyun: hangisi tanıma daha yakın?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1071 462</span></figcaption>
 <pre><code>ebob(1071, 462) -&gt; ebob(462, 147) -&gt; ebob(147, 21) -&gt; ebob(21, 0) = 21</code></pre>
@@ -65,6 +68,11 @@ toplam 15 adım (2^4 - 1 = 15)</code></pre>
 <section class="soru" id="IV-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-1-Z1</span> Hanoi&#x27;yi saymak</h3>
 <p>Taşımaları yazdırmak yerine sayın: her diskin kaç kere taşındığını bir dizide tutun. Girdi <code>5</code>; her disk için bir satır, sonda toplam. Çıktıya bakınca her diskin bir üstündekinin yarısı kadar taşındığını göreceksiniz; neden? Buradan <code>2ⁿ − 1</code>'i türetin. Sonra <code>n = 64</code> için toplam adımı <code>long long</code> ile hesaplayın (taşımadan, formülle) ve saniyede bir hamleyle kaç yıl sürdüğünü yazın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>tasi</code>'nin ortasındaki &ldquo;en büyüğü hedefe&rdquo; satırı bir taşımadır; onu sayın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>cout</code> satırının yerine <code>++kacKere[n];</code>; toplamı dizinin toplamı olarak alın. 64 için formül: <code>(1ULL &lt;&lt; 64) - 1</code> taşar; <code>numeric_limits&lt;unsigned long long&gt;::max()</code> tam odur.</p></details>
+<details><summary>İlk satır</summary><p><code>void tasi(int n, ...) { if (n == 0) return; tasi(n-1, ...); ++kacKere[n]; tasi(n-1, ...); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5</span></figcaption>
 <pre><code>1. disk: 16 kere
@@ -80,6 +88,11 @@ toplam 31 adım
 <section class="soru" id="IV-1-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-1-K1</span> Hanoi hakemi</h3>
 <p>Kitapçığın <em>Deneyin</em> kutusu: <code>tasi()</code>'nin üç satırının sırasını değiştirince çıktı geçerli bir çözüm mü? Göz yerine program karar versin. Üç çubuğu üç <code>stack&lt;int&gt;</code> ile canlandırın; her taşımada kaynak boş mu, büyük disk küçüğün üstüne mi geliyor diye bakın, bozuk hamlede durup <code>hata: k. adım</code> yazın. Girdi <code>4</code>; doğru sırayla <code>15 adım, hepsi geçerli</code>. Sonra satırların sırasını değiştirip hakemin ne dediğine bakın. Daha ileri: hakem, sonda bütün disklerin 3. çubukta olduğunu da denetlesin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Hakem her hamlede iki kural denetler: kaynak boş mu, büyük küçüğün üstüne mi geliyor.</p></details>
+<details><summary>Yaklaşım</summary><p><code>hamle(k, h)</code> içinde: <code>cubuk[k].empty()</code> → hata; <code>!cubuk[h].empty() and cubuk[h].top() &lt; cubuk[k].top()</code> → hata; değilse diski taşıyın. Başta diskleri 1. çubuğa büyükten küçüğe koyun.</p></details>
+<details><summary>İlk satır</summary><p><code>if (cubuk[kaynak].empty() or (not cubuk[hedef].empty() and cubuk[hedef].top() &lt; cubuk[kaynak].top())) { hata = true; return; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4</span></figcaption>
 <pre><code>15 adım, hepsi geçerli</code></pre>
@@ -103,6 +116,7 @@ toplam 31 adım
 <section class="soru" id="IV-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-2-I1</span> Süreler cerr&#x27;e, çağrılar cout&#x27;a</h3>
 <p><code>30-fib.cpp</code> süreleri de yazdığı için sınanamıyor. Çağrı sayıları ve sonuç <code>cout</code>'ta kalsın, mikrosaniyeler <code>cerr</code>'e gitsin (III-5-I1'deki gibi). <code>fibYavas(40)</code> birkaç saniye sürer; bekleyin, kitapçığın tablosundaki 331 160 281 çağrıyı kendi gözünüzle görün.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>fib(40) = 102334155
@@ -115,6 +129,7 @@ kontrol: aynı sonuç</code></pre>
 <section class="soru" id="IV-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-2-A1</span> Merdiven</h3>
 <p>Bir merdiveni her adımda bir ya da iki basamak çıkarak kaç farklı biçimde çıkabilirsiniz? <code>yol(n) = yol(n−1) + yol(n−2)</code>; taban durumlarını siz bulun. Önce memoizasyonsuz yazıp <code>n = 50</code>'nin bitmediğini görün; sonra bir <code>vector&lt;long long&gt;</code> bellekle. Üç satır: n = 10, 30, 50.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>10 basamak: 89
@@ -126,6 +141,7 @@ kontrol: aynı sonuç</code></pre>
 <section class="soru" id="IV-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-2-A2</span> Pascal üçgeni</h3>
 <p><code>C(n, k) = C(n−1, k−1) + C(n−1, k)</code>, kenarlarda 1. Bu tanımı özyinelemeli yazın; bellek olarak <code>map&lt;pair&lt;int,int&gt;, long long&gt;</code>. <code>C(30, 15)</code> ve <code>C(60, 30)</code>. Belleksiz hâliyle ikincisini de deneyin: kaç çağrı olur? (Hesaplayın, çalıştırmayın: <code>C(60, 30)</code>'un kendisi kadar, yani 10¹⁷.)</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>C(30, 15) = 155117520
@@ -136,6 +152,11 @@ C(60, 30) = 118264581564861424</code></pre>
 <section class="soru" id="IV-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-2-Z1</span> En uzun Collatz zinciri</h3>
 <p><a href="https://projecteuler.net/problem=14">Project Euler 14</a>: bir milyonun altında en uzun Collatz zincirini başlatan sayı. I-3-Z2'deki sayacı özyinelemeli yazın ve belleyin: <code>terim(n) = 1 + terim(sonraki)</code>, <code>terim(1) = 1</code> (Project Euler zincirin terim sayısını sayar, 27 için 112). Bellek bir <code>vector&lt;int&gt;</code> olsun ama dikkat: zincir bir milyonu aşan sayılardan geçer; onları bellemeyin, yalnız hesaplayın. Çıktı sayı ve terim sayısı.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Terim sayısı özyinelemeli: <code>terim(n) = 1 + terim(sonraki)</code>; bir milyonun altındakileri belleyin.</p></details>
+<details><summary>Yaklaşım</summary><p><code>if (n &lt; SINIR and bellek[n]) return bellek[n];</code> başta; sonucu yalnız <code>n &lt; SINIR</code> iken kaydedin. Sonraki değer <code>long long</code>; en uzun için 1..999999 döngüsü.</p></details>
+<details><summary>İlk satır</summary><p><code>int t = 1 + terim(n % 2 == 0 ? n / 2 : 3 * n + 1); if (n &lt; SINIR) bellek[n] = t; return t;</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>Project Euler, on dördüncü problem: 837799 (525 terim)</code></pre>
@@ -159,6 +180,7 @@ C(60, 30) = 118264581564861424</code></pre>
 <section class="soru" id="IV-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-3-I1</span> Dört öğe</h3>
 <p><code>kume</code>'yi <code>{3, 1, 2}</code> yerine <code>{4, 2, 7, 1}</code> yapın. Kaç altküme? İki yöntemin çıktısını yan yana koyun: sıraları aynı mı? Geri dönüşlü sürümde ilk yazılan altküme neden boş küme?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>-- geri dönüşlü arama --
@@ -202,6 +224,7 @@ C(60, 30) = 118264581564861424</code></pre>
 <section class="soru" id="IV-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-3-A1</span> Toplamı tutan altkümeler</h3>
 <p>Girdi: n, n sayı, bir hedef toplam. Toplamı hedefe eşit olan altkümeleri kitapçığın biçimiyle (<code>{ 3 2 }</code>) yazın, sonda kaç tane olduğunu. Girdi <code>4</code> / <code>3 1 2 4</code> / <code>5</code>. Kalıp <code>31-altkume</code>'nin aynısı; yalnız <code>yaz()</code> çağrısının önüne bir koşul geliyor. <code>secilen</code>'in toplamını her seferinde yeniden hesaplamak yerine bir sayaçla taşıyabilir misiniz?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 1 2 4 5</span></figcaption>
 <pre><code>{ 1 4 }
@@ -213,6 +236,7 @@ C(60, 30) = 118264581564861424</code></pre>
 <section class="soru" id="IV-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-3-A2</span> Her boydan kaç tane?</h3>
 <p>n öğeli kümenin her boydan kaç altkümesi var? Yazmak yerine sayın: <code>sayac[secilen.size()]</code>. Girdi <code>5</code>; her boy için bir satır, sonda toplam. Sayılar size tanıdık gelecek (IV-2-A2). Toplamın <code>2ⁿ</code> olduğunu bir cümleyle açıklayın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5</span></figcaption>
 <pre><code>boy 0: 1
@@ -228,6 +252,11 @@ toplam 32</code></pre>
 <section class="soru" id="IV-3-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">IV-3-Z1</span> Elmaları bölmek</h3>
 <p><a href="https://cses.fi/problemset/task/1623">CSES Elma paylaşımı</a> (<em>Apple Division</em>), küçük hâli: n elmayı iki gruba ayırın, ağırlık farkı en az olsun. Her elma için &ldquo;birinci gruba mı&rdquo; kararı; taban durumunda farkı hesaplayıp en küçüğü güncelleyin. Girdi <code>5</code> / <code>3 2 7 4 1</code>. Sonra aynısını bitlerle (II-3-K1) yazıp iki sonucu karşılaştırın. <code>n ≤ 20</code>: kaba kural ne diyor?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her elma iki gruptan birine; bütün bölüşmeler 2ⁿ dal; tabanda farkı ölçün.</p></details>
+<details><summary>Yaklaşım</summary><p><code>ara(k, birinci, ikinci)</code>: taban <code>k == elma.size()</code>'da <code>abs(birinci - ikinci)</code> ile <code>enKucuk</code>'ü güncelleyin; adımda iki çağrı. İlk değer için <code>-1</code> yerine çok büyük bir sayı daha rahat.</p></details>
+<details><summary>İlk satır</summary><p><code>ara(k + 1, birinci + elma[k], ikinci); ara(k + 1, birinci, ikinci + elma[k]);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 2 7 4 1</span></figcaption>
 <pre><code>En küçük fark: 1</code></pre>
@@ -237,6 +266,11 @@ toplam 32</code></pre>
 <section class="soru" id="IV-3-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-3-K1</span> Elma paylaşımı, tam boy</h3>
 <p>Aynı soru, CSES'in sınırlarında: <code>n = 20</code>, ağırlıklar 10⁹'a kadar. Girdi dosyası hazır. 2²⁰ ≈ bir milyon dal; kaba kurala göre saniyenin altı, ölçün. Sonra CSES'e gönderin, yeşil tik alın. Bir adım ötesi: ilk elmayı hep birinci gruba koyarak dalların yarısını atabilirsiniz; neden sonuç değişmez? Bu bir budama mı, simetri mi?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı arama, yalnız sayılar büyük: toplam <code>long long</code>.</p></details>
+<details><summary>Yaklaşım</summary><p>IV-3-Z1'in kodu olduğu gibi; toplamları <code>long long</code> yapın. Simetri için ilk elmayı hep birinci gruba koyun: <code>ara(1, elma[0], 0)</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>ara(1, elma[0], 0);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 20 829348952 658697903 488046854 317395805 146744756 976093707 805442658 634791609 464140560 293489511 122838462 952187413 781536364 610885315 440234266 269583217 98932168 928281119 757630070 586979021</span></figcaption>
 <pre><code>En küçük fark: 17292306</code></pre>
@@ -260,6 +294,7 @@ toplam 32</code></pre>
 <section class="soru" id="IV-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-4-I1</span> İzlemeyi kapatın, dörde çıkın</h3>
 <p><code>izle</code>'yi <code>false</code>, <code>N</code>'i 4 yapın. Kaç permütasyon? Önce <code>N = 4</code> ile izlemeyi açık bırakıp çıktıyı bir kere okuyun: <code>+</code> işaretleri derinlik; geri dönüşler nerede?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>      1. permütasyon: 0123
@@ -292,6 +327,7 @@ toplam 32</code></pre>
 <section class="soru" id="IV-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-4-A1</span> Harflerin sırası</h3>
 <p>Sayılar yerine bir sözcüğün harfleri: girdiden sözcüğü okuyun, bütün dizilişlerini yazın, sonda kaç tane. Girdi <code>kedi</code>. Kalıp aynı: <code>eklendi</code> dizisi ve bir <code>string</code> biriktirici. Harf tekrar ederse (<code>anne</code>) ne olur? Deneyin; çözümü IV-4-A2'de.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: kedi</span></figcaption>
 <pre><code>kedi
@@ -325,6 +361,7 @@ idek
 <section class="soru" id="IV-4-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-4-A2</span> Hazırıyla: next_permutation</h3>
 <p>Kitapçığın püf noktası: <code>sort</code> edip <code>do … while (next_permutation(...))</code>. Aynı girdiyle (<code>kedi</code>) dizilişleri yazın; IV-4-A1'in çıktısıyla karşılaştırın: sıra farklı mı, sayı aynı mı? Sonra <code>anne</code> ile deneyin: bu sefer tekrarlı harfleri kendiliğinden tek sayar. Neden?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: kedi</span></figcaption>
 <pre><code>deik
@@ -358,6 +395,11 @@ kied
 <section class="soru" id="IV-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-4-Z1</span> Güzel permütasyon</h3>
 <p><a href="https://cses.fi/problemset/task/1070/">CSES 1070</a>: 1..n'in öyle bir dizilişi ki komşu sayıların farkı hiç 1 olmasın. Önce <code>n = 5</code> için bütün dizilişleri üretip ilk uygun olanı yazın. Sonra kitapçığın asıl sorusu: üretmeden, doğrudan kurun &mdash; önce çiftler sonra tekler neden işe yarar? Hangi n'lerde hiç çözüm yok? Girdi <code>7</code>; çıktı iki satır: üretimle bulunan (sözlük sırasında ilk uygun olan; n ≤ 8 için) ve doğrudan kurulan. İkisi farklı; ikisi de doğru.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki yol: bütün dizilişleri deneyip ilk uygun olanı bulmak, ya da çiftleri sonra tekleri yazmak.</p></details>
+<details><summary>Yaklaşım</summary><p>Üretim: <code>vector&lt;int&gt; p</code> 1..n, <code>do { if (guzelMi(p)) break; } while (next_permutation(...))</code>. Doğrudan: n = 1 için 1, n = 2 ve 3 için çözüm yok, n ≥ 4 için 2 4 6 … sonra 1 3 5 ….</p></details>
+<details><summary>İlk satır</summary><p><code>bool guzelMi(const vector&lt;int&gt;&amp; p) { for (size_t k{1}; k &lt; p.size(); ++k) if (abs(p[k] - p[k-1]) == 1) return false; return true; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7</span></figcaption>
 <pre><code>üretimle: 1 3 5 2 6 4 7
@@ -368,6 +410,11 @@ doğrudan: 2 4 6 1 3 5 7</code></pre>
 <section class="soru" id="IV-4-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-4-K1</span> Gezgin satıcı, altı şehir <span class="sure">~2 saat</span></h3>
 <p>Altı şehir, aralarındaki uzaklıklar bir tabloda (girdi). 0'dan başlayıp hepsini bir kere dolaşıp 0'a dönen en kısa tur. Öteki beş şehrin bütün dizilişleri: 120 tur, her birinin uzunluğu. En kısasını ve uzunluğunu yazın. Sonra düşünün: 15 şehirde kaç tur? 20'de? Kaba kural ne diyor; bu sorunun neden &ldquo;zor&rdquo; sayıldığını bir cümleyle yazın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>0 sabit; öteki beş şehrin her dizilişi bir tur; 120 tur, en kısası.</p></details>
+<details><summary>Yaklaşım</summary><p><code>vector&lt;int&gt; sira{1, 2, 3, 4, 5}</code>; <code>do … while (next_permutation)</code>; her turda <code>0→sira[0]→…→sira[4]→0</code> uzunluğunu toplayın.</p></details>
+<details><summary>İlk satır</summary><p><code>int uzunluk{u[0][sira[0]]}; for (int k{1}; k &lt; n - 1; ++k) uzunluk += u[sira[k-1]][sira[k]]; uzunluk += u[sira[n-2]][0];</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 0 7 9 4 8 6 7 0 3 5 9 8 9 3 0 6 2 7 4 5 6 0 5 3 8 9 2 5 0 4 6 8 7 3 4 0</span></figcaption>
 <pre><code>En kısa tur: 0 1 2 4 5 3 0, uzunluk 23</code></pre>
@@ -391,6 +438,7 @@ doğrudan: 2 4 6 1 3 5 7</code></pre>
 <section class="soru" id="IV-5-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-5-I1</span> Altıya altı</h3>
 <p><code>N</code>'i 6 yapın. Kaç çözüm? Kitapçığın tablosuyla karşılaştırın; 5×5'ten az çıkmasına şaşırın. <code>capraz1</code> ve <code>capraz2</code> dizilerinin boyu neden <code>2N−1</code>?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>6 vezir bulmacasının çözüm sayısı: 4</code></pre>
@@ -400,6 +448,7 @@ doğrudan: 2 4 6 1 3 5 7</code></pre>
 <section class="soru" id="IV-5-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-5-A1</span> Tahtaları çizin</h3>
 <p>Kitapçığın ikinci alıştırması: saymak yerine çizin. Her satırın vezirinin sütununu bir dizide tutun (<code>yer[satir] = s</code>); çözüm bulununca tahtayı <code>Q</code> ve <code>.</code> ile basın. Yalnız ilk üç çözümü yazın (sonra sayın). Girdi <code>8</code>. İlk üçüne bakın: birbirlerinin aynadaki hâli mi?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 8</span></figcaption>
 <pre><code>Q.......
@@ -436,6 +485,11 @@ Q.......
 <section class="soru" id="IV-5-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-5-Z1</span> Tabloyu doğrulayın</h3>
 <p>Kitapçığın tablosu 4×4'ten 8×8'e; siz 4'ten 9'a kadar her tahta için çözüm sayısını tek programda yazın. <code>N</code> artık sabit değil; dizileri her <code>N</code> için yeniden kurun (<code>assign</code>). 9×9'da kaç çözüm, kaç saniye? 10, 11, 12'yi de deneyin ve süreleri <code>cerr</code>'e yazın: her artışta süre kaça katlanıyor?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı program, N dışarıdan: dizileri her N için yeniden boyutlandırın.</p></details>
+<details><summary>Yaklaşım</summary><p>Döngüde <code>sutun.assign(N, false); capraz1.assign(2*N-1, false); capraz2.assign(2*N-1, false); cozum = 0; koy(0);</code>. Süre için <code>chrono</code>, <code>cerr</code>'e.</p></details>
+<details><summary>İlk satır</summary><p><code>for (N = 4; N &lt;= 9; ++N) { sutun.assign(N, false); ... koy(0); cout &lt;&lt; N &lt;&lt; "x" &lt;&lt; N &lt;&lt; ": " &lt;&lt; cozum &lt;&lt; endl; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>4x4: 2
@@ -450,6 +504,11 @@ Q.......
 <section class="soru" id="IV-5-Z2">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">IV-5-Z2</span> Erken mi, geç mi?</h3>
 <p>İki sayım: kitapçığınki her veziri koymadan önce denetliyor (<em>erken</em>); öteki her satıra rastgele bir vezir koyup ancak tahta dolunca denetliyor (<em>geç</em>). İkisi de doğru sayar; <code>koy()</code>'un kaç kere çağrıldığını sayın. <code>N = 6</code> için iki çağrı sayısını ve çözüm sayısını yazın. Geç denetim kaç kat fazla iş yapıyor? Bu, &ldquo;uygun mu&rdquo; koşulunu döngünün içine koymanın değeri; IV.6'daki budamanın ilk örneği.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki sayım: biri koymadan önce denetler, öteki hepsini koyup sonda bakar.</p></details>
+<details><summary>Yaklaşım</summary><p><code>erken(satir)</code>: döngüde <code>if (not uygun(satir, s)) continue;</code>. <code>gec(satir)</code>: koşulsuz koy, tabanda bütün satırları <code>uygun</code> ile denetle. İkisinde de girişte <code>++cagri</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>void gec(int satir) { ++cagri; if (satir == N) { if (hepsiUygun()) ++cozum; return; } for (int s{0}; s &lt; N; ++s) { yer[satir] = s; gec(satir + 1); } }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>erken: 4 çözüm, 153 çağrı
@@ -460,6 +519,11 @@ geç: 4 çözüm, 55987 çağrı</code></pre>
 <section class="soru" id="IV-5-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-5-K1</span> Sudoku <span class="sure">~3 saat</span></h3>
 <p>Aynı kalıp, 81 kare: boş kareyi bul, 1'den 9'a dene, satırda-sütunda-kutuda yoksa koy, derine in, olmadıysa geri al. Girdi 9 satır, boşlar <code>0</code>. Çözülmüş tahtayı yazın. Önce <code>uygun(satir, sutun, rakam)</code> işlevini yazın ve tek başına sınayın; kutu numarası <code>(satir/3)*3 + sutun/3</code>. Kaç çağrıda çözüldü? Zor bir bulmaca bulup onu da deneyin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Sekiz vezirin aynısı, yalnız seçimler 1..9 ve &ldquo;uygun&rdquo; üç denetim.</p></details>
+<details><summary>Yaklaşım</summary><p><code>uygun</code>: satırda, sütunda ve <code>(r/3)*3, (c/3)*3</code> köşeli 3×3 kutuda rakam var mı. <code>coz()</code> ilk <code>'0'</code> kareyi bulsun; yoksa <code>true</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>for (char r{'1'}; r &lt;= '9'; ++r) if (uygun(i, j, r)) { t[i][j] = r; if (coz()) return true; t[i][j] = '0'; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079</span></figcaption>
 <pre><code>534678912
@@ -491,6 +555,7 @@ geç: 4 çözüm, 55987 çağrı</code></pre>
 <section class="soru" id="IV-6-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">IV-6-I1</span> Tabloyu üretin</h3>
 <p>Kitapçığın karmaşıklık tablosunu program yazdırsın: n = 20, 1000, 10⁶ için <code>log₂n</code>, <code>n</code>, <code>n·log₂n</code>, <code>n²</code> ve (yalnız n = 20 için) <code>2ⁿ</code>. Değerleri tam sayı olarak, <code>long long</code> ile; <code>log₂n</code>'i en yakın tam sayıya yuvarlayın (<code>round</code>; 1000 için 10). Sonra kaba kuralı uygulayın: her satırın yanına bir saniyede (10⁸ işlem) sığıp sığmadığını yazın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>n=20
@@ -515,6 +580,7 @@ n=1000000
 <section class="soru" id="IV-6-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-6-A1</span> Hamilton patikaları, budamasız</h3>
 <p>Izgarada sol üstten sağ alta, her kareden tam bir kere geçen yollar. Geri dönüşlü arama: dört yöne git, ziyaret edileni işaretle, geri dönerken temizle (III-6-Z1'deki yön listesi ve <code>icerdeMi</code>). Patika sayısı ve <code>git()</code> çağrı sayısı. Girdi <code>4 5</code>. Sonra <code>4 4</code> deneyin: sıfır çıkar! Neden? (İpucu: tahtayı satranç tahtası gibi boyayın; her adım renk değiştirir.) 5×5'i de çalıştırıp süreyi not edin; IV-6-A2'de karşılaştıracaksınız.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5</span></figcaption>
 <pre><code>patika: 20, çağrı: 8076</code></pre>
@@ -524,6 +590,7 @@ n=1000000
 <section class="soru" id="IV-6-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-6-A2</span> Kitapçığın budaması</h3>
 <p>Aynı program; kitapçığın iki satırlık kuralını ekleyin: üst ve alt dolu (ya da tahta dışı) ama sağ ve sol boşsa &mdash; ya tersi &mdash; tahta ikiye bölündü, geri dön. Girdi <code>5 5</code>. IV-6-A1'i de <code>5 5</code> ile çalıştırın: patika sayısı aynı olmalı (değilse budama yanlış), çağrı sayısı çok daha az. Kaç kat? Kural için &ldquo;dolu&rdquo;nun tahta dışını da kapsadığına dikkat.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5</span></figcaption>
 <pre><code>patika: 104, çağrı: 7959</code></pre>
@@ -533,6 +600,11 @@ n=1000000
 <section class="soru" id="IV-6-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">IV-6-Z1</span> Kendi budamanız</h3>
 <p>Kitapçığın dördüncü alıştırmasındaki &ldquo;zor&rdquo;: başka bir budama kuralı bulun. Bir aday: hedefe <em>erken</em> varırsak (kalan &gt; 0 iken) o dal ölmüştür, hemen dönün. Bir başkası: hedef kare dört yandan kapanmışsa. Her kuralı eklemeden önce kâğıtta &ldquo;bu dalda gerçekten çözüm olamaz&rdquo; diye bir kanıt yazın (kitapçığın beşinci alıştırması). Girdi <code>5 5</code>; patika sayısı yine 104 olmalı (değilse kural yanlış). Çağrı sayısı IV-6-A2'den az çıkarsa kuralınız yeni dallar kesiyor; eşit çıkarsa kitapçığın kuralı o dalları zaten kesiyormuş &mdash; bu da bir ölçüm. Üç sayıyı yan yana yazın: budamasız, kitapçığın, sizin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yeni bir budama: hedefe erken varmak ya da hedefin kapanması dalı öldürür.</p></details>
+<details><summary>Yaklaşım</summary><p><code>git</code>'in başında: <code>if ((r, c) hedef and kalan &gt; 0) return;</code>; kural numarasına göre <code>if (kural &gt;= 1)</code> kitapçığın denetimi, <code>if (kural == 2)</code> sizinki. Üç kuralı üç kere çalıştırıp çağrıları yazın.</p></details>
+<details><summary>İlk satır</summary><p><code>if (r == S - 1 and c == 0 and kalan &gt; 0) return;   // hedefe erken vardık</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5</span></figcaption>
 <pre><code>budamasız: 104 patika, 90111 çağrı
@@ -544,6 +616,11 @@ sizinki: 104 patika, 7959 çağrı</code></pre>
 <section class="soru" id="IV-6-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">IV-6-K1</span> Izgara yolları</h3>
 <p><a href="https://cses.fi/problemset/task/1625">CSES 1625</a> (<em>Grid Paths</em>): 7×7 ızgara, sol üstten sol alta, her kareden bir kere; 48 adımlık bir desen veriliyor, <code>?</code> serbest, <code>U D L R</code> zorunlu. Desene uyan patikaları sayın. Girdi CSES'in örneği; yanıt 201. Budamasız bitmez; kitapçığın kuralı ve IV-6-Z1'deki &ldquo;hedefe erken varma&rdquo; ile saniyeler. Daha hızlısı için CSES'in kendi kitabında bir bölüm var (depodaki <code>kitap/</code> dizininde Türkçesi).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Desendeki harf adımın yönünü kesinleştirir; <code>?</code> dört yönü de serbest bırakır.</p></details>
+<details><summary>Yaklaşım</summary><p>Yön listesini <code>U D L R</code> sırasında tutun; <code>desen[adim]</code> harfse yalnız o yöne gidin. Budamalar: kitapçığın ikiye bölme kuralı ve hedefe erken varma; ikisi birden gerekir.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int y{0}; y &lt; 4; ++y) { if (desen[adim] != '?' and desen[adim] != YON[y]) continue; ... }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: ??????R??????U??????????????????????????LD????D?</span></figcaption>
 <pre><code>uyan patika: 201</code></pre>
@@ -552,5 +629,67 @@ sizinki: 104 patika, 7959 çağrı</code></pre>
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">IV.7</div>
+  <div class="govde">
+    <h2>Geri dönüş: altkümeler ve permütasyonlar, kaplarda</h2>
+    <p>Özyineleme üretir, kap toplar. II. bölümün kümesi bu bölümün iki kalıbıyla buluşuyor: altküme toplamlarını ve tekrarlı harflerin permütasyonlarını bir <code>set</code>'te biriktirin.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f#kume-eslemin-kucuk-kardesi">kitapçık II.2: Küme, eşlemin küçük kardeşi</a> <a href="https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff#butun-altkumeler">kitapçık IV.3: Bütün altkümeler</a> <a href="https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff#butun-permutasyonlar">kitapçık IV.3: Bütün permütasyonlar</a></p>
+    </div>
+
+<section class="soru" id="IV-7-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-7-A1</span> Altküme toplamları, kümede</h3>
+<p>Girdi: <em>n</em> ve <em>n</em> sayı. Bütün altkümeleri üretin (<code>31-altkume</code> kalıbı) ama yazdırmayın; her altkümenin toplamını bir <code>set&lt;int&gt;</code>'e atın. Çıktı: kaç <strong>farklı</strong> toplam var, sonra toplamlar küçükten büyüğe tek satırda. Küme tekrarı da sıralamayı da sizin yerinize yapıyor; <code>{3, 1, 2, 4}</code> için 0'dan 10'a kadar her toplam çıkıyor mu?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 1 2 4</span></figcaption>
+<pre><code>11 farklı toplam
+0 1 2 3 4 5 6 7 8 9 10</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-7-A1"><code>alistirma/kod/IV-7-A1/</code></a></p>
+</section>
+<section class="soru" id="IV-7-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">IV-7-A2</span> Tekrarlı harflerin permütasyonları</h3>
+<p><code>aab</code> yazısının harflerini permütasyon kalıbıyla dizin: altı dizilişten yalnızca üçü farklı (<code>aab</code>, <code>aba</code>, <code>baa</code>). Her dizilişi bir <code>set&lt;string&gt;</code>'e atın; küme tekrarları elesin. Girdi: tek satırda yazı. Çıktı: farklı permütasyon sayısı, sonra her biri bir satırda, alfabetik. Sonra II. bölümün <code>next_permutation</code>'ıyla aynı işi yapın: o tekrarları kendiliğinden atlar; neden?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: aab</span></figcaption>
+<pre><code>3 farklı permütasyon
+aab
+aba
+baa</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/IV-7-A2"><code>alistirma/kod/IV-7-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#IV-3-Z1"><code>IV-3-Z1</code> Elmaları bölmek</a> <a href="#IV-1-Z1"><code>IV-1-Z1</code> Hanoi&#x27;yi saymak</a> <a href="#IV-5-Z2"><code>IV-5-Z2</code> Erken mi, geç mi?</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

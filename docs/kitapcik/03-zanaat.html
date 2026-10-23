@@ -1,0 +1,1537 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitapcik/bolumler/03-zanaat.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programcının Zanaatı</title>
+<meta name="description" content="Derleyici, make, testler, hata ayıklama ve hız ölçümü: programı işe yarar kılan alışkanlıklar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm III</div>
+  <h1>Programcının Zanaatı</h1>
+  <p class="ozet">
+    Bu bölümde tek bir yeni C++ kavramı yok. Onun yerine, iyi programcıyı acemi
+    programcıdan ayıran şey var: kodu derlemek, sınamak, hatayı bulmak ve hızı
+    tahmin etmek yerine ölçmek. Bu alışkanlıkları edinen bir öğrenci, dili daha iyi
+    bilen ama bunları bilmeyen bir öğrenciyi kolayca geçer.
+  </p>
+  <ul class="icerik-seridi"><li><a href="00-kapak.html">Kılavuz</a></li><li><a href="01-ilk-adimlar.html">I. İlk Adımlar</a></li><li><a href="02-veri.html">II. Veriyi Düzenlemek</a></li><li><a aria-current="page" style="border-color:var(--mavi);color:var(--mavi)">III. Zanaat</a></li><li><a href="04-ozyineleme.html">IV. Özyineleme</a></li><li><a href="05-cizgeler.html">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li><li><a href="07-sozluk.html">Sözlük</a></li></ul>
+</header>
+
+<div class="blok">
+  <div class="ray">III.1</div>
+  <div class="govde">
+    <h2 id="tarayicidan-terminale">Tarayıcıdan terminale</h2>
+
+    <p>
+      Çevrimiçi derleyiciler harika bir başlangıç. Ama bir noktada kendi
+      bilgisayarınıza inmelisiniz: büyük testler tarayıcıda çalışmaz, hata
+      ayıklayıcı orada zayıftır ve gerçek projeler tek dosyaya sığmaz.
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">bilmeniz gereken sekiz komut</span></figcaption>
+      <pre><code>pwd                     <span class="y"># neredeyim?</span>
+ls                      <span class="y"># burada ne var?</span>
+ls -l                   <span class="y"># ayrıntılı liste</span>
+cd ileri/dersler        <span class="y"># klasöre gir</span>
+cd ..                   <span class="y"># bir üste çık</span>
+mkdir yeni-alistirma    <span class="y"># klasör aç</span>
+cat dosya.cpp           <span class="y"># dosyayı ekrana bas</span>
+./prog &lt; test1          <span class="y"># programa dosyadan girdi ver</span></code></pre>
+    </figure>
+
+    <p>
+      Son satır yarışmalarda hayat kurtarır: girdiyi her seferinde elle yazmak
+      yerine bir dosyaya koyup <code>&lt;</code> ile beslersiniz.
+    </p>
+
+    <h3 id="derleyici-tek-bir-program-degil">Derleyici tek bir program değil</h3>
+
+    <p>
+      <code>c++ ana.cpp -o prog</code> yazdığınızda aslında iki iş art arda yapılıyor:
+      önce <strong>derleme</strong> (kaynak koddan makine koduna), sonra
+      <strong>bağlama</strong> (parçaları tek çalıştırılabilir dosyada birleştirme).
+      İkisini ayırabilirsiniz:
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">derleme ve bağlama</span></figcaption>
+      <pre><code><span class="y"># tek adımda</span>
+$ c++ -std=c++23 ana.cpp asal.cpp -o prog
+
+<span class="y"># ya da iki adımda: önce nesne kodu (.o), sonra bağlama</span>
+$ c++ -std=c++23 -c ana.cpp      <span class="y"># -&gt; ana.o</span>
+$ c++ -std=c++23 -c asal.cpp     <span class="y"># -&gt; asal.o</span>
+$ c++ -std=c++23 ana.o asal.o -o prog
+
+<span class="y"># faydalı seçenekler</span>
+$ c++ -std=c++23 -Wall -Wextra ana.cpp -o prog   <span class="y"># bütün uyarıları göster</span>
+$ c++ -std=c++23 -g ana.cpp -o prog              <span class="y"># hata ayıklama bilgisi ekle</span>
+$ c++ -std=c++23 -O2 ana.cpp -o prog             <span class="y"># iyileştirmeleri aç (hızlı!)</span></code></pre>
+    </figure>
+
+    <p>
+      Neden ayıralım? Çünkü yirmi dosyalık bir projede tek bir dosyayı
+      değiştirdiğinizde diğer on dokuzunu yeniden derlemek anlamsız. İşte
+      <code>make</code> tam olarak bunun için var.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        <code>-Wall</code> seçeneğini <strong>her zaman</strong> açık tutun.
+        Derleyici uyarıları can sıkıcı değil, bedava kod incelemesidir. Derste bir
+        işlevin çıktı türünü yanlış yazmıştık; program tesadüfen doğru çalışıyordu ama
+        derleyici bunu <code>-Wall</code> ile baştan söylemişti. Uyarıyı okusaydık
+        yarım saat kazanacaktık.
+      </p>
+    </div>
+
+    <h3 id="kodunuzu-saklayin">Kodunuzu saklayın</h3>
+
+    <p>
+      Terminale alıştığınız gün <code>git</code>'e de alışın. Ders deposunu
+      <code>git clone</code> ile indirdiniz; kendi çalışmalarınızı da bir depoda
+      tutun. Her çalışma oturumunun sonunda üç komut:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">git</span></figcaption>
+      <pre><code>$ git status                      <span class="y"># ne değişti?</span>
+$ git add ana.cpp beklenen-cikti  <span class="y"># bunları kaydedeceğim</span>
+$ git commit -m "labirent: yol tarifi eklendi"
+$ git push                        <span class="y"># GitHub'a gönder (hesabınız varsa)</span></code></pre>
+    </figure>
+
+    <p>
+      Faydası iki: bir gün bozduğunuz programı <code>git diff</code> ile bir
+      önceki hâliyle karşılaştırırsınız, ve &ldquo;dün çalışıyordu&rdquo; artık
+      bir cümle değil, geri dönebileceğiniz bir kayıt olur. Derlenmiş
+      <code>prog</code> dosyasını depoya koymayın; onu derleyici her seferinde
+      yeniden üretir.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.2</div>
+  <div class="govde">
+    <h2 id="make-tek-komutla-her-sey"><code>make</code>: tek komutla her şey</h2>
+
+    <p>
+      <code>make</code>, bir dosyanın bağlı olduğu dosyalardan daha eski olup
+      olmadığına bakar ve sadece gerekeni yeniden yapar. Kuralları
+      <code>Makefile</code> adlı dosyaya yazarsınız. Biçim çok basit:
+    </p>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">Makefile biçimi</span></figcaption>
+      <pre><code><span class="a">&lt;hedef&gt;</span>: <span class="t">&lt;bağlı olduğu şeyler&gt;</span>
+<span class="y">&lt;SEKME&gt;</span>çalıştırılacak komut</code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">En sinir bozucu hata</span>
+      <p>
+        Komut satırının başındaki girinti <strong>sekme</strong> (Tab) olmak zorunda,
+        boşluk değil. Editörünüz sekmeyi boşluğa çeviriyorsa <code>make</code>
+        anlaşılmaz bir hata verir. <code>Makefile</code> düzenlerken bu dönüşümü
+        kapatın.
+      </p>
+    </div>
+
+    <p>
+      Şimdi gerçek bir örnek. Asal çarpan bulan, üç dosyaya bölünmüş, kendi kendini
+      sınayan küçük bir proje:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">Makefile</span><span class="etiket">asal-projesi</span></figcaption>
+      <pre><code><span class="a">hedef</span>: derle çalıştır
+
+<span class="a">derle</span>: prog
+
+<span class="a">prog</span>: ana.o asal.o
+	c++ -std=c++23 ana.o asal.o -o prog
+
+<span class="a">ana.o</span>: ana.cpp asal.h
+	c++ -std=c++23 -c ana.cpp
+
+<span class="a">asal.o</span>: asal.cpp asal.h
+	c++ -std=c++23 -c asal.cpp
+
+<span class="a">çalıştır</span>: prog
+	./prog 60
+
+<span class="a">test</span>: prog
+	./prog 360 &gt; test-ciktisi
+	diff beklenen-cikti test-ciktisi
+	rm -f test-ciktisi
+	@echo <span class="s">"TEST GEÇTİ"</span>
+
+<span class="a">temizle</span>:
+	rm -f prog *.o test-ciktisi</code></pre>
+    </figure>
+
+    <p>
+      Hedef adlarının Türkçe olabildiğine dikkat edin &mdash; <code>make derle</code>,
+      <code>make test</code>, <code>make temizle</code>. Bir de her hedefin
+      <strong>neye bağlı olduğunu</strong> doğru yazmak önemli: <code>ana.o</code>
+      hem <code>ana.cpp</code>'ye hem <code>asal.h</code>'ye bağlı, çünkü başlık
+      dosyası değişirse yeniden derlenmesi gerek.
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">çalışırken</span></figcaption>
+      <pre><code>$ make
+c++ -std=c++23 -c ana.cpp
+c++ -std=c++23 -c asal.cpp
+c++ -std=c++23 ana.o asal.o -o prog
+./prog 60
+denemeler geçti.
+60 sayısının asal çarpanları: 2 2 3 5
+
+$ make          <span class="y"># ikinci kez: hiçbir şey değişmedi</span>
+make: 'hedef' hedefi için yapılacak bir şey yok.</code></pre>
+    </figure>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Yeni bir alıştırmaya başlarken hazır bir düzenden kopyalayın: bir
+        <code>Makefile</code>, bir <code>ana.cpp</code>, bir de
+        <code>beklenen-cikti</code>. Ders deposundaki <code>sablon/</code> klasörü
+        tam olarak bunun için var. Takımca bir kere kurun, dönem boyunca
+        kopyalayın &mdash; her seferinde sıfırdan Makefile yazmak zaman kaybı.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.3</div>
+  <div class="govde">
+    <h2 id="kendi-kendini-sinayan-program">Kendi kendini sınayan program <span class="yol yavas">yavaş yol</span></h2>
+
+    <p>
+      Bir program yazdınız, çalıştırdınız, doğru yanıt verdi. Sonra bir yerini
+      değiştirdiniz. Hâlâ doğru mu? Bunu her seferinde elle denemek imkânsız.
+      Çözüm: <strong>sınamayı programın içine koymak</strong>.
+    </p>
+
+    <p>
+      En sade araç <code>&lt;cassert&gt;</code> içindeki <code>assert</code>.
+      İçindeki koşul yanlışsa program hemen durur ve hangi satırda durduğunu söyler.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">denemeler</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;cassert&gt;</span>
+<span class="a">#include</span> <span class="s">"asal.h"</span>
+
+<span class="t">void</span> dene() {
+  assert(asalMi(<span class="n">2</span>));
+  assert(asalMi(<span class="n">97</span>));
+  assert(<span class="a">not</span> asalMi(<span class="n">1</span>));
+  assert(<span class="a">not</span> asalMi(<span class="n">91</span>));                 <span class="y">// 7 * 13, kolay tuzak</span>
+  assert(carpanlar(<span class="n">60</span>).size() == <span class="n">4</span>);      <span class="y">// 2, 2, 3, 5</span>
+  std::cout &lt;&lt; <span class="s">"denemeler geçti."</span> &lt;&lt; std::endl;
+}
+
+<span class="t">int</span> main(<span class="t">int</span> argc, <span class="t">char</span>** argv) {
+  dene();                                     <span class="y">// her çalıştırışta sınansın</span>
+  <span class="t">int</span> n = (argc &gt; <span class="n">1</span>) ? std::stoi(argv[<span class="n">1</span>]) : <span class="n">60</span>;
+  <span class="y">// ...</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>assert(not asalMi(91))</code> satırına özellikle dikkat.
+      İyi bir sınama, <strong>doğru olması gerekeni değil, yanlış olması gerekeni</strong>
+      de sınar. 91 sayısı asal görünür ama <code>7 &times; 13</code>'tür; naif bir asal
+      denetimi tam burada patlar.
+    </p>
+
+    <p>
+      Şimdi kasten bir hata yapalım: çarpan bulan işlevin son satırını silelim.
+      Ne olduğuna bakın:
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">yakalandı</span></figcaption>
+      <pre><code>$ make test
+c++ -std=c++23 -c asal.cpp
+c++ -std=c++23 ana.o asal.o -o prog
+./prog 360 &gt; test-ciktisi
+<span class="v">prog: ana.cpp:10: void dene(): Assertion `carpanlar(60).size() == 4' failed.</span>
+Aborted
+make: *** [Makefile:18: test] Error 134</code></pre>
+    </figure>
+
+    <p>
+      Hata dosya ve satır numarasıyla birlikte geldi. Bu, üç saatlik bir aramayı üç
+      saniyeye indiren şey.
+    </p>
+
+    <h3 id="altin-dosya-yontemi">Altın dosya yöntemi</h3>
+
+    <p>
+      <code>assert</code> tek tek değerleri sınar. Peki programın <strong>bütün
+      çıktısını</strong> nasıl sınarız? Ders deposunda kullandığımız yöntem çok
+      basit ve çok etkili: doğru çıktıyı bir kere üretip bir dosyaya kaydedin
+      (buna <strong>altın dosya</strong> deniyor), sonra her seferinde
+      <code>diff</code> ile karşılaştırın.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">Makefile</span><span class="etiket">test hedefi</span></figcaption>
+      <pre><code><span class="a">test</span>: prog
+	./prog 360 &gt; test-ciktisi
+	diff beklenen-cikti test-ciktisi
+	rm -f test-ciktisi</code></pre>
+    </figure>
+
+    <p>
+      Çıktıda tek bir boşluk bile kaysa <code>diff</code> haber veriyor:
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">diff yakaladı</span></figcaption>
+      <pre><code>$ make test
+./prog 360 &gt; test-ciktisi
+diff beklenen-cikti test-ciktisi
+<span class="v">2c2</span>
+&lt; 360 sayısının asal çarpanları: 2 2 2 3 3 5
+---
+&gt; 360  sayısının asal çarpanlari: 2 2 2 3 3 5
+make: *** [Makefile:19: test] Error 1</code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">Dikkat</span>
+      <p>
+        <code>diff</code> fark gösterdiğinde iki ihtimal var: ya kodunuzu bozdunuz,
+        ya da çıktıyı <strong>bilerek</strong> değiştirdiniz. İkincisiyse altın
+        dosyayı güncelleyin. Ama önce farka gerçekten bakın &mdash; altın dosyayı
+        düşünmeden güncellemek, testi tamamen silmekle aynı şey.
+      </p>
+      <p>
+        Bir de zamana bağlı çıktılara dikkat: &ldquo;doğduğunuzdan beri kaç gün
+        geçti&rdquo; yazan bir programın altın dosyası her gün bozulur. Böyle
+        çıktıları ya sabitleyin ya da testin dışında tutun.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.4</div>
+  <div class="govde">
+    <h2 id="hata-bulmanin-uc-yolu">Hata bulmanın üç yolu</h2>
+
+    <h3 id="1-yazdirarak-ama-acilip-kapanabilir-bicimde">1. Yazdırarak &mdash; ama açılıp kapanabilir biçimde</h3>
+
+    <p>
+      En yaygın hata ayıklama yöntemi programın içine <code>cout</code> serpiştirmek.
+      Sorun şu: iş bitince hepsini tek tek silmek gerekiyor, sonra hata tekrarlayınca
+      hepsini geri yazmak. Şu küçük numara bu derdi bitiriyor:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">dout numarası</span></figcaption>
+      <pre><code><span class="t">bool</span> yaz = <span class="a">false</span>;              <span class="y">// yazsın istiyorsak true yapalım</span>
+ostream nout{<span class="a">nullptr</span>};          <span class="y">// hiçbir yere yazmayan akım</span>
+ostream&amp; dout = yaz ? cout : nout;
+
+dout &lt;&lt; <span class="s">"k="</span> &lt;&lt; k &lt;&lt; <span class="s">" toplam="</span> &lt;&lt; toplam &lt;&lt; endl;</code></pre>
+    </figure>
+
+    <p>
+      Artık bütün ayıklama çıktılarınızı <code>dout</code> ile yazın. Tek bir
+      <code>bool</code> değiştirerek hepsini birden açıp kapatabilirsiniz.
+      (<em>debug out</em>'un kısaltması.)
+    </p>
+
+    <h3 id="2-hata-ayiklayiciyla">2. Hata ayıklayıcıyla</h3>
+
+    <p>
+      <strong>gdb</strong>, C ve C++ dünyasının efsanevi hata ayıklayıcısı.
+      Programı satır satır çalıştırıp her adımda değişkenlerin içine bakmanızı sağlar.
+      Önce <code>-g</code> ile derleyin:
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">gdb</span></figcaption>
+      <pre><code>$ c++ -std=c++23 -g ana.cpp -o prog
+$ gdb ./prog
+
+(gdb) break main          <span class="y"># main'de dur</span>
+(gdb) run                 <span class="y"># başlat</span>
+(gdb) next                <span class="y"># bir satır ilerle (işlevin içine girme)</span>
+(gdb) step                <span class="y"># bir satır ilerle (işlevin içine gir)</span>
+(gdb) print toplam        <span class="y"># değişkenin değerini göster</span>
+(gdb) backtrace           <span class="y"># buraya hangi çağrılarla geldik?</span>
+(gdb) continue            <span class="y"># bir sonraki durağa kadar devam</span>
+(gdb) quit</code></pre>
+    </figure>
+
+    <p>
+      OnlineGDB'de aynı şey tuşlarla yapılıyor: satır numarasına tıklayıp durak
+      koyun, <strong>Debug</strong>'a basın, sonra <strong>step into</strong> ile
+      ilerleyin. Özyineleyen bir işlevin nasıl çalıştığını anlamanın en hızlı yolu
+      budur &mdash; <a href="04-ozyineleme.html">Bölüm IV</a>'te işinize yarayacak.
+    </p>
+
+    <h3 id="3-kuculterek">3. Küçülterek</h3>
+
+    <p>
+      Belki de en güçlü yöntem, ve hiçbir araç gerektirmiyor. Kod büyük ve hata
+      nerede belli değilse, <strong>hatayı yeniden üreten en küçük örneği</strong>
+      bulun. Girdiyi yarıya indirin: hâlâ hata veriyor mu? Yarısını daha indirin.
+      Beş adımda bin satırlık girdi otuz satıra iner ve hata çoğu zaman kendini
+      gösterir.
+    </p>
+
+    <p>
+      Ders deposundaki her ciddi hata bu şekilde bulundu. Bir keresinde bir düğüm
+      kuyruğa iki kere giriyordu; yedi düğümlük minik bir çizgede çıktıyı elle
+      okuyunca hemen göründü. Yüz düğümlük çizgede asla göremezdik.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Hata avında ikili çalışmanın faydası en yüksek. Bir kişi kodu yüksek sesle
+        okur, öteki &ldquo;dur, burada ne olur?&rdquo; diye sorar. İnsan kendi
+        kodunda ne yazdığını değil, <em>ne yazmak istediğini</em> okur; ikinci bir
+        çift göz bu körlüğü kırar.
+      </p>
+    </div>
+
+    <h3 id="ve-dorduncusu-temizleyiciler">Ve dördüncüsü: temizleyiciler</h3>
+
+    <p>
+      Üç yol dedim; bugün neredeyse bedava bir dördüncüsü var.
+      <strong>Temizleyiciler</strong> (<em>sanitizers</em>) derleyiciye iki
+      bayrakla eklenir ve programınız çalışırken dizi sınırı aşımını, taşmayı,
+      serbest bırakılmış belleğe dokunmayı olduğu satırda yakalar. Bölüm I'deki
+      taşma ve şu klasik hata, ikisi de anında görünür:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">sinir.cpp</span><span class="etiket">bir fazla</span></figcaption>
+      <pre><code>vector&lt;<span class="t">int</span>&gt; v{<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>};
+<span class="t">int</span> toplam = <span class="n">0</span>;
+<span class="a">for</span> (<span class="t">int</span> k = <span class="n">0</span>; k &lt;= <span class="n">3</span>; ++k)   <span class="y">// &lt;= yerine &lt; olmalıydı</span>
+  toplam += v[k];</code></pre>
+    </figure>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">temizleyici</span></figcaption>
+      <pre><code>$ g++ -std=c++23 -Wall -g -fsanitize=address,undefined sinir.cpp -o sinir
+$ ./sinir
+==1406==ERROR: AddressSanitizer: <span class="v">heap-buffer-overflow</span> on address 0x50200000001c
+READ of size 4 at 0x50200000001c thread T0
+    #0 0x55aad589872f in main <span class="v">sinir.cpp:9</span>
+0x50200000001c is located <span class="v">0 bytes after 12-byte region</span></code></pre>
+    </figure>
+
+    <p>
+      Temizleyicisiz derlenen aynı program <code>6</code> da yazabilir,
+      <code>-589934592</code> de, hiç şikâyet etmeden &mdash; dizinin bir ötesinde
+      ne varsa onu toplar. Temizleyiciyle ise hata, dosya adı ve satır
+      numarasıyla elinizde. Program yavaşlar (iki üç kat), o yüzden
+      yarışmaya göndereceğiniz sürümü değil, <em>hata ararken</em> derlediğiniz
+      sürümü böyle derleyin. Ders deposundaki <code>sablon/Makefile</code>'da
+      bunun için bir <code>ayikla</code> hedefi var: <code>make ayikla</code>.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>Bir eksik, bir fazla.</strong> <code>sinir.cpp</code>'deki hata
+        programcılığın en eski hatası: üç öğeli dizide geçerli konumlar 0, 1, 2;
+        döngü <code>k &lt;= 3</code> deyince dördüncüye uzanıyor. Sınır yazarken
+        her seferinde iki soru sorun: ilk tur hangi konuma bakıyor, son tur
+        hangisine? <code>&lt;</code> ile <code>&lt;=</code> arasındaki fark
+        çoğu zaman tam bir öğedir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.5</div>
+  <div class="govde">
+    <h2 id="tahmin-etmeyin-olcun">Tahmin etmeyin, ölçün</h2>
+
+    <p>
+      &ldquo;Bu kod yavaş galiba&rdquo; cümlesi bir bilgi değil, bir his. C++ size
+      hissi ölçüye çevirecek bir araç veriyor: <code>&lt;chrono&gt;</code>.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">20-hiz.cpp</span><span class="etiket">süre ölçümü</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;chrono&gt;</span>
+<span class="a">using</span> saat = std::chrono::high_resolution_clock;
+
+<span class="a">auto</span> basla = saat::now();
+
+<span class="a">const</span> <span class="t">int</span> n = <span class="n">1'000'000</span>;               <span class="y">// tırnaklar okumayı kolaylaştırır</span>
+std::vector&lt;<span class="t">int</span>&gt; dizi(n);
+<span class="a">for</span> (<span class="t">int</span> k = <span class="n">0</span>; k &lt; n; ++k) dizi[k] = <span class="n">2</span> * k;
+
+<span class="a">auto</span> bitti = saat::now();
+<span class="a">auto</span> insa = std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(bitti - basla);
+
+std::cout &lt;&lt; <span class="s">"inşa süresi: "</span> &lt;&lt; insa.count() &lt;&lt; <span class="s">" ms"</span> &lt;&lt; std::endl;</code></pre>
+    </figure>
+
+    <p>
+      Bu programı iki kere derleyip çalıştırdım. Tek fark derleyici seçeneği:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Derleme</th><th>Bir milyon öğe inşası</th><th>Ortalama erişim</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>-O0</code> (iyileştirme yok)</td>
+            <td class="sayi">8 ms</td>
+            <td class="sayi">2.66 ns</td>
+          </tr>
+          <tr>
+            <td><code>-O2</code> (iyileştirme açık)</td>
+            <td class="sayi">2 ms</td>
+            <td class="sayi">0.28 ns</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Aynı kod, dört kat hızlı inşa, on kat hızlı erişim. Tek satır kod
+      değiştirmeden. Yarışmalarda bu fark, &ldquo;zaman aşımı&rdquo; ile
+      &ldquo;kabul edildi&rdquo; arasındaki fark olabilir.
+    </p>
+
+    <p>
+      Terminalde bütün programın süresini ölçmenin daha da kolay bir yolu var:
+    </p>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">time</span></figcaption>
+      <pre><code>$ time ./prog &lt; buyuk-test
+...
+./prog &lt; buyuk-test  <span class="v">28.71s</span> user 0.11s system 97% cpu 29.430 total</code></pre>
+    </figure>
+
+    <p>
+      Bu, derste gerçekten karşımıza çıkan bir ölçüm: labirentten kaçış problemini
+      çözen ilk programımız yarım dakika sürüyordu. Algoritmayı düzeltince aynı
+      girdide <span class="sayi">0.73</span> saniyeye indi &mdash; kırk kat.
+      Nasıl olduğunu <a href="05-cizgeler.html">Bölüm V</a>'te göreceksiniz. Şimdilik
+      şunu aklınızda tutun: <strong>büyük hız farkları derleyici seçeneğinden değil,
+      algoritmadan gelir.</strong>
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">III.6</div>
+  <div class="govde">
+    <h2 id="kendini-tekrar-etme">Kendini tekrar etme</h2>
+
+    <p>
+      Yazılımın belki de en meşhur ilkesi: <strong>DRY</strong>
+      (<em>Don't Repeat Yourself</em>). Aynı kodu kopyalayıp yapıştırdığınızda,
+      onu bir kere değil <em>iki kere</em> bakıma almış olursunuz. Bir hata bulup
+      birini düzeltir, ötekini unutursunuz.
+    </p>
+
+    <p>
+      Derste yedi kere iç içe <code>for</code> döngüsü içeren, dört farklı yerde
+      neredeyse aynı biçimde tekrarlanan bir çizim koduna baktık. Çalışıyordu, hem
+      de güzel çalışıyordu. Ama o dört bloğu tek bir <em>işlev kalıbına</em>
+      çevirince kod hem kısaldı hem de yeni çizim eklemek dakikalar sürer oldu.
+    </p>
+
+    <h3 id="sadelestirme-refactoring">Sadeleştirme (<em>refactoring</em>) <span class="yol hizli">hızlı yol</span></h3>
+
+    <p>
+      Kodu, davranışını değiştirmeden daha anlaşılır hâle getirmeye
+      <strong>sadeleştirme</strong> deniyor. Öğrenciyken bunun boş bir uğraş gibi
+      görünmesi çok normal &mdash; &ldquo;çalışıyor ya, ne gerek var?&rdquo;
+      Gerek var, çünkü kodu bir kere yazarsınız, on kere okursunuz.
+    </p>
+
+    <p>
+      İki gerçek örnek, ders notlarından:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Program</th><th>Önce</th><th>Sonra</th><th>Ne kazandık</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Labirentte en kısa yol</td>
+            <td class="sayi">93 satır</td>
+            <td class="sayi">69 satır</td>
+            <td>Aynı puan, çok daha okunur kod</td>
+          </tr>
+          <tr>
+            <td>Canavarlardan kaçış</td>
+            <td class="sayi">141 satır</td>
+            <td class="sayi">100 satır</td>
+            <td>Hem kısaldı hem <strong>40 kat hızlandı</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      İkinci satır çok öğretici: uzun program yavaş, kısa program hızlıydı.
+      Bu tesadüf değil. Kodu sadeleştirirken ne yaptığınızı daha net görürsünüz,
+      ve o netlikte daha iyi algoritma saklıdır.
+    </p>
+
+    <h4>Sadeleştirme için üç somut hamle</h4>
+
+    <ul>
+      <li>
+        <strong>İyi ad koyun.</strong> <code>int a, b, c;</code> yerine
+        <code>int satir, sutun, uzaklik;</code>. Bir değişkenin adını doğru
+        koyduğunuzda kodun yarısı kendini yazar.
+      </li>
+      <li>
+        <strong>Tür takma adları kullanın.</strong>
+        <code>vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt;</code> yerine
+        <code>using Cizge = Dizi&lt;Baglar&gt;;</code>. Kod problemin dilinde
+        konuşmaya başlar.
+      </li>
+      <li>
+        <strong>Tekrarlayan bloğu işlev yapın.</strong> Aynı beş satırı ikinci kez
+        yazdığınızı fark ettiğiniz an durun ve ona bir ad verin.
+      </li>
+    </ul>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Kendi şablonunuzu kurun.</strong> Bir klasör açın; içine
+          <code>Makefile</code>, <code>ana.cpp</code> ve <code>beklenen-cikti</code>
+          koyun. <code>make</code>, <code>make test</code> ve <code>make temizle</code>
+          çalışsın. Bundan sonraki her alıştırmada bunu kopyalayın.
+        </li>
+        <li>
+          <strong>Testi kırın.</strong> Çalışan bir programınızın çıktısını tek bir
+          karakter değiştirin ve <code>make test</code>'in nasıl bir hata verdiğini
+          görün. Sonra geri alın. Testin gerçekten çalıştığını görmemiş olsaydınız,
+          ona güvenemezdiniz.
+        </li>
+        <li>
+          <strong>Ölçün.</strong> <a href="02-veri.html">Bölüm II</a>'deki
+          &ldquo;tekrar var mı&rdquo; alıştırmasının üç çözümünü
+          <code>&lt;chrono&gt;</code> ile ölçün. On bin, yüz bin ve bir milyon
+          öğeyle deneyin. Süreler nasıl artıyor? Bir tablo yapın.
+          <span class="zor">önemli</span> Bu tablo, bir sonraki bölümde
+          konuşacağımız <em>karmaşıklık</em> kavramının somut hâli.
+        </li>
+        <li>
+          <strong>gdb ile özyineleme izleyin.</strong> Fibonaççi'yi özyinelemeli
+          yazın, <code>fib(5)</code> için <code>backtrace</code> komutunu birkaç kere
+          çalıştırın. Çağrı yığınının büyüyüp küçüldüğünü kendi gözünüzle görün.
+        </li>
+        <li>
+          <strong>Bir kodu sadeleştirin.</strong> İki hafta önce yazdığınız bir
+          programı açın. Anlamakta zorlandığınız her satır bir fırsat: değişkeni
+          yeniden adlandırın, tekrarı işleve çıkarın, sihirli sayıya isim verin.
+          Sonunda <code>make test</code> hâlâ geçiyor mu? Geçiyorsa doğru
+          sadeleştirdiniz.
+        </li>
+      </ol>
+    </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · testli ve make'li</span>
+      <p>
+        Oyunu işlevlere bölün: <code>degerlendir(tahmin, gizli)</code> &ldquo;büyük&rdquo;, &ldquo;küçük&rdquo; ya da &ldquo;bildin&rdquo; döndürsün ve <code>assert</code> ile üç durumu sınayın. Tutulan sayıyı komut satırından alın ki oyun tekrarlanabilsin; tahminleri bir <code>girdi</code> dosyasından okuyup çıktıyı altın dosyayla karşılaştıran bir <code>test</code> hedefi yazın. Artık projeniz <code>make test</code> diyince &ldquo;Doğru!&rdquo; diyor.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Terminalde bir klasöre girip <code>g++</code> ile derleyebilir, <code>./prog</code> ile çalıştırabilirim.</li>
+        <li><code>derle</code>, <code>test</code> ve <code>temizle</code> hedefli bir Makefile yazabilirim.</li>
+        <li><code>assert</code> ile kendi kendini sınayan bir işlev yazabilir, altın dosyayla çıktıyı karşılaştırabilirim.</li>
+        <li>Bir hatayı yazdırarak, hata ayıklayıcıyla ya da girdiyi küçülterek köşeye sıkıştırabilirim.</li>
+        <li>İki çözümün süresini <code>chrono</code> ile ölçüp <code>-O2</code>'nin etkisini görebilirim.</li>
+        <li>Tekrarı görünce işleve çıkarır, sihirli sayıya ad veririm.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li><code>make test</code> hedefi derlemeye bağımlı değilse ilk çalıştırmada ne olur? Makefile'ın hangi satırı bunu düzeltir? <a href="#make-tek-komutla-her-sey">make</a></li>
+        <li>Altın dosya testi geçen bir program yine de yanlış olabilir mi? Bir örnek verin; sonra testi o örneği yakalayacak biçimde genişletin. <a href="#altin-dosya-yontemi">Altın dosya yöntemi</a></li>
+        <li>Programınız yalnızca büyük bir girdide çöküyor. İlk üç hamleniz hangi sırayla? Hangisi en ucuz? <a href="#hata-bulmanin-uc-yolu">Hata bulmanın üç yolu</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<nav class="gezinme"><a href="02-veri.html"><span class="yon">Önceki</span>II. Veriyi Düzenlemek</a><a class="sag" href="04-ozyineleme.html"><span class="yon">Sonraki</span>IV. Özyineleme</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

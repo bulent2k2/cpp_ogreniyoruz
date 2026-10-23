@@ -58,8 +58,8 @@ def baglantilar(kok: pathlib.Path) -> dict[str, str]:
     for satir in dosya.read_text(encoding="utf-8").splitlines():
         satir = satir.strip()
         if satir and not satir.startswith("#") and " " in satir:
-            k, v = satir.split(None, 1)
-            sonuc[k] = v.strip()
+            k, v = satir.split()[:2]   # ilk adres: claude.ai sayfası
+            sonuc[k] = v
     return sonuc
 
 

@@ -1,0 +1,1864 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: alistirma/bolumler/05-cizgeler.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alıştırmalar V: Çizgeler ve Gezintiler</title>
+<meta name="description" content="Derinlemesine ve enlemesine gezi, bağlı parçalar, Dijkstra, Floyd-Warshall, Bellman-Ford.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+/* ===========================================================
+   Alıştırma defteri için ek biçem.
+   Biçemin tamamı kardeş kitapçıktan (kitapcik/ortak.css) geliyor.
+   Burada iki şey var: vurgu rengi (mavi yerine mürdüm) ve alıştırma
+   basamaklarının biçemi: Isınma / Alıştırma / Zorlayıcı / Keşif.
+   =========================================================== */
+
+:root {
+  --mavi: #6B3FA0;          /* mürdüm: alıştırma defterinin vurgu rengi */
+  --mavi-yumusak: #EEE7F8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mavi: #B79BE6;
+    --mavi-yumusak: #241A36;
+  }
+}
+
+:root[data-theme="dark"] {
+  --mavi: #B79BE6;
+  --mavi-yumusak: #241A36;
+}
+
+@media print {
+  a { color: #5A338A; }
+}
+
+/* ---------- basamaklar ---------- */
+/* Dört basamak, dört renk; kitapçığın kutu renkleriyle aynı aile:
+   Isınma yeşil, Alıştırma mavi (vurgu), Zorlayıcı sarı, Keşif kırmızı. */
+
+.basamak {
+  display: inline-block;
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.18em 0.5em; border-radius: 4px;
+  vertical-align: 0.15em; margin-right: 0.45rem;
+}
+.basamak.isinma    { background: var(--yesil-yumusak);   color: var(--yesil); }
+.basamak.alistirma { background: var(--mavi-yumusak);    color: var(--mavi); }
+.basamak.zor       { background: var(--sari-yumusak);    color: var(--sari); }
+.basamak.kesif     { background: var(--kirmizi-yumusak); color: var(--kirmizi); }
+
+/* konu başındaki özet: her basamaktan kaç soru var */
+.merdiven { display: flex; gap: 0.35rem; margin: -0.4rem 0 1.2rem; }
+.merdiven .basamak { margin: 0; min-width: 1.6em; text-align: center; }
+.merdiven .basamak::after { content: ""; }
+
+/* ---------- tek alıştırma ---------- */
+
+.soru {
+  margin: 2rem 0 0;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--cizgi);
+}
+.soru > h3 { margin-top: 0; }
+.soru-no {
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+  color: var(--kod-soluk); margin-right: 0.45rem;
+}
+.soru .dizin {
+  font-size: 0.86rem; color: var(--kod-soluk); margin-top: 0.6rem;
+}
+.soru .kod.dar { margin-top: 1rem; }
+
+@media print {
+  .soru { break-inside: avoid; }
+}
+
+/* ikili çalışma imi (P9) ve süre notu (P4) */
+.basamak.ikili { background: var(--kagit-3); color: var(--murekkep-2); border: 1px dashed var(--cizgi-2); }
+.sure {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--murekkep-3); margin-left: 0.4rem; white-space: nowrap; vertical-align: 0.1em;
+}
+
+/* üç kademeli ipucu (P3): kapalı details; çözüm yok */
+.ipucu { margin: 0.6rem 0 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; }
+.ipucu details {
+  flex: 1 1 100%;
+  border: 1px solid var(--cizgi); border-left: 3px solid var(--sari);
+  border-radius: 0 4px 4px 0; background: var(--kagit-2);
+  padding: 0.3rem 0.8rem; font-size: 0.94rem;
+}
+.ipucu summary {
+  cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--sari); font-weight: 600; list-style: none;
+}
+.ipucu summary::before { content: "+ "; }
+.ipucu details[open] summary::before { content: "\2212 "; }
+.ipucu details p { margin: 0.35rem 0 0.25rem; }
+@media print { .ipucu details { break-inside: avoid; } }
+
+/* bölüm sınavı (P8): üç soru bağlantısı */
+.sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
+.sinav-sorular a { text-decoration: none; border: 1px solid var(--cizgi-2); border-radius: 4px; padding: 0.2rem 0.6rem; background: var(--kagit-2); color: var(--murekkep); }
+.sinav-sorular a:hover { border-color: var(--kirmizi); }
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar</div>
+  <div class="no">Bölüm V</div>
+  <h1>Çizgeler ve Gezintiler</h1>
+  <p class="ozet">
+    Kitapçığın beşinci bölümü beş satırlık bir kalıp öğretiyor ve onu değiştire değiştire yarım düzine ünlü problemi çözüyor. Burada dokuz konu, kırk alıştırma: çizgeyi saklamak, derinlemesine ve enlemesine gezi, odalar, labirent, iki takım, çok kaynaklı gezi, Dijkstra, Floyd–Warshall, Bellman–Ford. Keşiflerin çoğu CSES'in çizge bölümünden; girdiler CSES'in örnekleri.
+  </p>
+  <ul class="icerik-seridi"><li><a href="00-hazirlik.html">Hazırlık</a></li><li><a href="01-ilk-adimlar.html">I. İlk Adımlar</a></li><li><a href="02-veri.html">II. Veriyi Düzenlemek</a></li><li><a href="03-zanaat.html">III. Zanaat</a></li><li><a href="04-ozyineleme.html">IV. Özyineleme</a></li><li><a aria-current="page" style="border-color:var(--mavi);color:var(--mavi)">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li></ul>
+</header>
+
+<div class="blok">
+  <div class="ray">V.1</div>
+  <div class="govde">
+    <h2>Çizge nedir, nasıl saklanır?</h2>
+    <p>Noktalar ve bağlar. Bu konunun girdi biçimi bölüm boyunca aynı: ilk satırda nokta ve bağ sayısı, sonra her satırda bir bağ. Komşuluk listesi, komşuluk matrisi, dereceler ve 1736'dan kalma bir soru.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#cizge-nedir-nasil-saklanir">kitapçık V.1: Çizge nedir</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders19.md">ders 19: çizgeler ve ağlar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cizge-kurami.md">çizge kuramı</a></p>
+    </div>
+
+<section class="soru" id="V-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-1-I1</span> Yönsüzden yönlüye</h3>
+<p>Program bağları <em>yönsüz</em> okuyor: her <code>a b</code> satırı için hem <code>a</code>'nın listesine <code>b</code> hem <code>b</code>'nin listesine <code>a</code> ekleniyor. Tek satır silip çizgeyi <em>yönlü</em> yapın: yalnız <code>a → b</code>. Çıktıdaki hangi satırlar değişir? Girdi altı noktalı, altı bağlı bir çizge; sonraki alıştırmalar da aynı dosyayı kullanacak.</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-1-I1 · Yönsüzden yönlüye: bir satır silin</span>
+<span class="t">int</span> main() {
+  <span class="t">int</span> n{<span class="n">0</span>}, m{<span class="n">0</span>};
+  cin &gt;&gt; n &gt;&gt; m;
+  Dizi&lt;Dizi&lt;Nokta&gt;&gt; komsular(n + <span class="n">1</span>);
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; m; ++k) {
+    Nokta a, b; cin &gt;&gt; a &gt;&gt; b;
+    komsular[a].push_back(b);
+    komsular[b].push_back(a);     <span class="y">// yönsüz: iki yöne de</span>
+  }
+  <span class="a">for</span> (Nokta p{<span class="n">1</span>}; p &lt;= n; ++p) {
+    cout &lt;&lt; p &lt;&lt; <span class="s">&quot;:&quot;</span>;
+    <span class="a">for</span> (Nokta q : komsular[p]) cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; q;
+    cout &lt;&lt; endl;
+  }
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>1: 2 3
+2: 4
+3: 4
+4: 5
+5: 6
+6:</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-I1"><code>alistirma/kod/V-1-I1/</code></a></p>
+</section>
+<section class="soru" id="V-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-1-A1</span> Komşuluk matrisi</h3>
+<p>Aynı girdi, öteki temsil: <code>n × n</code> bir matris, <code>km[a][b]</code> bağ varsa 1. Yönsüz okuyun, matrisi satır satır yazın (sayılar arasında boşluk). Matris neden simetrik? Yönlü olsaydı olmazdı; bir deneyin. Kitapçığın tablosu: bu temsil ne zaman iyi?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>0 1 1 0 0 0
+1 0 0 1 0 0
+1 0 0 1 0 0
+0 1 1 0 1 0
+0 0 0 1 0 1
+0 0 0 0 1 0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-A1"><code>alistirma/kod/V-1-A1/</code></a></p>
+</section>
+<section class="soru" id="V-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-1-A2</span> Dereceler</h3>
+<p>Bir noktanın <strong>derecesi</strong> komşu sayısı. Her nokta için derecesini yazın; sonra en çok komşusu olan noktayı (eşitlikte küçük numaralı). Derecelerin toplamı bağ sayısının neden tam iki katı? Bu, çizge kuramının ilk teoremi.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>1: 2
+2: 2
+3: 2
+4: 3
+5: 2
+6: 1
+en çok komşusu olan: 4 (3)
+derece toplamı: 12</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-A2"><code>alistirma/kod/V-1-A2/</code></a></p>
+</section>
+<section class="soru" id="V-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-1-Z1</span> Königsberg&#x27;in köprüleri</h3>
+<p>Euler'in 1736'daki yanıtı tek bir sayıya bakıyor: derecesi <em>tek</em> olan nokta sayısı. Sıfırsa her köprüden bir kere geçip başa dönen bir yürüyüş var (Euler çevrimi); tam ikiyse başa dönmeyen bir yürüyüş var (Euler yolu); başka bir sayıysa yok. Girdi Königsberg'in kendisi: dört kara parçası, yedi köprü (aynı iki nokta arasında birden çok bağ olabilir, buna dikkat). Programınız üç durumdan hangisi olduğunu söylesin; sonra girdiyi değiştirip öteki iki durumu da üretin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Euler'in ölçütü yalnızca derecelere bakıyor; çoklu bağlar dereceyi iki kere artırır.</p></details>
+<details><summary>Yaklaşım</summary><p><code>vector&lt;int&gt; derece(n + 1)</code>; her bağ için iki ucu bir artırın; tek dereceli sayısını sayın; 0 / 2 / başka diye üç dal.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int k{0}; k &lt; m; ++k) { int a, b; cin &gt;&gt; a &gt;&gt; b; ++derece[a]; ++derece[b]; }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 7 1 2 1 2 1 3 1 3 1 4 2 4 3 4</span></figcaption>
+<pre><code>tek dereceli nokta sayısı: 4
+Euler yolu yok: her köprüden tam bir kere geçmek olanaksız</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-1-Z1"><code>alistirma/kod/V-1-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.2</div>
+  <div class="govde">
+    <h2>Beş satırlık kalıp: derinlemesine gezi</h2>
+    <p>Kitapçığın <code>40-gezi.cpp</code>'si: aynı çizge, üç gezi. Buradan erişilebilen noktalara, &ldquo;yol var mı&rdquo; sorularına, gezi ağacına ve yığınlı gezinin sırasını özyinelemeliyle eşleştirmeye.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#bes-satirlik-kalip">kitapçık V.2: Beş satırlık kalıp</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders20.md">ders 20: çizgelerde gezintiler</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260130.md">algoritma ders 16: derinlemesine gezi kalıpları</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/40-gezi.cpp">kod: 40-gezi.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-2-I1</span> Üçten başlayın</h3>
+<p>Üç geziyi de 1 yerine 3'ten başlatın. Çizge yönlü; 3'ten 2'ye bir yol var mı, yedi nokta da görünüyor mu? Önce kâğıtta okları izleyin, sonra çalıştırın. Sonra <code>bagla(6, 1)</code> satırını silip tekrar bakın: şimdi hangileri kayboldu, neden?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>derinlemesine (özyineleme): 3 4 6 1 2 5 7 
+derinlemesine (yığınla)   : 3 4 7 5 6 1 2 
+enlemesine    (kuyrukla)  : 3 4 6 7 1 5 2 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-I1"><code>alistirma/kod/V-2-I1/</code></a></p>
+</section>
+<section class="soru" id="V-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-2-A1</span> Erişilebilenler</h3>
+<p>Girdiden yönlü çizge okuyun (kitapçığın yedi noktalı çizgesi), 1'den derinlemesine gezin; erişilebilen noktaları küçükten büyüğe ve sayısını yazın. Gezinin sırası değil, kümesi önemli: <code>gezildi</code> dizisini sonunda tarayın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
+<pre><code>1&#x27;den erişilebilen: 1 2 3 4 5 6 7
+7 nokta</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-A1"><code>alistirma/kod/V-2-A1/</code></a></p>
+</section>
+<section class="soru" id="V-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-2-A2</span> Yol var mı?</h3>
+<p>Çizgeden sonra sorular geliyor: her satırda <code>a b</code>; <code>a</code>'dan <code>b</code>'ye yol var mı? Her soru için geziyi sıfırlayıp <code>a</code>'dan başlatın; <code>evet</code> ya da <code>hayır</code>. Girdi kitapçığın çizgesi ve dört soru. Sorular çoğalınca her seferinde baştan gezmek pahalı olur; V.3 bunun çaresini gösterecek (yönsüz çizgede).</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5 4 1 7 3 2 6 5 7 6</span></figcaption>
+<pre><code>1 -&gt; 7: evet
+3 -&gt; 2: evet
+6 -&gt; 5: evet
+7 -&gt; 6: hayır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-A2"><code>alistirma/kod/V-2-A2/</code></a></p>
+</section>
+<section class="soru" id="V-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-2-Z1</span> Gezi ağacı</h3>
+<p>Derinlemesine gezi bir ağaç çizer: her noktaya ilk kez hangi noktadan geldik? Kalıba iki girdi ekleyin: <code>gez(bu, nereden, derinlik)</code>. Her nokta için &ldquo;nereden, derinlik&rdquo; yazın (1 için kök). Girdi kitapçığın çizgesi. En derin nokta hangisi? Kitapçığın çıktısındaki sırayla (<code>1 2 5 7 3 4 6</code>) karşılaştırın: ağaç o sırayı açıklıyor mu?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her noktaya ilk kez geldiğimiz nokta ve o andaki derinlik ağacın kendisi.</p></details>
+<details><summary>Yaklaşım</summary><p><code>gez(bu, onceki, d)</code>: girişte <code>nereden[bu] = onceki; derinlik[bu] = d;</code>, komşulara <code>gez(su, bu, d + 1)</code>. En derin için derinlik dizisinin en büyüğü.</p></details>
+<details><summary>İlk satır</summary><p><code>void gez(Nokta bu, Nokta onceki, int d) { if (gezildi[bu]) return; gezildi[bu] = true; nereden[bu] = onceki; derinlik[bu] = d; for (Nokta su : komsular[bu]) gez(su, bu, d + 1); }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
+<pre><code>1: kök
+2: nereden=1 derinlik=1
+3: nereden=1 derinlik=1
+4: nereden=3 derinlik=2
+5: nereden=2 derinlik=2
+6: nereden=4 derinlik=3
+7: nereden=5 derinlik=3
+en derin: 6 (3)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-Z1"><code>alistirma/kod/V-2-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-2-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-2-K1</span> Yığın, özyinelemeyle aynı sırada</h3>
+<p>Kitapçığın çıktısında yığınlı gezi (<code>1 3 4 7 5 6 2</code>) özyinelemeliden (<code>1 2 5 7 3 4 6</code>) farklı sıra veriyor. Neden? Komşular yığına 2, 3 sırasıyla giriyor, 3 üstte kalıyor, önce o çıkıyor. <code>gez2</code>'yi öyle değiştirin ki sıra özyinelemeliyle aynı olsun; tek satır yeter (<code>&lt;algorithm&gt;</code>'da tersten yineleyici var, ya da döngüyü tersten kurun). Sonra düşünün: iki gezi de <em>doğru</em>; sıra ne zaman önemli olur?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yığın son koyduğunu önce verir; komşuları ters sırada koyarsanız ilkini önce alırsınız.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (auto it = komsular[bu].rbegin(); it != komsular[bu].rend(); ++it) yigin.push(*it);</code> — ya da indeksle tersten döngü.</p></details>
+<details><summary>İlk satır</summary><p><code>for (auto it = komsular[bu].rbegin(); it != komsular[bu].rend(); ++it) yigin.push(*it);</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>derinlemesine (özyineleme): 1 2 5 7 3 4 6 
+derinlemesine (yığınla)   : 1 2 5 7 3 4 6 
+enlemesine    (kuyrukla)  : 1 2 3 5 4 7 6 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-2-K1"><code>alistirma/kod/V-2-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.3</div>
+  <div class="govde">
+    <h2>Kaç oda var? Bağlı parçalar</h2>
+    <p>Izgarada görünmez çizge. Kitapçığın &ldquo;etrafı duvarla çevirin&rdquo; numarası, CSES'in <em>Counting Rooms</em> ve <em>Building Roads</em> soruları. Girdi biçimi CSES'inki: satır sütun, sonra plan.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#1-kac-oda-var">kitapçık V.3: Kaç oda var</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260123.md">algoritma ders 15: oda sayımı</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260130.md">algoritma ders 16: yol ağı tasarımı</a></p>
+    </div>
+
+<section class="soru" id="V-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-3-I1</span> Çapraz da komşu olsun</h3>
+<p>Program odaları sayıyor; dört yönlü komşuluk. Komşuluğu sekiz yöne çıkarın (çaprazlar da bağlasın): oda sayısı ne olur? Girdi CSES'in örneğinin bir duvarı açılmış hâli (dört yönlüde yine 3 oda). Çıktı iki satır olsun: dört yönlü ve sekiz yönlü sayım. Duvar çerçevesi sayesinde köşegen çağrılar da taşmıyor; neden?</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-3-I1 · Çapraz da komşu olsun</span>
+<span class="y">// Çıktı: &quot;4 yönlü: 3&quot; ve &quot;8 yönlü: ?&quot;</span>
+<span class="a">using</span> Tahta = Dizi&lt;Dizi<span class="s">&lt;bool&gt;</span>&gt;;   <span class="y">// true: boş ve gezilmemiş</span>
+
+<span class="t">bool</span> gez(<span class="t">int</span> y, <span class="t">int</span> x, Tahta&amp; t) {
+  <span class="a">if</span> (<span class="a">not</span> t[y][x]) <span class="a">return</span> <span class="a">false</span>;
+  t[y][x] = <span class="a">false</span>;
+  gez(y - <span class="n">1</span>, x, t); gez(y + <span class="n">1</span>, x, t); gez(y, x - <span class="n">1</span>, t); gez(y, x + <span class="n">1</span>, t);
+  <span class="a">return</span> <span class="a">true</span>;
+}
+
+Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) {
+  cin &gt;&gt; n &gt;&gt; m;
+  Tahta t(n + <span class="n">2</span>, Dizi<span class="s">&lt;bool&gt;</span>(m + <span class="n">2</span>, <span class="a">false</span>));     <span class="y">// çerçeve: duvar</span>
+  <span class="a">for</span> (<span class="t">int</span> y{<span class="n">1</span>}; y &lt;= n; ++y) {
+    <span class="t">string</span> satir; cin &gt;&gt; satir;
+    <span class="a">for</span> (<span class="t">int</span> x{<span class="n">1</span>}; x &lt;= m; ++x) t[y][x] = satir[x - <span class="n">1</span>] == <span class="s">&#x27;.&#x27;</span>;
+  }
+  <span class="a">return</span> t;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> n, m;
+  Tahta t{oku(n, m)};
+  <span class="t">int</span> oda{<span class="n">0</span>};
+  <span class="a">for</span> (<span class="t">int</span> y{<span class="n">1</span>}; y &lt;= n; ++y) <span class="a">for</span> (<span class="t">int</span> x{<span class="n">1</span>}; x &lt;= m; ++x) <span class="a">if</span> (gez(y, x, t)) ++oda;
+  cout &lt;&lt; <span class="s">&quot;4 yönlü: &quot;</span> &lt;&lt; oda &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ###..#.# #..#...# ########</span></figcaption>
+<pre><code>4 yönlü: 3
+8 yönlü: 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-I1"><code>alistirma/kod/V-3-I1/</code></a></p>
+</section>
+<section class="soru" id="V-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-3-A1</span> Odaları sayın, yığınla</h3>
+<p>Kitapçığın birinci alıştırması: <a href="https://cses.fi/problemset/task/1192">CSES 1192</a>, bu sefer özyineleme yerine <code>std::stack</code> ile. V-3-I1'in <code>gez</code>'ini yığınlı yazın (40-gezi'deki <code>gez2</code> kalıbı, karelerle). Çıktı yalnız oda sayısı; CSES'e gönderin. Büyük haritada (1000×1000) özyinelemeli sürüm neden çökebilir, yığınlı neden çökmez?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ####.#.# #..#...# ########</span></figcaption>
+<pre><code>3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-A1"><code>alistirma/kod/V-3-A1/</code></a></p>
+</section>
+<section class="soru" id="V-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-3-A2</span> En büyük oda</h3>
+<p>Odaları saymak yetmiyor; en büyüğü kaç kare? <code>gez</code> bir <code>bool</code> yerine <em>kare sayısı</em> döndürsün: kendisi 1, artı dört komşudan dönenlerin toplamı. Girdi aynı; çıktı oda sayısı ve en büyük odanın kare sayısı.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ####.#.# #..#...# ########</span></figcaption>
+<pre><code>3 oda, en büyüğü 8 kare</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-A2"><code>alistirma/kod/V-3-A2/</code></a></p>
+</section>
+<section class="soru" id="V-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">V-3-Z1</span> Yol ağı tasarımı</h3>
+<p><a href="https://cses.fi/problemset/task/1666">CSES 1666</a>, kitapçığın üçüncü alıştırması: n şehir, bazıları arasında yol; herkesin herkese ulaşması için en az kaç yeni yol gerekir, hangileri? Kitapçığın <code>parcayaEkle</code> kalıbı: parçaları numaralayın, her parçanın temsilcisini saklayın, temsilcileri zincir gibi bağlayın. Girdi CSES örneği (<code>4 2</code>, yollar 1-2, 3-4). Çıktı: yeni yol sayısı, sonra yollar. Başka bir doğru yanıt da olabilir; CSES hepsini kabul eder, bizim beklenen çıktı temsilcileri küçükten büyüğe zincirliyor.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her parçanın bir temsilcisi var; parçaları ardışık temsilcilerle bağlamak yeter.</p></details>
+<details><summary>Yaklaşım</summary><p><code>parcayaEkle</code> ile her noktayı numaralayın; her parça numarası için ilk görülen noktayı <code>temsilci</code> dizisine yazın; yeni yollar <code>temsilci[i]–temsilci[i+1]</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>vector&lt;Nokta&gt; temsilci; for (Nokta p{1}; p &lt;= n; ++p) if (parca[p] == 0) { temsilci.push_back(p); parcayaEkle(p, temsilci.size()); }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 2 1 2 3 4</span></figcaption>
+<pre><code>1
+1 3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-Z1"><code>alistirma/kod/V-3-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.4</div>
+  <div class="govde">
+    <h2>Labirentte en kısa yol: enlemesine gezi</h2>
+    <p>Kuyruk, noktaları başlangıca uzaklık sırasıyla işler; bu yüzden ilk varış en kısa yoldur. Kitapçığın <code>43-labirent.cpp</code>'sinden uzaklık haritasına, CSES'in <em>Labyrinth</em>'ine, genel çizgede en kısa yola ve satranç atına.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#2-labirentte-en-kisa-yol">kitapçık V.3: Labirentte en kısa yol</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260123.md">algoritma ders 15: labirentte yol bulma</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260206.md">algoritma ders 17: enlemesine gezi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/43-labirent.cpp">kod: 43-labirent.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-4-I1</span> Önce B&#x27;yi taşıyın, sonra bir duvar yıkın</h3>
+<p>Kitapçığın labirentinde A'dan B'ye 10 adım: dört aşağı, altı sağa; bu kadar kısa bir yolu hiçbir duvar yıkımı kısaltamaz (neden?). İki değişiklik yapın. Önce B'yi ortadaki odaya taşıyın: dördüncü satırı <code>#.#.B.#.#</code> yapın, altıncı satırdaki B'yi <code>.</code> yapın; yol kaç adıma uzadı? Sonra ikinci satırda A'nın sağındaki duvarı yıkın (<code>#A......#</code>); şimdi kaç adım, tarifi ne? Her ikisini de çalıştırmadan önce kâğıtta sayın. Beklenen çıktı ikinci durumun.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>en kısa yol 5 adım: RRDDR</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-I1"><code>alistirma/kod/V-4-I1/</code></a></p>
+</section>
+<section class="soru" id="V-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-4-A1</span> Uzaklık haritası</h3>
+<p>Yol tarifi yerine harita: A'dan her kareye kaç adım? Enlemesine gezi her karenin uzaklığını &ldquo;geldiğim karenin uzaklığı + 1&rdquo; diye yazsın. Haritayı basın: duvar <code>##</code>, ulaşılamayan <code>..</code>, ötekiler iki haneli uzaklık (<code>setw(2)</code>). Girdi CSES biçiminde (satır sütun, plan; A başlangıç, B hedef). B'deki sayı V-4-A2'nin yanıtı olacak.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #.A#...# #.##.#B# #......# ########</span></figcaption>
+<pre><code>################
+## 1 0## 8 910##
+## 2#### 7## 9##
+## 3 4 5 6 7 8##
+################</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-A1"><code>alistirma/kod/V-4-A1/</code></a></p>
+</section>
+<section class="soru" id="V-4-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-4-A2</span> Labyrinth</h3>
+<p><a href="https://cses.fi/problemset/task/1193">CSES 1193</a>, kitapçığın ikinci alıştırması: A'dan B'ye var mı, kaç adım, tarifi (<code>U D L R</code>). Kitapçığın &ldquo;nereden geldim&rdquo; numarası: her kareye geliş yönünü yazın, B'den geriye yürüyüp tarifi okuyun, ters çevirin. Çıktı CSES biçimi: <code>YES</code>, adım sayısı, tarif; ya da <code>NO</code>. Birden çok en kısa yol olabilir; bizim beklenen çıktı yönleri U, D, L, R sırasıyla deneyen sürümünki.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #.A#...# #.##.#B# #......# ########</span></figcaption>
+<pre><code>YES
+9
+LDDRRRRRU</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-A2"><code>alistirma/kod/V-4-A2/</code></a></p>
+</section>
+<section class="soru" id="V-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-4-Z1</span> Genel çizgede en kısa yol</h3>
+<p>Izgara değil, komşuluk listesi: yönsüz çizgede 1'den her noktaya en az kaç bağ? Enlemesine gezi, <code>uzaklik</code> ve <code>nereden</code> dizileriyle. Her nokta için uzaklığı yazın, sonra 1'den n'e yolu (<code>nereden</code> zincirini geri sararak). Girdi altı noktalı çizge. Yol yoksa <code>yol yok</code>.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Enlemesine gezi uzaklığı verir; <code>nereden</code> dizisi yolu geri sarar.</p></details>
+<details><summary>Yaklaşım</summary><p>Kuyrukla gezide komşuya girerken <code>uzaklik[su] = uzaklik[bu] + 1; nereden[su] = bu;</code>. Yolu <code>n</code>'den başlayıp <code>nereden</code>'i izleyerek bir vektöre koyun, sonra ters çevirin.</p></details>
+<details><summary>İlk satır</summary><p><code>for (Nokta p{n}; p != 0; p = nereden[p]) yol.push_back(p); reverse(yol.begin(), yol.end());</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>1: 0
+2: 1
+3: 1
+4: 2
+5: 3
+6: 4
+1 -&gt; 6: 1 2 4 5 6</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-Z1"><code>alistirma/kod/V-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-4-K1</span> Satranç atı <span class="sure">~2 saat</span></h3>
+<p>At, 8×8 tahtada <code>a1</code>'den <code>h8</code>'e en az kaç hamlede gider? Çizge görünmez: her karenin komşuları atın sekiz sıçraması. Enlemesine gezi; girdi iki kare (<code>a1 h8</code>). Sonra kitapçığın <em>Neden en kısa?</em> kutusunu kendi sözlerinizle yazın: kuyruktan çıkan karelerin uzaklığı neden hiç azalmaz? Bu bir tümevarım; dört beş cümle yeter, kod yazmaktan daha değerli.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Tahta bir çizge: kare düğüm, atın sıçraması bağ; komşular hesaplanır, saklanmaz.</p></details>
+<details><summary>Yaklaşım</summary><p>Sekiz sıçramayı iki dizide tutun (<code>DX</code>, <code>DY</code>); kuyrukla gezin, <code>uzaklik[8][8]</code> −1 ile başlasın. Harfi ve rakamı sayıya çevirme kodu hazır.</p></details>
+<details><summary>İlk satır</summary><p><code>const int DX[8]{1,2,2,1,-1,-2,-2,-1}, DY[8]{2,1,-1,-2,-2,-1,1,2};</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: a1 h8</span></figcaption>
+<pre><code>a1 -&gt; h8: 6 hamle</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-K1"><code>alistirma/kod/V-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.5</div>
+  <div class="govde">
+    <h2>İki takım kurmak; çevrim bulmak</h2>
+    <p>Aynı kalıp, &ldquo;gezildi&rdquo; yerine &ldquo;hangi takımda&rdquo;. Kitapçığın iki gerçek hatasından birini siz bulacaksınız; sonra CSES'in <em>Building Teams</em> ve <em>Round Trip</em> soruları.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#4-iki-takim-kurmak">kitapçık V.3: İki takım kurmak</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260213.md">algoritma ders 18: iki parça çizgeler</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260220.md">algoritma ders 19: çevrim bulma</a></p>
+    </div>
+
+<section class="soru" id="V-5-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-5-I1</span> Kitapçığın ilk hatası</h3>
+<p>Program iki takım kuruyor; ama kitapçığın <em>İki hata, iki ders</em> kutusundaki ilk hata burada: bir <code>else</code> eksik (süslü ayraçlar yerinde, yalnız sözcük yok), taban durumu yok, gezi durmuyor (çökene kadar kendini çağırır). Yeri bulup <code>else</code>'i koyun. Girdi: beş kişi, üç arkadaşlık. Kitapçık bu hatayı <code>gdb</code> ile bulmuş; siz de deneyin: <code>backtrace</code> sonsuz tekrarı gösterir.</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-5-I1 · Kitapçığın ilk hatası: eksik else</span>
+enum <span class="a">class</span> Takim { Yok, Bir, Iki };
+Dizi&lt;Dizi&lt;Nokta&gt;&gt; sinif;
+Dizi&lt;Takim&gt; takim;
+
+<span class="t">bool</span> gez(Nokta a) {
+  <span class="a">for</span> (Nokta b : sinif[a]) {
+    <span class="a">if</span> (takim[b] != Takim::Yok) {
+      <span class="a">if</span> (takim[b] == takim[a]) <span class="a">return</span> <span class="a">false</span>;
+    }
+    {                                   <span class="y">// buraya bir sözcük eksik</span>
+      takim[b] = (takim[a] == Takim::Bir) ? Takim::Iki : Takim::Bir;
+      <span class="a">if</span> (<span class="a">not</span> gez(b)) <span class="a">return</span> <span class="a">false</span>;
+    }
+  }
+  <span class="a">return</span> <span class="a">true</span>;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> n{<span class="n">0</span>}, m{<span class="n">0</span>};
+  cin &gt;&gt; n &gt;&gt; m;
+  sinif.assign(n + <span class="n">1</span>, {}); takim.assign(n + <span class="n">1</span>, Takim::Yok);
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; m; ++k) { Nokta a, b; cin &gt;&gt; a &gt;&gt; b; sinif[a].push_back(b); sinif[b].push_back(a); }
+  <span class="a">for</span> (Nokta p{<span class="n">1</span>}; p &lt;= n; ++p)
+    <span class="a">if</span> (takim[p] == Takim::Yok) {
+      takim[p] = Takim::Bir;
+      <span class="a">if</span> (<span class="a">not</span> gez(p)) { cout &lt;&lt; <span class="s">&quot;IMPOSSIBLE&quot;</span> &lt;&lt; endl; <span class="a">return</span> <span class="n">0</span>; }
+    }
+  <span class="a">for</span> (Nokta p{<span class="n">1</span>}; p &lt;= n; ++p) cout &lt;&lt; (takim[p] == Takim::Bir ? <span class="n">1</span> : <span class="n">2</span>) &lt;&lt; <span class="s">&quot; &quot;</span>;
+  cout &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 1 2 1 3 4 5</span></figcaption>
+<pre><code>1 2 2 1 2 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-I1"><code>alistirma/kod/V-5-I1/</code></a></p>
+</section>
+<section class="soru" id="V-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-5-A1</span> Üçgen</h3>
+<p>Kitapçığın dördüncü alıştırması: <a href="https://cses.fi/problemset/task/1668">CSES 1668</a>. V-5-I1'in düzeltilmiş programı bunu zaten çözüyor; şimdi mümkün olmayan bir girdi: 1-2, 2-3, 3-1 üçgeni. Çıktı <code>IMPOSSIBLE</code>. Sonra düşünün: hangi çizgeler ikiye bölünemez? Kitapçığın ipucu: tek sayıda bağdan oluşan bir çevrim. Girdiye bir dörtgen (çift çevrim) ekleyip bölünebildiğini de görün.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 3 1 2 2 3 3 1</span></figcaption>
+<pre><code>IMPOSSIBLE</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-A1"><code>alistirma/kod/V-5-A1/</code></a></p>
+</section>
+<section class="soru" id="V-5-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-5-A2</span> Çevrim var mı?</h3>
+<p>Yönsüz çizgede çevrim var mı? Derinlemesine gezide zaten gezilmiş bir komşuya rastlamak çevrim demek &mdash; <em>bir istisnayla</em>: az önce geldiğimiz nokta (yönsüz bağ iki yöne de görünür). Kalıba &ldquo;bir önceki nokta&rdquo; girdisini ekleyin. Girdi altı noktalı çizge: çevrim var (1-2-4-3). Çıktı <code>çevrim var</code> ya da <code>çevrim yok</code>; 5-6 bağını silip bir de ağaç deneyin.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
+<pre><code>çevrim var</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-A2"><code>alistirma/kod/V-5-A2/</code></a></p>
+</section>
+<section class="soru" id="V-5-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-5-Z1</span> Gidiş dönüş</h3>
+<p><a href="https://cses.fi/problemset/task/1669">CSES 1669</a> (<em>Round Trip</em>), kitapçığın beşinci alıştırması: çevrimi <em>yazın</em>. V-5-A2'ye <code>nereden</code> dizisini ekleyin; gezilmiş bir komşuya (<code>su</code>) rastlayınca <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar geri yürüyün, başa <code>su</code>'yu da koyun. Çıktı CSES biçimi: çevrimin nokta sayısı (başlangıç iki kere sayılır), sonra noktalar. Girdi CSES örneği. Başka çevrimler de doğru; bizim beklenen çıktı komşuları girdi sırasıyla gezen sürümünki.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Gezilmiş bir komşuya (geldiğin yer hariç) rastlamak çevrim demek; yolu <code>nereden</code>'den okuyun.</p></details>
+<details><summary>Yaklaşım</summary><p><code>gez(bu, onceki)</code> komşu <code>su</code> gezilmişse ve <code>su != onceki</code> ise: <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar noktaları toplayın, başa <code>su</code> koyun, <code>true</code> döndürün.</p></details>
+<details><summary>İlk satır</summary><p><code>for (Nokta p{bu}; p != su; p = nereden[p]) cevrim.push_back(p); cevrim.push_back(su); reverse(...); cevrim.insert(cevrim.begin(), su);</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 6 1 3 1 2 5 3 1 5 2 4 4 5</span></figcaption>
+<pre><code>4
+1 5 3 1 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-5-Z1"><code>alistirma/kod/V-5-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.6</div>
+  <div class="govde">
+    <h2>Bir kuyruk, birçok başlangıç</h2>
+    <p>Bütün kaynakları aynı kuyruğa koyun; tek gezi, iş bölümü. Kitapçığın kırk kat hızlanan canavar problemi burada: önce uzaklık haritası, sonra iki yöntemin karşılaştırması, sonra CSES'in <em>Monsters</em> sorusu.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#bir-kuyruk-bircok-baslangic">kitapçık V.4: Bir kuyruk, birçok başlangıç</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260227.md">algoritma ders 20: canavarlardan kaçış, giriş</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260306.md">algoritma ders 21: canavarlardan kaçış</a></p>
+    </div>
+
+<section class="soru" id="V-6-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-6-I1</span> En yakın canavar</h3>
+<p>Program her karenin en yakın canavara uzaklığını hesaplıyor: bütün <code>M</code>'ler önce kuyruğa, sonra tek gezi. Haritayı basıyor. Bir satır ekleyin: canavardan en uzak kare kaç adım uzakta? Girdi CSES'in canavar örneği.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>################
+## 0 1 2 1 2 3##
+## 1## 1 0## 4##
+## 0## 2 1## 5 6
+## 1############
+en uzak kare: 6 adım</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-I1"><code>alistirma/kod/V-6-I1/</code></a></p>
+</section>
+<section class="soru" id="V-6-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-6-A1</span> Yavaş ve hızlı, yan yana</h3>
+<p>Kitapçığın iki parçasını aynı programda yazın: <em>yavaş</em> (her canavar için ayrı gezi, her karede küçüğü tut) ve <em>hızlı</em> (hepsi aynı kuyrukta). İkisi de aynı haritayı vermeli; kuyruktan kaç kare çıktığını sayın. Çıktı: <code>aynı</code> ya da <code>FARKLI</code>, sonra iki sayı. Girdi aynı. Kitapçığın <code>c × n × m</code> / <code>c + n × m</code> oranı burada kaç?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>aynı
+yavaş: 48 çıkarma
+hızlı: 16 çıkarma</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-A1"><code>alistirma/kod/V-6-A1/</code></a></p>
+</section>
+<section class="soru" id="V-6-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">V-6-Z1</span> Monsters <span class="sure">~2 saat</span></h3>
+<p><a href="https://cses.fi/problemset/task/1194">CSES 1194</a>: labirentin kenarına canavarlardan önce varabilir misiniz? İki gezi: önce canavarların uzaklık haritası (V-6-I1), sonra sizin geziniz &mdash; bir kareye yalnız canavardan <em>daha erken</em> varabiliyorsanız girin. Kenara varınca <code>YES</code>, adım sayısı ve tarif (V-4-A2'deki &ldquo;nereden&rdquo; numarası). Girdi CSES örneği; beklenen çıktı U, D, L, R sırasıyla deneyen sürümünki, başka tarifler de doğru.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki uzaklık haritası: canavarlarınki önce, sizinki sonra; bir kareye yalnız erken varırsanız girin.</p></details>
+<details><summary>Yaklaşım</summary><p>Çok kaynaklı gezi (bütün <code>M</code>'ler kuyruğa) → <code>canavar[r][c]</code>; sonra <code>A</code>'dan gezi, komşuya geçiş koşulu <code>benim + 1 &lt; canavar[nr][nc]</code>; kenara varınca <code>nereden</code> ile tarifi geri sarın.</p></details>
+<details><summary>İlk satır</summary><p><code>if (uzak[nr][nc] == -1 and uzak[r][c] + 1 &lt; canavar[nr][nc]) { uzak[nr][nc] = uzak[r][c] + 1; nereden[nr][nc] = {r, c}; kuyruk.push({nr, nc}); }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>YES
+5
+RRDDR</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-Z1"><code>alistirma/kod/V-6-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-6-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-6-Z2</span> En güvenli kare</h3>
+<p>Tersine soru: duvarlardan en uzak kare hangisi? Bütün duvarları (ve tahtanın dışını) kaynak yapın; her boş karenin en yakın duvara uzaklığı çıkar; en büyüğünü bulun. Çerçeve numarası burada işinize yarar: dışarıyı da duvar sayın. Girdi aynı plan; çıktı en güvenli kare(ler)in uzaklığı ve kaç kare olduğu.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her boş karenin en yakın duvara uzaklığı: duvarları kaynak yapıp enlemesine gezin.</p></details>
+<details><summary>Yaklaşım</summary><p>Haritayı bir satır ve sütun çerçeveyle büyütüp dışı duvar sayın; bütün duvarlar uzaklık 0 ile kuyruğa; gezi bitince boş karelerin en büyük uzaklığı ve o uzaklıkta kaç kare.</p></details>
+<details><summary>İlk satır</summary><p><code>vector&lt;string&gt; g(n + 2, string(m + 2, '#')); for (int r{0}; r &lt; n; ++r) for (int c{0}; c &lt; m; ++c) g[r+1][c+1] = plan[r][c];</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
+<pre><code>en yakın duvara en uzak: 1 adım, 16 kare</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-Z2"><code>alistirma/kod/V-6-Z2/</code></a></p>
+</section>
+<section class="soru" id="V-6-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-6-K1</span> Monsters, büyük haritada</h3>
+<p>V-6-Z1'in programı, 40×60'lık üretilmiş bir haritada (girdi hazır). Önce yanıtı alın; sonra III.5'teki gibi ölçün: canavar sayısını kat kat artırsanız &ldquo;yavaş&rdquo; yöntem kaç kat yavaşlar, &ldquo;hızlı&rdquo; ne kadar? Sonra CSES'e gönderin (1000×1000, 1 s sınırı). Bir adım ötesi: canavarın da sizin de aynı anda vardığınız kareyi kim alır; CSES'in kuralı ile programınızın <code>&gt;=</code>'si uyuşuyor mu?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı program, büyük girdi; iş ölçmek ve sınır durumunu okumak.</p></details>
+<details><summary>Yaklaşım</summary><p>V-6-Z1'i kopyalayın; <code>chrono</code> ile süreyi <code>cerr</code>'e yazın; canavar sayısını girdide artırıp yeniden ölçün. CSES kuralı: aynı anda varılan kare canavarındır, <code>&lt;</code> katı olmalı.</p></details>
+<details><summary>İlk satır</summary><p><code>auto t0 = chrono::steady_clock::now();</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 40 60 ###############.############################################ #A..####..#......#.#....#..........#...##..#...............# #.....#..........#....#....#..#......###..#...#.....#......# ##.#......#...#....#.#.....#....#..#.......#...####.#..##..# #....#......##..##.........##...#..#.##.........#....##....# #....##.#...#.#...##.......#..#....#...........#...##...#.## #.#.#......##........##..............##.###.##.....#....##.# ##............#....#.......#..#...#.#......##...#...#.....## #.......##.####...#..##.#.#................#....#...#.#....# #........#...........##..#...#......#....#.....#.#....#.##.# #..#.##......##.....##........#..#..####....####.#...#.....# #.#..........##..#..##..####.......###...#.....#.#......#### #..###..#.######.#.#..........#..#.....##.#..##....#.##....# ##.....##........#.#..##..................#....####.#.##..## #.......###....#.#....#....#...#..#....##.##.#.##....#.#...# #........##...##.......#....##....###.###.###..#.........#.# #..#.....#.....#....#..........####.#.##..#..#...##..#..##.# #.#...#.........#...###....#.#................#..####.###### #....#.##...#.#.#.##...........###...#..#.....#.#......##..# ###..###....#.......###....#..#..##.##....#...##...##...#### #.#....#.....##..#..##....#.#........#.......#.............. #...#..#.....##..#............##.#.....#.#....#.#.##.......# #.##.#.........##...#.#..#..###...##...#.#.#.#....#.#......# #..................#..#.#..##.....#.#........###....###..### #.#..#.#.##......#.......##.......#..##....#.##.........##.# #.#.....#..#......#............#..#.....#.###....##.#.#....# ##.#..#..#..#...#....#..##..#..#.....#....#........##..#..## ###.#...#...#.#..#..#....##....#..#######..#.....#M.#..#.#.# #........#......##......#.#.........#..#.##.#.##..#....#...# ##..#...........................#........#.#.#.M#..#....#..# ###..#.....#...###.###...#.......#......#.#....M.......##..# #...#.........#.......#........#.#.....#.....#.......#.#..## ##......#.....#.#....#...#..#.#M.....#.#.......M......#...## #.#...#....#.##..###........##...#.#.....#.#...#......#..### #.##..#........#..#...#.#.#.#......###..M#......###........# #.##...#..#.#.#...##............#.#.#..##.#..##...#.##.#..M# ##.##.............#.#.......#..M.........#......#M..#.#....# #...#..#....#...#.#.#............###..###.#...#..##.#####..# #.##.........#...#..#......###............##....#..#.....### ##############################.#############################</span></figcaption>
+<pre><code>YES
+19
+DRRRDRRRURRRRURRRRU</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-K1"><code>alistirma/kod/V-6-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.7</div>
+  <div class="govde">
+    <h2>Dijkstra: bir noktadan hepsine</h2>
+    <p>Enlemesine gezi, kuyruğu öncelik sırasıyla değiştirince ağırlıklı yollara da çalışır. Kitapçığın <code>41-dijkstra.cpp</code>'si, yol kurma, Dijkstra'yı kırmak (eksi ağırlık), &ldquo;eski kayıt&rdquo; satırı ve CSES'in <em>Flight Discount</em>'u.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#dijkstra-bir-noktadan-hepsine">kitapçık V.5: Dijkstra</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260327.md">algoritma ders 23: en kısa yol (Dijkstra)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260313.md">algoritma ders 22: omuzda taşıyarak (USACO)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/41-dijkstra.cpp">kod: 41-dijkstra.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-7-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-7-I1</span> Ulaşılamayan şehir</h3>
+<p>Kitapçığın girdisine ulaşılamayan dördüncü bir şehir ekledik. Program onun uzaklığı için <code>SONSUZ</code>'u (10¹⁸) basıyor; bunu <code>-1</code> yapın. Tek satır. Sonra sorun: <code>SONSUZ</code> neden <code>1e18</code>, neden <code>numeric_limits&lt;long long&gt;::max()</code> değil? (İpucu: <code>u + sure</code> taşar mı?)</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 4 1 2 6 1 3 2 3 2 3 1 3 4</span></figcaption>
+<pre><code>0 5 2 -1 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-I1"><code>alistirma/kod/V-7-I1/</code></a></p>
+</section>
+<section class="soru" id="V-7-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A1</span> Yolu da yazın</h3>
+<p>Uzaklık yetmez, rota lazım: <code>nereden[su] = bu</code> kaydını uzaklık iyileştiğinde tutun; sonunda n'den geriye yürüyün (V-4-Z1'deki gibi). Çıktı: 1'den her şehre uzaklık satırı, sonra <code>1 -> n</code> yolu. Girdi beş şehir, yedi hat (yönlü). Bir şehre iki yoldan aynı uzaklıkla varılırsa hangisi kaydedilir?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 7 1 2 4 1 3 1 3 2 2 2 4 5 3 4 8 4 5 3 3 5 10</span></figcaption>
+<pre><code>1: 0
+2: 3
+3: 1
+4: 8
+5: 11
+1 -&gt; 5: 1 3 5 (uzaklık 11)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-A1"><code>alistirma/kod/V-7-A1/</code></a></p>
+</section>
+<section class="soru" id="V-7-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A2</span> Dijkstra&#x27;yı kırın</h3>
+<p>Kitapçığın yedinci alıştırması. Girdide eksi ağırlıklı bir bağ var (beş şehir). Aynı programda iki hesap yapın: <em>klasik</em> Dijkstra ve <em>n−1 tur gevşetme</em> (Bellman–Ford'un en sade hâli, V.9'da ayrıntısı). Klasik Dijkstra: sıradan çıkan şehri bir <code>bitti</code> dizisinde işaretleyin ve bitmiş şehre bir daha dokunmayın (ne yeniden işleyin ne uzaklığını güncelleyin). Dikkat, kitapçığın <code>41-dijkstra.cpp</code>'si farklı: o yalnız eski kaydı atlar, 2'yi yeniden açar ve bu girdide doğru sonucu verir; neden? İki sonucu alt alta yazın; hangi şehirlerde ayrışıyorlar, neden? Dijkstra 2'yi &ldquo;işi bitti&rdquo; sayıp bir daha bakmıyor (bitmiş şehre dokunmuyor); eksi bağ o kararı sonradan bozuyor, hata 5'e de taşınıyor.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5 1 2 1 2 5 1 1 3 5 3 4 -6 4 2 1</span></figcaption>
+<pre><code>Dijkstra : 0 1 5 -1 2
+gevşetme : 0 0 5 -1 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-A2"><code>alistirma/kod/V-7-A2/</code></a></p>
+</section>
+<section class="soru" id="V-7-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-7-Z1</span> Eski kayıt</h3>
+<p><code>if (uzaklik[bu] &lt; u) continue;</code> satırı ne yapıyor? Bir şehir sıraya birden çok kere girebilir (her iyileşmede bir kayıt); eskisi çıkınca atlanır. Satırı sayaçlı yapın: kaç kayıt atlandı? Sonra satırı silip programı yine çalıştırın: sonuç değişir mi, kaç hat gevşetildi? İki sayıyı da yazın. Girdi V-7-A1'inki.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı şehir sıraya birden çok kere girebilir; eski kayıt çıkınca atlanmalı.</p></details>
+<details><summary>Yaklaşım</summary><p><code>if (uzaklik[bu] &lt; u) { ++atlanan; continue; }</code>; ikinci sürümde satırı silip her çıkışta gevşetme sayacını artırın. İki sürümü iki işlev yapın, aynı girdiyle çağırın.</p></details>
+<details><summary>İlk satır</summary><p><code>long long atlanan{0}, gevsetme{0};</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 7 1 2 4 1 3 1 3 2 2 2 4 5 3 4 8 4 5 3 3 5 10</span></figcaption>
+<pre><code>1: 0
+2: 3
+3: 1
+4: 8
+5: 11
+atlanan eski kayıt: 2
+satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-Z1"><code>alistirma/kod/V-7-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-7-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-7-K1</span> Uçuş indirimi</h3>
+<p><a href="https://cses.fi/problemset/task/1195">CSES 1195</a> (<em>Flight Discount</em>): bir uçuşun bedelini yarıya indirme hakkınız var (bir kere, aşağı yuvarlayarak); 1'den n'e en ucuz yolculuk? Hile: her şehrin iki hâli var, &ldquo;indirim kullanılmadı&rdquo; ve &ldquo;kullanıldı&rdquo;; Dijkstra'yı <code>2n</code> düğümlü bu çizgede çalıştırın. Girdi CSES örneği; yanıt 2. Bir adım ötesi: indirim hakkı k olsaydı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her şehrin iki hâli; indirim kullanılmadan ve kullanılarak varmak farklı düğümler.</p></details>
+<details><summary>Yaklaşım</summary><p><code>uzaklik[sehir][0/1]</code>; her hat için iki geçiş: aynı hâlde tam bedelle, 0'dan 1'e yarı bedelle (<code>s / 2</code>). Yanıt <code>min(uzaklik[n][0], uzaklik[n][1])</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>priority_queue&lt;tuple&lt;U, Nokta, int&gt;, vector&lt;...&gt;, greater&lt;&gt;&gt; sira;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 1 2 3 2 3 1 1 3 7 2 1 5</span></figcaption>
+<pre><code>2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-7-K1"><code>alistirma/kod/V-7-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.8</div>
+  <div class="govde">
+    <h2>Floyd–Warshall: herkesten herkese</h2>
+    <p>Üç döngü, o kadar. Kitapçığın <code>42-floyd.cpp</code>'si, CSES'in <em>Shortest Routes II</em>'si, yolu geri kurmak ve erişilebilirlik matrisi.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#floyd-warshall-herkesten-herkese">kitapçık V.5: Floyd–Warshall</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260403.md">algoritma ders 24: bütün uzaklıklar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/floyd-warshall.md">floyd-warshall (kanıt)</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/42-floyd.cpp">kod: 42-floyd.cpp</a></p>
+    </div>
+
+<section class="soru" id="V-8-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-8-I1</span> Bir yol daha</h3>
+<p>Kitapçığın dört şehrine bir yol ekleyin: <code>yol(1, 3, 1)</code>. Matristeki hangi hücreler değişir? Önce kâğıtta: 1'den 3'e artık 1; 2'den 4'e? 1 üzerinden 5+1+... Hesaplayın, sonra çalıştırın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>        1   2   3   4
+     ----------------
+  1 |   0   3   1   8
+  2 |   3   0   2   9
+  3 |   1   2   0   7
+  4 |   8   9   7   0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-I1"><code>alistirma/kod/V-8-I1/</code></a></p>
+</section>
+<section class="soru" id="V-8-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-8-A1</span> En kısa yollar II</h3>
+<p><a href="https://cses.fi/problemset/task/1672">CSES 1672</a> (<em>Shortest Routes II</em>): n şehir, m çift yönlü yol, q soru; her soru için iki şehir arasındaki en kısa uzaklık, yol yoksa <code>-1</code>. Girdi CSES örneği. Aynı iki şehir arasında birden çok yol olabilir: <code>min</code> ile okuyun. <code>SONSUZ + SONSUZ</code> taşmasın diye <code>1e15</code>'in neden yeterli olduğunu düşünün.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 5 1 2 5 1 3 9 2 3 3 1 2 2 1 1 3 1 4 3 2</span></figcaption>
+<pre><code>5
+5
+8
+-1
+3</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-A1"><code>alistirma/kod/V-8-A1/</code></a></p>
+</section>
+<section class="soru" id="V-8-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-8-Z1</span> Yolu geri kurmak</h3>
+<p>Floyd–Warshall uzaklığı veriyor, yolu değil. İkinci bir matris tutun: <code>sonraki[a][b]</code>, a'dan b'ye giderken ilk adım. Yol okununca (<code>f[a][b] &gt; f[a][o] + f[o][b]</code>) <code>sonraki[a][b] = sonraki[a][o]</code>. Sonunda a'dan b'ye yolu <code>sonraki</code>'yi izleyerek yazın. Girdi kitapçığın dört şehri ve iki soru (<code>1 4</code>, <code>2 4</code>).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>sonraki[a][b]</code> a'dan b'ye ilk adım; her iyileşmede ara şehrin ilk adımını devralır.</p></details>
+<details><summary>Yaklaşım</summary><p>Başta <code>sonraki[a][b] = b</code> her yol için; üç döngüde <code>if (f[a][o] + f[o][b] &lt; f[a][b]) { f[a][b] = ...; sonraki[a][b] = sonraki[a][o]; }</code>. Yol: <code>a</code>'dan <code>b</code>'ye <code>sonraki</code>'yi izleyin.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int p{a}; p != b; p = sonraki[p][b]) cout &lt;&lt; p &lt;&lt; " "; cout &lt;&lt; b;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 4 2 1 2 5 1 4 9 2 3 2 3 4 7 1 4 2 4</span></figcaption>
+<pre><code>1 -&gt; 4: 1 4 (uzaklık 9)
+2 -&gt; 4: 2 3 4 (uzaklık 9)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-Z1"><code>alistirma/kod/V-8-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-8-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-8-K1</span> Kim kime ulaşır?</h3>
+<p>Ağırlıkları atın, <code>bool</code> kalsın: <code>erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b])</code>. Yönlü çizgede erişilebilirlik matrisi (<em>geçişli kapanış</em>). Girdi kitapçığın yedi noktalı yönlü çizgesi; matrisi basın, sonra her nokta için kaç noktaya ulaştığını. n = 500'de <code>n³</code> = 1,25·10⁸: kaba kurala göre bir saniye; deneyin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Uzaklık yerine evet/hayır; üç döngü aynı, işlem <code>or</code> ve <code>and</code>.</p></details>
+<details><summary>Yaklaşım</summary><p><code>erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b]);</code> — <code>o</code> en dışta. Sonra her satırın <code>true</code> sayısı.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int o{1}; o &lt;= n; ++o) for (int a{1}; a &lt;= n; ++a) for (int b{1}; b &lt;= n; ++b) erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b]);</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
+<pre><code>1 1 1 1 1 1 1
+0 1 0 0 1 0 1
+1 1 1 1 1 1 1
+1 1 1 1 1 1 1
+0 0 0 0 1 0 1
+1 1 1 1 1 1 1
+0 0 0 0 1 0 1
+1: 7 noktaya ulaşır
+2: 3 noktaya ulaşır
+3: 7 noktaya ulaşır
+4: 7 noktaya ulaşır
+5: 2 noktaya ulaşır
+6: 7 noktaya ulaşır
+7: 2 noktaya ulaşır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-8-K1"><code>alistirma/kod/V-8-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.9</div>
+  <div class="govde">
+    <h2>Bellman–Ford: eksi ağırlıklar da olabilir</h2>
+    <p>n−1 tur gevşetme; n'inci turda hâlâ iyileşen varsa çevrim. Kitapçığın ödüllü tünelleri (en büyük skor), CSES'in <em>High Score</em> ve <em>Cycle Finding</em> soruları.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/05-cizgeler.html#bellman-ford-eksi-agirliklar-da-olabilir">kitapçık V.5: Bellman–Ford</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260410.md">algoritma ders 25: en iyi yol ve sonsuz çevrim</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260417.md">algoritma ders 26: Bellman–Ford kanıtı</a></p>
+    </div>
+
+<section class="soru" id="V-9-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-9-I1</span> Kaç tur yetti?</h3>
+<p>Program kitapçığın skor sürümü: her tünelin ödülü/cezası, 1'den n'e en büyük skor, n−1 tur. Çoğu çizgede daha az tur yeter: bir turda hiçbir skor değişmediyse durun ve kaç tur attığınızı yazın. Girdi CSES'in <em>High Score</em> örneği (yanıt 5). Neden n−1 tur hep <em>yeterli</em>, ama çoğu zaman <em>gerekli</em> değil?</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code>#include <span class="s">&lt;iostream&gt;</span>
+#include <span class="s">&lt;vector&gt;</span>
+#include <span class="s">&lt;queue&gt;</span>
+#include <span class="s">&lt;stack&gt;</span>
+#include <span class="s">&lt;string&gt;</span>
+#include <span class="s">&lt;algorithm&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+<span class="a">using</span> Nokta = <span class="t">int</span>;
+template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Dizi = vector&lt;T&gt;;
+
+<span class="y">// V-9-I1 · Kaç tur yetti? Erken durun, tur sayısını yazın</span>
+<span class="a">using</span> S = <span class="t">long</span> <span class="t">long</span>;
+<span class="a">const</span> S SONSUZ{(S)1e18};
+<span class="a">struct</span> Tunel { <span class="t">int</span> a, b; S x; };
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> n{<span class="n">0</span>}, m{<span class="n">0</span>};
+  cin &gt;&gt; n &gt;&gt; m;
+  Dizi&lt;Tunel&gt; tuneller(m);
+  <span class="a">for</span> (<span class="a">auto</span>&amp; t : tuneller) cin &gt;&gt; t.a &gt;&gt; t.b &gt;&gt; t.x;
+  Dizi&lt;S&gt; skor(n + <span class="n">1</span>, -SONSUZ);
+  skor[<span class="n">1</span>] = <span class="n">0</span>;
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">1</span>}; k &lt; n; ++k)
+    <span class="a">for</span> (<span class="a">auto</span> [a, b, x] : tuneller)
+      <span class="a">if</span> (skor[a] != -SONSUZ) skor[b] = max(skor[b], skor[a] + x);
+  cout &lt;&lt; <span class="s">&quot;en büyük skor: &quot;</span> &lt;&lt; skor[n] &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 3 2 4 -1 1 3 -2 3 4 7 1 4 4</span></figcaption>
+<pre><code>en büyük skor: 5
+2 turda durdu</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-I1"><code>alistirma/kod/V-9-I1/</code></a></p>
+</section>
+<section class="soru" id="V-9-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-9-A1</span> Yüksek skor</h3>
+<p><a href="https://cses.fi/problemset/task/1673">CSES 1673</a> (<em>High Score</em>): 1'den n'e en büyük skor; sonsuza kadar artırılabiliyorsa <code>-1</code>. n'inci turda hâlâ iyileşen bir tünel varsa <em>o tünelin vardığı nokta</em> bir kârlı çevrimde ya da onun etkisinde. Ama dikkat: çevrim n'e ulaşmıyorsa sonsuz skor olmaz. Bu girdi (CSES örneği) çevrimsiz; yanıt 5. V-9-Z1 çevrimli hâlini verecek.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 3 2 4 -1 1 3 -2 3 4 7 1 4 4</span></figcaption>
+<pre><code>5</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-A1"><code>alistirma/kod/V-9-A1/</code></a></p>
+</section>
+<section class="soru" id="V-9-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-9-Z1</span> Çevrim n&#x27;e ulaşmıyorsa</h3>
+<p>İki girdi düşünün: birinde kârlı çevrim 1'den n'e giden yolun üstünde, ötekinde kenarda, n'e ulaşmayan bir çıkmazda. İkincide yanıt <code>-1</code> değil. V-9-A1'in çözümü bunu nasıl ayırıyor? Girdide iki çizge art arda (her biri <code>n m</code> ile başlıyor); programınız ikisi için de yanıt versin. Kârlı çevrim 2-3-2 ikisinde de var; farkı 3'ten n'e yol olup olmaması.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Kârlı çevrim yalnız <code>n</code>'e ulaşıyorsa sonsuz skor demek.</p></details>
+<details><summary>Yaklaşım</summary><p>n'inci turda iyileşen noktaları işaretleyin; işaretli bir noktadan <code>n</code>'e yol var mı diye (tersten ya da düz) gezin. Girdiyi <code>while (cin &gt;&gt; n &gt;&gt; m)</code> ile iki kere okuyun.</p></details>
+<details><summary>İlk satır</summary><p><code>while (cin &gt;&gt; n &gt;&gt; m) { Dizi&lt;Tunel&gt; t(m); for (auto&amp; x : t) cin &gt;&gt; x.a &gt;&gt; x.b &gt;&gt; x.x; cout &lt;&lt; coz(n, t) &lt;&lt; endl; }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 3 2 3 2 2 3 4 1 1 4 10 5 5 1 2 1 2 3 2 3 2 2 1 4 3 4 5 1</span></figcaption>
+<pre><code>-1
+4</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-Z1"><code>alistirma/kod/V-9-Z1/</code></a></p>
+</section>
+<section class="soru" id="V-9-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-9-K1</span> Çevrim bulma</h3>
+<p><a href="https://cses.fi/problemset/task/1197">CSES 1197</a> (<em>Cycle Finding</em>): çizgede toplam ağırlığı eksi bir çevrim var mı; varsa yazın. Bu sefer en <em>küçük</em> uzaklık (min), başlangıç noktası yok: bütün uzaklıkları 0'dan başlatın (sanki her noktaya sıfır maliyetli bir kaynak bağlı). n'inci turda hâlâ iyileşen bir nokta bulun; <code>nereden</code> zincirini n kere geri sarıp çevrimin içine girdiğinizden emin olun, sonra çevrimi okuyun. Girdi CSES örneği; beklenen çıktı bizim sürümünki, başka çevrim de doğru.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Eksi çevrim: n'inci turda hâlâ iyileşen bir nokta var; nereden zincirini geri sarınca çevrimin içine düşersiniz.</p></details>
+<details><summary>Yaklaşım</summary><p>Bütün uzaklıklar 0; n tur gevşetme; son turda iyileşen <code>x</code>'i n kere <code>nereden</code> ile geri sarın (artık çevrimdesiniz), sonra kendine dönene kadar toplayın ve ters çevirin.</p></details>
+<details><summary>İlk satır</summary><p><code>Nokta p{x}; for (int k{0}; k &lt; n; ++k) p = nereden[p]; Nokta bas{p}; do { cevrim.push_back(p); p = nereden[p]; } while (p != bas);</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 4 1 3 1 1 4 1 -3 4 3 -2</span></figcaption>
+<pre><code>YES
+4 1 2 4 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-9-K1"><code>alistirma/kod/V-9-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.10</div>
+  <div class="govde">
+    <h2>Geri dönüş: eşlemle çizge, özyinelemeyle oda</h2>
+    <p>Çizge kodunun altında hep eski tanıdıklar var: komşuluk listesi bir eşlem, derinlemesine gezi bir özyineleme. İki kısa soru, ikisi de o tanıdıkları adıyla çağırıyor.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/02-veri.html#eslem-en-cok-isinize-yarayacak-kap">kitapçık II.2: Eşlem</a> <a href="../kitapcik/04-ozyineleme.html#kendini-cagiran-islev">kitapçık IV.1: Kendini çağıran işlev</a> <a href="../kitapcik/05-cizgeler.html#cizge-nedir-nasil-saklanir">kitapçık V.1: Çizge nedir</a> <a href="../kitapcik/05-cizgeler.html#1-kac-oda-var">kitapçık V.3: Kaç oda var</a></p>
+    </div>
+
+<section class="soru" id="V-10-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-10-A1</span> Dereceler, eşlemle</h3>
+<p>Girdi: bağ sayısı <em>m</em>, sonra <em>m</em> satırda yönsüz bağ (<code>A B</code>). Çizgeyi <code>map&lt;string, set&lt;string&gt;&gt;</code> olarak kurun: her düğüm komşularının kümesine. Çıktı: her düğüm ve derecesi (komşu sayısı) ada göre sıralı, son satırda en çok komşusu olan düğüm. Küme sayesinde aynı bağ iki kere gelse de derece şişmez; eşlem sayesinde düğümleri önceden saymanıza gerek yok.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 A B A C B C C D D E</span></figcaption>
+<pre><code>A: 2
+B: 2
+C: 3
+D: 2
+E: 1
+en çok komşu: C (3)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-10-A1"><code>alistirma/kod/V-10-A1/</code></a></p>
+</section>
+<section class="soru" id="V-10-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-10-A2</span> Odaları özyinelemeyle sayın</h3>
+<p>Kitapçığın &ldquo;kaç oda var&rdquo; sorusu, bu sefer gezi kalıbı yerine doğrudan IV. bölümün özyinelemesiyle: <code>doldur(s, k)</code> kareyi işaretlesin, dört komşusunu çağırsın ve doldurduğu kare sayısını döndürsün. Girdi: satır ve sütun sayısı, sonra harita (<code>.</code> boş, <code>#</code> duvar). Çıktı: oda sayısı ve en büyük odanın kare sayısı. Taban durumunu ilk satıra yazın: sınır dışı, duvar ya da zaten dolu.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 6 ..#..# ..#..# ###### #...#.</span></figcaption>
+<pre><code>4 oda
+en büyük oda: 4 kare</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-10-A2"><code>alistirma/kod/V-10-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#V-4-Z1"><code>V-4-Z1</code> Genel çizgede en kısa yol</a> <a href="#V-3-Z1"><code>V-3-Z1</code> Yol ağı tasarımı</a> <a href="#V-6-Z2"><code>V-6-Z2</code> En güvenli kare</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<nav class="gezinme"><a href="04-ozyineleme.html"><span class="yon">Önceki</span>IV. Özyineleme</a><a class="sag" href="06-dp.html"><span class="yon">Sonraki</span>VI. Dinamik Programlama</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

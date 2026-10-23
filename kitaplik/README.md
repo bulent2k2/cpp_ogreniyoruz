@@ -17,6 +17,10 @@ sunan üç sayfa:
   pedagog, editör ve bilgisayar uzmanı gözüyle eksikler, öneriler ve yerini
   söyleyen düzeltme listesi.
 
+Üçü de, dört eserin bütün bölümleriyle birlikte, GitHub Pages aynasında da var:
+[bulent2k2.github.io/cpp_ogreniyoruz](https://bulent2k2.github.io/cpp_ogreniyoruz/). İki adres aynı içeriği taşır;
+biri açılmazsa öteki. Ayna depodaki `docs/` dizininden sunulur.
+
 Dosyalar
 --
 
@@ -32,6 +36,26 @@ python3 yap.py    # cikti/kitaplik.html, cikti/dizin.html, cikti/inceleme.html
 ```
 
 `cikti/` dizini `.gitignore`'dadır.
+
+GitHub Pages aynası
+--
+
+`ayna.py` dört eserin bölümlerini (her eserin kendi `yap.py`'sini çağırarak) ve
+bu üç sayfayı tam HTML olarak depo kökündeki `docs/` dizinine yazar:
+
+```sh
+make ayna         # python3 ayna.py -> ../docs/
+```
+
+Aynada bölümler arası bağlantılar claude.ai adresleri yerine göreli yollara gider
+(`baglantilar.txt`'deki ilk sütundan `docs/` içindeki dosyaya); resimler gömülmez,
+deponun ham GitHub adresinden okunur. Betik bitince göreli bağlantıları ve
+`#çapa`ları denetler; kırık varsa adlarını basar ve 1 ile çıkar.
+
+`docs/` üretilmiş dosyadır ve depoya işlenir (GitHub Pages oradan sunar); elle
+düzenlemeyin, kaynağı değiştirip `make ayna` deyin ve `docs/`'u da commit edin.
+Sayfaların adresi `baglantilar.txt` dosyalarının ikinci sütununda. Ayrıntı:
+`../kitapcik/yapim.md`, "GitHub Pages aynası".
 
 Dizine kavram eklemek
 --

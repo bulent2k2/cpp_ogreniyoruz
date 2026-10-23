@@ -140,9 +140,10 @@ pip install epubcheck
 python3 -m epubcheck kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub
 ```
 
-`baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor; `yap.py` bunları
-bölümler arası bağlantılara yerleştiriyor. Bölüm eklerseniz `yap.py` içindeki
-`BOLUMLER` listesine de eklemeyi unutmayın.
+`baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor, iki sütun hâlinde:
+claude.ai sayfası ve GitHub Pages aynası. `yap.py` ilk adresi bölümler arası
+bağlantılara yerleştiriyor. Bölüm eklerseniz `yap.py` içindeki `BOLUMLER`
+listesine de eklemeyi unutmayın.
 
 Kod bloklarındaki &ldquo;Hepsini seç&rdquo; düğmesi
 --
@@ -180,3 +181,36 @@ python3 kitapcik/geri_al.py kitapcik 02-veri ~/indirilen/sayfa.html --yaz   # ka
 
 Çıkış kodu 0 ise aynı, 1 ise farklı. Aynı betik Koco kitapçığı için de
 çalışır: ilk bağımsız değişkeni `kitapcik-koco` yapın.
+
+GitHub Pages aynası
+--
+
+Çevrimiçi bölümler claude.ai sayfalarında; bir de GitHub Pages aynası var:
+[bulent2k2.github.io/cpp_ogreniyoruz](https://bulent2k2.github.io/cpp_ogreniyoruz/). İki adres aynı içeriği taşır; biri
+açılmazsa öteki. Aynayı `kitaplik/ayna.py` üretir, çıktı depo kökündeki `docs/`
+dizinine gider ve depoya işlenir; Pages o dizinden sunar (depo ayarları →
+Pages → `main` dalı, `/docs`).
+
+```bash
+make -C kitaplik ayna     # python3 kitaplik/ayna.py -> docs/
+```
+
+Betik dört eserin (`kitapcik`, `kitapcik-koco`, `alistirma`, `alistirma-koco`)
+kendi `yap.py`'sini yükleyip `kur()` ile bölüm gövdesini kurar, tam HTML'e
+sarar ve iki dönüşüm uygular:
+
++ Bölümler arası bağlantılar claude.ai adresleri yerine göreli yollara gider:
+  `baglantilar.txt`'deki ilk adres `docs/` içindeki dosyaya çevrilir, `#çapa`
+  olduğu gibi kalır. Böylece ayna kendi içinde kapalıdır.
++ Resimler gömülmez (sayfa şişmesin) ve `docs/`'a kopyalanmaz (ikili dosya
+  çoğalmasın); deponun ham GitHub adresinden (`raw.githubusercontent.com`)
+  okunur. Yazı tipleri yayımlanan sayfalardaki gibi Google Fonts'tan gelir.
+
+Kitaplık sayfaları (`kitaplik.html` → `docs/index.html`, `dizin.html`,
+`inceleme.html`, `dizin-veri.js`) de aynı adres çevirisinden geçer. Betik
+bitince aynadaki göreli bağlantıları ve çapaları denetler; kırık varsa adını
+basar ve 1 ile çıkar.
+
+Bölüm metnini, Kitaplık sayfalarını ya da `baglantilar.txt`'yi değiştirdiyseniz
+`make -C kitaplik ayna` deyip `docs/`'u da commit edin; yoksa ayna geride kalır.
+`docs/` içindeki dosyaları elle düzenlemeyin.

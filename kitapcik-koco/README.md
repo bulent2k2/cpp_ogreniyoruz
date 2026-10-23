@@ -46,8 +46,8 @@ olan herkes açabilir; telefondan okumak için elverişli. Her bölümün başı
 + [VI. Dinamik Programlama](https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9) ızgara yolları, bozuk para; Mandelbrot; yola devam
 + [Küçük Sözlük](https://claude.ai/artifact/RBmX55BsV339Foquk6b6oT) terimlerin Türkçesi, Scala'daki ve İngilizcedeki karşılığı
 
-Adresler `baglantilar.txt` dosyasında; `yap.py` bunları bölümler arası
-bağlantılara yerleştiriyor.
+Aynı bölümler GitHub Pages aynasında da var: [bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/00-kapak.html). İki adres aynı içeriği taşır; biri açılmazsa öteki. Adresler `baglantilar.txt`
+dosyasında; `yap.py` bunları bölümler arası bağlantılara yerleştiriyor.
 
 
 Gerekli araçlar
@@ -115,9 +115,10 @@ make kapak      # kitap/kapak-koco.png (kapak-tasarim.html'den)
 make denetle    # epubcheck ile doğrula
 ```
 
-`baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor; biçimi kardeş
-kitapçıktakiyle aynı, `yap.py` bunları bölümler arası bağlantılara
-yerleştiriyor.
+`baglantilar.txt` yayımlanan bölümlerin adreslerini tutuyor (claude.ai sayfası ve
+GitHub Pages aynası); biçimi kardeş kitapçıktakiyle aynı, `yap.py` ilk adresi
+bölümler arası bağlantılara yerleştiriyor. Ayna `make -C ../kitaplik ayna` ile
+`docs/` altına yazılır; bkz. `../kitapcik/yapim.md`.
 
 Bir bölüm çevrimiçi sayfada düzeltilip kaynağa işlenmezse PDF ile EPUB geride
 kalır; kardeş kitapçıktaki `../kitapcik/geri_al.py` sayfayı kaynakla

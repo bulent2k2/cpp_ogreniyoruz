@@ -31,8 +31,10 @@ Bölümler
 | V | [Çizgeler ve Gezintiler](https://claude.ai/artifact/UkwaywCDT7d3GRkxY3HDZc) ([kaynak](bolumler/05-cizgeler.html)) | 4 | 18 |
 | VI | [Dinamik Programlama](https://claude.ai/artifact/YJrUEgeuxn8hEZDeBwSVLJ) ([kaynak](bolumler/06-dp.html)) | 4 | 19 |
 
-Bağlantısı olan herkes sayfaları açabilir; adresler `baglantilar.txt`'de,
-`yap.py` onları bölümler arası gezinmeye yerleştiriyor.
+Bağlantısı olan herkes sayfaları açabilir; aynı sayfalar GitHub Pages aynasında:
+[bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/00-hazirlik.html).
+Adresler `baglantilar.txt`'de, `yap.py` ilk adresi bölümler arası gezinmeye
+yerleştiriyor.
 
 Dizin yapısı
 --

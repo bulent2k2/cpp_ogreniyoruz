@@ -1,0 +1,1544 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: alistirma/bolumler/01-ilk-adimlar.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alıştırmalar I: İlk Adımlar</title>
+<meta name="description" content="Değer, ad, tür, taşma, karar, tekrar, işlev, ilk oyun ve kapsam: her konuya dört basamaklı bir merdiven.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+/* ===========================================================
+   Alıştırma defteri için ek biçem.
+   Biçemin tamamı kardeş kitapçıktan (kitapcik/ortak.css) geliyor.
+   Burada iki şey var: vurgu rengi (mavi yerine mürdüm) ve alıştırma
+   basamaklarının biçemi: Isınma / Alıştırma / Zorlayıcı / Keşif.
+   =========================================================== */
+
+:root {
+  --mavi: #6B3FA0;          /* mürdüm: alıştırma defterinin vurgu rengi */
+  --mavi-yumusak: #EEE7F8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mavi: #B79BE6;
+    --mavi-yumusak: #241A36;
+  }
+}
+
+:root[data-theme="dark"] {
+  --mavi: #B79BE6;
+  --mavi-yumusak: #241A36;
+}
+
+@media print {
+  a { color: #5A338A; }
+}
+
+/* ---------- basamaklar ---------- */
+/* Dört basamak, dört renk; kitapçığın kutu renkleriyle aynı aile:
+   Isınma yeşil, Alıştırma mavi (vurgu), Zorlayıcı sarı, Keşif kırmızı. */
+
+.basamak {
+  display: inline-block;
+  font-family: var(--mono); font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.18em 0.5em; border-radius: 4px;
+  vertical-align: 0.15em; margin-right: 0.45rem;
+}
+.basamak.isinma    { background: var(--yesil-yumusak);   color: var(--yesil); }
+.basamak.alistirma { background: var(--mavi-yumusak);    color: var(--mavi); }
+.basamak.zor       { background: var(--sari-yumusak);    color: var(--sari); }
+.basamak.kesif     { background: var(--kirmizi-yumusak); color: var(--kirmizi); }
+
+/* konu başındaki özet: her basamaktan kaç soru var */
+.merdiven { display: flex; gap: 0.35rem; margin: -0.4rem 0 1.2rem; }
+.merdiven .basamak { margin: 0; min-width: 1.6em; text-align: center; }
+.merdiven .basamak::after { content: ""; }
+
+/* ---------- tek alıştırma ---------- */
+
+.soru {
+  margin: 2rem 0 0;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--cizgi);
+}
+.soru > h3 { margin-top: 0; }
+.soru-no {
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+  color: var(--kod-soluk); margin-right: 0.45rem;
+}
+.soru .dizin {
+  font-size: 0.86rem; color: var(--kod-soluk); margin-top: 0.6rem;
+}
+.soru .kod.dar { margin-top: 1rem; }
+
+@media print {
+  .soru { break-inside: avoid; }
+}
+
+/* ikili çalışma imi (P9) ve süre notu (P4) */
+.basamak.ikili { background: var(--kagit-3); color: var(--murekkep-2); border: 1px dashed var(--cizgi-2); }
+.sure {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--murekkep-3); margin-left: 0.4rem; white-space: nowrap; vertical-align: 0.1em;
+}
+
+/* üç kademeli ipucu (P3): kapalı details; çözüm yok */
+.ipucu { margin: 0.6rem 0 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; }
+.ipucu details {
+  flex: 1 1 100%;
+  border: 1px solid var(--cizgi); border-left: 3px solid var(--sari);
+  border-radius: 0 4px 4px 0; background: var(--kagit-2);
+  padding: 0.3rem 0.8rem; font-size: 0.94rem;
+}
+.ipucu summary {
+  cursor: pointer; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--sari); font-weight: 600; list-style: none;
+}
+.ipucu summary::before { content: "+ "; }
+.ipucu details[open] summary::before { content: "\2212 "; }
+.ipucu details p { margin: 0.35rem 0 0.25rem; }
+@media print { .ipucu details { break-inside: avoid; } }
+
+/* bölüm sınavı (P8): üç soru bağlantısı */
+.sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
+.sinav-sorular a { text-decoration: none; border: 1px solid var(--cizgi-2); border-radius: 4px; padding: 0.2rem 0.6rem; background: var(--kagit-2); color: var(--murekkep); }
+.sinav-sorular a:hover { border-color: var(--kirmizi); }
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Keyifli Alıştırmalar</div>
+  <div class="no">Bölüm I</div>
+  <h1>İlk Adımlar</h1>
+  <p class="ozet">
+    Kitapçığın birinci bölümü beş yapıtaşı veriyor: değer, ad, tür, karar, tekrar; bir de işlev. Burada her birine bir merdiven var. Isınmalar kitapçıktaki programla başlıyor; Keşifler Project Euler'e çıkıyor.
+  </p>
+  <ul class="icerik-seridi"><li><a href="00-hazirlik.html">Hazırlık</a></li><li><a aria-current="page" style="border-color:var(--mavi);color:var(--mavi)">I. İlk Adımlar</a></li><li><a href="02-veri.html">II. Veriyi Düzenlemek</a></li><li><a href="03-zanaat.html">III. Zanaat</a></li><li><a href="04-ozyineleme.html">IV. Özyineleme</a></li><li><a href="05-cizgeler.html">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li></ul>
+</header>
+
+<div class="blok">
+  <div class="ray">I.1</div>
+  <div class="govde">
+    <h2>Değer, ad, tür</h2>
+    <p>Kitapçığın <code>01-turler.cpp</code> programı dört türü gösteriyor. Aşağıdaki beş alıştırma o programdan başlayıp türlerin sınırlarına kadar gidiyor.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/01-ilk-adimlar.html#deger-ad-tur">kitapçık I.1: Değer, ad, tür</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/01-turler.cpp">kod: 01-turler.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-1-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-1-I1</span> Deneyin kutusu</h3>
+<p>Kitapçığın <em>Deneyin</em> kutusu: <code>ogrenci</code>'yi <code>false</code> yapın, <code>char basHarfi{'B'}</code> yerine <code>int basHarfi{'B'}</code> yazın. Çalıştırmadan önce dört satırın nasıl değişeceğini tahmin edin, sonra beklenen çıktıyla karşılaştırın. <code>66</code> nereden geldi?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Merhaba! Ben senin ilk programın.
+Yaş      : 16
+Boy      : 1.72 m
+Baş harfi: 66
+Öğrenci  : 0
+Öğrenci  : false
+On yıl sonra: 26</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-I1"><code>alistirma/kod/I-1-I1/</code></a></p>
+</section>
+<section class="soru" id="I-1-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-1-A1</span> Dört değişken, dört tür</h3>
+<p>Bir kitabı dört değişkenle tanımlayın: adı (<code>string</code>), sayfa sayısı (<code>int</code>), fiyatı (<code>double</code>), rafta mı (<code>bool</code>). Değerler: <code>Keyifli Alıştırmalar</code>, <code>120</code>, <code>49.9</code>, <code>true</code>. Dört satırda, aşağıdaki biçimde yazın. <code>boolalpha</code>'yı hatırlayın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Kitap : Keyifli Alıştırmalar
+Sayfa : 120
+Fiyat : 49.9 TL
+Rafta : true</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-A1"><code>alistirma/kod/I-1-A1/</code></a></p>
+</section>
+<section class="soru" id="I-1-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-1-A2</span> Kaç bayt?</h3>
+<p>Kitapçık &ldquo;bellek upuzun bir şerit&rdquo; diyor. Her tür o şeritten kaç bayt alıyor? <code>sizeof(int)</code> söyler. Beş tür için yazın: <code>char</code>, <code>int</code>, <code>long long</code>, <code>double</code>, <code>bool</code>. (Beklenen çıktı bugünkü yaygın bilgisayarlar için; başka bir makinede başka çıkarsa bu bir hata değil, bir keşif.)</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>char      : 1 bayt
+int       : 4 bayt
+long long : 8 bayt
+double    : 8 bayt
+bool      : 1 bayt</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-A2"><code>alistirma/kod/I-1-A2/</code></a></p>
+</section>
+<section class="soru" id="I-1-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-1-Z1</span> Harfler de sayı</h3>
+<p><code>I-1-I1</code>'deki 66, <code>'B'</code> harfinin bellekteki sayısı (ASCII). Madem harf sayıdır, harfle hesap yapılır: bir döngüyle <code>A</code>'dan <code>Z</code>'ye bütün büyük harfleri tek satırda yazın. Sonra iki satır daha: <code>'B' + 1</code> kaç eder, <code>char('B' + 1)</code> hangi harf? Döngü değişkeninin türünü iyi seçin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Harf bir sayıdır; A'dan Z'ye gitmek 65'ten 90'a saymaktır.</p></details>
+<details><summary>Yaklaşım</summary><p>Döngü değişkenini <code>char</code> yapın ve <code>'A'</code>'dan <code>'Z'</code>'ye <code>++h</code> ile ilerleyin; <code>'B' + 1</code> ise <code>int</code>, onu harfe çevirmek için <code>char(...)</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>for (char h{'A'}; h &lt;= 'Z'; ++h) cout &lt;&lt; h;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ
+&#x27;B&#x27; + 1 = 67
+char(&#x27;B&#x27; + 1) = C</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-Z1"><code>alistirma/kod/I-1-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-1-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-1-K1</span> Sınırları keşfedin</h3>
+<p>Kitapçık <code>numeric_limits&lt;int&gt;::max()</code>'i gösterdi. <code>&lt;limits&gt;</code> başlığını kurcalayın: <code>short</code>, <code>int</code>, <code>long long</code> için en büyük değer; <code>double</code> için <code>epsilon()</code> (birden sonra temsil edilebilen ilk sayı ile 1 arasındaki fark). Beklenen çıktı bu dördü için; sonra <code>min()</code>, <code>digits</code>, <code>lowest()</code> ile kendiniz oynayın. Hangi tür ne zaman gerekir, takımınızla tartışın: nüfus, sıcaklık, bir harf notu, kapı açık mı.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her türün en büyük değeri <code>&lt;limits&gt;</code>'te hazır; dört satır, dört tür.</p></details>
+<details><summary>Yaklaşım</summary><p>Başlangıç dosyasındaki <code>short</code> satırını kopyalayıp türü değiştirin; <code>double</code> için <code>max()</code> yerine <code>epsilon()</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>cout &lt;&lt; numeric_limits&lt;long long&gt;::max() &lt;&lt; endl;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>short en büyük     : 32767
+int en büyük       : 2147483647
+long long en büyük : 9223372036854775807
+double epsilon     : 2.22045e-16</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-1-K1"><code>alistirma/kod/I-1-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.2</div>
+  <div class="govde">
+    <h2>Her türün bir sınırı var: taşma</h2>
+    <p>Yarışma sorularında en çok can yakan hata. Kitapçığın <code>02-tasma.cpp</code> programıyla başlayıp sınırın tam yerini bulana kadar gidiyoruz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/01-ilk-adimlar.html#her-turun-bir-siniri-var">kitapçık I.1: Her türün bir sınırı var</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/02-tasma.cpp">kod: 02-tasma.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-2-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-2-I1</span> Küp küçülünce</h3>
+<p><code>a</code>'yı <code>2000</code> yerine <code>1000</code> yapın. Hangi satırlar değişir, hangileri değişmez? Önce tahmin edin: 1000'in küpü <code>int</code>'e sığar mı? Kitapçıktaki sınırla karşılaştırın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1000&#x27;in küpü (int) : 1000000000
+3000&#x27;ün küpü (int) : 1230196224
+3000&#x27;ün küpü (long long): 27000000000
+karekök(1000&#x27;in küpü) : 31622.8
+int&#x27;in en büyüğü                : 2147483647
+unsigned long long&#x27;un en büyüğü : 18446744073709551615</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-I1"><code>alistirma/kod/I-2-I1/</code></a></p>
+</section>
+<section class="soru" id="I-2-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-2-A1</span> Faktöriyel nerede taşar?</h3>
+<p><code>n! = 1 · 2 · … · n</code>. Bir döngüyle hesaplayın; <code>12!</code> ve <code>13!</code>'ü önce <code>int</code>, sonra <code>long long</code> ile. <code>20!</code>'i de <code>long long</code> ile ekleyin. Dört satır. Hangi noktada <code>int</code> yalan söylemeye başlıyor?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>12! (int)       : 479001600
+13! (int)       : 1932053504
+13! (long long) : 6227020800
+20! (long long) : 2432902008176640000</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-A1"><code>alistirma/kod/I-2-A1/</code></a></p>
+</section>
+<section class="soru" id="I-2-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-2-A2</span> Sıfırın bir eksiği</h3>
+<p><code>unsigned int</code> eksi sayı tutamaz. Peki <code>0</code>'dan <code>1</code> çıkarınca ne olur? Ya en büyük değere <code>1</code> eklenince? İki satırda yazın. Kilometre saati benzetmesini hatırlayın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>unsigned 0 - 1          = 4294967295
+unsigned en büyük + 1   = 0</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-A2"><code>alistirma/kod/I-2-A2/</code></a></p>
+</section>
+<section class="soru" id="I-2-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-2-Z1</span> Neden tam 2147483647?</h3>
+<p>Kitapçığın <em>Takım işi</em> kutusundaki soru. Kâğıtta çözdükten sonra programla doğrulayın: <code>2³¹</code>, <code>2³¹ − 1</code>, <code>2³²</code> ve <code>2⁶³ − 1</code>. Çarpı işaretiyle değil, kaydırma işleciyle: <code>1LL &lt;&lt; 31</code> ne demek? <code>1 &lt;&lt; 31</code> yazarsanız ne olur, neden <code>LL</code> gerekti? Son satır için dikkat: <code>1LL &lt;&lt; 63</code> taşar; önce <code>62</code>'yi düşünün.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>2³¹ bir sayının 31 kere ikiye katlanması; kaydırma işleci tam bunu yapar.</p></details>
+<details><summary>Yaklaşım</summary><p><code>1LL &lt;&lt; 31</code> 64 bitte hesaplar; <code>1 &lt;&lt; 31</code> ise 32 bitte taşar. 2⁶³ − 1 için <code>1LL &lt;&lt; 63</code> taşar: iki kere 2⁶² − 1 artı 1 diye düşünün ya da <code>numeric_limits</code> ile doğrulayın.</p></details>
+<details><summary>İlk satır</summary><p><code>cout &lt;&lt; (1LL &lt;&lt; 31) - 1 &lt;&lt; endl;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>2^31     = 2147483648
+2^31 - 1 = 2147483647
+2^32     = 4294967296
+2^63 - 1 = 9223372036854775807</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-2-Z1"><code>alistirma/kod/I-2-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.3</div>
+  <div class="govde">
+    <h2>Kararlar ve tekrarlar</h2>
+    <p><code>if</code>, <code>for</code>, <code>while</code>. Kitapçık bu üçünü Project Euler'in birinci sorusuyla gösterdi; biz de oradan başlıyoruz ve ikinci soruya kadar gidiyoruz.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/01-ilk-adimlar.html#kararlar-ve-tekrarlar">kitapçık I.2: Kararlar ve tekrarlar</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">ders 5: PE 1</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders6.md">ders 6: Fibonaççi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/04-pe1.cpp">kod: 04-pe1.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-3-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-3-I1</span> Bin yerine yüz</h3>
+<p>Kitapçığın <code>04-pe1.cpp</code> programında sınırı <code>1000</code> yerine <code>100</code> yapın. Çalıştırmadan tahmin etmeyin, kâğıtta hesaplayın: 3'ün katları, 5'in katları, 15'in katları. Sonra çalıştırıp karşılaştırın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Project Euler, birinci problem: 2318</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-I1"><code>alistirma/kod/I-3-I1/</code></a></p>
+</section>
+<section class="soru" id="I-3-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-3-A1</span> Fizz, Buzz, FizzBuzz</h3>
+<p>Dünyanın en çok sorulan iş görüşmesi sorusu. 1'den 20'ye kadar sayın; 3'e bölünende <code>Fizz</code>, 5'e bölünende <code>Buzz</code>, ikisine de bölünende <code>FizzBuzz</code>, yoksa sayının kendisini yazın. Her biri ayrı satır. <code>if</code>'lerin sırası önemli; 15'i düşünün.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-A1"><code>alistirma/kod/I-3-A1/</code></a></p>
+</section>
+<section class="soru" id="I-3-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-3-A2</span> Basamaklar</h3>
+<p>Bir tam sayı okuyun; kaç basamağı olduğunu ve basamaklarının toplamını tek satırda yazın. <code>H-1-I2</code>'deki <code>%</code> ve <code>/</code> burada iş görüyor: <code>2026 % 10</code> son basamak, <code>2026 / 10</code> gerisi. Sayı sıfır olana kadar <code>while</code>.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 2026</span></figcaption>
+<pre><code>2026 sayısının 4 basamağı var, basamakları toplamı 10.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-A2"><code>alistirma/kod/I-3-A2/</code></a></p>
+</section>
+<section class="soru" id="I-3-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">I-3-Z1</span> Klasik tuzağı kendiniz kurun</h3>
+<p>Kitapçığın <em>Klasik tuzak</em> kutusu: <code>if</code>'i ikiye bölünce 15'in katları iki kere sayılıyor. Tuzağı bilerek kurun: iki ayrı <code>if</code> ile &ldquo;yanlış&rdquo; toplamı hesaplayın, sonra 15'in katlarını çıkararak düzeltin, sonra da <code>or</code>'lu doğru hâlle karşılaştırın. Üç satır: yanlış, yamalı, doğru. Yamalı ile doğru eşit çıkmalı. Hangisi daha okunaklı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Üç toplam: 3'e bölünenler artı 5'e bölünenler (15'ler iki kere), 15'leri bir kere çıkarınca yamalı, tek <code>or</code>'lu koşulla doğru.</p></details>
+<details><summary>Yaklaşım</summary><p>Tek döngü, üç sayaç; her sayı için üç ayrı <code>if</code> bloğu. Yamalı sürüm, yanlış toplamdan 15'in katlarını bir kere düşer.</p></details>
+<details><summary>İlk satır</summary><p><code>if (bolunuyorMu(s, 3)) yanlis += s; if (bolunuyorMu(s, 5)) yanlis += s;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>iki if ile  : 266333
+15 çıkarınca: 233168
+or ile      : 233168</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-Z1"><code>alistirma/kod/I-3-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-3-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-3-Z2</span> Collatz&#x27;ın inatçı dizisi</h3>
+<p>Bir sayı alın: çiftse ikiye bölün, tekse üçle çarpıp bir ekleyin; 1'e varana kadar. Kimse bunun her sayı için bittiğini kanıtlayamadı, ama 27 için biter: kaç adımda? Yolda görülen en yüksek değer ne? Girdi <code>27</code>. Sayı taşabilir mi diye düşünün, türünüzü ona göre seçin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Bir sayı 1'e inene kadar çift/tek kuralıyla dönüşüyor; adımları ve yolda görülen en büyüğü sayın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>while (n != 1)</code> döngüsü, içinde <code>n % 2</code> ile ikiye ayrılan bir <code>if</code>; her adımda sayaç ve <code>max</code>. 3n+1 ara değerleri <code>int</code>'i aşabilir: <code>long long</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>while (n != 1) { n = (n % 2 == 0) ? n / 2 : 3 * n + 1; ++adim; enBuyuk = max(enBuyuk, n); }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 27</span></figcaption>
+<pre><code>27 için 111 adım, en yüksek değer 9232.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-Z2"><code>alistirma/kod/I-3-Z2/</code></a></p>
+</section>
+<section class="soru" id="I-3-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-3-K1</span> Project Euler 2</h3>
+<p><a href="https://projecteuler.net/problem=2">İkinci soru</a>: Fibonaççi dizisinde (1, 2, 3, 5, 8, …) dört milyonu aşmayan <em>çift</em> terimlerin toplamı. Döngüyle; özyineleme Bölüm IV'te. Yanıtı bulunca Project Euler hesabınıza girin, yeşil tik alın. Sonra bir adım öteye: her üçüncü Fibonaççi sayısının çift olduğunu fark ettiniz mi? Neden?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Fibonaççi terimlerini üretip çift olanları topluyorsunuz; dört milyonu geçince durun.</p></details>
+<details><summary>Yaklaşım</summary><p>İki değişken yeter: <code>a</code> ve <code>b</code>; her adımda <code>(a, b) = (b, a + b)</code>. Üçüncü bir geçici değişken gerekir.</p></details>
+<details><summary>İlk satır</summary><p><code>long long a{1}, b{2}, toplam{0}; while (b &lt;= 4000000) { ... }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Project Euler, ikinci problem: 4613732</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-3-K1"><code>alistirma/kod/I-3-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.4</div>
+  <div class="govde">
+    <h2>İşlev: bir kere yaz, çok kere kullan</h2>
+    <p>Kitapçık <code>bolunuyorMu()</code> için &ldquo;tek satır, buna değer mi? Kesinlikle&rdquo; dedi. Burada beş işlev yazacaksınız; her biri bir satırdan biraz uzun.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/01-ilk-adimlar.html#islev-bir-kere-yaz-cok-kere-kullan">kitapçık I.2: İşlev</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders8.md">ders 8: Kendini tekrar etme</a></p>
+    </div>
+
+<section class="soru" id="I-4-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-4-I1</span> Kare ve küp</h3>
+<p>İki işlev: <code>kare(int)</code> ve <code>kup(int)</code>. İkisi de <code>int</code> döndürsün. <code>main</code> hazır, yalnız işlevleri yazın. Sonra <code>kup</code>'u <code>kare</code>'yi kullanarak yazabilir misiniz?</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-4-I1 · Kare ve küp</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="y">// kare(int) ve kup(int) işlevlerini buraya yazın</span>
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;12&#x27;nin karesi: &quot;</span> &lt;&lt; kare(<span class="n">12</span>) &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">&quot;12&#x27;nin küpü  : &quot;</span> &lt;&lt; kup(<span class="n">12</span>) &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>12&#x27;nin karesi: 144
+12&#x27;nin küpü  : 1728</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-I1"><code>alistirma/kod/I-4-I1/</code></a></p>
+</section>
+<section class="soru" id="I-4-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-4-A1</span> Üçün en büyüğü</h3>
+<p><code>enBuyuk(int, int, int)</code> üç sayının en büyüğünü döndürsün. Girdi <code>7 42 19</code>. Önce <code>if</code>'lerle yazın; sonra önce ikisinin en büyüğünü bulan iki girdili bir işlev yazıp üçlüyü onunla kurun. Hangisi kısa?</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 42 19</span></figcaption>
+<pre><code>En büyük: 42</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-A1"><code>alistirma/kod/I-4-A1/</code></a></p>
+</section>
+<section class="soru" id="I-4-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-4-A2</span> Asal mı?</h3>
+<p><code>asalMi(int)</code> bir <code>bool</code> döndürsün. Sonra 50'den küçük asalları tek satırda yazın: her sayıdan sonra bir boşluk, en sonda <code>endl</code>. Bölenleri nereye kadar denemek gerekir: <code>n</code>'e kadar mı, <code>n/2</code>'ye mi, <code>√n</code>'e mi? Üçü de doğru yanıt verir; farkı Bölüm III'te ölçeceksiniz.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 </code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-A2"><code>alistirma/kod/I-4-A2/</code></a></p>
+</section>
+<section class="soru" id="I-4-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-4-Z1</span> Öklid&#x27;in işlevi</h3>
+<p>İki sayının en büyük ortak böleni için Öklid'in 2300 yıllık yöntemi: büyük sayıyı küçüğe böl, kalanı al; kalan sıfır olana kadar. <code>ebob(int, int)</code> işlevini döngüyle yazın (özyinelemesini Bölüm IV'te göreceksiniz). Sonra <code>ekok</code>'u <code>ebob</code>'dan türetin: <code>a · b / ebob</code>. Girdi <code>1071 462</code>.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Öklid: <code>ebob(a, b) = ebob(b, a % b)</code>, kalan sıfır olana kadar.</p></details>
+<details><summary>Yaklaşım</summary><p><code>while (b != 0)</code> döngüsünde kalanı hesaplayıp <code>a</code>'yı <code>b</code>, <code>b</code>'yi kalan yapın; ekok için çarpmadan önce bölün ki taşmasın: <code>a / ebob * b</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>int ebob(int a, int b) { while (b != 0) { int k{a % b}; a = b; b = k; } return a; }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1071 462</span></figcaption>
+<pre><code>ebob(1071, 462) = 21
+ekok(1071, 462) = 23562</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-Z1"><code>alistirma/kod/I-4-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-4-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-4-K1</span> Project Euler 3</h3>
+<p><a href="https://projecteuler.net/problem=3">Üçüncü soru</a>: <code>600851475143</code> sayısının en büyük asal çarpanı. Kitapçığın uyarısı: bu sayı <code>int</code>'e sığmıyor. <code>I-4-A2</code>'deki <code>asalMi</code>'yi her bölen için çağırmak çok yavaş olur; başka bir yol düşünün: en küçük bölenden başlayıp sayıyı bölerek küçültün. Asallık sınaması gerekmeyebilir. Neden?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Sayıyı en küçük bölenden başlayarak bölüp küçültün; bölen artık bölmüyorsa bir artırın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (long long b{2}; b * b &lt;= sayi; ++b) while (sayi % b == 0) sayi /= b;</code> döngüsünden sonra kalan sayı (1 değilse) en büyük asal çarpan. Bölenler asal olmasa da olur; neden?</p></details>
+<details><summary>İlk satır</summary><p><code>long long b{2}; while (b * b &lt;= sayi) { ... }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>Project Euler, üçüncü problem: 6857</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-4-K1"><code>alistirma/kod/I-4-K1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.5</div>
+  <div class="govde">
+    <h2>İlk oyununuz</h2>
+    <p>Kitapçığın tahmin oyunu rastgele sayı tutuyor; rastgele programı sınamak zordur. İlk alıştırma oyunu sınanabilir yapıyor, gerisi o temelin üstüne çıkıyor. Girdi isteyen alıştırmalarda tahminler <code>girdi</code> dosyasından geliyor; tarayıcıda <em>Input</em> kutusuna yazın.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">1</span> <span class="basamak zor">2</span> <span class="basamak kesif">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/01-ilk-adimlar.html#ilk-oyununuz">kitapçık I.3: İlk oyununuz</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">ders 1-4: rastgele sayılar, girdi</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/03-tahmin.cpp">kod: 03-tahmin.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-5-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-5-I1</span> Rastgeleyi kapatın</h3>
+<p><code>03-tahmin.cpp</code>'de <code>gizli</code>'yi rastgele seçen satırı <code>const int gizli{37};</code> yapın. Artık oyun sınanabilir: girdi <code>50 25 37</code> ile aşağıdaki konuşma çıkmalı. &ldquo;Bildin! 3 tahminde&rdquo; sayısı nereden geliyor, <code>toplamHak - hak</code> ifadesini okuyun.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 50 25 37</span></figcaption>
+<pre><code>1 ile 100 arasında bir sayı tuttum. 7 hakkın var.
+Tahminin: Daha küçük. Kalan hak: 6
+Tahminin: Daha büyük. Kalan hak: 5
+Tahminin: Bildin! 3 tahminde.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-I1"><code>alistirma/kod/I-5-I1/</code></a></p>
+</section>
+<section class="soru" id="I-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-5-A1</span> Kaç hak yeter?</h3>
+<p>Kitapçığın <em>Deneyin</em> kutusu: hak sayısını sınıra bakarak hesaplayın. Bir <code>hakSayisi(int sinir)</code> işlevi yazın: <code>2ⁿ</code> sınırı geçene kadar sayan bir <code>while</code>. Üç sınır için yazın: 100, 1000, 1000000. <code>log2</code> kullanmayın, elle; sonra <code>&lt;cmath&gt;</code> ile doğrulayın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>100 için 7 hak
+1000 için 10 hak
+1000000 için 20 hak</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-A1"><code>alistirma/kod/I-5-A1/</code></a></p>
+</section>
+<section class="soru" id="I-5-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">I-5-Z1</span> Tersine oyun</h3>
+<p>Kitapçığın birinci alıştırması: siz sayı tutun, bilgisayar bulsun. Her tahminden sonra siz <code>b</code> (daha büyük), <code>k</code> (daha küçük) ya da <code>d</code> (doğru) yazın. Bilgisayar akıllı oyuncu olsun: her seferinde kalan aralığın ortasını söylesin. Girdi <code>b k b d</code> ile tahminler 50, 75, 62, 68 olmalı. İki değişken yeter: <code>alt</code> ve <code>ust</code>. Bu, ikili aramanın ta kendisi.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Bilgisayar her seferinde aralığın ortasını söylüyor; yanıtınıza göre aralık yarıya iniyor.</p></details>
+<details><summary>Yaklaşım</summary><p><code>alt</code> ve <code>ust</code>; tahmin <code>(alt + ust) / 2</code>; <code>b</code> gelince <code>alt = tahmin + 1</code>, <code>k</code> gelince <code>ust = tahmin - 1</code>, <code>d</code> gelince dur.</p></details>
+<details><summary>İlk satır</summary><p><code>while (true) { int tahmin{(alt + ust) / 2}; cout &lt;&lt; tahmin &lt;&lt; endl; char y; cin &gt;&gt; y; ... }</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: b k b d</span></figcaption>
+<pre><code>1 ile 100 arasında bir sayı tutun. Ben bulayım.
+Tahminim: 50 (b/k/d) 
+Tahminim: 75 (b/k/d) 
+Tahminim: 62 (b/k/d) 
+Tahminim: 68 (b/k/d) 
+4 tahminde buldum: 68</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-Z1"><code>alistirma/kod/I-5-Z1/</code></a></p>
+</section>
+<section class="soru" id="I-5-Z2">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-5-Z2</span> Bozuk girdiye dayanmak</h3>
+<p>Kitapçığın oyunu bozuk girdide (<code>abc</code> gibi) oyunu bitiriyor: <code>if (not (cin &gt;&gt; tahmin)) break;</code>. Daha nazik olun: &ldquo;Bu bir sayı değil, hak yanmadı.&rdquo; deyip devam edin. Bunun için <code>cin.clear()</code> ile hatayı silmek, sonra bozuk sözcüğü okuyup atmak gerekiyor. Girdi gerçekten bitmişse yine çıkın (<code>cin.eof()</code>). <code>gizli</code> 37 olsun; girdi <code>abc 37</code>.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Bozuk girdi <code>cin</code>'i hata durumuna sokar; durumu silip bozuk sözcüğü atmadan devam edemezsiniz.</p></details>
+<details><summary>Yaklaşım</summary><p><code>if (not (cin &gt;&gt; tahmin))</code> dalında önce <code>cin.eof()</code>'a bakın (bitti mi), değilse <code>cin.clear()</code>, sonra bozuk parçayı bir <code>string</code>'e okuyup atın ve <code>continue</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>if (cin.eof()) break; cin.clear(); string cop; cin &gt;&gt; cop; cout &lt;&lt; "Bu bir sayı değil, hak yanmadı." &lt;&lt; endl; continue;</code></p></details>
+</div>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: abc 37</span></figcaption>
+<pre><code>1 ile 100 arasında bir sayı tuttum. 7 hakkın var.
+Tahminin: Bu bir sayı değil, hak yanmadı.
+Tahminin: Bildin! 1 tahminde.</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-Z2"><code>alistirma/kod/I-5-Z2/</code></a></p>
+</section>
+<section class="soru" id="I-5-K1">
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">I-5-K1</span> Oyunu büyütün</h3>
+<p>Beklenen çıktı yok; oyun sizin. Birkaç yön: oyun bitince &ldquo;bir daha?&rdquo; diye sorsun; iki oyuncu sırayla tahmin etsin, bilen kazansın; sınırı kullanıcı seçsin, hak sayısı <code>I-5-A1</code>'deki işlevle hesaplansın. En az birini yapın, ikili çalışın, sonra sınıftan birine oynatın: oyununuz onun yaptığı tuhaf şeylere dayanıyor mu?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Oyunun gövdesi hazır; etrafına bir katman daha koyuyorsunuz: tekrar, iki oyuncu ya da seçilebilir sınır.</p></details>
+<details><summary>Yaklaşım</summary><p>Oyunu bir <code>oyna()</code> işlevine taşıyın; <code>main</code> onu bir <code>do … while</code> içinde çağırsın. İki oyuncu için sıra değişkeni (<code>sira = 1 - sira</code>).</p></details>
+<details><summary>İlk satır</summary><p><code>do { oyna(); cout &lt;&lt; "bir daha? (e/h) "; cin &gt;&gt; yanit; } while (yanit == 'e');</code></p></details>
+</div>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-5-K1"><code>alistirma/kod/I-5-K1/</code></a> &mdash; beklenen çıktı yok</p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">I.6</div>
+  <div class="govde">
+    <h2>Adların nerede geçerli olduğu</h2>
+    <p>Kapsam. Kitapçık &ldquo;yanıtı vermiyorum, çalıştırın&rdquo; dedi. Biz de vermiyoruz; dört alıştırma, her biri bir tuzak.</p>
+    <p class="merdiven"><span class="basamak isinma">1</span> <span class="basamak alistirma">2</span> <span class="basamak zor">1</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="../kitapcik/01-ilk-adimlar.html#adlarin-nerede-gecerli-oldugu">kitapçık I.4: Adların nerede geçerli olduğu</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/neden-namespace-kullanırız.md">neden-namespace-kullanırız</a> <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/kod/05-kapsam.cpp">kod: 05-kapsam.cpp</a></p>
+    </div>
+
+<section class="soru" id="I-6-I1">
+<h3><span class="basamak isinma">Isınma</span><span class="soru-no">I-6-I1</span> Bir sözcük silin</h3>
+<p>Önce <code>05-kapsam.cpp</code>'yi olduğu gibi çalıştırıp iki soru işaretini doldurun. Sonra <code>g()</code> içindeki <code>int</code> sözcüğünü silin. Şimdi ne yazar? Çalıştırmadan önce yanıtı kâğıda yazın; beklenen çıktı değişmiş hâli için.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>5 99</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-I1"><code>alistirma/kod/I-6-I1/</code></a></p>
+</section>
+<section class="soru" id="I-6-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-6-A1</span> Döngüden sonra</h3>
+<p>Program derlenmiyor: <code>k</code> döngünün dışında tanınmıyor. Döngüyü değiştirmeden, <code>k</code>'yı döngüden sonra da yaşayacak biçimde tanımlayın. Çıktı <code>k = 10</code> olmalı. Kitapçığın kuralını hatırlayın: en dar kapsam &mdash; ama bu sefer döngüden <em>bir</em> adım geniş.</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-6-A1 · Döngüden sonra</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="a">for</span> (<span class="t">int</span> k{<span class="n">0</span>}; k &lt; <span class="n">10</span>; ++k) {
+    <span class="y">// bir şey yapıyormuş gibi</span>
+  }
+  cout &lt;&lt; <span class="s">&quot;k = &quot;</span> &lt;&lt; k &lt;&lt; endl;   <span class="y">// derlenmez: k burada yok</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>k = 10</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-A1"><code>alistirma/kod/I-6-A1/</code></a></p>
+</section>
+<section class="soru" id="I-6-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">I-6-A2</span> İç içe gölgeler</h3>
+<p>Her süslü parantez yeni bir kapsam, her kapsamda yeni bir <code>x</code>. Program beş sayı yazıyor. Çalıştırmadan önce sırayı tahmin edin; sonra sınayın. Bu kod da kitapçığın dediği gibi &ldquo;kasıtlı olarak kafa karıştırmak için&rdquo; yazıldı. Kendi programınızda yapmayın.</p>
+
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-6-A2 · İç içe gölgeler: önce tahmin edin</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="t">int</span> x{<span class="n">1</span>};
+  cout &lt;&lt; x;
+  {
+    <span class="t">int</span> x{<span class="n">2</span>};
+    cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x;
+    {
+      <span class="t">int</span> x{<span class="n">3</span>};
+      cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x;
+    }
+    cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x;
+  }
+  cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; x &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>1 2 3 2 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-A2"><code>alistirma/kod/I-6-A2/</code></a></p>
+</section>
+<section class="soru" id="I-6-Z1">
+<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">I-6-Z1</span> Küreselsiz sayaç</h3>
+<p>Aşağıdaki program küresel bir <code>sayac</code> kullanıyor; <code>say()</code> onu artırıp yazıyor. Şimdi <em>ikinci</em> bir sayaç gerekiyor: <code>b</code> satırı ayrıca 1'den 2'ye saysın. Küresel değişkenle bunu yapmak ya iki işlev ya iki küresel demek. Küreseli tamamen kaldırın: <code>say</code> sayacı girdi olarak alsın, bir fazlasını döndürsün. Çıktı iki satır.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Sayaç küresel olmasın; işlev onu yine de hatırlasın ya da dışarıdan alsın.</p></details>
+<details><summary>Yaklaşım</summary><p>İki yol: işleve sayacı takma adla vermek (<code>int&amp; sayac</code>) ya da işlevin içinde <code>static int sayac{0};</code> tutmak. İkisini de deneyin; hangisi sınamak için daha kolay?</p></details>
+<details><summary>İlk satır</summary><p><code>void say(int&amp; sayac) { ++sayac; cout &lt;&lt; sayac &lt;&lt; endl; }</code></p></details>
+</div>
+<figure class="kod">
+<figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
+<pre><code><span class="y">// I-6-Z1 · Küreselsiz sayaç</span>
+<span class="y">// Küreseli kaldırın; ikinci satır: &quot;b: 1 2&quot;</span>
+#include <span class="s">&lt;iostream&gt;</span>
+<span class="a">using</span> <span class="a">namespace</span> std;
+
+<span class="t">int</span> sayac{<span class="n">0</span>};               <span class="y">// küresel: bundan kurtulun</span>
+
+<span class="t">void</span> say() {
+  ++sayac;
+  cout &lt;&lt; <span class="s">&quot; &quot;</span> &lt;&lt; sayac;
+}
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; <span class="s">&quot;a:&quot;</span>;
+  say(); say(); say();
+  cout &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}
+</code></pre>
+</figure>
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>a: 1 2 3
+b: 1 2</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/I-6-Z1"><code>alistirma/kod/I-6-Z1/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#I-3-Z2"><code>I-3-Z2</code> Collatz&#x27;ın inatçı dizisi</a> <a href="#I-4-Z1"><code>I-4-Z1</code> Öklid&#x27;in işlevi</a> <a href="#I-5-Z1"><code>I-5-Z1</code> Tersine oyun</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<nav class="gezinme"><a href="00-hazirlik.html"><span class="yon">Önceki</span>Hazırlık</a><a class="sag" href="02-veri.html"><span class="yon">Sonraki</span>II. Veriyi Düzenlemek</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

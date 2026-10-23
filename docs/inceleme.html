@@ -1,0 +1,477 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitaplik/inceleme.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Keyifli Kitaplık İncelemesi</title>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kagit: #F6F7FA; --kart: #FFFFFF; --murekkep: #16203A; --soluk: #5B6478;
+  --izgara: #E3E8F2; --cizgi: #D5DCEA;
+  --mavi: #2A4BC4; --kirmizi: #BF3B2E; --yesil: #2E6F4E; --sari: #97701A; --petrol: #0E7490; --murdum: #6B3FA0;
+  --mavi-zemin: #E8EDFB; --petrol-zemin: #DFF2F7; --murdum-zemin: #EFE8F8; --yesil-zemin: #E3F1E9; --sari-zemin: #F6EFDC; --kirmizi-zemin: #F9E6E3;
+  --kod-zemin: #111A2B; --kod-yazi: #E6ECF7;
+  --golge: 0 1px 2px rgba(22,32,58,.05), 0 6px 20px rgba(22,32,58,.06);
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit: #0F1520; --kart: #161E2E; --murekkep: #E6ECF7; --soluk: #9AA7BF;
+    --izgara: #182233; --cizgi: #28344B;
+    --mavi: #86A4FF; --kirmizi: #F08A7E; --yesil: #7FD1A3; --sari: #E3C070; --petrol: #67C8DC; --murdum: #B79BE6;
+    --mavi-zemin: #1B2744; --petrol-zemin: #10343D; --murdum-zemin: #2A2140; --yesil-zemin: #15302A; --sari-zemin: #352C14; --kirmizi-zemin: #3A1D1A;
+    --kod-zemin: #0B111C; --kod-yazi: #E6ECF7;
+    --golge: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --kagit: #0F1520; --kart: #161E2E; --murekkep: #E6ECF7; --soluk: #9AA7BF;
+  --izgara: #182233; --cizgi: #28344B;
+  --mavi: #86A4FF; --kirmizi: #F08A7E; --yesil: #7FD1A3; --sari: #E3C070; --petrol: #67C8DC; --murdum: #B79BE6;
+  --mavi-zemin: #1B2744; --petrol-zemin: #10343D; --murdum-zemin: #2A2140; --yesil-zemin: #15302A; --sari-zemin: #352C14; --kirmizi-zemin: #3A1D1A;
+  --kod-zemin: #0B111C; --kod-yazi: #E6ECF7;
+  --golge: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--murekkep); font: 16px/1.65 var(--sans);
+  background-color: var(--kagit);
+  background-image: linear-gradient(var(--izgara) 1px, transparent 1px), linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+.ic { max-width: 64rem; margin-inline: auto; }
+a { color: var(--mavi); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+code { font: .88em var(--mono); background: var(--izgara); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--kod-zemin); color: var(--kod-yazi); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font: .85rem/1.5 var(--mono); margin: 8px 0; }
+pre code { background: transparent; padding: 0; font: inherit; }
+header.bas { padding-block: 44px 10px; }
+.ustyazi { font: 500 .8rem/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); margin: 0 0 8px; }
+h1 { font: 700 clamp(1.9rem, 4vw, 2.6rem)/1.15 var(--serif); margin: 0 0 12px; text-wrap: balance; }
+.ozet { max-width: 66ch; font-size: 1.05rem; margin: 0 0 14px; }
+.kunye { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--soluk); font-size: .88rem; margin: 0 0 8px; }
+.kitaplar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.kitaplar a { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border: 1px solid var(--cizgi); border-radius: 999px; background: var(--kart); text-decoration: none; font-size: .9rem; color: var(--murekkep); box-shadow: var(--golge); }
+.kitaplar a::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--renk, var(--soluk)); }
+.r-cb { --renk: var(--mavi); } .r-kb { --renk: var(--petrol); } .r-ca { --renk: var(--murdum); } .r-ka { --renk: var(--yesil); } .r-dn { --renk: var(--sari); } .r-ana { --renk: var(--kirmizi); }
+
+nav.icindekiler { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; padding: 12px 16px; margin: 14px 0 28px; box-shadow: var(--golge); }
+nav.icindekiler ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 24px; }
+nav.icindekiler li { break-inside: avoid; }
+nav.icindekiler a { text-decoration: none; }
+h2 { font: 700 1.55rem/1.25 var(--serif); margin: 44px 0 10px; padding-top: 10px; border-top: 2px solid var(--cizgi); text-wrap: balance; scroll-margin-top: 16px; }
+h2 .no { color: var(--soluk); font-weight: 400; margin-right: 8px; }
+h3 { font: 600 1.15rem/1.3 var(--serif); margin: 26px 0 8px; text-wrap: balance; }
+p, li { max-width: 72ch; }
+ul, ol { padding-left: 22px; }
+li { margin: 4px 0; }
+.giris { font-size: 1.02rem; color: var(--murekkep); }
+.iki { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 12px 0; }
+.kutu { background: var(--kart); border: 1px solid var(--cizgi); border-left: 4px solid var(--renk, var(--mavi)); border-radius: 10px; padding: 12px 16px; box-shadow: var(--golge); min-width: 0; }
+.kutu h3 { margin-top: 0; font-size: 1.02rem; }
+.kutu p { margin: 6px 0; }
+.kutu ul, .kutu ol { margin: 6px 0; }
+.iyi { --renk: var(--yesil); } .oneri { --renk: var(--sari); } .duzelt { --renk: var(--kirmizi); } .not { --renk: var(--petrol); }
+.kart-liste { display: grid; gap: 12px; margin: 12px 0; }
+.ped { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; padding: 14px 16px; box-shadow: var(--golge); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 22px; min-width: 0; }
+.ped h3 { grid-column: 1 / -1; margin: 0 0 2px; font-size: 1.05rem; }
+.ped .e, .ped .o { margin: 0; }
+.ped .e::before, .ped .o::before { display: block; font: 500 .72rem var(--sans); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.ped .e::before { content: "Eksik ve neden önemli"; color: var(--kirmizi); }
+.ped .o::before { content: "Öneri"; color: var(--yesil); }
+.tablo-kabi { overflow-x: auto; border: 1px solid var(--cizgi); border-radius: 12px; background: var(--kart); box-shadow: var(--golge); margin: 12px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: .92rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--cizgi); }
+th { font: 600 .78rem var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--soluk); background: var(--kagit); position: sticky; top: 0; }
+td.yer { font: .82rem var(--mono); white-space: nowrap; }
+td.yer small { display: block; font: .78rem var(--sans); color: var(--soluk); white-space: normal; }
+.onem { display: inline-block; font: 500 .72rem var(--sans); letter-spacing: .04em; text-transform: uppercase; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+.o-y { background: var(--kirmizi-zemin); color: var(--kirmizi); } .o-o { background: var(--sari-zemin); color: var(--sari); } .o-d { background: var(--izgara); color: var(--soluk); }
+.rozet { display: inline-block; font: 500 .72rem var(--sans); letter-spacing: .04em; text-transform: uppercase; border-radius: 999px; padding: 1px 8px; margin-right: 4px; background: var(--izgara); color: var(--soluk); }
+.rozet.kitap-c { background: var(--mavi-zemin); color: var(--mavi); } .rozet.kitap-k { background: var(--petrol-zemin); color: var(--petrol); } .rozet.al-c { background: var(--murdum-zemin); color: var(--murdum); } .rozet.al-k { background: var(--yesil-zemin); color: var(--yesil); } .rozet.depo { background: var(--sari-zemin); color: var(--sari); }
+.dalga { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0; }
+footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px; color: var(--soluk); font-size: .88rem; }
+@media (max-width: 640px) { .ped { grid-template-columns: 1fr; } nav.icindekiler ol { columns: 1; } }
+</style>
+
+<header class="bas">
+  <div class="ic">
+    <p class="ustyazi">Keyifli Kitaplık · inceleme</p>
+    <h1>Keyifli Kitaplık İncelemesi</h1>
+    <p class="ozet">
+      İki kitapçık ve iki alıştırma defteri üç gözle okundu: öğretim tasarımı (pedagog), metin ve yapı (editör),
+      kod ve teknik doğruluk (bilgisayar uzmanı). Önce güçlü yanlar, sonra eksikler, öneriler ve yerini
+      söyleyen düzeltme listesi. Her bulgu dosya ve kesim adıyla verildi; düzeltmeler küçük yamalarla yapılabilir.
+    </p>
+    <p class="kunye">
+      <span>Ekim 2026</span>
+      <span>Depo: <code>main</code> @ b806630</span>
+      <span>Okunan: 28 bölüm dosyası, 7 README ve dizin, ders dizini, 24 örnek program</span>
+    </p>
+    <nav class="kitaplar" aria-label="İncelenen eserler">
+      <a class="r-cb" href="kitapcik/00-kapak.html">Kitapçık C++</a>
+      <a class="r-kb" href="kitapcik-koco/00-kapak.html">Kitapçık Koco</a>
+      <a class="r-ca" href="alistirma/00-hazirlik.html">Alıştırmalar C++</a>
+      <a class="r-ka" href="alistirma-koco/00-hazirlik.html">Alıştırmalar Koco</a>
+      <a class="r-dn" href="dizin.html">Kavram dizini</a>
+    </nav>
+  </div>
+</header>
+
+<main class="ic">
+  <nav class="icindekiler" aria-label="İçindekiler">
+    <ol>
+      <li><a href="#ozet">Kısa özet ve ilk on iş</a></li>
+      <li><a href="#pedagog">Pedagog gözüyle: eksikler ve öneriler</a></li>
+      <li><a href="#editor">Editör gözüyle: yapı, tutarlılık, bağlantılar</a></li>
+      <li><a href="#teknik">Bilgisayar uzmanı gözüyle: düzeltme listesi</a></li>
+      <li><a href="#yol">Yol haritası: hemen, bu dönem, sonraki sürüm</a></li>
+      <li><a href="#yontem">Yöntem ve sınırlar</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="ozet"><span class="no">1</span>Kısa özet</h2>
+  <p class="giris">
+    Bütün olarak bakınca ortada nadir bir şey var: iki yıllık gerçek dersten damıtılmış, iki dilde paralel
+    yürüyen, her konusunun alıştırması ve her alıştırmasının ders notuna dönen ipucu olan bir giriş kitaplığı.
+    Eksikler, bu çatının üstüne konacak katlar; temelde sorun yok.
+  </p>
+  <div class="iki">
+    <div class="kutu iyi">
+      <h3>Güçlü yanlar</h3>
+      <ul>
+        <li><strong>Dört basamaklı merdiven</strong> (Isınma, Alıştırma, Zorlayıcı, Keşif) her konuda aynı; öğrenci nerede durduğunu bilir. 314 alıştırmanın hepsi bu düzene uyuyor.</li>
+        <li><strong>Yanıt yerine ipucu.</strong> Çözüm anahtarı yok, ders notuna ve kitapçık kesimine bağlantı var. Kopyalamayı değil düşünmeyi ödüllendiriyor.</li>
+        <li><strong>Zanaat bölümü</strong> (terminal, make, altın dosya, hata ayıklama, ölçme) giriş kitaplarında neredeyse hiç olmayan bir şey; burada III. bölümün tamamı.</li>
+        <li><strong>Kanıt vurgusu.</strong> VI. bölüm DP'yi formül ezberi değil kanıtlanacak bir iddia olarak sunuyor; V-9 ve VI-5 alıştırmaları bunu sürdürüyor.</li>
+        <li><strong>İki dil, tek yol.</strong> Koco cildi aynı kavramı işlevsel kılıkta tekrar ettiriyor; bu, transfer için en iyi bilinen yöntemlerden biri.</li>
+        <li><strong>Çalışan kod.</strong> 24 örnek program ve her alıştırma için başlangıç dosyası, girdi ve beklenen çıktı depoda; <code>make test</code> ile sınanabilir.</li>
+        <li><strong>Ses.</strong> Birinci tekil şahıs, sıcak, kısa cümleler; öğrenciye hitap ediyor ama küçümsemiyor.</li>
+      </ul>
+    </div>
+    <div class="kutu oneri">
+      <h3>İlk on iş (önem sırasıyla)</h3>
+      <ol>
+        <li>Koco V.1'deki <em>"değişmez kalıplarından Eşlem"</em> cümlesini düzeltin: Eşlem değişebilir, değişmez olan Eşlek. <a href="#t13">→ 13</a></li>
+        <li>C++ I.2'de işaretli taşmayı "tanımsız davranış" olarak anlatın; <code>1L</code> ve <code>unsigned long</code> yerine <code>1LL</code> ve <code>unsigned long long</code>. <a href="#t1">→ 1, 2</a></li>
+        <li>V. bölümdeki "Dijkstra'yı kırın" alıştırmasını kitapçığın tembel Dijkstra'sıyla uyumlayın (defterdeki V-7-A2 doğru hâli). <a href="#t4">→ 4</a></li>
+        <li>Her bölümün sonuna "Bu bölümden sonra…" hedef listesi ve üç öz-denetim sorusu ekleyin. <a href="#p1">→ P1</a></li>
+        <li>Kitapçık kesimlerine numara ve <code>id</code> verin; alıştırma konu numaraları (II.5 gibi) kitapçıkta karşılık bulsun, "Yanıt yerine" bağlantıları kesime insin. <a href="#e1">→ E1, E2</a></li>
+        <li>Kök README ve <code>ileri/icindekiler.md</code>'ye dört eseri, dizini ve genel sayfayı listeleyen bir "Kitaplık" bölümü koyun. <a href="#e5">→ E5</a></li>
+        <li>Zorlayıcı ve Keşif sorularına üç kademeli ipucu (<code>&lt;details&gt;</code>) ve süre kestirimi ekleyin. <a href="#p3">→ P3, P4</a></li>
+        <li>Bellman–Ford parçasına ulaşılamayan düğüm denetimini, VI'daki "küme" gösterimine çoklu küme düzeltmesini, "ortak altdizi"ye "bitişik" sözcüğünü ekleyin. <a href="#t5">→ 5, 6, 7</a></li>
+        <li>Windows için WSL'i öne alın; git'i araç listesine ekleyin; iKojo–masaüstü farkları kutusu yazın. <a href="#t9">→ 9, 16</a></li>
+        <li>Bölümleri GitHub Pages'te de yayımlayın; claude.ai bağlantıları tek kopya olmasın. <a href="#e8">→ E8</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 id="pedagog"><span class="no">2</span>Pedagog gözüyle: eksikler ve öneriler</h2>
+  <p class="giris">
+    Ölçüt şu: bir öğrenci bu kitaplıkla yalnız başına, haftada iki saat çalışsa, altı ayda nereye varır ve
+    nerede takılır? Aşağıdakiler takılacağı yerler. Her biri için en küçük işe yarar değişikliği yazdım.
+  </p>
+  <div class="kart-liste">
+    <article class="ped" id="p1">
+      <h3>P1 · Öğrenme hedefleri ve öz-denetim yok</h3>
+      <p class="e">Yalnızca C++ I. bölümde "Bölümü kapatırken" var. Öğrenci bir bölümü bitirince "ne öğrenmiş olmalıyım" sorusuna yanıt bulamıyor; eksik kalan şeyi fark etmeden ilerliyor. Alıştırma defteri bunu kısmen karşılıyor ama ölçüt vermiyor.</p>
+      <p class="o">Her bölümün sonuna 4–6 maddelik "Bu bölümden sonra şunları yapabilirsiniz" listesi (yapabilirlik dili: "bir eşlemi anahtara göre gezip sayım yapabilirim") ve 3 öz-denetim sorusu. Yanıtları kitapçığa koymayın; "Yanıt yerine" kutusunun aynısı: ilgili kesime bağlantı. İki kitapçık için 12 kısa kutu; bir öğleden sonra.</p>
+    </article>
+    <article class="ped" id="p2">
+      <h3>P2 · Yanılgı kutuları tek: "Klasik tuzak"</h3>
+      <p class="e">Giriş kitaplarında en çok işe yarayan şey, öğrencinin kafasında zaten yanlış kurulmuş modeli yakalamaktır. Kitapçıkta bunun bir örneği var (15'in katlarını iki kere saymak) ve çok iyi çalışıyor; başka yok.</p>
+      <p class="o">Her bölüme bir ya da iki "Sık yanılgı" kutusu: <code>=</code> ile <code>==</code>; <code>7 / 2</code>'nin 3 olması; "bir eksik, bir fazla" döngü sınırı; işleve kopya gitmesi; <code>m[k]</code>'nin anahtarı yaratması; gezide taban durumunu ya da "gezildi" işaretini unutmak; DP'de döngü sırasının yanıtı değiştirmesi. Alıştırma defterinde bunların çoğu zaten soru olmuş (I-6-A2, II-2-Z1, V-5-I1, VI-5-Z1); kitapçıkta adını koymak kalıyor.</p>
+    </article>
+    <article class="ped" id="p3">
+      <h3>P3 · İpucu merdiveni tek basamaklı</h3>
+      <p class="e">Zorlayıcı ve Keşif sorularında ipucu bir cümle, sonra ders notu. Takılan öğrencinin iki seçeneği var: pes etmek ya da ders notunun tamamını okumak. Arası yok; en çok burada kaybedilir.</p>
+      <p class="o">Üç kademe, hepsi kapalı <code>&lt;details&gt;</code> içinde: <em>Düşünce</em> (soruyu yeniden söyleyen bir cümle), <em>Yaklaşım</em> (hangi kalıp, hangi veri yapısı), <em>İlk satır</em> (kodun iskeleti). Çözüm yine yok. Önce yalnızca Z ve K sorularına; 90 kadar soru, her biri üç cümle.</p>
+    </article>
+    <article class="ped" id="p4">
+      <h3>P4 · Süre ve zorluk kestirimi yok</h3>
+      <p class="e">Bir Isınma on dakika, bir Keşif bir hafta sürebilir; ikisi de aynı görünüyor. Öğrenci planlayamıyor, öğretmen ödev veremiyor.</p>
+      <p class="o">Basamak başına varsayılan süre (Isınma 10 dk, Alıştırma 20–30 dk, Zorlayıcı 45–90 dk, Keşif açık uçlu) defterin başına bir kez; sapanlara soru başlığında not ("~2 saat"). Zorluk için ikinci bir ölçek gerekmez; basamak zaten o.</p>
+    </article>
+    <article class="ped" id="p5">
+      <h3>P5 · Aralıklı tekrar yok</h3>
+      <p class="e">Her bölüm kendi konusunu çalıştırıyor; IV. bölümdeyken eşlem, VI. bölümdeyken gezi kalıbı bir daha sorulmuyor. Unutma eğrisi tam bu noktada çalışır.</p>
+      <p class="o">Her bölümün alıştırmalarına iki "Geri dönüş" sorusu: önceki bölümlerden bir kalıbı bu bölümün bağlamında kullandıran kısa sorular (IV'te altkümeleri kümeye koyup tekrar aramak; VI'da çizelgeyi eşlemle tutmak). Bir de altı haftalık tekrar takvimi önerisi: 1, 3, 7, 14, 30 gün.</p>
+    </article>
+    <article class="ped" id="p6">
+      <h3>P6 · Bölümleri birbirine bağlayan proje yok</h3>
+      <p class="e">Sayı tahmin oyunu I'de başlayıp bitiyor; robot (II-5-K1), labirent (V-4), yaşam oyunu (VI-6-K1) ayrı ayrı. Öğrencinin "benim programım" diyebileceği, bölümden bölüme büyüyen bir şey yok. Keyfi en çok taşıyan şey budur.</p>
+      <p class="o">Tek bir proje ipi: I'de oyun → II'de skor tablosu (eşlem) → III'te testli ve make'li → IV'te bilgisayarın tahmin stratejisi (ikili arama, özyineleme) → V'te labirent sürümü → VI'da en az adımlı çözüm. Her bölüm sonunda "Projeye ekleyin" kutusu, bir paragraf. Koco cildinde aynı ip tuvalde yürür.</p>
+    </article>
+    <article class="ped" id="p7">
+      <h3>P7 · Tek yol, tek hız</h3>
+      <p class="e">C bilen öğrenci I. bölümde sıkılıyor, hiç bilmeyen II. bölümde boğuluyor; metin ikisine de aynı davranıyor. Genel sayfadaki okuma yolları bunu dışarıdan çözüyor, ama kitabın içinde işaret yok.</p>
+      <p class="o">Kesim başlıklarına iki küçük im: "hızlı yol" (deneyimli okur atlayabilir) ve "yavaş yol" (yeni başlayan iki kere okusun). II. bölümde yapıcı/yıkıcı, friend, enum ve kalıp kesimleri "ileri" imli olsun; ilk okumada atlanabilsin. Alıştırmalarda zaten Z/K ayrımı var.</p>
+    </article>
+    <article class="ped" id="p8">
+      <h3>P8 · Bölüm sonu değerlendirmesi yok</h3>
+      <p class="e">Öğrenci "bu bölümü geçtim mi" diyemiyor; altın dosya testi tek soruyu ölçüyor, bölümü değil.</p>
+      <p class="o">Her bölüme 30 dakikalık "bölüm sınavı": üç soru, biri CSES'ten, ikisi kendi; girdi ve beklenen çıktı depoda, <code>make sinav</code> ile. Keşif soruları için üç satırlık değerlendirme ölçütü (çalışıyor / okunaklı / test var). Öğretmen için aynı dosya not anahtarı olur.</p>
+    </article>
+    <article class="ped" id="p9">
+      <h3>P9 · İkili çalışma yalnızca Hazırlık'ta</h3>
+      <p class="e">Sürücü–seyrüseferci düzeni H-3'te çok iyi anlatılmış, sonra bir daha anılmıyor. Oysa Zorlayıcı sorular tam ikili iş.</p>
+      <p class="o">Bölüm başına iki Z sorusuna "ikili" imi; yanına beş maddelik kod okuma listesi (adlar anlaşılır mı, tekrar var mı, sınır durumu denendi mi, test var mı, çıktı biçimi doğru mu). Öğrenciler birbirinin kodunu bu listeyle okusun.</p>
+    </article>
+    <article class="ped" id="p10">
+      <h3>P10 · Üstbiliş: "neye takıldım" sorusu yok</h3>
+      <p class="e">Öğrenen, takıldığı yeri adlandırabildiğinde daha hızlı aşar; kitaplık bunu istemiyor.</p>
+      <p class="o">Her bölüm sonunda tek satır: "Bu bölümde en çok neye takıldınız? Bir cümleyle yazın, sonraki bölüme başlamadan okuyun." Alıştırma dizinine <code>gunluk.md</code> şablonu. Maliyeti sıfır, etkisi ölçülmüş.</p>
+    </article>
+    <article class="ped" id="p11">
+      <h3>P11 · İngilizce hata iletileri için küçük sözlük yok</h3>
+      <p class="e">H-2 hata iletisini okumayı öğretiyor ama iletiler İngilizce; yeni başlayan "expected ';' before" cümlesini çözemiyor.</p>
+      <p class="o">Hazırlık bölümüne en sık on derleyici iletisinin Türkçesi ve anlamı (expected, undeclared, no match, segmentation fault, warning: unused…). Koco cildi için aynı: "type mismatch", "not found: value".</p>
+    </article>
+    <article class="ped" id="p12">
+      <h3>P12 · Yapay zekâ ile çalışma kuralı tek yerde</h3>
+      <p class="e">VI-4-K1 "makineyle takım işi" diyor, ders 14 yapay zekâ ile soru çözüyor; ama öğrenciye "ne zaman sorarım, ne zaman sormam" kuralı verilmiyor. Bugün her öğrencinin elinde bir model var.</p>
+      <p class="o">Kapağa kısa bir kural: Isınma ve Alıştırmada sormayın; Zorlayıcı'da yalnızca ipucu isteyin, kod istemeyin; Keşif'te serbest, ama her satırı açıklayabilmelisiniz. "Yanıt yerine" ilkesinin uzantısı.</p>
+    </article>
+  </div>
+
+  <h2 id="editor"><span class="no">3</span>Editör gözüyle: yapı, tutarlılık, bağlantılar</h2>
+  <div class="kart-liste">
+    <div class="kutu oneri" id="e1">
+      <h3>E1 · Kesim numaraları ile alıştırma konu numaraları örtüşmüyor</h3>
+      <p>Kitapçık kesimleri numarasız; alıştırma defteri konuları "II.5" gibi numaralıyor ve kesimleri birleştiriyor ya da bölüyor: C++ II. bölümde 10 kesim, defterde 7 konu; IV'te 9 kesime 6 konu; V'te 14 kesime 9 konu. "II.5 Kendi türünüzü yazmak" defterde var, kitapçıkta "II.5" diye bir şey yok.</p>
+      <p>Öneri: kitapçık <code>h2</code>'lerine defterle aynı numarayı verin (birleşen kesimler alt kesim olsun) ya da defterde konu başlığına kitapçık kesim adlarını tam yazın (çoğunda var, hepsinde değil).</p>
+    </div>
+    <div class="kutu oneri" id="e2">
+      <h3>E2 · Başlıklarda <code>id</code> yok, derin bağlantı yok</h3>
+      <p>Alıştırmaların "Yanıt yerine" kutuları ve kavram dizini kitapçığa yalnızca bölüm başından bağlanabiliyor; okur kesimi kendisi arıyor. Alıştırma sayfalarında ise her soru <code>id</code>'li (<code>III-4-A1</code>), oraya doğrudan inilebiliyor.</p>
+      <p>Öneri: <code>yap.py</code>'ye başlıkları sadeleştirip <code>id</code> yazan on satır (ç→c, boşluk→tire). Sonra dizin ve defter kesime bağlanır; PDF'te de yer imi olur.</p>
+    </div>
+    <div class="kutu oneri" id="e3">
+      <h3>E3 · Terimler yer yer çarpışıyor</h3>
+      <ul>
+        <li><strong>dizin</strong>: III. bölümde klasör (<code>cd</code>), Koco'da <code>Dizin</code> = bağlı liste, ders notlarında <code>std::list</code>. Klasör için "klasör" ya da "dizin (klasör)" deyin.</li>
+        <li><strong>nokta / düğüm</strong>, <strong>bağ / kenar</strong>: V. bölümde ikisi de geçiyor. Birini seçin (ders notları ve kod "düğüm", "bağ" diyor).</li>
+        <li><strong>altdizi</strong>: VI'da bitişik parça (substring) için kullanılıyor; yarışma dilinde altdizi çoğu zaman bitişik olmayan (subsequence). "Bitişik altdizi" deyin, bkz. teknik 7.</li>
+        <li><strong>akıllı dizi / vektör / yöney</strong>: kitapçık "akıllı dizi", ders 13 "yöney (vektor)". Kitapçıkta tek, ders notunda eş anlamlıyı parantezle.</li>
+      </ul>
+      <p>Her iki kitapçığın sonuna bir sayfalık sözlük; kavram dizini bunun tohumu olabilir (300 girdinin Türkçe–İngilizce çifti hazır).</p>
+    </div>
+    <div class="kutu oneri" id="e4">
+      <h3>E4 · Durum etiketleri eskimiş</h3>
+      <p>Koco kitapçığının künyesi ve README'si "ilk taslak" diyor; kök README "Henüz ilk taslak". Oysa PDF, EPUB ve 116 alıştırmalık defteri yayımlanmış. Okur taslak sanıp ciddiye almayabilir.</p>
+      <p>Öneri: "1. sürüm, Ekim 2026" biçiminde tarihli sürüm; değişiklik günlüğü README'de üç satır.</p>
+    </div>
+    <div class="kutu oneri" id="e5">
+      <h3>E5 · Kök README ve ders dizini kitaplığı tam göstermiyor</h3>
+      <p>Kök README iki kitapçığı anlatıyor, alıştırma defterlerini anmıyor. <code>ileri/icindekiler.md</code> yalnızca C++ kitapçığını listeliyor; Koco kitapçığı ve iki defter yok. Yeni gelen okur dört eserin dördünü tek yerden göremiyor.</p>
+      <p>Öneri: README'nin başına "Kitaplık" başlıklı dört satır (eser, bağlantı, PDF, defter) ve genel sayfa ile dizine bağlantı; aynı blok <code>icindekiler.md</code>'nin "Giriş Kitapçığı" bölümüne.</p>
+    </div>
+    <div class="kutu duzelt" id="e6">
+      <h3>E6 · Yanlış hedefe giden bağlantılar</h3>
+      <ul>
+        <li>Koco V ("kardeş kitapçığın V. bölümünde") ve VI ("Kardeş kitapçığa geçin") GitHub'daki <code>tree/main/kitapcik</code> dizinine gidiyor; okur kaynak dosya listesine düşüyor. Hedef: V. bölüm sayfası (<code>011ec142…</code>) ve kapak (<code>5636245b…</code>).</li>
+        <li><code>mp4ler/gorsel-kayitlar.md</code>: <code>../ileri/dersler/20260220.md</code> ve <code>20260227.md</code> bağlantılarında <code>d</code> öneki eksik; ikisi de kırık.</li>
+      </ul>
+    </div>
+    <div class="kutu oneri" id="e7">
+      <h3>E7 · Vaat edilen ama boş sayfalar</h3>
+      <p>VI. bölüm "Nereye gidilir?" kesimi "hepsinin girişi ders deposunda var" diyor. <code>python/giris.md</code> sıfır bayt; <code>ileri/segment-trees/README.md</code> tek satır. Ya listeyi gerçekten var olanlarla sınırlayın ya da dosyaları birer paragrafla doldurun.</p>
+    </div>
+    <div class="kutu oneri" id="e8">
+      <h3>E8 · Barındırma tek kopya</h3>
+      <p>Bütün bölüm bağlantıları claude.ai sayfalarına gidiyor. Bu sayfalar paylaşıma bağlı, adresleri değiştirilemez ve depo dışında. <code>yap.py</code> zaten <code>cikti/</code> üretiyor.</p>
+      <p>Öneri: <code>cikti/</code>'yi GitHub Pages'te yayımlayın (depo ayarlarından bir dal ya da <code>docs/</code>); <code>baglantilar.txt</code>'ye ikinci adres sütunu. claude.ai sayfaları kalsın, ama "tek adres" olmasın. Okullar ve veliler için <code>github.io</code> adresi daha güvenilir görünür.</p>
+    </div>
+    <div class="kutu not" id="e9">
+      <h3>E9 · Küçük tutarlılık notları</h3>
+      <ul>
+        <li>Alıştırma defteri Isınma'dan önce "Kitapçığın örneği" diyor; kesim adı yerine örnek programın dosya adı da (<code>41-dijkstra.cpp</code>) verilse öğrenci depoda hemen bulur.</li>
+        <li>Koco defterinde "Tuvalde:" satırları iyi bir buluş; C++ defterinde çıktının yanında "Terminalde:" aynı rolü oynayabilir.</li>
+        <li>C++ kapaktaki "Bu kitapçıkta neler var?" ile Koco kapaktaki aynı başlık farklı uzunlukta; ikisini aynı kalıba oturtun (bölüm, bir cümle, tahmini süre).</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="teknik"><span class="no">4</span>Bilgisayar uzmanı gözüyle: düzeltme listesi</h2>
+  <p class="giris">
+    Aşağıdaki her satır kaynak dosyada doğrulandı. "Yer" sütunu dosya ve kesimi verir; "Önem" öğrenciye
+    yanlış öğretme ya da kırık deneyim riskine göre.
+  </p>
+  <div class="tablo-kabi">
+    <table>
+      <thead><tr><th>#</th><th>Yer</th><th>Sorun</th><th>Öneri</th><th>Önem</th></tr></thead>
+      <tbody>
+        <tr id="t1"><td>1</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/01-ilk-adimlar.html<small>I · Her türün bir sınırı var; kod/02-tasma.cpp</small></td>
+          <td>İşaretli <code>int</code> taşması, sayının "başa dönmesi" gibi kesin bir davranış olarak gösteriliyor. C++'ta işaretli taşma tanımsız davranıştır; <code>-O2</code> ile derleyici taşmanın olmayacağını varsayıp kodu değiştirebilir, çıktı makineden makineye değişir.</td>
+          <td>Kesime bir cümle: "C++ bunun ne olacağını tanımlamaz; gördüğünüz, bu derleyicinin bu seferki kararı." Gösterim için <code>unsigned</code> kullanın (orada sarmalama tanımlıdır). III. bölüme <code>-fsanitize=undefined,address</code> kutusu; bu bayrak taşmayı da dizi sınırı aşımını da anında yakalar.</td>
+          <td><span class="onem o-y">Yüksek</span></td></tr>
+        <tr id="t2"><td>2</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>aynı kesim, satır 95 ve 129; kod/02-tasma.cpp:11<small><span class="rozet al-c">Alıştırma C++</span> I-2-I1</small></td>
+          <td><code>1L * b * b * b</code> ve <code>unsigned long</code> yalnızca Linux/macOS'ta 64 bit. Windows'ta (MinGW, MSVC) <code>long</code> 32 bittir; küp yine taşar, öğrenci kitapçıkla çelişen çıktı görür. I-2-I1'in beklenen çıktısı da <code>unsigned long</code> üst sınırına bağlı.</td>
+          <td><code>1LL *</code> ve <code>unsigned long long</code>; metinde "long long her yerde 64 bit, long değil" notu. I-2-I1 beklenen çıktıyı buna göre güncelleyin.</td>
+          <td><span class="onem o-y">Yüksek</span></td></tr>
+        <tr id="t3"><td>3</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/kod/03-tahmin.cpp:20</td>
+          <td><code>int hak{7}</code> tanımlı ama "Bildin!" satırı <code>7 - hak</code> yazıyor; hak sayısı değişince yanlış sayar. III. bölümün "sihirli sayı" öğüdüyle çelişiyor.</td>
+          <td><code>const int toplamHak = 7;</code> ve <code>toplamHak - hak</code>. Alıştırma I-5-A1 ("Kaç hak yeter?") bunu zaten kurcalatıyor; düzeltme oradaki deneyimi de temizler.</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+        <tr id="t4"><td>4</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/05-cizgeler.html<small>V · Dijkstra, alıştırma "Dijkstra'yı kırın… en fazla dört noktalı"</small></td>
+          <td>Kitapçığın Dijkstra'sı tembel sürüm (<code>if (uzaklik[bu] &lt; u) continue;</code>, gezildi dizisi yok). Bu sürüm eksi ağırlıklı bir bağla yanlış sonuç vermez, yalnızca yavaşlar; eksi çevrim varsa hiç durmaz. Alıştırma istenen biçimde çözülemez. Defterdeki V-7-A2 bunu fark edip "klasik Dijkstra (bitti dizisi)" demiş.</td>
+          <td>Kitapçıktaki alıştırmayı defterle aynı sözlerle yazın; ya da soruyu "bu sürümü sonsuz döngüye sokun" diye kurun (eksi çevrimli üç düğüm yeter). Metne bir cümle: iki Dijkstra sürümü var, hangisinin neden kırıldığı.</td>
+          <td><span class="onem o-y">Yüksek</span></td></tr>
+        <tr id="t5"><td>5</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>05-cizgeler.html, satır 571–581<small>V · Bellman–Ford</small></td>
+          <td><code>skor[b] = max(skor[b], skor[a] + x);</code> satırı <code>skor[a] == -SONSUZ</code> denetimi yapmıyor. Ulaşılamayan bir düğümden çıkan bağ, komşusuna <code>-SONSUZ + x</code> gibi "neredeyse sonsuz" bir değer sızdırır; ulaşılamayan düğüm ulaşılmış görünür. Defterdeki V-9-I1 başlangıç kodunda denetim var; kitapçıkta yok.</td>
+          <td>Döngüye <code>if (skor[a] == -SONSUZ) continue;</code>. Ayrıca "sonsuz" için neden türün en büyük değerinin seçilmediği (toplayınca taşmasın diye) bir cümleyle söylensin; V-7-I1 ve VI-4-A1 de aynı tuzağa dokunuyor.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t6"><td>6</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/06-dp.html, satır ~314<small>VI · Soru 3: Diziler mi, kümeler mi?</small></td>
+          <td>Tablo "Kümeler (3 tane): {2,5}, {2,3}, {3}" diyor. Bunlar küme değil çoklu küme: {2,2,5}, {2,2,2,3}, {3,3,3}. Küme gösterimi tekrarı yuttuğu için "toplamı 9" bile sağlanmıyor; II. bölümde tanıtılan küme kavramıyla çelişiyor.</td>
+          <td>Ya <code>2+2+5</code> yazımına dönün ya da "çoklu küme (sıra önemsiz, tekrar var)" deyip {2,2,5} biçiminde yazın. CSES'in "Coin Combinations II" adı için de aynı açıklama.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t7"><td>7</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>06-dp.html, satır 411–414<small>VI · Yarım bıraktığımız bir problem; ileri/dp/README.md</small></td>
+          <td>"İki yazının en uzun ortak altdizisi" diye başlıyor, sonra "k2 konumunda biten ortak altdizinin uzunluğu" diye kuruyor. Bu tanım bitişik parçayı (longest common substring) verir; yarışma dilindeki "en uzun ortak altdizi" (LCS, bitişik olmayan) başka bir problemdir ve çizelgesi farklıdır. Defterdeki VI-5-K1 doğru adı koymuş; kitapçık koymamış.</td>
+          <td>Başlıkta ve ilk cümlede "bitişik" sözcüğü; bir cümleyle LCS'den farkı; <code>ileri/dp/README.md</code> ile aynı adlandırma. Alıştırma defterine LCS'yi Keşif olarak eklemek de yakışır.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t8"><td>8</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>06-dp.html, satır ~620<small>VI · Nereye gidilir?</small></td>
+          <td>"Hepsinin girişi ders deposunda var" cümlesi; dilim ağacı README'si tek satır, Python girişi boş, ayrık küme bileşimi yalnızca ders 1-8 notunda.</td>
+          <td>Listeyi var olanlarla sınırlayın ve her maddeye bağlantı verin; ya da iki boş dosyayı birer paragraf ve bir kaynakla doldurun (bkz. E7).</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+        <tr id="t9"><td>9</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/00-kapak.html, satır 274–302<small>Kapak · Bu ay, kendi bilgisayarınızda</small></td>
+          <td>Windows için önce Cygwin, "alternatif olarak WSL" deniyor. 2026'da Cygwin'in yolu uzun ve kırılgan; WSL ya da MSYS2 standart. Kurulum listesinde git yok, ama hemen altında <code>git clone</code> isteniyor.</td>
+          <td>Sırayı çevirin: WSL (Ubuntu) birinci, MSYS2 ikinci, Cygwin anılmasın. Araç listesine "git" ve üç komut (<code>clone</code>, <code>pull</code>, <code>status</code>); III. bölüme "kodunuzu saklayın" diye bir paragraf.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t10"><td>10</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>I. ve II. bölüm<small><span class="rozet al-c">Alıştırma C++</span> H-1-A2, II-2-A1, II-6-I1</small></td>
+          <td><code>std::string</code> hiçbir yerde tanıtılmıyor; Hazırlık'ta (H-1-A2) ve II. bölümden itibaren kullanılıyor. Yeni başlayan "yazı" türünün nereden geldiğini bilmiyor.</td>
+          <td>I.1'e altı satırlık "Yazı: std::string" kutusu (tanım, <code>+</code>, <code>size()</code>, <code>[]</code>, <code>getline</code>). II.1'de dizinin "harf dizisi" olarak string ile akrabalığı bir cümle.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t11"><td>11</td><td class="yer"><span class="rozet al-c">Alıştırma C++</span>II-4-I1, IV-4-A2, V-7-I1, I-5-Z2</td>
+          <td><code>std::sort</code>, <code>next_permutation</code>, <code>pair</code>, <code>cin.clear()</code> alıştırmalarda kullanılıyor; kitapçıkta tanıtılmıyor. "Yanıt yerine" kutuları ders notuna gönderiyor ama ders notu da hepsini anlatmıyor.</td>
+          <td>II. bölümün sonuna "Hazır araçlar" kutusu (<code>&lt;algorithm&gt;</code>'dan beş işlev, <code>pair</code>) ya da alıştırma başlığına "yeni araç" imi ve cppreference bağlantısı.</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+        <tr id="t12"><td>12</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/02-veri.html<small>II · bütün bölüm</small></td>
+          <td>On kesimde dizi, vector, map, set, stack/queue/priority_queue/deque, struct, class, yapıcı, yıkıcı, friend, enum, işlev kalıbı, tür kalıbı, adres ve takma ad. Yeni başlayan için en yoğun bölüm; alıştırmaları da en kalabalık (35 soru).</td>
+          <td>İkiye bölün: "II. Kaplar" (dizi, vector, map, set, sıralı kaplar) ve "II½. Kendi türünüz" (struct/class, kalıp, adres). Bölmek istemiyorsanız yapıcı/yıkıcı, friend, enum kesimlerini "ileri" imiyle ilk okumadan çıkarın (bkz. P7).</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t13"><td>13</td><td class="yer"><span class="rozet kitap-k">Kitapçık Koco</span>kitapcik-koco/bolumler/05-cizgeler.html:33<small>V · Çizge nedir, nasıl saklanır?</small></td>
+          <td>"Scala'nın değişmez kalıplarından Eşlem tam bu iş için" deniyor. Koco'nun Türkçe API'sinde <code>Eşlem</code> değişebilir (mutable) eşlemdir; <code>eşEkle</code> yerinde değiştirir ve kitapçığın kendi kodu da alıştırmalar da onu öyle kullanıyor (KVI-1-I1'deki <code>bellek.eşEkle</code>). Değişmez olan <code>Eşlek</code>. II. bölümün "değişmezlik" vurgusuyla çelişen bir cümle.</td>
+          <td>"Scala'nın <em>değişebilir</em> eşlemi Eşlem" ya da örneği gerçekten değişmez <code>Eşlek</code> ile yazın ve farkı bir kutuda anlatın: Eşlem (değişir, <code>eşEkle</code>), Eşlek (değişmez, <code>+</code> ile yenisi).</td>
+          <td><span class="onem o-y">Yüksek</span></td></tr>
+        <tr id="t14"><td>14</td><td class="yer"><span class="rozet kitap-k">Kitapçık Koco</span>05-cizgeler.html:286; 06-dp.html:297<small>V · Yollar eşit değilse; VI · Kardeş kitapçığa geçin</small></td>
+          <td>İki bağlantı da <code>github.com/…/tree/main/kitapcik</code> dizinine gidiyor; okur HTML kaynaklarının listesine düşüyor, V. bölümü bulamıyor.</td>
+          <td>V.'de <code>…/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc</code>, VI'da kapak <code>…/artifact/5636245b-1b09-4b69-be33-a0cf21566a63</code>; GitHub Pages gelince oraya (E8).</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t15"><td>15</td><td class="yer"><span class="rozet kitap-k">Kitapçık Koco</span>06-dp.html:82<small>VI · Izgarada kaç yol var?</small></td>
+          <td>"441 kayıt, o kadar" deniyor; 21×21 = 441 varsayımı. Koddaki belleklemede taban durumları (satır ya da sütun 0) deftere yazılmıyor; defterde 20×20 = 400 kayıt oluşuyor. Defterdeki KVI-1-I1 bunu soru yapmış: "kitapçık 441 diyor, siz kaç buldunuz, neden?"</td>
+          <td>Bilerek bırakılmış bir "yakalayın" ise kitapçıkta bir satırla söyleyin ("sayın; 441 çıkmazsa nedenini KVI-1-I1'de bulacaksınız"); değilse 400 yapın. Şu an düz bir yanlış gibi okunuyor.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t16"><td>16</td><td class="yer"><span class="rozet kitap-k">Kitapçık Koco</span>kitapcik-koco/bolumler/00-kapak.html<small>Kapak · Koco'yu kurun</small></td>
+          <td>iKojo (tarayıcı) ile masaüstü Koco arasındaki farklar anlatılmıyor: <code>silVeSakla</code> yalnızca masaüstünde; dizinler iKojo'da <code>List(…)</code> olarak yazılabiliyor; iletişim pencereleri çıktı alanını örtebiliyor. Defter iki ortamı da destekliyor, kitapçık ayrım yapmıyor.</td>
+          <td>Kapağa "İki Koco, üç fark" kutusu; defterde ilgili alıştırmalara (ekran çıktısı karşılaştıranlara) "iKojo'da böyle görünür" notu.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t17"><td>17</td><td class="yer"><span class="rozet al-k">Alıştırma Koco</span>alistirma-koco/bolumler/03-soyutlama.html:91<small>KIII-1-Z1 · Izgara, iki yoldan</small></td>
+          <td>"biri 48, öteki 31 çizgiyle çizilmiş" deniyor; <code>beklenen-cikti</code> "çizgi çizgi: 9 çizgi". 3×4 ızgara çizgi çizgi çizilince 4 yatay + 5 dikey = 9. "31" yanlış.</td>
+          <td>Metni "öteki 9 çizgiyle" yapın.</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+        <tr id="t18"><td>18</td><td class="yer"><span class="rozet al-k">Alıştırma Koco</span>alistirma-koco/kod/KIV-1-K1/beklenen-cikti<small>KIV-1-K1 · Eğrelti otu (Keşif)</small></td>
+          <td>Keşif soruları açık uçlu ve "beklenen çıktı yok" ilkesiyle yazılmış; bu dizinde "977 dal" diye bir beklenen çıktı duruyor. Öğrencinin kendi seçimine bağlı bir sayıyı "beklenen" diye görmesi kafa karıştırır.</td>
+          <td>Dosyayı kaldırın ya da adını <code>ornek-cikti</code> yapıp sayfada "örnek: bizim ayarlarla 977 dal" deyin.</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+        <tr id="t19"><td>19</td><td class="yer"><span class="rozet depo">Depo</span>mp4ler/gorsel-kayitlar.md</td>
+          <td>Ders 19 ve 20 bağlantıları <code>../ileri/dersler/20260220.md</code> ve <code>20260227.md</code>; dosya adları <code>d20260220.md</code>, <code>d20260227.md</code>. İki kırık bağlantı.</td>
+          <td><code>d</code> önekini ekleyin.</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+        <tr id="t20"><td>20</td><td class="yer"><span class="rozet al-c">Alıştırma C++</span>alistirma/kod/*/Makefile<small>Bölüm III ve sonrası</small></td>
+          <td><code>diff</code> boşluk ve son satır sonu farkına duyarlı; yeni başlayanın satır sonunda fazladan boşluk bırakan çıktısı "yanlış" sayılır ve neden olduğu anlaşılmaz. Windows'ta <code>make</code> ve <code>diff</code> için yol tarifi yok.</td>
+          <td>Makefile'larda <code>diff -w</code> (ya da <code>--strip-trailing-cr -w</code>); defterin III. bölüm başına "Windows'ta WSL açın" kutusu; H-2-Z1 zaten <code>diff</code> okumayı öğretiyor, oraya "boşluk farkı" örneği.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t21"><td>21</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/03-zanaat.html<small>III · Hata bulmanın üç yolu</small></td>
+          <td>Üç yol (yazdırma, ayıklayıcı, küçültme) iyi; ama bugünün en ucuz dördüncü yolu, temizleyiciler (<em>sanitizers</em>), yok. Taşma, sınır aşımı ve bellek hatalarını tek bayrakla yakalar; 1 ve 2 numaralı sorunları da öğrencinin kendisi görür.</td>
+          <td>Yarım sayfa: <code>g++ -std=c++23 -Wall -fsanitize=address,undefined ana.cpp</code>; bir sınır aşımı örneği ve çıktısı. <code>sablon/Makefile</code>'a <code>ayikla</code> hedefi.</td>
+          <td><span class="onem o-o">Orta</span></td></tr>
+        <tr id="t22"><td>22</td><td class="yer"><span class="rozet depo">Depo</span>dogrusal-cebir/prog; python/giris.md; ileri/segment-trees/README.md</td>
+          <td>Derlenmiş <code>prog</code> ikilisi izleniyor (CLAUDE.md bunu bilinen istisna diye not etmiş); boş ve tek satırlık iki belge var.</td>
+          <td><code>git rm --cached dogrusal-cebir/prog</code>; iki belgeyi doldurun ya da kaldırıp bağlantıları temizleyin.</td>
+          <td><span class="onem o-d">Düşük</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="yol"><span class="no">5</span>Yol haritası</h2>
+  <div class="dalga">
+    <div class="kutu duzelt">
+      <h3>Hemen (bir-iki saat)</h3>
+      <ul>
+        <li>13 · Eşlem/Eşlek cümlesi</li>
+        <li>1, 2 · taşma anlatımı, <code>1LL</code>, <code>unsigned long long</code></li>
+        <li>4 · "Dijkstra'yı kırın" metni</li>
+        <li>5 · Bellman–Ford denetimi</li>
+        <li>6, 7 · çoklu küme, "bitişik altdizi"</li>
+        <li>14, 19 · bağlantı hedefleri</li>
+        <li>15, 17, 18, 3 · 441/400, 31/9, Keşif çıktısı, <code>toplamHak</code></li>
+      </ul>
+    </div>
+    <div class="kutu oneri">
+      <h3>Bu dönem (birkaç akşam)</h3>
+      <ul>
+        <li>E5 · README ve icindekiler'e "Kitaplık" bölümü; genel sayfa ve dizin bağlantıları</li>
+        <li>E1, E2 · kesim numaraları ve <code>id</code>'ler; "Yanıt yerine" bağlantılarını kesime indirin</li>
+        <li>10, 11 · <code>std::string</code> ve "Hazır araçlar" kutuları</li>
+        <li>9, 16, 20, 21 · WSL/git, iKojo farkları, <code>diff -w</code>, temizleyiciler</li>
+        <li>E3, E4 · sözlük sayfası, sürüm etiketleri</li>
+        <li>P2, P11, P12 · yanılgı kutuları, hata iletisi sözlüğü, yapay zekâ kuralı</li>
+      </ul>
+    </div>
+    <div class="kutu iyi">
+      <h3>Sonraki sürüm (yaz)</h3>
+      <ul>
+        <li>P1 · öğrenme hedefleri ve öz-denetim</li>
+        <li>P3, P4 · üç kademeli ipucu, süre kestirimi</li>
+        <li>P5, P6 · geri dönüş soruları, proje ipi</li>
+        <li>P7, 12 · hızlı/yavaş yol imleri, II. bölümü bölmek</li>
+        <li>P8, P9, P10 · bölüm sınavı, ikili imi, günlük</li>
+        <li>E8 · GitHub Pages aynası</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="yontem"><span class="no">6</span>Yöntem ve sınırlar</h2>
+  <p>
+    Dört eserin 28 bölüm dosyası, README'leri, <code>ileri/icindekiler.md</code>, kök README ve
+    <code>kitap/ReadMe.md</code> baştan sona okundu; 314 alıştırmanın kimlik ve başlıkları, 24 örnek programın
+    kaynak dosyaları ve depodaki bütün GitHub bağlantıları makineyle denetlendi (hepsi var; yalnızca E6'daki
+    iki <code>mp4ler</code> bağlantısı kırık). Koco Türkçe API'si, kitapçığın bağlı olduğu Kojo sürümünün
+    kaynaklarından doğrulandı; kullanılan bütün Türkçe adlar var, <code>Eşlem</code>'in değişebilir olduğu
+    oradan okundu.
+  </p>
+  <p>
+    Teknik tablodaki her satır ilgili dosyada satır numarasıyla yeniden kontrol edildi. Bu incelemede 24
+    program yeniden derlenmedi ve 314 test yeniden koşturulmadı; bulgular kaynak metne ve koda dayanıyor.
+    Pedagojik bölümdeki öneriler görüş içerir; "en küçük işe yarar değişiklik" ilkesiyle yazıldı. Tahmini
+    süreler (P4) öneri niteliğindedir, ölçüm değil.
+  </p>
+  <p>
+    Bu inceleme ile birlikte <a href="dizin.html">Keyifli Kavram Dizini</a>
+    (300 kavram, Türkçe–İngilizce, bölüm ve alıştırma bağlantılı) ve kitaplığı bir bütün olarak sunan
+    <a id="kitaplik-bag" href="index.html">Keyifli Kitaplık</a> sayfası hazırlandı.
+  </p>
+</main>
+
+<footer>
+  <div class="ic">
+    <p>Metin <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr">CC BY-SA 4.0</a>; incelenen eserler
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">cpp_ogreniyoruz</a> deposunda.</p>
+  </div>
+</footer>
+
+</body>
+</html>

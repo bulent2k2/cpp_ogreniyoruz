@@ -201,9 +201,6 @@ Yoksa `prog`, `bin/`, `*.o` ve `test-ciktisi` dosyalarını elle silin.
   hazır", "Update d20260508.md").
 - `.gitignore` ikili çıktıları dışlar: `*.o`, `bin/`, `**/prog`, `*~`,
   `*.dSYM/`. **Derlenmiş ikili dosya commit etmeyin.**
-  (`dogrusal-cebir/prog` `.gitignore`'dan önce eklendiği için hâlâ
-  izleniyor — bilinen bir istisna; temizlemek gerekirse önce sahibine
-  sorun.)
 - Sürekli tümleştirme (CI) yoktur; `.github/` dizini yoktur.
 
 ### Lisans

@@ -6,8 +6,8 @@ Sınav 16 Mayıs 2026'da. 14 Mayıs'ta yaptığımız son ders: [ders 30](dersle
 
 Giriş Kitapçığı
 --
-+ [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](../kitapcik/README.md) bütün derslerden damıtılmış altı bölümlük bir giriş: temeller, veri yapıları, zanaat, özyineleme, çizgeler ve dinamik programlama. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) ve [EPUB](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
-+ [Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş](../kitapcik-koco/README.md) kardeş kitapçık: aynı kavramlar Koco ve Scala ile, bölüm bölüm paralel. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf) ve [EPUB](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
++ [Programlamaya ve Algoritmalara Keyifli Bir Başlangıç](../kitapcik/README.md) bütün derslerden damıtılmış altı bölümlük bir giriş: temeller, veri yapıları, zanaat, özyineleme, çizgeler ve dinamik programlama. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf) ve [EPUB](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub) · [Küçük Sözlük](https://claude.ai/artifact/MQsSVarxjXcUiczTtanFn5)
++ [Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş](../kitapcik-koco/README.md) kardeş kitapçık: aynı kavramlar Koco ve Scala ile, bölüm bölüm paralel. [PDF](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf) ve [EPUB](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub) · [Küçük Sözlük](https://claude.ai/artifact/RBmX55BsV339Foquk6b6oT)
 + [Keyifli Alıştırmalar](../alistirma/README.md) kitapçığın alıştırma defteri; her konuda dört basamak. [Koco cildi](../alistirma-koco/README.md) de var.
 + [Keyifli Kitaplık](https://claude.ai/artifact/2HmYGoMWQRpLJ6siGq7qxY) hepsini bir arada sunan sayfa: kime hangi yol, nasıl çalışılır. [Kavram dizini](https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT) A'dan Z'ye. Kaynaklar [kitaplik/](../kitaplik/README.md) dizininde.
 

@@ -121,6 +121,26 @@ satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span
       tutmaz. <strong>Kanıtın yarısını veri yapısı yapıyor.</strong>
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong>Gezilenler kümesini unutmak.</strong> Küme değişmez:
+          <code>gezilen + buradan</code> yeni bir küme döndürür, eskisine
+          dokunmaz. Döneni bir sonraki çağrıya vermezseniz aynı düğüme
+          defalarca girer, çevrimli çizgede hiç durmazsınız. <code>den</code>
+          kılığında da aynı tuzak: <code>gezilen = gezilen + şimdiki</code>
+          satırı yoksa döngü bitmez.
+        </li>
+        <li>
+          <strong>Yönsüz bağı tek yöne eklemek.</strong> A&ndash;B bağını yalnızca
+          A'nın kümesine koyarsanız B'den A görünmez; parçalar yanlış sayılır.
+          Yönsüz çizgede her bağı iki yöne de ekleyin (KV-1-A2 tam bunu
+          yaptırıyor).
+        </li>
+      </ul>
+    </div>
+
     <h3>Aynı gezi, yığınla &mdash; ve kuyruk numarası <span class="yol ileri">ileri</span></h3>
 
     <p>

@@ -33,9 +33,9 @@
   <span class="t">short</span> dizi[]{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>};
 
   cout &lt;&lt; <span class="s">&quot;dizinin boyu     : &quot;</span> &lt;&lt; sizeof(dizi)    &lt;&lt; <span class="s">&quot; bayt&quot;</span> &lt;&lt; endl;
-  cout &lt;&lt; <span class="s">&quot;bir öğenin boyu  : &quot;</span> &lt;&lt; sizeof(dizi[<span class="n">0</span>]) &lt;&lt; <span class="s">&quot; bayt&quot;</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">&quot;bir ögenin boyu  : &quot;</span> &lt;&lt; sizeof(dizi[<span class="n">0</span>]) &lt;&lt; <span class="s">&quot; bayt&quot;</span> &lt;&lt; endl;
   <span class="t">int</span> ogeSayisi = sizeof(dizi) / sizeof(dizi[<span class="n">0</span>]);
-  cout &lt;&lt; <span class="s">&quot;öğe sayısı       : &quot;</span> &lt;&lt; ogeSayisi &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">&quot;öge sayısı       : &quot;</span> &lt;&lt; ogeSayisi &lt;&lt; endl;
 
   <span class="a">for</span> (<span class="a">auto</span> s : dizi) cout &lt;&lt; s &lt;&lt; <span class="s">&quot; &quot;</span>;
   cout &lt;&lt; endl;
@@ -46,15 +46,15 @@
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>dizinin boyu     : 32 bayt
-bir öğenin boyu  : 4 bayt
-öğe sayısı       : 8
+bir ögenin boyu  : 4 bayt
+öge sayısı       : 8
 3 1 4 1 5 9 2 6 </code></pre>
 </figure>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/II-1-I1"><code>alistirma/kod/II-1-I1/</code></a></p>
 </section>
 <section class="soru" id="II-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-1-A1</span> Toplam, en büyük, en küçük</h3>
-<p>Önce bir <code>n</code>, sonra <code>n</code> sayı okuyun; bir <code>vector&lt;int&gt;</code>'e koyun. Dört satır yazın: toplam, en büyük, en küçük, ortalama. Girdi <code>5</code> ve <code>3 1 4 1 5</code>. En büyüğü bulmak için ilk öğeyle başlayın, sıfırla değil; eksi sayılarda neden fark eder?</p>
+<p>Önce bir <code>n</code>, sonra <code>n</code> sayı okuyun; bir <code>vector&lt;int&gt;</code>'e koyun. Dört satır yazın: toplam, en büyük, en küçük, ortalama. Girdi <code>5</code> ve <code>3 1 4 1 5</code>. En büyüğü bulmak için ilk ögeyle başlayın, sıfırla değil; eksi sayılarda neden fark eder?</p>
 
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 3 1 4 1 5</span></figcaption>
@@ -305,7 +305,7 @@ defter: yok</code></pre>
 </section>
 <section class="soru" id="II-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-3-A2</span> Kesişim, birleşim, fark</h3>
-<p>İki küme okuyun: önce boy, sonra öğeler; iki kere. Üç satır: kesişim, birleşim, birinciden ikincinin farkı. Girdi <code>4</code> / <code>1 4 6 9</code> / <code>3</code> / <code>4 9 10</code>. <code>contains</code> ile döngü yeter; <code>&lt;algorithm&gt;</code>'daki <code>set_intersection</code> sonra.</p>
+<p>İki küme okuyun: önce boy, sonra ögeler; iki kere. Üç satır: kesişim, birleşim, birinciden ikincinin farkı. Girdi <code>4</code> / <code>1 4 6 9</code> / <code>3</code> / <code>4 9 10</code>. <code>contains</code> ile döngü yeter; <code>&lt;algorithm&gt;</code>'daki <code>set_intersection</code> sonra.</p>
 
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 1 4 6 9 3 4 9 10</span></figcaption>
@@ -526,7 +526,7 @@ elma</code></pre>
 </section>
 <section class="soru" id="II-6-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-6-A1</span> Her türden toplam</h3>
-<p><code>template &lt;typename T&gt; T toplam(const vector&lt;T&gt;&amp; d)</code>: öğeleri toplayıp döndürsün. Bir <code>vector&lt;int&gt;{1,2,3,4,5}</code> ve bir <code>vector&lt;double&gt;{1.5, 2.5, 3.5}</code> ile çağırın. Toplamı hangi değerle başlatacaksınız: <code>0</code> mı, <code>T{}</code> mi? İkisini de deneyin.</p>
+<p><code>template &lt;typename T&gt; T toplam(const vector&lt;T&gt;&amp; d)</code>: ögeleri toplayıp döndürsün. Bir <code>vector&lt;int&gt;{1,2,3,4,5}</code> ve bir <code>vector&lt;double&gt;{1.5, 2.5, 3.5}</code> ile çağırın. Toplamı hangi değerle başlatacaksınız: <code>0</code> mı, <code>T{}</code> mi? İkisini de deneyin.</p>
 
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
@@ -603,7 +603,7 @@ takma addan sonra: 40</code></pre>
 </section>
 <section class="soru" id="II-7-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">II-7-A2</span> Kopyalamayın, değiştirmeyin</h3>
-<p>Kitapçığın <em>Püf noktası</em>: iki işlev yazın. <code>int toplam(const vector&lt;int&gt;&amp; d)</code> kabı kopyalamadan toplasın; <code>void ikiyeKatla(vector&lt;int&gt;&amp; d)</code> her öğeyi yerinde iki katına çıkarsın. Dizi <code>{3, 1, 4, 1, 5}</code>; toplam, katlanmış dizi, yeni toplam: üç satır. <code>toplam</code> içinde bir öğeyi değiştirmeyi deneyin; derleyici ne der?</p>
+<p>Kitapçığın <em>Püf noktası</em>: iki işlev yazın. <code>int toplam(const vector&lt;int&gt;&amp; d)</code> kabı kopyalamadan toplasın; <code>void ikiyeKatla(vector&lt;int&gt;&amp; d)</code> her ögeyi yerinde iki katına çıkarsın. Dizi <code>{3, 1, 4, 1, 5}</code>; toplam, katlanmış dizi, yeni toplam: üç satır. <code>toplam</code> içinde bir ögeyi değiştirmeyi deneyin; derleyici ne der?</p>
 
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
@@ -617,14 +617,14 @@ toplam 28</code></pre>
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">II-7-Z1</span> Adresle yürümek</h3>
 <p>Temel dizide adres aritmetiği: <code>int* p = dizi;</code> ile başlayıp <code>p != dizi + n</code> olana kadar <code>++p</code>; her adımda <code>*p</code>'yi yazın. Sonra <code>*(dizi + 3)</code> ile <code>dizi[3]</code>'ün aynı şey olduğunu gösterin. <code>++p</code> adresi kaç bayt ilerletiyor? Kitapçığın <code>10-dizi</code> çıktısındaki &ldquo;ikincininki&rdquo; satırıyla bağlayın.</p>
 <div class="ipucu">
-<details><summary>Düşünce</summary><p>Adres bir konum; <code>++p</code> bir sonraki öğeye, yani <code>sizeof(int)</code> bayt ileri.</p></details>
+<details><summary>Düşünce</summary><p>Adres bir konum; <code>++p</code> bir sonraki ögeye, yani <code>sizeof(int)</code> bayt ileri.</p></details>
 <details><summary>Yaklaşım</summary><p><code>for (int* p{dizi}; p != dizi + n; ++p) cout &lt;&lt; *p;</code> — adresleri <code>cout &lt;&lt; p</code> ile yazdırıp iki ardışık adresin farkına bakın.</p></details>
 <details><summary>İlk satır</summary><p><code>for (int* p{dizi}; p != dizi + n; ++p) cout &lt;&lt; *p &lt;&lt; " ";</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>3 1 4 1 5 9 2 6 
-dördüncü öğe: 1 = 1</code></pre>
+dördüncü öge: 1 = 1</code></pre>
 </figure>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/II-7-Z1"><code>alistirma/kod/II-7-Z1/</code></a></p>
 </section>

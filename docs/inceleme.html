@@ -118,7 +118,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
     <p class="ozet">
       İki kitapçık ve iki alıştırma defteri üç gözle okundu: öğretim tasarımı (pedagog), metin ve yapı (editör),
       kod ve teknik doğruluk (bilgisayar uzmanı). Önce güçlü yanlar, sonra eksikler, öneriler ve yerini
-      söyleyen düzeltme listesi. Her bulgu dosya ve kesim adıyla verildi; düzeltmeler küçük yamalarla yapılabilir.
+      söyleyen düzeltme listesi. Her bulgu dosya ve altbölüm adıyla verildi; düzeltmeler küçük yamalarla yapılabilir.
     </p>
     <p class="kunye">
       <span>Ekim 2026</span>
@@ -164,7 +164,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
       <h3>Güçlü yanlar</h3>
       <ul>
         <li><strong>Dört basamaklı merdiven</strong> (Isınma, Alıştırma, Zorlayıcı, Keşif) her konuda aynı; öğrenci nerede durduğunu bilir. 314 alıştırmanın hepsi bu düzene uyuyor.</li>
-        <li><strong>Yanıt yerine ipucu.</strong> Çözüm anahtarı yok, ders notuna ve kitapçık kesimine bağlantı var. Kopyalamayı değil düşünmeyi ödüllendiriyor.</li>
+        <li><strong>Yanıt yerine ipucu.</strong> Çözüm anahtarı yok, ders notuna ve kitapçık altbölümüne bağlantı var. Kopyalamayı değil düşünmeyi ödüllendiriyor.</li>
         <li><strong>Zanaat bölümü</strong> (terminal, make, altın dosya, hata ayıklama, ölçme) giriş kitaplarında neredeyse hiç olmayan bir şey; burada III. bölümün tamamı.</li>
         <li><strong>Kanıt vurgusu.</strong> VI. bölüm DP'yi formül ezberi değil kanıtlanacak bir iddia olarak sunuyor; V-9 ve VI-5 alıştırmaları bunu sürdürüyor.</li>
         <li><strong>İki dil, tek yol.</strong> Koco cildi aynı kavramı işlevsel kılıkta tekrar ettiriyor; bu, transfer için en iyi bilinen yöntemlerden biri.</li>
@@ -179,7 +179,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
         <li>C++ I.2'de işaretli taşmayı "tanımsız davranış" olarak anlatın; <code>1L</code> ve <code>unsigned long</code> yerine <code>1LL</code> ve <code>unsigned long long</code>. <a href="#t1">→ 1, 2</a> <span class="durum d-ok">✓ #25</span></li>
         <li>V. bölümdeki "Dijkstra'yı kırın" alıştırmasını kitapçığın tembel Dijkstra'sıyla uyumlayın (defterdeki V-7-A2 doğru hâli). <a href="#t4">→ 4</a> <span class="durum d-ok">✓ #25</span></li>
         <li>Her bölümün sonuna "Bu bölümden sonra…" hedef listesi ve üç öz-denetim sorusu ekleyin. <a href="#p1">→ P1</a> <span class="durum d-ok">✓ #26</span></li>
-        <li>Kitapçık kesimlerine numara ve <code>id</code> verin; alıştırma konu numaraları (II.5 gibi) kitapçıkta karşılık bulsun, "Yanıt yerine" bağlantıları kesime insin. <a href="#e1">→ E1, E2</a> <span class="durum d-ok">✓ #25</span></li>
+        <li>Kitapçık altbölümlerine numara ve <code>id</code> verin; alıştırma konu numaraları (II.5 gibi) kitapçıkta karşılık bulsun, "Yanıt yerine" bağlantıları altbölüme insin. <a href="#e1">→ E1, E2</a> <span class="durum d-ok">✓ #25</span></li>
         <li>Kök README ve <code>ileri/icindekiler.md</code>'ye dört eseri, dizini ve genel sayfayı listeleyen bir "Kitaplık" bölümü koyun. <a href="#e5">→ E5</a> <span class="durum d-ok">✓ #25 + #28</span></li>
         <li>Zorlayıcı ve Keşif sorularına üç kademeli ipucu (<code>&lt;details&gt;</code>) ve süre kestirimi ekleyin. <a href="#p3">→ P3, P4</a> <span class="durum d-ok">✓ #26</span></li>
         <li>Bellman–Ford parçasına ulaşılamayan düğüm denetimini, VI'daki "küme" gösterimine çoklu küme düzeltmesini, "ortak altdizi"ye "bitişik" sözcüğünü ekleyin. <a href="#t5">→ 5, 6, 7</a> <span class="durum d-ok">✓ #25</span></li>
@@ -198,7 +198,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
     <article class="ped" id="p1">
       <h3>P1 · Öğrenme hedefleri ve öz-denetim yok <span class="durum d-ok">✓ #26</span></h3>
       <p class="e">Yalnızca C++ I. bölümde "Bölümü kapatırken" var. Öğrenci bir bölümü bitirince "ne öğrenmiş olmalıyım" sorusuna yanıt bulamıyor; eksik kalan şeyi fark etmeden ilerliyor. Alıştırma defteri bunu kısmen karşılıyor ama ölçüt vermiyor.</p>
-      <p class="o">Her bölümün sonuna 4–6 maddelik "Bu bölümden sonra şunları yapabilirsiniz" listesi (yapabilirlik dili: "bir eşlemi anahtara göre gezip sayım yapabilirim") ve 3 öz-denetim sorusu. Yanıtları kitapçığa koymayın; "Yanıt yerine" kutusunun aynısı: ilgili kesime bağlantı. İki kitapçık için 12 kısa kutu; bir öğleden sonra.</p>
+      <p class="o">Her bölümün sonuna 4–6 maddelik "Bu bölümden sonra şunları yapabilirsiniz" listesi (yapabilirlik dili: "bir eşlemi anahtara göre gezip sayım yapabilirim") ve 3 öz-denetim sorusu. Yanıtları kitapçığa koymayın; "Yanıt yerine" kutusunun aynısı: ilgili altbölüme bağlantı. İki kitapçık için 12 kısa kutu; bir öğleden sonra.</p>
     </article>
     <article class="ped" id="p2">
       <h3>P2 · Yanılgı kutuları tek: "Klasik tuzak" <span class="durum d-ok" title="İlk kutular #25; C++ IV ve V ile Koco III, IV ve V'teki beş kutu #28">✓ #25 + #28</span></h3>
@@ -228,7 +228,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
     <article class="ped" id="p7">
       <h3>P7 · Tek yol, tek hız <span class="durum d-ok">✓ #26</span></h3>
       <p class="e">C bilen öğrenci I. bölümde sıkılıyor, hiç bilmeyen II. bölümde boğuluyor; metin ikisine de aynı davranıyor. Genel sayfadaki okuma yolları bunu dışarıdan çözüyor, ama kitabın içinde işaret yok.</p>
-      <p class="o">Kesim başlıklarına iki küçük im: "hızlı yol" (deneyimli okur atlayabilir) ve "yavaş yol" (yeni başlayan iki kere okusun). II. bölümde yapıcı/yıkıcı, friend, enum ve kalıp kesimleri "ileri" imli olsun; ilk okumada atlanabilsin. Alıştırmalarda zaten Z/K ayrımı var.</p>
+      <p class="o">Altbölüm başlıklarına iki küçük im: "hızlı yol" (deneyimli okur atlayabilir) ve "yavaş yol" (yeni başlayan iki kere okusun). II. bölümde yapıcı/yıkıcı, friend, enum ve kalıp altbölümleri "ileri" imli olsun; ilk okumada atlanabilsin. Alıştırmalarda zaten Z/K ayrımı var.</p>
     </article>
     <article class="ped" id="p8">
       <h3>P8 · Bölüm sonu değerlendirmesi yok <span class="durum d-ok">✓ #26</span></h3>
@@ -260,14 +260,14 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
   <h2 id="editor"><span class="no">3</span>Editör gözüyle: yapı, tutarlılık, bağlantılar</h2>
   <div class="kart-liste">
     <div class="kutu oneri" id="e1">
-      <h3>E1 · Kesim numaraları ile alıştırma konu numaraları örtüşmüyor <span class="durum d-ok">✓ #25</span></h3>
-      <p>Kitapçık kesimleri numarasız; alıştırma defteri konuları "II.5" gibi numaralıyor ve kesimleri birleştiriyor ya da bölüyor: C++ II. bölümde 10 kesim, defterde 7 konu; IV'te 9 kesime 6 konu; V'te 14 kesime 9 konu. "II.5 Kendi türünüzü yazmak" defterde var, kitapçıkta "II.5" diye bir şey yok.</p>
-      <p>Öneri: kitapçık <code>h2</code>'lerine defterle aynı numarayı verin (birleşen kesimler alt kesim olsun) ya da defterde konu başlığına kitapçık kesim adlarını tam yazın (çoğunda var, hepsinde değil).</p>
+      <h3>E1 · Altbölüm numaraları ile alıştırma konu numaraları örtüşmüyor <span class="durum d-ok">✓ #25</span></h3>
+      <p>Kitapçık altbölümleri numarasız; alıştırma defteri konuları "II.5" gibi numaralıyor ve altbölümleri birleştiriyor ya da bölüyor: C++ II. bölümde 10 altbölüm, defterde 7 konu; IV'te 9 altbölüme 6 konu; V'te 14 altbölüme 9 konu. "II.5 Kendi türünüzü yazmak" defterde var, kitapçıkta "II.5" diye bir şey yok.</p>
+      <p>Öneri: kitapçık <code>h2</code>'lerine defterle aynı numarayı verin (birleşen altbölümler bir alt başlık olsun) ya da defterde konu başlığına kitapçık altbölüm adlarını tam yazın (çoğunda var, hepsinde değil).</p>
     </div>
     <div class="kutu oneri" id="e2">
       <h3>E2 · Başlıklarda <code>id</code> yok, derin bağlantı yok <span class="durum d-ok">✓ #25</span></h3>
-      <p>Alıştırmaların "Yanıt yerine" kutuları ve kavram dizini kitapçığa yalnızca bölüm başından bağlanabiliyor; okur kesimi kendisi arıyor. Alıştırma sayfalarında ise her soru <code>id</code>'li (<code>III-4-A1</code>), oraya doğrudan inilebiliyor.</p>
-      <p>Öneri: <code>yap.py</code>'ye başlıkları sadeleştirip <code>id</code> yazan on satır (ç→c, boşluk→tire). Sonra dizin ve defter kesime bağlanır; PDF'te de yer imi olur.</p>
+      <p>Alıştırmaların "Yanıt yerine" kutuları ve kavram dizini kitapçığa yalnızca bölüm başından bağlanabiliyor; okur altbölümü kendisi arıyor. Alıştırma sayfalarında ise her soru <code>id</code>'li (<code>III-4-A1</code>), oraya doğrudan inilebiliyor.</p>
+      <p>Öneri: <code>yap.py</code>'ye başlıkları sadeleştirip <code>id</code> yazan on satır (ç→c, boşluk→tire). Sonra dizin ve defter altbölüme bağlanır; PDF'te de yer imi olur.</p>
     </div>
     <div class="kutu oneri" id="e3">
       <h3>E3 · Terimler yer yer çarpışıyor <span class="durum d-ok" title="Sözlük sayfaları ve terim düzeltmeleri #25; Düğüm/nokta notu #28">✓ #25 + #28</span></h3>
@@ -298,7 +298,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
     </div>
     <div class="kutu oneri" id="e7">
       <h3>E7 · Vaat edilen ama boş sayfalar <span class="durum d-ok">✓ #28</span></h3>
-      <p>VI. bölüm "Nereye gidilir?" kesimi "hepsinin girişi ders deposunda var" diyor. <code>python/giris.md</code> sıfır bayt; <code>ileri/segment-trees/README.md</code> tek satır. Ya listeyi gerçekten var olanlarla sınırlayın ya da dosyaları birer paragrafla doldurun.</p>
+      <p>VI. bölüm "Nereye gidilir?" altbölümü "hepsinin girişi ders deposunda var" diyor. <code>python/giris.md</code> sıfır bayt; <code>ileri/segment-trees/README.md</code> tek satır. Ya listeyi gerçekten var olanlarla sınırlayın ya da dosyaları birer paragrafla doldurun.</p>
     </div>
     <div class="kutu oneri" id="e8">
       <h3>E8 · Barındırma tek kopya <span class="durum d-ok">✓ #27</span></h3>
@@ -309,7 +309,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
     <div class="kutu not" id="e9">
       <h3>E9 · Küçük tutarlılık notları <span class="durum d-kismen" title="Kapak tabloları aynı kalıba oturtuldu (#26); 'Terminalde' notu alınmadı, çıktı blokları o işi görüyor">kısmen · #26</span></h3>
       <ul>
-        <li>Alıştırma defteri Isınma'dan önce "Kitapçığın örneği" diyor; kesim adı yerine örnek programın dosya adı da (<code>41-dijkstra.cpp</code>) verilse öğrenci depoda hemen bulur.</li>
+        <li>Alıştırma defteri Isınma'dan önce "Kitapçığın örneği" diyor; altbölüm adı yerine örnek programın dosya adı da (<code>41-dijkstra.cpp</code>) verilse öğrenci depoda hemen bulur.</li>
         <li>Koco defterinde "Tuvalde:" satırları iyi bir buluş; C++ defterinde çıktının yanında "Terminalde:" aynı rolü oynayabilir.</li>
         <li>C++ kapaktaki "Bu kitapçıkta neler var?" ile Koco kapaktaki aynı başlık farklı uzunlukta; ikisini aynı kalıba oturtun (bölüm, bir cümle, tahmini süre).</li>
       </ul>
@@ -318,7 +318,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
 
   <h2 id="teknik"><span class="no">4</span>Bilgisayar uzmanı gözüyle: düzeltme listesi</h2>
   <p class="giris">
-    Aşağıdaki her satır kaynak dosyada doğrulandı. "Yer" sütunu dosya ve kesimi verir; "Önem" öğrenciye
+    Aşağıdaki her satır kaynak dosyada doğrulandı. "Yer" sütunu dosya ve altbölümü verir; "Önem" öğrenciye
     yanlış öğretme ya da kırık deneyim riskine göre.
   </p>
   <div class="tablo-kabi">
@@ -327,10 +327,10 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
       <tbody>
         <tr id="t1"><td>1</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/01-ilk-adimlar.html<small>I · Her türün bir sınırı var; kod/02-tasma.cpp</small></td>
           <td>İşaretli <code>int</code> taşması, sayının "başa dönmesi" gibi kesin bir davranış olarak gösteriliyor. C++'ta işaretli taşma tanımsız davranıştır; <code>-O2</code> ile derleyici taşmanın olmayacağını varsayıp kodu değiştirebilir, çıktı makineden makineye değişir.</td>
-          <td>Kesime bir cümle: "C++ bunun ne olacağını tanımlamaz; gördüğünüz, bu derleyicinin bu seferki kararı." Gösterim için <code>unsigned</code> kullanın (orada sarmalama tanımlıdır). III. bölüme <code>-fsanitize=undefined,address</code> kutusu; bu bayrak taşmayı da dizi sınırı aşımını da anında yakalar.</td>
+          <td>Altbölüme bir cümle: "C++ bunun ne olacağını tanımlamaz; gördüğünüz, bu derleyicinin bu seferki kararı." Gösterim için <code>unsigned</code> kullanın (orada sarmalama tanımlıdır). III. bölüme <code>-fsanitize=undefined,address</code> kutusu; bu bayrak taşmayı da dizi sınırı aşımını da anında yakalar.</td>
           <td><span class="onem o-y">Yüksek</span></td>
           <td><span class="durum d-ok">✓ #25</span></td></tr>
-        <tr id="t2"><td>2</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>aynı kesim, satır 95 ve 129; kod/02-tasma.cpp:11<small><span class="rozet al-c">Alıştırma C++</span> I-2-I1</small></td>
+        <tr id="t2"><td>2</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>aynı altbölüm, satır 95 ve 129; kod/02-tasma.cpp:11<small><span class="rozet al-c">Alıştırma C++</span> I-2-I1</small></td>
           <td><code>1L * b * b * b</code> ve <code>unsigned long</code> yalnızca Linux/macOS'ta 64 bit. Windows'ta (MinGW, MSVC) <code>long</code> 32 bittir; küp yine taşar, öğrenci kitapçıkla çelişen çıktı görür. I-2-I1'in beklenen çıktısı da <code>unsigned long</code> üst sınırına bağlı.</td>
           <td><code>1LL *</code> ve <code>unsigned long long</code>; metinde "long long her yerde 64 bit, long değil" notu. I-2-I1 beklenen çıktıyı buna göre güncelleyin.</td>
           <td><span class="onem o-y">Yüksek</span></td>
@@ -381,8 +381,8 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
           <td><span class="onem o-d">Düşük</span></td>
           <td><span class="durum d-ok">✓ #25</span></td></tr>
         <tr id="t12"><td>12</td><td class="yer"><span class="rozet kitap-c">Kitapçık C++</span>kitapcik/bolumler/02-veri.html<small>II · bütün bölüm</small></td>
-          <td>On kesimde dizi, vector, map, set, stack/queue/priority_queue/deque, struct, class, yapıcı, yıkıcı, friend, enum, işlev kalıbı, tür kalıbı, adres ve takma ad. Yeni başlayan için en yoğun bölüm; alıştırmaları da en kalabalık (35 soru).</td>
-          <td>İkiye bölün: "II. Kaplar" (dizi, vector, map, set, sıralı kaplar) ve "II½. Kendi türünüz" (struct/class, kalıp, adres). Bölmek istemiyorsanız yapıcı/yıkıcı, friend, enum kesimlerini "ileri" imiyle ilk okumadan çıkarın (bkz. P7).</td>
+          <td>On altbölümde dizi, vector, map, set, stack/queue/priority_queue/deque, struct, class, yapıcı, yıkıcı, friend, enum, işlev kalıbı, tür kalıbı, adres ve takma ad. Yeni başlayan için en yoğun bölüm; alıştırmaları da en kalabalık (35 soru).</td>
+          <td>İkiye bölün: "II. Kaplar" (dizi, vector, map, set, sıralı kaplar) ve "II½. Kendi türünüz" (struct/class, kalıp, adres). Bölmek istemiyorsanız yapıcı/yıkıcı, friend, enum altbölümlerini "ileri" imiyle ilk okumadan çıkarın (bkz. P7).</td>
           <td><span class="onem o-o">Orta</span></td>
           <td><span class="durum d-ok">✓ #26</span></td></tr>
         <tr id="t13"><td>13</td><td class="yer"><span class="rozet kitap-k">Kitapçık Koco</span>kitapcik-koco/bolumler/05-cizgeler.html:33<small>V · Çizge nedir, nasıl saklanır?</small></td>
@@ -461,7 +461,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
       <h3>Bu dönem (birkaç akşam)</h3>
       <ul>
         <li>E5 · README ve icindekiler'e "Kitaplık" bölümü; genel sayfa ve dizin bağlantıları</li>
-        <li>E1, E2 · kesim numaraları ve <code>id</code>'ler; "Yanıt yerine" bağlantılarını kesime indirin</li>
+        <li>E1, E2 · altbölüm numaraları ve <code>id</code>'ler; "Yanıt yerine" bağlantılarını altbölüme indirin</li>
         <li>10, 11 · <code>std::string</code> ve "Hazır araçlar" kutuları</li>
         <li>9, 16, 20, 21 · WSL/git, iKojo farkları, <code>diff -w</code>, temizleyiciler</li>
         <li>E3, E4 · sözlük sayfası, sürüm etiketleri</li>
@@ -501,7 +501,7 @@ footer { margin-top: 44px; border-top: 1px solid var(--cizgi); padding-top: 14px
     (300 kavram, Türkçe–İngilizce, bölüm ve alıştırma bağlantılı) ve kitaplığı bir bütün olarak sunan
     <a id="kitaplik-bag" href="index.html">Keyifli Kitaplık</a> sayfası hazırlandı.
     Dizin 23 Ekim'de yenilendi: P5 ile gelen 20 "Geri dönüş" alıştırması eklendi, kitapçık bağlantıları artık
-    kesimin başlığına iniyor (E2), iki Küçük Sözlük şeritte.
+    altbölümün başlığına iniyor (E2), iki Küçük Sözlük şeritte.
   </p>
 </main>
 

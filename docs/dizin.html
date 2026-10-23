@@ -135,7 +135,7 @@ footer p { max-width: 70ch; margin: 6px 0; }
     <p class="ozet">
       İki kitapçık, iki alıştırma defteri ve ders notlarında geçen kavramlar A'dan Z'ye, Türkçe ve İngilizce
       adlarıyla. Her kavramın altında onu anlatan kitapçık bölümü, onu çalıştıran alıştırmalar ve ilgili ders
-      notu var. Alıştırma bağlantıları doğrudan soruya, kitapçık bağlantıları kesimin başlığına iner.
+      notu var. Alıştırma bağlantıları doğrudan soruya, kitapçık bağlantıları altbölümün başlığına iner.
     </p>
     <nav class="kitaplar" aria-label="Kitaplık">
       <a class="r-ana" id="kitaplik-bag" href="index.html">Keyifli Kitaplık (genel sayfa)</a>
@@ -193,7 +193,7 @@ footer p { max-width: 70ch; margin: 6px 0; }
     <p>
       Alıştırma kimlikleri <code>bölüm-konu-basamak</code> biçimindedir: <code>IV-3-Z1</code>, C++ defterinin
       IV. bölümü, 3. konu, birinci Zorlayıcı soru; <code>K</code> ile başlayanlar Koco defterinindir.
-      Kitapçık bağlantıları kesimin başlığına iner; kesim adı yanında yazar. İki kitapçığın Küçük Sözlük sayfaları
+      Kitapçık bağlantıları altbölümün başlığına iner; altbölüm adı yanında yazar. İki kitapçığın Küçük Sözlük sayfaları
       yukarıdaki şeritte. Ders notları GitHub'daki depoya açılır.
     </p>
     <p>
@@ -260,14 +260,14 @@ footer p { max-width: 70ch; margin: 6px 0; }
   }
 
   function kitapBag(ref, kaynak) {
-    const [bol, kesim, kimlik] = ref.split("|");
+    const [bol, altbolum, kimlik] = ref.split("|");
     const url = (kaynak === "cb" ? D.CB : D.KB)[bol];
     const a = el("a");
-    a.href = kimlik ? url + "#" + kimlik : url;   // kimlik varsa kesimin başlığına iner
+    a.href = kimlik ? url + "#" + kimlik : url;   // kimlik varsa altbölümün başlığına iner
     a.target = "_blank"; a.rel = "noopener";
     const bolAd = bol === "0" ? "Kapak" : bol === "S" ? "Sözlük" : "Bölüm " + bol;
-    a.textContent = kesim ? bolAd + " · " + kesim : bolAd;
-    a.title = KAY[kaynak].kitap + ", " + bolAd.toLowerCase() + (kimlik ? " · kesimin başlığına iner" : "");
+    a.textContent = altbolum ? bolAd + " · " + altbolum : bolAd;
+    a.title = KAY[kaynak].kitap + ", " + bolAd.toLowerCase() + (kimlik ? " · altbölümün başlığına iner" : "");
     return a;
   }
   function alistirmaBag(id, kaynak) {

@@ -138,7 +138,7 @@ code {
   background: #EAEEF6;
   border-bottom: 1px solid #CBD4E4;
   padding: 0.35em 0.7em;
-  /* Düğme kayan (float) öğe; kapsamazsak başlığın yüksekliğine katılmaz
+  /* Düğme kayan (float) öge; kapsamazsak başlığın yüksekliğine katılmaz
      ve alt kenarlığı aşıp kodun ilk satırının üstüne taşar. */
   display: flow-root;
 }

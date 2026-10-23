@@ -24,7 +24,7 @@ int main() {
                / (1.0 * sorgu);
 
   cout << fixed << setprecision(2);
-  cout << "dizi boyu          : " << n << " öğe"  << endl;
+  cout << "dizi boyu          : " << n << " öge"  << endl;
   cout << "inşa süresi        : " << insa.count() << " ms" << endl;
   cout << "ortalama erişim    : " << ort << " ns" << endl;
   cout << "(toplam " << toplam << ")" << endl;

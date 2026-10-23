@@ -266,7 +266,7 @@ toplam 7 adım (2^3 - 1 = 7)</code></pre>
     <h3>Bütün altkümeler</h3>
 
     <p>
-      <code>{3, 1, 2}</code> kümesinin bütün altkümelerini üretelim. Her öğe için tek
+      <code>{3, 1, 2}</code> kümesinin bütün altkümelerini üretelim. Her öge için tek
       bir karar var: <em>alayım mı, almayayım mı?</em>
     </p>
 
@@ -277,17 +277,17 @@ toplam 7 adım (2^3 - 1 = 7)</code></pre>
 <span class="t">void</span> uret(<span class="t">size_t</span> k) {
   <span class="a">if</span> (k == kume.size()) { yaz(); <span class="a">return</span>; }   <span class="y">// TABAN: karar bitti</span>
 
-  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı öğeyi ALMA</span>
+  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı ögeyi ALMA</span>
 
   secilen.push_back(kume[k]);
-  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı öğeyi AL</span>
+  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı ögeyi AL</span>
   secilen.pop_back();             <span class="y">// geri dön: bıraktığın gibi bırak</span>
 }</code></pre>
     </figure>
 
     <p>
       Aynı işi <strong>hiç özyineleme kullanmadan</strong>, bitlerle de yapabiliriz.
-      <em>n</em> öğe için <code>2ⁿ</code> altküme var; her sayının ikili yazılışı
+      <em>n</em> öge için <code>2ⁿ</code> altküme var; her sayının ikili yazılışı
       bir altkümeyi tarif ediyor:
     </p>
 
@@ -325,7 +325,7 @@ toplam 7 adım (2^3 - 1 = 7)</code></pre>
     <h3>Bütün permütasyonlar</h3>
 
     <p>
-      Aynı kalıp, tek fark: bu sefer <em>sıra</em> önemli, ve her öğeyi bir kere
+      Aynı kalıp, tek fark: bu sefer <em>sıra</em> önemli, ve her ögeyi bir kere
       kullanabiliriz. Onun için &ldquo;bunu daha önce kullandım mı&rdquo; diye bir
       dizi tutuyoruz.
     </p>
@@ -487,7 +487,7 @@ vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>)
           <tr><th>Karmaşıklık</th><th>Adı</th><th>n=20</th><th>n=1000</th><th>n=10⁶</th><th>Örnek</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>O(1)</code></td><td>sabit</td><td class="sayi">1</td><td class="sayi">1</td><td class="sayi">1</td><td>Dizide öğeye erişim</td></tr>
+          <tr><td><code>O(1)</code></td><td>sabit</td><td class="sayi">1</td><td class="sayi">1</td><td class="sayi">1</td><td>Dizide ögeye erişim</td></tr>
           <tr><td><code>O(log n)</code></td><td>logaritmik</td><td class="sayi">4</td><td class="sayi">10</td><td class="sayi">20</td><td>İkili arama, tahmin oyunu</td></tr>
           <tr><td><code>O(n)</code></td><td>doğrusal</td><td class="sayi">20</td><td class="sayi">10³</td><td class="sayi">10⁶</td><td>Diziyi bir kere tarama</td></tr>
           <tr><td><code>O(n log n)</code></td><td>&mdash;</td><td class="sayi">86</td><td class="sayi">10⁴</td><td class="sayi">2×10⁷</td><td>Sıralama, Dijkstra</td></tr>
@@ -499,7 +499,7 @@ vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>)
     </div>
 
     <p>
-      Tabloyu bir kere gerçekten okuyun. <code>O(n²)</code> bir milyon öğe için
+      Tabloyu bir kere gerçekten okuyun. <code>O(n²)</code> bir milyon öge için
       <code>10¹²</code> işlem demek &mdash; saatler. <code>O(2ⁿ)</code> ise
       <em>n</em> kırkı geçince evrenin yaşını aşıyor. Bu yüzden yarışma sorularında
       girdi sınırına bakmak, algoritma seçmenin ilk adımıdır:
@@ -575,7 +575,7 @@ vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>)
         <li>
           <strong>Güzel permütasyon.</strong>
           <a href="https://cses.fi/problemset/task/1070/">CSES 1070</a>: peş peşe
-          gelen öğelerin farkı en az 2 olan bir permütasyon bulun. Önce hepsini
+          gelen ögelerin farkı en az 2 olan bir permütasyon bulun. Önce hepsini
           üretip eleyin. Sonra <span class="zor">asıl soru</span> doğrudan
           kurmanın bir yolunu bulun &mdash; <em>n</em> büyük olduğunda üretmek
           çalışmaz.

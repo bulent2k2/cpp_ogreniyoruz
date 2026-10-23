@@ -8,7 +8,7 @@
 using namespace std;
 using saat = chrono::steady_clock;
 
-vector<int> veri(int n) {              // 0..n-1 karışık, son iki öğe eşit
+vector<int> veri(int n) {              // 0..n-1 karışık, son iki öge eşit
   vector<int> d(n);
   for (int k{0}; k < n; ++k) d[k] = (long long)k * 7919 % n;
   d[n - 1] = d[n - 2];

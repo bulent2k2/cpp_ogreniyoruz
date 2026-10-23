@@ -1,0 +1,1274 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitapcik-koco/bolumler/05-cizgeler.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Çizgeler ve Gezintiler</title>
+<meta name="description" content="Derinlemesine ve enlemesine gezi, bu sefer işlevsel: değişmez kümelerle çizge gezmek.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+/* ===========================================================
+   Koco kitapçığı için ek biçem.
+   Biçemin tamamı kardeş kitapçıktan (kitapcik/ortak.css) geliyor;
+   burada yalnızca vurgu rengi değişiyor: mavi yerine petrol yeşili.
+   İki kitapçık yan yana açıldığında ilk bakışta ayırt edilsin diye.
+   =========================================================== */
+
+:root {
+  --mavi: #0E7490;          /* petrol: Koco kitapçığının vurgu rengi */
+  --mavi-yumusak: #E0F2F7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mavi: #67C8DC;
+    --mavi-yumusak: #102A33;
+  }
+}
+
+:root[data-theme="dark"] {
+  --mavi: #67C8DC;
+  --mavi-yumusak: #102A33;
+}
+
+@media print {
+  a { color: #0E6E86; }
+}
+
+/* ---------- bölüm içi ekran görüntüleri ---------- */
+/* Kaplumbağa çıktıları yazı sütununu aşmasın, ufak dursun:
+   .galeri'nin geniş ekrandaki sağa taşmasını (-4.5rem) geri alıyoruz,
+   tek resimli galeride resmi de yarı genişlikte tutuyoruz. */
+
+.galeri.dar { margin-right: 0; }
+.galeri.dar figure { max-width: 19rem; width: 100%; margin: 0 auto; }
+.galeri.dar.uclu {
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+}
+
+@media print {
+  .galeri.dar figure { max-width: 15em; }
+}
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</div>
+  <div class="no">Bölüm V</div>
+  <h1>Çizgeler ve Gezintiler</h1>
+  <p class="ozet">
+    Şehirler ve yollar, bilgisayarlar ve kablolar, insanlar ve arkadaşlıklar
+    &mdash; hepsi aynı matematiksel nesne: <strong>çizge</strong>. Kardeş
+    kitapçık bu konuyu beş satırlık bir gezi kalıbıyla işler; biz aynı kalıbı
+    bir de işlevsel kılıkta göreceğiz: değiştirmeden, geri almadan, kanıtı
+    kendiliğinden gelen bir gezi.
+  </p>
+  <ul class="icerik-seridi"><li><a href="00-kapak.html">Kılavuz</a></li><li><a href="01-ilk-adimlar.html">I. İlk Adımlar</a></li><li><a href="02-veri.html">II. Veriyi Düzenlemek</a></li><li><a href="03-soyutlama.html">III. Soyutlama</a></li><li><a href="04-ozyineleme.html">IV. Özyineleme</a></li><li><a aria-current="page" style="border-color:var(--mavi);color:var(--mavi)">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li><li><a href="07-sozluk.html">Sözlük</a></li></ul>
+</header>
+
+<div class="blok">
+  <div class="ray">V.1</div>
+  <div class="govde">
+    <h2 id="cizge-nedir-nasil-saklanir">Çizge nedir, nasıl saklanır?</h2>
+
+    <p>
+      Bir <strong>çizge</strong> (<em>graph</em>) iki şeyden ibaret:
+      <strong>düğümler</strong> (<em>vertex</em>) ve onları birleştiren
+      <strong>bağlar</strong> (<em>edge</em>). Kuramın doğum günü bile belli:
+      1736'da Euler, Königsberg'in yedi köprüsünün hepsinden tam bir kere geçen
+      yürüyüş olmadığını kanıtlarken köprü boylarının, ada büyüklüklerinin hiç
+      önemli olmadığını, önemli olanın yalnızca <em>neyin neye bağlı olduğu</em>
+      olduğunu gösterdi.
+    </p>
+
+    <p>
+      &ldquo;Neyin neye bağlı olduğu&rdquo; sözünü Bölüm II'de bir kapla
+      söylemiştik: eşlem. Her düğümü komşularının kümesine eşleyelim; Koco'nun
+      <code>Eşlem</code>'i tam bu iş için. (Dikkat: <code>Eşlem</code>
+      <em>değişebilir</em> bir eşlemdir, <code>eşEkle</code> onu yerinde
+      değiştirir. Bölüm II'nin değişmezlik ilkesine uyan kardeşi
+      <code>Eşlek</code>; ona <code>+</code> ile eklenir ve yenisi döner.
+      Çizgeyi bir kere kurup bir daha değiştirmeyeceğiz, <code>Eşlem</code>
+      yeter.)
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">çizge.kojo</span><span class="etiket">komşuluk kümesi</span></figcaption>
+      <pre><code><span class="a">tür</span> <span class="t">Düğüm</span> = <span class="t">Harf</span>
+<span class="a">tür</span> <span class="t">Çizge</span> = <span class="t">Eşlem</span>[<span class="t">Düğüm</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]]   <span class="y">// düğümden komşularına</span>
+
+<span class="a">dez</span> ç: <span class="t">Çizge</span> = <span class="t">Eşlem</span>(
+  <span class="s">'A'</span> -&gt; <span class="t">Küme</span>(<span class="s">'B'</span>, <span class="s">'C'</span>),
+  <span class="s">'B'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>),
+  <span class="s">'C'</span> -&gt; <span class="t">Küme</span>(<span class="s">'D'</span>, <span class="s">'E'</span>),
+  <span class="s">'D'</span> -&gt; <span class="t">Küme</span>(<span class="s">'F'</span>),
+  <span class="s">'E'</span> -&gt; <span class="t">Küme</span>(<span class="s">'F'</span>),
+  <span class="s">'F'</span> -&gt; <span class="t">Küme</span>(<span class="s">'G'</span>),
+  <span class="s">'G'</span> -&gt; <span class="t">Küme</span>[<span class="t">Düğüm</span>]()          <span class="y">// çıkışı olmayan düğüm</span>
+)</code></pre>
+    </figure>
+
+    <p>
+      <code>tür</code> satırları yeni bir şey <em>yapmıyor</em>, sadece ad
+      takıyor &mdash; ama fark büyük: <code>Eşlem[Harf, Küme[Harf]]</code> yerine
+      <code>Çizge</code> okuyunca kod problemin dilinde konuşuyor. Kardeş
+      kitapçıktaki <code>using Cizge = map&lt;Nokta, set&lt;Nokta&gt;&gt;</code>
+      satırının buradaki ikizi bu. Kâğıda çizin: A'dan iki yol çatallanıp
+      D ile E'de buluşuyor, F'te birleşip G'de bitiyor.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Çizgenin kendisi de bir işlev gibi kullanılır: <code>ç('A')</code> size
+        A'nın komşularını verir. Küme de öyleydi: <code>komşular('D')</code>
+        &ldquo;D komşu mu?&rdquo; demek. Eşlem, küme, işlev &mdash; işlevsel
+        dünyada hepsi aynı kapıya çıkar: <em>girdi ver, çıktı al</em>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.2</div>
+  <div class="govde">
+    <h2 id="derinlemesine-gezi-iki-kilikta">Derinlemesine gezi, iki kılıkta</h2>
+
+    <p>
+      Önce yeni bir aletle tanışın. <code>indirge</code> ögeleri birleştirirken
+      başlangıç değeri alamıyordu; <strong>soldanKatla</strong>
+      (<em>fold left</em>) alır: bir başlangıç değeri, bir de &ldquo;eldeki
+      sonuçla sıradaki ögeyi birleştir&rdquo; işlevi verirsiniz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">soldanKatla</span></figcaption>
+      <pre><code><span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>).soldanKatla(<span class="n">0</span>)((toplam, öge) =&gt; toplam + öge)   <span class="y">// 8</span>
+<span class="t">Dizin</span>(<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>).soldanKatla(<span class="s">""</span>)((yazı, öge) =&gt; yazı + öge)     <span class="y">// "314"</span></code></pre>
+    </figure>
+
+    <p>
+      Şimdi gezi. Amaç: bir düğümden başlayıp ulaşılabilen <em>bütün</em>
+      düğümleri bulmak. İşlevsel kılıkta durum &mdash; gezilenler kümesi &mdash;
+      değiştirilmez; her çağrı <strong>yeni bir küme verir</strong>:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">gez.kojo</span><span class="etiket">işlevsel derinlemesine gezi</span></figcaption>
+      <pre><code><span class="a">tanım</span> gez(ç: <span class="t">Çizge</span>, buradan: <span class="t">Düğüm</span>, gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Küme</span>[<span class="t">Düğüm</span>] =
+  <span class="a">eğer</span> (gezilen(buradan)) gezilen             <span class="y">// TABAN: zaten uğramışız</span>
+  <span class="a">yoksa</span> ç(buradan).soldanKatla(gezilen + buradan)(
+    (g, komşu) =&gt; gez(ç, komşu, g)          <span class="y">// her komşudan derine in</span>
+  )
+
+satıryaz(gez(ç, <span class="s">'A'</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]()))
+<span class="y">// KıymaKüme(E, F, A, G, B, C, D) -- yedi düğümün yedisi de bulundu;</span>
+<span class="y">// sıralanış her seferinde değişebilir, çünkü kıyma (hash) kümesi sıra tutmaz</span></code></pre>
+    </figure>
+
+    <p>
+      Dört satır. Okunuşu: <em>buraya uğramışsak elimizdeki küme neyse odur;
+      uğramamışsak kendimizi ekleyip her komşunun getirdiklerini üst üste
+      katlarız.</em> Geri alma satırı yok, işaretleme yok, silme yok &mdash;
+      çünkü hiçbir şey değişmiyor. Bu kodun &ldquo;bir düğümü iki kere sayar
+      mı?&rdquo; sorusuna yanıtı, kümenin tanımından çıkıyor: küme, tekrar
+      tutmaz. <strong>Kanıtın yarısını veri yapısı yapıyor.</strong>
+    </p>
+
+    <h3 id="ayni-gezi-yiginla-ve-kuyruk-numarasi">Aynı gezi, yığınla &mdash; ve kuyruk numarası <span class="yol ileri">ileri</span></h3>
+
+    <p>
+      Şimdi kardeş kitapçığın en sevdiğim numarası, burada da aynen çalışıyor.
+      Geziyi özyineleme yerine bir <strong>yığınla</strong> yazalım:
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">gez2.kojo</span><span class="etiket">yığın mı, kuyruk mu?</span></figcaption>
+      <pre><code><span class="a">tanım</span> gez2(ç: <span class="t">Çizge</span>, ilk: <span class="t">Düğüm</span>) = {
+  <span class="a">dez</span> bekleyen = <span class="t">Yığın</span>[<span class="t">Düğüm</span>]()       <span class="y">// yığın: son giren ilk çıkar</span>
+  <span class="a">den</span> gezilen = <span class="t">Küme</span>[<span class="t">Düğüm</span>]()
+  bekleyen.koy(ilk)
+  yineleDoğruysa(bekleyen.tane &gt; <span class="n">0</span>) {
+    <span class="a">dez</span> şimdiki = bekleyen.al()   <span class="y">// "bu" diyemezdik: anahtar sözcük (this)</span>
+    <span class="a">eğer</span> (!gezilen(şimdiki)) {
+      gezilen = gezilen + şimdiki
+      yaz(<span class="s">s"$şimdiki "</span>)
+      ç(şimdiki).herbiriİçin(komşu =&gt; bekleyen.koy(komşu))
+    }
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Şimdi <code>Yığın</code> yerine <code>Kuyruk</code> koyun
+      (<code>koy</code> yerine <code>ekle</code>, <code>al</code> yerine
+      <code>baştanAl</code>). Tek kelimelik bu değişiklik geziyi
+      <strong>derinlemesineden</strong> (<em>DFS</em>)
+      <strong>enlemesineye</strong> (<em>BFS</em>) çevirir: yığın hep en son
+      bulduğu yola dalar, kuyruk ise düğümleri başlangıca <em>uzaklık
+      sırasıyla</em> işler. Aynı iskelet, bambaşka iki algoritma. İkisini de
+      çalıştırdım; aynı çizge, iki farklı sıra:
+    </p>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>yığınla  : A C E F G D B   <span class="y">// C'ye dalıp ta G'ye kadar gitti</span>
+kuyrukla : <span class="v">A B C</span> D E F G   <span class="y">// önce bütün komşular: uzaklık sırası</span></code></pre>
+    </figure>
+
+    <div class="kutu dikkat">
+      <span class="basi">Gerçek bir hata</span>
+      <p>
+        <code>if (!gezilen(bu))</code> denetimini silerseniz program çoğu çizgede
+        yine çalışır &mdash; ama iki yoldan ulaşılan düğümler iki kere işlenir,
+        çevrimli bir çizgede ise hiç durmaz. Kardeş sınıfta bu hatayı C++
+        yazarken yaptık ve ancak çizgeye yedinci düğümü ekleyince fark ettik.
+        Çizge kodunda ilk denetleyeceğiniz soru: <em>&ldquo;buraya daha önce
+        geldim mi?&rdquo;</em> soruluyor mu?
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.3</div>
+  <div class="govde">
+    <h2 id="katman-katman-en-az-adim">Katman katman: en az adım</h2>
+
+    <p>
+      Enlemesine gezinin asıl armağanı şudur: başlangıçtan her düğüme
+      <strong>en az kaç adımda</strong> gidileceğini söyler. İşlevsel kılıkta
+      bunu katmanlarla anlatmak çok doğal: 0. katman başlangıç, 1. katman onun
+      komşuları, 2. katman onların henüz görülmemiş komşuları&hellip;
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">katmanlar.kojo</span><span class="etiket">işlevsel enlemesine gezi</span></figcaption>
+      <pre><code><span class="a">tanım</span> katmanlar(ç: <span class="t">Çizge</span>, sınır: <span class="t">Küme</span>[<span class="t">Düğüm</span>],
+              gezilen: <span class="t">Küme</span>[<span class="t">Düğüm</span>]): <span class="t">Dizin</span>[<span class="t">Küme</span>[<span class="t">Düğüm</span>]] =
+  <span class="a">eğer</span> (sınır.boşMu) <span class="t">Boş</span>                       <span class="y">// TABAN: yeni düğüm kalmadı</span>
+  <span class="a">yoksa</span> {
+    <span class="a">dez</span> sonraki = sınır.düzİşle(d =&gt; ç(d))     <span class="y">// sınırın bütün komşuları...</span>
+                      .ele(k =&gt; !gezilen(k))   <span class="y">// ...görülmemiş olanları</span>
+    sınır :: katmanlar(ç, sonraki, gezilen ++ sonraki)
+  }
+
+<span class="a">dez</span> kat = katmanlar(ç, <span class="t">Küme</span>(<span class="s">'A'</span>), <span class="t">Küme</span>(<span class="s">'A'</span>))
+kat.ikileSırayla.herbiriİçin { <span class="a">durum</span> (katman, uzaklık) =&gt;
+  satıryaz(<span class="s">s"$uzaklık adım: $katman"</span>)
+}</code></pre>
+    </figure>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>0 adım: Küme(A)
+1 adım: Küme(B, C)
+2 adım: Küme(D, E)
+3 adım: Küme(F)
+4 adım: Küme(G)</code></pre>
+    </figure>
+
+    <p>
+      <code>düzİşle</code> (<em>flat map</em>) burada ilk kez iş başında:
+      her düğümü komşu <em>kümesine</em> çevirip hepsini tek kümede düzlüyor.
+      Ve neden &ldquo;en az adım&rdquo; sorusunun yanıtı bu? Çünkü bir düğüm
+      hangi katmanda <em>ilk kez</em> görünüyorsa, oraya daha kısa yol olamaz
+      &mdash; olsaydı önceki bir katmanda görünürdü. Kardeş kitapçık bu kanıtı
+      kuyruklu kodun üstüne kurar; burada kanıt, kodun <em>şekline</em> gömülü.
+    </p>
+
+    <h3 id="kac-parca">Kaç parça?</h3>
+
+    <p>
+      Çizge kopuksa tek gezi her yere ulaşamaz. Bütün düğümleri sırayla deneyip
+      gezilmemiş her birinden yeni bir gezi başlatırsak, kaç gezi başlattıysak
+      çizge o kadar <strong>bağlı parçadır</strong>:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bağlı parçalar</span></figcaption>
+      <pre><code><span class="a">dez</span> düğümler = ç.dizine.işle { <span class="a">durum</span> (d, _) =&gt; d }.sıralı
+
+<span class="a">dez</span> (parçaSayısı, _) =
+  düğümler.soldanKatla((<span class="n">0</span>, <span class="t">Küme</span>[<span class="t">Düğüm</span>]())) {
+    <span class="a">durum</span> ((sayı, gezilen), d) =&gt;
+      <span class="a">eğer</span> (gezilen(d)) (sayı, gezilen)          <span class="y">// eski bir parçanın içinde</span>
+      <span class="a">yoksa</span> (sayı + <span class="n">1</span>, gez(ç, d, gezilen))      <span class="y">// yeni parça keşfedildi</span>
+  }
+
+satıryaz(<span class="s">s"$parçaSayısı parça"</span>)     <span class="y">// 1 parça: A'dan her yere ulaşılıyor</span></code></pre>
+    </figure>
+
+    <p>
+      Yine <code>soldanKatla</code>, bu sefer taşıdığı şey bir demet:
+      (şimdiye kadarki parça sayısı, şimdiye kadar gezilenler). Döngü + iki
+      değişkenle yazacağınız her şeyi, başlangıç değeri + birleştirme işleviyle
+      de yazabilirsiniz &mdash; bu, işlevsel programlamanın büyük
+      değiş tokuşudur.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Neden sıraladık?</span>
+      <p>
+        <code>düğümler</code>'in sonundaki <code>sıralı</code>'yı silin ve
+        birkaç kere çalıştırın: bazen 1, bazen 2 parça çıkar! Çünkü eşlemin
+        veriliş sırası her seferinde değişebilir ve bizim çizge
+        <strong>yönlü</strong>: A'dan G'ye yol var ama G'den A'ya yok. Geziye
+        A'dan başlarsanız tek parça görürsünüz; G'den başlarsanız G tek başına
+        bir &ldquo;parça&rdquo; olur. Bunu ilk çalıştırmada değil, ancak
+        çıktıyı sınayınca fark ettik &mdash; bağlı parçalar aslında
+        <em>yönsüz</em> çizgelerin kavramı. Yönlü çizgede ne anlama geldiğini
+        düşünmek güzel bir tartışma sorusu.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">V.4</div>
+  <div class="govde">
+    <h2 id="yollar-esit-degilse">Yollar eşit değilse</h2>
+
+    <p>
+      Bütün bağların eşit sayıldığı dünyada &ldquo;en kısa yol&rdquo; demek
+      &ldquo;en az adım&rdquo; demekti ve kuyruk yetiyordu. Bağların ağırlığı
+      olunca &mdash; kilometre, dakika, ücret &mdash; kuyruğun yerini
+      <strong>öncelik sırası</strong> alır ve algoritmanın adı
+      <strong>Dijkstra</strong> olur. Koco'da <code>ÖncelikSırası</code> hazır;
+      iskelet de gördüğünüz gezilerle aynı: <em>bekleyenlerden birini al,
+      işle, komşularını beklet.</em> Değişen tek şey, &ldquo;hangisini önce
+      alacağız?&rdquo;
+    </p>
+
+    <p>
+      Bu kitapçıkta Dijkstra'yı yazmıyorum; bilerek. Tam kodu, kanıtıyla ve
+      tuzaklarıyla birlikte kardeş kitapçığın
+      <a href="../kitapcik/05-cizgeler.html">V.
+      bölümünde</a> bulacaksınız. Buradaki alıştırmanız onu Koco'ya çevirmek
+      &mdash; ve çeviri yaparken iki dilde de aynı kalan çekirdeği görmek.
+      O çekirdek, algoritmanın kendisidir; gerisi kılık.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Çizgeleri konuşmanın en iyi yeri tahta değil, tuval. Kaplumbağayla
+        çizge çizen bir <code>düğümÇiz(ad: Düğüm, x: Kesir, y: Kesir)</code>
+        işlevi yazın: <code>atla(x, y)</code>, küçük bir <code>daire</code>,
+        yanına <code>yazı(ad)</code>. Biriniz düğümleri, öteki bağları çizsin;
+        yukarıdaki yedi düğümlü çizgeyi ekrana alın. Gezilerinizi bu resmin
+        üstünde parmakla izleyin &mdash; kod başka, çizge başka şeymiş gibi
+        durmasın.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Kuyruk sürümü.</strong> <code>gez2</code>'yi kuyrukla yazın ve
+          iki çıktıyı yan yana koyun. Hangi sıra hangi geziye ait, bakar bakmaz
+          söyleyebiliyor musunuz?
+        </li>
+        <li>
+          <strong>Yol var mı?</strong> <code>ulaşırMı(ç, a, b): İkil</code>
+          işlevini yazın. İpucu: <code>gez</code> zaten her şeyi biliyor;
+          tek satır yeter.
+        </li>
+        <li>
+          <strong>İki takım.</strong> Sınıfı iki takıma ayırın; arkadaş olan
+          ikili aynı takıma düşmesin. Gezi kalıbına &ldquo;takım&rdquo; bilgisi
+          ekleyin: komşuya hep karşı takımı verin, çelişki çıkarsa
+          <code>yanlış</code>. Hangi çizgelerde imkânsız?
+          <span class="zor">ipucu</span> Tek sayıda bağdan oluşan çevrim.
+        </li>
+        <li>
+          <strong>Düğüm çözme oyunu.</strong> Ders notlarımızdan iki bulmaca:
+          <a href="https://ikojo.fly.dev/sf/Iy4oXa6/2">Kocoyla düğüm çözme</a> ve
+          <a href="https://ikojo.fly.dev/sf/OK5yfFR/2">çözülemeyen bir düğüm</a>.
+          İkincisinin neden düzlemsel olamayacağını tartışın.
+          (İkisinin de kodu ders deposunda, <code>kitapcik-koco/kod/</code>
+          dizininde.)
+        </li>
+        <li>
+          <strong>Dijkstra'yı Koco'ya çevirin.</strong> Kardeş kitapçıktaki
+          Dijkstra'yı <code>ÖncelikSırası</code> ile buraya taşıyın.
+          <span class="zor">püf</span> Önceliği <code>(süre, şehir)</code>
+          demetiyle verin; demetler soldan karşılaştırılır &mdash; C++'taki
+          <code>pair</code> gibi.
+        </li>
+      </ol>
+    </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · labirent tuvalde</span>
+      <p>
+        Oyun labirente taşınıyor. Izgarayı bir <code>Dizin[Yazı]</code> ile verin (<code>#</code> duvar, <code>.</code> yol, <code>S</code> başlangıç, <code>C</code> çıkış) ve tuvale kareler olarak çizin. Oyuncu klavyeden yürüsün; her hamleden sonra enlemesine geziyle çıkışa kalan adım sayısını hesaplayın ve oyuncunun karesini buna göre boyayın: yakınsa yeşil, uzaksa kırmızı. Tahmin oyununun büyük/küçük ipucu, bu sefer renk olarak.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Bir çizgeyi <code>Eşlem[Düğüm, Küme[Düğüm]]</code> ile saklayıp tuvale çizebilirim.</li>
+        <li>Derinlemesine geziyi değişmez kümeyle, özyinelemeli yazabilirim.</li>
+        <li>Aynı iskeletle yığınlı ve kuyruklu geziyi yazıp farkını gösterebilirim.</li>
+        <li>Enlemesine geziyle en az adımı bulabilirim.</li>
+        <li>Bağlı parçaları sayabilir, Dijkstra'yı öncelik sırasıyla yazabilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li>Gezilen kümesini girdi alıp yenisini döndüren geziyle onu <code>den</code>'de tutan gezi arasındaki fark nedir? Hangisini sınamak kolay? <a href="#derinlemesine-gezi-iki-kilikta">Derinlemesine gezi, iki kılıkta</a></li>
+        <li>Aynı kodda yığını kuyrukla değiştirince çıktı neden değişir? Yedi düğümlü örnekte sırayı kâğıtta çıkarın. <a href="#ayni-gezi-yiginla-ve-kuyruk-numarasi">Aynı gezi, yığınla</a></li>
+        <li>Altı düğümlü bir çizgede parça sayısı hangi aralıkta olabilir? Her uç için bir çizge çizin. <a href="#kac-parca">Kaç parça?</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<nav class="gezinme"><a href="04-ozyineleme.html"><span class="yon">Önceki</span>IV. Özyineleme</a><a class="sag" href="06-dp.html"><span class="yon">Sonraki</span>VI. Dinamik Programlama</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

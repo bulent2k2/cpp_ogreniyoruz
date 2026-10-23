@@ -1,0 +1,1539 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitapcik/bolumler/02-veri.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veriyi Düzenlemek</title>
+<meta name="description" content="Diziler, akıllı diziler, eşlemler, kümeler, yığınlar ve kendi türlerinizi yazmak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm II</div>
+  <h1>Veriyi Düzenlemek</h1>
+  <p class="ozet">
+    Tek bir sayıyla ne kadar iş yapılabilir? Programların gücü, çok sayıda veriyi
+    düzenli tutmaktan geliyor. Bu bölümde hazır kapları tanıyacak, sonra kendi
+    türünüzü yazacaksınız &mdash; ve bir tür yazdığınız an dilin size çalıştığını
+    hissedeceksiniz.
+  </p>
+  <ul class="icerik-seridi"><li><a href="00-kapak.html">Kılavuz</a></li><li><a href="01-ilk-adimlar.html">I. İlk Adımlar</a></li><li><a aria-current="page" style="border-color:var(--mavi);color:var(--mavi)">II. Veriyi Düzenlemek</a></li><li><a href="03-zanaat.html">III. Zanaat</a></li><li><a href="04-ozyineleme.html">IV. Özyineleme</a></li><li><a href="05-cizgeler.html">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li><li><a href="07-sozluk.html">Sözlük</a></li></ul>
+</header>
+
+<div class="blok">
+  <div class="ray">II.1</div>
+  <div class="govde">
+    <h2 id="dizi-bellekte-yan-yana">Dizi: bellekte yan yana <span class="yol hizli">hızlı yol</span></h2>
+
+    <p>
+      En eski, en sade ve en hızlı kap: <strong>dizi</strong> (<em>array</em>).
+      Aynı türden birkaç değer, bellekte yan yana. Öğelerin yerini hesaplamak
+      bedava &mdash; ilk öğenin adresini biliyorsanız, üçüncü öğe
+      &ldquo;ilk adres + 2 &times; öğe boyu&rdquo; adresindedir. Bu yüzden dizide
+      arama değil ama <em>erişim</em> anlıktır. Bölüm I'deki <code>std::string</code>
+      de aslında böyle bir dizi: harfler bellekte yan yana, <code>ad[0]</code>
+      ilk harf, <code>ad.size()</code> kaç tane olduğu.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">10-dizi.cpp</span><span class="etiket">bellekte ne var?</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="t">int</span> main() {
+  <span class="t">short</span> dizi[]{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>};
+
+  cout &lt;&lt; <span class="s">"dizinin boyu     : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi)    &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"bir öğenin boyu  : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi[<span class="n">0</span>]) &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
+  <span class="t">int</span> ogeSayisi = <span class="a">sizeof</span>(dizi) / <span class="a">sizeof</span>(dizi[<span class="n">0</span>]);
+  cout &lt;&lt; <span class="s">"öğe sayısı       : "</span> &lt;&lt; ogeSayisi &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"ilk öğenin adresi: "</span> &lt;&lt; (<span class="t">void</span>*) dizi       &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"ikincininki      : "</span> &lt;&lt; (<span class="t">void</span>*) (dizi + <span class="n">1</span>) &lt;&lt; endl;
+
+  <span class="a">for</span> (<span class="a">auto</span> s : dizi) cout &lt;&lt; s &lt;&lt; <span class="s">" "</span>;
+  cout &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"taşma: "</span> &lt;&lt; dizi[<span class="n">12</span>] &lt;&lt; endl;   <span class="y">// dizinin dışı! kimse uyarmıyor</span>
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>dizinin boyu     : 16 bayt
+bir öğenin boyu  : 2 bayt
+öğe sayısı       : 8
+ilk öğenin adresi: 0x7ffc4e4f2eb0
+ikincininki      : 0x7ffc4e4f2eb<span class="v">2</span>
+3 1 4 1 5 9 2 6
+taşma: <span class="v">-1536</span></code></pre>
+    </figure>
+
+    <p>
+      İki adres arasındaki fark tam <strong>2 bayt</strong>: bir <code>short</code>'un
+      boyu. Bellek gerçekten şerit gibi ve diziler o şeridin üzerinde bitişik duruyor.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Dikkat</span>
+      <p>
+        Son satıra bakın: <code>dizi[12]</code> diye bir öğe yok, ama program
+        çökmedi &mdash; bellekte o adreste ne varsa onu okuyup yazdı. C++ sizi
+        korumaz, size <em>güvenir</em>. Bu hem hızının hem de tehlikesinin kaynağı.
+        Yarışmalarda &ldquo;çalışıyor ama bazen yanlış&rdquo; hatalarının çoğu budur.
+        <strong>Etrafı duvarla çevirmek</strong> &mdash; yani diziyi bir sıra fazla
+        ayırmak &mdash; <a href="05-cizgeler.html">Bölüm V</a>'te çok işimize yarayacak.
+      </p>
+    </div>
+
+    <h3 id="akilli-dizi-std-vector">Akıllı dizi: <code>std::vector</code></h3>
+
+    <p>
+      Temel dizinin boyu derleme anında bellidir ve büyüyemez. <strong>Akıllı dizi</strong>
+      (<em>vector</em>) bu sorunu çözer: gerekince kendi kendine büyür, boyunu bilir,
+      kopyalanabilir.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">akıllı dizi</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;vector&gt;</span>
+std::vector&lt;<span class="t">int</span>&gt; d{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>};
+d.push_back(<span class="n">1</span>);          <span class="y">// sona ekle</span>
+d.resize(<span class="n">10</span>);            <span class="y">// on öğeye çıkar, yenileri sıfır</span>
+d.size();                <span class="y">// kaç öğe var</span>
+d[<span class="n">2</span>];                    <span class="y">// erişim, sınır denetimi YOK</span>
+d.at(<span class="n">2</span>);                 <span class="y">// erişim, sınır denetimi VAR (yavaş ama güvenli)</span>
+
+<span class="y">// iki boyutlu: 5 satır, her satırda 8 sıfır</span>
+std::vector&lt;std::vector&lt;<span class="t">int</span>&gt;&gt; tablo(<span class="n">5</span>, std::vector&lt;<span class="t">int</span>&gt;(<span class="n">8</span>, <span class="n">0</span>));</code></pre>
+    </figure>
+
+    <p>
+      Hız kaybı var mı? Ölçtük: bir milyon öğelik dizide temel dizi
+      <span class="sayi">3 ms</span>'de kuruluyor, akıllı dizi
+      <span class="sayi">7 ms</span>'de. Sorgular ise ikisinde de mikrosaniyenin
+      binde biri. Yani fark var ama sizin problemleriniz için <strong>önemsiz</strong>.
+      Ölçmeyi <a href="03-zanaat.html">Bölüm III</a>'te öğreneceğiz &mdash; ve tahmin
+      etmek yerine ölçmek, bu kitapçığın belki de en önemli alışkanlığı.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.2</div>
+  <div class="govde">
+    <h2 id="eslem-en-cok-isinize-yarayacak-kap">Eşlem: en çok işinize yarayacak kap <span class="yol yavas">yavaş yol</span></h2>
+
+    <p>
+      <strong>Eşlem</strong> (<em>map</em>) bir şeyi başka bir şeye bağlar:
+      harften sayıya, addan telefona, şehirden komşularına. Dizide yer numarası
+      0, 1, 2 diye gitmek zorundadır; eşlemde &ldquo;yer numarası&rdquo; ne olursa
+      olabilir. Ona <strong>anahtar</strong> deniyor.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">11-esleme.cpp</span><span class="etiket">harf sayma</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;iostream&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;map&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;string&gt;</span>
+<span class="a">using namespace</span> std;
+
+<span class="a">using</span> <span class="t">Sayac</span> = map&lt;<span class="t">char</span>, <span class="t">int</span>&gt;;
+
+<span class="t">int</span> main() {
+  string yazi{<span class="s">"kelebek kanadi"</span>};
+
+  <span class="t">Sayac</span> kac;
+  <span class="a">for</span> (<span class="t">char</span> h : yazi)
+    <span class="a">if</span> (h != <span class="s">' '</span>) ++kac[h];          <span class="y">// yoksa sıfırdan başlar</span>
+
+  <span class="a">for</span> (<span class="a">auto</span> [harf, adet] : kac)      <span class="y">// anahtarlar kendiliğinden sıralı</span>
+    cout &lt;&lt; harf &lt;&lt; <span class="s">" -&gt; "</span> &lt;&lt; adet &lt;&lt; endl;
+
+  cout &lt;&lt; <span class="s">"kaç ayrı harf: "</span> &lt;&lt; kac.size() &lt;&lt; endl;
+
+  <span class="y">// Dikkat! Olmayan bir anahtarı [] ile okumak onu YARATIR:</span>
+  cout &lt;&lt; <span class="s">"z kaç kere: "</span> &lt;&lt; kac[<span class="s">'z'</span>] &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"kaç ayrı harf: "</span> &lt;&lt; kac.size() &lt;&lt; <span class="s">"  &lt;- arttı!"</span> &lt;&lt; endl;
+
+  <span class="y">// Doğrusu:</span>
+  cout &lt;&lt; <span class="s">"q var mı: "</span> &lt;&lt; (kac.contains(<span class="s">'q'</span>) ? <span class="s">"evet"</span> : <span class="s">"hayır"</span>) &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"kaç ayrı harf: "</span> &lt;&lt; kac.size() &lt;&lt; <span class="s">"  &lt;- değişmedi"</span> &lt;&lt; endl;
+  <span class="a">return</span> <span class="n">0</span>;
+}</code></pre>
+    </figure>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>a -&gt; 2    b -&gt; 1    d -&gt; 1    e -&gt; 3
+i -&gt; 1    k -&gt; 3    l -&gt; 1    n -&gt; 1
+kaç ayrı harf: 8
+z kaç kere: 0
+kaç ayrı harf: <span class="v">9  &lt;- arttı!</span>
+q var mı: hayır
+kaç ayrı harf: 9  &lt;- değişmedi</code></pre>
+    </figure>
+
+    <p>
+      Üç şeye dikkat edin. Birincisi: <code>++kac[h]</code> satırı, harfi ilk kez
+      görüyorsa sıfırdan başlatıp bir artırıyor &mdash; sayaç yazmanın en zarif yolu.
+      İkincisi: eşlem anahtarları <strong>kendiliğinden sıralı</strong> tutuyor, siz
+      hiçbir şey yapmadan çıktı alfabetik geliyor. Üçüncüsü de tuzak.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Klasik tuzak</span>
+      <p>
+        Eşlemde <strong>olmayan</strong> bir anahtarı <code>[]</code> ile okursanız,
+        C++ o anahtarı sessizce yaratır ve ilk değerini verir. Yani salt okuma
+        sandığınız satır eşlemi büyütür. Sadece bakmak istiyorsanız
+        <code>contains()</code> ya da <code>find()</code> kullanın. Bu hatayı derste
+        yaptık ve bulmak yarım saatimizi aldı.
+      </p>
+    </div>
+
+    <h3 id="kume-eslemin-kucuk-kardesi">Küme, eşlemin küçük kardeşi</h3>
+
+    <p>
+      <strong>Küme</strong> (<em>set</em>) matematikteki kümenin ta kendisi:
+      sıralı, tekrarsız. Aslında eşlemin değerini attığınızda geriye küme kalır.
+      Tersi de doğru &mdash; her kümeyi bir eşlemle ifade edebilirsiniz:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">küme ve eşlem</span></figcaption>
+      <pre><code>set&lt;<span class="t">int</span>&gt; kume {<span class="n">1</span>, <span class="n">4</span>, <span class="n">6</span>, <span class="n">9</span>};
+
+<span class="y">// aynı bilgi, üstüne "kaç çarpanı var" bilgisi de eklenmiş hâliyle:</span>
+map&lt;<span class="t">int</span>, <span class="t">int</span>&gt; eslem {{<span class="n">1</span>,<span class="n">1</span>}, {<span class="n">4</span>,<span class="n">3</span>}, {<span class="n">6</span>,<span class="n">4</span>}, {<span class="n">9</span>,<span class="n">3</span>}};
+
+<span class="y">// hatta çarpanların kendisi de saklanabilir:</span>
+map&lt;<span class="t">int</span>, set&lt;<span class="t">int</span>&gt;&gt; eslem2 {
+    { <span class="n">1</span>, {<span class="n">1</span>} },
+    { <span class="n">4</span>, {<span class="n">1</span>, <span class="n">2</span>, <span class="n">4</span>} },
+    { <span class="n">9</span>, {<span class="n">1</span>, <span class="n">3</span>, <span class="n">9</span>} }
+};</code></pre>
+    </figure>
+
+    <p>
+      Bu son yapıyı aklınızın bir köşesine yazın: &ldquo;bir şeyden bir şey kümesine
+      eşlem&rdquo;. <a href="05-cizgeler.html">Bölüm V</a>'te bir çizgeyi tam olarak
+      böyle temsil edeceğiz: <code>map&lt;Nokta, set&lt;Nokta&gt;&gt;</code>, yani
+      &ldquo;her noktadan komşularına&rdquo;.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.3</div>
+  <div class="govde">
+    <h2 id="siranin-onemli-oldugu-kaplar">Sıranın önemli olduğu kaplar</h2>
+
+    <p>
+      Üç özel kap daha var. Üçünün de yaptığı iş &ldquo;öğe ekle, öğe çıkar&rdquo;
+      &mdash; aralarındaki tek fark <strong>hangisinin çıkacağı</strong>. Ama o tek
+      fark, üçünü üç farklı algoritmanın kalbi yapıyor.
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Kap</th><th>Kural</th><th>Yöntemler</th><th>Ne işe yarar</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Yığın</strong><br><code>std::stack</code></td>
+            <td>Son giren ilk çıkar</td>
+            <td><code>push</code> <code>pop</code> <code>top</code></td>
+            <td>Derinlemesine gezi, parantez denetimi, geri alma</td>
+          </tr>
+          <tr>
+            <td><strong>Kuyruk</strong><br><code>std::queue</code></td>
+            <td>İlk giren ilk çıkar</td>
+            <td><code>push</code> <code>pop</code> <code>front</code></td>
+            <td>Enlemesine gezi, en kısa yol (eşit adımlı)</td>
+          </tr>
+          <tr>
+            <td><strong>Öncelik sırası</strong><br><code>std::priority_queue</code></td>
+            <td>En büyük önce çıkar</td>
+            <td><code>push</code> <code>pop</code> <code>top</code></td>
+            <td>Dijkstra, en yakın <em>n</em> şeyi bulmak</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">12-kaplar.cpp</span><span class="etiket">aynı girdi, üç çıktı</span></figcaption>
+      <pre><code><span class="a">#include</span> <span class="s">&lt;stack&gt;</span>
+<span class="a">#include</span> <span class="s">&lt;queue&gt;</span>   <span class="y">// queue ve priority_queue ikisi de burada</span>
+
+stack&lt;<span class="t">int</span>&gt; yigin;               <span class="y">// ilk giren son çıkar</span>
+queue&lt;<span class="t">int</span>&gt; kuyruk;              <span class="y">// ilk giren ilk çıkar</span>
+priority_queue&lt;<span class="t">int</span>&gt; oncelik;    <span class="y">// en büyük önce çıkar</span>
+
+<span class="a">for</span> (<span class="t">int</span> s : {<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>}) {
+  yigin.push(s); kuyruk.push(s); oncelik.push(s);
+}</code></pre>
+    </figure>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>girdi   : 3 1 4 1 5
+yığın   : <span class="v">5 1 4 1 3</span>   <span class="y">// ters</span>
+kuyruk  : <span class="v">3 1 4 1 5</span>   <span class="y">// aynı sırada</span>
+öncelik : <span class="v">5 4 3 1 1</span>   <span class="y">// büyükten küçüğe</span></code></pre>
+    </figure>
+
+    <p>
+      Bu üç satır, ileride yazacağınız onlarca algoritmanın özeti. Aynı gezinme
+      kodunda yığını kuyrukla değiştirdiğinizde derinlemesine arama enlemesine
+      aramaya dönüşüyor &mdash; ve bambaşka bir soruyu çözüyor.
+      <a href="05-cizgeler.html">Bölüm V</a>'te bunu tam olarak yapacağız.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        <code>priority_queue</code> büyükten küçüğe sıralıyor. Küçükten büyüğe
+        istiyorsanız üçüncü tür girdisine <code>std::greater&lt;int&gt;</code> verin:
+        <code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt;</code>.
+        Deneyin ve çıktının değiştiğini görün. Bu ayrıntı Dijkstra algoritmasında
+        hayati olacak.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.4</div>
+  <div class="govde">
+    <h2 id="kendi-turunuzu-yazmak">Kendi türünüzü yazmak</h2>
+
+    <p>
+      Şimdi işin en keyifli kısmı. Bir noktanın <code>x</code> ve <code>y</code>'sini
+      iki ayrı değişkende taşımak yerine, ikisini bir araya getirip yeni bir tür
+      yapabilirsiniz. Bunu yaptığınız an dil sizin problem alanınızın dilini konuşmaya
+      başlar.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">13-konum.cpp</span><span class="etiket">ilk türünüz</span></figcaption>
+      <pre><code><span class="a">struct</span> <span class="t">Konum</span> {
+  <span class="t">int</span> x{<span class="n">0</span>}, y{<span class="n">0</span>};                         <span class="y">// veriler</span>
+
+  <span class="t">void</span> kaydir(<span class="t">int</span> dx, <span class="t">int</span> dy) {           <span class="y">// yöntem</span>
+    x += dx;
+    y += dy;
+  }
+  <span class="t">double</span> uzaklik() <span class="a">const</span> {                <span class="y">// const: hiçbir şeyi değiştirmem</span>
+    <span class="a">return</span> sqrt(<span class="n">1.0</span> * x * x + y * y);
+  }
+};
+
+<span class="y">// türün üyesi olmayan ama türü tanıyan bir işlemci:</span>
+ostream&amp; <span class="a">operator</span>&lt;&lt;(ostream&amp; o, <span class="a">const</span> <span class="t">Konum</span>&amp; k) {
+  <span class="a">return</span> o &lt;&lt; <span class="s">"("</span> &lt;&lt; k.x &lt;&lt; <span class="s">", "</span> &lt;&lt; k.y &lt;&lt; <span class="s">")"</span>;
+}
+
+<span class="t">int</span> main() {
+  <span class="t">Konum</span> k{<span class="n">3</span>, <span class="n">4</span>};
+  cout &lt;&lt; k &lt;&lt; <span class="s">" başlangıca uzaklığı: "</span> &lt;&lt; k.uzaklik() &lt;&lt; endl;
+
+  k.kaydir(<span class="n">2</span>, <span class="n">2</span>);
+  cout &lt;&lt; k &lt;&lt; <span class="s">" şimdi uzaklığı: "</span> &lt;&lt; k.uzaklik() &lt;&lt; endl;
+}</code></pre>
+    </figure>
+
+    <p class="cikti-satiri">
+      (3, 4) başlangıca uzaklığı: 5<br>
+      (5, 6) şimdi uzaklığı: 7.81025
+    </p>
+
+    <p>
+      <code>operator&lt;&lt;</code> satırına dikkat: <code>cout &lt;&lt; k</code>
+      yazabilmemizin sebebi bu. C++'ta işlemcilere yeni beceriler öğretebiliyorsunuz.
+      Bir kere yazdınız mı, o türü artık her yerde <code>int</code> kadar rahat
+      yazdırabiliyorsunuz. Hata ayıklarken bunun değeri paha biçilmez.
+    </p>
+
+    <h3 id="struct-mu-class-mi"><code>struct</code> mu, <code>class</code> mı? <span class="yol ileri">ileri</span></h3>
+
+    <p>
+      Teknik olarak tek fark: <code>struct</code>'ta üyeler varsayılan olarak
+      <strong>görünür</strong> (<code>public</code>), <code>class</code>'ta
+      <strong>gizli</strong> (<code>private</code>). Gelenek olarak ise
+      <code>struct</code> &ldquo;sadece veri torbası&rdquo;, <code>class</code>
+      &ldquo;kendi kurallarını koruyan bir nesne&rdquo; için kullanılır.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bir sınıfın anatomisi</span></figcaption>
+      <pre><code><span class="a">class</span> <span class="t">Temel</span> {
+    <span class="t">int</span> gizli_veri;          <span class="y">// varsayılan: private</span>
+
+<span class="a">protected</span>:
+    <span class="t">int</span> korunmus_veri;       <span class="y">// alt türler görebilir</span>
+
+<span class="a">public</span>:
+    <span class="t">int</span> gorunur_veri;
+
+    <span class="t">Temel</span>();                 <span class="y">// yapıcı: girdisi olabilir, çıktısı OLAMAZ</span>
+    <span class="t">Temel</span>(<span class="a">const</span> <span class="t">Temel</span>&amp;);     <span class="y">// kopyalayıcı yapıcı</span>
+    ~<span class="t">Temel</span>();                <span class="y">// yıkıcı: girdisi de çıktısı da YOK, tek tane</span>
+
+    <span class="t">Temel</span>&amp; <span class="a">operator</span>=(<span class="a">const</span> <span class="t">Temel</span>&amp;);   <span class="y">// eşitleme</span>
+
+    <span class="a">friend</span> ostream&amp; <span class="a">operator</span>&lt;&lt;(ostream&amp;, <span class="a">const</span> <span class="t">Temel</span>&amp;);
+};</code></pre>
+    </figure>
+
+    <ul>
+      <li>
+        <strong>Yapıcı</strong> (<em>constructor</em>) nesne doğarken çalışır: bellekte
+        yer açar, ilk değerleri yazar. Birden fazla yapıcı olabilir.
+      </li>
+      <li>
+        <strong>Yıkıcı</strong> (<em>destructor</em>) nesne ölürken çalışır ve tek
+        tanedir. Açtığınız kaynakları burada kapatırsınız.
+      </li>
+      <li>
+        <code>operator=</code> genelde <code>*this</code> döndürür &mdash; böylece
+        <code>a = b = c</code> yazabilirsiniz. <code>this</code>, nesnenin kendi
+        adresini tutan gösterge.
+      </li>
+      <li>
+        <code>friend</code>, üye olmayan bir işleve gizli verileri görme izni verir.
+        <code>operator&lt;&lt;</code> için tam da bu gerekir, çünkü o
+        <code>ostream</code>'in soluna yazılır, sizin türünüzün değil.
+      </li>
+    </ul>
+
+    <h4>Az sayıda değeri olan türler: <code>enum class</code> <span class="yol ileri">ileri</span></h4>
+
+    <p>
+      Bir öğrencinin takımı 1 mi 2 mi? <code>int</code> kullanırsanız 7. takıma da
+      yazabilirsiniz ve derleyici sesini çıkarmaz. Bunun yerine:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">enum class</span></figcaption>
+      <pre><code><span class="a">enum class</span> <span class="t">Takim</span> { Yok, Bir, İki };
+
+std::vector&lt;<span class="t">Takim</span>&gt; takim(n + <span class="n">1</span>, <span class="t">Takim</span>::Yok);
+
+<span class="a">using enum</span> <span class="t">Takim</span>;                <span class="y">// tür adını her seferinde yazmayalım</span>
+takim[b] = (takim[a] == Bir) ? İki : Bir;</code></pre>
+    </figure>
+
+    <p>
+      Hem kod okunaklı oluyor hem de yanlışlıkla üçüncü bir takım kurmaya kalkarsanız
+      derleyici hemen &ldquo;olmaz&rdquo; diyor. <strong>Derleyicinin sizi
+      yakalamasını sağlayan her tasarım kararı iyi bir karardır.</strong>
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.5</div>
+  <div class="govde">
+    <h2 id="kaliplar-tur-de-bir-degisken-olabilir">Kalıplar: tür de bir değişken olabilir <span class="yol ileri">ileri</span></h2>
+
+    <p>
+      Şimdiye kadar her değişkenin bir değeri, bir adı ve bir türü olduğunu söyledik.
+      Şimdi tuhaf bir şey yapacağız: <strong>türün kendisini değişken yapacağız.</strong>
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">14-kalip.cpp</span><span class="etiket">işlev kalıbı</span></figcaption>
+      <pre><code><span class="a">template</span> &lt;<span class="a">typename</span> <span class="t">Tur</span>&gt;
+<span class="t">Tur</span> ekle(<span class="t">Tur</span> a, <span class="t">Tur</span> b) { <span class="a">return</span> a + b; }
+
+<span class="t">int</span> main() {
+  cout &lt;&lt; ekle(<span class="n">3</span>, <span class="n">4</span>)                       &lt;&lt; endl;   <span class="y">// Tur = int    -&gt; 7</span>
+  cout &lt;&lt; ekle(<span class="n">3.5</span>, <span class="n">4.25</span>)                  &lt;&lt; endl;   <span class="y">// Tur = double -&gt; 7.75</span>
+  cout &lt;&lt; ekle(string(<span class="s">"ke"</span>), string(<span class="s">"lebek"</span>)) &lt;&lt; endl;   <span class="y">// -&gt; kelebek</span>
+
+  <span class="y">// cout &lt;&lt; ekle("ke", "lebek");   // HATA! Neden?</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      <code>Tur</code> bir <strong>tür değişkeni</strong>. Değeri, kalıp
+      kullanıldığında belli oluyor. Derleyici her çağrı için ayrı bir somut işlev
+      üretiyor; buna <em>somutlaştırma</em> (<em>instantiation</em>) deniyor.
+    </p>
+
+    <p>
+      Son satır neden hata veriyor? Çünkü <code>"ke"</code> bir
+      <code>std::string</code> değil, <code>const char*</code> yani bir
+      <strong>adres</strong>. İki adresi toplamanın anlamı yok, derleyici de tam olarak
+      bunu söylüyor:
+    </p>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">derleyici</span><span class="etiket">hata</span></figcaption>
+      <pre><code>error: invalid operands of types 'const char*' and 'const char*'
+       to binary 'operator+'
+   |         return a + b;</code></pre>
+    </figure>
+
+    <p>
+      Derleyici hatalarını okumayı öğrenin. Uzun ve korkutucu görünürler ama
+      genelde ilk iki satırında her şey yazar. Bu alışkanlık sizi saatlerce
+      zaman kazandırır.
+    </p>
+
+    <h3 id="tur-kaliplari">Tür kalıpları <span class="yol ileri">ileri</span></h3>
+
+    <p>
+      Aynı fikir türler için de geçerli &mdash; ve aslında bu bölümde kullandığımız
+      <code>vector&lt;int&gt;</code>, <code>map&lt;char,int&gt;</code>,
+      <code>set&lt;int&gt;</code> hepsi tür kalıbı:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tür kalıbı</span></figcaption>
+      <pre><code><span class="a">template</span> &lt;<span class="a">typename</span> X&gt;
+<span class="a">class</span> <span class="t">Kutu</span> {
+    X icerik;
+<span class="a">public</span>:
+    <span class="t">Kutu</span>(X x) : icerik{x} {}
+    X al() <span class="a">const</span> { <span class="a">return</span> icerik; }
+};
+
+<span class="t">Kutu</span>&lt;<span class="t">int</span>&gt;    k1{<span class="n">42</span>};
+<span class="t">Kutu</span>&lt;<span class="t">Konum</span>&gt;  k2{{<span class="n">3</span>, <span class="n">4</span>}};    <span class="y">// kendi türümüzle de çalışıyor!</span></code></pre>
+    </figure>
+
+    <p>
+      Ders notlarımızda çok kullandığımız bir kolaylık da şu: uzun kalıp adlarına
+      Türkçe takma ad vermek. Kod bir anda okunur hâle geliyor.
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">takma adlar</span></figcaption>
+      <pre><code><span class="a">template</span> &lt;<span class="a">typename</span> T&gt; <span class="a">using</span> <span class="t">Dizi</span> = std::vector&lt;T&gt;;
+
+<span class="a">using</span> <span class="t">Dugum</span>   = <span class="t">unsigned</span>;
+<span class="a">using</span> <span class="t">Kume</span>    = std::set&lt;<span class="t">Dugum</span>&gt;;
+<span class="a">using</span> <span class="t">Cizge</span>   = std::map&lt;<span class="t">Dugum</span>, <span class="t">Kume</span>&gt;;   <span class="y">// komşuluk kümesi</span>
+<span class="a">using</span> <span class="t">Tahta</span>   = <span class="t">Dizi</span>&lt;<span class="t">Dizi</span>&lt;<span class="t">bool</span>&gt;&gt;;</code></pre>
+    </figure>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">II.6</div>
+  <div class="govde">
+    <h2 id="adres-ve-takma-ad">Adres ve takma ad <span class="yol yavas">yavaş yol</span></h2>
+
+    <p>
+      Son bir kavram, ve belki de C++'ın en çok korkulan kavramı. Aslında çok basit:
+      bir değişkenin <strong>değeri</strong> yerine bellekteki <strong>yerini</strong>
+      taşımak.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">15-adres.cpp</span><span class="etiket">üç ekleme, üç sonuç</span></figcaption>
+      <pre><code><span class="a">using</span> <span class="t">Sayi</span>  = <span class="t">int</span>;
+<span class="a">using</span> <span class="t">Adres</span> = <span class="t">Sayi</span>*;      <span class="y">// Sayı türünün adresi de bir tür</span>
+
+<span class="t">void</span> ekleA(<span class="t">Adres</span> a, <span class="t">Sayi</span> ek) { *a += ek; }   <span class="y">// adresle</span>
+<span class="t">void</span> ekleT(<span class="t">Sayi</span>&amp; t, <span class="t">Sayi</span> ek) { t  += ek; }   <span class="y">// takma adla</span>
+<span class="t">void</span> ekleK(<span class="t">Sayi</span>  k, <span class="t">Sayi</span> ek) { k  += ek; }   <span class="y">// kopyayla (etkisiz!)</span>
+
+<span class="t">int</span> main() {
+  <span class="t">Sayi</span> s{<span class="n">10</span>};
+
+  ekleK(s, <span class="n">10</span>);  cout &lt;&lt; <span class="s">"kopyadan sonra   : "</span> &lt;&lt; s &lt;&lt; endl;
+  ekleA(&amp;s, <span class="n">10</span>); cout &lt;&lt; <span class="s">"adresten sonra   : "</span> &lt;&lt; s &lt;&lt; endl;
+  ekleT(s, <span class="n">10</span>);  cout &lt;&lt; <span class="s">"takma addan sonra: "</span> &lt;&lt; s &lt;&lt; endl;
+}</code></pre>
+    </figure>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
+      <pre><code>kopyadan sonra   : <span class="v">10</span>   <span class="y">// hiçbir şey olmadı!</span>
+adresten sonra   : 20
+takma addan sonra: 30</code></pre>
+    </figure>
+
+    <p>
+      Üç işlev de &ldquo;ekle&rdquo; diyor ama biri hiçbir işe yaramıyor.
+      <code>ekleK</code> değişkenin <em>ikizini</em> alıyor, ikizi artırıyor, sonra
+      ikiz ölüyor. <code>ekleA</code> adresi alıyor, <code>*</code> ile o adrestekine
+      uzanıyor. <code>ekleT</code> ise sadece tek bir <code>&amp;</code> imgesiyle
+      değişkenin kendisine <strong>takma ad</strong> (<em>reference</em>) veriyor.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <p>
+        <strong>İşleve giden şey kopyadır.</strong> <code>ekleK</code>'nin başına
+        gelen her işlev için geçerli: girdiyi düz yazarsanız işlev bir
+        <em>ikiz</em> alır, ikizi değiştirir, siz dışarıda eski değere bakarsınız.
+        Bir diziyi işleve verip &ldquo;neden sıralanmadı?&rdquo; diye bakakalmak
+        bu yüzden. İşlev değişkenin kendisini değiştirsin istiyorsanız takma ad
+        (<code>&amp;</code>) verin.
+      </p>
+    </div>
+
+    <p>
+      C dilinde sadece adresler vardı; takma ad C++'la geldi. Modern kodda tercih
+      genelde takma ad: daha sade ve daha güvenli, çünkü takma ad hiçbir zaman
+      boş olamaz. Ama akıllı dizi yerine temel dizi kullandığınızda ya da
+      <code>new</code> ile bellek ayırdığınızda adreslere geri dönersiniz.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Büyük bir kabı işleve girdi olarak verirken <code>const Dizi&amp;</code>
+        yazın. <code>const</code> &ldquo;değiştirmeyeceğim&rdquo; sözü,
+        <code>&amp;</code> ise &ldquo;kopyalamayın&rdquo; demek. Bir milyon öğelik
+        bir diziyi her çağrıda kopyalamak, çözümünüzün neden yavaş olduğunu
+        anlayamadığınız durumların en yaygın nedenidir.
+      </p>
+    </div>
+
+    <div class="kutu puf">
+      <span class="basi">Hazır araçlar</span>
+      <p>
+        Bu bölümün kapları kadar sık kullanacağınız birkaç hazır işlev var;
+        alıştırmalarda karşınıza çıkınca &ldquo;nereden geldi?&rdquo; demeyin.
+        <code>&lt;algorithm&gt;</code> başlığından:
+      </p>
+      <figure class="kod dar">
+        <figcaption><span class="nokta"></span><span class="ad">hazır araçlar</span></figcaption>
+        <pre><code><span class="a">#include</span> <span class="s">&lt;algorithm&gt;</span>
+vector&lt;<span class="t">int</span>&gt; v{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>};
+sort(v.begin(), v.end());              <span class="y">// küçükten büyüğe sıralar: 1 1 3 4 5</span>
+reverse(v.begin(), v.end());           <span class="y">// tersine çevirir</span>
+<span class="t">int</span> enB = *max_element(v.begin(), v.end());   <span class="y">// en büyük öge (min_element de var)</span>
+<span class="t">int</span> kac = count(v.begin(), v.end(), <span class="n">1</span>);       <span class="y">// 1 kaç kere geçiyor</span>
+next_permutation(v.begin(), v.end());  <span class="y">// sıradaki dizilim; Bölüm IV'te işe yarayacak</span>
+
+pair&lt;<span class="t">int</span>, <span class="t">string</span>&gt; p{<span class="n">7</span>, <span class="s">"yedi"</span>};         <span class="y">// iki değeri bir arada tutan çift: p.first, p.second</span>
+cin.clear();                           <span class="y">// bozuk girdiden sonra cin'i yeniden açar</span></code></pre>
+      </figure>
+      <p>
+        Hepsi <code>begin()</code>, <code>end()</code> çiftiyle çalışıyor: &ldquo;şuradan
+        şuraya kadar&rdquo;. Ayrıntıları
+        <a href="https://en.cppreference.com/w/cpp/algorithm">cppreference</a>'ta;
+        oraya bakmayı şimdiden alışkanlık edinin.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Sözlük.</strong> <code>map&lt;string, vector&lt;string&gt;&gt;</code>
+          kullanarak çok tanımlı bir sözlük yapın: bir sözcüğün birden fazla anlamı
+          olabilsin. Sonra sözcük ekleme ve arama işlevleri yazın.
+        </li>
+        <li>
+          <strong>Dengeli parantez.</strong> Bir yazıda parantezler doğru açılıp
+          kapanıyor mu? Önce sadece <code>(</code> ve <code>)</code> için çözün
+          &mdash; şaşırtıcı biçimde tek bir sayaçla olur, yığına gerek yok. Sonra
+          <code>[]</code> ve <code>{}</code> ekleyin. <span class="zor">şimdi
+          yığın gerekli</span> Neden gerekli oldu, onu da anlatabilir misiniz?
+        </li>
+        <li>
+          <strong>Tekrar var mı?</strong> Bir sayı dizisinde tekrar eden öğe var mı?
+          En az üç farklı yöntem bulun ve hızlarını karşılaştırın. (Biri
+          <code>set</code> kullanır, biri sıralama, biri iç içe iki döngü.)
+        </li>
+        <li>
+          <strong>Kendi <code>Kesir</code> türünüz.</strong> Pay ve paydası olan bir
+          tür yazın. <code>+</code>, <code>*</code> ve <code>&lt;&lt;</code>
+          işlemcilerini tanımlayın. Yapıcı içinde kesri sadeleştirin
+          (<code>3/6</code> yerine <code>1/2</code>). <span class="zor">bonus</span>
+          Payda sıfır verilirse ne yapmalı?
+        </li>
+        <li>
+          <strong>En büyük ve en küçük.</strong> Bir dizinin hem en büyük hem en
+          küçük öğesini, <strong>en az sayıda karşılaştırmayla</strong> bulun.
+          Karşılaştırmaları programa saydırın. Öğeleri ikişer ikişer ele almayı
+          deneyin; <em>n</em> öğe için <code>2n-2</code>'den az yapabilir misiniz?
+        </li>
+      </ol>
+    </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · skor tablosu</span>
+      <p>
+        Oyuna birden çok oyuncu girsin: oyunun başında oyuncu adını okuyun, her oyuncunun en iyi (en az) tahmin sayısını bir <code>map&lt;string,int&gt;</code>'te tutun ve her oyundan sonra tabloyu addan sıralı yazdırın. Aynı oyuncu daha kötü bir sonuç alırsa tablo değişmesin. İsteğe bağlı: program kapanınca tabloyu bir dosyaya yazın, açılınca geri okuyun; <code>ofstream</code> ve <code>ifstream</code> ders notlarında.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Bir <code>vector</code>'ü doldurup aralık tabanlı <code>for</code> ile gezebilir, <code>sort</code> ile sıralayabilirim.</li>
+        <li>Bir yazıdaki harfleri eşlemle sayıp alfabetik yazdırabilirim; olmayan anahtarı <code>[]</code> ile okumanın ne yaptığını bilirim.</li>
+        <li>Yığın, kuyruk ve öncelik sırasından hangisinin hangi işe yaradığını bir cümleyle söyleyebilirim.</li>
+        <li>Verisi ve işlevleri olan küçük bir tür yazıp <code>operator&lt;&lt;</code> ile yazdırabilirim.</li>
+        <li>Bir işlevi kalıp yapıp hem <code>int</code> hem <code>double</code> ile çağırabilirim.</li>
+        <li>Bir diziyi işleve kopyasız (<code>const&amp;</code>) verebilir, değiştirmesi gerekiyorsa <code>&amp;</code> ile verebilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li><code>map&lt;string,int&gt; m; if (m["x"] == 0) {}</code> satırlarından sonra <code>m.size()</code> kaç? Neden? <a href="#eslem-en-cok-isinize-yarayacak-kap">Eşlem</a></li>
+        <li>Bir kuyruğu ve bir yığını aynı üç sayıyla doldurup boşaltın. Çıkış sıraları neden farklı; hangisi geziyi enlemesine yapar? <a href="#siranin-onemli-oldugu-kaplar">Sıranın önemli olduğu kaplar</a></li>
+        <li><code>void ekle(vector&lt;int&gt; v)</code> ile <code>void ekle(vector&lt;int&gt;&amp; v)</code> arasındaki fark bir milyon öğelik dizide neye mal olur? Ölçmeden tahmin edin, sonra III. bölümde ölçün. <a href="#adres-ve-takma-ad">Adres ve takma ad</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<nav class="gezinme"><a href="01-ilk-adimlar.html"><span class="yon">Önceki</span>I. İlk Adımlar</a><a class="sag" href="03-zanaat.html"><span class="yon">Sonraki</span>III. Zanaat</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

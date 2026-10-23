@@ -1,0 +1,1463 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitapcik/bolumler/04-ozyineleme.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Özyineleme ve Arama</title>
+<meta name="description" content="Kendini çağıran işlevler, bellekle hızlandırma, geri dönüşlü arama ve arama uzayını budamak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</div>
+  <div class="no">Bölüm IV</div>
+  <h1>Özyineleme ve Arama</h1>
+  <p class="ozet">
+    Bir işlev kendi kendini çağırabilir. Kulağa hile gibi geliyor, ama bu tek fikir
+    Hanoi kulelerinden sekiz vezire, altküme üretiminden bütün bir çizge kuramına
+    kadar uzanıyor. Bu bölümde onu ehlileştireceğiz &mdash; ve bir ara
+    kırk bin kat hızlanacağız.
+  </p>
+  <ul class="icerik-seridi"><li><a href="00-kapak.html">Kılavuz</a></li><li><a href="01-ilk-adimlar.html">I. İlk Adımlar</a></li><li><a href="02-veri.html">II. Veriyi Düzenlemek</a></li><li><a href="03-zanaat.html">III. Zanaat</a></li><li><a aria-current="page" style="border-color:var(--mavi);color:var(--mavi)">IV. Özyineleme</a></li><li><a href="05-cizgeler.html">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li><li><a href="07-sozluk.html">Sözlük</a></li></ul>
+</header>
+
+<div class="blok">
+  <div class="ray">IV.1</div>
+  <div class="govde">
+    <h2 id="kendini-cagiran-islev">Kendini çağıran işlev <span class="yol yavas">yavaş yol</span></h2>
+
+    <p>
+      Alışık olduğumuz işlev tanımı şöyle: <code>y = f(x)</code>. Girdi ver, çıktı al.
+      <strong>Özyinelemeli</strong> (<em>recursive</em>) tanım ise bir şeyi
+      <em>kendi küçük hâliyle</em> anlatır:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">iki tür tanım</span></figcaption>
+      <pre><code><span class="y">// klasik tanım: her x için bir y</span>
+y = f(x)
+
+<span class="y">// özyinelemeli tanım</span>
+f(0) = sabit                              <span class="y">// TABAN</span>
+f(n) = g( f(n-1), f(n-2), ..., f(0) )     <span class="y">// ADIM</span></code></pre>
+    </figure>
+
+    <p>
+      Her özyinelemeli işlevin iki parçası var ve <strong>ikisi de olmazsa
+      olmaz</strong>:
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Taban durumu.</strong> Kendini çağırmadan yanıt verdiği durum.
+        En küçük, en kolay hâl.
+      </li>
+      <li>
+        <strong>Adım.</strong> Problemi kendinden <em>daha küçük</em> bir problemle
+        ifade etmesi. Küçülmesi şart, yoksa hiç durmaz.
+      </li>
+    </ol>
+
+    <div class="kutu dikkat">
+      <span class="basi">Bir numaralı hata</span>
+      <p>
+        Taban durumunu unutmak ya da yanlış yazmak. Program ya sonsuza kadar
+        çalışır ya da bir süre sonra çöker (&ldquo;<em>stack overflow</em>&rdquo;:
+        çağrı yığını taşar). Derste tam olarak bunu yaptık: bir çizge gezisinde
+        &ldquo;daha önce buraya uğradık mı&rdquo; koşulunu yazmayı unuttuk ve program
+        sonsuz döngüye girdi. Özyinelemeli bir işlev yazarken <strong>ilk yazacağınız
+        satır taban durumu olsun.</strong>
+      </p>
+    </div>
+
+    <h3 id="hanoi-kuleleri">Hanoi kuleleri</h3>
+
+    <p>
+      Özyinelemenin gücünü en iyi gösteren bulmaca. Üç çubuk var, birincisinde
+      büyükten küçüğe dizilmiş <em>n</em> disk. Hepsini üçüncü çubuğa taşıyacaksınız.
+      Kurallar: her seferinde tek disk, ve büyük disk asla küçüğün üstüne konmayacak.
+    </p>
+
+    <p>
+      Döngüyle çözmeye kalkarsanız saatlerinizi alır. Özyinelemeyle bakış açısı
+      şu: <em>en büyük diski hedefe koyabilmem için, üstündeki n&minus;1 diskin
+      yoldan çekilmesi gerek.</em> O da aynı problemin küçüğü!
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">34-hanoi.cpp</span><span class="etiket">üç satırlık çözüm</span></figcaption>
+      <pre><code><span class="t">void</span> tasi(<span class="t">int</span> n, <span class="t">int</span> kaynak, <span class="t">int</span> hedef, <span class="t">int</span> yardimci) {
+  <span class="a">if</span> (n == <span class="n">0</span>) <span class="a">return</span>;                       <span class="y">// TABAN: taşınacak disk yok</span>
+
+  tasi(n-<span class="n">1</span>, kaynak, yardimci, hedef);       <span class="y">// üstteki n-1 diski aradaki çubuğa</span>
+  cout &lt;&lt; ++adim &lt;&lt; <span class="s">") "</span> &lt;&lt; n &lt;&lt; <span class="s">". diski "</span>
+       &lt;&lt; kaynak &lt;&lt; <span class="s">" -&gt; "</span> &lt;&lt; hedef &lt;&lt; endl;   <span class="y">// en büyüğü hedefe</span>
+  tasi(n-<span class="n">1</span>, yardimci, hedef, kaynak);       <span class="y">// n-1 diski üstüne</span>
+}
+
+<span class="y">// çağırırken: tasi(3, 1, 3, 2);</span></code></pre>
+    </figure>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">n = 3</span></figcaption>
+      <pre><code>1) 1. diski 1 -&gt; 3
+2) 2. diski 1 -&gt; 2
+3) 1. diski 3 -&gt; 2
+4) 3. diski 1 -&gt; 3
+5) 1. diski 2 -&gt; 1
+6) 2. diski 2 -&gt; 3
+7) 1. diski 1 -&gt; 3
+toplam 7 adım (2^3 - 1 = 7)</code></pre>
+    </figure>
+
+    <p>
+      Üç satırlık bir işlev, mükemmel bir çözüm üretiyor. Adım sayısı da
+      <code>2ⁿ − 1</code>. Efsaneye göre 64 diskli bir kule tamamlandığında dünya
+      sona erecekmiş; saniyede bir hamleyle bu yaklaşık
+      <strong>584 milyar yıl</strong> sürer. Rahat olun.
+    </p>
+
+    <div class="kutu deneyin">
+      <span class="basi">Deneyin</span>
+      <p>
+        <code>n</code>'i 4, 5, 6 yapın ve adım sayısını not edin. Sonra
+        <code>tasi()</code> içindeki üç satırın sırasını değiştirin. Çıktı hâlâ
+        geçerli bir çözüm mü? Neden değil?
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.2</div>
+  <div class="govde">
+    <h2 id="ayni-isi-iki-kere-yapmayin">Aynı işi iki kere yapmayın</h2>
+
+    <p>
+      Özyinelemenin bir tuzağı var. Fibonaççi'yi tanımıyla yazalım:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">tanımı yazdık, oldu</span></figcaption>
+      <pre><code><span class="t">Sayi</span> fibYavas(<span class="t">int</span> n) {
+  <span class="a">if</span> (n &lt; <span class="n">2</span>) <span class="a">return</span> n;
+  <span class="a">return</span> fibYavas(n-<span class="n">1</span>) + fibYavas(n-<span class="n">2</span>);
+}</code></pre>
+    </figure>
+
+    <p>
+      Doğru çalışıyor. Ama <code>fib(40)</code> deneyin, çayınızı içecek vakit
+      bulursunuz. Neden? Çünkü sağ tarafta <strong>iki</strong> çağrı var; her
+      çağrı ikiye çatallanıyor, o ikisi dörde&hellip; Ağacın altında
+      <code>fib(3)</code> milyonlarca kere yeniden hesaplanıyor.
+    </p>
+
+    <p>
+      Çare çok basit: <strong>hesapladığını bir kenara yaz</strong>. Buna
+      <strong>bellekle hızlandırma</strong> (<em>memoizasyon</em>) deniyor.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">30-fib.cpp</span><span class="etiket">tek satır fark</span></figcaption>
+      <pre><code>map&lt;<span class="t">int</span>, <span class="t">Sayi</span>&gt; bellek;
+
+<span class="t">Sayi</span> fibHizli(<span class="t">int</span> n) {
+  <span class="a">if</span> (n &lt; <span class="n">2</span>) <span class="a">return</span> n;
+  <span class="a">if</span> (bellek.contains(n)) <span class="a">return</span> bellek[n];      <span class="y">// &lt;- eklenen satır</span>
+  <span class="a">return</span> bellek[n] = fibHizli(n-<span class="n">1</span>) + fibHizli(n-<span class="n">2</span>);
+}</code></pre>
+    </figure>
+
+    <p>
+      İki işlevi <code>n = 40</code> için çalıştırıp çağrıları saydırdım.
+      Sonuç şaşırtıcı:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>İşlev</th><th>Çağrı sayısı</th><th>Süre</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>fibYavas(40)</code></td>
+            <td class="sayi">331 160 281</td>
+            <td class="sayi">321 613 µs</td>
+          </tr>
+          <tr>
+            <td><code>fibHizli(40)</code></td>
+            <td class="sayi">79</td>
+            <td class="sayi">8 µs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Üç yüz otuz bir milyon çağrı yerine yetmiş dokuz. Kırk bin kat hız &mdash;
+      <strong>tek bir satırla</strong>. Kodun mantığı değişmedi, sadece unutkanlığı
+      düzeldi.
+    </p>
+
+    <p>
+      Bu fikrin bir adı var ve bir bölümü hak ediyor:
+      <a href="06-dp.html">dinamik programlama</a>. Bölüm VI'da oraya döneceğiz.
+    </p>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Biriniz <code>fibYavas(35)</code> çalıştırırken, öteki
+        <code>fib(35)</code>'i kâğıt üzerinde tanımdan hesaplamaya başlasın.
+        Kim önce bitirir dersiniz? Sonra <code>fibHizli</code> ile yarışın. Bu küçük
+        oyun, &ldquo;algoritma seçimi&rdquo;nin ne demek olduğunu bir ömür anlatır.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.3</div>
+  <div class="govde">
+    <h2 id="butun-olasiliklari-gezmek">Bütün olasılıkları gezmek</h2>
+
+    <p>
+      Şimdi özyinelemenin asıl gücüne geliyoruz. Çoğu zor problemde
+      &ldquo;bütün olasılıkları dene&rdquo;den başka yol yoktur. Buna
+      <strong>geri dönüşlü arama</strong> (<em>backtracking</em>) deniyor:
+      bir seçim yap, o dalda ilerle, çıkmaza girersen <strong>geri dön</strong>,
+      başka bir seçim dene.
+    </p>
+
+    <p>
+      Kalıbı her seferinde aynı ve ezberlemeye değer:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">geri dönüşlü arama kalıbı</span></figcaption>
+      <pre><code><span class="t">void</span> ara(durum) {
+  <span class="a">if</span> (tamamlandı) { kaydet(); <span class="a">return</span>; }
+
+  <span class="a">for</span> (<span class="a">auto</span> secim : olasiSecimler) {
+    <span class="a">if</span> (<span class="a">not</span> uygun(secim)) <span class="a">continue</span>;
+
+    uygula(secim);          <span class="y">// 1. seç</span>
+    ara(yeniDurum);         <span class="y">// 2. o dalda derine in</span>
+    geriAl(secim);          <span class="y">// 3. BIRAKTIĞIN GİBİ BIRAK</span>
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Üçüncü satır en çok unutulanı. Geri almayı unutursanız, bir daldaki seçiminiz
+      diğer dalları kirletir ve program sessizce yanlış yanıt verir.
+    </p>
+
+    <h3 id="butun-altkumeler">Bütün altkümeler</h3>
+
+    <p>
+      <code>{3, 1, 2}</code> kümesinin bütün altkümelerini üretelim. Her öğe için tek
+      bir karar var: <em>alayım mı, almayayım mı?</em>
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">31-altkume.cpp</span><span class="etiket">al ya da alma</span></figcaption>
+      <pre><code>Dizi kume{<span class="n">3</span>, <span class="n">1</span>, <span class="n">2</span>}, secilen;
+
+<span class="t">void</span> uret(<span class="t">size_t</span> k) {
+  <span class="a">if</span> (k == kume.size()) { yaz(); <span class="a">return</span>; }   <span class="y">// TABAN: karar bitti</span>
+
+  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı öğeyi ALMA</span>
+
+  secilen.push_back(kume[k]);
+  uret(k + <span class="n">1</span>);                    <span class="y">// k'ıncı öğeyi AL</span>
+  secilen.pop_back();             <span class="y">// geri dön: bıraktığın gibi bırak</span>
+}</code></pre>
+    </figure>
+
+    <p>
+      Aynı işi <strong>hiç özyineleme kullanmadan</strong>, bitlerle de yapabiliriz.
+      <em>n</em> öğe için <code>2ⁿ</code> altküme var; her sayının ikili yazılışı
+      bir altkümeyi tarif ediyor:
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">bitler ve altkümeler</span></figcaption>
+      <pre><code>sayı  bitler  altküme
+----  ------  --------
+ 0     000    { }
+ 1     001    { 3 }
+ 2     010    { 1 }
+ 3     011    { 3 1 }
+ 4     100    { 2 }
+ 5     101    { 3 2 }
+ 6     110    { 1 2 }
+ 7     111    { 3 1 2 }</code></pre>
+    </figure>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">bitlerle üretim</span></figcaption>
+      <pre><code><span class="t">size_t</span> n = kume.size(), altKumeSayisi = <span class="n">1u</span> &lt;&lt; n;   <span class="y">// 2^n</span>
+
+<span class="a">for</span> (<span class="t">size_t</span> ak = <span class="n">0</span>; ak &lt; altKumeSayisi; ++ak)
+  <span class="a">for</span> (<span class="t">size_t</span> k = <span class="n">0</span>; k &lt; n; ++k)
+    <span class="a">if</span> (ak &amp; (<span class="n">1u</span> &lt;&lt; k))         <span class="y">// k'ıncı bit açık mı?</span>
+      cout &lt;&lt; kume[k] &lt;&lt; <span class="s">" "</span>;</code></pre>
+    </figure>
+
+    <p>
+      İkisini de bilmekte fayda var. Bit yöntemi daha hızlı ve bellek yemiyor, ama
+      sadece <em>n</em> 60'tan küçükken kullanılabiliyor. Özyineleme ise her boyutta
+      çalışıyor ve <strong>budama</strong> yapmaya izin veriyor &mdash; birazdan
+      göreceğimiz gibi bu çok kritik.
+    </p>
+
+    <h3 id="butun-permutasyonlar">Bütün permütasyonlar</h3>
+
+    <p>
+      Aynı kalıp, tek fark: bu sefer <em>sıra</em> önemli, ve her öğeyi bir kere
+      kullanabiliriz. Onun için &ldquo;bunu daha önce kullandım mı&rdquo; diye bir
+      dizi tutuyoruz.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">32-permutasyon.cpp</span><span class="etiket">n = 3</span></figcaption>
+      <pre><code>vector&lt;<span class="t">int</span>&gt; perm;
+vector&lt;<span class="t">bool</span>&gt; eklendi(N, <span class="a">false</span>);
+
+<span class="t">void</span> uret(<span class="t">int</span> derinlik) {
+  <span class="a">if</span> ((<span class="t">int</span>) perm.size() == N) { yaz(perm); <span class="a">return</span>; }
+
+  <span class="a">for</span> (<span class="t">int</span> k = <span class="n">0</span>; k &lt; N; ++k) {
+    <span class="a">if</span> (eklendi[k]) <span class="a">continue</span>;        <span class="y">// bunu zaten kullandık</span>
+
+    eklendi[k] = <span class="a">true</span>;
+    perm.push_back(k);
+    uret(derinlik + <span class="n">1</span>);
+    perm.pop_back();               <span class="y">// geri al</span>
+    eklendi[k] = <span class="a">false</span>;           <span class="y">// geri al</span>
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Bu programa bir izleme satırı ekleyip çalıştırdım. Çıktıyı okuyun &mdash;
+      özyinelemenin nasıl derine inip geri döndüğünü <em>görebilirsiniz</em>.
+      <code>+</code> işaretleri derinliği gösteriyor:
+    </p>
+
+    <figure class="kod kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">izleme</span><span class="etiket">özyineleme canlı</span></figcaption>
+      <pre><code>+ k=0  perm: 0
+++ k=1  perm: 01
++++ k=2  perm: 012
+       <span class="v">1. permütasyon: 012</span>
+++ k=2  perm: 02
++++ k=1  perm: 021
+       <span class="v">2. permütasyon: 021</span>
++ k=1  perm: 1
+++ k=0  perm: 10
++++ k=2  perm: 102
+       <span class="v">3. permütasyon: 102</span>
+++ k=2  perm: 12
++++ k=0  perm: 120
+       <span class="v">4. permütasyon: 120</span>
++ k=2  perm: 2
+++ k=0  perm: 20
++++ k=1  perm: 201
+       <span class="v">5. permütasyon: 201</span>
+++ k=1  perm: 21
++++ k=0  perm: 210
+       <span class="v">6. permütasyon: 210</span></code></pre>
+    </figure>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Standart kütüpte hazırı var: <code>std::next_permutation(d.begin(),
+        d.end())</code>. Diziyi bir sonraki permütasyona çevirir, bitince
+        <code>false</code> döner. Bir <code>do&hellip;while</code> döngüsüyle
+        hepsini üretirsiniz. Ama önce kendiniz yazın &mdash; hazırı kullanmak,
+        nasıl çalıştığını bilerek kullanmakla aynı şey değil.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.4</div>
+  <div class="govde">
+    <h2 id="sekiz-vezir">Sekiz vezir</h2>
+
+    <p>
+      Klasiklerin klasiği. Satranç tahtasına sekiz vezir yerleştirin; hiçbiri
+      diğerini tehdit etmesin. Vezir yatay, dikey ve çapraz gider &mdash; yani her
+      satırda tam bir vezir olmak zorunda. Bu gözlem problemi yarı yarıya küçültüyor:
+      artık soru &ldquo;her satırdaki vezir hangi sütunda?&rdquo;
+    </p>
+
+    <p>
+      Püf noktası köşegenleri numaralandırmakta. Sol-üstten sağ-alta giden bir
+      köşegen üzerinde <code>satır + sütun</code> hep aynıdır; öteki yönde ise
+      <code>satır − sütun</code> aynıdır. Böylece &ldquo;bu köşegen dolu mu?&rdquo;
+      sorusu tek bir dizi bakışına iniyor.
+    </p>
+
+    <figure class="kod">
+      <figcaption><span class="nokta"></span><span class="ad">33-vezir.cpp</span><span class="etiket">tam çözüm</span></figcaption>
+      <pre><code><span class="a">const</span> <span class="t">int</span> N = <span class="n">8</span>;
+vector&lt;<span class="t">bool</span>&gt; sutun(N, <span class="a">false</span>),          <span class="y">// bu sütunda vezir var mı?</span>
+             capraz1(<span class="n">2</span>*N-<span class="n">1</span>, <span class="a">false</span>),    <span class="y">// satır + sütun sabit</span>
+             capraz2(<span class="n">2</span>*N-<span class="n">1</span>, <span class="a">false</span>);    <span class="y">// satır - sütun sabit</span>
+<span class="t">int</span> cozum = <span class="n">0</span>;
+
+<span class="t">void</span> koy(<span class="t">int</span> satir) {
+  <span class="a">if</span> (satir == N) { ++cozum; <span class="a">return</span>; }        <span class="y">// sekiz vezir yerleşti</span>
+
+  <span class="a">for</span> (<span class="t">int</span> s = <span class="n">0</span>; s &lt; N; ++s) {
+    <span class="t">int</span> c1 = satir + s, c2 = satir - s + N - <span class="n">1</span>;
+    <span class="a">if</span> (sutun[s] <span class="a">or</span> capraz1[c1] <span class="a">or</span> capraz2[c2]) <span class="a">continue</span>;   <span class="y">// tehdit altında</span>
+
+    sutun[s] = capraz1[c1] = capraz2[c2] = <span class="a">true</span>;   <span class="y">// vezir kondu</span>
+    koy(satir + <span class="n">1</span>);                                 <span class="y">// bir alt satıra geç</span>
+    sutun[s] = capraz1[c1] = capraz2[c2] = <span class="a">false</span>;  <span class="y">// geri al</span>
+  }
+}</code></pre>
+    </figure>
+
+    <p>
+      Kalıbı tanıdınız mı? Altküme ve permütasyon üretimiyle <strong>birebir
+      aynı</strong>: seç, derine in, geri al. Değişen sadece &ldquo;uygun mu?&rdquo;
+      koşulu.
+    </p>
+
+    <p>
+      Programı farklı tahta boylarında çalıştırdım. Sonuçlar hiç de düzenli değil:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Tahta</th><th class="sayi">4×4</th><th class="sayi">5×5</th><th class="sayi">6×6</th><th class="sayi">7×7</th><th class="sayi">8×8</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Çözüm sayısı</td>
+            <td class="sayi">2</td><td class="sayi">10</td><td class="sayi">4</td>
+            <td class="sayi">40</td><td class="sayi">92</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      6×6 tahtada 5×5'ten <em>daha az</em> çözüm var. Neden? Kimse basit bir formül
+      bulamadı; bu diziyi hesaplamanın bilinen tek yolu saymak. Matematiğin
+      hoşuma giden yanı da bu: bazen en sade sorunun bile kısa yolu yok.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">IV.5</div>
+  <div class="govde">
+    <h2 id="ne-kadar-surer-karmasiklik">Ne kadar sürer? Karmaşıklık <span class="yol yavas">yavaş yol</span></h2>
+
+    <p>
+      &ldquo;Bütün olasılıkları dene&rdquo; iyi bir fikir, ta ki olasılıklar
+      tükenmez olana kadar. Bir algoritmanın girdi büyüdükçe ne kadar
+      yavaşladığını anlatan gösterime <strong>büyük O</strong> deniyor.
+      Sabitleri ve küçük terimleri atarız; çünkü mesele bir milisaniye değil,
+      <em>büyüme biçimi</em>.
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Karmaşıklık</th><th>Adı</th><th>n=20</th><th>n=1000</th><th>n=10⁶</th><th>Örnek</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>O(1)</code></td><td>sabit</td><td class="sayi">1</td><td class="sayi">1</td><td class="sayi">1</td><td>Dizide öğeye erişim</td></tr>
+          <tr><td><code>O(log n)</code></td><td>logaritmik</td><td class="sayi">4</td><td class="sayi">10</td><td class="sayi">20</td><td>İkili arama, tahmin oyunu</td></tr>
+          <tr><td><code>O(n)</code></td><td>doğrusal</td><td class="sayi">20</td><td class="sayi">10³</td><td class="sayi">10⁶</td><td>Diziyi bir kere tarama</td></tr>
+          <tr><td><code>O(n log n)</code></td><td>&mdash;</td><td class="sayi">86</td><td class="sayi">10⁴</td><td class="sayi">2×10⁷</td><td>Sıralama, Dijkstra</td></tr>
+          <tr><td><code>O(n²)</code></td><td>karesel</td><td class="sayi">400</td><td class="sayi">10⁶</td><td class="sayi">10¹²</td><td>İç içe iki döngü</td></tr>
+          <tr><td><code>O(2ⁿ)</code></td><td>üstel</td><td class="sayi">10⁶</td><td class="sayi">&infin;</td><td class="sayi">&infin;</td><td>Bütün altkümeler</td></tr>
+          <tr><td><code>O(n!)</code></td><td>faktöriyel</td><td class="sayi">10¹⁸</td><td class="sayi">&infin;</td><td class="sayi">&infin;</td><td>Bütün permütasyonlar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Tabloyu bir kere gerçekten okuyun. <code>O(n²)</code> bir milyon öğe için
+      <code>10¹²</code> işlem demek &mdash; saatler. <code>O(2ⁿ)</code> ise
+      <em>n</em> kırkı geçince evrenin yaşını aşıyor. Bu yüzden yarışma sorularında
+      girdi sınırına bakmak, algoritma seçmenin ilk adımıdır:
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Kaba kural</span>
+      <p>
+        Bilgisayarınız saniyede kabaca <strong>10⁸</strong> basit işlem yapar.
+        Soruda <code>n ≤ 20</code> yazıyorsa üstel çözüm serbest.
+        <code>n ≤ 5000</code> ise karesel olabilir. <code>n ≤ 10⁶</code> ise
+        <code>O(n)</code> ya da <code>O(n log n)</code> aramanız gerek. Bu tek
+        cümle, boşa harcanacak saatlerinizi kurtarır.
+      </p>
+    </div>
+
+    <h3 id="arama-uzayini-budamak">Arama uzayını budamak <span class="yol ileri">ileri</span></h3>
+
+    <p>
+      Üstel bir arama uzayıyla karşılaştığınızda ne yapılır? Bütünüyle
+      kurtulamazsınız, ama <strong>meyve vermeyecek dalları kesebilirsiniz</strong>.
+      Buna <strong>budama</strong> (<em>pruning</em>) deniyor.
+    </p>
+
+    <p>
+      Derste ızgara üzerinde bütün <em>Hamilton patikalarını</em> (her kareden tam
+      bir kere geçen yollar) arayan bir program yazdık. 6×6 tahtada saniyeler
+      sürüyordu, 7×7'de dakikalar. Sonra şu iki satırı ekledik:
+    </p>
+
+    <figure class="kod dar">
+      <figcaption><span class="nokta"></span><span class="ad">budama</span><span class="etiket">dakikalar → saniyenin altı</span></figcaption>
+      <pre><code><span class="t">bool</span> so = gir[y][x-<span class="n">1</span>], sa = gir[y][x+<span class="n">1</span>],
+     yu = gir[y-<span class="n">1</span>][x], as = gir[y+<span class="n">1</span>][x];
+
+<span class="a">if</span> (yu <span class="a">and</span> as <span class="a">and</span> <span class="a">not</span>(so <span class="a">or</span> sa) <span class="a">or</span>
+    so <span class="a">and</span> sa <span class="a">and</span> <span class="a">not</span>(yu <span class="a">or</span> as))
+    <span class="a">return</span>;                 <span class="y">// çıkmaz sokak: geri dön</span></code></pre>
+    </figure>
+
+    <p>
+      Anlamı şu: bu karenin üstü <em>ve</em> altı zaten ziyaret edilmişse ama
+      sağı <em>ve</em> solu boşsa, tahta ikiye bölünmüş demektir ve bir daha
+      birleşemeyiz. O dalda meyve yok, geri dön.
+    </p>
+
+    <div class="kutu dikkat">
+      <span class="basi">Budarken dikkat</span>
+      <p>
+        Kestiğiniz dalın gerçekten meyve veremeyeceğinden <strong>emin</strong>
+        olmalısınız. Yoksa doğru çözümleri kaybedersiniz ve program hızlı hızlı
+        yanlış yanıt verir &mdash; en kötü hata türü. Her budama kuralı için bir
+        kanıt isteyin kendinizden. Yukarıdaki kural için kâğıda birkaç örnek
+        çizmek yetiyor.
+      </p>
+    </div>
+
+    <div class="alistirmalar">
+      <h4>Alıştırmalar</h4>
+      <ol>
+        <li>
+          <strong>Kümeyi ikiye bölün.</strong>
+          <a href="https://cses.fi/problemset/task/1623">Apple Division</a>:
+          <em>n</em> elmayı iki gruba ayırın, ağırlık farkı en az olsun.
+          Hem özyinelemeyle hem bitlerle çözün. (<code>n ≤ 20</code> olduğuna
+          dikkat &mdash; yukarıdaki kaba kural size ne söylüyor?)
+        </li>
+        <li>
+          <strong>Vezirleri yazdırın.</strong> Yukarıdaki program çözümleri
+          <em>sayıyor</em>. Bir de her çözümü tahta olarak ekrana çizsin. 92
+          çözümün ilk üçüne bakın; birbirlerinin aynadaki hâli mi?
+        </li>
+        <li>
+          <strong>Güzel permütasyon.</strong>
+          <a href="https://cses.fi/problemset/task/1070/">CSES 1070</a>: peş peşe
+          gelen öğelerin farkı en az 2 olan bir permütasyon bulun. Önce hepsini
+          üretip eleyin. Sonra <span class="zor">asıl soru</span> doğrudan
+          kurmanın bir yolunu bulun &mdash; <em>n</em> büyük olduğunda üretmek
+          çalışmaz.
+        </li>
+        <li>
+          <strong>Hamilton patikaları.</strong>
+          <a href="https://cses.fi/problemset/task/1625">CSES 1625</a>: ızgarada
+          sol üstten sağ alta, her kareden bir kere geçen yolları sayın. Önce
+          budamasız yazın ve 6×6'da süreyi ölçün. Sonra yukarıdaki budamayı
+          ekleyin ve tekrar ölçün. Aradaki farkı görün.
+          <span class="zor">zor</span> Başka bir budama kuralı bulabilir misiniz?
+        </li>
+        <li>
+          <strong>Bir kanıt yazın.</strong> Yukarıdaki budama kuralının doğru
+          olduğunu &mdash; yani kesilen dalda gerçekten çözüm olamayacağını
+          &mdash; birkaç cümleyle anlatın. Kâğıt kalem serbest.
+          Bu alıştırma kod yazmaktan daha değerli.
+        </li>
+      </ol>
+    </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · bilgisayar tahmin etsin</span>
+      <p>
+        Roller değişsin: bu sefer siz tutun, bilgisayar bulsun. <code>tahminEt(alt, ust)</code> işlevi aralığın ortasını sorsun, &ldquo;büyük/küçük&rdquo; yanıtına göre kendini daralan aralıkla çağırsın; yani ikili arama, özyinelemeli. En kötü durumda kaç tahmin gerekiyor? 1&ndash;100 ve 1&ndash;1000 için deneyin, I. bölümdeki tabloyla karşılaştırın. Oyunun iki kipi artık tek programda: &ldquo;ben tutayım&rdquo; ve &ldquo;sen tut&rdquo;.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Taban durumu ve küçülen adımla özyinelemeli bir işlev yazabilirim; ilk satırım hep taban.</li>
+        <li>Hanoi'nin üç satırlık çözümünü bir arkadaşıma anlatabilirim.</li>
+        <li>Yavaş bir özyinelemeye eşlemle bellekle hızlandırma ekleyebilirim.</li>
+        <li>Seç, derine in, geri al kalıbıyla altkümeleri ve permütasyonları üretebilirim.</li>
+        <li>&ldquo;Uygun mu?&rdquo; koşulunu değiştirerek sekiz veziri çözebilirim.</li>
+        <li>Bir çözümün karmaşıklığını tahmin edip girdi sınırına göre uygun olup olmadığını söyleyebilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li><code>fibYavas(30)</code> kaç kere çağrılır, <code>fibHizli(30)</code> kaç kere? Saydırın, sonra 40 için tahmin edin. <a href="#ayni-isi-iki-kere-yapmayin">Aynı işi iki kere yapmayın</a></li>
+        <li>Altküme üreten işlevden <code>secilen.pop_back()</code> satırını silin. Çıktı ne olur; neden &ldquo;sessizce yanlış&rdquo;? <a href="#butun-olasiliklari-gezmek">Bütün olasılıkları gezmek</a></li>
+        <li>Soruda <code>n ≤ 2000</code> yazıyor. Karesel çözüm güvenli mi, üstel? Kaba kuralla hesaplayın. <a href="#ne-kadar-surer-karmasiklik">Karmaşıklık</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<nav class="gezinme"><a href="03-zanaat.html"><span class="yon">Önceki</span>III. Zanaat</a><a class="sag" href="05-cizgeler.html"><span class="yon">Sonraki</span>V. Çizgeler</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

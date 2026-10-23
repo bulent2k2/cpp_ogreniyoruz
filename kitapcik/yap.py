@@ -245,8 +245,8 @@ if __name__ == "__main__":
             satir = satir.strip()
             if not satir or satir.startswith("#") or " " not in satir:
                 continue
-            k, v = satir.split(None, 1)
-            baglantilar[k] = v.strip()
+            k, v = satir.split()[:2]   # ilk adres: claude.ai sayfası
+            baglantilar[k] = v
     artifact_yaz(baglantilar)
     tam_yaz()
     print(f"{len(BOLUMLER)} bölüm + tam belge yazıldı -> {CIKTI}")

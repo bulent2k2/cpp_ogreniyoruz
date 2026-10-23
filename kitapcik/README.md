@@ -35,6 +35,8 @@ bir bölüme bakmak isteyenler için:
 + [VI. Dinamik Programlama](https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb) beş adımlık reçete, ızgara yolları, bozuk para soruları
 + [Küçük Sözlük](https://claude.ai/artifact/MQsSVarxjXcUiczTtanFn5) terimlerin Türkçesi, İngilizcesi, bir cümlelik anlamı
 
+Aynı bölümler GitHub Pages aynasında da var: [bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/00-kapak.html). İki adres aynı içeriği taşır; biri açılmazsa öteki. Adresler `baglantilar.txt`'de.
+
 Yazarken dikkat edilenler
 --
 

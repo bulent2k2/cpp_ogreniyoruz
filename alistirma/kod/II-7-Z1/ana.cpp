@@ -1,5 +1,5 @@
 // II-7-Z1 · Adresle yürümek
-// Çıktı: "3 1 4 1 5 9 2 6" ve "dördüncü öğe: 1 = 1"
+// Çıktı: "3 1 4 1 5 9 2 6" ve "dördüncü öge: 1 = 1"
 #include <iostream>
 using namespace std;
 

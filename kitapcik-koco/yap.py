@@ -71,7 +71,7 @@ AD = {b[0]: b[1] for b in BOLUMLER}
 BAS = {b[0]: b[2] for b in BOLUMLER}
 
 # Başlıklara kimlik (id): "Her türün bir sınırı var" -> her-turun-bir-siniri-var.
-# Alıştırma defteri ve kavram dizini bölüm sayfasına değil, doğrudan kesime
+# Alıştırma defteri ve kavram dizini bölüm sayfasına değil, doğrudan altbölüme
 # bağlanabilsin; PDF'te de yer imi olsun. Aynı dönüşümü defterin üreteci de
 # kullanıyor; değiştirirseniz orayı da değiştirin.
 TURKCE = str.maketrans("çğıöşüâîûÇĞİÖŞÜÂÎÛ", "cgiosuaiuCGIOSUAIU")
@@ -80,7 +80,7 @@ TURKCE = str.maketrans("çğıöşüâîûÇĞİÖŞÜÂÎÛ", "cgiosuaiuCGIOSUA
 def kimlik(metin: str) -> str:
     metin = re.sub(r'<span class="yol[^"]*">.*?</span>', "", metin, flags=re.S)  # okuma yolu imi kimliğe girmesin
     t = html.unescape(re.sub(r"<[^>]+>", "", metin)).translate(TURKCE).lower()
-    return re.sub(r"[^a-z0-9]+", "-", t).strip("-") or "kesim"
+    return re.sub(r"[^a-z0-9]+", "-", t).strip("-") or "altbolum"
 
 
 def kimlik_ver(govde_html: str) -> str:

@@ -2,7 +2,7 @@ Dilim Ağaçları (*Segment Trees*)
 ====
 
 Dizi parçalarının verimli kullanımı. Bir dizide iki iş sık sık bir arada
-gerekir: "i'den j'ye toplam (ya da en büyük) kaç?" sorusu ve "k'ıncı öğeyi
+gerekir: "i'den j'ye toplam (ya da en büyük) kaç?" sorusu ve "k'ıncı ögeyi
 değiştir" işlemi. Düz dizide sorgu O(n), değiştirme O(1); birikimli toplam
 (*prefix sums*) sorguyu O(1) yapar ama değiştirmeyi O(n)'e çıkarır. Dilim
 ağacı ikisini de O(log n)'de yapar: diziyi ikiye, ikiyi dörde böle böle bir

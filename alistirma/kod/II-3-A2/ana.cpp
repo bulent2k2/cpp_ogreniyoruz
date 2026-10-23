@@ -1,5 +1,5 @@
 // II-3-A2 · Kesişim, birleşim, fark
-// Girdi: n, n öğe, m, m öğe. Çıktı: Kesişim / Birleşim / Fark
+// Girdi: n, n öge, m, m öge. Çıktı: Kesişim / Birleşim / Fark
 #include <iostream>
 #include <set>
 using namespace std;

@@ -18,9 +18,9 @@
 
     <p>
       En eski, en sade ve en hızlı kap: <strong>dizi</strong> (<em>array</em>).
-      Aynı türden birkaç değer, bellekte yan yana. Öğelerin yerini hesaplamak
-      bedava &mdash; ilk öğenin adresini biliyorsanız, üçüncü öğe
-      &ldquo;ilk adres + 2 &times; öğe boyu&rdquo; adresindedir. Bu yüzden dizide
+      Aynı türden birkaç değer, bellekte yan yana. Ögelerin yerini hesaplamak
+      bedava &mdash; ilk ögenin adresini biliyorsanız, üçüncü öge
+      &ldquo;ilk adres + 2 &times; öge boyu&rdquo; adresindedir. Bu yüzden dizide
       arama değil ama <em>erişim</em> anlıktır. Bölüm I'deki <code>std::string</code>
       de aslında böyle bir dizi: harfler bellekte yan yana, <code>ad[0]</code>
       ilk harf, <code>ad.size()</code> kaç tane olduğu.
@@ -35,11 +35,11 @@
   <span class="t">short</span> dizi[]{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>, <span class="n">1</span>, <span class="n">5</span>, <span class="n">9</span>, <span class="n">2</span>, <span class="n">6</span>};
 
   cout &lt;&lt; <span class="s">"dizinin boyu     : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi)    &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
-  cout &lt;&lt; <span class="s">"bir öğenin boyu  : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi[<span class="n">0</span>]) &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"bir ögenin boyu  : "</span> &lt;&lt; <span class="a">sizeof</span>(dizi[<span class="n">0</span>]) &lt;&lt; <span class="s">" bayt"</span> &lt;&lt; endl;
   <span class="t">int</span> ogeSayisi = <span class="a">sizeof</span>(dizi) / <span class="a">sizeof</span>(dizi[<span class="n">0</span>]);
-  cout &lt;&lt; <span class="s">"öğe sayısı       : "</span> &lt;&lt; ogeSayisi &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"öge sayısı       : "</span> &lt;&lt; ogeSayisi &lt;&lt; endl;
 
-  cout &lt;&lt; <span class="s">"ilk öğenin adresi: "</span> &lt;&lt; (<span class="t">void</span>*) dizi       &lt;&lt; endl;
+  cout &lt;&lt; <span class="s">"ilk ögenin adresi: "</span> &lt;&lt; (<span class="t">void</span>*) dizi       &lt;&lt; endl;
   cout &lt;&lt; <span class="s">"ikincininki      : "</span> &lt;&lt; (<span class="t">void</span>*) (dizi + <span class="n">1</span>) &lt;&lt; endl;
 
   <span class="a">for</span> (<span class="a">auto</span> s : dizi) cout &lt;&lt; s &lt;&lt; <span class="s">" "</span>;
@@ -53,9 +53,9 @@
     <figure class="kod kopyalanmaz">
       <figcaption><span class="nokta"></span><span class="ad">çıktı</span></figcaption>
       <pre><code>dizinin boyu     : 16 bayt
-bir öğenin boyu  : 2 bayt
-öğe sayısı       : 8
-ilk öğenin adresi: 0x7ffc4e4f2eb0
+bir ögenin boyu  : 2 bayt
+öge sayısı       : 8
+ilk ögenin adresi: 0x7ffc4e4f2eb0
 ikincininki      : 0x7ffc4e4f2eb<span class="v">2</span>
 3 1 4 1 5 9 2 6
 taşma: <span class="v">-1536</span></code></pre>
@@ -69,7 +69,7 @@ taşma: <span class="v">-1536</span></code></pre>
     <div class="kutu dikkat">
       <span class="basi">Dikkat</span>
       <p>
-        Son satıra bakın: <code>dizi[12]</code> diye bir öğe yok, ama program
+        Son satıra bakın: <code>dizi[12]</code> diye bir öge yok, ama program
         çökmedi &mdash; bellekte o adreste ne varsa onu okuyup yazdı. C++ sizi
         korumaz, size <em>güvenir</em>. Bu hem hızının hem de tehlikesinin kaynağı.
         Yarışmalarda &ldquo;çalışıyor ama bazen yanlış&rdquo; hatalarının çoğu budur.
@@ -91,8 +91,8 @@ taşma: <span class="v">-1536</span></code></pre>
       <pre><code><span class="a">#include</span> <span class="s">&lt;vector&gt;</span>
 std::vector&lt;<span class="t">int</span>&gt; d{<span class="n">3</span>, <span class="n">1</span>, <span class="n">4</span>};
 d.push_back(<span class="n">1</span>);          <span class="y">// sona ekle</span>
-d.resize(<span class="n">10</span>);            <span class="y">// on öğeye çıkar, yenileri sıfır</span>
-d.size();                <span class="y">// kaç öğe var</span>
+d.resize(<span class="n">10</span>);            <span class="y">// on ögeye çıkar, yenileri sıfır</span>
+d.size();                <span class="y">// kaç öge var</span>
 d[<span class="n">2</span>];                    <span class="y">// erişim, sınır denetimi YOK</span>
 d.at(<span class="n">2</span>);                 <span class="y">// erişim, sınır denetimi VAR (yavaş ama güvenli)</span>
 
@@ -101,7 +101,7 @@ std::vector&lt;std::vector&lt;<span class="t">int</span>&gt;&gt; tablo(<span cla
     </figure>
 
     <p>
-      Hız kaybı var mı? Ölçtük: bir milyon öğelik dizide temel dizi
+      Hız kaybı var mı? Ölçtük: bir milyon ögelik dizide temel dizi
       <span class="sayi">3 ms</span>'de kuruluyor, akıllı dizi
       <span class="sayi">7 ms</span>'de. Sorgular ise ikisinde de mikrosaniyenin
       binde biri. Yani fark var ama sizin problemleriniz için <strong>önemsiz</strong>.
@@ -222,7 +222,7 @@ map&lt;<span class="t">int</span>, set&lt;<span class="t">int</span>&gt;&gt; esl
     <h2>Sıranın önemli olduğu kaplar</h2>
 
     <p>
-      Üç özel kap daha var. Üçünün de yaptığı iş &ldquo;öğe ekle, öğe çıkar&rdquo;
+      Üç özel kap daha var. Üçünün de yaptığı iş &ldquo;öge ekle, öge çıkar&rdquo;
       &mdash; aralarındaki tek fark <strong>hangisinin çıkacağı</strong>. Ama o tek
       fark, üçünü üç farklı algoritmanın kalbi yapıyor.
     </p>
@@ -583,7 +583,7 @@ takma addan sonra: 30</code></pre>
       <p>
         Büyük bir kabı işleve girdi olarak verirken <code>const Dizi&amp;</code>
         yazın. <code>const</code> &ldquo;değiştirmeyeceğim&rdquo; sözü,
-        <code>&amp;</code> ise &ldquo;kopyalamayın&rdquo; demek. Bir milyon öğelik
+        <code>&amp;</code> ise &ldquo;kopyalamayın&rdquo; demek. Bir milyon ögelik
         bir diziyi her çağrıda kopyalamak, çözümünüzün neden yavaş olduğunu
         anlayamadığınız durumların en yaygın nedenidir.
       </p>
@@ -633,7 +633,7 @@ cin.clear();                           <span class="y">// bozuk girdiden sonra c
           yığın gerekli</span> Neden gerekli oldu, onu da anlatabilir misiniz?
         </li>
         <li>
-          <strong>Tekrar var mı?</strong> Bir sayı dizisinde tekrar eden öğe var mı?
+          <strong>Tekrar var mı?</strong> Bir sayı dizisinde tekrar eden öge var mı?
           En az üç farklı yöntem bulun ve hızlarını karşılaştırın. (Biri
           <code>set</code> kullanır, biri sıralama, biri iç içe iki döngü.)
         </li>
@@ -646,9 +646,9 @@ cin.clear();                           <span class="y">// bozuk girdiden sonra c
         </li>
         <li>
           <strong>En büyük ve en küçük.</strong> Bir dizinin hem en büyük hem en
-          küçük öğesini, <strong>en az sayıda karşılaştırmayla</strong> bulun.
-          Karşılaştırmaları programa saydırın. Öğeleri ikişer ikişer ele almayı
-          deneyin; <em>n</em> öğe için <code>2n-2</code>'den az yapabilir misiniz?
+          küçük ögesini, <strong>en az sayıda karşılaştırmayla</strong> bulun.
+          Karşılaştırmaları programa saydırın. Ögeleri ikişer ikişer ele almayı
+          deneyin; <em>n</em> öge için <code>2n-2</code>'den az yapabilir misiniz?
         </li>
       </ol>
     </div>
@@ -673,7 +673,7 @@ cin.clear();                           <span class="y">// bozuk girdiden sonra c
       <ol>
         <li><code>map&lt;string,int&gt; m; if (m["x"] == 0) {}</code> satırlarından sonra <code>m.size()</code> kaç? Neden? <a href="#eslem-en-cok-isinize-yarayacak-kap">Eşlem</a></li>
         <li>Bir kuyruğu ve bir yığını aynı üç sayıyla doldurup boşaltın. Çıkış sıraları neden farklı; hangisi geziyi enlemesine yapar? <a href="#siranin-onemli-oldugu-kaplar">Sıranın önemli olduğu kaplar</a></li>
-        <li><code>void ekle(vector&lt;int&gt; v)</code> ile <code>void ekle(vector&lt;int&gt;&amp; v)</code> arasındaki fark bir milyon öğelik dizide neye mal olur? Ölçmeden tahmin edin, sonra III. bölümde ölçün. <a href="#adres-ve-takma-ad">Adres ve takma ad</a></li>
+        <li><code>void ekle(vector&lt;int&gt; v)</code> ile <code>void ekle(vector&lt;int&gt;&amp; v)</code> arasındaki fark bir milyon ögelik dizide neye mal olur? Ölçmeden tahmin edin, sonra III. bölümde ölçün. <a href="#adres-ve-takma-ad">Adres ve takma ad</a></li>
       </ol>
       <p class="gunluk">
         Bu bölümde en çok neye takıldınız? Bir cümleyle yazın

@@ -12,7 +12,7 @@ sunan üç sayfa:
   300 kavram A'dan Z'ye, Türkçe ve İngilizce adlarıyla; her kavramda onu
   anlatan kitapçık bölümü, onu çalıştıran alıştırmalar ve ders notu. "English
   A–Z" düğmesiyle İngilizce sıraya geçer; alıştırma bağlantıları doğrudan
-  soruya, kitapçık bağlantıları kesimin başlığına iner.
+  soruya, kitapçık bağlantıları altbölümün başlığına iner.
 + [Keyifli Kitaplık İncelemesi](https://claude.ai/artifact/Kcz4QboYQ7KUwpkNi1T1GW)
   pedagog, editör ve bilgisayar uzmanı gözüyle eksikler, öneriler ve yerini
   söyleyen düzeltme listesi.
@@ -65,9 +65,9 @@ dosyanın başında anlatılıyor: Türkçe ad, İngilizce ad, bir cümlelik
 açıklama, alan, kitapçık bölümleri, alıştırma kimlikleri ve ders notları.
 Alıştırma kimlikleri (`IV-3-Z1`, `KII-2-A1`) defterlerdeki `section id`
 değerleriyle aynı olmalı; sayfa bağlantıyı bu kimlikten kurar. Kitapçık
-kesimi `"I|Değer, ad, tür|deger-ad-tur"` biçiminde yazılır: üçüncü parça,
+altbölümü `"I|Değer, ad, tür|deger-ad-tur"` biçiminde yazılır: üçüncü parça,
 yayımlanan bölüm sayfasındaki başlık kimliğidir (`kitapcik*/cikti/*.html`
 içindeki `h2`/`h3` `id`'si; `yap.py` başlıktan türetir) ve bağlantıyı
-kesimin başlığına indirir; boş bırakılırsa bağlantı bölümün başına gider.
+altbölümün başlığına indirir; boş bırakılırsa bağlantı bölümün başına gider.
 `"S"` bölüm kodu Küçük Sözlük sayfasıdır. Sıralama ve harf gruplama sayfada
 kendiliğinden olur.

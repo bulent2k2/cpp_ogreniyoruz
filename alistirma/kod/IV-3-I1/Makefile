@@ -1,4 +1,4 @@
-# IV-3-I1 · Dört öğe
+# IV-3-I1 · Dört öge
 # make        -> derle ve çalıştır
 # make test   -> çıktını beklenen-cikti ile karşılaştır
 hedef: derle calistir

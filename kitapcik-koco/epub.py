@@ -82,7 +82,7 @@ def xhtml_yap(parca: str) -> str:
     """HTML parçasını iyi biçimli XHTML'e çevirir."""
     for adi, harf in VARLIKLAR.items():
         parca = parca.replace(adi, harf)
-    # boş öğeler XHTML'de kapanmak zorunda
+    # boş ögeler XHTML'de kapanmak zorunda
     parca = re.sub(r"<br\s*/?>", "<br/>", parca)
     parca = re.sub(r"<(hr|img|meta|link)([^>]*?)/?>", r"<\1\2/>", parca)
 

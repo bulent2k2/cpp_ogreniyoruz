@@ -14,9 +14,9 @@ void yaz() {
 // 1. yol: geri dönüşlü arama (backtracking)
 void uret(size_t k) {
   if (k == kume.size()) { yaz(); return; }
-  uret(k + 1);                    // k'ıncı öğeyi ALMA
+  uret(k + 1);                    // k'ıncı ögeyi ALMA
   secilen.push_back(kume[k]);
-  uret(k + 1);                    // k'ıncı öğeyi AL
+  uret(k + 1);                    // k'ıncı ögeyi AL
   secilen.pop_back();             // geri dön: bıraktığın gibi bırak
 }
 

@@ -1,10 +1,11 @@
-# Yayımlanan bölümlerin adresleri. yap.py bunları bölümler arası
+# Yayımlanan bölümlerin adresleri: önce claude.ai sayfası, sonra GitHub Pages
+# aynası (docs/ altında; kitaplik/ayna.py üretir). yap.py ilk adresi bölümler arası
 # bağlantılara yerleştirir. Yeniden yayımlarken adresler değişmez.
-00-kapak      https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63
-01-ilk-adimlar https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7
-02-veri       https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f
-03-zanaat     https://claude.ai/code/artifact/6a403229-5395-4258-adc4-496f5c79a5a1
-04-ozyineleme https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff
-05-cizgeler   https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc
-06-dp         https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb
-07-sozluk     https://claude.ai/artifact/MQsSVarxjXcUiczTtanFn5
+00-kapak        https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/00-kapak.html
+01-ilk-adimlar  https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/01-ilk-adimlar.html
+02-veri         https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/02-veri.html
+03-zanaat       https://claude.ai/code/artifact/6a403229-5395-4258-adc4-496f5c79a5a1  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/03-zanaat.html
+04-ozyineleme   https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/04-ozyineleme.html
+05-cizgeler     https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/05-cizgeler.html
+06-dp           https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb  https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/06-dp.html
+07-sozluk       https://claude.ai/artifact/MQsSVarxjXcUiczTtanFn5                     https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/07-sozluk.html

@@ -118,9 +118,20 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   (`inceleme.html`). Dosyalar yayımlanan sayfaların kaynağıdır
   (`<title>` ve `<style>` ile başlar; `<html>`/`<body>` sarmalayıcısı
   yoktur); `yap.py` tam HTML'i `cikti/`'ye yazar, yayım adresleri
-  `baglantilar.txt`'de. Dizine kavram eklerken alıştırma kimlikleri
+  `baglantilar.txt`'de (iki sütun: claude.ai sayfası ve GitHub Pages
+  aynası). `ayna.py` (`make -C kitaplik ayna`) dört eserin bölümlerini ve bu
+  sayfaları tam HTML olarak kök `docs/`'a yazar; bkz. aşağıda.
+  Dizine kavram eklerken alıştırma kimlikleri
   `alistirma*/bolumler/*.html` içindeki `section id` değerleriyle aynı
   olmalı; girdi biçimi `dizin-veri.js`'nin başında.
+- `docs/` — **GitHub Pages aynası**, `kitaplik/ayna.py`'nin ürettiği tam
+  HTML (dört eserin bölümleri + Kitaplık sayfaları), adres
+  `https://bulent2k2.github.io/cpp_ogreniyoruz/`. Üretilmiş dosyadır ama
+  depoya işlenir (Pages oradan sunar). **Elle düzenlemeyin**; `bolumler/`,
+  `kitaplik/*.html` ya da `baglantilar.txt` değişince `make -C kitaplik ayna`
+  çalıştırıp `docs/`'u da commit edin. Bölümler arası bağlantılar göreli,
+  resimler deponun ham GitHub adresinden; claude.ai adresi kalmamalı
+  (betik denetler).
 - `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve iki
   kitapçığın PDF/EPUB sürümleri ile kapak resimleri.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt
@@ -277,6 +288,10 @@ Küme komşular(const Çizge& c, Düğüm d) { ... }
 9. **Büyük ikili dosya eklemeyin.** pdf, mp4, png yalnızca gerçekten
    gerekliyse ve doğru dizine (`kitap/`, `notlar/`,
    `ileri/dersler/resim/`) konur.
-10. **Markdown düzenine uyun.** Başlıklar `#` yerine alt çizgi biçimiyle
+10. **Aynayı güncel tutun.** Kitapçık/defter bölümlerine, Kitaplık
+    sayfalarına ya da `baglantilar.txt`'ye dokunduysanız `make -C kitaplik
+    ayna` çalıştırın ve `docs/` altındaki değişiklikleri aynı commit'e
+    koyun. `docs/`'u elle düzenlemeyin.
+11. **Markdown düzenine uyun.** Başlıklar `#` yerine alt çizgi biçimiyle
     yazılır (`Başlık` altına `====` ya da `--`), satır sonu iki boşlukla
     kırılır, kod blokları ```` ```c++ ```` ile etiketlenir.

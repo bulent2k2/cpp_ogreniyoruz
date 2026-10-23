@@ -1,0 +1,485 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitaplik/kitaplik.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Keyifli Kitaplık</title>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kagit: #F6F7FA; --kart: #FFFFFF; --murekkep: #16203A; --soluk: #5B6478;
+  --izgara: #E3E8F2; --cizgi: #D5DCEA;
+  --mavi: #2A4BC4; --kirmizi: #BF3B2E; --yesil: #2E6F4E; --sari: #97701A; --petrol: #0E7490; --murdum: #6B3FA0;
+  --mavi-zemin: #E8EDFB; --petrol-zemin: #DFF2F7; --murdum-zemin: #EFE8F8; --yesil-zemin: #E3F1E9; --sari-zemin: #F6EFDC; --kirmizi-zemin: #F9E6E3;
+  --kod-zemin: #111A2B; --kod-yazi: #E6ECF7;
+  --golge: 0 1px 2px rgba(22,32,58,.05), 0 6px 20px rgba(22,32,58,.06);
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit: #0F1520; --kart: #161E2E; --murekkep: #E6ECF7; --soluk: #9AA7BF;
+    --izgara: #182233; --cizgi: #28344B;
+    --mavi: #86A4FF; --kirmizi: #F08A7E; --yesil: #7FD1A3; --sari: #E3C070; --petrol: #67C8DC; --murdum: #B79BE6;
+    --mavi-zemin: #1B2744; --petrol-zemin: #10343D; --murdum-zemin: #2A2140; --yesil-zemin: #15302A; --sari-zemin: #352C14; --kirmizi-zemin: #3A1D1A;
+    --kod-zemin: #0B111C; --kod-yazi: #E6ECF7;
+    --golge: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --kagit: #0F1520; --kart: #161E2E; --murekkep: #E6ECF7; --soluk: #9AA7BF;
+  --izgara: #182233; --cizgi: #28344B;
+  --mavi: #86A4FF; --kirmizi: #F08A7E; --yesil: #7FD1A3; --sari: #E3C070; --petrol: #67C8DC; --murdum: #B79BE6;
+  --mavi-zemin: #1B2744; --petrol-zemin: #10343D; --murdum-zemin: #2A2140; --yesil-zemin: #15302A; --sari-zemin: #352C14; --kirmizi-zemin: #3A1D1A;
+  --kod-zemin: #0B111C; --kod-yazi: #E6ECF7;
+  --golge: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--murekkep); font: 16px/1.65 var(--sans);
+  background-color: var(--kagit);
+  background-image: linear-gradient(var(--izgara) 1px, transparent 1px), linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+.ic { max-width: 66rem; margin-inline: auto; }
+a { color: var(--mavi); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+code { font: .88em var(--mono); background: var(--izgara); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+p, li { max-width: 72ch; }
+ul, ol { padding-left: 22px; }
+li { margin: 4px 0; }
+
+header.bas { padding-block: 48px 8px; }
+.ustyazi { font: 500 .8rem/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); margin: 0 0 8px; }
+h1 { font: 700 clamp(2.2rem, 5vw, 3.2rem)/1.1 var(--serif); margin: 0 0 14px; text-wrap: balance; }
+.ozet { max-width: 64ch; font-size: 1.12rem; margin: 0 0 18px; }
+.kitaplar { display: flex; flex-wrap: wrap; gap: 8px; }
+.kitaplar a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--cizgi); border-radius: 999px; background: var(--kart); text-decoration: none; font-size: .92rem; color: var(--murekkep); box-shadow: var(--golge); }
+.kitaplar a::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--renk, var(--soluk)); }
+.kitaplar a:hover { border-color: var(--renk, var(--mavi)); }
+.r-cb { --renk: var(--mavi); } .r-kb { --renk: var(--petrol); } .r-ca { --renk: var(--murdum); } .r-ka { --renk: var(--yesil); } .r-dn { --renk: var(--sari); } .r-ana { --renk: var(--kirmizi); } .r-dizin { --renk: var(--murekkep); }
+
+h2 { font: 700 1.7rem/1.25 var(--serif); margin: 48px 0 10px; padding-top: 12px; border-top: 2px solid var(--cizgi); text-wrap: balance; scroll-margin-top: 16px; }
+h2 .no { color: var(--soluk); font-weight: 400; margin-right: 8px; }
+h3 { font: 600 1.15rem/1.3 var(--serif); margin: 22px 0 8px; text-wrap: balance; }
+.giris { font-size: 1.04rem; }
+.ilkeler { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 14px 0; }
+.ilke { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; padding: 12px 16px; box-shadow: var(--golge); min-width: 0; }
+.ilke strong { display: block; font: 600 1rem var(--serif); margin-bottom: 4px; }
+.ilke p { margin: 0; font-size: .95rem; }
+
+.eserler { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin: 14px 0; }
+.eser { background: var(--kart); border: 1px solid var(--cizgi); border-top: 5px solid var(--renk); border-radius: 12px; padding: 14px 16px 16px; box-shadow: var(--golge); display: grid; gap: 8px; align-content: start; min-width: 0; }
+.eser .tur { font: 500 .74rem var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--renk); }
+.eser h3 { margin: 0; font-size: 1.18rem; }
+.eser .ad { font: italic 400 .95rem var(--sans); color: var(--soluk); }
+.eser p { margin: 0; font-size: .95rem; }
+.eser .bolumler { display: flex; flex-wrap: wrap; gap: 5px; }
+.eser .bolumler a { display: inline-block; border: 1px solid var(--cizgi); border-radius: 7px; padding: 2px 8px; font-size: .84rem; text-decoration: none; color: var(--murekkep); background: var(--zemin); }
+.eser .bolumler a:hover { border-color: var(--renk); }
+.eser .baglar { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .9rem; margin-top: 2px; }
+.e-cb { --renk: var(--mavi); --zemin: var(--mavi-zemin); } .e-kb { --renk: var(--petrol); --zemin: var(--petrol-zemin); } .e-ca { --renk: var(--murdum); --zemin: var(--murdum-zemin); } .e-ka { --renk: var(--yesil); --zemin: var(--yesil-zemin); } .e-dn { --renk: var(--sari); --zemin: var(--sari-zemin); } .e-ana { --renk: var(--kirmizi); --zemin: var(--kirmizi-zemin); }
+.arka { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; }
+.arka a { display: block; background: var(--kart); border: 1px solid var(--cizgi); border-left: 4px solid var(--renk, var(--sari)); border-radius: 10px; padding: 10px 14px; text-decoration: none; color: var(--murekkep); box-shadow: var(--golge); min-width: 0; }
+.arka a strong { display: block; font: 600 .98rem var(--serif); }
+.arka a span { font-size: .86rem; color: var(--soluk); }
+
+.tablo-kabi { overflow-x: auto; border: 1px solid var(--cizgi); border-radius: 12px; background: var(--kart); box-shadow: var(--golge); margin: 12px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: .9rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--cizgi); }
+th { font: 600 .76rem var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--soluk); background: var(--kagit); }
+td.b { font: 700 1rem var(--serif); white-space: nowrap; }
+td a.cip { display: inline-block; border: 1px solid var(--cizgi); border-radius: 7px; padding: 1px 7px; font-size: .82rem; text-decoration: none; color: var(--murekkep); background: var(--zemin, var(--kagit)); margin: 1px 0; }
+td a.cip small { color: var(--soluk); }
+.c-cb { --zemin: var(--mavi-zemin); } .c-kb { --zemin: var(--petrol-zemin); } .c-ca { --zemin: var(--murdum-zemin); } .c-ka { --zemin: var(--yesil-zemin); } .c-dn { --zemin: var(--sari-zemin); }
+
+.profiller { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 14px 0; }
+.profil { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; box-shadow: var(--golge); overflow: hidden; min-width: 0; display: grid; grid-template-rows: auto 1fr; }
+.profil header { background: var(--zemin, var(--mavi-zemin)); padding: 12px 16px; border-bottom: 1px solid var(--cizgi); }
+.profil header h3 { margin: 0; font-size: 1.12rem; }
+.profil header p { margin: 4px 0 0; font-size: .9rem; color: var(--soluk); }
+.profil .govde { padding: 10px 16px 14px; display: grid; gap: 8px; }
+.profil dl { margin: 0; display: grid; gap: 6px; }
+.profil dt { font: 500 .72rem var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--soluk); }
+.profil dd { margin: 0 0 4px; font-size: .95rem; }
+.profil ol { margin: 2px 0 0; padding-left: 20px; }
+.profil ol li { margin: 2px 0; font-size: .95rem; }
+.p-a { --zemin: var(--petrol-zemin); } .p-b { --zemin: var(--mavi-zemin); } .p-c { --zemin: var(--yesil-zemin); } .p-d { --zemin: var(--sari-zemin); } .p-e { --zemin: var(--kirmizi-zemin); } .p-f { --zemin: var(--murdum-zemin); }
+
+.basamaklar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 12px 0; }
+.basamak { background: var(--kart); border: 1px solid var(--cizgi); border-left: 4px solid var(--c); border-radius: 10px; padding: 10px 14px; box-shadow: var(--golge); min-width: 0; }
+.basamak strong { display: block; font: 600 1rem var(--serif); }
+.basamak small { color: var(--soluk); }
+.basamak p { margin: 4px 0 0; font-size: .92rem; }
+.uc { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0; }
+.kutu { background: var(--kart); border: 1px solid var(--cizgi); border-left: 4px solid var(--renk, var(--mavi)); border-radius: 10px; padding: 12px 16px; box-shadow: var(--golge); min-width: 0; }
+.kutu h3 { margin-top: 0; font-size: 1.02rem; }
+.kutu ul { margin: 6px 0 0; padding-left: 20px; }
+.kutu li { font-size: .95rem; }
+.k-mavi { --renk: var(--mavi); } .k-petrol { --renk: var(--petrol); } .k-sari { --renk: var(--sari); } .k-yesil { --renk: var(--yesil); } .k-kirmizi { --renk: var(--kirmizi); } .k-murdum { --renk: var(--murdum); }
+footer { margin-top: 48px; border-top: 1px solid var(--cizgi); padding-top: 14px; color: var(--soluk); font-size: .88rem; }
+footer p { margin: 6px 0; }
+@media (max-width: 480px) { .profiller { grid-template-columns: 1fr; } .eserler { grid-template-columns: 1fr; } }
+</style>
+
+<header class="bas">
+  <div class="ic">
+    <p class="ustyazi">Programlamaya ve algoritmalara giriş · dört kitap, bir dizin, bir yol haritası</p>
+    <h1>Keyifli Kitaplık</h1>
+    <p class="ozet">
+      İki kitapçık, iki alıştırma defteri, iki dönemlik ders notu ve bir kavram dizini: hepsi aynı yolun
+      parçaları. Bu sayfa hepsini bir arada gösterir, kim olduğunuza göre nereden başlayacağınızı söyler
+      ve keyfi kaçırmadan verimli çalışmanın kısa kurallarını verir.
+    </p>
+    <nav class="kitaplar" aria-label="Kitaplık">
+      <a class="r-cb" href="kitapcik/00-kapak.html">Kitapçık C++</a>
+      <a class="r-kb" href="kitapcik-koco/00-kapak.html">Kitapçık Koco</a>
+      <a class="r-ca" href="alistirma/00-hazirlik.html">Alıştırmalar C++</a>
+      <a class="r-ka" href="alistirma-koco/00-hazirlik.html">Alıştırmalar Koco</a>
+      <a class="r-dizin" href="dizin.html">Kavram dizini A–Z</a>
+      <a class="r-ana" href="inceleme.html">İnceleme ve öneriler</a>
+      <a class="r-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/icindekiler.md">Ders notları</a>
+    </nav>
+  </div>
+</header>
+
+<main class="ic">
+  <h2 id="neden"><span class="no">1</span>Neden yazıldı?</h2>
+  <p class="giris">
+    Bu kitaplık, bir Fen Lisesi öğrenci grubuna iki dönem boyunca verilen derslerden damıtıldı: 2024-25'te
+    C++ ile programlamaya giriş (23 ders), 2025-26'da algoritmalar ve rekabetçi programlama (30 ders).
+    Derste birlikte yazılan programlar, tahtada bulunan hatalar ve "neden böyle?" soruları önce ders notu
+    oldu, sonra altı bölümlük iki kitapçığa ve iki alıştırma defterine dönüştü.
+  </p>
+  <p>
+    Amaç iki sözcükle anlatılabilir: <strong>keyif ve verim.</strong> Keyif, her bölümün bir oyunla, bir
+    bulmacayla ya da gerçek bir yarışma sorusuyla açılmasından; verim, her kavramın çalışan bir programla ve
+    hemen ardından gelen alıştırmayla pekiştirilmesinden geliyor. Hedef okur, hiç programlamamış ya da az
+    programlamış bir lise öğrencisi; ama yol, çizge algoritmalarına ve dinamik programlamaya kadar gidiyor.
+  </p>
+  <div class="ilkeler">
+    <div class="ilke"><strong>Önce yazın, sonra okuyun</strong><p>Her kesimin kodu depoda, derlenmeye hazır. Kitapçık, çalıştırmadan geçilen bir metin değil, yanında klavye olan bir defter.</p></div>
+    <div class="ilke"><strong>Yanıt yerine ipucu</strong><p>Alıştırmaların çözümü yok. Her konunun başında o tekniği anlatan kitapçık kesimine ve ders notuna bağlantı var; gerisi sizin.</p></div>
+    <div class="ilke"><strong>İki dil, tek yol</strong><p>Aynı kavramlar C++ ve Koco'da bölüm bölüm paralel. Birinde öğrendiğiniz, ötekinde ikinci kez, başka kılıkta karşınıza çıkar ve yerleşir.</p></div>
+    <div class="ilke"><strong>Zanaat da ders</strong><p>Terminal, make, kendi kendini sınayan program, hata ayıklama ve hız ölçümü ayrı bir bölüm. Yarışmada da işte de asıl fark burada.</p></div>
+  </div>
+
+  <h2 id="neler"><span class="no">2</span>Neler sunuyor?</h2>
+  <div class="eserler">
+    <article class="eser e-cb">
+      <span class="tur">Kitapçık · C++</span>
+      <h3>Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</h3>
+      <p>Altı bölüm, 64 sayfa, 24 çalışan program. Değer ve türden başlayıp Dijkstra, Floyd–Warshall, Bellman–Ford ve dinamik programlamaya varan tek bir yol.</p>
+      <div class="bolumler">
+        <a href="kitapcik/00-kapak.html">Kapak · Tezgâhınızı kurun</a>
+        <a href="kitapcik/01-ilk-adimlar.html">I · İlk Adımlar</a>
+        <a href="kitapcik/02-veri.html">II · Veriyi Düzenlemek</a>
+        <a href="kitapcik/03-zanaat.html">III · Programcının Zanaatı</a>
+        <a href="kitapcik/04-ozyineleme.html">IV · Özyineleme ve Arama</a>
+        <a href="kitapcik/05-cizgeler.html">V · Çizgeler ve Gezintiler</a>
+        <a href="kitapcik/06-dp.html">VI · Dinamik Programlama</a>
+        <a href="kitapcik/07-sozluk.html">Küçük Sözlük</a>
+      </div>
+      <p><strong>Kime:</strong> C++ öğrenmek ve yarışma dünyasına kapı aralamak isteyen herkese; hiç programlamamış olmak engel değil, Hazırlık defteri var.</p>
+      <div class="baglar">
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf">PDF</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub">EPUB</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/kitapcik/kod">Örnek programlar</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik/README.md">README</a>
+      </div>
+    </article>
+
+    <article class="eser e-kb">
+      <span class="tur">Kitapçık · Koco</span>
+      <h3>Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş</h3>
+      <p>Altı bölüm, 46 sayfa. Aynı kavramlar, bu sefer Koco (Kojo) ortamında Scala ile, Türkçe komutlarla ve bir kaplumbağayla: çizerek, işlevsel düşünerek, fraktallarla ve Mandelbrot'la.</p>
+      <div class="bolumler">
+        <a href="kitapcik-koco/00-kapak.html">Kapak · Koco'yu kurun</a>
+        <a href="kitapcik-koco/01-ilk-adimlar.html">I · Kaplumbağayla İlk Adımlar</a>
+        <a href="kitapcik-koco/02-veri.html">II · Veriyi Düzenlemek</a>
+        <a href="kitapcik-koco/03-soyutlama.html">III · Soyutlama Sanatı</a>
+        <a href="kitapcik-koco/04-ozyineleme.html">IV · Özyineleme ve Fraktallar</a>
+        <a href="kitapcik-koco/05-cizgeler.html">V · Çizgeler ve Gezintiler</a>
+        <a href="kitapcik-koco/06-dp.html">VI · Dinamik Programlama</a>
+        <a href="kitapcik-koco/07-sozluk.html">Küçük Sözlük</a>
+      </div>
+      <p><strong>Kime:</strong> görerek öğrenmeyi sevenlere, daha küçük yaştakilere, kurulumla uğraşmadan tarayıcıda başlamak isteyenlere; C++ cildini okuyup aynı kavramı ikinci kılıkta görmek isteyenlere.</p>
+      <div class="baglar">
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf">PDF</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub">EPUB</a>
+        <a href="https://ikojo.fly.dev/">iKojo (tarayıcıda Koco)</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitapcik-koco/README.md">README</a>
+      </div>
+    </article>
+
+    <article class="eser e-ca">
+      <span class="tur">Alıştırma defteri · C++</span>
+      <h3>Keyifli Alıştırmalar</h3>
+      <p>Hazırlık ve altı bölüm: 48 konu, 208 alıştırma. Her konuda aynı dört basamak: Isınma, Alıştırma, Zorlayıcı, Keşif. Her alıştırmanın başlangıç dosyası, girdisi ve beklenen çıktısı depoda; <code>make test</code> ile kendinizi sınarsınız.</p>
+      <div class="bolumler">
+        <a href="alistirma/00-hazirlik.html">Hazırlık · Tarayıcıda</a>
+        <a href="alistirma/01-ilk-adimlar.html">I</a>
+        <a href="alistirma/02-veri.html">II</a>
+        <a href="alistirma/03-zanaat.html">III</a>
+        <a href="alistirma/04-ozyineleme.html">IV</a>
+        <a href="alistirma/05-cizgeler.html">V</a>
+        <a href="alistirma/06-dp.html">VI</a>
+      </div>
+      <p><strong>Kime:</strong> C++ kitapçığını okuyan herkese, her bölümün hemen ardından. Yanıt anahtarı yok; her konunun başında "Yanıt yerine" kutusu kitapçığa ve ders notuna gönderir.</p>
+      <div class="baglar">
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/alistirma/kod">Başlangıç dosyaları</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/README.md">README</a>
+      </div>
+    </article>
+
+    <article class="eser e-ka">
+      <span class="tur">Alıştırma defteri · Koco</span>
+      <h3>Keyifli Alıştırmalar · Koco cildi</h3>
+      <p>Hazırlık ve altı bölüm: 30 konu, 126 alıştırma; iKojo'da ya da masaüstü Koco'da. Çizen alıştırmalarda "Tuvalde ne görmelisiniz" tarifi, hesaplayanlarda beklenen çıktı.</p>
+      <div class="bolumler">
+        <a href="alistirma-koco/00-hazirlik.html">Hazırlık · iKojo'da</a>
+        <a href="alistirma-koco/01-ilk-adimlar.html">I</a>
+        <a href="alistirma-koco/02-veri.html">II</a>
+        <a href="alistirma-koco/03-soyutlama.html">III</a>
+        <a href="alistirma-koco/04-ozyineleme.html">IV</a>
+        <a href="alistirma-koco/05-cizgeler.html">V</a>
+        <a href="alistirma-koco/06-dp.html">VI</a>
+      </div>
+      <p><strong>Kime:</strong> Koco kitapçığını okuyanlara; C++ cildini bitirip aynı soruyu işlevsel üslupla bir daha çözmek isteyenlere.</p>
+      <div class="baglar">
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/alistirma-koco/kod">Başlangıç dosyaları</a>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/README.md">README</a>
+      </div>
+    </article>
+  </div>
+
+  <h3>Arka plan: kitapçıkların damıtıldığı kaynaklar</h3>
+  <div class="arka">
+    <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/icindekiler.md"><strong>Ders notları 2024-25</strong><span>C++'a giriş, 23 ders. Kitapçıkların I–III. bölümleri buradan.</span></a>
+    <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/ileri/dersler"><strong>Ders notları 2025-26</strong><span>Algoritmalar ve rekabetçi programlama, 30 ders. IV–VI. bölümlerin kaynağı.</span></a>
+    <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/mp4ler/gorsel-kayitlar.md"><strong>Görsel kayıtlar</strong><span>Derslerin video kayıtları; notla birlikte izleyin.</span></a>
+    <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/ReadMe.md"><strong>Küçük kitaplık</strong><span>Rekabetçi Programlama El Kitabı (Türkçe 314, İngilizce 296 sayfa) ve başka ücretsiz kitaplar.</span></a>
+    <a href="dizin.html"><strong>Kavram dizini</strong><span>300 kavram A'dan Z'ye, Türkçe–İngilizce; bölüm, alıştırma ve ders notu bağlantılı.</span></a>
+    <a href="inceleme.html"><strong>İnceleme ve öneriler</strong><span>Pedagog, editör ve bilgisayar uzmanı gözüyle eksikler, öneriler, düzeltme listesi.</span></a>
+  </div>
+
+  <h2 id="harita"><span class="no">3</span>Bölüm haritası</h2>
+  <p class="giris">Dört eser bölüm bölüm paralel. Bir satırı soldan sağa okuyun: önce kitapçık, sonra defter, takılınca ders notu.</p>
+  <div class="tablo-kabi">
+    <table>
+      <thead><tr><th>Bölüm</th><th>Konular</th><th>Kitapçık C++</th><th>Kitapçık Koco</th><th>Alıştırma C++</th><th>Alıştırma Koco</th><th>Ders notları</th></tr></thead>
+      <tbody>
+        <tr><td class="b">0 / H</td><td>Tezgâh, ilk program, hata iletisi okumak, ikili çalışma</td>
+          <td><a class="cip c-cb" href="kitapcik/00-kapak.html">Kapak</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/00-kapak.html">Kapak</a></td>
+          <td><a class="cip c-ca" href="alistirma/00-hazirlik.html">Hazırlık <small>3 konu · 12</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/00-hazirlik.html">Hazırlık <small>1 konu · 5</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">C++ ders 1-4</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">ders 5</a></td></tr>
+        <tr><td class="b">I</td><td>Değer, tür, taşma, karar, döngü, işlev, kapsam, ilk oyun, ikili arama</td>
+          <td><a class="cip c-cb" href="kitapcik/01-ilk-adimlar.html">İlk Adımlar</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/01-ilk-adimlar.html">Kaplumbağayla İlk Adımlar</a></td>
+          <td><a class="cip c-ca" href="alistirma/01-ilk-adimlar.html">I <small>6 konu · 29</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/01-ilk-adimlar.html">I <small>4 konu · 19</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders1-4.md">C++ ders 1-4</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders6.md">ders 6</a></td></tr>
+        <tr><td class="b">II</td><td>Dizi, vector, eşlem, küme, yığın ve kuyruk, kendi türünüz, kalıp, adres ve takma ad; Koco'da dizin, işle/ele/indirge, Belki</td>
+          <td><a class="cip c-cb" href="kitapcik/02-veri.html">Veriyi Düzenlemek</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/02-veri.html">Veriyi Düzenlemek</a></td>
+          <td><a class="cip c-ca" href="alistirma/02-veri.html">II <small>8 konu · 37</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/02-veri.html">II <small>5 konu · 21</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders7.md">C++ ders 7</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders8.md">8</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders9.md">9</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders10.md">10</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders11.md">11</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders12.md">12</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders21.md">21</a></td></tr>
+        <tr><td class="b">III</td><td>Terminal, derleyici, make, kendi kendini sınayan program, hata ayıklama, ölçme, DRY; Koco'da soyutlama ve yüksek mertebeli işlev</td>
+          <td><a class="cip c-cb" href="kitapcik/03-zanaat.html">Programcının Zanaatı</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/03-soyutlama.html">Soyutlama Sanatı</a></td>
+          <td><a class="cip c-ca" href="alistirma/03-zanaat.html">III <small>7 konu · 27</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/03-soyutlama.html">III <small>5 konu · 20</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders5.md">C++ ders 5</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders15.md">15</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders22.md">22</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/hiz-olcumu.md">Hız ölçümü</a></td></tr>
+        <tr><td class="b">IV</td><td>Özyineleme, Hanoi, bellekleme, altkümeler ve permütasyonlar, sekiz vezir, karmaşıklık, budama; Koco'da fraktallar</td>
+          <td><a class="cip c-cb" href="kitapcik/04-ozyineleme.html">Özyineleme ve Arama</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/04-ozyineleme.html">Özyineleme ve Fraktallar</a></td>
+          <td><a class="cip c-ca" href="alistirma/04-ozyineleme.html">IV <small>7 konu · 31</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/04-ozyineleme.html">IV <small>5 konu · 20</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders7.md">C++ ders 7</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20251205.md">Algoritma 9</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20251212.md">10</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20251219.md">11</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20251226.md">12</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260109.md">13</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260116.md">14</a></td></tr>
+        <tr><td class="b">V</td><td>Çizge, derinlemesine ve enlemesine gezi, bağlı parçalar, labirent, iki takım, çok kaynaklı gezi, Dijkstra, Floyd–Warshall, Bellman–Ford</td>
+          <td><a class="cip c-cb" href="kitapcik/05-cizgeler.html">Çizgeler ve Gezintiler</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/05-cizgeler.html">Çizgeler ve Gezintiler</a></td>
+          <td><a class="cip c-ca" href="alistirma/05-cizgeler.html">V <small>10 konu · 42</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/05-cizgeler.html">V <small>5 konu · 20</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders19.md">C++ ders 19</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/ders20.md">20</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260123.md">Algoritma 15</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/ileri/dersler">16–26</a></td></tr>
+        <tr><td class="b">VI</td><td>Dinamik programlama: çizelge, ızgara yolları, beş adımlık reçete, zar dizileri, bozuk para, kanıt; Koco'da karmaşık sayılar ve Mandelbrot</td>
+          <td><a class="cip c-cb" href="kitapcik/06-dp.html">Dinamik Programlama</a></td>
+          <td><a class="cip c-kb" href="kitapcik-koco/06-dp.html">Dinamik Programlama</a></td>
+          <td><a class="cip c-ca" href="alistirma/06-dp.html">VI <small>7 konu · 30</small></a></td>
+          <td><a class="cip c-ka" href="alistirma-koco/06-dp.html">VI <small>5 konu · 21</small></a></td>
+          <td><a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20251010-1128.md">Algoritma 1-8</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260424.md">27</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260501.md">28</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/d20260508.md">29</a> <a class="cip c-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/dersler/dp-sade.md">Sade DP</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="kim"><span class="no">4</span>Kim, nereden başlasın?</h2>
+  <p class="giris">
+    Altı okur tipi, altı yol. Kendinize en yakın olanı seçin; iki tipin arasındaysanız zorunu alın, Isınma
+    soruları sizi hizalar. Süreler haftada iki oturum, oturum başına 60–90 dakika varsayımıyla.
+  </p>
+  <div class="profiller">
+    <article class="profil p-a">
+      <header><h3>Hiç programlama yapmadım, görerek başlamak istiyorum</h3><p>Ortaokul sonu ya da lise başı; klavyeyle arası iyi, kodla tanışmamış.</p></header>
+      <div class="govde"><dl>
+        <dt>Yol</dt><dd><ol>
+          <li>Koco kapak: iKojo'yu tarayıcıda açın, kurulum yok.</li>
+          <li>Koco I ve Hazırlık + I defterleri: kaplumbağa, tanım, ilk oyun.</li>
+          <li>Koco II ve III: dizin, işle/ele/indirge, soyutlama. Burada "programlama" artık size ait.</li>
+          <li>C++ kapak ("Bugün, hiçbir şey yüklemeden") ve C++ I: kavramlar tanıdık gelecek, hızlı geçer.</li>
+          <li>C++ II ve III, sonra IV–VI'yı iki ciltten istediğinizle; Koco IV'ün fraktalları ödül niteliğinde.</li>
+        </ol></dd>
+        <dt>Atlayın</dt><dd>Hiçbir şeyi. Keşif soruları isteğe bağlı; Zorlayıcı'yı bir hafta bekletmek serbest.</dd>
+        <dt>Ritim</dt><dd>Bölüm başına üç hafta; her oturumda bir kesim + Isınma + bir Alıştırma. Yol yaklaşık sekiz ay.</dd>
+        <dt>Hedef</dt><dd>Altı ayda kendi küçük programınız (Koco'da çizen bir şey), yıl sonunda CSES'ten ilk on soru.</dd>
+      </dl></div>
+    </article>
+
+    <article class="profil p-b">
+      <header><h3>Hiç programlama yapmadım, doğrudan C++ istiyorum</h3><p>Hedefte yarışma var ya da okulda C++ işleniyor.</p></header>
+      <div class="govde"><dl>
+        <dt>Yol</dt><dd><ol>
+          <li>C++ kapak: önce tarayıcıda (Sololearn, OnlineGDB); "Bu ay, kendi bilgisayarınızda" kesimini III. bölüme saklayın.</li>
+          <li>Hazırlık defteri, üç konunun üçü de: özellikle H-2, hata iletisini okumak.</li>
+          <li>C++ I + defter I. Taşma kesimini iki kere okuyun.</li>
+          <li>C++ II'yi iki parçada: II.1–II.4 (kaplar), sonra II.5–II.7 (kendi türünüz, kalıp, adres).</li>
+          <li>C++ III'ü kurulumla birlikte; sonra IV, V, VI sırayla.</li>
+        </ol></dd>
+        <dt>Atlayın</dt><dd>İlk okumada II'de yapıcı/yıkıcı, friend ve enum; V'te Bellman–Ford. İkinci turda dönersiniz.</dd>
+        <dt>Ritim</dt><dd>Bölüm başına iki-üç hafta; her konuda Isınma ve bir Alıştırma zorunlu, Zorlayıcı hafta sonu.</dd>
+        <dt>Hedef</dt><dd>Yıl sonunda V. bölüm bitmiş, labirent ve Dijkstra yazılmış; VI yaza kalabilir.</dd>
+      </dl></div>
+    </article>
+
+    <article class="profil p-c">
+      <header><h3>Python ya da C biliyorum, C++ bilmiyorum</h3><p>Döngü ve işlev tanıdık; eşlem, kalıp, adres ve "zanaat" yeni.</p></header>
+      <div class="govde"><dl>
+        <dt>Yol</dt><dd><ol>
+          <li>C++ I'i bir oturumda okuyun; defterden yalnızca Z ve K sorularını yapın (taşma ve kapsam sizi şaşırtabilir).</li>
+          <li>C++ II'yi tam: eşlem, küme, öncelik sırası, kalıp, takma ad. Alıştırmaların hepsi.</li>
+          <li>C++ III'ü tam: make, altın dosya, gdb, chrono. Çoğu deneyimli kişide eksik olan bölüm budur.</li>
+          <li>IV–VI sırayla, her konuda A + Z.</li>
+          <li>İsteğe bağlı: III'ten sonra Koco II–IV "ikinci dil" olarak; işlevsel bakış VI'da işe yarar.</li>
+        </ol></dd>
+        <dt>Atlayın</dt><dd>Hazırlık defteri; I'in Isınma ve Alıştırmaları.</dd>
+        <dt>Ritim</dt><dd>Bölüm başına bir-iki hafta; üç ayda VI.</dd>
+        <dt>Hedef</dt><dd>CSES'in çizge ve DP bölümlerinden onar soru; El Kitabı'na geçiş.</dd>
+      </dl></div>
+    </article>
+
+    <article class="profil p-d">
+      <header><h3>Geçen yıl (2024-25) C++ derslerini aldım</h3><p>23 dersin notları elinizde; kitapçık onların derli toplu hâli.</p></header>
+      <div class="govde"><dl>
+        <dt>Yol</dt><dd><ol>
+          <li>I ve II'yi hızlı tekrar: yalnızca A ve Z soruları. Yeni olabilecekler: taşma ve <code>numeric_limits</code>, <code>set</code>, <code>priority_queue</code>, <code>const&amp;</code>.</li>
+          <li>III'ü tam: derste kısmen gördüğünüz make, altın dosya, gdb ve ölçme burada bütün.</li>
+          <li>IV–VI'yı ders notlarıyla yan yana; her konunun "Yanıt yerine" kutusu 2025-26 derslerine döner.</li>
+          <li>Her bölümün Keşif sorusundan birini mutlaka; proje gibi.</li>
+        </ol></dd>
+        <dt>Atlayın</dt><dd>Hazırlık; I.1–I.4'ün Isınmaları.</dd>
+        <dt>Ritim</dt><dd>Haftada bir konu ve üç soru; dört ayda VI.</dd>
+        <dt>Hedef</dt><dd>2025-26 algoritma derslerinin tamamını kitapçıkla pekiştirmek; CSES çizge ve DP setleri.</dd>
+      </dl></div>
+    </article>
+
+    <article class="profil p-e">
+      <header><h3>Bu yıl (2025-26) algoritma derslerini aldım, sınava hazırlanıyorum</h3><p>Derste dağınık gelen konuların toplu, kanıtlı hâlini istiyorsunuz.</p></header>
+      <div class="govde"><dl>
+        <dt>Yol</dt><dd><ol>
+          <li>IV → V → VI'yı kitapçıktan baştan okuyun; her konuda Z ve K.</li>
+          <li>V.7–V.9: "Hangisini seçmeli?" kesimi ve V-7-A2, V-9-Z1, V-9-K1 soruları; algoritma seçimi sınavın yarısıdır.</li>
+          <li>VI-5 (kanıt) ve VI-4-Z2 (aceleci ne zaman doğru?): yanlış DP'yi kâğıt üstünde yakalamak.</li>
+          <li>Sonra El Kitabı'nın çizge ve DP bölümleri; CSES Graph Algorithms ve Dynamic Programming; USACO bronz ve gümüş.</li>
+        </ol></dd>
+        <dt>Atlayın</dt><dd>I–III; yalnızca III.3 (test) ve III.5 (ölçme) kesimlerine göz atın.</dd>
+        <dt>Ritim</dt><dd>Haftada üç defter sorusu ve bir CSES; sınav öncesi Zorlayıcı soruları süre tutarak.</dd>
+        <dt>Hedef</dt><dd>Her konuda "hangi kalıp, neden" sorusuna bir cümleyle yanıt; Koco IV ve VI keyif için.</dd>
+      </dl></div>
+    </article>
+
+    <article class="profil p-f">
+      <header><h3>Öğretmenim ya da ağabey-ablayım; bir grubu çalıştıracağım</h3><p>Haftada bir oturum, dönem boyu.</p></header>
+      <div class="govde"><dl>
+        <dt>Dönem planı</dt><dd>Hazırlık 1 hafta · I 3 · II 4 · III 2 · IV 3 · V 4 · VI 3 = 20 hafta. İki ciltten birini ana, ötekini "aynı soruyu öteki dilde" ödevi olarak kullanın.</dd>
+        <dt>90 dakikalık oturum</dt><dd><ol>
+          <li>15 dk: kesimi birlikte okuyun, kitapçığın programını birlikte çalıştırın.</li>
+          <li>40 dk: ikili (sürücü–seyrüseferci, H-3) Isınma ve bir Alıştırma; <code>make test</code> ile kendileri denetlesin.</li>
+          <li>15 dk: iki ikili çözümünü anlatsın; farklı yollar tahtaya.</li>
+          <li>10 dk: Zorlayıcı'yı ev ödevi olarak açın; Keşif gönüllülere, dönem sonunda sunum.</li>
+        </ol></dd>
+        <dt>Araçlar</dt><dd>Kavram dizini konu planı için; defterin "Yanıt yerine" kutuları ödev yönergesi için; inceleme sayfasındaki "bölüm sınavı" ve "ipucu merdiveni" önerileri ölçme için.</dd>
+        <dt>Hedef</dt><dd>Dönem sonunda her öğrencinin bir Keşif projesi ve CSES'te çözülmüş on soru.</dd>
+      </dl></div>
+    </article>
+  </div>
+
+  <h2 id="nasil"><span class="no">5</span>Nasıl çalışmalı: keyif ve verim bir arada</h2>
+  <p class="giris">Her konuda aynı merdiven. Süreler öneridir; aşarsanız sorun yok, hiç çıkmadan geçerseniz sorun var.</p>
+  <div class="basamaklar">
+    <div class="basamak" style="--c: var(--yesil)"><strong>Isınma</strong><small>~10 dakika</small><p>Kitapçığın programını çalıştırın, bir satırını değiştirin. Amaç: elinizin kodda olması.</p></div>
+    <div class="basamak" style="--c: var(--mavi)"><strong>Alıştırma</strong><small>20–30 dakika</small><p>Aynı kalıpla yeni, küçük bir iş. Beklenen çıktı var; <code>make test</code> "Doğru!" diyene kadar.</p></div>
+    <div class="basamak" style="--c: var(--sari)"><strong>Zorlayıcı</strong><small>45–90 dakika</small><p>Kalıbı bükmeniz, iki kalıbı birleştirmeniz ya da bir hatayı bulmanız gerekir. Yarışma sorusu kıvamı.</p></div>
+    <div class="basamak" style="--c: var(--kirmizi)"><strong>Keşif</strong><small>açık uçlu</small><p>Beklenen çıktı yok. Bir şey inşa edin, arkadaşlarınıza gösterin. Dizin sizin.</p></div>
+  </div>
+  <div class="ilkeler">
+    <div class="ilke"><strong>Takılınca üç adım</strong><p>On beş dakika kendiniz. Sonra konunun başındaki "Yanıt yerine" ipucu. Sonra ders notu. Çözüme bakmak yok, çünkü çözüm yok.</p></div>
+    <div class="ilke"><strong>İkili çalışın</strong><p>Sürücü yazar, seyrüseferci düşünür; on dakikada bir değişin. Yalnız gidebilirsiniz, ama ikili daha hızlı.</p></div>
+    <div class="ilke"><strong>Hata iletisini okuyun</strong><p>İlk satır, dosya adı, satır numarası. Derleyici kızmıyor ama yanlışsa altın dosya farkını (<code>diff</code>) okuyun.</p></div>
+    <div class="ilke"><strong>Haftada üç soru</strong><p>Bölüm bitince de. Kitapçıkların son öğüdü bu: azar azar, hiç durmadan.</p></div>
+    <div class="ilke"><strong>Bir kavram, iki dil</strong><p>C++'ta bitirdiğiniz konuyu Koco defterinde bir daha yapın (ya da tersi). İkinci yazış, ilkinin kaç katı hızlıydı?</p></div>
+    <div class="ilke"><strong>Tahmin etmeyin, ölçün</strong><p>III. bölümün kuralı bütün bölümlerde geçerli: iki çözüm varsa süresini ölçün, <code>-O2</code> ile de.</p></div>
+    <div class="ilke"><strong>Yapay zekâ kuralı</strong><p>Isınma ve Alıştırmada sormayın. Zorlayıcı'da yalnızca ipucu isteyin, kod değil. Keşif'te serbest; ama her satırı açıklayabilmelisiniz.</p></div>
+    <div class="ilke"><strong>Günlük tutun</strong><p>Her bölümün sonunda tek satır: "En çok neye takıldım?" Sonraki bölüme başlamadan okuyun.</p></div>
+  </div>
+
+  <h2 id="tezgah"><span class="no">6</span>Tezgâh: bugün, bu ay, hesaplar</h2>
+  <div class="uc">
+    <div class="kutu k-mavi"><h3>Bugün, hiçbir şey yüklemeden</h3><ul>
+      <li>C++: <a href="https://www.sololearn.com/en/compiler-playground/cpp">Sololearn</a>, <a href="https://onlinegdb.com/">OnlineGDB</a>, <a href="https://coliru.stacked-crooked.com/">Coliru</a>. Hazırlık ve I. bölüm için yeter.</li>
+      <li>Koco: <a href="https://ikojo.fly.dev/">iKojo</a>. Koco kitapçığının tamamı ve defteri tarayıcıda çalışır.</li>
+    </ul></div>
+    <div class="kutu k-petrol"><h3>Bu ay, kendi bilgisayarınızda</h3><ul>
+      <li>Derleyici (<code>g++</code> ya da <code>clang++</code>), <code>make</code>, <code>git</code>. Windows'ta WSL ile Ubuntu açmak en kısa yol.</li>
+      <li>Masaüstü <a href="https://sites.google.com/view/koco-surum">Koco</a>; iKojo'dan bir adım ileri.</li>
+      <li>Depoyu indirin: <code>git clone https://github.com/bulent2k2/cpp_ogreniyoruz</code>; her alıştırma <code>alistirma/kod/&lt;kimlik&gt;/</code> altında.</li>
+    </ul></div>
+    <div class="kutu k-sari"><h3>Hesaplarınızı açın</h3><ul>
+      <li><a href="https://cses.fi/problemset/">CSES</a>: derslerin ve V–VI. bölümlerin ana soru kaynağı.</li>
+      <li><a href="https://projecteuler.net/">Project Euler</a>: I. bölümden itibaren.</li>
+      <li><a href="https://usaco.org/">USACO</a> ve <a href="https://atcoder.jp/">AtCoder</a>: yarışma havasını solumak için.</li>
+      <li><a href="https://github.com/">GitHub</a>: kodunuzu saklamak ve depoyu izlemek için.</li>
+    </ul></div>
+  </div>
+
+  <h2 id="kaynaklar"><span class="no">7</span>Sonrası için kaynaklar</h2>
+  <ul>
+    <li><a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/ReadMe.md">Küçük kitaplık</a>: Rekabetçi Programlama El Kitabı'nın Türkçesi ve İngilizcesi, Bilgisayar Olimpiyatlarına Hazırlık kitabı ve öğütler.</li>
+    <li><a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cheatsheets.md">Kopya sayfaları</a> ve <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/notlar/cizge-kurami.md">çizge kuramı notları</a>.</li>
+    <li><a href="https://en.cppreference.com">cppreference</a>: her C++ işlevinin resmî açıklaması; II. bölümden itibaren açık dursun.</li>
+    <li><a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/kocoya-davet.md">Koco'ya davet</a> ve <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/kojo/temel-bilgiler">Kojo temel bilgiler</a> çevirisi.</li>
+    <li><a href="dizin.html">Kavram dizini</a>: bir terimi duyduğunuzda nerede anlatıldığını ve hangi alıştırmada geçtiğini bulmak için.</li>
+  </ul>
+</main>
+
+<footer>
+  <div class="ic">
+    <p>Metinler <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr">CC BY-SA 4.0</a>, kod MIT; serbestçe basın, çoğaltın, dersinizde kullanın. Kaynak: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">cpp_ogreniyoruz</a> deposu.</p>
+    <p>Bu sayfa deponun <code>main</code> dalındaki b806630 sürümüne göre hazırlandı (Ekim 2026). Sayılar: 2 kitapçık, 2 defter, 78 konu, 334 alıştırma, 53 ders notu, 300 kavram.</p>
+  </div>
+</footer>
+
+</body>
+</html>

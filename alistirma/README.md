@@ -33,7 +33,8 @@ Bölüm III'ten itibaren bir terminal gerekir (kitapçığın kapağındaki *Tez
 Bölümler
 --
 
-Çevrimiçi sayfalar bağlantısı olan herkese açık; telefondan da okunur.
+Çevrimiçi sayfalar bağlantısı olan herkese açık; telefondan da okunur. Aynı
+sayfalar GitHub Pages aynasında: [bulent2k2.github.io/cpp_ogreniyoruz/alistirma/](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/00-hazirlik.html).
 
 | | Bölüm | Konu | Alıştırma |
 |---|---|---|---|

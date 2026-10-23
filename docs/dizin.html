@@ -1,0 +1,385 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitaplik/dizin.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Keyifli Kavram Dizini</title>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kagit: #F6F7FA; --kart: #FFFFFF; --murekkep: #16203A; --soluk: #5B6478;
+  --izgara: #E3E8F2; --cizgi: #D5DCEA; --vurgu: #FFF4C2;
+  --mavi: #2A4BC4; --kirmizi: #BF3B2E; --yesil: #2E6F4E; --sari: #97701A; --petrol: #0E7490; --murdum: #6B3FA0;
+  --mavi-zemin: #E8EDFB; --petrol-zemin: #DFF2F7; --murdum-zemin: #EFE8F8; --yesil-zemin: #E3F1E9; --sari-zemin: #F6EFDC; --kirmizi-zemin: #F9E6E3;
+  --golge: 0 1px 2px rgba(22,32,58,.05), 0 6px 20px rgba(22,32,58,.06);
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit: #0F1520; --kart: #161E2E; --murekkep: #E6ECF7; --soluk: #9AA7BF;
+    --izgara: #182233; --cizgi: #28344B; --vurgu: #3B3414;
+    --mavi: #86A4FF; --kirmizi: #F08A7E; --yesil: #7FD1A3; --sari: #E3C070; --petrol: #67C8DC; --murdum: #B79BE6;
+    --mavi-zemin: #1B2744; --petrol-zemin: #10343D; --murdum-zemin: #2A2140; --yesil-zemin: #15302A; --sari-zemin: #352C14; --kirmizi-zemin: #3A1D1A;
+    --golge: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --kagit: #0F1520; --kart: #161E2E; --murekkep: #E6ECF7; --soluk: #9AA7BF;
+  --izgara: #182233; --cizgi: #28344B; --vurgu: #3B3414;
+  --mavi: #86A4FF; --kirmizi: #F08A7E; --yesil: #7FD1A3; --sari: #E3C070; --petrol: #67C8DC; --murdum: #B79BE6;
+  --mavi-zemin: #1B2744; --petrol-zemin: #10343D; --murdum-zemin: #2A2140; --yesil-zemin: #15302A; --sari-zemin: #352C14; --kirmizi-zemin: #3A1D1A;
+  --golge: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--murekkep); font: 16px/1.6 var(--sans);
+  background-color: var(--kagit);
+  background-image: linear-gradient(var(--izgara) 1px, transparent 1px), linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 56px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--kagit); z-index: 10; }
+.ic { max-width: 68rem; margin-inline: auto; }
+a { color: var(--mavi); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+header.bas { padding-block: 40px 16px; }
+.ustyazi { font: 500 .8rem/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); margin: 0 0 8px; }
+h1 { font: 700 clamp(1.9rem, 4vw, 2.6rem)/1.15 var(--serif); margin: 0 0 12px; text-wrap: balance; }
+.ozet { max-width: 62ch; margin: 0 0 18px; font-size: 1.05rem; }
+.kitaplar { display: flex; flex-wrap: wrap; gap: 8px; }
+.kitaplar a { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border: 1px solid var(--cizgi); border-radius: 999px; background: var(--kart); text-decoration: none; font-size: .9rem; color: var(--murekkep); box-shadow: var(--golge); }
+.kitaplar a::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--renk, var(--soluk)); }
+.kitaplar a:hover { border-color: var(--renk, var(--mavi)); }
+.r-cb { --renk: var(--mavi); } .r-kb { --renk: var(--petrol); } .r-ca { --renk: var(--murdum); } .r-ka { --renk: var(--yesil); } .r-dn { --renk: var(--sari); } .r-ana { --renk: var(--kirmizi); }
+
+.denetim { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 14px; padding: 14px 16px; box-shadow: var(--golge); display: grid; gap: 12px; margin-block: 8px 14px; }
+.satir { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ara { flex: 1 1 240px; min-width: 0; display: flex; align-items: center; gap: 8px; border: 1px solid var(--cizgi); border-radius: 10px; padding: 8px 12px; background: var(--kagit); }
+.ara input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--murekkep); font: 1rem var(--sans); outline: none; }
+.ara svg { width: 18px; height: 18px; flex: none; color: var(--soluk); }
+.anahtar { display: inline-flex; border: 1px solid var(--cizgi); border-radius: 10px; overflow: hidden; background: var(--kagit); }
+.anahtar button { border: 0; background: transparent; color: var(--soluk); font: 500 .9rem var(--sans); padding: 8px 12px; cursor: pointer; }
+.anahtar button[aria-pressed="true"] { background: var(--murekkep); color: var(--kagit); }
+select { border: 1px solid var(--cizgi); border-radius: 10px; padding: 8px 10px; background: var(--kagit); color: var(--murekkep); font: .95rem var(--sans); }
+.etiket { font-size: .8rem; color: var(--soluk); letter-spacing: .04em; text-transform: uppercase; margin-right: 2px; }
+.kaynaklar { display: flex; flex-wrap: wrap; gap: 6px; }
+.kaynaklar button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--cizgi); border-radius: 999px; padding: 4px 10px; background: var(--kagit); color: var(--murekkep); font: .85rem var(--sans); cursor: pointer; }
+.kaynaklar button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--renk); }
+.kaynaklar button[aria-pressed="true"] { background: var(--renk); color: var(--kagit); border-color: var(--renk); }
+.kaynaklar button[aria-pressed="true"]::before { background: var(--kagit); }
+.b-cb { --renk: var(--mavi); } .b-kb { --renk: var(--petrol); } .b-ca { --renk: var(--murdum); } .b-ka { --renk: var(--yesil); } .b-dn { --renk: var(--sari); }
+
+.harfler { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--kagit); padding-block: 8px; margin-inline: -4px; display: flex; flex-wrap: wrap; gap: 3px; border-bottom: 1px solid var(--cizgi); }
+.harfler button { border: 0; background: transparent; color: var(--mavi); font: 500 .9rem var(--mono); min-width: 28px; padding: 3px 4px; border-radius: 6px; cursor: pointer; }
+.harfler button:hover { background: var(--mavi-zemin); }
+.harfler button[disabled] { color: var(--cizgi); cursor: default; background: transparent; }
+.sayac { color: var(--soluk); font-size: .9rem; margin: 12px 0 6px; }
+
+.harf-grubu { margin-top: 22px; }
+.harf-grubu h2 { font: 700 1.6rem/1 var(--serif); color: var(--soluk); margin: 0 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--cizgi); display: flex; align-items: baseline; gap: 10px; }
+.harf-grubu h2 small { font: 400 .8rem var(--sans); letter-spacing: .04em; }
+.liste { display: grid; gap: 10px; }
+.kavram { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; padding: 12px 14px 12px; box-shadow: var(--golge); display: grid; gap: 6px; min-width: 0; scroll-margin-top: 70px; }
+.kavram.vurgu { outline: 3px solid var(--sari); background: var(--vurgu); }
+.kavram h3 { margin: 0; font: 600 1.12rem/1.3 var(--serif); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.kavram h3 .ikinci { font: italic 400 .95rem var(--sans); color: var(--soluk); }
+.kavram .alan { margin-left: auto; font: 500 .72rem var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--soluk); border: 1px solid var(--cizgi); border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+.kavram p { margin: 0; color: var(--murekkep); max-width: 70ch; }
+.baglar { display: grid; gap: 4px; }
+.bag-satiri { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+.kaynak { font: 500 .72rem var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--renk); min-width: 112px; }
+.bag-satiri a { display: inline-block; border: 1px solid var(--cizgi); border-radius: 7px; padding: 2px 8px; font-size: .84rem; text-decoration: none; color: var(--murekkep); background: var(--zemin, var(--kagit)); max-width: 100%; }
+.bag-satiri a:hover { border-color: var(--renk); }
+.bag-satiri a.kimlik { font: 500 .82rem var(--mono); }
+.s-cb { --renk: var(--mavi); --zemin: var(--mavi-zemin); }
+.s-kb { --renk: var(--petrol); --zemin: var(--petrol-zemin); }
+.s-ca { --renk: var(--murdum); --zemin: var(--murdum-zemin); }
+.s-ka { --renk: var(--yesil); --zemin: var(--yesil-zemin); }
+.s-dn { --renk: var(--sari); --zemin: var(--sari-zemin); }
+.kimlik.d-I { border-left: 3px solid var(--yesil); }
+.kimlik.d-A { border-left: 3px solid var(--mavi); }
+.kimlik.d-Z { border-left: 3px solid var(--sari); }
+.kimlik.d-K { border-left: 3px solid var(--kirmizi); }
+.bos { padding: 40px 16px; text-align: center; color: var(--soluk); }
+
+footer { margin-top: 40px; border-top: 1px solid var(--cizgi); padding-top: 16px; color: var(--soluk); font-size: .88rem; }
+footer p { max-width: 70ch; margin: 6px 0; }
+.lejant { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 8px 0; }
+.lejant span { display: inline-flex; align-items: center; gap: 6px; }
+.lejant i { display: inline-block; width: 14px; height: 10px; border-left: 3px solid var(--c); border-radius: 2px; background: var(--kart); border-top: 1px solid var(--cizgi); border-bottom: 1px solid var(--cizgi); border-right: 1px solid var(--cizgi); }
+.harf-grubu { scroll-margin-top: 56px; }
+@media (max-width: 560px) {
+  .kaynak { min-width: 100%; }
+  .kavram .alan { display: none; }
+  .kavram, .harf-grubu { scroll-margin-top: 118px; }
+}
+</style>
+
+<header class="bas">
+  <div class="ic">
+    <p class="ustyazi">Keyifli Kitaplık · kavram dizini</p>
+    <h1>Keyifli Kavram Dizini</h1>
+    <p class="ozet">
+      İki kitapçık, iki alıştırma defteri ve ders notlarında geçen kavramlar A'dan Z'ye, Türkçe ve İngilizce
+      adlarıyla. Her kavramın altında onu anlatan kitapçık bölümü, onu çalıştıran alıştırmalar ve ilgili ders
+      notu var. Alıştırma bağlantıları doğrudan soruya, kitapçık bağlantıları kesimin başlığına iner.
+    </p>
+    <nav class="kitaplar" aria-label="Kitaplık">
+      <a class="r-ana" id="kitaplik-bag" href="index.html">Keyifli Kitaplık (genel sayfa)</a>
+      <a class="r-cb" href="kitapcik/00-kapak.html">Kitapçık C++</a>
+      <a class="r-kb" href="kitapcik-koco/00-kapak.html">Kitapçık Koco</a>
+      <a class="r-ca" href="alistirma/00-hazirlik.html">Alıştırmalar C++</a>
+      <a class="r-ka" href="alistirma-koco/00-hazirlik.html">Alıştırmalar Koco</a>
+      <a class="r-cb" href="kitapcik/07-sozluk.html">Sözlük C++</a>
+      <a class="r-kb" href="kitapcik-koco/07-sozluk.html">Sözlük Koco</a>
+      <a class="r-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/icindekiler.md">Ders notları</a>
+    </nav>
+  </div>
+</header>
+
+<main class="ic">
+  <section class="denetim" aria-label="Arama ve süzme">
+    <div class="satir">
+      <label class="ara">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="ara" type="search" placeholder="Kavram, İngilizcesi ya da açıklamasında ara: özyineleme, map, taşma…" autocomplete="off">
+      </label>
+      <div class="anahtar" role="group" aria-label="Sıralama dili">
+        <button id="dil-tr" aria-pressed="true">Türkçe A–Z</button>
+        <button id="dil-en" aria-pressed="false">English A–Z</button>
+      </div>
+      <select id="alan" aria-label="Alan">
+        <option value="">Bütün alanlar</option>
+      </select>
+    </div>
+    <div class="satir">
+      <span class="etiket">Şunu içerenler</span>
+      <div class="kaynaklar" id="kaynaklar">
+        <button class="b-cb" data-k="cb" aria-pressed="false">Kitapçık C++</button>
+        <button class="b-kb" data-k="kb" aria-pressed="false">Kitapçık Koco</button>
+        <button class="b-ca" data-k="ca" aria-pressed="false">Alıştırma C++</button>
+        <button class="b-ka" data-k="ka" aria-pressed="false">Alıştırma Koco</button>
+        <button class="b-dn" data-k="dn" aria-pressed="false">Ders notu</button>
+      </div>
+    </div>
+  </section>
+
+  <nav class="harfler" id="harfler" aria-label="Harfe git"></nav>
+  <p class="sayac" id="sayac"></p>
+  <div id="liste"></div>
+</main>
+
+<footer>
+  <div class="ic">
+    <div class="lejant" aria-label="Alıştırma basamakları">
+      <span><i style="--c: var(--yesil)"></i> I · Isınma</span>
+      <span><i style="--c: var(--mavi)"></i> A · Alıştırma</span>
+      <span><i style="--c: var(--sari)"></i> Z · Zorlayıcı</span>
+      <span><i style="--c: var(--kirmizi)"></i> K · Keşif</span>
+    </div>
+    <p>
+      Alıştırma kimlikleri <code>bölüm-konu-basamak</code> biçimindedir: <code>IV-3-Z1</code>, C++ defterinin
+      IV. bölümü, 3. konu, birinci Zorlayıcı soru; <code>K</code> ile başlayanlar Koco defterinindir.
+      Kitapçık bağlantıları kesimin başlığına iner; kesim adı yanında yazar. İki kitapçığın Küçük Sözlük sayfaları
+      yukarıdaki şeritte. Ders notları GitHub'daki depoya açılır.
+    </p>
+    <p>
+      Bu dizin, bir kavramın sayfasına doğrudan bağlantı verir: sayfanın adresine <code>#k-ozyineleme</code>
+      gibi bir ek koyun (Türkçe harfler sadeleşir: <code>#k-cizge</code>, <code>#k-eslem</code>).
+      Metin <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr">CC BY-SA 4.0</a>,
+      kaynak <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">cpp_ogreniyoruz</a> deposunda.
+    </p>
+  </div>
+</footer>
+
+<script src="dizin-veri.js"></script>
+<script>
+(function () {
+  const D = window.DIZIN;
+  const KAY = {
+    cb: { ad: "Kitapçık C++", cls: "s-cb", kitap: "Keyifli Bir Başlangıç" },
+    kb: { ad: "Kitapçık Koco", cls: "s-kb", kitap: "Keyifli ve İşlevsel Bir Giriş" },
+    ca: { ad: "Alıştırma C++", cls: "s-ca", kitap: "Keyifli Alıştırmalar" },
+    ka: { ad: "Alıştırma Koco", cls: "s-ka", kitap: "Keyifli Alıştırmalar · Koco cildi" },
+    dn: { ad: "Ders notu", cls: "s-dn", kitap: "Ders deposu" }
+  };
+  const BASAMAK = { I: "Isınma", A: "Alıştırma", Z: "Zorlayıcı", K: "Keşif" };
+  const TR_ABC = "A B C Ç D E F G Ğ H I İ J K L M N O Ö P R S Ş T U Ü V Y Z".split(" ");
+  const EN_ABC = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" ");
+  const TRMAP = { "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u", "Ç": "c", "Ğ": "g", "İ": "i", "I": "i", "Ö": "o", "Ş": "s", "Ü": "u" };
+  const sade = s => s.replace(/[çğıöşüÇĞİIÖŞÜ]/g, c => TRMAP[c]).toLowerCase();
+  const slug = s => sade(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+  const girdiler = D.girdiler.map(g => ({
+    tr: g[0], en: g[1], aciklama: g[2], alan: g[3], cb: g[4], kb: g[5], ca: g[6], ka: g[7], dn: g[8],
+    id: "k-" + slug(g[0]),
+    ara: (g[0] + " " + g[1] + " " + g[2]).toLocaleLowerCase("tr"),
+    araSade: sade(g[0] + " " + g[1] + " " + g[2])
+  }));
+  const gorulen = new Set();
+  for (const g of girdiler) { let id = g.id, n = 2; while (gorulen.has(id)) id = g.id + "-" + n++; g.id = id; gorulen.add(id); }
+
+  const durum = { q: "", dil: "tr", alan: "", kaynak: new Set() };
+  try { const d = localStorage.getItem("dizin-dil"); if (d === "en" || d === "tr") durum.dil = d; } catch (e) {}
+
+  const $ = s => document.querySelector(s);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  const alanSec = $("#alan");
+  for (const [k, ad] of Object.entries(D.alan)) { const o = el("option", null, ad); o.value = k; alanSec.appendChild(o); }
+
+  function harf(g) {
+    const s = (durum.dil === "tr" ? g.tr : g.en).trim();
+    const c = s[0];
+    return durum.dil === "tr" ? c.toLocaleUpperCase("tr") : c.toLocaleUpperCase("en");
+  }
+  function kars(a, b) {
+    return durum.dil === "tr" ? a.tr.localeCompare(b.tr, "tr") : a.en.localeCompare(b.en, "en");
+  }
+  function uyar(g) {
+    if (durum.alan && g.alan !== durum.alan) return false;
+    if (durum.kaynak.size) { let var_ = false; for (const k of durum.kaynak) if (g[k].length) { var_ = true; break; } if (!var_) return false; }
+    if (durum.q) {
+      const q = durum.q.toLocaleLowerCase("tr"), qs = sade(durum.q);
+      if (!g.ara.includes(q) && !g.araSade.includes(qs)) return false;
+    }
+    return true;
+  }
+
+  function kitapBag(ref, kaynak) {
+    const [bol, kesim, kimlik] = ref.split("|");
+    const url = (kaynak === "cb" ? D.CB : D.KB)[bol];
+    const a = el("a");
+    a.href = kimlik ? url + "#" + kimlik : url;   // kimlik varsa kesimin başlığına iner
+    a.target = "_blank"; a.rel = "noopener";
+    const bolAd = bol === "0" ? "Kapak" : bol === "S" ? "Sözlük" : "Bölüm " + bol;
+    a.textContent = kesim ? bolAd + " · " + kesim : bolAd;
+    a.title = KAY[kaynak].kitap + ", " + bolAd.toLowerCase() + (kimlik ? " · kesimin başlığına iner" : "");
+    return a;
+  }
+  function alistirmaBag(id, kaynak) {
+    const bol = id.split("-")[0];
+    const basamak = id.split("-")[2][0];
+    const url = (kaynak === "ca" ? D.CA : D.KA)[bol];
+    const a = el("a", "kimlik d-" + basamak, id);
+    a.href = url + "#" + id;
+    a.target = "_blank"; a.rel = "noopener";
+    a.title = KAY[kaynak].kitap + " · " + (BASAMAK[basamak] || "");
+    return a;
+  }
+  function dersBag(ref) {
+    const [yol, etiket] = ref.split("|");
+    const a = el("a", null, etiket || yol);
+    a.href = (yol.endsWith("/") ? D.GHT : D.GH) + encodeURI(yol);
+    a.target = "_blank"; a.rel = "noopener";
+    a.title = yol;
+    return a;
+  }
+
+  function kart(g) {
+    const art = el("article", "kavram");
+    art.id = g.id;
+    const h = el("h3");
+    const birinci = el("span", "birinci", durum.dil === "tr" ? g.tr : g.en);
+    const ikinci = el("span", "ikinci", durum.dil === "tr" ? g.en : g.tr);
+    h.append(birinci, ikinci);
+    const alan = el("span", "alan", D.alan[g.alan]);
+    h.appendChild(alan);
+    art.appendChild(h);
+    art.appendChild(el("p", null, g.aciklama));
+    const baglar = el("div", "baglar");
+    for (const k of ["cb", "kb", "ca", "ka", "dn"]) {
+      if (!g[k].length) continue;
+      const satir = el("div", "bag-satiri " + KAY[k].cls);
+      satir.appendChild(el("span", "kaynak", KAY[k].ad));
+      for (const r of g[k]) {
+        satir.appendChild(k === "cb" || k === "kb" ? kitapBag(r, k) : k === "dn" ? dersBag(r) : alistirmaBag(r, k));
+      }
+      baglar.appendChild(satir);
+    }
+    art.appendChild(baglar);
+    return art;
+  }
+
+  function ciz() {
+    const liste = $("#liste");
+    liste.textContent = "";
+    const secili = girdiler.filter(uyar).sort(kars);
+    const gruplar = new Map();
+    for (const g of secili) { const h = harf(g); if (!gruplar.has(h)) gruplar.set(h, []); gruplar.get(h).push(g); }
+    const abc = durum.dil === "tr" ? TR_ABC : EN_ABC;
+    const nav = $("#harfler");
+    nav.textContent = "";
+    for (const h of abc) {
+      const b = el("button", null, h);
+      if (!gruplar.has(h)) b.disabled = true;
+      else b.addEventListener("click", () => { const hedef = document.getElementById("harf-" + h); if (hedef) hedef.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      nav.appendChild(b);
+    }
+    for (const h of [...gruplar.keys()]) if (!abc.includes(h)) { const b = el("button", null, h); b.addEventListener("click", () => document.getElementById("harf-" + h).scrollIntoView({ behavior: "smooth" })); nav.appendChild(b); }
+    const sirali = [...gruplar.keys()].sort((a, b) => { const ia = abc.indexOf(a), ib = abc.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
+    for (const h of sirali) {
+      const grup = el("section", "harf-grubu");
+      grup.id = "harf-" + h;
+      const baslik = el("h2", null, h);
+      baslik.appendChild(el("small", null, gruplar.get(h).length + " kavram"));
+      grup.appendChild(baslik);
+      const kutu = el("div", "liste");
+      for (const g of gruplar.get(h)) kutu.appendChild(kart(g));
+      grup.appendChild(kutu);
+      liste.appendChild(grup);
+    }
+    if (!secili.length) liste.appendChild(el("p", "bos", "Bu süzgeçlerle eşleşen kavram yok. Aramayı kısaltın ya da süzgeçleri kaldırın."));
+    $("#sayac").textContent = secili.length === girdiler.length
+      ? girdiler.length + " kavram, " + gruplar.size + " harf"
+      : girdiler.length + " kavramdan " + secili.length + "'i gösteriliyor";
+  }
+
+  $("#ara").addEventListener("input", e => { durum.q = e.target.value.trim(); ciz(); });
+  $("#alan").addEventListener("change", e => { durum.alan = e.target.value; ciz(); });
+  function dilAyarla(d) {
+    durum.dil = d;
+    $("#dil-tr").setAttribute("aria-pressed", d === "tr");
+    $("#dil-en").setAttribute("aria-pressed", d === "en");
+    try { localStorage.setItem("dizin-dil", d); } catch (e) {}
+    ciz();
+  }
+  $("#dil-tr").addEventListener("click", () => dilAyarla("tr"));
+  $("#dil-en").addEventListener("click", () => dilAyarla("en"));
+  for (const b of document.querySelectorAll("#kaynaklar button")) {
+    b.addEventListener("click", () => {
+      const k = b.dataset.k;
+      if (durum.kaynak.has(k)) durum.kaynak.delete(k); else durum.kaynak.add(k);
+      b.setAttribute("aria-pressed", durum.kaynak.has(k));
+      ciz();
+    });
+  }
+
+  $("#dil-tr").setAttribute("aria-pressed", durum.dil === "tr");
+  $("#dil-en").setAttribute("aria-pressed", durum.dil === "en");
+  ciz();
+
+  // Derin bağlantı: #k-ozyineleme gibi bir ek varsa o kavrama in.
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h) {
+    const hedef = document.getElementById(h);
+    if (hedef) { hedef.classList.add("vurgu"); setTimeout(() => hedef.scrollIntoView({ block: "center" }), 60); }
+  }
+})();
+</script>
+
+</body>
+</html>

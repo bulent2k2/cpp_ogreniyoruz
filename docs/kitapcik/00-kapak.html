@@ -1,0 +1,1356 @@
+<!doctype html>
+<!-- Üretilmiş dosya (kitaplik/ayna.py). Kaynak: kitapcik/bolumler/00-kapak.html -->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyifli Bir Başlangıç</title>
+<meta name="description" content="Programlamaya ve algoritmalara giriş kitapçığının kapağı, çalışma yöntemi ve içindekiler.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* ===========================================================
+   Programlamaya ve Algoritmalara Keyifli Bir Başlangıç
+   Ortak biçem dosyası.
+   Görsel fikir: aydınlıkta kareli defter, karanlıkta karatahta.
+   =========================================================== */
+
+:root {
+  /* kareli defter */
+  --kagit:      #F6F7FA;
+  --kagit-2:    #FFFFFF;
+  --kagit-3:    #EDF0F7;
+  --izgara:     #DFE5F1;
+  --izgara-2:   #CBD6E9;
+  --cizgi:      #D5DCEA;
+  --cizgi-2:    #BDC7DB;
+
+  /* mürekkep */
+  --murekkep:   #16203A;
+  --murekkep-2: #52607C;
+  --murekkep-3: #8792AA;
+
+  /* kalemler */
+  --mavi:       #2A4BC4;
+  --mavi-yumusak:#E7ECFB;
+  --kirmizi:    #BF3B2E;
+  --kirmizi-yumusak:#FBEAE7;
+  --yesil:      #2E6F4E;
+  --yesil-yumusak:#E5F2EA;
+  --sari:       #97701A;
+  --sari-yumusak:#F8F0DC;
+
+  /* terminal: iki temada da koyu */
+  --kod-zemin:  #111A2B;
+  --kod-zemin-2:#0B1220;
+  --kod-yazi:   #DCE5F4;
+  --kod-soluk:  #7A8AA8;
+  --kod-anahtar:#8FB0FF;
+  --kod-yazi2:  #9BD8A8;
+  --kod-sayi:   #E8B98A;
+  --kod-tur:    #E5C3F0;
+
+  --olcu: 68ch;
+  --rayg: 9.5rem;
+
+  --serif: "Bitter", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kagit:      #0F1520;
+    --kagit-2:    #161F2E;
+    --kagit-3:    #131B29;
+    --izgara:     #1B2536;
+    --izgara-2:   #232F45;
+    --cizgi:      #24304559;
+    --cizgi-2:    #2E3B52;
+
+    --murekkep:   #E6ECF7;
+    --murekkep-2: #9CA9C2;
+    --murekkep-3: #6E7B95;
+
+    --mavi:       #86A4FF;
+    --mavi-yumusak:#18213A;
+    --kirmizi:    #F08272;
+    --kirmizi-yumusak:#2A1A19;
+    --yesil:      #74C494;
+    --yesil-yumusak:#14241C;
+    --sari:       #DCB264;
+    --sari-yumusak:#241E12;
+
+    --kod-zemin:  #0A0F19;
+    --kod-zemin-2:#070B13;
+  }
+}
+
+:root[data-theme="dark"] {
+  --kagit:      #0F1520;
+  --kagit-2:    #161F2E;
+  --kagit-3:    #131B29;
+  --izgara:     #1B2536;
+  --izgara-2:   #232F45;
+  --cizgi:      #24304559;
+  --cizgi-2:    #2E3B52;
+
+  --murekkep:   #E6ECF7;
+  --murekkep-2: #9CA9C2;
+  --murekkep-3: #6E7B95;
+
+  --mavi:       #86A4FF;
+  --mavi-yumusak:#18213A;
+  --kirmizi:    #F08272;
+  --kirmizi-yumusak:#2A1A19;
+  --yesil:      #74C494;
+  --yesil-yumusak:#14241C;
+  --sari:       #DCB264;
+  --sari-yumusak:#241E12;
+
+  --kod-zemin:  #0A0F19;
+  --kod-zemin-2:#070B13;
+}
+
+/* ---------- iskelet ---------- */
+
+body {
+  margin: 0;
+  background-color: var(--kagit);
+  background-image:
+    linear-gradient(var(--izgara) 1px, transparent 1px),
+    linear-gradient(90deg, var(--izgara) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  color: var(--murekkep);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sayfa {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 6rem;
+}
+
+/* iki sütun: sol ray + okuma sütunu */
+.blok {
+  display: grid;
+  grid-template-columns: var(--rayg) minmax(0, var(--olcu));
+  gap: 0 2.25rem;
+  align-items: start;
+}
+.blok > .ray {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  padding-top: 0.55rem;
+  text-align: right;
+  line-height: 1.5;
+}
+.blok > .govde { grid-column: 2; min-width: 0; }
+
+@media (max-width: 60rem) {
+  .blok { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .blok > .ray { grid-column: 1; text-align: left; padding-top: 0; margin-bottom: .35rem; }
+  .blok > .govde { grid-column: 1; }
+}
+
+/* ---------- tipografi ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--murekkep);
+  text-wrap: balance;
+  line-height: 1.18;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.15rem);
+  letter-spacing: -0.015em;
+  margin: 3.75rem 0 0.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--murekkep);
+}
+h3 {
+  font-size: 1.3rem;
+  margin: 2.5rem 0 0.35rem;
+  letter-spacing: -0.008em;
+}
+h4 {
+  font-size: 1.03rem;
+  font-family: var(--sans);
+  font-weight: 650;
+  margin: 1.9rem 0 0.3rem;
+  color: var(--murekkep);
+}
+
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--mavi);
+  text-decoration-color: color-mix(in srgb, var(--mavi) 40%, transparent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--mavi); }
+a:focus-visible {
+  outline: 2px solid var(--mavi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 650; }
+em { font-style: italic; color: var(--murekkep-2); }
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.35rem; }
+li { margin-bottom: 0.45rem; }
+li > ul, li > ol { margin-top: 0.45rem; margin-bottom: 0.2rem; }
+
+ol.adimlar { list-style: none; counter-reset: adim; padding-left: 0; }
+ol.adimlar > li {
+  counter-increment: adim;
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.9rem;
+}
+ol.adimlar > li::before {
+  content: counter(adim);
+  position: absolute; left: 0; top: 0.1rem;
+  width: 1.7rem; height: 1.7rem;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 50%;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+}
+
+/* satır içi kod */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--kagit-3);
+  border: 1px solid var(--cizgi);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  white-space: nowrap;
+}
+/* dar ekranda uzun satır içi kod sayfayı yana taşırmasın */
+@media (max-width: 40rem) {
+  p code, li code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ---------- terminal kartı ---------- */
+
+.kod {
+  margin: 1.5rem 0 1.6rem;
+  background: var(--kod-zemin);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #1E2A40;
+  box-shadow: 0 1px 2px rgba(10, 20, 40, .18), 0 8px 22px -14px rgba(10, 20, 40, .5);
+}
+/* kod blokları okuma sütununu biraz taşsın */
+@media (min-width: 74rem) {
+  .kod { margin-left: -2.5rem; margin-right: -4.5rem; }
+  .kod.dar { margin-left: 0; margin-right: 0; }
+}
+.kod > figcaption {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--kod-zemin-2);
+  border-bottom: 1px solid #1E2A40;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  color: var(--kod-soluk);
+}
+.kod > figcaption .nokta {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: #35435E; flex: none;
+}
+.kod > figcaption .ad { color: #A9B8D4; }
+.kod > figcaption .etiket { margin-left: auto; text-transform: uppercase; font-size: 0.66rem; }
+
+/* "Hepsini seç" düğmesi: kopyala.js ekliyor, baskıda gizli (aşağıda).
+   .etiket'ten sonra gelirse sabit boşluk, tek başınaysa sağa yapışsın. */
+.kod > figcaption .kopyala {
+  margin-left: auto;
+  flex: none;
+  font-family: inherit;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A9B8D4;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid #35435E;
+  border-radius: 3px;
+  padding: 0.22em 0.6em;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+.kod > figcaption .etiket + .kopyala { margin-left: 0.75rem; }
+.kod > figcaption .kopyala:hover {
+  color: #E9EEF9;
+  border-color: #5A6E93;
+  background: rgba(255, 255, 255, .1);
+}
+.kod > figcaption .kopyala:focus-visible {
+  outline: 2px solid var(--kod-anahtar);
+  outline-offset: 2px;
+}
+.kod > figcaption .kopyala[data-durum="tamam"] {
+  color: var(--kod-yazi2);
+  border-color: var(--kod-yazi2);
+}
+.kod pre {
+  margin: 0;
+  padding: 0.95rem 1.1rem 1.05rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.815rem;
+  line-height: 1.62;
+  color: var(--kod-yazi);
+  tab-size: 4;
+}
+.kod pre code {
+  background: none; border: none; padding: 0;
+  font-size: inherit; white-space: pre;
+}
+.kod .y  { color: var(--kod-soluk); font-style: italic; } /* yorum */
+.kod .a  { color: var(--kod-anahtar); }                   /* anahtar sözcük */
+.kod .s  { color: var(--kod-yazi2); }                     /* yazı sabiti */
+.kod .n  { color: var(--kod-sayi); }                      /* sayı */
+.kod .t  { color: var(--kod-tur); }                       /* tür */
+.kod .v  { color: #F2A5A5; font-weight: 600; }            /* vurgu */
+
+/* ---------- kutular ---------- */
+
+.kutu {
+  margin: 1.6rem 0;
+  padding: 1rem 1.15rem 1.05rem;
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-left: 3px solid var(--murekkep-3);
+  border-radius: 0 5px 5px 0;
+}
+.kutu > .basi {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--murekkep-2);
+}
+.kutu p:last-child, .kutu ul:last-child, .kutu ol:last-child { margin-bottom: 0; }
+
+.kutu.deneyin      { border-left-color: var(--mavi);    background: var(--mavi-yumusak); }
+.kutu.deneyin > .basi { color: var(--mavi); }
+.kutu.dikkat       { border-left-color: var(--kirmizi); background: var(--kirmizi-yumusak); }
+.kutu.dikkat > .basi  { color: var(--kirmizi); }
+.kutu.takim        { border-left-color: var(--yesil);   background: var(--yesil-yumusak); }
+.kutu.takim > .basi   { color: var(--yesil); }
+.kutu.puf          { border-left-color: var(--sari);    background: var(--sari-yumusak); }
+.kutu.puf > .basi     { color: var(--sari); }
+
+/* alıştırma kutusu: defterin kenarına iliştirilmiş gibi */
+.alistirmalar {
+  margin: 2.5rem 0 1rem;
+  border: 1.5px solid var(--murekkep);
+  border-radius: 6px;
+  background: var(--kagit-2);
+  overflow: hidden;
+}
+.alistirmalar > h4 {
+  margin: 0;
+  padding: 0.65rem 1.15rem;
+  background: var(--murekkep);
+  color: var(--kagit);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alistirmalar > ol { margin: 0; padding: 1rem 1.15rem 1.1rem 2.6rem; }
+.alistirmalar > ol > li { margin-bottom: 0.75rem; }
+.alistirmalar > ol > li:last-child { margin-bottom: 0; }
+.alistirmalar .zor {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
+  color: var(--kirmizi); text-transform: uppercase; margin-left: 0.35rem;
+  vertical-align: 0.08em;
+}
+
+/* ---------- tablo ---------- */
+
+.tablo-sar { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  background: var(--kagit-2);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--cizgi);
+  vertical-align: top;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--murekkep-2);
+  border-bottom: 1.5px solid var(--murekkep-3);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td code { white-space: nowrap; }
+.sayi { font-variant-numeric: tabular-nums; }
+
+/* ---------- başlık bölgesi ---------- */
+
+.ust {
+  padding: 3.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--cizgi-2);
+  margin-bottom: 0.5rem;
+  /* başlık, gövde sütunuyla aynı eksende dursun */
+  margin-left: calc(var(--rayg) + 2.25rem);
+  max-width: var(--olcu);
+}
+@media (max-width: 60rem) {
+  .ust { margin-left: 0; max-width: none; }
+}
+.ust .seri {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--murekkep-3);
+  margin-bottom: 1rem;
+}
+.ust .no {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kirmizi);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.ust h1 {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 3.4rem);
+  letter-spacing: -0.028em;
+  margin-bottom: 0.75rem;
+}
+.ust .ozet {
+  font-size: 1.13rem;
+  color: var(--murekkep-2);
+  max-width: 46rem;
+  line-height: 1.62;
+}
+
+/* içindekiler şeridi */
+.icerik-seridi {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+.icerik-seridi li a {
+  display: inline-block;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 3px;
+  color: var(--murekkep-2);
+  text-decoration: none;
+  background: var(--kagit-2);
+}
+.icerik-seridi li a:hover { border-color: var(--mavi); color: var(--mavi); }
+
+/* ---------- alt gezinme ---------- */
+
+.gezinme {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cizgi-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.gezinme a { text-decoration: none; }
+.gezinme .yon { display: block; color: var(--murekkep-3); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gezinme .sag { text-align: right; }
+
+.dipnot {
+  margin-top: 2.5rem;
+  font-size: 0.84rem;
+  color: var(--murekkep-3);
+  line-height: 1.6;
+}
+
+/* ---------- küçük parçalar ---------- */
+
+.terim { font-style: italic; color: var(--murekkep-2); }
+
+.cikti-satiri {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--kod-yazi2);
+}
+
+hr.ayrac {
+  border: none;
+  height: 1px;
+  background: var(--cizgi-2);
+  margin: 3rem 0;
+}
+
+.kart-izgara {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 1.6rem 0;
+}
+.kart {
+  background: var(--kagit-2);
+  border: 1px solid var(--cizgi);
+  border-radius: 6px;
+  padding: 0.95rem 1.05rem 1rem;
+}
+.kart h4 { margin: 0 0 0.35rem; font-size: 0.98rem; }
+.kart p { font-size: 0.92rem; color: var(--murekkep-2); margin: 0; }
+
+@media (min-width: 74rem) {
+  .kart-izgara { margin-right: -4.5rem; }
+}
+
+/* ---------- kapak görseli ---------- */
+/* Yalnızca ekranda. PDF'in ilk sayfası ve EPUB'ın kapak sayfası zaten bu resim. */
+
+.kapak-gorseli {
+  margin: 2rem 0 0;
+  max-width: 21rem;
+}
+.kapak-gorseli img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 6px;
+  box-shadow: 0 18px 38px -22px rgba(16, 28, 60, .55);
+}
+.kapak-gorseli figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+@media (min-width: 60rem) {
+  .kapak-gorseli { margin-left: calc(var(--rayg) + 2.25rem); }
+}
+
+/* ---------- görsel galeri ---------- */
+
+.galeri { margin: 1.7rem 0; display: grid; gap: 1.3rem 1.1rem; }
+.galeri.uclu { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.galeri figure { margin: 0; }
+.galeri img {
+  display: block; width: 100%;
+  border: 1px solid var(--cizgi-2);
+  border-radius: 5px;
+  background: var(--kagit-2);
+}
+.galeri figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--murekkep-2);
+}
+.galeri figcaption b { color: var(--murekkep); font-weight: 650; }
+/* üç cisim şeridi: yan yana karşılaştırılsın diye hep üç sütun */
+.galeri.serit { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+/* üç cisim şeridi: oranlar farklı, kutuları eşitleyelim ki alt yazılar hizalansın */
+.galeri img, .galeri.serit img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 0.3rem;
+}
+.galeri.serit figcaption {
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; color: var(--murekkep-3);
+}
+@media (max-width: 34rem) { .galeri.serit { grid-template-columns: 1fr; } }
+@media (min-width: 74rem) { .galeri { margin-right: -4.5rem; } }
+
+/* ---------- okuma yolu imleri ve bölüm sonu kutuları ---------- */
+
+.yol {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  border: 1px solid var(--cizgi-2);
+  color: var(--murekkep-2);
+  background: var(--kagit-2);
+  white-space: nowrap;
+}
+.yol.hizli { color: var(--yesil);   border-color: var(--yesil); }
+.yol.yavas { color: var(--kirmizi); border-color: var(--kirmizi); }
+.yol.ileri { color: var(--sari);    border-color: var(--sari); }
+
+.kutu.hedef { border-left-color: var(--murekkep); }
+.kutu.hedef > .basi { color: var(--murekkep); }
+.kutu.hedef ul, .kutu.hedef ol { margin-bottom: 0.8rem; }
+.kutu.hedef .gunluk { font-style: italic; color: var(--murekkep-2); }
+.kutu.proje { border-left-color: var(--murekkep-3); border-style: dashed; background: var(--kagit-3); }
+.kutu.proje > .basi { color: var(--murekkep-2); }
+
+/* ---------- sözlük ---------- */
+
+.sozluk { margin: 1rem 0 0; }
+.sozluk dt {
+  font-weight: 650;
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--cizgi);
+}
+.sozluk dt:first-child { border-top: none; padding-top: 0; margin-top: 0.3rem; }
+.sozluk dt em { font-weight: 400; color: var(--murekkep-2); margin-left: 0.25rem; }
+.sozluk dt .bolum {
+  float: right;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--murekkep-3);
+  padding-top: 0.25rem;
+}
+.sozluk dd { margin: 0.15rem 0 0; font-size: 0.97rem; }
+@media print {
+  .sozluk dt { break-after: avoid; page-break-after: avoid; }
+  .sozluk dd { break-before: avoid; page-break-before: avoid; }
+}
+
+/* ---------- baskı ---------- */
+
+/* PDF'in ilk sayfası: kapak. Ekranda ve EPUB'da gösterilmiyor. */
+.pdf-kapak { display: none; }
+
+@media print {
+  .pdf-kapak {
+    display: block;
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+  .pdf-kapak img { max-width: 100%; max-height: 99vh; }
+
+  body {
+    background-image: none;
+    background-color: #fff;
+    color: #12182A;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+  .sayfa { max-width: none; padding: 0; }
+  /* ekran için yazılmış dar-ekran kuralını geri al: baskıda ray hep solda */
+  .blok { grid-template-columns: 7.5em minmax(0, 1fr); gap: 0 1.4em; }
+  .blok > .ray {
+    grid-column: 1; text-align: right;
+    padding-top: .35em; margin-bottom: 0;
+  }
+  .blok > .govde { grid-column: 2; }
+  .ust { margin-left: calc(7.5em + 1.4em); max-width: none; }
+  .kod { margin-left: 0 !important; margin-right: 0 !important; box-shadow: none; }
+  .kod > figcaption .kopyala { display: none; }   /* kâğıtta panosu yok */
+  .kod pre { font-size: 7.6pt; line-height: 1.5; white-space: pre-wrap; }
+  .kod pre code { white-space: pre-wrap; word-break: break-word; }
+  .kart-izgara { margin-right: 0; }
+  .gezinme { display: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-after: avoid; page-break-after: avoid; }
+  .kod, .kutu, .alistirmalar, table, .kart { break-inside: avoid; page-break-inside: avoid; }
+  .kapak-gorseli { display: none; }
+  .galeri { margin-right: 0; gap: 0.8em 0.7em; }
+  /* baskıda auto-fit iki sütun veriyor ve üçüncü resim satırdan taşıyordu */
+  .galeri.uclu, .galeri.serit { grid-template-columns: repeat(3, 1fr); }
+  .galeri figure { break-inside: avoid; page-break-inside: avoid; }
+  .galeri figcaption { font-size: 8pt; line-height: 1.4; }
+  a { color: #1D3FB0; text-decoration: none; }
+  .bolum-basi { break-before: page; page-break-before: always; }
+  .ust { padding-top: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="sayfa">
+<header class="ust">
+  <div class="seri">Fen Lisesi için C++ ve algoritma kitapçığı</div>
+  <h1>Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</h1>
+  <p class="ozet">
+    Bu kitapçık iki dönemlik ders notlarımızın, birlikte yazdığımız programların ve
+    sorduğunuz soruların damıtılmış hâli. Amacı size programlamayı
+    <em>anlatmak</em> değil; kendi kendinize öğrenebileceğinizi
+    <em>fark ettirmek</em>. Bir de arkadaşınızla yan yana oturunca işin ne kadar
+    hızlandığını. Kitapçığın bir de kardeşi var: aynı yolu Koco ve Scala ile
+    yürüyen <a href="../kitapcik-koco/00-kapak.html"><em>Keyifli ve İşlevsel Bir Giriş</em></a>.
+  </p>
+  <ul class="icerik-seridi"><li><a href="01-ilk-adimlar.html">I. İlk Adımlar</a></li><li><a href="02-veri.html">II. Veriyi Düzenlemek</a></li><li><a href="03-zanaat.html">III. Zanaat</a></li><li><a href="04-ozyineleme.html">IV. Özyineleme</a></li><li><a href="05-cizgeler.html">V. Çizgeler</a></li><li><a href="06-dp.html">VI. Dinamik Programlama</a></li><li><a href="07-sozluk.html">Sözlük</a></li></ul>
+</header>
+
+<figure class="kapak-gorseli">
+  <img src="https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/kapak.png"
+       alt="Kitapçığın kapağı: derste elle çizilmiş beş çizge şekli">
+  <figcaption>
+    Kapaktaki çizimler derste tahtaya çizilenlerden: bilgisayar ağı,
+    Dijkstra&rsquo;nın son adımı, Bellman&ndash;Ford çizgesi, yönlü bir çizge
+    ve omuzda taşıma. Aynı kapak, PDF ile EPUB sürümlerinin de ilk sayfası.
+  </figcaption>
+</figure>
+
+<div class="blok">
+  <div class="ray">Önsöz</div>
+  <div class="govde">
+    <h2 id="merhaba">Merhaba</h2>
+
+    <p>
+      Programlamayı öğrenmenin en zor tarafı, ilk birkaç haftanın insana
+      &ldquo;ben bunu beceremem&rdquo; dedirtmesi. Noktalı virgül unutulur, derleyici
+      anlaşılmaz bir hata verir, program çalışır ama yanlış sayı yazar. Sonra bir gün
+      bir şey tıklar: bilgisayarın aslında son derece <em>aptal</em> ama son derece
+      <em>itaatkâr</em> olduğunu anlarsınız. O günden sonrası keyif.
+    </p>
+
+    <p>
+      Bu kitapçık o günü öne çekmek için yazıldı. İçindeki her kavram, derslerimizde
+      gerçekten yazdığımız, çalıştırdığımız ve bazen de hata verdiği için birlikte
+      düzelttiğimiz programlardan geliyor. Hataları da sakladım, çünkü hata bulmak
+      programcılığın yarısı.
+    </p>
+
+    <p>
+      Altı bölüm var. İlk üçü temeli kuruyor: dil, veri ve zanaat. Son üçü
+      algoritmalara ayrılmış: özyineleme, çizgeler ve dinamik programlama. Sırayla
+      okumanız gerekmiyor ama sırayla okursanız her bölüm bir öncekine yaslanacak.
+    </p>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Yöntem</div>
+  <div class="govde">
+    <h2 id="nasil-calisalim">Nasıl çalışalım?</h2>
+
+    <p>
+      Altı ilke. Hepsi derslerde pahalı yollardan öğrendiğimiz şeyler; hiçbiri
+      kitaptan okunmadı.
+    </p>
+
+    <ol class="adimlar">
+      <li>
+        <strong>Kod okumadan kod yazılmaz.</strong> Müzisyen dinleyerek, yazar okuyarak
+        öğrenir. Siz de başkasının kodunu satır satır okuyun. Anlamadığınız satırda
+        durun, tahmin edin, sonra çalıştırıp tahmininizi sınayın. Bu kitapçıktaki her
+        program okunmak için var.
+      </li>
+      <li>
+        <strong>Çalıştırmadan inanmayın.</strong> Bir kodun ne yapacağını
+        &ldquo;herhâlde şunu yapar&rdquo; diye geçiştirmeyin. Çalıştırın. Bilgisayar
+        elinizin altında; dünyanın en sabırlı öğretmeni ve hiç yorulmuyor.
+      </li>
+      <li>
+        <strong>Önce doğru, sonra hızlı.</strong> Programcıların meşhur bir sözü var:
+        <em>bütün baş belalarının kaynağı sırasız yapılan iyileştirmelerdir.</em>
+        Çalışan yavaş bir program, çalışmayan hızlı bir programdan sonsuz kere iyidir.
+      </li>
+      <li>
+        <strong>Kanıt isteyin.</strong> Kodunuz doğru yanıtı verdi diye doğru olduğunu
+        bilmiyorsunuz; sadece o girdide yanlış olmadığını biliyorsunuz. Neden
+        çalıştığını anlatabiliyor musunuz? Anlatamıyorsanız, henüz çözmediniz demektir.
+        Bilmediğimizi bilmek de bir bilgidir; bilmemek ayıp değil.
+      </li>
+      <li>
+        <strong>Yapay zekâya danışın, ama güvenmeyin.</strong> Çok iyi bir yol
+        arkadaşı, çok kötü bir hakem. Yazdığı kodu okuyun, çalıştırın, sınayın.
+        Derslerimizde yapay zekânın yazdığı kodlarda birden fazla hata bulduk.
+        Kuralım şu: alıştırma defterinin Isınma ve Alıştırma basamaklarında hiç
+        sormayın; Zorlayıcı'da yalnızca ipucu isteyin, kod istemeyin; Keşif'te
+        serbest, ama yapıştırdığınız her satırı açıklayabilmelisiniz.
+      </li>
+      <li>
+        <strong>Yarım bıraktığım yerler kasıtlı.</strong> Bu kitapçıkta bilerek
+        tamamlanmamış işlevler ve yanıtı verilmemiş sorular var. Onlar boşluk değil,
+        davet. Bir çözümü okuyarak öğrenilenle, bir çözümü bulmaya çalışırken
+        öğrenilen aynı şey değil.
+      </li>
+    </ol>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Takıldığınızda geçirdiğiniz süreyi ölçün. Yirmi dakika ilerleyemediyseniz,
+        problemi bir arkadaşınıza <em>yüksek sesle</em> anlatın. Anlatırken çözdüğünüz
+        çok olacak. Buna &ldquo;lastik ördek yöntemi&rdquo; deniyor: karşınızdaki
+        dinlemese de olur, hatta ördek bile olur.
+      </p>
+    </div>
+
+    <div class="kutu puf">
+      <span class="basi">Kesim başlıklarındaki imler</span>
+      <p>
+        Bazı başlıkların yanında küçük bir im var. <span class="yol hizli">hızlı yol</span>
+        Daha önce programlamış okur ilk okumada atlayabilir.
+        <span class="yol yavas">yavaş yol</span> Yeni başlayan iki kere okusun;
+        hatalar en çok burada çıkıyor. <span class="yol ileri">ileri</span>
+        İlk okumada atlayın, ikinci turda dönün. Her bölümün sonunda iki kutu daha
+        var: &ldquo;Projeye ekleyin&rdquo; kitapçık boyunca büyüyen tek programınız,
+        &ldquo;Bu bölümden sonra&rdquo; ise o bölümden ne çıkarmış olmanız gerektiği
+        ve üç sınama sorusu.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Takım</div>
+  <div class="govde">
+    <h2 id="yalniz-gidebilirsiniz-ama-ikili-daha-hizli">Yalnız gidebilirsiniz, ama ikili daha hızlı</h2>
+
+    <p>
+      Bu kitapçığın en önemli sayfası burası. Programlamayı tek başınıza
+      öğrenebilirsiniz &mdash; buna hiç şüphem yok, insanlar öğreniyor. Ama iki ya da
+      üç kişilik küçük takımlarla çalışanların ne kadar hızlı yol aldığını her dönem
+      görüyorum. Nedeni de basit: <strong>programlamanın zor kısmı yazmak değil,
+      düşünmek.</strong> Düşünmek de tek başına yapılınca kısır döngüye girmeye çok
+      müsait.
+    </p>
+
+    <p>
+      Yazılım dünyasında bunun bir adı var: <em>ikili programlama</em>
+      (<em>pair programming</em>). Kuralları şöyle:
+    </p>
+
+    <div class="kart-izgara">
+      <div class="kart">
+        <h4>Sürücü</h4>
+        <p>
+          Klavye onda. Sadece o yazar. Aklından geçeni sesli söyler:
+          &ldquo;şimdi döngüyü kuruyorum, sayaç sıfırdan başlasın&hellip;&rdquo;
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Yol gösterici</h4>
+        <p>
+          Klavyeye dokunmaz. Bir adım ileriyi düşünür: &ldquo;dizinin dışına taşacak
+          galiba&rdquo;, &ldquo;bunun testi ne olacak?&rdquo;
+        </p>
+      </div>
+      <div class="kart">
+        <h4>Üçüncü kişi</h4>
+        <p>
+          Varsa test yazar ve karşı örnek arar. Takımın en eğlenceli işi:
+          arkadaşlarının kodunu kırmaya çalışmak.
+        </p>
+      </div>
+    </div>
+
+    <ul>
+      <li>
+        <strong>On beş dakikada bir rol değişin.</strong> Zamanlayıcı kurun.
+        Değişmezseniz hızlı olan yazar, yavaş olan seyreder ve kimse öğrenmez.
+      </li>
+      <li>
+        <strong>Önce algoritmayı konuşun, sonra klavyeye dokunun.</strong> Kâğıt kalem
+        alın, küçük bir örneği elle çözün. Elle çözemediğiniz bir şeyi bilgisayara
+        anlatamazsınız.
+      </li>
+      <li>
+        <strong>&ldquo;Anlamadım&rdquo; demek takımın en değerli cümlesi.</strong>
+        Anlamamış gibi görünmemek için susan bir takım, hep birlikte yanlış yola sapar.
+      </li>
+      <li>
+        <strong>Aynı problemi ayrı ayrı çözüp sonra kodları karşılaştırmak</strong> da
+        harika bir yöntem. İki farklı çözüm görmek, tek çözümü iki kere görmekten çok
+        daha öğretici.
+      </li>
+    </ul>
+
+    <div class="kutu takim">
+      <span class="basi">Takım işi</span>
+      <p>
+        Bu kitapçıkta yeşil kutular takımca yapılacak işleri gösteriyor. İlki şu:
+        bir araya gelip <strong>haftada bir sabit saat</strong> belirleyin ve o saati
+        koruyun. Düzenli bir saat, uzun ama düzensiz saatlerden çok daha verimli. İki
+        saatlik haftalık bir buluşma, bir dönemde sizi şaşırtacak bir yere getirir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Kardeş</div>
+  <div class="govde">
+    <h2 id="iki-kitapcik-tek-yol">İki kitapçık, tek yol</h2>
+
+    <p>
+      Bu kitapçığın bir kardeşi var:
+      <a href="../kitapcik-koco/00-kapak.html">Programlamaya ve Algoritmalara
+      Keyifli ve İşlevsel Bir Giriş</a> &mdash; aynı konuları Koco (Kojo'nun
+      Türkçesi) ve Scala ile anlatıyor. Orada derleyici yok, bekleme yok:
+      kaplumbağaya komut verirsiniz, tuvalde çizer. Bölümleri bilerek paralel
+      kurdum: buradaki sayı tahmin oyunu orada da var; buradaki Hanoi kuleleri
+      orada Koch tanesi oluyor; buradaki çizge gezisi orada işlevsel kılıkta
+      karşınıza çıkıyor.
+    </p>
+
+    <p>
+      Hangisinden başlamalı? C++ ile başladıysanız buradan devam edin; ama bir
+      bölümü bitirince oradaki eşine göz atın. Aynı algoritmayı iki dilde görmek,
+      tek dilde iki kere görmekten çok daha öğretici &mdash; tıpkı iki farklı
+      çözümü karşılaştırmanın tek çözümü ezberlemekten öğretici olması gibi.
+    </p>
+
+    <div class="kutu puf">
+      <span class="basi">Püf noktası</span>
+      <p>
+        Bir bölümü burada bitirip kardeş kitapçıktaki eşine bakınca kendinize şu
+        soruyu sorun: <em>hangi kısım orada daha kolaydı, hangisi burada?</em>
+        Bu sorunun yanıtı size dillerin karakterini, dillerin karakteri de
+        programlamanın kendisini öğretir.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Tezgâh</div>
+  <div class="govde">
+    <h2 id="tezgahinizi-kurun">Tezgâhınızı kurun</h2>
+
+    <p>
+      Marangozun tezgâhı, programcının da geliştirme ortamı var. İki aşamada kurun:
+      önce hiçbir şey yüklemeden başlayın, sonra kendi bilgisayarınıza inin.
+    </p>
+
+    <h3 id="bugun-hicbir-sey-yuklemeden">Bugün, hiçbir şey yüklemeden</h3>
+
+    <p>
+      Tarayıcıda çalışan derleyiciler var. İlk haftalar için fazlasıyla yeterli, hatta
+      kod paylaşmak için uzun süre en pratik yol:
+    </p>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Site</th><th>İyi tarafı</th><th>Not</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.sololearn.com/en/compiler-playground/cpp">Sololearn</a></td>
+            <td>Sade, hızlı açılıyor</td>
+            <td><code>std::cin &gt;&gt; girdi;</code> çalışıyor</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.onlinegdb.com/">OnlineGDB</a></td>
+            <td>Girdi ve çıktı altta, aynı terminalde</td>
+            <td>Hata ayıklayıcısı (<em>debugger</em>) var, çok işe yarar</td>
+          </tr>
+          <tr>
+            <td><a href="https://coliru.stacked-crooked.com/">Coliru</a></td>
+            <td>Derleme komutunu siz yazıyorsunuz</td>
+            <td>Sağ alttaki <strong>Edit</strong> tuşuna basın</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="bu-ay-kendi-bilgisayarinizda">Bu ay, kendi bilgisayarınızda</h3>
+
+    <p>
+      Er ya da geç kendi makinenizde derlemeniz gerekecek; büyük testler tarayıcıda
+      zorlanıyor. Gereken üç şey var: bir <strong>terminal</strong>, bir
+      <strong>derleyici</strong> ve bir <strong>editör</strong>.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Windows:</strong> <a href="https://learn.microsoft.com/windows/wsl/install">WSL</a>
+        kurun (Ubuntu seçin); açılan terminalde
+        <code>sudo apt install build-essential git</code> yazın. Böylece
+        Linux'taki her şey &mdash; <code>g++</code>, <code>make</code>,
+        <code>diff</code> &mdash; elinizin altında olur, kitapçıktaki komutlar
+        birebir çalışır. WSL kuramıyorsanız ikinci seçenek
+        <a href="https://www.msys2.org/">MSYS2</a>.
+      </li>
+      <li>
+        <strong>macOS:</strong> terminalde <code>c++ --version</code> yazın. Yoksa
+        Xcode komut satırı araçlarını kurmayı önerecektir; kabul edin.
+      </li>
+      <li>
+        <strong>Linux:</strong> zaten hazır. Değilse dağıtımınızın paket yöneticisiyle
+        <code>g++</code> kurun.
+      </li>
+      <li>
+        <strong>Git:</strong> kodunuzu saklamak ve geri almak için. macOS ve
+        Linux'ta çoğu zaman hazır; <code>git --version</code> ile bakın. Üç komut
+        yeter: <code>git clone</code> (depoyu indir), <code>git pull</code>
+        (yenilikleri al), <code>git status</code> (ne değişti). Gerisi
+        <a href="03-zanaat.html">Bölüm III</a>'te.
+      </li>
+      <li>
+        <strong>Editör:</strong>
+        <a href="https://code.visualstudio.com/">VS Code</a> her yerde çalışıyor ve
+        kolay. <a href="https://www.gnu.org/software/emacs/">Emacs</a> eski ve dik
+        başlı ama bir kere alışınca bırakılmıyor. Hangisi olduğu önemli değil,
+        birini seçip kısayollarını öğrenmeniz önemli.
+      </li>
+    </ul>
+
+    <figure class="kod dar kopyalanmaz">
+      <figcaption><span class="nokta"></span><span class="ad">terminal</span><span class="etiket">ilk sınav</span></figcaption>
+      <pre><code><span class="y"># derleyici duruyor mu?</span>
+$ c++ --version
+
+<span class="y"># ders deposunu indirin</span>
+$ git clone https://github.com/bulent2k2/cpp_ogreniyoruz
+$ cd cpp_ogreniyoruz
+$ ls
+
+<span class="y"># tek dosyalık bir programı derleyip çalıştırın</span>
+$ c++ -std=c++23 ilkProgram.cpp -o ilk
+$ ./ilk</code></pre>
+    </figure>
+
+    <h3 id="hesaplarinizi-acin">Hesaplarınızı açın</h3>
+
+    <p>
+      Bunların hepsi ücretsiz ve hepsi bir dönem boyunca işinize yarayacak. Bugün
+      açın, sonra unutulur:
+    </p>
+
+    <ul>
+      <li><a href="https://github.com/signup">GitHub</a> &mdash; kodlarınızı saklamak ve paylaşmak için</li>
+      <li><a href="https://projecteuler.net/register">Project Euler</a> &mdash; matematik kokan, tadına doyulmaz sorular</li>
+      <li><a href="https://cses.fi/problemset/">CSES Problem Set</a> &mdash; algoritma öğrenmek için sıraya dizilmiş en iyi liste</li>
+      <li><a href="https://usaco.org/">USACO</a> &mdash; ABD bilgisayar olimpiyatı ön elemeleri, deneme sınavları</li>
+      <li><a href="https://codeforces.com/problemset?order=BY_RATING_ASC">Codeforces</a> ve <a href="https://atcoder.jp/">AtCoder</a> &mdash; yarışmalar</li>
+    </ul>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">İçindekiler</div>
+  <div class="govde">
+    <h2 id="bu-kitapcikta-neler-var">Bu kitapçıkta neler var?</h2>
+
+    <div class="tablo-sar">
+      <table>
+        <thead>
+          <tr><th>Bölüm</th><th>Konu</th><th>Sonunda yapabileceğiniz</th><th>Süre</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="01-ilk-adimlar.html"><strong>I. İlk Adımlar</strong></a></td>
+            <td>Değer, değişken, tür, işlev; koşullar ve döngüler; kapsam</td>
+            <td>Kullanıcıyla konuşan bir tahmin oyunu ve ilk Project Euler çözümünüz</td>
+            <td class="sayi">3 hafta</td>
+          </tr>
+          <tr>
+            <td><a href="02-veri.html"><strong>II. Veriyi Düzenlemek</strong></a></td>
+            <td>Dizi, akıllı dizi, eşlem, küme, yığın, kuyruk, öncelik sırası; kendi türleriniz; kalıplar</td>
+            <td>Bir metindeki harfleri sayan, kendi türünü tanımlayan programlar</td>
+            <td class="sayi">4 hafta</td>
+          </tr>
+          <tr>
+            <td><a href="03-zanaat.html"><strong>III. Zanaat</strong></a></td>
+            <td>Derleme, <code>make</code>, testler, hata ayıklama, hız ölçümü</td>
+            <td>Kendini sınayan, tek komutla derlenen bir proje düzeni</td>
+            <td class="sayi">2 hafta</td>
+          </tr>
+          <tr>
+            <td><a href="04-ozyineleme.html"><strong>IV. Özyineleme ve Arama</strong></a></td>
+            <td>Kendini çağıran işlevler, bellekle hızlandırma, geri dönüşlü arama, budama</td>
+            <td>Sekiz vezir bulmacası ve altküme/permütasyon üretimi</td>
+            <td class="sayi">3 hafta</td>
+          </tr>
+          <tr>
+            <td><a href="05-cizgeler.html"><strong>V. Çizgeler</strong></a></td>
+            <td>Derinlemesine ve enlemesine gezi, bağlı parçalar, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford</td>
+            <td>Labirentte en kısa yol, canavarlardan kaçış, en ucuz uçuş rotası</td>
+            <td class="sayi">4 hafta</td>
+          </tr>
+          <tr>
+            <td><a href="06-dp.html"><strong>VI. Dinamik Programlama</strong></a></td>
+            <td>Problemi küçültmek, tümevarım formülü kurmak, yukarıdan aşağı ve aşağıdan yukarı</td>
+            <td>Bozuk para ve zar dizisi problemlerini kendi başınıza kurup çözmek</td>
+            <td class="sayi">3 hafta</td>
+          </tr>
+          <tr>
+            <td><a href="07-sozluk.html"><strong>Sözlük</strong></a></td>
+            <td>Terimlerin Türkçesi, İngilizcesi, bir cümlelik anlamı</td>
+            <td>Ders notunda ya da yarışma sitesinde İngilizcesini görünce buraya bakmak</td>
+            <td class="sayi">&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="kutu dikkat">
+      <span class="basi">Son bir uyarı</span>
+      <p>
+        Bu kitapçıktaki <strong>alıştırmaların çözümleri yok</strong> ve bu bir eksiklik
+        değil. Bazı örnek kodlar da bilerek yarım bırakıldı. Takıldığınız yerde ipucu
+        var, ama yanıt yok. Yanıt sizde &mdash; ya da yan masadaki arkadaşınızda.
+      </p>
+    </div>
+
+    <div class="kutu">
+      <span class="basi">Başka biçimlerde</span>
+      <p>
+        Kitapçığın tamamı ders deposunda iki dosya hâlinde de duruyor:
+      </p>
+      <ul>
+        <li>
+          <strong>PDF</strong> &mdash; altmış dört sayfa, A4'e basılmak üzere
+          düzenlendi: <code>kitap/&hellip;-Baslangic.pdf</code>
+        </li>
+        <li>
+          <strong>EPUB</strong> &mdash; telefon, tablet ve e-kitap okuyucular
+          için akışkan sürüm: <code>kitap/&hellip;-Baslangic.epub</code>
+        </li>
+      </ul>
+      <p>
+        İçindeki bütün programların kaynak dosyaları da
+        <code>kitapcik/kod/</code> dizininde, derlenmeye hazır.
+      </p>
+    </div>
+
+    <p class="dipnot">
+      Kaynak: 2024&ndash;25 ve 2025&ndash;26 dönemi ders notları, birlikte yazdığımız
+      programlar ve sınıfta sorulan sorular. Ders notlarının tamamı
+      <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">GitHub deposunda</a>,
+      dizini de <code>ileri/icindekiler.md</code> dosyasında. Kardeş kitapçığın
+      kaynakları, PDF'i ve EPUB'ı da aynı depoda: <code>kitapcik-koco/</code>.
+    </p>
+  </div>
+</div>
+
+<div class="blok kunye">
+  <div class="ray">Künye</div>
+  <div class="govde">
+    <h2 id="telif-ve-lisans">Telif ve lisans</h2>
+
+    <p>
+      <strong>Programlamaya ve Algoritmalara Keyifli Bir Başlangıç</strong><br>
+      Bülent Başaran &middot; 2026 &middot; Birinci sürüm
+    </p>
+
+    <p>
+      Bu kitapçığın <strong>metni</strong>
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr">Creative Commons
+      Atıf-AynıLisanslaPaylaş 4.0</a> (CC&nbsp;BY-SA&nbsp;4.0) lisansıyla sunuluyor.
+      Kopyalayın, basın, dağıtın, çevirin, değiştirin &mdash; ticari olarak da.
+      Tek istediğimiz kaynağı anmanız ve türev çalışmanızı da aynı lisansla
+      paylaşmanız.
+    </p>
+
+    <p>
+      İçindeki <strong>bütün örnek programlar</strong> ise
+      <a href="https://opensource.org/licenses/MIT">MIT lisansı</a> altında.
+      Yani hiçbir yükümlülük altına girmeden kendi projelerinize
+      kopyalayabilirsiniz. Zaten onun için yazıldılar.
+    </p>
+
+    <div class="kutu">
+      <span class="basi">Atıf</span>
+      <p>
+        &ldquo;Programlamaya ve Algoritmalara Keyifli Bir Başlangıç&rdquo;,
+        Bülent Başaran, CC BY-SA 4.0.<br>
+        <a href="https://github.com/bulent2k2/cpp_ogreniyoruz">github.com/bulent2k2/cpp_ogreniyoruz</a>
+      </p>
+    </div>
+
+    <p>
+      Kitapçıkta anılan ve bağlantı verilen dış kaynaklar &mdash; Project Euler,
+      CSES, USACO, Codeforces, AtCoder ve Antti Laaksonen'in
+      <em>Rekabetçi Programlama El Kitabı</em> &mdash; kendi sahiplerine ve kendi
+      koşullarına tabidir. Ders deposundaki üçüncü taraf malzemenin dökümü
+      <code>LICENSE</code> dosyasında.
+    </p>
+
+    <p class="dipnot">
+      Bu kitapçıktaki bütün programlar <code>g++ -std=c++23 -Wall</code> ile
+      derlenip çalıştırıldı; gösterilen çıktılar gerçek çıktılardır.
+      Bir hata bulursanız ya da bir bölümün daha iyi anlatılabileceğini
+      düşünüyorsanız, deposunda konu açın &mdash; kitapçık da ders gibi,
+      birlikte gelişiyor.
+    </p>
+  </div>
+</div>
+
+<nav class="gezinme"><span></span><a class="sag" href="01-ilk-adimlar.html"><span class="yon">Sonraki</span>I. İlk Adımlar</a></nav>
+</div>
+<script>
+/* ===========================================================
+   "Hepsini seç" düğmesi.
+
+   Her kod bloğunun sağ üst köşesine bir düğme koyar; tıklayınca
+   bloğun tamamını seçer ve panoya kopyalar. Amaç bir örneği iKojo'ya
+   (ya da çevrimiçi bir derleyiciye) yapıştırmayı kolaylaştırmak.
+
+   Dört karar ve nedenleri:
+
+   1. Düğme HTML'e yazılmıyor, bu betik ekliyor. Böylece betiğin
+      çalışmadığı yerlerde -- e-mürekkep okuyucular, baskı -- ölü bir
+      düğme görünmüyor. Baskıda ayrıca biçem dosyası da gizliyor.
+
+   2. Önce seçiyor, sonra kopyalamayı deniyor. Kum havuzundaki
+      çerçevelerde ve bazı e-kitap okuyucularında pano izni yok; seçim
+      ise her yerde çalışıyor. Kopyalama tutmazsa öğrenci Ctrl+C'ye
+      basıp devam edebilir, düğme de bunu yazıyor. Seçim de tutmadıysa
+      kopyalamayı hiç denemiyoruz: yoksa öğrencinin sayfada daha önce
+      seçtiği başka bir metni panoya atardık.
+
+   3. Yapıştırılacak bir betik olmayan bloklar -- program çıktısı,
+      uçbirim dökümü, derleyici hatası, tümevarım formülü -- düğme
+      almıyor. Bunları başlıktaki addan tahmin etmiyoruz; blok
+      <figure class="kod kopyalanmaz"> diye işaretleniyor. Ada bakmak
+      kırılgandı: adlar (çıktı, terminal, izleme, çalışırken, tümevarım,
+      derleyici ...) iki kitapçıkta çeşitleniyor ve yeni bir ad eklenince
+      liste sessizce eskiyordu.
+
+   4. Ekranda görünen yazılar \u kaçışlarıyla yazıldı: EPUB okuyucusu bu
+      dosyanın kodlamasını yanlış varsaysa bile düğmenin üstündeki Türkçe
+      doğru çıksın diye. Yorumlarda böyle bir kaygı yok; onlar Türkçe
+      duruyor, çünkü kimse onları ekranda görmüyor ve yanlış çözülmüş bir
+      yorum da programı bozmuyor.
+   =========================================================== */
+
+(function () {
+  "use strict";
+
+  var SEC = "Hepsini seç";                              // Hepsini seç
+  var TAMAM = "Kopyalandı";                             // Kopyalandı
+  var SECILDI = "Seçildi — Ctrl+C";                // Seçildi — Ctrl+C
+  var YARDIM = "Kod bloğunun tamamını " +     // Kod bloğunun tamamını
+               "seç ve kopyala";                        // seç ve kopyala
+  var SURE = 1800;                                  // geri bildirim, milisaniye
+
+  /* Düğmenin yazısını geçici olarak değiştirir, sonra eski hâline döner. */
+  function bildir(dugme, yazi, basarili) {
+    dugme.textContent = yazi;
+    if (basarili) {
+      dugme.setAttribute("data-durum", "tamam");
+    } else {
+      dugme.removeAttribute("data-durum");
+    }
+    if (dugme.zamanlayici) {
+      clearTimeout(dugme.zamanlayici);
+    }
+    dugme.zamanlayici = setTimeout(function () {
+      dugme.textContent = SEC;
+      dugme.removeAttribute("data-durum");
+    }, SURE);
+  }
+
+  /* Kod bloğunun tamamını seçer. Kopyalama için de gereken adım bu. */
+  function sec(kod) {
+    try {
+      var secim = window.getSelection();
+      if (!secim) {
+        return false;
+      }
+      var aralik = document.createRange();
+      aralik.selectNodeContents(kod);
+      secim.removeAllRanges();
+      secim.addRange(aralik);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function tikla(kod, dugme) {
+    var secildi = sec(kod);
+    var kopyalandi = false;
+    // execCommand eskimiş sayılıyor ama kum havuzundaki çerçevelerde hâlâ
+    // en çok çalışan yol; seçimi kopyaladığı için ayrı bir alan gerekmiyor.
+    // Seçemediysek çağırmıyoruz: seçimi kopyalar, bizimki de seçim değil.
+    try {
+      kopyalandi = !!(secildi && document.execCommand &&
+                      document.execCommand("copy"));
+    } catch (e) {
+      kopyalandi = false;
+    }
+    if (kopyalandi) {
+      bildir(dugme, TAMAM, true);
+      return;
+    }
+    // Olmadıysa yeni pano arayüzünü dene; bu eşzamansız çalışıyor.
+    var pano = navigator.clipboard;
+    if (pano && pano.writeText) {
+      pano.writeText(kod.textContent).then(
+        function () { bildir(dugme, TAMAM, true); },
+        function () { bildir(dugme, secildi ? SECILDI : SEC, false); }
+      );
+      return;
+    }
+    bildir(dugme, secildi ? SECILDI : SEC, false);
+  }
+
+  function kur() {
+    // Yapıştırılacak betik olmayan bloklar "kopyalanmaz" diye işaretli.
+    var bloklar = document.querySelectorAll("figure.kod:not(.kopyalanmaz)");
+    for (var i = 0; i < bloklar.length; i++) {
+      var blok = bloklar[i];
+      var basi = blok.querySelector("figcaption");
+      var kod = blok.querySelector("pre code") || blok.querySelector("pre");
+      if (!basi || !kod || basi.querySelector(".kopyala")) {
+        continue;
+      }
+      var dugme = document.createElement("button");
+      dugme.setAttribute("type", "button");
+      dugme.className = "kopyala";
+      dugme.textContent = SEC;
+      dugme.setAttribute("aria-label", YARDIM);
+      basi.appendChild(dugme);
+      dugme.addEventListener("click", (function (k, d) {
+        return function () { tikla(k, d); };
+      })(kod, dugme));
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kur);
+  } else {
+    kur();
+  }
+})();
+</script>
+</body>
+</html>

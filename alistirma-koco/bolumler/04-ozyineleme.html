@@ -22,6 +22,7 @@
 <section class="soru" id="KIV-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIV-1-I1</span> Sarmalı sayın</h3>
 <p>Kitapçığın sarmalı: taban <code>boy &gt; 2</code>, adım <code>boy * 0.95</code>. Kaç çizgi çiziyor? Tahmin edin, sonra bir <code>den</code> sayaçla sayıp yazdırın. Sonra kitapçığın deneyleri: tabanı 150 yapın (kaç çizgi?), küçülmeyi kaldırın (ne oluyor, Koco nasıl durduruyor?). Sayaç her deneyde yanıtı veriyor.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIV-1-I1 · Sarmalı sayın</span>
@@ -46,6 +47,7 @@ sarmal(<span class="n">200</span>)
 <section class="soru" id="KIV-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-1-A1</span> Dalları sayın</h3>
 <p>Kitapçığın ağacı: <code>ağaç(90)</code>, oran 0,7, taban 4. Kaç dal çiziliyor? Her çağrı bir dal; sayaçla sayın. Kâğıtta: gövde 90, 63, 44, 31, … 4'ü geçtiği sürece devam; kaç seviye, her seviyede kaç dal? Sonra kalem kalınlığını <code>boy / 10</code> yapın ve açıları değiştirin; sayı değişir mi?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>ağaç(90): 511 dal</code></pre>
@@ -56,6 +58,7 @@ sarmal(<span class="n">200</span>)
 <section class="soru" id="KIV-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-1-A2</span> Sayılarda taban ve adım</h3>
 <p>Çizmeyen üç özyineleme: <code>toplam(n)</code> = 1'den n'ye toplam; <code>faktöriyel(n): Uzun</code>; <code>üs(a, n)</code> = aⁿ. Her birinde önce tabanı yazın (n == 0 için ne?), sonra adımı. <code>toplam(100)</code>, <code>faktöriyel(20)</code>, <code>üs(2, 30)</code>'u yazdırın. <code>faktöriyel(21)</code> neden yanlış çıkar?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>5050
@@ -65,8 +68,13 @@ sarmal(<span class="n">200</span>)
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-1-A2"><code>alistirma-koco/kod/KIV-1-A2/</code></a></p>
 </section>
 <section class="soru" id="KIV-1-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIV-1-Z1</span> Sierpinski üçgeni</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">KIV-1-Z1</span> Sierpinski üçgeni</h3>
 <p>Kitapçığın üçüncü alıştırması. Taban: derinlik 0'da düz bir üçgen çiz. Adım: üç köşeye yarı boyutlu, bir eksik derinlikli üç üçgen. Köşeler arasında <code>zıpla</code> ile gidin; <code>konumVeYönüBelleğeYaz</code>/<code>konumVeYönüGeriYükle</code> başlangıca dönmeyi kolaylaştırır. Derinlik 4'te kaç dolu üçgen çizildi? Sayaçla yazdırın; 3⁴ ile karşılaştırın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Derinlik 0 dolu üçgen; derinlik d, üç köşeye d−1 derinlikli üç üçgen.</p></details>
+<details><summary>Yaklaşım</summary><p>Her köşe için: <code>sierpinski(kenar / 2, derinlik - 1)</code>, sonra <code>zıpla(kenar / 2); sol(120)</code> ile sıradaki köşeye. Üçgen sayısı 3ᵈ.</p></details>
+<details><summary>İlk satır</summary><p><code>yinele(3) { sierpinski(kenar / 2, derinlik - 1); zıpla(kenar / 2); sol(120) }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>derinlik 4: 81 üçgen</code></pre>
@@ -75,8 +83,13 @@ sarmal(<span class="n">200</span>)
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-1-Z1"><code>alistirma-koco/kod/KIV-1-Z1/</code></a></p>
 </section>
 <section class="soru" id="KIV-1-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIV-1-K1</span> Eğrelti otu</h3>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIV-1-K1</span> Eğrelti otu <span class="sure">~2 saat</span></h3>
 <p>Kitapçığın birinci alıştırması: ağaca üçüncü bir dal (ortaya, daha kısa) ekleyin; açılarla, oranlarla oynayın; dalın boyuna göre rengi yeşilden kahverengiye değiştirin (kalın dallar kahverengi, ince uçlar yeşil: <code>eğer (boy &gt; 30) kahverengi yoksa yeşil</code>). Dal sayısını yine yazdırın; beklenen çıktı yok, sayı sizin oranlarınıza bağlı (bizim ayarlarla 977 çıktı). En güzel ağacı kim çizecek; bu dizin sizin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Üçüncü dal ortaya, daha kısa; renk dalın boyuna bağlı.</p></details>
+<details><summary>Yaklaşım</summary><p>İki dalın arasına <code>ağaç(boy * 0.5)</code> ekleyin (yönü değiştirmeden); <code>ileri</code>'den önce <code>kalemRenginiKur(eğer (boy > 30) kahverengi yoksa yeşil)</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>kalemRenginiKur(eğer (boy > 30) kahverengi yoksa yeşil)</code></p></details>
+</div>
 <p class="gorunum"><span class="etk">Tuvalde:</span> Üç dallı, gövdesi kahverengi uçları yeşil bir eğrelti otu; dal sayısı sizin oran ve tabanınıza bağlı.</p>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-1-K1"><code>alistirma-koco/kod/KIV-1-K1/</code></a> &mdash; beklenen çıktı yok, sayı sizin ağacınıza bağlı</p>
 </section>
@@ -97,6 +110,7 @@ sarmal(<span class="n">200</span>)
 <section class="soru" id="KIV-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIV-2-I1</span> Çizgileri sayın</h3>
 <p>Kitapçığın kar tanesi, derinlik 4. <code>ileri</code>'yi sayan bir sayaç koyun ve yazdırın: 3 × 4⁴ mü? Sonra derinliği 0, 1, 2, 3 yapıp her seferinde sayıyı ve şekli izleyin. Derinlik 10'da sayı kaç olurdu; çizmeye kalkmayın, hesaplayın.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIV-2-I1 · Çizgileri sayın</span>
@@ -127,6 +141,7 @@ yinele(<span class="n">3</span>) {
 <section class="soru" id="KIV-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-2-A1</span> Kare tanesi</h3>
 <p>Kitapçığın ikinci alıştırması: çatıyı üçgen yerine kare yapın. Parça beşe bölünür: ileri, sol(90) ileri, sağ(90) ileri, sağ(90) ileri, sol(90) ileri; hepsi <code>boy / 3</code>. Derinlik 3'te tek bir kenar kaç çizgi? Dört kenarlı kapalı sürümünü de çizin ve sayıyı yazdırın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>bir kenar, derinlik 3: 125 çizgi
@@ -138,6 +153,11 @@ dört kenar: 500 çizgi</code></pre>
 <section class="soru" id="KIV-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIV-2-Z1</span> Tanenin çevresi</h3>
 <p>Her derinlik katı uzunluğu 4/3'e katlar. Derinlik 0..5 için tanenin çevresini iki yoldan hesaplayın: formülle (3 × 243 × (4/3)ᵈ) ve çizerek (her <code>ileri</code>'nin boyunu bir <code>den</code>'e toplayın). İki sütun aynı mı? Çevre sonsuza giderken alan sınırlı kalıyor: neden? (Bir cümle; ipucu: tane çevrel çemberin dışına hiç çıkmaz.)</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her derinlik uzunluğu 4/3 katlar; çizilen toplam formülle aynı çıkmalı.</p></details>
+<details><summary>Yaklaşım</summary><p><code>(0 |-| 5).herbiriİçin { d => uzunluk = 0.0; yinele(3) { koh(243, d); sağ(120) }; satıryaz(...) }</code>; formül <code>3 * 243 * mat.üs(4.0 / 3, d)</code> ya da bir döngüyle çarpın.</p></details>
+<details><summary>İlk satır</summary><p><code>den formül = 3 * 243.0; yinele(d) { formül = formül * 4 / 3 }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>derinlik 0: formül 729 çizilen 729
@@ -151,8 +171,13 @@ derinlik 5: formül 3072 çizilen 3072</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-2-Z1"><code>alistirma-koco/kod/KIV-2-Z1/</code></a></p>
 </section>
 <section class="soru" id="KIV-2-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIV-2-K1</span> Ejderha eğrisi</h3>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIV-2-K1</span> Ejderha eğrisi <span class="sure">~2 saat</span></h3>
 <p>Kendi fraktalınız. Ejderha eğrisi: <code>ejderha(boy, derinlik, yön)</code>; derinlik 0'da düz çizgi; yoksa önce <code>ejderha(boy, derinlik − 1, 1)</code>, <code>yön × 90</code> derece dön, sonra <code>ejderha(boy, derinlik − 1, −1)</code>. (Dönüş <code>sağ(yön * 90)</code>; yön 1 ya da −1.) Derinlik 10'da kaç çizgi? Sayın, yazdırın; sonra renkleri derinliğe bağlayın. İnternette &ldquo;dragon curve&rdquo; diye aratıp sizinkiyle karşılaştırın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Ejderha: sol kıvrımlı yarı, dönüş, sağ kıvrımlı yarı.</p></details>
+<details><summary>Yaklaşım</summary><p><code>ejderha(boy, derinlik - 1, 1); sağ(yön * 90); ejderha(boy, derinlik - 1, -1)</code>; çizgi sayısı 2¹⁰. Renk için <code>kalemRenginiKur</code>'u derinliğe bağlayın.</p></details>
+<details><summary>İlk satır</summary><p><code>yoksa { ejderha(boy, derinlik - 1, 1); sağ(yön * 90); ejderha(boy, derinlik - 1, -1) }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>derinlik 10: 1024 çizgi</code></pre>
@@ -177,6 +202,7 @@ derinlik 5: formül 3072 çizilen 3072</code></pre>
 <section class="soru" id="KIV-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIV-3-I1</span> Dört disk</h3>
 <p>Kitapçığın Hanoi'si üç diskle yedi hamle. <code>taşı(4, 1, 3, 2)</code> yapın: kaç hamle, ilk hamle hangi diski nereye götürüyor? Çıktıyı beklenen çıktıyla karşılaştırın. Sonra 1. diskin hamlelerine bakın: hep aynı yönde mi dönüyor? (Dört diskte yön üç diskinkinin tersi; neden?)</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIV-3-I1 · Dört disk</span>
@@ -214,6 +240,7 @@ taşı(<span class="n">3</span>, <span class="n">1</span>, <span class="n">3</sp
 <section class="soru" id="KIV-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-3-A1</span> Üç tanım, eşle ile</h3>
 <p>Kitapçığın <code>toplam</code>'ı gibi, <code>eşle</code>/<code>durum</code> ile: <code>boy(d)</code> (Boş 0, yoksa 1 + gerisinin boyu), <code>enBüyük(d)</code> (tek öge kendisi; yoksa başı ile gerisinin en büyüğünden büyüğü), <code>ters(d)</code> (gerisinin tersi, sonuna baş: <code>:+</code> ya da <code>sonunaEkle</code>). Hazır <code>boyu</code>, <code>enİrisi</code>, <code>tersi</code> ile karşılaştırın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>boy: 6 6
@@ -225,6 +252,7 @@ ters: 9 5 1 4 1 3 = 9 5 1 4 1 3</code></pre>
 <section class="soru" id="KIV-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-3-A2</span> Permütasyonlar</h3>
 <p>Kitapçığın dördüncü alıştırması: <code>permütasyonlar(d: Dizin[Sayı]): Dizin[Dizin[Sayı]]</code>. Taban: boş dizinin tek sıralanışı var, boş. Adım: başı sırayla her öge yapın (<code>d.işle</code>), o öge çıkarılmış dizinin (<code>fark(Dizin(x))</code>) permütasyonlarının önüne ekleyin, hepsini birleştirin (<code>düzİşle</code>). <code>Dizin(1, 2, 3)</code> için altısını yazdırın; <code>belirt</code> ile 6'yı ve 4 öge için 24'ü sınayın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1 2 3
@@ -238,8 +266,13 @@ denemeler geçti.</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-3-A2"><code>alistirma-koco/kod/KIV-3-A2/</code></a></p>
 </section>
 <section class="soru" id="KIV-3-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIV-3-Z1</span> Kümeyi ikiye bölün</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">KIV-3-Z1</span> Kümeyi ikiye bölün</h3>
 <p>Kitapçığın beşinci alıştırması, <a href="https://cses.fi/problemset/task/1623">CSES Elma paylaşımı</a> (<em>Apple Division</em>): elmaları iki gruba ayırın, ağırlık farkı en az olsun. <code>altKümeler</code> tam bu iş: her altküme bir grup, kalanı öteki; farkların en küçüğü. <code>Dizin(3, 2, 7, 4, 1)</code> için yazdırın. Elma sayısı 20'de altküme sayısı kaç; CSES'in 1 saniyesine sığar mı? Toplamlar için <code>Uzun</code>.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her altküme bir grup; farkların en küçüğü.</p></details>
+<details><summary>Yaklaşım</summary><p><code>dez toplam = elmalar.topla</code>; <code>altKümeler(elmalar).işle(ak => (toplam - 2 * ak.topla).mutlak).enUfağı</code>. 20 elma için 2²⁰ altküme, bir milyon; saniyeye sığar.</p></details>
+<details><summary>İlk satır</summary><p><code>dez fark = altKümeler(elmalar).işle(ak => (toplam - 2 * ak.topla).mutlak).enUfağı</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>en küçük fark: 1</code></pre>
@@ -249,6 +282,11 @@ denemeler geçti.</code></pre>
 <section class="soru" id="KIV-3-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIV-3-K1</span> Hanoi&#x27;yi saymak</h3>
 <p>Hamleleri yazdırmadan sayan <code>hamle(n)</code>: taban 0, adım 2 × hamle(n − 1) + 1. 10 ve 20 için <code>Uzun</code> yeter; 64 için yetmez (2⁶⁴ − 1 > Uzun'un sınırı). <code>İriSayı</code> ile yazın ve kitapçığın efsanesini hesaplayın: saniyede bir hamleyle kaç yıl (bir yıl 31 557 600 saniye)? Kitapçık 584 milyar diyor; tam sayı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>hamle(n) = 2 · hamle(n−1) + 1</code>, taban 0; 64 için İriSayı.</p></details>
+<details><summary>Yaklaşım</summary><p><code>tanım hamle(n: Sayı): İriSayı = eğer (n == 0) 0 yoksa 2 * hamle(n - 1) + 1</code>; yıl için <code>hamle(64) / 31557600</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>tanım hamle(n: Sayı): İriSayı = eğer (n == 0) 0 yoksa 2 * hamle(n - 1) + 1</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>10: 1023
@@ -275,6 +313,7 @@ denemeler geçti.</code></pre>
 <section class="soru" id="KIV-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIV-4-I1</span> Kaç çağrı?</h3>
 <p>Kitapçığın iki Fibonaççi'si. İkisine de çağrı sayacı koyun (<code>den</code>), <code>fibYavaş(30)</code> ve <code>fibHızlı(30)</code> için sayıları yazdırın; sonra <code>fibHızlı(90)</code>. C++ cildindeki sayılarla aynı mı (2 692 537 ve 59)? Belleğin kaç kaydı var (<code>bellek.sayı</code>)?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIV-4-I1 · Kaç çağrı?</span>
@@ -306,6 +345,7 @@ bellek: 89 kayıt</code></pre>
 <section class="soru" id="KIV-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-4-A1</span> Collatz, bellekli</h3>
 <p>KII-2-Z2'nin Collatz adımı, bu sefer özyinelemeli ve bellekli: <code>adım(n) = 1 + adım(sonraki)</code>, taban <code>adım(1) = 0</code>; kenar defteri <code>Eşlem[Uzun, Sayı]</code> (ara değerler Sayı'yı aşabilir, Uzun kullanın). 10 000'e kadar en uzun zinciri bulun. Bellek olmadan ne kadar sürerdi; deneyin, sabrınız biterse <code>Durdur</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>en uzun: 6171 (261 adım)</code></pre>
@@ -315,6 +355,7 @@ bellek: 89 kayıt</code></pre>
 <section class="soru" id="KIV-4-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-4-A2</span> Pascal üçgeni, bellekli</h3>
 <p>Binom katsayısı: <code>binom(n, k) = binom(n−1, k−1) + binom(n−1, k)</code>, taban k == 0 ya da k == n için 1. Bellek anahtarı bir demet: <code>Eşlem[(Sayı, Sayı), Uzun]</code>. <code>binom(30, 15)</code>'i yazdırın; sonra belleği kapatıp (alYoksa yerine doğrudan hesap) aynı çağrıyı deneyin: kaç saniye? Bir de üçgenin ilk altı satırını yazdırın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1
@@ -330,6 +371,11 @@ binom(30, 15) = 155117520</code></pre>
 <section class="soru" id="KIV-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIV-4-Z1</span> Uzun&#x27;un sınırı, İriSayı</h3>
 <p><code>fibHızlı(90)</code> Uzun'a ucu ucuna sığıyor; 93 sığmaz. Belleği <code>Eşlem[Sayı, İriSayı]</code> yapıp <code>fibİri(n)</code> yazın: 93 ve 100'ü yazdırın. Sonra en basit sürümü, iki değişkenli döngüyü (<code>den a, b</code>) de yazın ve 100 için aynı sayıyı verdiğini gösterin. Üç sürüm: tanım, tanım + defter, döngü. Hangisi en kısa, hangisi en hızlı, hangisinin kanıtı tanımın kendisi?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı fib, türü İriSayı; döngülü sürüm iki değişken.</p></details>
+<details><summary>Yaklaşım</summary><p><code>fibİri</code>: kitapçığın <code>alYoksa</code> kalıbı, bellek <code>Eşlem[Sayı, İriSayı]</code>. Döngü: <code>den a: İriSayı = 0; den b: İriSayı = 1</code>, n kere <code>(a, b) = (b, a + b)</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>tanım fibİri(n: Sayı): İriSayı = eğer (n < 2) n yoksa bellek.alYoksa(n, { dez s = fibİri(n - 1) + fibİri(n - 2); bellek.eşEkle(n -> s); s })</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>93: 12200160415121876738
@@ -340,5 +386,67 @@ döngüyle 100: 354224848179261915075</code></pre>
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">IV.5</div>
+  <div class="govde">
+    <h2>Geri dönüş: altkümeler ve permütasyonlar, kümede</h2>
+    <p>Özyineleme üretir, küme toplar. Altküme toplamlarını ve tekrarlı harflerin dizilişlerini bir <code>Küme</code>'de biriktirin; tekrarları ve sıralamayı küme halleder.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec#kume-ve-eslem">kitapçık II.3: Küme ve eşlem</a> <a href="https://claude.ai/code/artifact/7d214fb0-5fd4-4074-a4ab-fe8ca99820dd#dizinlerde-ozyineleme">kitapçık IV.4: Dizinlerde özyineleme</a></p>
+    </div>
+
+<section class="soru" id="KIV-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-5-A1</span> Altküme toplamları, kümede</h3>
+<p><code>toplamlar(d)</code>: dizinin bütün altkümelerinin toplamlarını bir <code>Küme[Sayı]</code> olarak versin. Taban: boş dizinin tek altkümesi boş, toplamı 0. Adım: kuyruğun toplamlarını al; her birine başı ekleyerek ikinci bir küme kur; ikisini <code>++</code> ile birleştir. <code>Dizin(3, 1, 2, 4)</code> için kaç farklı toplam var? Kümeyi <code>dizine.sıralı</code> ile yazdırın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>11 farklı toplam
+0 1 2 3 4 5 6 7 8 9 10</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-5-A1"><code>alistirma-koco/kod/KIV-5-A1/</code></a></p>
+</section>
+<section class="soru" id="KIV-5-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIV-5-A2</span> Tekrarlı harflerin dizilişleri</h3>
+<p><code>dizilişler(d)</code>: bir harf dizininin bütün dizilişlerini <code>Küme[Dizin[Harf]]</code> olarak versin. Taban: boş dizinin tek dizilişi boş. Adım: <code>d.yinelemesiz</code> içindeki her harf için, o harfi bir kere çıkardığınız dizinin (<code>d.diff(Dizin(h))</code>) dizilişlerinin önüne harfi ekleyin; kümeleri <code>indirge</code> ile birleştirin. <code>"aab".dizine</code> için üç diziliş çıkmalı; <code>yazıYap("")</code> ile yazıya çevirip sıralı yazdırın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>3 farklı diziliş
+aab
+aba
+baa</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIV-5-A2"><code>alistirma-koco/kod/KIV-5-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#KIV-3-Z1"><code>KIV-3-Z1</code> Kümeyi ikiye bölün</a> <a href="#KIV-1-Z1"><code>KIV-1-Z1</code> Sierpinski üçgeni</a> <a href="#KIV-4-Z1"><code>KIV-4-Z1</code> Uzun&#x27;un sınırı, İriSayı</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

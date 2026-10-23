@@ -13,7 +13,7 @@
 <div class="blok">
   <div class="ray">I.1</div>
   <div class="govde">
-    <h2>Değer, ad, tür</h2>
+    <h2>Değer, ad, tür <span class="yol hizli">hızlı yol</span></h2>
 
     <p>
       Programlamanın tamamı şu üçlünün etrafında dönüyor. Bir <strong>değer</strong>
@@ -98,7 +98,7 @@ getline(cin, ad);             <span class="y">// boşluklu bir satırın tamamı
       </p>
     </div>
 
-    <h3>Her türün bir sınırı var</h3>
+    <h3>Her türün bir sınırı var <span class="yol yavas">yavaş yol</span></h3>
 
     <p>
       Şimdi çok öğretici bir hataya bakalım. Aşağıdaki programın çıktısını
@@ -179,7 +179,7 @@ unsigned long long'un en büyüğü : 18446744073709551615</code></pre>
 <div class="blok">
   <div class="ray">I.2</div>
   <div class="govde">
-    <h2>Kararlar ve tekrarlar</h2>
+    <h2>Kararlar ve tekrarlar <span class="yol hizli">hızlı yol</span></h2>
 
     <p>
       Şimdiye kadarki program yukarıdan aşağıya bir kere aktı. Programı
@@ -392,7 +392,7 @@ unsigned long long'un en büyüğü : 18446744073709551615</code></pre>
 <div class="blok">
   <div class="ray">I.4</div>
   <div class="govde">
-    <h2>Adların nerede geçerli olduğu</h2>
+    <h2>Adların nerede geçerli olduğu <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       Bir değişkenin adı her yerde tanınmıyor. Süslü parantezin içinde tanımlanan bir
@@ -496,6 +496,36 @@ unsigned long long'un en büyüğü : 18446744073709551615</code></pre>
         öğrenmenin gerçekten olduğu an orası.
       </p>
     </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · tahmin oyunu, 1. adım</span>
+      <p>
+        Bu bölümün oyunu, kitapçık boyunca büyüyecek projenizin ilk sürümü. Bugünkü ek küçük: oyun bitince kaç tahminde bulunduğunuzu yazdırsın ve oyuncu &ldquo;bir daha?&rdquo; sorusuna <code>e</code> derse yeniden başlasın. Kodu <code>proje/</code> diye bir klasörde saklayın; her bölümün sonunda ona bir parça ekleyeceğiz ve VI. bölümün sonunda elinizde I'den VI'ya kadar her konuyu kullanan tek bir program olacak.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Bir değişkeni türüyle tanımlayıp ilk değerini süslü parantezle verebilirim.</li>
+        <li><code>int</code>'in sınırını söyleyebilir, taşacak bir hesabı <code>long long</code>'a taşıyabilirim.</li>
+        <li><code>if</code>, <code>for</code> ve <code>while</code> ile bir aralığı gezip koşula uyanları toplayabilirim.</li>
+        <li>Tekrar eden bir işi işleve çıkarıp iki ayrı yerden çağırabilirim.</li>
+        <li>Tahmin oyununu baştan yazabilir, yedi hakkın neden yettiğini anlatabilirim.</li>
+        <li>Bir adın hangi süslü parantezin içinde geçerli olduğunu gösterebilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li><code>int a{3}; a = 7 / 2;</code> satırından sonra <code>a</code> kaç? Peki <code>double b{7 / 2};</code> ile <code>b</code>? <a href="#deger-ad-tur">Değer, ad, tür</a></li>
+        <li>1'den <em>n</em>'ye kadar sayıların çarpımı hangi <em>n</em>'den sonra <code>int</code>'e sığmaz? Programla bulun, sonra <code>long long</code> için yineleyin. <a href="#her-turun-bir-siniri-var">Her türün bir sınırı var</a></li>
+        <li>Bir işlevin içinde tanımlanan değişkeni <code>main</code>'den okumaya çalışınca derleyici tam olarak ne der? Deneyin ve iletiyi Türkçeye çevirin. <a href="#adlarin-nerede-gecerli-oldugu">Adların nerede geçerli olduğu</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
   </div>
 </div>
 

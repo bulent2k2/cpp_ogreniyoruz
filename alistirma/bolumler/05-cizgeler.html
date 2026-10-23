@@ -22,6 +22,7 @@
 <section class="soru" id="V-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-1-I1</span> Yönsüzden yönlüye</h3>
 <p>Program bağları <em>yönsüz</em> okuyor: her <code>a b</code> satırı için hem <code>a</code>'nın listesine <code>b</code> hem <code>b</code>'nin listesine <code>a</code> ekleniyor. Tek satır silip çizgeyi <em>yönlü</em> yapın: yalnız <code>a → b</code>. Çıktıdaki hangi satırlar değişir? Girdi altı noktalı, altı bağlı bir çizge; sonraki alıştırmalar da aynı dosyayı kullanacak.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -67,6 +68,7 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <section class="soru" id="V-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-1-A1</span> Komşuluk matrisi</h3>
 <p>Aynı girdi, öteki temsil: <code>n × n</code> bir matris, <code>km[a][b]</code> bağ varsa 1. Yönsüz okuyun, matrisi satır satır yazın (sayılar arasında boşluk). Matris neden simetrik? Yönlü olsaydı olmazdı; bir deneyin. Kitapçığın tablosu: bu temsil ne zaman iyi?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
 <pre><code>0 1 1 0 0 0
@@ -81,6 +83,7 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <section class="soru" id="V-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-1-A2</span> Dereceler</h3>
 <p>Bir noktanın <strong>derecesi</strong> komşu sayısı. Her nokta için derecesini yazın; sonra en çok komşusu olan noktayı (eşitlikte küçük numaralı). Derecelerin toplamı bağ sayısının neden tam iki katı? Bu, çizge kuramının ilk teoremi.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
 <pre><code>1: 2
@@ -97,6 +100,11 @@ derece toplamı: 12</code></pre>
 <section class="soru" id="V-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-1-Z1</span> Königsberg&#x27;in köprüleri</h3>
 <p>Euler'in 1736'daki yanıtı tek bir sayıya bakıyor: derecesi <em>tek</em> olan nokta sayısı. Sıfırsa her köprüden bir kere geçip başa dönen bir yürüyüş var (Euler çevrimi); tam ikiyse başa dönmeyen bir yürüyüş var (Euler yolu); başka bir sayıysa yok. Girdi Königsberg'in kendisi: dört kara parçası, yedi köprü (aynı iki nokta arasında birden çok bağ olabilir, buna dikkat). Programınız üç durumdan hangisi olduğunu söylesin; sonra girdiyi değiştirip öteki iki durumu da üretin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Euler'in ölçütü yalnızca derecelere bakıyor; çoklu bağlar dereceyi iki kere artırır.</p></details>
+<details><summary>Yaklaşım</summary><p><code>vector&lt;int&gt; derece(n + 1)</code>; her bağ için iki ucu bir artırın; tek dereceli sayısını sayın; 0 / 2 / başka diye üç dal.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int k{0}; k &lt; m; ++k) { int a, b; cin &gt;&gt; a &gt;&gt; b; ++derece[a]; ++derece[b]; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 7 1 2 1 2 1 3 1 3 1 4 2 4 3 4</span></figcaption>
 <pre><code>tek dereceli nokta sayısı: 4
@@ -121,6 +129,7 @@ Euler yolu yok: her köprüden tam bir kere geçmek olanaksız</code></pre>
 <section class="soru" id="V-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-2-I1</span> Üçten başlayın</h3>
 <p>Üç geziyi de 1 yerine 3'ten başlatın. Çizge yönlü; 3'ten 2'ye bir yol var mı, yedi nokta da görünüyor mu? Önce kâğıtta okları izleyin, sonra çalıştırın. Sonra <code>bagla(6, 1)</code> satırını silip tekrar bakın: şimdi hangileri kayboldu, neden?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>derinlemesine (özyineleme): 3 4 6 1 2 5 7 
@@ -132,6 +141,7 @@ enlemesine    (kuyrukla)  : 3 4 6 7 1 5 2 </code></pre>
 <section class="soru" id="V-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-2-A1</span> Erişilebilenler</h3>
 <p>Girdiden yönlü çizge okuyun (kitapçığın yedi noktalı çizgesi), 1'den derinlemesine gezin; erişilebilen noktaları küçükten büyüğe ve sayısını yazın. Gezinin sırası değil, kümesi önemli: <code>gezildi</code> dizisini sonunda tarayın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
 <pre><code>1&#x27;den erişilebilen: 1 2 3 4 5 6 7
@@ -142,6 +152,7 @@ enlemesine    (kuyrukla)  : 3 4 6 7 1 5 2 </code></pre>
 <section class="soru" id="V-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-2-A2</span> Yol var mı?</h3>
 <p>Çizgeden sonra sorular geliyor: her satırda <code>a b</code>; <code>a</code>'dan <code>b</code>'ye yol var mı? Her soru için geziyi sıfırlayıp <code>a</code>'dan başlatın; <code>evet</code> ya da <code>hayır</code>. Girdi kitapçığın çizgesi ve dört soru. Sorular çoğalınca her seferinde baştan gezmek pahalı olur; V.3 bunun çaresini gösterecek (yönsüz çizgede).</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5 4 1 7 3 2 6 5 7 6</span></figcaption>
 <pre><code>1 -&gt; 7: evet
@@ -154,6 +165,11 @@ enlemesine    (kuyrukla)  : 3 4 6 7 1 5 2 </code></pre>
 <section class="soru" id="V-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-2-Z1</span> Gezi ağacı</h3>
 <p>Derinlemesine gezi bir ağaç çizer: her noktaya ilk kez hangi noktadan geldik? Kalıba iki girdi ekleyin: <code>gez(bu, nereden, derinlik)</code>. Her nokta için &ldquo;nereden, derinlik&rdquo; yazın (1 için kök). Girdi kitapçığın çizgesi. En derin nokta hangisi? Kitapçığın çıktısındaki sırayla (<code>1 2 5 7 3 4 6</code>) karşılaştırın: ağaç o sırayı açıklıyor mu?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her noktaya ilk kez geldiğimiz nokta ve o andaki derinlik ağacın kendisi.</p></details>
+<details><summary>Yaklaşım</summary><p><code>gez(bu, onceki, d)</code>: girişte <code>nereden[bu] = onceki; derinlik[bu] = d;</code>, komşulara <code>gez(su, bu, d + 1)</code>. En derin için derinlik dizisinin en büyüğü.</p></details>
+<details><summary>İlk satır</summary><p><code>void gez(Nokta bu, Nokta onceki, int d) { if (gezildi[bu]) return; gezildi[bu] = true; nereden[bu] = onceki; derinlik[bu] = d; for (Nokta su : komsular[bu]) gez(su, bu, d + 1); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
 <pre><code>1: kök
@@ -170,6 +186,11 @@ en derin: 6 (3)</code></pre>
 <section class="soru" id="V-2-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-2-K1</span> Yığın, özyinelemeyle aynı sırada</h3>
 <p>Kitapçığın çıktısında yığınlı gezi (<code>1 3 4 7 5 6 2</code>) özyinelemeliden (<code>1 2 5 7 3 4 6</code>) farklı sıra veriyor. Neden? Komşular yığına 2, 3 sırasıyla giriyor, 3 üstte kalıyor, önce o çıkıyor. <code>gez2</code>'yi öyle değiştirin ki sıra özyinelemeliyle aynı olsun; tek satır yeter (<code>&lt;algorithm&gt;</code>'da tersten yineleyici var, ya da döngüyü tersten kurun). Sonra düşünün: iki gezi de <em>doğru</em>; sıra ne zaman önemli olur?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yığın son koyduğunu önce verir; komşuları ters sırada koyarsanız ilkini önce alırsınız.</p></details>
+<details><summary>Yaklaşım</summary><p><code>for (auto it = komsular[bu].rbegin(); it != komsular[bu].rend(); ++it) yigin.push(*it);</code> — ya da indeksle tersten döngü.</p></details>
+<details><summary>İlk satır</summary><p><code>for (auto it = komsular[bu].rbegin(); it != komsular[bu].rend(); ++it) yigin.push(*it);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>derinlemesine (özyineleme): 1 2 5 7 3 4 6 
@@ -195,6 +216,7 @@ enlemesine    (kuyrukla)  : 1 2 3 5 4 7 6 </code></pre>
 <section class="soru" id="V-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-3-I1</span> Çapraz da komşu olsun</h3>
 <p>Program odaları sayıyor; dört yönlü komşuluk. Komşuluğu sekiz yöne çıkarın (çaprazlar da bağlasın): oda sayısı ne olur? Girdi CSES'in örneğinin bir duvarı açılmış hâli (dört yönlüde yine 3 oda). Çıktı iki satır olsun: dört yönlü ve sekiz yönlü sayım. Duvar çerçevesi sayesinde köşegen çağrılar da taşmıyor; neden?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -248,6 +270,7 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
 <section class="soru" id="V-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-3-A1</span> Odaları sayın, yığınla</h3>
 <p>Kitapçığın birinci alıştırması: <a href="https://cses.fi/problemset/task/1192">CSES 1192</a>, bu sefer özyineleme yerine <code>std::stack</code> ile. V-3-I1'in <code>gez</code>'ini yığınlı yazın (40-gezi'deki <code>gez2</code> kalıbı, karelerle). Çıktı yalnız oda sayısı; CSES'e gönderin. Büyük haritada (1000×1000) özyinelemeli sürüm neden çökebilir, yığınlı neden çökmez?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ####.#.# #..#...# ########</span></figcaption>
 <pre><code>3</code></pre>
@@ -257,6 +280,7 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
 <section class="soru" id="V-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-3-A2</span> En büyük oda</h3>
 <p>Odaları saymak yetmiyor; en büyüğü kaç kare? <code>gez</code> bir <code>bool</code> yerine <em>kare sayısı</em> döndürsün: kendisi 1, artı dört komşudan dönenlerin toplamı. Girdi aynı; çıktı oda sayısı ve en büyük odanın kare sayısı.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #..#...# ####.#.# #..#...# ########</span></figcaption>
 <pre><code>3 oda, en büyüğü 8 kare</code></pre>
@@ -264,8 +288,13 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-3-A2"><code>alistirma/kod/V-3-A2/</code></a></p>
 </section>
 <section class="soru" id="V-3-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-3-Z1</span> Yol ağı tasarımı</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">V-3-Z1</span> Yol ağı tasarımı</h3>
 <p><a href="https://cses.fi/problemset/task/1666">CSES 1666</a>, kitapçığın üçüncü alıştırması: n şehir, bazıları arasında yol; herkesin herkese ulaşması için en az kaç yeni yol gerekir, hangileri? Kitapçığın <code>parcayaEkle</code> kalıbı: parçaları numaralayın, her parçanın temsilcisini saklayın, temsilcileri zincir gibi bağlayın. Girdi CSES örneği (<code>4 2</code>, yollar 1-2, 3-4). Çıktı: yeni yol sayısı, sonra yollar. Başka bir doğru yanıt da olabilir; CSES hepsini kabul eder, bizim beklenen çıktı temsilcileri küçükten büyüğe zincirliyor.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her parçanın bir temsilcisi var; parçaları ardışık temsilcilerle bağlamak yeter.</p></details>
+<details><summary>Yaklaşım</summary><p><code>parcayaEkle</code> ile her noktayı numaralayın; her parça numarası için ilk görülen noktayı <code>temsilci</code> dizisine yazın; yeni yollar <code>temsilci[i]–temsilci[i+1]</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>vector&lt;Nokta&gt; temsilci; for (Nokta p{1}; p &lt;= n; ++p) if (parca[p] == 0) { temsilci.push_back(p); parcayaEkle(p, temsilci.size()); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 2 1 2 3 4</span></figcaption>
 <pre><code>1
@@ -290,6 +319,7 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
 <section class="soru" id="V-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-4-I1</span> Önce B&#x27;yi taşıyın, sonra bir duvar yıkın</h3>
 <p>Kitapçığın labirentinde A'dan B'ye 10 adım: dört aşağı, altı sağa; bu kadar kısa bir yolu hiçbir duvar yıkımı kısaltamaz (neden?). İki değişiklik yapın. Önce B'yi ortadaki odaya taşıyın: dördüncü satırı <code>#.#.B.#.#</code> yapın, altıncı satırdaki B'yi <code>.</code> yapın; yol kaç adıma uzadı? Sonra ikinci satırda A'nın sağındaki duvarı yıkın (<code>#A......#</code>); şimdi kaç adım, tarifi ne? Her ikisini de çalıştırmadan önce kâğıtta sayın. Beklenen çıktı ikinci durumun.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>en kısa yol 5 adım: RRDDR</code></pre>
@@ -299,6 +329,7 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
 <section class="soru" id="V-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-4-A1</span> Uzaklık haritası</h3>
 <p>Yol tarifi yerine harita: A'dan her kareye kaç adım? Enlemesine gezi her karenin uzaklığını &ldquo;geldiğim karenin uzaklığı + 1&rdquo; diye yazsın. Haritayı basın: duvar <code>##</code>, ulaşılamayan <code>..</code>, ötekiler iki haneli uzaklık (<code>setw(2)</code>). Girdi CSES biçiminde (satır sütun, plan; A başlangıç, B hedef). B'deki sayı V-4-A2'nin yanıtı olacak.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #.A#...# #.##.#B# #......# ########</span></figcaption>
 <pre><code>################
@@ -312,6 +343,7 @@ Tahta oku(<span class="t">int</span>&amp; n, <span class="t">int</span>&amp; m) 
 <section class="soru" id="V-4-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-4-A2</span> Labyrinth</h3>
 <p><a href="https://cses.fi/problemset/task/1193">CSES 1193</a>, kitapçığın ikinci alıştırması: A'dan B'ye var mı, kaç adım, tarifi (<code>U D L R</code>). Kitapçığın &ldquo;nereden geldim&rdquo; numarası: her kareye geliş yönünü yazın, B'den geriye yürüyüp tarifi okuyun, ters çevirin. Çıktı CSES biçimi: <code>YES</code>, adım sayısı, tarif; ya da <code>NO</code>. Birden çok en kısa yol olabilir; bizim beklenen çıktı yönleri U, D, L, R sırasıyla deneyen sürümünki.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #.A#...# #.##.#B# #......# ########</span></figcaption>
 <pre><code>YES
@@ -323,6 +355,11 @@ LDDRRRRRU</code></pre>
 <section class="soru" id="V-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-4-Z1</span> Genel çizgede en kısa yol</h3>
 <p>Izgara değil, komşuluk listesi: yönsüz çizgede 1'den her noktaya en az kaç bağ? Enlemesine gezi, <code>uzaklik</code> ve <code>nereden</code> dizileriyle. Her nokta için uzaklığı yazın, sonra 1'den n'e yolu (<code>nereden</code> zincirini geri sararak). Girdi altı noktalı çizge. Yol yoksa <code>yol yok</code>.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Enlemesine gezi uzaklığı verir; <code>nereden</code> dizisi yolu geri sarar.</p></details>
+<details><summary>Yaklaşım</summary><p>Kuyrukla gezide komşuya girerken <code>uzaklik[su] = uzaklik[bu] + 1; nereden[su] = bu;</code>. Yolu <code>n</code>'den başlayıp <code>nereden</code>'i izleyerek bir vektöre koyun, sonra ters çevirin.</p></details>
+<details><summary>İlk satır</summary><p><code>for (Nokta p{n}; p != 0; p = nereden[p]) yol.push_back(p); reverse(yol.begin(), yol.end());</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
 <pre><code>1: 0
@@ -336,8 +373,13 @@ LDDRRRRRU</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-4-Z1"><code>alistirma/kod/V-4-Z1/</code></a></p>
 </section>
 <section class="soru" id="V-4-K1">
-<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-4-K1</span> Satranç atı</h3>
+<h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-4-K1</span> Satranç atı <span class="sure">~2 saat</span></h3>
 <p>At, 8×8 tahtada <code>a1</code>'den <code>h8</code>'e en az kaç hamlede gider? Çizge görünmez: her karenin komşuları atın sekiz sıçraması. Enlemesine gezi; girdi iki kare (<code>a1 h8</code>). Sonra kitapçığın <em>Neden en kısa?</em> kutusunu kendi sözlerinizle yazın: kuyruktan çıkan karelerin uzaklığı neden hiç azalmaz? Bu bir tümevarım; dört beş cümle yeter, kod yazmaktan daha değerli.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Tahta bir çizge: kare düğüm, atın sıçraması bağ; komşular hesaplanır, saklanmaz.</p></details>
+<details><summary>Yaklaşım</summary><p>Sekiz sıçramayı iki dizide tutun (<code>DX</code>, <code>DY</code>); kuyrukla gezin, <code>uzaklik[8][8]</code> −1 ile başlasın. Harfi ve rakamı sayıya çevirme kodu hazır.</p></details>
+<details><summary>İlk satır</summary><p><code>const int DX[8]{1,2,2,1,-1,-2,-2,-1}, DY[8]{2,1,-1,-2,-2,-1,1,2};</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: a1 h8</span></figcaption>
 <pre><code>a1 -&gt; h8: 6 hamle</code></pre>
@@ -361,6 +403,7 @@ LDDRRRRRU</code></pre>
 <section class="soru" id="V-5-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-5-I1</span> Kitapçığın ilk hatası</h3>
 <p>Program iki takım kuruyor; ama kitapçığın <em>İki hata, iki ders</em> kutusundaki ilk hata burada: bir <code>else</code> eksik (süslü ayraçlar yerinde, yalnız sözcük yok), taban durumu yok, gezi durmuyor (çökene kadar kendini çağırır). Yeri bulup <code>else</code>'i koyun. Girdi: beş kişi, üç arkadaşlık. Kitapçık bu hatayı <code>gdb</code> ile bulmuş; siz de deneyin: <code>backtrace</code> sonsuz tekrarı gösterir.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -416,6 +459,7 @@ Dizi&lt;Takim&gt; takim;
 <section class="soru" id="V-5-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-5-A1</span> Üçgen</h3>
 <p>Kitapçığın dördüncü alıştırması: <a href="https://cses.fi/problemset/task/1668">CSES 1668</a>. V-5-I1'in düzeltilmiş programı bunu zaten çözüyor; şimdi mümkün olmayan bir girdi: 1-2, 2-3, 3-1 üçgeni. Çıktı <code>IMPOSSIBLE</code>. Sonra düşünün: hangi çizgeler ikiye bölünemez? Kitapçığın ipucu: tek sayıda bağdan oluşan bir çevrim. Girdiye bir dörtgen (çift çevrim) ekleyip bölünebildiğini de görün.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 3 1 2 2 3 3 1</span></figcaption>
 <pre><code>IMPOSSIBLE</code></pre>
@@ -425,6 +469,7 @@ Dizi&lt;Takim&gt; takim;
 <section class="soru" id="V-5-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-5-A2</span> Çevrim var mı?</h3>
 <p>Yönsüz çizgede çevrim var mı? Derinlemesine gezide zaten gezilmiş bir komşuya rastlamak çevrim demek &mdash; <em>bir istisnayla</em>: az önce geldiğimiz nokta (yönsüz bağ iki yöne de görünür). Kalıba &ldquo;bir önceki nokta&rdquo; girdisini ekleyin. Girdi altı noktalı çizge: çevrim var (1-2-4-3). Çıktı <code>çevrim var</code> ya da <code>çevrim yok</code>; 5-6 bağını silip bir de ağaç deneyin.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 6 6 1 2 1 3 2 4 3 4 4 5 5 6</span></figcaption>
 <pre><code>çevrim var</code></pre>
@@ -434,6 +479,11 @@ Dizi&lt;Takim&gt; takim;
 <section class="soru" id="V-5-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-5-Z1</span> Gidiş dönüş</h3>
 <p><a href="https://cses.fi/problemset/task/1669">CSES 1669</a> (<em>Round Trip</em>), kitapçığın beşinci alıştırması: çevrimi <em>yazın</em>. V-5-A2'ye <code>nereden</code> dizisini ekleyin; gezilmiş bir komşuya (<code>su</code>) rastlayınca <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar geri yürüyün, başa <code>su</code>'yu da koyun. Çıktı CSES biçimi: çevrimin nokta sayısı (başlangıç iki kere sayılır), sonra noktalar. Girdi CSES örneği. Başka çevrimler de doğru; bizim beklenen çıktı komşuları girdi sırasıyla gezen sürümünki.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Gezilmiş bir komşuya (geldiğin yer hariç) rastlamak çevrim demek; yolu <code>nereden</code>'den okuyun.</p></details>
+<details><summary>Yaklaşım</summary><p><code>gez(bu, onceki)</code> komşu <code>su</code> gezilmişse ve <code>su != onceki</code> ise: <code>bu</code>'dan <code>nereden</code> zinciriyle <code>su</code>'ya kadar noktaları toplayın, başa <code>su</code> koyun, <code>true</code> döndürün.</p></details>
+<details><summary>İlk satır</summary><p><code>for (Nokta p{bu}; p != su; p = nereden[p]) cevrim.push_back(p); cevrim.push_back(su); reverse(...); cevrim.insert(cevrim.begin(), su);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 6 1 3 1 2 5 3 1 5 2 4 4 5</span></figcaption>
 <pre><code>4
@@ -458,6 +508,7 @@ Dizi&lt;Takim&gt; takim;
 <section class="soru" id="V-6-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-6-I1</span> En yakın canavar</h3>
 <p>Program her karenin en yakın canavara uzaklığını hesaplıyor: bütün <code>M</code>'ler önce kuyruğa, sonra tek gezi. Haritayı basıyor. Bir satır ekleyin: canavardan en uzak kare kaç adım uzakta? Girdi CSES'in canavar örneği.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
 <pre><code>################
@@ -472,6 +523,7 @@ en uzak kare: 6 adım</code></pre>
 <section class="soru" id="V-6-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-6-A1</span> Yavaş ve hızlı, yan yana</h3>
 <p>Kitapçığın iki parçasını aynı programda yazın: <em>yavaş</em> (her canavar için ayrı gezi, her karede küçüğü tut) ve <em>hızlı</em> (hepsi aynı kuyrukta). İkisi de aynı haritayı vermeli; kuyruktan kaç kare çıktığını sayın. Çıktı: <code>aynı</code> ya da <code>FARKLI</code>, sonra iki sayı. Girdi aynı. Kitapçığın <code>c × n × m</code> / <code>c + n × m</code> oranı burada kaç?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
 <pre><code>aynı
@@ -481,8 +533,13 @@ hızlı: 16 çıkarma</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-6-A1"><code>alistirma/kod/V-6-A1/</code></a></p>
 </section>
 <section class="soru" id="V-6-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-6-Z1</span> Monsters</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">V-6-Z1</span> Monsters <span class="sure">~2 saat</span></h3>
 <p><a href="https://cses.fi/problemset/task/1194">CSES 1194</a>: labirentin kenarına canavarlardan önce varabilir misiniz? İki gezi: önce canavarların uzaklık haritası (V-6-I1), sonra sizin geziniz &mdash; bir kareye yalnız canavardan <em>daha erken</em> varabiliyorsanız girin. Kenara varınca <code>YES</code>, adım sayısı ve tarif (V-4-A2'deki &ldquo;nereden&rdquo; numarası). Girdi CSES örneği; beklenen çıktı U, D, L, R sırasıyla deneyen sürümünki, başka tarifler de doğru.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki uzaklık haritası: canavarlarınki önce, sizinki sonra; bir kareye yalnız erken varırsanız girin.</p></details>
+<details><summary>Yaklaşım</summary><p>Çok kaynaklı gezi (bütün <code>M</code>'ler kuyruğa) → <code>canavar[r][c]</code>; sonra <code>A</code>'dan gezi, komşuya geçiş koşulu <code>benim + 1 &lt; canavar[nr][nc]</code>; kenara varınca <code>nereden</code> ile tarifi geri sarın.</p></details>
+<details><summary>İlk satır</summary><p><code>if (uzak[nr][nc] == -1 and uzak[r][c] + 1 &lt; canavar[nr][nc]) { uzak[nr][nc] = uzak[r][c] + 1; nereden[nr][nc] = {r, c}; kuyruk.push({nr, nc}); }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
 <pre><code>YES
@@ -494,6 +551,11 @@ RRDDR</code></pre>
 <section class="soru" id="V-6-Z2">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-6-Z2</span> En güvenli kare</h3>
 <p>Tersine soru: duvarlardan en uzak kare hangisi? Bütün duvarları (ve tahtanın dışını) kaynak yapın; her boş karenin en yakın duvara uzaklığı çıkar; en büyüğünü bulun. Çerçeve numarası burada işinize yarar: dışarıyı da duvar sayın. Girdi aynı plan; çıktı en güvenli kare(ler)in uzaklığı ve kaç kare olduğu.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her boş karenin en yakın duvara uzaklığı: duvarları kaynak yapıp enlemesine gezin.</p></details>
+<details><summary>Yaklaşım</summary><p>Haritayı bir satır ve sütun çerçeveyle büyütüp dışı duvar sayın; bütün duvarlar uzaklık 0 ile kuyruğa; gezi bitince boş karelerin en büyük uzaklığı ve o uzaklıkta kaç kare.</p></details>
+<details><summary>İlk satır</summary><p><code>vector&lt;string&gt; g(n + 2, string(m + 2, '#')); for (int r{0}; r &lt; n; ++r) for (int c{0}; c &lt; m; ++c) g[r+1][c+1] = plan[r][c];</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 8 ######## #M..A..# #.#.M#.# #M#..#.. #.######</span></figcaption>
 <pre><code>en yakın duvara en uzak: 1 adım, 16 kare</code></pre>
@@ -503,6 +565,11 @@ RRDDR</code></pre>
 <section class="soru" id="V-6-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-6-K1</span> Monsters, büyük haritada</h3>
 <p>V-6-Z1'in programı, 40×60'lık üretilmiş bir haritada (girdi hazır). Önce yanıtı alın; sonra III.5'teki gibi ölçün: canavar sayısını kat kat artırsanız &ldquo;yavaş&rdquo; yöntem kaç kat yavaşlar, &ldquo;hızlı&rdquo; ne kadar? Sonra CSES'e gönderin (1000×1000, 1 s sınırı). Bir adım ötesi: canavarın da sizin de aynı anda vardığınız kareyi kim alır; CSES'in kuralı ile programınızın <code>&gt;=</code>'si uyuşuyor mu?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı program, büyük girdi; iş ölçmek ve sınır durumunu okumak.</p></details>
+<details><summary>Yaklaşım</summary><p>V-6-Z1'i kopyalayın; <code>chrono</code> ile süreyi <code>cerr</code>'e yazın; canavar sayısını girdide artırıp yeniden ölçün. CSES kuralı: aynı anda varılan kare canavarındır, <code>&lt;</code> katı olmalı.</p></details>
+<details><summary>İlk satır</summary><p><code>auto t0 = chrono::steady_clock::now();</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 40 60 ###############.############################################ #A..####..#......#.#....#..........#...##..#...............# #.....#..........#....#....#..#......###..#...#.....#......# ##.#......#...#....#.#.....#....#..#.......#...####.#..##..# #....#......##..##.........##...#..#.##.........#....##....# #....##.#...#.#...##.......#..#....#...........#...##...#.## #.#.#......##........##..............##.###.##.....#....##.# ##............#....#.......#..#...#.#......##...#...#.....## #.......##.####...#..##.#.#................#....#...#.#....# #........#...........##..#...#......#....#.....#.#....#.##.# #..#.##......##.....##........#..#..####....####.#...#.....# #.#..........##..#..##..####.......###...#.....#.#......#### #..###..#.######.#.#..........#..#.....##.#..##....#.##....# ##.....##........#.#..##..................#....####.#.##..## #.......###....#.#....#....#...#..#....##.##.#.##....#.#...# #........##...##.......#....##....###.###.###..#.........#.# #..#.....#.....#....#..........####.#.##..#..#...##..#..##.# #.#...#.........#...###....#.#................#..####.###### #....#.##...#.#.#.##...........###...#..#.....#.#......##..# ###..###....#.......###....#..#..##.##....#...##...##...#### #.#....#.....##..#..##....#.#........#.......#.............. #...#..#.....##..#............##.#.....#.#....#.#.##.......# #.##.#.........##...#.#..#..###...##...#.#.#.#....#.#......# #..................#..#.#..##.....#.#........###....###..### #.#..#.#.##......#.......##.......#..##....#.##.........##.# #.#.....#..#......#............#..#.....#.###....##.#.#....# ##.#..#..#..#...#....#..##..#..#.....#....#........##..#..## ###.#...#...#.#..#..#....##....#..#######..#.....#M.#..#.#.# #........#......##......#.#.........#..#.##.#.##..#....#...# ##..#...........................#........#.#.#.M#..#....#..# ###..#.....#...###.###...#.......#......#.#....M.......##..# #...#.........#.......#........#.#.....#.....#.......#.#..## ##......#.....#.#....#...#..#.#M.....#.#.......M......#...## #.#...#....#.##..###........##...#.#.....#.#...#......#..### #.##..#........#..#...#.#.#.#......###..M#......###........# #.##...#..#.#.#...##............#.#.#..##.#..##...#.##.#..M# ##.##.............#.#.......#..M.........#......#M..#.#....# #...#..#....#...#.#.#............###..###.#...#..##.#####..# #.##.........#...#..#......###............##....#..#.....### ##############################.#############################</span></figcaption>
 <pre><code>YES
@@ -528,6 +595,7 @@ DRRRDRRRURRRRURRRRU</code></pre>
 <section class="soru" id="V-7-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-7-I1</span> Ulaşılamayan şehir</h3>
 <p>Kitapçığın girdisine ulaşılamayan dördüncü bir şehir ekledik. Program onun uzaklığı için <code>SONSUZ</code>'u (10¹⁸) basıyor; bunu <code>-1</code> yapın. Tek satır. Sonra sorun: <code>SONSUZ</code> neden <code>1e18</code>, neden <code>numeric_limits&lt;long long&gt;::max()</code> değil? (İpucu: <code>u + sure</code> taşar mı?)</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 4 1 2 6 1 3 2 3 2 3 1 3 4</span></figcaption>
 <pre><code>0 5 2 -1 </code></pre>
@@ -537,6 +605,7 @@ DRRRDRRRURRRRURRRRU</code></pre>
 <section class="soru" id="V-7-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A1</span> Yolu da yazın</h3>
 <p>Uzaklık yetmez, rota lazım: <code>nereden[su] = bu</code> kaydını uzaklık iyileştiğinde tutun; sonunda n'den geriye yürüyün (V-4-Z1'deki gibi). Çıktı: 1'den her şehre uzaklık satırı, sonra <code>1 -> n</code> yolu. Girdi beş şehir, yedi hat (yönlü). Bir şehre iki yoldan aynı uzaklıkla varılırsa hangisi kaydedilir?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 7 1 2 4 1 3 1 3 2 2 2 4 5 3 4 8 4 5 3 3 5 10</span></figcaption>
 <pre><code>1: 0
@@ -551,6 +620,7 @@ DRRRDRRRURRRRURRRRU</code></pre>
 <section class="soru" id="V-7-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-7-A2</span> Dijkstra&#x27;yı kırın</h3>
 <p>Kitapçığın yedinci alıştırması. Girdide eksi ağırlıklı bir bağ var (beş şehir). Aynı programda iki hesap yapın: <em>klasik</em> Dijkstra ve <em>n−1 tur gevşetme</em> (Bellman–Ford'un en sade hâli, V.9'da ayrıntısı). Klasik Dijkstra: sıradan çıkan şehri bir <code>bitti</code> dizisinde işaretleyin ve bitmiş şehre bir daha dokunmayın (ne yeniden işleyin ne uzaklığını güncelleyin). Dikkat, kitapçığın <code>41-dijkstra.cpp</code>'si farklı: o yalnız eski kaydı atlar, 2'yi yeniden açar ve bu girdide doğru sonucu verir; neden? İki sonucu alt alta yazın; hangi şehirlerde ayrışıyorlar, neden? Dijkstra 2'yi &ldquo;işi bitti&rdquo; sayıp bir daha bakmıyor (bitmiş şehre dokunmuyor); eksi bağ o kararı sonradan bozuyor, hata 5'e de taşınıyor.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 5 1 2 1 2 5 1 1 3 5 3 4 -6 4 2 1</span></figcaption>
 <pre><code>Dijkstra : 0 1 5 -1 2
@@ -561,6 +631,11 @@ gevşetme : 0 0 5 -1 1</code></pre>
 <section class="soru" id="V-7-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-7-Z1</span> Eski kayıt</h3>
 <p><code>if (uzaklik[bu] &lt; u) continue;</code> satırı ne yapıyor? Bir şehir sıraya birden çok kere girebilir (her iyileşmede bir kayıt); eskisi çıkınca atlanır. Satırı sayaçlı yapın: kaç kayıt atlandı? Sonra satırı silip programı yine çalıştırın: sonuç değişir mi, kaç hat gevşetildi? İki sayıyı da yazın. Girdi V-7-A1'inki.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı şehir sıraya birden çok kere girebilir; eski kayıt çıkınca atlanmalı.</p></details>
+<details><summary>Yaklaşım</summary><p><code>if (uzaklik[bu] &lt; u) { ++atlanan; continue; }</code>; ikinci sürümde satırı silip her çıkışta gevşetme sayacını artırın. İki sürümü iki işlev yapın, aynı girdiyle çağırın.</p></details>
+<details><summary>İlk satır</summary><p><code>long long atlanan{0}, gevsetme{0};</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 7 1 2 4 1 3 1 3 2 2 2 4 5 3 4 8 4 5 3 3 5 10</span></figcaption>
 <pre><code>1: 0
@@ -576,6 +651,11 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <section class="soru" id="V-7-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-7-K1</span> Uçuş indirimi</h3>
 <p><a href="https://cses.fi/problemset/task/1195">CSES 1195</a> (<em>Flight Discount</em>): bir uçuşun bedelini yarıya indirme hakkınız var (bir kere, aşağı yuvarlayarak); 1'den n'e en ucuz yolculuk? Hile: her şehrin iki hâli var, &ldquo;indirim kullanılmadı&rdquo; ve &ldquo;kullanıldı&rdquo;; Dijkstra'yı <code>2n</code> düğümlü bu çizgede çalıştırın. Girdi CSES örneği; yanıt 2. Bir adım ötesi: indirim hakkı k olsaydı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Her şehrin iki hâli; indirim kullanılmadan ve kullanılarak varmak farklı düğümler.</p></details>
+<details><summary>Yaklaşım</summary><p><code>uzaklik[sehir][0/1]</code>; her hat için iki geçiş: aynı hâlde tam bedelle, 0'dan 1'e yarı bedelle (<code>s / 2</code>). Yanıt <code>min(uzaklik[n][0], uzaklik[n][1])</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>priority_queue&lt;tuple&lt;U, Nokta, int&gt;, vector&lt;...&gt;, greater&lt;&gt;&gt; sira;</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 3 4 1 2 3 2 3 1 1 3 7 2 1 5</span></figcaption>
 <pre><code>2</code></pre>
@@ -599,6 +679,7 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <section class="soru" id="V-8-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-8-I1</span> Bir yol daha</h3>
 <p>Kitapçığın dört şehrine bir yol ekleyin: <code>yol(1, 3, 1)</code>. Matristeki hangi hücreler değişir? Önce kâğıtta: 1'den 3'e artık 1; 2'den 4'e? 1 üzerinden 5+1+... Hesaplayın, sonra çalıştırın.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>        1   2   3   4
@@ -613,6 +694,7 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <section class="soru" id="V-8-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-8-A1</span> En kısa yollar II</h3>
 <p><a href="https://cses.fi/problemset/task/1672">CSES 1672</a> (<em>Shortest Routes II</em>): n şehir, m çift yönlü yol, q soru; her soru için iki şehir arasındaki en kısa uzaklık, yol yoksa <code>-1</code>. Girdi CSES örneği. Aynı iki şehir arasında birden çok yol olabilir: <code>min</code> ile okuyun. <code>SONSUZ + SONSUZ</code> taşmasın diye <code>1e15</code>'in neden yeterli olduğunu düşünün.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 3 5 1 2 5 1 3 9 2 3 3 1 2 2 1 1 3 1 4 3 2</span></figcaption>
 <pre><code>5
@@ -626,6 +708,11 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <section class="soru" id="V-8-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-8-Z1</span> Yolu geri kurmak</h3>
 <p>Floyd–Warshall uzaklığı veriyor, yolu değil. İkinci bir matris tutun: <code>sonraki[a][b]</code>, a'dan b'ye giderken ilk adım. Yol okununca (<code>f[a][b] &gt; f[a][o] + f[o][b]</code>) <code>sonraki[a][b] = sonraki[a][o]</code>. Sonunda a'dan b'ye yolu <code>sonraki</code>'yi izleyerek yazın. Girdi kitapçığın dört şehri ve iki soru (<code>1 4</code>, <code>2 4</code>).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>sonraki[a][b]</code> a'dan b'ye ilk adım; her iyileşmede ara şehrin ilk adımını devralır.</p></details>
+<details><summary>Yaklaşım</summary><p>Başta <code>sonraki[a][b] = b</code> her yol için; üç döngüde <code>if (f[a][o] + f[o][b] &lt; f[a][b]) { f[a][b] = ...; sonraki[a][b] = sonraki[a][o]; }</code>. Yol: <code>a</code>'dan <code>b</code>'ye <code>sonraki</code>'yi izleyin.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int p{a}; p != b; p = sonraki[p][b]) cout &lt;&lt; p &lt;&lt; " "; cout &lt;&lt; b;</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 4 2 1 2 5 1 4 9 2 3 2 3 4 7 1 4 2 4</span></figcaption>
 <pre><code>1 -&gt; 4: 1 4 (uzaklık 9)
@@ -636,6 +723,11 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <section class="soru" id="V-8-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-8-K1</span> Kim kime ulaşır?</h3>
 <p>Ağırlıkları atın, <code>bool</code> kalsın: <code>erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b])</code>. Yönlü çizgede erişilebilirlik matrisi (<em>geçişli kapanış</em>). Girdi kitapçığın yedi noktalı yönlü çizgesi; matrisi basın, sonra her nokta için kaç noktaya ulaştığını. n = 500'de <code>n³</code> = 1,25·10⁸: kaba kurala göre bir saniye; deneyin.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Uzaklık yerine evet/hayır; üç döngü aynı, işlem <code>or</code> ve <code>and</code>.</p></details>
+<details><summary>Yaklaşım</summary><p><code>erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b]);</code> — <code>o</code> en dışta. Sonra her satırın <code>true</code> sayısı.</p></details>
+<details><summary>İlk satır</summary><p><code>for (int o{1}; o &lt;= n; ++o) for (int a{1}; a &lt;= n; ++a) for (int b{1}; b &lt;= n; ++b) erisir[a][b] = erisir[a][b] or (erisir[a][o] and erisir[o][b]);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 7 9 1 2 1 3 2 5 3 4 4 6 4 7 5 7 6 1 7 5</span></figcaption>
 <pre><code>1 1 1 1 1 1 1
@@ -672,6 +764,7 @@ satırsız: aynı, gevşetilen hat: 7 yerine 9</code></pre>
 <section class="soru" id="V-9-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">V-9-I1</span> Kaç tur yetti?</h3>
 <p>Program kitapçığın skor sürümü: her tünelin ödülü/cezası, 1'den n'e en büyük skor, n−1 tur. Çoğu çizgede daha az tur yeter: bir turda hiçbir skor değişmediyse durun ve kaç tur attığınızı yazın. Girdi CSES'in <em>High Score</em> örneği (yanıt 5). Neden n−1 tur hep <em>yeterli</em>, ama çoğu zaman <em>gerekli</em> değil?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code>#include <span class="s">&lt;iostream&gt;</span>
@@ -714,6 +807,7 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <section class="soru" id="V-9-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-9-A1</span> Yüksek skor</h3>
 <p><a href="https://cses.fi/problemset/task/1673">CSES 1673</a> (<em>High Score</em>): 1'den n'e en büyük skor; sonsuza kadar artırılabiliyorsa <code>-1</code>. n'inci turda hâlâ iyileşen bir tünel varsa <em>o tünelin vardığı nokta</em> bir kârlı çevrimde ya da onun etkisinde. Ama dikkat: çevrim n'e ulaşmıyorsa sonsuz skor olmaz. Bu girdi (CSES örneği) çevrimsiz; yanıt 5. V-9-Z1 çevrimli hâlini verecek.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 3 2 4 -1 1 3 -2 3 4 7 1 4 4</span></figcaption>
 <pre><code>5</code></pre>
@@ -723,6 +817,11 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <section class="soru" id="V-9-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">V-9-Z1</span> Çevrim n&#x27;e ulaşmıyorsa</h3>
 <p>İki girdi düşünün: birinde kârlı çevrim 1'den n'e giden yolun üstünde, ötekinde kenarda, n'e ulaşmayan bir çıkmazda. İkincide yanıt <code>-1</code> değil. V-9-A1'in çözümü bunu nasıl ayırıyor? Girdide iki çizge art arda (her biri <code>n m</code> ile başlıyor); programınız ikisi için de yanıt versin. Kârlı çevrim 2-3-2 ikisinde de var; farkı 3'ten n'e yol olup olmaması.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Kârlı çevrim yalnız <code>n</code>'e ulaşıyorsa sonsuz skor demek.</p></details>
+<details><summary>Yaklaşım</summary><p>n'inci turda iyileşen noktaları işaretleyin; işaretli bir noktadan <code>n</code>'e yol var mı diye (tersten ya da düz) gezin. Girdiyi <code>while (cin &gt;&gt; n &gt;&gt; m)</code> ile iki kere okuyun.</p></details>
+<details><summary>İlk satır</summary><p><code>while (cin &gt;&gt; n &gt;&gt; m) { Dizi&lt;Tunel&gt; t(m); for (auto&amp; x : t) cin &gt;&gt; x.a &gt;&gt; x.b &gt;&gt; x.x; cout &lt;&lt; coz(n, t) &lt;&lt; endl; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 3 2 3 2 2 3 4 1 1 4 10 5 5 1 2 1 2 3 2 3 2 2 1 4 3 4 5 1</span></figcaption>
 <pre><code>-1
@@ -733,6 +832,11 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 <section class="soru" id="V-9-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">V-9-K1</span> Çevrim bulma</h3>
 <p><a href="https://cses.fi/problemset/task/1197">CSES 1197</a> (<em>Cycle Finding</em>): çizgede toplam ağırlığı eksi bir çevrim var mı; varsa yazın. Bu sefer en <em>küçük</em> uzaklık (min), başlangıç noktası yok: bütün uzaklıkları 0'dan başlatın (sanki her noktaya sıfır maliyetli bir kaynak bağlı). n'inci turda hâlâ iyileşen bir nokta bulun; <code>nereden</code> zincirini n kere geri sarıp çevrimin içine girdiğinizden emin olun, sonra çevrimi okuyun. Girdi CSES örneği; beklenen çıktı bizim sürümünki, başka çevrim de doğru.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Eksi çevrim: n'inci turda hâlâ iyileşen bir nokta var; nereden zincirini geri sarınca çevrimin içine düşersiniz.</p></details>
+<details><summary>Yaklaşım</summary><p>Bütün uzaklıklar 0; n tur gevşetme; son turda iyileşen <code>x</code>'i n kere <code>nereden</code> ile geri sarın (artık çevrimdesiniz), sonra kendine dönene kadar toplayın ve ters çevirin.</p></details>
+<details><summary>İlk satır</summary><p><code>Nokta p{x}; for (int k{0}; k &lt; n; ++k) p = nereden[p]; Nokta bas{p}; do { cevrim.push_back(p); p = nereden[p]; } while (p != bas);</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 5 1 2 1 2 4 1 3 1 1 4 1 -3 4 3 -2</span></figcaption>
 <pre><code>YES
@@ -742,5 +846,69 @@ template &lt;<span class="a">class</span> T&gt; <span class="a">using</span> Diz
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">V.10</div>
+  <div class="govde">
+    <h2>Geri dönüş: eşlemle çizge, özyinelemeyle oda</h2>
+    <p>Çizge kodunun altında hep eski tanıdıklar var: komşuluk listesi bir eşlem, derinlemesine gezi bir özyineleme. İki kısa soru, ikisi de o tanıdıkları adıyla çağırıyor.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f#eslem-en-cok-isinize-yarayacak-kap">kitapçık II.2: Eşlem</a> <a href="https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff#kendini-cagiran-islev">kitapçık IV.1: Kendini çağıran işlev</a> <a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc#cizge-nedir-nasil-saklanir">kitapçık V.1: Çizge nedir</a> <a href="https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc#1-kac-oda-var">kitapçık V.3: Kaç oda var</a></p>
+    </div>
+
+<section class="soru" id="V-10-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-10-A1</span> Dereceler, eşlemle</h3>
+<p>Girdi: bağ sayısı <em>m</em>, sonra <em>m</em> satırda yönsüz bağ (<code>A B</code>). Çizgeyi <code>map&lt;string, set&lt;string&gt;&gt;</code> olarak kurun: her düğüm komşularının kümesine. Çıktı: her düğüm ve derecesi (komşu sayısı) ada göre sıralı, son satırda en çok komşusu olan düğüm. Küme sayesinde aynı bağ iki kere gelse de derece şişmez; eşlem sayesinde düğümleri önceden saymanıza gerek yok.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 5 A B A C B C C D D E</span></figcaption>
+<pre><code>A: 2
+B: 2
+C: 3
+D: 2
+E: 1
+en çok komşu: C (3)</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-10-A1"><code>alistirma/kod/V-10-A1/</code></a></p>
+</section>
+<section class="soru" id="V-10-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">V-10-A2</span> Odaları özyinelemeyle sayın</h3>
+<p>Kitapçığın &ldquo;kaç oda var&rdquo; sorusu, bu sefer gezi kalıbı yerine doğrudan IV. bölümün özyinelemesiyle: <code>doldur(s, k)</code> kareyi işaretlesin, dört komşusunu çağırsın ve doldurduğu kare sayısını döndürsün. Girdi: satır ve sütun sayısı, sonra harita (<code>.</code> boş, <code>#</code> duvar). Çıktı: oda sayısı ve en büyük odanın kare sayısı. Taban durumunu ilk satıra yazın: sınır dışı, duvar ya da zaten dolu.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 4 6 ..#..# ..#..# ###### #...#.</span></figcaption>
+<pre><code>4 oda
+en büyük oda: 4 kare</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/V-10-A2"><code>alistirma/kod/V-10-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#V-4-Z1"><code>V-4-Z1</code> Genel çizgede en kısa yol</a> <a href="#V-3-Z1"><code>V-3-Z1</code> Yol ağı tasarımı</a> <a href="#V-6-Z2"><code>V-6-Z2</code> En güvenli kare</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

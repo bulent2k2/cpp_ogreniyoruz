@@ -27,6 +27,49 @@
   </div>
 </div>
 
+<div class="blok">
+  <div class="ray">Süre</div>
+  <div class="govde">
+    <div class="kutu puf">
+      <span class="basi">Ne kadar sürer?</span>
+      <p>
+        Basamak zaten zorluğu söylüyor; süre de ona bağlı.
+        <span class="basamak isinma">Isınma</span> on dakika: kitapçığın
+        programını çalıştırıp bir satırını değiştirmek.
+        <span class="basamak alistirma">Alıştırma</span> yirmi&ndash;otuz dakika:
+        aynı kalıpla yeni, küçük bir iş. <span class="basamak zor">Zorlayıcı</span>
+        kırk beş&ndash;doksan dakika: kalıbı bükmek, iki kalıbı birleştirmek ya da bir
+        hata bulmak. <span class="basamak kesif">Keşif</span> açık uçlu: bir akşam
+        da sürebilir, bir hafta da. Bu ölçünün dışına taşanların başlığında bir not
+        var: <span class="sure">~2 saat</span> gibi. Süreyi aşmak sorun değil;
+        hiç çıkmadan geçmek sorun.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">İkili</div>
+  <div class="govde">
+    <div class="kutu takim">
+      <span class="basi">İkili çalışma ve kod okuma listesi</span>
+      <p>
+        Sürücü&ndash;seyrüseferci düzeni Hazırlık'ta kalmasın: her bölümde iki
+        Zorlayıcı soru <span class="basamak ikili">ikili</span> imini taşıyor.
+        Onları ikili yazın; bitince kodu değişin ve birbirinizinkini şu beş
+        soruyla okuyun. Beşine de &ldquo;evet&rdquo; diyemediğiniz kod bitmemiştir.
+      </p>
+      <ol>
+        <li>Adlar anlaşılır mı? <code>x</code>, <code>tmp</code>, <code>a2</code> yerine ne demek istediğini söyleyen adlar var mı?</li>
+        <li>Tekrar var mı? Aynı üç satır iki yerde geçiyorsa işleve çıkmalı.</li>
+        <li>Sınır durumu denendi mi? Boş girdi, tek öğe, en büyük değer, eksi sayı.</li>
+        <li>Test var mı? En azından bir <code>assert</code> ya da altın dosya; &ldquo;çalıştırdım, oldu&rdquo; test değildir.</li>
+        <li>Çıktı biçimi doğru mu? Boşluk, satır sonu, sıra; <code>make test</code> sizin yerinize bakar.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
 
 <div class="blok">
   <div class="ray">H.1</div>
@@ -67,6 +110,7 @@
 <section class="soru" id="KH-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KH-1-I1</span> İlk çizgi, sonra L</h3>
 <p>Kitapçığın ilk iki satırı: yukarı bir çizgi, sonra doğuya dön. Üçüncü bir satır ekleyin: kaplumbağa 50 adım daha yürüsün. Tuvalde ters bir L belirmeli. Şimdi sorun: ilk satırı <code>ileri(100)</code> yerine <code>geri(100)</code> yapınca L nereye döner? Çalıştırmadan tahmin edin, sonra çalıştırın.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KH-1-I1 · İlk çizgi, sonra L</span>
@@ -81,6 +125,7 @@ sağ()        <span class="y">// 90 derece sağa dön</span>
 <section class="soru" id="KH-1-I2">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KH-1-I2</span> Kitapçığın sürprizi</h3>
 <p>Kare kodunda iki sayı var: 4 ve 100; bir de <code>sağ()</code>'ın gizli 90'ı. Kitapçığın &ldquo;Deneyin&rdquo;ini yapın: <code>yinele(3)</code> ile <code>sağ(120)</code>, <code>yinele(6)</code> ile <code>sağ(60)</code>, sonra <code>yinele(5)</code> ile <code>sağ(144)</code>. Sonuncusu neden kapalı bir şekil veriyor, üstelik beş köşeli? İpucu: dönüşlerin toplamı kaç derece? 360 değil.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KH-1-I2 · Kitapçığın sürprizi: 4 ve 90&#x27;ı değiştirin</span>
@@ -96,22 +141,30 @@ yinele(<span class="n">4</span>) {
 <section class="soru" id="KH-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KH-1-A1</span> Renkli kare</h3>
 <p>Kitapçığın komut tablosundan dört komut: <code>kalemRenginiKur</code>, <code>boyamaRenginiKur</code>, <code>kalemKalınlığınıKur</code> ve <code>hızıKur</code>. Kareyi mavi kalemle, sarı dolguyla, kalın çizgiyle ve hızlı çizdirin. Sonra <code>kalemRenginiKur(rastgeleRenk)</code> satırını <em>döngünün içine</em> alın: dört kenar dört renk olur mu?</p>
+
 <p class="gorunum"><span class="etk">Tuvalde:</span> İçi sarı, kenarları kalın bir kare; döngü içindeki rastgeleRenk ile her kenar başka renk.</p>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-A1"><code>alistirma-koco/kod/KH-1-A1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
 </section>
 <section class="soru" id="KH-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KH-1-A2</span> Zıpla ve atla</h3>
 <p>İki kare yan yana, aralarında çizgi olmadan. <code>zıpla(150)</code> kalemi kaldırıp yürür; <code>atla(x, y)</code> ise çizmeden verilen noktaya gider. Birinci kareden sonra zıplayın, ikinciyi çizin; sonra <code>atla(-150, 0)</code> ile sola gidip üçüncüyü çizin. Dikkat: zıpladıktan sonra kaplumbağa hangi yöne bakıyor? Kareler yan yana mı çıktı, yoksa biri yukarıda mı?</p>
+
 <p class="gorunum"><span class="etk">Tuvalde:</span> Üç eş kare yan yana (x = -150, 0, 150), aralarında çizgi yok. sağ()/sol() olmadan ikinci kare yukarıya çıkar: kaplumbağa kuzeye bakıyordu.</p>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-A2"><code>alistirma-koco/kod/KH-1-A2/</code></a> &mdash; beklenen çıktı yok, çizim</p>
 </section>
 <section class="soru" id="KH-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KH-1-Z1</span> Kesik çizgili kare</h3>
 <p>Kesik çizgi: on kere &ldquo;10 adım çiz, 10 adım zıpla&rdquo;. Bunu bir karenin dört kenarına uygulayın: <code>yinele</code>'nin içinde <code>yinele</code>. İç döngü bitince kaplumbağa kenarın sonunda mı? Kaç tane kısa çizgi çizildi (sayın: 4 × ?)? Sonra zıplama boyunu 5 yapıp kareyi yeniden çizin: kenar uzunluğu değişti mi, çizgi sayısı mı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Bir kenar on kısa çizgi; dört kenar, dört kere on.</p></details>
+<details><summary>Yaklaşım</summary><p>Dıştaki <code>yinele(4)</code> kenarı, içteki <code>yinele(10)</code> çizgileri sayar; iç döngü bitince <code>sağ()</code>. Çizgi sayısı 4 × 10.</p></details>
+<details><summary>İlk satır</summary><p><code>yinele(4) { yinele(10) { ileri(10); zıpla(10) }; sağ() }</code></p></details>
+</div>
 <p class="gorunum"><span class="etk">Tuvalde:</span> Kenarı 200 adım olan, her kenarı on kısa çizgiden oluşan kesik çizgili bir kare: 40 kısa çizgi. Zıplama 5 olunca kenar 150'ye iner, çizgi sayısı yine 40.</p>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KH-1-Z1"><code>alistirma-koco/kod/KH-1-Z1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
 </section>
   </div>
 </div>
+
 
 <!--GEZINME-->

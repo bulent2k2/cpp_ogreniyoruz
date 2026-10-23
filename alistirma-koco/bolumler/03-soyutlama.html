@@ -22,6 +22,7 @@
 <section class="soru" id="KIII-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIII-1-I1</span> Çember olmaya çalışan çokgen</h3>
 <p>Kitapçığın <code>çokgen</code>'i: 3, 4, 6 ve 60 kenar. Her çağrıdan önce dış açıyı da yazdırın: <code>360.0 / kenarSayısı</code>. Sonra <code>çokgen(360, 1)</code> ekleyin: tuvalde ne var? Dış açı neden <code>360.0</code> ile hesaplanıyor da <code>360</code> ile değil (KI-2-A2'yi hatırlayın)?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIII-1-I1 · Çember olmaya çalışan çokgen</span>
@@ -52,6 +53,7 @@
 <section class="soru" id="KIII-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-1-A1</span> Yıldıza genelleme</h3>
 <p>Kitapçığın ikinci alıştırması: <code>yıldız(köşe: Sayı, kenar: Kesir)</code>. Beş köşelide dönüş 144'tü; formül ne? (İpucu: kaplumbağa iki tam tur atıyor: 2 × 360 / köşe.) Yedi ve dokuz köşeli için de çalıştırın, dönüş açılarını yazdırın. Sonra &ldquo;üç tur&rdquo;lu sürümü deneyin: 3 × 360 / 7 ne çizer?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>5 köşe: 144.0
@@ -64,6 +66,7 @@
 <section class="soru" id="KIII-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-1-A2</span> Hesapta da tekrar etmeyin</h3>
 <p>Program PE 1'i üç kere aynı zinciri yazarak çözüyor: 3'ün katları, 5'in katları, 15'in katları. Tekrarı bir işleve çıkarın: <code>katlarınToplamı(k: Sayı, sınır: Sayı)</code>. Sonra kapsama-dışlama: 3 + 5 − 15. Yanıt yine 233168. Dört satırlık program üç satıra iner; asıl kazanç nedir?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIII-1-A2 · Hesapta da tekrar etmeyin</span>
@@ -81,8 +84,13 @@ satıryaz(üçler + beşler - onbeşler)
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-1-A2"><code>alistirma-koco/kod/KIII-1-A2/</code></a></p>
 </section>
 <section class="soru" id="KIII-1-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIII-1-Z1</span> Izgara, iki yoldan</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">KIII-1-Z1</span> Izgara, iki yoldan</h3>
 <p><code>ızgara(satır, sütun, kenar)</code>: kareleri yan yana ve alt alta (<code>atla</code> ile) dizen bir işlev. Çizdiğiniz çizgileri sayın: <code>kare</code>'nin içine <code>den çizgi</code> sayacı koyun. 3×4 ızgara kaç çizgi? Ortak kenarlar iki kere çiziliyor; ızgarayı yalnız uzun yatay ve dikey çizgilerle kuran sürüm kaç <code>çiz</code> çağrısıyla aynı resmi çizer? İkisini de yazdırın: önce kare kare, sonra çizgi çizgi (sayaç <code>ileri</code>'yi sayan bir <code>çiz(boy)</code> işlevine taşınabilir).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Kare kare çizince ortak kenarlar iki kere; uzun çizgilerle her çizgi bir kere.</p></details>
+<details><summary>Yaklaşım</summary><p>Birinci sürüm: iki iç içe döngü, her karede <code>kare</code>, aralarda <code>atla</code>. İkinci sürüm: <code>satır + 1</code> yatay ve <code>sütun + 1</code> dikey uzun çizgi; sayaç her <code>çiz</code>'de artar.</p></details>
+<details><summary>İlk satır</summary><p><code>tanım ızgara(satır: Sayı, sütun: Sayı, kenar: Kesir) = yineleDizinli(satır) { s => yineleDizinli(sütun) { k => atla(k * kenar, s * kenar); kare(kenar) } }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>kare kare: 48 çizgi
@@ -108,6 +116,7 @@ satıryaz(üçler + beşler - onbeşler)
 <section class="soru" id="KIII-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIII-2-I1</span> Kaç kere çizdi?</h3>
 <p>Kitapçığın üç <code>dönence</code>'si. Bloğun kaç kere çalıştığını sayın: <code>den sayaç = 0</code>, her bloğa <code>sayaç = sayaç + 1</code>. Üç çağrıdan sonra sayaç kaç olmalı? Önce söyleyin, sonra yazdırın. <code>çizim: =&gt; Birim</code> girdisi &ldquo;çalıştırılmamış komutlar&rdquo;: sayacın artması bunu kanıtlıyor mu?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIII-2-I1 · Kaç kere çizdi?</span>
@@ -143,6 +152,7 @@ dönence(<span class="n">8</span>, <span class="n">45</span>) {
 <section class="soru" id="KIII-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-2-A1</span> bizimYineleDizinli</h3>
 <p>Kitapçığın &ldquo;Takım işi&rdquo;: <code>bizimYinele</code> hazır; sayacı da veren <code>bizimYineleDizinli(kaç: Sayı)(komutlar: Sayı =&gt; Birim)</code>'yi yazın. Özyinelemeli olacak; sayaç 0'dan başlasın ki <code>yineleDizinli</code> ile aynı davransın. İkisini yan yana çalıştırıp aynı satırları yazdırın. Sonra onunla bir merdiven çizin: k'inci basamak k + 1 birim.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>0 1 2 3 4 
@@ -154,6 +164,7 @@ dönence(<span class="n">8</span>, <span class="n">45</span>) {
 <section class="soru" id="KIII-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-2-A2</span> İki kere uygula</h3>
 <p>İşlev alan iki küçük işlev: <code>ikiKere(f: Sayı =&gt; Sayı, x: Sayı)</code> f'yi iki kere uygular; <code>bileşke(f, g)</code> ise <em>yeni bir işlev</em> döndürür: önce g, sonra f. <code>ikiKere(s =&gt; s * 2, 5)</code>, <code>ikiKere(s =&gt; s + 3, 5)</code>, <code>bileşke(s =&gt; s * 2, s =&gt; s + 3)(5)</code> ve tersini yazdırın. Son ikisi neden farklı?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>20
@@ -166,6 +177,11 @@ dönence(<span class="n">8</span>, <span class="n">45</span>) {
 <section class="soru" id="KIII-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIII-2-Z1</span> Kendi işle&#x27;niz, kendi ele&#x27;niz</h3>
 <p><code>işle</code> ve <code>ele</code> de sihir değil. <code>bizimİşle(d: Dizin[Sayı])(f: Sayı =&gt; Sayı): Dizin[Sayı]</code> ve <code>bizimEle(d)(deneme: Sayı =&gt; İkil)</code> yazın; şimdilik <code>den</code>, <code>herbiriİçin</code> ve <code>::</code> ile (öne ekleyip sonda <code>tersi</code>; KII-1-Z1). Gerçek <code>işle</code>/<code>ele</code> ile aynı sonucu verdiklerini yazdırın. Bölüm IV'te ikisini de <code>den</code>'siz, özyinelemeyle yazacağız.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>işle</code> her ögeye <code>f</code> uygulayıp yeni dizin kurar; <code>ele</code> deneyi geçenleri alır.</p></details>
+<details><summary>Yaklaşım</summary><p><code>den sonuç: Dizin[Sayı] = Boş</code>; <code>d.herbiriİçin(x => sonuç = f(x) :: sonuç)</code>; sonda <code>sonuç.tersi</code>. <code>ele</code> aynı, yalnız <code>eğer (deneme(x))</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>tanım bizimİşle(d: Dizin[Sayı])(f: Sayı => Sayı): Dizin[Sayı] = { den sonuç: Dizin[Sayı] = Boş; d.herbiriİçin(x => sonuç = f(x) :: sonuç); sonuç.tersi }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>işle: 9 1 16 1 25 = 9 1 16 1 25
@@ -176,6 +192,11 @@ ele: 3 1 1 5 = 3 1 1 5</code></pre>
 <section class="soru" id="KIII-2-Z2">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIII-2-Z2</span> Sayan döngü</h3>
 <p><code>kaçKere(koşul: =&gt; İkil)(adım: =&gt; Birim): Sayı</code>: koşul doğru kaldıkça adımı çalıştırsın ve kaç kere çalıştırdığını döndürsün. İki girdisi de &ldquo;çalıştırılmamış kod&rdquo;. Onunla iki eski soruyu yeniden yazın: KI-4-I1'in hak hesabı (1000 için) ve KII-2-Z2'nin Collatz adımı (27 için). Döngü yazmadınız; döngüyü <em>bir kere</em> yazıp iki kere kullandınız.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Döngüyü bir kere yazıp iki kere kullanmak: koşul ve adım, çalıştırılmamış kod olarak girdi.</p></details>
+<details><summary>Yaklaşım</summary><p><code>yineleDoğruysa(koşul) { adım; sayı = sayı + 1 }</code>; Collatz için <code>den s = 27</code> ve <code>kaçKere(s != 1) { s = eğer (s % 2 == 0) s / 2 yoksa 3 * s + 1 }</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>yineleDoğruysa(koşul) { adım; sayı = sayı + 1 }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>1000 için 10 hak
@@ -186,6 +207,11 @@ ele: 3 1 1 5 = 3 1 1 5</code></pre>
 <section class="soru" id="KIII-2-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIII-2-K1</span> Dönence içinde dönence</h3>
 <p><code>dönence</code>'nin bloğuna başka bir <code>dönence</code> koyun: <code>dönence(6, 60) { dönence(12, 30) { çokgen(3, 40) } }</code>. Sonra her katmana <code>rastgeleRenk</code>, kalem kalınlığı, <code>zıpla</code> ile aralık ekleyin. En güzel deseni kim bulur? Bu dizin sizin; sayfa görüntüsünü sınıfla paylaşın. Bir de sayın: iç blok toplam kaç kere çalıştı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Dönence içinde dönence: dıştaki her turda içteki tamamen çalışır.</p></details>
+<details><summary>Yaklaşım</summary><p>İç blok 6 × 12 kere çalışır; sayaç için bir <code>den</code>. Renk ve kalınlık için <code>kalemRenginiKur(rastgeleRenk)</code> iç bloğun başına.</p></details>
+<details><summary>İlk satır</summary><p><code>dönence(6, 60) { kalemRenginiKur(rastgeleRenk); dönence(12, 30) { çokgen(3, 40) } }</code></p></details>
+</div>
 <p class="gorunum"><span class="etk">Tuvalde:</span> Altı kollu, her kolu on iki üçgenden bir çiçek olan bir desen; iç blok 72 kere çalışır.</p>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-2-K1"><code>alistirma-koco/kod/KIII-2-K1/</code></a> &mdash; beklenen çıktı yok, çizim</p>
 </section>
@@ -206,6 +232,7 @@ ele: 3 1 1 5 = 3 1 1 5</code></pre>
 <section class="soru" id="KIII-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIII-3-I1</span> İki deneme daha</h3>
 <p>Kitapçığın <code>asal.kojo</code>'su. İki deneme ekleyin: 13 asal, 15 değil. Denemeleri sayan bir <code>den</code> koyun ve sonda &ldquo;6 deneme geçti.&rdquo; yazdırın (sayan sarmalayıcıya <code>dene</code> diyemezsiniz: anahtar sözcük; kitapçık da <code>denemeler</code> demişti). Sonra kitapçığın &ldquo;Deneyin&rdquo;i: <code>n &gt; 1 &amp;&amp;</code>'i silin, çalıştırın; hangi deneme hangi mesajla patlıyor? Geri koyun.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIII-3-I1 · İki deneme daha</span>
@@ -231,6 +258,7 @@ denemeler()
 <section class="soru" id="KIII-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-3-A1</span> Mükemmel sayılar</h3>
 <p>Kitapçığın üçüncü alıştırması: kendisi dışındaki bölenlerinin toplamı kendisine eşit (6 = 1 + 2 + 3). <code>mükemmelMi(n)</code>'yi <code>ele</code> ve <code>topla</code> ile tek satırda yazın. Önce denemeler: 6 ve 28 mükemmel, 12 ve 1 değil. Sonra 10 000'e kadar olanları bulup yazdırın. Kaç tane? (Beşincisi 33 550 336; bulmaya kalkmayın, neden?)</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -241,6 +269,7 @@ denemeler()
 <section class="soru" id="KIII-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-3-A2</span> Önce denemeler: ebob</h3>
 <p>İki sayının en büyük ortak böleni; Öklid'in yöntemi: <code>ebob(a, b) = ebob(b, a % b)</code>, <code>b == 0</code> olunca a. Önce denemeleri yazın: <code>ebob(12, 18) == 6</code>, <code>ebob(7, 5) == 1</code>, <code>ebob(0, 5) == 5</code>, <code>ebob(1071, 462) == 21</code>. Sonra işlevi; <code>yineleDoğruysa</code> ile ya da özyinelemeyle (Bölüm IV'ün ön tadı). Denemeler geçince <code>ekok</code>'u da ekleyin: a / ebob × b.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -250,8 +279,13 @@ ekok(4, 6) = 12</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-3-A2"><code>alistirma-koco/kod/KIII-3-A2/</code></a></p>
 </section>
 <section class="soru" id="KIII-3-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIII-3-Z1</span> Eşleme denemesi</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">KIII-3-Z1</span> Eşleme denemesi</h3>
 <p>Kitapçığın dördüncü alıştırması. <code>asalMıHızlı</code> karekök sınırıyla yazılmış ama içinde bir hata var: sınır <code>b * b &lt; n</code>. Eşleme denemesi onu yakalar: 1'den 1000'e iki sürümün ayrıştığı ilk sayıyı yazdırın (<code>bul</code>). Hatayı düzeltin (<code>&lt;=</code>), yeniden çalıştırın: ayrışma kalmadı mı? Sonunda 1000'e kadar kaç asal var, yazın. Yavaş ama basit sürüm, hızlı sürümün hakemi.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Yavaş sürüm hakem; hızlı sürümle ayrıştığı ilk sayı hatayı gösterir.</p></details>
+<details><summary>Yaklaşım</summary><p><code>bul</code> bir <code>Belki</code> verir: <code>Biri(n)</code> ya da <code>Hiçbiri</code>; <code>eşle</code> ile yazdırın. Hata <code>b * b < n</code>'de: tam kare sayılarda (25, 49) kök dahil edilmiyor.</p></details>
+<details><summary>İlk satır</summary><p><code>ayrışan eşle { durum Biri(n) => satıryaz(s"ilk ayrışma: $n"); durum Hiçbiri => satıryaz("ayrışma yok") }</code></p></details>
+</div>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.kojo</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// KIII-3-Z1 · Eşleme denemesi (hızlı sürümde bilerek hata var)</span>
@@ -288,6 +322,7 @@ ekok(4, 6) = 12</code></pre>
 <section class="soru" id="KIII-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">KIII-4-I1</span> Önce sayın</h3>
 <p>Kitapçığın tablosunu makineye yazdırın: 10 007, 1 000 003 ve 10⁹ + 7 için &ldquo;2'den n'ye&rdquo; kaç deneme (n − 2), &ldquo;√n'ye kadar&rdquo; kaç deneme (<code>karekökü(n).sayıya − 1</code>). Üç satır; son satırdaki oran kaç? Hiçbir şey ölçmediniz, yalnız saydınız; ama bu sayım hangi sürümün kazanacağını baştan söylüyor.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>10007: 10005 99
@@ -299,16 +334,27 @@ ekok(4, 6) = 12</code></pre>
 <section class="soru" id="KIII-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-4-A1</span> Şimdi ölçün</h3>
 <p>Kitapçığın <code>süresi</code>'yle iki sürümü aynı sayıda ölçün: <code>asalMı(999999937)</code> ve <code>asalMıHızlı(999999937)</code> (KIII-3-Z1'in düzeltilmiş hâli). Yavaş sürüm bir süre bekletir; sabırlı olun. İki süreyi ve oranını yazdırın. Beklenen çıktı yok: sizin makinenizin sayıları. Oran kitapçığın otuz bin katına yakın mı, değilse neden?</p>
+
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-4-A1"><code>alistirma-koco/kod/KIII-4-A1/</code></a> &mdash; beklenen çıktı yok, ölçüm</p>
 </section>
 <section class="soru" id="KIII-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">KIII-4-Z1</span> Tekrar var mı, ölçün</h3>
 <p>Kitapçığın beşinci alıştırması: KII-3-A2'nin iki çözümünü (<code>yinelemesiz</code> ve <code>kümeye</code>) 10 bin, 100 bin ve 1 milyon ögelik dizinlerde ölçün. Dizin: <code>(1 |-| n).dizine.işle(s =&gt; s % 1000)</code> (tekrarlı). Bir tablo yazdırın. Süreler nasıl büyüyor: n iki katına çıkınca süre kaç katına çıkıyor? Beklenen çıktı yok. Bu tablo C++ cildinin karmaşıklık konusunun kapısı.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Üç boy, iki yöntem, altı ölçüm; süreleri bir tabloya yazın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>süresi</code> hazır; her <code>n</code> için iki satır <code>satıryaz(s"$n: yinelemesiz ${süresi(tekrarVar1(d))} s, küme ${süresi(tekrarVar2(d))} s")</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>satıryaz(s"$n: ${süresi(tekrarVar1(d))} ${süresi(tekrarVar2(d))}")</code></p></details>
+</div>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-4-Z1"><code>alistirma-koco/kod/KIII-4-Z1/</code></a> &mdash; beklenen çıktı yok, ölçüm</p>
 </section>
 <section class="soru" id="KIII-4-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">KIII-4-K1</span> Asal sayma yarışı</h3>
 <p>100 000'e kadar kaç asal var? İki yol: her sayıya <code>asalMıHızlı</code> (√n'ye kadar deneme) ve Eratosthenes'in eleği: <code>Dizik.doldur(n + 1)(doğru)</code> ile bir dizik, her asalın katlarını <code>yanlış</code> yapın, kalan <code>doğru</code>'ları sayın (<code>say</code>). İki sayı eşit çıkmalı: 9592. Sonra ikisini <code>süresi</code> ile ölçün; elek kaç kat hızlı? Bir adım ötesi: eleği 10⁷'ye çıkarın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>İki yöntem aynı sayıyı vermeli; elek katları siler, deneme bölenleri dener.</p></details>
+<details><summary>Yaklaşım</summary><p>Elek: <code>(2 |-| 316).herbiriİçin { i => eğer (elek(i)) (i * i |-| n).adımla(i).herbiriİçin(k => elek(k) = yanlış) }</code>; sonra <code>elek.say(x => x)</code>. (<code>adımla</code> yoksa <code>yineleDoğruysa</code> ile.)</p></details>
+<details><summary>İlk satır</summary><p><code>den k = i * i; yineleDoğruysa(k <= n) { elek(k) = yanlış; k = k + i }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>deneyerek: 9592
@@ -318,5 +364,75 @@ elekle: 9592</code></pre>
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">III.5</div>
+  <div class="govde">
+    <h2>Geri dönüş: eski işlevleri sınamak</h2>
+    <p>Bu bölümün alışkanlığı sınamak; sınanacak şey de önceki bölümlerden. I. bölümün <code>bölünüyorMu</code>'su ve II. bölümün harf sayacı, bu sefer <code>belirt</code> ile.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3#ciktisi-olan-islevler">kitapçık I.4: Çıktısı olan işlevler</a> <a href="https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec#harf-saymak-dongusuz">kitapçık II.3: Harf saymak, döngüsüz</a> <a href="https://claude.ai/code/artifact/1bff2e2b-9d1a-435e-901e-974e6acced99#kendi-kendini-sinayan-program">kitapçık III.3: Kendi kendini sınayan program</a></p>
+    </div>
+
+<section class="soru" id="KIII-5-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-5-A1</span> bölünüyorMu için denemeler</h3>
+<p>I. bölümün <code>bölünüyorMu(a, b)</code>'sunu yazın ve dört <code>belirt</code> ile sınayın: 15 5'e bölünür, 15 4'e bölünmez, 0 her sayıya bölünür, <strong>b sıfırsa yanıt yanlış</strong> (programı çökertmeyin: <code>15 % 0</code> çalışırken patlar). Sonra çiftler dizini için <code>15 5 -&gt; evet</code> biçiminde yazın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>denemeler geçti.
+15 5 -&gt; evet
+15 4 -&gt; hayır
+0 3 -&gt; evet
+7 0 -&gt; hayır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-5-A1"><code>alistirma-koco/kod/KIII-5-A1/</code></a></p>
+</section>
+<section class="soru" id="KIII-5-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">KIII-5-A2</span> Harf sayacını sınayın</h3>
+<p>II. bölümün harf sayacını bir işleve koyun: <code>harfSay(yazı)</code> boşlukları atsın, <code>öbekle</code> ile sayıp <code>(harf, sayı)</code> çiftlerinin <strong>sıralı dizinini</strong> döndürsün. <code>belirt</code> ile sınayın: <code>harfSay("aab")</code> tam olarak <code>Dizin(('a', 2), ('b', 1))</code> olmalı; <code>harfSay("")</code> boş. Sonra <code>kelebek kanadi</code> için sayımı <code>a: 2</code> biçiminde yazın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
+<pre><code>denemeler geçti.
+a: 2
+b: 1
+d: 1
+e: 3
+i: 1
+k: 3
+l: 1
+n: 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma-koco/kod/KIII-5-A2"><code>alistirma-koco/kod/KIII-5-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#KIII-2-Z2"><code>KIII-2-Z2</code> Sayan döngü</a> <a href="#KIII-3-Z1"><code>KIII-3-Z1</code> Eşleme denemesi</a> <a href="#KIII-1-Z1"><code>KIII-1-Z1</code> Izgara, iki yoldan</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

@@ -205,7 +205,7 @@ make: 'hedef' hedefi için yapılacak bir şey yok.</code></pre>
 <div class="blok">
   <div class="ray">III.3</div>
   <div class="govde">
-    <h2>Kendi kendini sınayan program</h2>
+    <h2>Kendi kendini sınayan program <span class="yol yavas">yavaş yol</span></h2>
 
     <p>
       Bir program yazdınız, çalıştırdınız, doğru yanıt verdi. Sonra bir yerini
@@ -552,7 +552,7 @@ std::cout &lt;&lt; <span class="s">"inşa süresi: "</span> &lt;&lt; insa.count(
       çevirince kod hem kısaldı hem de yeni çizim eklemek dakikalar sürer oldu.
     </p>
 
-    <h3>Sadeleştirme (<em>refactoring</em>)</h3>
+    <h3>Sadeleştirme (<em>refactoring</em>) <span class="yol hizli">hızlı yol</span></h3>
 
     <p>
       Kodu, davranışını değiştirmeden daha anlaşılır hâle getirmeye
@@ -650,6 +650,36 @@ std::cout &lt;&lt; <span class="s">"inşa süresi: "</span> &lt;&lt; insa.count(
         </li>
       </ol>
     </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · testli ve make'li</span>
+      <p>
+        Oyunu işlevlere bölün: <code>degerlendir(tahmin, gizli)</code> &ldquo;büyük&rdquo;, &ldquo;küçük&rdquo; ya da &ldquo;bildin&rdquo; döndürsün ve <code>assert</code> ile üç durumu sınayın. Tutulan sayıyı komut satırından alın ki oyun tekrarlanabilsin; tahminleri bir <code>girdi</code> dosyasından okuyup çıktıyı altın dosyayla karşılaştıran bir <code>test</code> hedefi yazın. Artık projeniz <code>make test</code> diyince &ldquo;Doğru!&rdquo; diyor.
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Terminalde bir klasöre girip <code>g++</code> ile derleyebilir, <code>./prog</code> ile çalıştırabilirim.</li>
+        <li><code>derle</code>, <code>test</code> ve <code>temizle</code> hedefli bir Makefile yazabilirim.</li>
+        <li><code>assert</code> ile kendi kendini sınayan bir işlev yazabilir, altın dosyayla çıktıyı karşılaştırabilirim.</li>
+        <li>Bir hatayı yazdırarak, hata ayıklayıcıyla ya da girdiyi küçülterek köşeye sıkıştırabilirim.</li>
+        <li>İki çözümün süresini <code>chrono</code> ile ölçüp <code>-O2</code>'nin etkisini görebilirim.</li>
+        <li>Tekrarı görünce işleve çıkarır, sihirli sayıya ad veririm.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li><code>make test</code> hedefi derlemeye bağımlı değilse ilk çalıştırmada ne olur? Makefile'ın hangi satırı bunu düzeltir? <a href="#make-tek-komutla-her-sey">make</a></li>
+        <li>Altın dosya testi geçen bir program yine de yanlış olabilir mi? Bir örnek verin; sonra testi o örneği yakalayacak biçimde genişletin. <a href="#altin-dosya-yontemi">Altın dosya yöntemi</a></li>
+        <li>Programınız yalnızca büyük bir girdide çöküyor. İlk üç hamleniz hangi sırayla? Hangisi en ucuz? <a href="#hata-bulmanin-uc-yolu">Hata bulmanın üç yolu</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
   </div>
 </div>
 

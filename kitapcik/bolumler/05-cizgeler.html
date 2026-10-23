@@ -526,7 +526,7 @@ vector&lt;<span class="t">Takim</span>&gt; takim;
       (<code>O(log b)</code>).
     </p>
 
-    <h3>Floyd&ndash;Warshall: herkesten herkese</h3>
+    <h3>Floyd&ndash;Warshall: herkesten herkese <span class="yol ileri">ileri</span></h3>
 
     <p>
       Bütün şehir çiftleri arasındaki uzaklığı istiyorsanız, Dijkstra'yı
@@ -560,7 +560,7 @@ vector&lt;<span class="t">Takim</span>&gt; takim;
   4 |   9   9   7   0</code></pre>
     </figure>
 
-    <h3>Bellman&ndash;Ford: eksi ağırlıklar da olabilir</h3>
+    <h3>Bellman&ndash;Ford: eksi ağırlıklar da olabilir <span class="yol ileri">ileri</span></h3>
 
     <p>
       Bir odadan ötekine tünellerden geçiyorsunuz; bazı tüneller ödül veriyor,
@@ -604,7 +604,7 @@ skor[<span class="n">1</span>] = <span class="n">0</span>;
       yakalıyoruz &mdash; çok zarif.
     </p>
 
-    <h3>Hangisini seçmeli?</h3>
+    <h3>Hangisini seçmeli? <span class="yol yavas">yavaş yol</span></h3>
 
     <div class="tablo-sar">
       <table>
@@ -698,6 +698,36 @@ skor[<span class="n">1</span>] = <span class="n">0</span>;
         </li>
       </ol>
     </div>
+    <div class="kutu proje">
+      <span class="basi">Projeye ekleyin · labirent sürümü</span>
+      <p>
+        Oyun labirente taşınıyor. Bir dosyadan ızgara okuyun (<code>#</code> duvar, <code>.</code> yol, <code>S</code> başlangıç, <code>C</code> çıkış); oyuncu <code>w a s d</code> ile yürüsün. Her hamleden sonra program enlemesine geziyle çıkışa kalan en az adımı hesaplasın ve bunu sayı olarak değil, bir önceki hamleye göre &ldquo;sıcak&rdquo; ya da &ldquo;soğuk&rdquo; diye söylesin: tahmin oyununun büyük/küçük ipucu, çizgede. IV. bölümdeki bilgisayar oyuncusu bu oyunu da oynayabilir mi?
+      </p>
+    </div>
+
+    <div class="kutu hedef">
+      <span class="basi">Bu bölümden sonra</span>
+      <ul>
+        <li>Bir çizgeyi komşuluk listesiyle saklayıp bütün komşuları gezebilirim.</li>
+        <li>Beş satırlık gezi kalıbını özyinelemeyle de, yığınla da, kuyrukla da yazabilirim.</li>
+        <li>Enlemesine geziyle ağırlıksız çizgede en kısa yolu bulabilirim.</li>
+        <li>Bağlı parçaları sayabilir, bir ızgarayı çizgeye çevirebilirim.</li>
+        <li>Dijkstra'yı öncelik sırasıyla yazabilir, eksi ağırlıkta neden kırıldığını söyleyebilirim.</li>
+        <li>Üç en kısa yol algoritmasından hangisini ne zaman seçeceğimi bilirim.</li>
+      </ul>
+      <p><strong>Kendinizi sınayın.</strong> Üç soru. Yanıtlar yazılı değil; her sorunun yanındaki bağlantı, konunun anlatıldığı başlığa gider:</p>
+      <ol>
+        <li>Gezildi işaretini kuyruğa koyarken mi, kuyruktan çıkarırken mi koymalı? İkisini de deneyin; hangisi 7'yi iki kere yazdırır? <a href="#bes-satirlik-kalip">Beş satırlık kalıp</a></li>
+        <li>Beş düğümlü yönsüz bir çizgede en çok kaç bağ olabilir? Parça sayısı en az ve en çok kaç? <a href="#3-bagli-parcalar-ve-yol-agi">Bağlı parçalar ve yol ağı</a></li>
+        <li>Eksi ağırlıklı tek bir bağ Dijkstra'yı neden yanıltabilir? Dört düğümlü bir karşı örnek çizin. <a href="#hangisini-secmeli">Hangisini seçmeli?</a></li>
+      </ol>
+      <p class="gunluk">
+        Bu bölümde en çok neye takıldınız? Bir cümleyle yazın
+        (<code>alistirma/gunluk.md</code> şablonu depoda); sonraki bölüme
+        başlamadan o cümleyi bir daha okuyun.
+      </p>
+    </div>
+
   </div>
 </div>
 

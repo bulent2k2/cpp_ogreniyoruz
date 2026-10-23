@@ -22,6 +22,7 @@
 <section class="soru" id="III-1-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">III-1-I1</span> Girdiyi dosyadan</h3>
 <p>Program girdi bitene kadar sayı okuyup kaç tane olduğunu ve toplamını yazıyor. Dizindeki <code>girdi</code> dosyasında kırk sayı var. Önce elle: <code>./prog</code> deyip birkaç sayı yazın, <code>Ctrl-D</code> ile bitirin. Sonra <code>./prog &lt; girdi</code>. Sonra <code>make test</code>. Üçü aynı programı çalıştırıyor; fark yalnız girdinin nereden geldiği. Son olarak bir satır ekleyin: en büyük sayı.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-1-I1 · Girdiyi dosyadan</span>
@@ -53,6 +54,7 @@ En büyük: 100</code></pre>
 <section class="soru" id="III-1-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-1-A1</span> -Wall ne diyor?</h3>
 <p>Program derleniyor ve doğru çıktı veriyor; ama bu dizinin <code>Makefile</code>'ı <code>-Wall -Werror</code> ile derliyor: her uyarı hata sayılır. Üç uyarı var. Her birini okuyun, nedenini anlayın, çıktıyı değiştirmeden giderin. Kitapçığın püf noktası: uyarılar bedava kod incelemesidir.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-1-A1 · -Wall ne diyor?</span>
@@ -87,6 +89,7 @@ En büyük: 100</code></pre>
 <section class="soru" id="III-1-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-1-A2</span> İki adımda derleme</h3>
 <p>Dizinde üç dosya var: <code>ana.cpp</code>, <code>yardimci.cpp</code>, <code>yardimci.h</code>. <code>Makefile</code>'ın <code>derle</code> kuralı boş bırakıldı. Önce elle, kitapçıktaki gibi iki adımda derleyin: her <code>.cpp</code> için <code>-c</code> ile bir <code>.o</code>, sonra <code>.o</code>'ları <code>prog</code>'a bağlayın. Çalışınca aynı komutları <code>derle</code> kuralına yazın (sekmeyle!). <code>make test</code> geçmeli. <code>ls</code> ile <code>.o</code> dosyalarını görün; <code>make temizle</code> onları da silsin.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>toplam   : 31
@@ -97,6 +100,11 @@ en büyük : 9</code></pre>
 <section class="soru" id="III-1-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-1-Z1</span> Komut satırından girdi</h3>
 <p>Girdi her zaman <code>cin</code>'den gelmez; <code>./prog 3 14 15 92</code> gibi komutun yanına da yazılır. <code>int main(int argc, char** argv)</code>: <code>argc</code> kaç parça olduğu (programın adı dahil), <code>argv[k]</code> k'ıncı parça, yazı olarak. <code>stoi</code> ile sayıya çevirin; adedi ve toplamı yazın. Hiç sayı verilmezse <code>Kullanım: ./prog sayı sayı ...</code> yazıp çıkın. <code>make test</code> dört sayıyla çağırıyor; <code>./prog</code>'u boş da deneyin. Depodaki <code>sablon/ana.cpp</code> aynı kalıbı kullanıyor.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p><code>argv</code> yazı dizisi; <code>argv[0]</code> programın adı, gerisi girdi.</p></details>
+<details><summary>Yaklaşım</summary><p><code>argc &lt; 2</code> ise kullanım yazıp dön; değilse <code>for (int k{1}; k &lt; argc; ++k) toplam += stoi(argv[k]);</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>if (argc &lt; 2) { cout &lt;&lt; "Kullanım: ./prog sayı sayı ..." &lt;&lt; endl; return 1; }</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>4 sayı, toplam 124</code></pre>
@@ -120,6 +128,7 @@ en büyük : 9</code></pre>
 <section class="soru" id="III-2-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">III-2-I1</span> İki kere make</h3>
 <p>Kitapçığın asal projesi olduğu gibi. Sırayla: <code>make</code> (üç derleme komutu görürsünüz), bir daha <code>make</code> (hiçbir şey), <code>touch asal.h</code> sonra <code>make</code> (hangi dosyalar yeniden derlendi, neden ikisi birden?), <code>touch ana.cpp</code> sonra <code>make</code> (şimdi hangisi?). Gözlemlerinizi <code>ana.cpp</code>'nin başına yorum olarak yazın. <code>make test</code> baştan geçer; bu alıştırmada iş değiştirmek değil, izlemek.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -130,6 +139,7 @@ en büyük : 9</code></pre>
 <section class="soru" id="III-2-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-2-A1</span> Eksik bağımlılık</h3>
 <p>Bu projede <code>ana.cpp</code>, başlık dosyasındaki <code>VARSAYILAN</code> sabitini kullanıyor. <code>Makefile</code>'da bir satır eksik. Şunu yapın: <code>make</code>; sonra <code>asal.h</code>'de <code>VARSAYILAN</code>'ı 60'tan 84'e çevirin; <code>make</code>. Program hâlâ 60 diyor! Neden yeniden derlenmedi? <code>Makefile</code>'daki eksik bağımlılığı bulup ekleyin; <code>make</code> bu sefer doğru dosyayı derlesin. <code>make test</code> 84'ü bekliyor.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -140,6 +150,7 @@ en büyük : 9</code></pre>
 <section class="soru" id="III-2-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-2-A2</span> Üçüncü dosya</h3>
 <p><code>ana.cpp</code> artık <code>ebob.h</code>'yi de içeriyor ve <code>ebob(360, 84)</code>'ü yazdırıyor; ama o dosyalar yok ve <code>Makefile</code> onları bilmiyor. <code>ebob.h</code> ile <code>ebob.cpp</code>'yi yazın (I-4-Z1'deki döngülü Öklid; başlık koruması <code>#ifndef</code> ile), <code>Makefile</code>'a <code>ebob.o</code> kuralını ve bağımlılığını ekleyin. Hangi hedefler <code>ebob.o</code>'ya bağlı olmalı?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -151,6 +162,11 @@ ebob(360, 84) = 12</code></pre>
 <section class="soru" id="III-2-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-2-Z1</span> Desen kuralı</h3>
 <p>Her <code>.cpp</code> için ayrı kural yazmak tekrar. <code>make</code>'in desen kuralı var: <code>%.o: %.cpp</code> diye tek kural, komutunda <code>$&lt;</code> (ilk bağımlılık) ve <code>$@</code> (hedef). Değişkenler de: <code>CXXFLAGS = -std=c++23 -Wall</code>. Bu projenin <code>Makefile</code>'ını yeniden yazın: tek desen kuralı, kaynak listesi <code>$(wildcard *.cpp)</code>, nesne listesi <code>$(SRC:.cpp=.o)</code>. Başlık bağımlılığı desen kuralında nasıl söylenir? (Kitapçığın <code>kod/Makefile</code>'ı ve depodaki <code>ileri/dp/Makefile</code> örnek.) <code>make test</code> yine geçmeli.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Tek desen kuralı bütün <code>.cpp</code>'leri kapsar; bağlama ayrı bir kural.</p></details>
+<details><summary>Yaklaşım</summary><p><code>SRC = $(wildcard *.cpp)</code>, <code>OBJ = $(SRC:.cpp=.o)</code>, <code>%.o: %.cpp</code> kuralında <code>$(CXX) $(CXXFLAGS) -c $&lt; -o $@</code>; başlık bağımlılığı için <code>%.o: %.cpp %.h</code> ya da ayrı bir satır.</p></details>
+<details><summary>İlk satır</summary><p><code>%.o: %.cpp\n\t$(CXX) $(CXXFLAGS) -c $&lt; -o $@</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -161,6 +177,11 @@ ebob(360, 84) = 12</code></pre>
 <section class="soru" id="III-2-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">III-2-K1</span> Kendi şablonunuz</h3>
 <p>Kitapçığın birinci alıştırması. Bu dizin bilerek yarım: <code>ana.cpp</code> var, <code>Makefile</code> yok, beklenen çıktı yok. Depodaki <code>sablon/</code> dizinine bakın, ama kopyalamayın; kendinizinkini yazın: <code>make</code>, <code>make test</code>, <code>make temizle</code>. Test hedefi <code>derle</code>'ye bağlı olsun (depodaki şablonun bir eksiği bu; CLAUDE.md'de yazıyor). Beklenen çıktıyı kendiniz üretip <code>beklenen-cikti</code>'ye kaydedin. Bundan sonraki her alıştırmayı bu şablondan açın.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Şablon üç hedef: derle, test, temizle; test derlemeye bağımlı olsun.</p></details>
+<details><summary>Yaklaşım</summary><p><code>test: derle</code> satırı bağımlılığı kurar; beklenen çıktıyı bir kere kendiniz üretip dosyaya yönlendirin (<code>./prog &gt; beklenen-cikti</code>), sonra her test <code>diff</code> eder.</p></details>
+<details><summary>İlk satır</summary><p><code>test: derle\n\t./prog &gt; test-ciktisi\n\tdiff beklenen-cikti test-ciktisi</code></p></details>
+</div>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-2-K1"><code>alistirma/kod/III-2-K1/</code></a> &mdash; beklenen çıktı yok</p>
 </section>
   </div>
@@ -180,6 +201,7 @@ ebob(360, 84) = 12</code></pre>
 <section class="soru" id="III-3-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">III-3-I1</span> Yakalandı</h3>
 <p>Kitapçık &ldquo;çarpan bulan işlevin son satırını silelim&rdquo; demişti; burada silinmiş hâli var. <code>make test</code> çalıştırın, <code>assert</code>'in iletisini okuyun: dosya, satır, koşul. Sonra <code>asal.cpp</code>'yi onarın. Silinen satır neydi, neden gerekli? Hangi sayılar için eksik olduğu belli olmazdı?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -190,6 +212,7 @@ ebob(360, 84) = 12</code></pre>
 <section class="soru" id="III-3-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-3-A1</span> Yanlış olması gerekeni de sınayın</h3>
 <p><code>ebob</code> için bir <code>dene()</code> yazın: en az beş <code>assert</code>, en az biri <em>yanlış</em> olması gereken bir şeyi sınasın (<code>ebob(7, 13) != 7</code> gibi), biri de sınır durumu (<code>ebob(0, 5)</code>, <code>ebob(5, 5)</code>). <code>main</code> önce <code>dene()</code>'yi çağırıp <code>denemeler geçti.</code> yazsın, sonra girdideki çifti hesaplasın. Girdi <code>1071 462</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 1071 462</span></figcaption>
 <pre><code>denemeler geçti.
@@ -200,6 +223,7 @@ ebob(1071, 462) = 21</code></pre>
 <section class="soru" id="III-3-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-3-A2</span> Her gün bozulan test</h3>
 <p>Program bir doğum tarihinden bugüne kaç gün geçtiğini yazıyor; depodaki <code>gun-sayimi/</code> gibi. Testi her gün bozuluyor, çünkü çıktı bugüne bağlı. Kitapçığın önerisi: böyle çıktıyı ya sabitleyin ya testin dışında tutun. İkisini de yapın: &ldquo;bugün&rdquo;ü komut satırından alın (verilmezse gerçek bugün), <code>make test</code> sabit bir tarihle çağırsın. Tarih hesabı için <code>&lt;chrono&gt;</code>'nun <code>year_month_day</code> ve <code>sys_days</code> türleri var; girdi <code>yıl ay gün</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>Doğumdan bu yana 5892 gün geçti.</code></pre>
@@ -207,8 +231,13 @@ ebob(1071, 462) = 21</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-3-A2"><code>alistirma/kod/III-3-A2/</code></a></p>
 </section>
 <section class="soru" id="III-3-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-3-Z1</span> Kesir&#x27;e denemeler</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">III-3-Z1</span> Kesir&#x27;e denemeler</h3>
 <p>II-5-Z1'deki <code>Kesir</code> türü için <code>dene()</code> yazın: sadeleştirme (<code>Kesir{2, 4}</code> payı 1 paydası 2), toplama, çarpma, eşitlik. Eşitlik için <code>operator==</code> gerekecek. Bir tuzak: <code>assert(Kesir{1, 2} == Kesir{1, 2})</code> derlenmez, çünkü <code>assert</code> bir makro ve süslü parantezin içindeki virgülü argüman ayracı sanır; ifadeyi bir çift parantez daha içine alın. Sonra <code>-DNDEBUG</code> ile derleyin: <code>c++ -std=c++23 -DNDEBUG ana.cpp</code>. Denemeler ne oldu? Bu seçenek ne işe yarar, yarışmada açık mı kapalı mı olmalı?</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Eşitlik için <code>operator==</code>; <code>assert</code> makrosu virgülü argüman ayracı sanır, parantezle sarın.</p></details>
+<details><summary>Yaklaşım</summary><p><code>bool operator==(const Kesir&amp; a, const Kesir&amp; b) { return a.pay == b.pay and a.payda == b.payda; }</code> (yapıcı sadeleştirdiği için yeter). <code>assert((Kesir{1, 2} == Kesir{2, 4}));</code></p></details>
+<details><summary>İlk satır</summary><p><code>assert((Kesir{2, 4} == Kesir{1, 2}));</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>denemeler geçti.
@@ -219,6 +248,11 @@ ebob(1071, 462) = 21</code></pre>
 <section class="soru" id="III-3-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">III-3-K1</span> Önce test, sonra kod</h3>
 <p>Tersten: denemeler hazır, işlev yok. <code>romaya(int)</code> bir sayıyı Roma rakamına çevirsin; <code>dene()</code> içindeki yedi <code>assert</code> ne beklediğini söylüyor. Önce derlemeyi geçecek en basit gövdeyi yazın (boş yazı döndüren), sonra denemeleri birer birer geçirin. Buna <em>test güdümlü geliştirme</em> deniyor. İpucu: değer-simge çiftlerini büyükten küçüğe bir dizide tutun; <code>900 → CM</code> gibi çıkarmalı çiftler de o dizide.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Roma rakamı büyükten küçüğe çıkarma: 1987 = 1000 + 900 + 50 + 30 + 5 + 1 + 1.</p></details>
+<details><summary>Yaklaşım</summary><p>Değer–simge çiftlerini (<code>{1000,"M"}, {900,"CM"}, …, {1,"I"}</code>) bir dizide tutun; her çift için <code>while (n &gt;= deger) { sonuc += simge; n -= deger; }</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>const vector&lt;pair&lt;int, string&gt;&gt; tablo{{1000, "M"}, {900, "CM"}, {500, "D"}, ...};</code></p></details>
+</div>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-3-K1 · Önce test, sonra kod</span>
@@ -277,6 +311,7 @@ ebob(1071, 462) = 21</code></pre>
 <section class="soru" id="III-4-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">III-4-I1</span> dout&#x27;u kapatın</h3>
 <p>Program kitapçığın <code>dout</code> numarasını kullanıyor, ama ayıklama anahtarı açık kalmış: <code>make test</code> ayıklama satırları yüzünden geçmiyor. Önce çıktıyı okuyun, <code>dout</code> satırlarının ne anlattığını görün; sonra anahtarı kapatın. Bir adım ötesi: <code>dout</code>'u <code>cout</code> yerine <code>cerr</code>'e bağlayın; ayıklama açıkken bile <code>make test</code> neden geçer?</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-4-I1 · dout&#x27;u kapatın</span>
@@ -311,6 +346,7 @@ ostream&amp; dout = yaz ? cout : nout;
 <section class="soru" id="III-4-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-4-A1</span> Küçülterek</h3>
 <p>Program kırk sayının tek olanlarını topluyor; beklenen çıktıyla uyuşmuyor. Kırk sayıya bakarak hatayı bulmak zor. Kitapçığın yöntemi: <code>girdi</code>'yi kopyalayıp yarıya indirin, hata duruyor mu? Yine yarıya. Üç dört adımda iki üç sayıya iner ve hata görünür. Hatayı bulunca girdiyi geri koyun (<code>git checkout girdi</code> ya da yedek), <code>make test</code>.</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 40 66 29 93 56 19 83 46 9 73 36 100 63 26 90 53 16 80 43 6 70 33 97 60 23 87 50 13 77 40 3 67 30 94 57 20 84 47 10 74 37</span></figcaption>
 <pre><code>Teklerin toplamı: 1006</code></pre>
@@ -320,6 +356,7 @@ ostream&amp; dout = yaz ? cout : nout;
 <section class="soru" id="III-4-A2">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-4-A2</span> Adım adım</h3>
 <p>Özyinelemeli Fibonaççi yanlış sonuç veriyor: <code>fib(10)</code> 55 olmalı. Kodu okumak yerine izleyin: OnlineGDB'de <code>fib</code>'in ilk satırına durak koyup <em>Debug</em>, ya da terminalde <code>c++ -g</code> ile derleyip <code>gdb ./prog</code>, <code>break fib</code>, <code>run</code>, birkaç <code>continue</code>, her durakta <code>print n</code> ve <code>backtrace</code>. Çağrılar beklediğiniz gibi mi dallanıyor? Hatayı bulunca düzeltin. (Özyinelemenin kendisi Bölüm IV'te; burada yalnız izleyin.)</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-4-A2 · Adım adım</span>
@@ -350,6 +387,11 @@ fib(20) = 6765</code></pre>
 <section class="soru" id="III-4-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-4-Z1</span> Sessiz taşma</h3>
 <p>Program girdideki sayıların toplamını ve ortalamasını yazıyor; küçük girdilerde doğru, bu girdide yanlış. Hiçbir satır bariz bozuk değil. Küçülterek deneyin: kaç sayıya inince düzeliyor? Bir tahmin: toplamın büyüklüğüne bakın, Bölüm I'deki sınırı hatırlayın. Düzeltme tek sözcük. Böyle hatalar yarışmalarda &ldquo;küçük testler geçti, büyükler yanlış&rdquo; diye görünür.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Küçük girdide doğru, büyükte yanlış: sayılar büyüyor, bir yerde sığmıyor.</p></details>
+<details><summary>Yaklaşım</summary><p>Toplamın türüne bakın; girdideki sayılar ile sayısını çarpın, <code>int</code>'in sınırıyla karşılaştırın. Düzeltme tek sözcük: toplamın türü.</p></details>
+<details><summary>İlk satır</summary><p><code>long long toplam{0};</code></p></details>
+</div>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-4-Z1 · Sessiz taşma</span>
@@ -393,6 +435,7 @@ Ortalama: 200000066</code></pre>
 <section class="soru" id="III-5-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">III-5-I1</span> Süreler cerr&#x27;e</h3>
 <p>Kitapçığın <code>20-hiz.cpp</code>'si: iki satırı süre yazıyor, bu yüzden <code>make test</code> geçmez. Süre satırlarını <code>cerr</code>'e yazın; <code>make test</code> geçsin, ekranda süreler yine görünsün. Sonra <code>./prog 2&gt;/dev/null</code> ile süreleri susturun, <code>./prog &gt;/dev/null</code> ile yalnız süreleri görün. <code>2&gt;</code> ne demek?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>dizi boyu          : 1000000 öğe
@@ -403,6 +446,7 @@ Ortalama: 200000066</code></pre>
 <section class="soru" id="III-5-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-5-A1</span> Üç sınır, üç süre</h3>
 <p>I-4-A2'deki soru: <code>asalMi</code>'de bölenleri <code>n</code>'e kadar mı, <code>n/2</code>'ye mi, <code>√n</code>'e mi denemeli? Üçünü de yazın; 200000'e kadar asalları her biriyle sayın. Sayılar <code>cout</code>'a (üçü de aynı olmalı), süreler <code>cerr</code>'e. Kaç kat fark var? <code>-O2</code> ile fark değişiyor mu?</p>
+
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>n&#x27;e kadar: 17984 asal
@@ -412,8 +456,13 @@ köke kadar: 17984 asal</code></pre>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-5-A1"><code>alistirma/kod/III-5-A1/</code></a></p>
 </section>
 <section class="soru" id="III-5-Z1">
-<h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-5-Z1</span> Tekrar var mı, üç yol, üç boy</h3>
+<h3><span class="basamak zor">Zorlayıcı</span><span class="basamak ikili">ikili</span><span class="soru-no">III-5-Z1</span> Tekrar var mı, üç yol, üç boy</h3>
 <p>Kitapçığın üçüncü alıştırması. II-3-A1'in küme çözümüne iki rakip ekleyin: sıralayıp komşuları karşılaştırmak (<code>sort</code>) ve iç içe iki döngü. Veri üretimi hazır (tekrar en sonda). Dört boy: 10&nbsp;000, 30&nbsp;000, 100&nbsp;000, 1&nbsp;000&nbsp;000 &mdash; iç içe döngü yalnız ilk ikisinde; 100&nbsp;000'de yarım dakika, bir milyonda saatler sürer (deneyin, sonra <code>Ctrl-C</code>). Sonuçlar <code>cout</code>'a, süreler <code>cerr</code>'e; tabloyu yorum olarak dosyanın başına yazın. Boy üç katına çıkınca döngünün süresi kaç katına çıkıyor? On katına çıkınca kümenin ve sıralamanın? Üç yöntem, üç ayrı yanıt.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Üç yöntem, dört boy; her ölçüm bir <code>chrono</code> çifti.</p></details>
+<details><summary>Yaklaşım</summary><p>Her yöntemi ayrı işlev yapın; <code>auto t0 = saat::now();</code> … <code>duration_cast&lt;milliseconds&gt;</code>; süreleri <code>cerr</code>'e, sonuçları <code>cout</code>'a. Sıralama için <code>sort</code> sonra komşu karşılaştırma.</p></details>
+<details><summary>İlk satır</summary><p><code>auto t0 = chrono::steady_clock::now(); bool s = tekrarSort(d); auto t1 = chrono::steady_clock::now();</code></p></details>
+</div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
 <pre><code>küme    n=10000: tekrar var
@@ -432,6 +481,11 @@ sırala  n=1000000: tekrar var</code></pre>
 <section class="soru" id="III-5-K1">
 <h3><span class="basamak kesif">Keşif</span><span class="soru-no">III-5-K1</span> -O2 farkı</h3>
 <p>Bu dizinin <code>Makefile</code>'ında iki hedef var: <code>make yavas</code> (<code>-O0</code>) ve <code>make hizli</code> (<code>-O2</code>). Aynı programı ikisiyle de derleyip çalıştırın; kitapçığın tablosunun kendi makinenizdeki hâlini doldurun. Sonra III-5-Z1'i de iki seçenekle ölçün: hangi yöntemde fark büyük, hangisinde küçük? Neden algoritma farkı derleyici farkından daha çok iş yapıyor? Beklenen çıktı yok; ölçümünüz çıktı.</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Aynı kod, iki derleme seçeneği; fark ölçümden çıkar.</p></details>
+<details><summary>Yaklaşım</summary><p><code>make yavas &amp;&amp; ./prog</code>, sonra <code>make hizli &amp;&amp; ./prog</code>; sayıları bir tabloya yazın. III-5-Z1 için Makefile'a aynı iki hedefi ekleyin.</p></details>
+<details><summary>İlk satır</summary><p><code>hizli:\n\tg++ -std=c++23 -O2 ana.cpp -o prog</code></p></details>
+</div>
 <p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-5-K1"><code>alistirma/kod/III-5-K1/</code></a> &mdash; beklenen çıktı yok</p>
 </section>
   </div>
@@ -451,6 +505,7 @@ sırala  n=1000000: tekrar var</code></pre>
 <section class="soru" id="III-6-I1">
 <h3><span class="basamak isinma">Isınma</span><span class="soru-no">III-6-I1</span> Üç kere aynı döngü</h3>
 <p>Program üç yıldız karesi çiziyor; çizim döngüsü üç kere kopyalanmış. Döngüyü <code>kare(int boy)</code> işlevine çıkarın, üç çağrı kalsın. Çıktı bir karakter bile değişmemeli: <code>make test</code> sizin hakeminiz.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-6-I1 · Üç kere aynı döngü</span>
@@ -496,6 +551,7 @@ sırala  n=1000000: tekrar var</code></pre>
 <section class="soru" id="III-6-A1">
 <h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-6-A1</span> Dört tablo, bir hata</h3>
 <p>Dört çarpım tablosu, dört kopya döngü &mdash; ve kopyalardan birinde bir hata var, <code>make test</code> geçmiyor. Hatayı satır satır arayabilirsiniz; ama daha iyisi, dört bloğu tek bir <code>tablo(int)</code> işlevine çevirin: hata ya kendiliğinden kaybolur ya da tek yerde görünür. Kitapçığın cümlesi: kopyaladığınız kodu iki kere bakıma alırsınız.</p>
+
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-6-A1 · Dört tablo, bir hata</span>
@@ -531,6 +587,11 @@ sırala  n=1000000: tekrar var</code></pre>
 <section class="soru" id="III-6-Z1">
 <h3><span class="basamak zor">Zorlayıcı</span><span class="soru-no">III-6-Z1</span> Dört yön, bir sınır denetimi</h3>
 <p>Izgaradaki her hücre için dolu komşularını sayan program: dört yön, dört kopya sınır denetimi, biri yanlış; <code>make test</code> farkı gösteriyor, hangi satır olduğunu değil. <code>icerdeMi(satir, sutun)</code> işlevi ve yön listesi (<code>{{-1,0},{1,0},{0,-1},{0,1}}</code>) ile yeniden yazın; <code>Izgara</code>, <code>Satir</code> gibi takma adlar koyun; <code>a</code>, <code>b</code>, <code>c</code> adlarını anlamlı adlarla değiştirin. Bölüm V'teki gezi kalıpları tam olarak bu düzeni kullanacak; şimdiden alışın. Girdi: satır sütun, sonra ızgara (<code>#</code> dolu, <code>.</code> boş).</p>
+<div class="ipucu">
+<details><summary>Düşünce</summary><p>Dört kopya sınır denetiminden biri yanlış; dört yönü bir listeye alınca denetim tek yerde olur.</p></details>
+<details><summary>Yaklaşım</summary><p><code>const vector&lt;pair&lt;int,int&gt;&gt; yonler{{-1,0},{1,0},{0,-1},{0,1}};</code> ve <code>icerdeMi(r, c)</code>; iç döngü yönleri gezip <code>icerdeMi</code> ile denetler. Yanlış olan <code>&gt;</code> mi <code>&gt;=</code> mi?</p></details>
+<details><summary>İlk satır</summary><p><code>bool icerdeMi(int r, int c) { return r &gt;= 0 and r &lt; satir and c &gt;= 0 and c &lt; sutun; }</code></p></details>
+</div>
 <figure class="kod">
 <figcaption><span class="nokta"></span><span class="ad">ana.cpp</span><span class="etiket">başlangıç</span></figcaption>
 <pre><code><span class="y">// III-6-Z1 · Dört yön, bir sınır denetimi</span>
@@ -569,5 +630,75 @@ sırala  n=1000000: tekrar var</code></pre>
 </section>
   </div>
 </div>
+
+<div class="blok">
+  <div class="ray">III.7</div>
+  <div class="govde">
+    <h2>Geri dönüş: eski işlevleri sınamak</h2>
+    <p>Bu bölümün alışkanlığı sınamak; sınanacak şey de önceki bölümlerden. İki kısa soru: I. bölümün <code>bolunuyorMu</code>'su ve II. bölümün harf sayacı, bu sefer <code>assert</code> ile.</p>
+    <p class="merdiven"><span class="basamak alistirma">2</span></p>
+    <div class="kutu puf">
+      <span class="basi">Yanıt yerine</span>
+      <p><a href="https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7#islev-bir-kere-yaz-cok-kere-kullan">kitapçık I.2: İşlev</a> <a href="https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f#eslem-en-cok-isinize-yarayacak-kap">kitapçık II.2: Eşlem</a> <a href="https://claude.ai/code/artifact/6a403229-5395-4258-adc4-496f5c79a5a1#kendi-kendini-sinayan-program">kitapçık III.3: Kendi kendini sınayan program</a></p>
+    </div>
+
+<section class="soru" id="III-7-A1">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-7-A1</span> bolunuyorMu için denemeler</h3>
+<p>I. bölümün tek satırlık işlevi <code>bolunuyorMu(a, b)</code>'yi yazın ve önce <code>dene()</code> içinde dört <code>assert</code> ile sınayın: 15 5'e bölünür, 15 4'e bölünmez, 0 her sayıya bölünür, <strong>b sıfırsa yanıt yanlış</strong> (programı çökertmeyin). Sonra girdideki çiftler için <code>15 5 -&gt; evet</code> biçiminde yazın. Sıfıra bölme denemesini yazmadan önce işlevin ne yaptığına bakın: <code>15 % 0</code> çalışma zamanında çöker.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: 15 5 15 4 0 3 7 0</span></figcaption>
+<pre><code>denemeler geçti.
+15 5 -&gt; evet
+15 4 -&gt; hayır
+0 3 -&gt; evet
+7 0 -&gt; hayır</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-7-A1"><code>alistirma/kod/III-7-A1/</code></a></p>
+</section>
+<section class="soru" id="III-7-A2">
+<h3><span class="basamak alistirma">Alıştırma</span><span class="soru-no">III-7-A2</span> Harf sayacını sınayın</h3>
+<p>II. bölümün harf sayacını bir işleve koyun: <code>map&lt;char,int&gt; harfSay(const string&amp;)</code>, boşlukları saymasın. Önce <code>dene()</code>: <code>harfSay("aab")</code> için a 2, b 1, ve <code>c</code> anahtarı <strong>yok</strong> (<code>contains</code> ile bakın; <code>[]</code> ile bakarsanız anahtarı yaratırsınız, II. bölümün klasik tuzağı). Sonra girdideki satırı <code>getline</code> ile okuyup sayımı <code>a: 2</code> biçiminde yazın.</p>
+
+<figure class="kod kopyalanmaz dar">
+<figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti · girdi: kelebek kanadi</span></figcaption>
+<pre><code>denemeler geçti.
+a: 2
+b: 1
+d: 1
+e: 3
+i: 1
+k: 3
+l: 1
+n: 1</code></pre>
+</figure>
+<p class="dizin">Dizin: <a href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/alistirma/kod/III-7-A2"><code>alistirma/kod/III-7-A2/</code></a></p>
+</section>
+  </div>
+</div>
+
+<div class="blok">
+  <div class="ray">Sınav</div>
+  <div class="govde">
+    <div class="kutu dikkat">
+      <span class="basi">Bölüm sınavı · 30 dakika</span>
+      <p>
+        &ldquo;Bu bölümü geçtim mi?&rdquo; sorusunun yanıtı: saati kurun, üç soruyu
+        kitapçığa ve ipuçlarına bakmadan çözün, her birinde <code>make test</code>
+        &ldquo;Doğru!&rdquo; desin. Üçü de otuz dakikada geçiyorsa bölüm sizin;
+        ikisi geçiyorsa bir hafta sonra yeniden; biri geçiyorsa bölümün
+        alıştırmalarına dönün.
+      </p>
+      <p class="sinav-sorular"><a href="#III-1-Z1"><code>III-1-Z1</code> Komut satırından girdi</a> <a href="#III-3-Z1"><code>III-3-Z1</code> Kesir&#x27;e denemeler</a> <a href="#III-4-Z1"><code>III-4-Z1</code> Sessiz taşma</a></p>
+      <p>
+        <strong>Keşif soruları için ölçüt</strong>, öğretmen de aynısını kullanır:
+        <em>çalışıyor</em> (bir girdiyle gösterin), <em>okunaklı</em> (adlar
+        anlaşılır, tekrar yok), <em>test var</em> (en az bir <code>assert</code>
+        ya da altın dosya). Üçü de evetse tam puan.
+      </p>
+    </div>
+  </div>
+</div>
+
 
 <!--GEZINME-->

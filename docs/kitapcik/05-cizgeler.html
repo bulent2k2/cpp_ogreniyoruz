@@ -834,6 +834,24 @@ komsular[<span class="n">1</span>].push_back(<span class="n">2</span>);      <sp
       kendisi &mdash; sadece adı değişti.
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong>Gezildi işaretini unutmak.</strong> İşaret yoksa gezi bir
+          çevrimde dönüp durur: A'dan B'ye, B'den A'ya, sonsuza kadar.
+          İşareti komşulara bakmadan <em>önce</em>, noktaya girer girmez
+          koyun; kalıbın ikinci satırı o yüzden <code>gezildi[bu] = true</code>.
+        </li>
+        <li>
+          <strong>Yönsüz bağı tek yöne eklemek.</strong> A&ndash;B bağını yalnızca
+          A'nın komşu listesine koyarsanız B'den A görünmez: odalar yanlış
+          sayılır, &ldquo;yol var mı?&rdquo; sorusu yöne göre başka yanıt verir.
+          Yönsüz çizgede her bağı iki kere ekleyin.
+        </li>
+      </ul>
+    </div>
+
     <h3 id="ayni-gezi-uc-farkli-yol">Aynı gezi, üç farklı yol</h3>
 
     <p>

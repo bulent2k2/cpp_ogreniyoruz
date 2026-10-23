@@ -893,6 +893,26 @@ ağaç(<span class="n">90</span>)</code></pre>
         kalın, uçlar ince: bir anda gerçekçi oluverir.
       </p>
     </div>
+
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong><code>geri(boy)</code>'u unutmak.</strong> Dalı çizen çağrı
+          kaplumbağayı bulduğu yere bırakmazsa kardeş dal yanlış yerden başlar,
+          ağaç bir yana yığılır. Dönüşler için de aynı kural: <code>sol(30)</code>,
+          <code>sağ(60)</code>, <code>sol(30)</code> toplamı sıfır. Kaplumbağa
+          hem konumunu hem yönünü geldiği gibi bırakmalı.
+        </li>
+        <li>
+          <strong>Adım küçültmüyor.</strong> Sarmalda <code>boy * 0.95</code>
+          yerine <code>boy</code>, ağaçta <code>boy * 0.7</code> yerine
+          <code>boy</code>: taban orada dursa bile işlev ona hiç varamaz, Koco
+          bir süre sonra <code>StackOverflowError</code> der ve durur. Her
+          çağrı sorunu gerçekten küçültmeli.
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

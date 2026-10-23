@@ -914,6 +914,26 @@ toplam 7 adım (2^3 - 1 = 7)</code></pre>
         oyun, &ldquo;algoritma seçimi&rdquo;nin ne demek olduğunu bir ömür anlatır.
       </p>
     </div>
+
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong>Taban durumu sonda, ya da hiç yok.</strong> Özyinelemeli işlev
+          önce kendini çağırıp sonra &ldquo;sıfırsa dur&rdquo; diyorsa hiç
+          durmaz; çağrı yığını taşar (<em>stack overflow</em>) ve program
+          çöker. Taban denetimi işlevin <em>ilk</em> satırı olsun, adım ondan
+          sonra gelsin.
+        </li>
+        <li>
+          <strong>Belleğe <code>[]</code> ile bakmak.</strong>
+          <code>if (bellek[n])</code> yazarsanız olmayan anahtarı sıfır değerle
+          yaratırsınız; Bölüm II'nin klasik tuzağı. Var mı diye
+          <code>contains</code> ile bakın, yazarken <code>[]</code> kullanın;
+          yukarıdaki <code>fibHizli</code> tam böyle yapıyor.
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

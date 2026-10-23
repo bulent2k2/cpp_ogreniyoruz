@@ -122,6 +122,27 @@ dönence(<span class="n">8</span>, <span class="n">45</span>) {                 
       demek; C++'taki <code>void</code>'in kardeşi.)
     </p>
 
+    <div class="kutu dikkat">
+      <span class="basi">Sık yanılgı</span>
+      <ul>
+        <li>
+          <strong><code>=&gt;</code> işaretini düşürmek.</strong>
+          <code>(çizim: Birim)</code> yazarsanız blok, <code>dönence</code>'ye
+          girmeden <em>bir kere</em> çalışır ve işlevin eline yalnız
+          &ldquo;bitti&rdquo; kalır; döngünün içindeki <code>çizim</code> artık
+          hiçbir şey çizmez. <code>=&gt; Birim</code> &ldquo;çalıştırılmamış
+          komutlar&rdquo; demek; işi ertelemek istiyorsanız ok şart.
+        </li>
+        <li>
+          <strong><code>işle</code> ile <code>herbiriİçin</code>'i karıştırmak.</strong>
+          <code>işle</code> her öğeden yeni bir değer üretip dizin döndürür;
+          <code>herbiriİçin</code> yalnızca iş yapar (çizer, yazar), değer
+          döndürmez. Sonucu kullanacaksanız <code>işle</code>, yalnız yan etki
+          istiyorsanız <code>herbiriİçin</code>.
+        </li>
+      </ul>
+    </div>
+
     <h3>Perde arkası: <code>yinele</code> dediğiniz nedir ki? <span class="yol ileri">ileri</span></h3>
 
     <p>

@@ -135,7 +135,7 @@ footer p { max-width: 70ch; margin: 6px 0; }
     <p class="ozet">
       İki kitapçık, iki alıştırma defteri ve ders notlarında geçen kavramlar A'dan Z'ye, Türkçe ve İngilizce
       adlarıyla. Her kavramın altında onu anlatan kitapçık bölümü, onu çalıştıran alıştırmalar ve ilgili ders
-      notu var. Alıştırma bağlantıları doğrudan soruya iner.
+      notu var. Alıştırma bağlantıları doğrudan soruya, kitapçık bağlantıları kesimin başlığına iner.
     </p>
     <nav class="kitaplar" aria-label="Kitaplık">
       <a class="r-ana" id="kitaplik-bag" href="index.html">Keyifli Kitaplık (genel sayfa)</a>
@@ -143,6 +143,8 @@ footer p { max-width: 70ch; margin: 6px 0; }
       <a class="r-kb" href="kitapcik-koco/00-kapak.html">Kitapçık Koco</a>
       <a class="r-ca" href="alistirma/00-hazirlik.html">Alıştırmalar C++</a>
       <a class="r-ka" href="alistirma-koco/00-hazirlik.html">Alıştırmalar Koco</a>
+      <a class="r-cb" href="kitapcik/07-sozluk.html">Sözlük C++</a>
+      <a class="r-kb" href="kitapcik-koco/07-sozluk.html">Sözlük Koco</a>
       <a class="r-dn" href="https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/ileri/icindekiler.md">Ders notları</a>
     </nav>
   </div>
@@ -191,7 +193,8 @@ footer p { max-width: 70ch; margin: 6px 0; }
     <p>
       Alıştırma kimlikleri <code>bölüm-konu-basamak</code> biçimindedir: <code>IV-3-Z1</code>, C++ defterinin
       IV. bölümü, 3. konu, birinci Zorlayıcı soru; <code>K</code> ile başlayanlar Koco defterinindir.
-      Kitapçık bağlantıları bölümün başına gider; kesim adı yanında yazar. Ders notları GitHub'daki depoya açılır.
+      Kitapçık bağlantıları kesimin başlığına iner; kesim adı yanında yazar. İki kitapçığın Küçük Sözlük sayfaları
+      yukarıdaki şeritte. Ders notları GitHub'daki depoya açılır.
     </p>
     <p>
       Bu dizin, bir kavramın sayfasına doğrudan bağlantı verir: sayfanın adresine <code>#k-ozyineleme</code>
@@ -257,14 +260,14 @@ footer p { max-width: 70ch; margin: 6px 0; }
   }
 
   function kitapBag(ref, kaynak) {
-    const [bol, kesim] = ref.split("|");
+    const [bol, kesim, kimlik] = ref.split("|");
     const url = (kaynak === "cb" ? D.CB : D.KB)[bol];
     const a = el("a");
-    a.href = url;
+    a.href = kimlik ? url + "#" + kimlik : url;   // kimlik varsa kesimin başlığına iner
     a.target = "_blank"; a.rel = "noopener";
-    const bolAd = bol === "0" ? "Kapak" : "Bölüm " + bol;
+    const bolAd = bol === "0" ? "Kapak" : bol === "S" ? "Sözlük" : "Bölüm " + bol;
     a.textContent = kesim ? bolAd + " · " + kesim : bolAd;
-    a.title = KAY[kaynak].kitap + ", " + bolAd.toLowerCase();
+    a.title = KAY[kaynak].kitap + ", " + bolAd.toLowerCase() + (kimlik ? " · kesimin başlığına iner" : "");
     return a;
   }
   function alistirmaBag(id, kaynak) {

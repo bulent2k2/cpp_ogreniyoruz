@@ -64,3 +64,7 @@ Algoritma (2025-2026)
 + [ders 29](dersler/d20260508.md) Bozuk para sorularının Dinamik Program kodları
 + [ders 30](dersler/d20260514.md) Sınava hazırlık için zor `C` soruları
 
+2026-2027
+--
++ [ders 1](dersler/d20261024.md) Tanışma, giriş ve alıştırma önerileri, kitaplar, kodlar
+

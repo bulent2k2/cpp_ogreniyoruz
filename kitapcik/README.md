@@ -11,7 +11,7 @@ Kitapçığı okumak ve basmak için seçenekler
 
 **Çevirim içi okuyun.** Bağlantılar hemen altta. Bir sonraki bölümde.
 
-**PDF (64 sayfa, A4'e basmaya hazır):**
+**PDF (80 sayfa, A4'e basmaya hazır):**
 [kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
 
 **EPUB (telefon, tablet, e-kitap okuyucu):**

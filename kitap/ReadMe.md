@@ -14,8 +14,8 @@ tarafından 2018'de yazılmış güzel bir kitap da var. Yarışmalarda daha ba�
 Bende ikinci baskısı da var, arzu eden olursa özelden paylaşırım. 
 
 Daha kısa bir kitapçıkla ve daha hızlı bir giriş yapmak isteyenler de olur diye düşünüyorum. Onlar için de iki paralel yol var (acele etmemek koşuluyla 8-): 
-1. [C++ dili kullanarak](https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63)
-2. [Scala dili kullanarak](https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702)
+1. [C++ dili kullanarak](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/00-kapak.html)
+2. [Scala dili kullanarak](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/00-kapak.html)
   
 Bu ikisi bizim Ankara Fen Lisesindeki ders notlarımızdan damıtıldı ve derlendi.  
 

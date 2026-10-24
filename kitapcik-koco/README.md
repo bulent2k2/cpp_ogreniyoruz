@@ -25,10 +25,10 @@ Kitapçığı okumak
 --
 
 **PDF (A4'e basmaya hazır):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
 
 **EPUB (telefon, tablet, e-kitap okuyucu):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
 
 Çevrimiçi bölümler
 --

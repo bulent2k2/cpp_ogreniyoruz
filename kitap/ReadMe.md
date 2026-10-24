@@ -20,9 +20,9 @@ Daha kısa bir kitapçıkla ve daha hızlı bir giriş yapmak isteyenler de olur
 Bu ikisi bizim Ankara Fen Lisesindeki ders notlarımızdan damıtıldı ve derlendi.  
 
 İki kıtapçığı da PDF ya da EPUB olarak indirebilirsiniz: [GitHub dizini burada](https://github.com/bulent2k2/cpp_ogreniyoruz/tree/main/kitap).  
-- [C++ PDF](https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
-- [Scala PDF](https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
-- [C++ EPUB](https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
-- [Scala EPUB](https://github.com/bulent2k2/cpp_ogreniyoruz/blob/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
+- [C++ PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
+- [Scala PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
+- [C++ EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
+- [Scala EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
 
 Başarılar diliyorum. Sevgiler, selamlar. 

@@ -12,10 +12,10 @@ Kitapçığı okumak ve basmak için seçenekler
 **Çevirim içi okuyun.** Bağlantılar hemen altta. Bir sonraki bölümde.
 
 **PDF (80 sayfa, A4'e basmaya hazır):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
 
 **EPUB (telefon, tablet, e-kitap okuyucu):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 
 İkisi de bu depoda duruyor; herkes indirip okuyabilir, basabilir.
 

@@ -13,10 +13,13 @@ Kullanım:  python3 kitapcik-koco/epub.py
 import mimetypes
 import pathlib
 import re
+import sys
 import xml.etree.ElementTree as ET
 import zipfile
 
 import yap  # bölüm listesi ve gövde birleştirme mantığı oradan geliyor
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "kitaplik"))
+import adresler  # claude.ai -> Pages adresi
 
 # Kod bloklarındaki "Hepsini seç" düğmesi. Düğmeyi bu betik ekliyor; betiği
 # çalıştırmayan okuyucularda hiç oluşmuyor, yani ölü düğme görünmüyor.
@@ -111,6 +114,8 @@ def bolum_sayfalari() -> tuple[list[tuple[str, str, str]], list[str]]:
     sayfalar, resimler = [], []
     for slug, _kisa, baslik, _tanit in yap.BOLUMLER:
         govde = yap.kur(slug, baglantilar, tam=False)
+        # e-kitap okuyucuda claude.ai değil, kalıcı Pages adresi (kitaplik/adresler.py)
+        govde = adresler.cevir(govde)
         for ad in RESIM_DESENI.findall(govde):
             if ad not in resimler:
                 resimler.append(ad)

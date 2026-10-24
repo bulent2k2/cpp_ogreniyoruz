@@ -206,6 +206,12 @@ sarar ve iki dönüşüm uygular:
   çoğalmasın); deponun ham GitHub adresinden (`raw.githubusercontent.com`)
   okunur. Yazı tipleri yayımlanan sayfalardaki gibi Google Fonts'tan gelir.
 
+PDF ve EPUB de kendi başlarına yaşar: kardeş kitapçığa, deftere, dizine ve
+Kitaplık'a giden bağlantılar orada da claude.ai yerine kalıcı Pages adresine
+çevrilir. Çeviriyi `kitaplik/adresler.py` yapar; `yap.py` (PDF'in birleşik
+belgesi) ve `epub.py` onu çağırır. Adreslerin kaynağı yine `baglantilar.txt`'nin
+üçüncü sütunudur.
+
 Kitaplık sayfaları (`kitaplik.html` → `docs/index.html`, `dizin.html`,
 `inceleme.html`, `dizin-veri.js`) de aynı adres çevirisinden geçer. Betik
 bitince aynadaki göreli bağlantıları ve çapaları denetler; kırık varsa adını

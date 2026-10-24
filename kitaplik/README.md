@@ -4,22 +4,25 @@ Keyifli Kitaplık
 İki kitapçığı, iki alıştırma defterini ve ders notlarını bir bütün olarak
 sunan üç sayfa:
 
-+ [Keyifli Kitaplık](https://claude.ai/artifact/2HmYGoMWQRpLJ6siGq7qxY)
++ [Keyifli Kitaplık](https://bulent2k2.github.io/cpp_ogreniyoruz/)
   neden yazıldı, neler sunuyor, bölüm haritası; altı okur tipi için (hiç
   programlamamış, Python ya da C bilen, geçen yıl C++ alan, bu yıl algoritma
   alan, öğretmen) nereden başlanır, nasıl çalışılır.
-+ [Keyifli Kavram Dizini](https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT)
++ [Keyifli Kavram Dizini](https://bulent2k2.github.io/cpp_ogreniyoruz/dizin.html)
   300 kavram A'dan Z'ye, Türkçe ve İngilizce adlarıyla; her kavramda onu
   anlatan kitapçık bölümü, onu çalıştıran alıştırmalar ve ders notu. "English
   A–Z" düğmesiyle İngilizce sıraya geçer; alıştırma bağlantıları doğrudan
   soruya, kitapçık bağlantıları altbölümün başlığına iner.
-+ [Keyifli Kitaplık İncelemesi](https://claude.ai/artifact/Kcz4QboYQ7KUwpkNi1T1GW)
++ [Keyifli Kitaplık İncelemesi](https://bulent2k2.github.io/cpp_ogreniyoruz/inceleme.html)
   pedagog, editör ve bilgisayar uzmanı gözüyle eksikler, öneriler ve yerini
   söyleyen düzeltme listesi.
 
-Üçü de, dört eserin bütün bölümleriyle birlikte, GitHub Pages aynasında da var:
-[bulent2k2.github.io/cpp_ogreniyoruz](https://bulent2k2.github.io/cpp_ogreniyoruz/). İki adres aynı içeriği taşır;
-biri açılmazsa öteki. Ayna depodaki `docs/` dizininden sunulur.
+Üçü de, dört eserin bütün bölümleriyle birlikte, GitHub Pages'ten sunulur; kaynağı
+depodaki `docs/` dizinidir. Aynı sayfalar claude.ai'de de yayımlı
+([Kitaplık](https://claude.ai/artifact/2HmYGoMWQRpLJ6siGq7qxY),
+[dizin](https://claude.ai/artifact/6eAAQywvrczgppTggZMNHT),
+[inceleme](https://claude.ai/artifact/Kcz4QboYQ7KUwpkNi1T1GW)); iki adres aynı
+içeriği taşır, biri açılmazsa öteki.
 
 Dosyalar
 --

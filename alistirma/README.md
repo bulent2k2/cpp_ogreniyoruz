@@ -38,13 +38,13 @@ sayfalar GitHub Pages aynasında: [bulent2k2.github.io/cpp_ogreniyoruz/alistirma
 
 | | Bölüm | Konu | Alıştırma |
 |---|---|---|---|
-| Hazırlık | [Tarayıcıda, hiçbir şey yüklemeden](https://claude.ai/artifact/XKDtPcu8csxWMu6YZULS3A) ([kaynak](bolumler/00-hazirlik.html)) | 3 | 12 |
-| I | [İlk Adımlar](https://claude.ai/artifact/Bhazr8dwrYRPikNxW9X9Yv) ([kaynak](bolumler/01-ilk-adimlar.html)) | 6 | 29 |
-| II | [Veriyi Düzenlemek](https://claude.ai/artifact/TV31hBhhNsFsufpMdGeb1w) ([kaynak](bolumler/02-veri.html)) | 7 | 35 |
-| III | [Programcının Zanaatı](https://claude.ai/artifact/4SQxFr36xx7nHEiqpTWF3S) ([kaynak](bolumler/03-zanaat.html)) | 6 | 25 |
-| IV | [Özyineleme ve Arama](https://claude.ai/artifact/1CZqZ1HJC1WQneFCw6qyDJ) ([kaynak](bolumler/04-ozyineleme.html)) | 6 | 29 |
-| V | [Çizgeler ve Gezintiler](https://claude.ai/artifact/FJjmyqnb9eYtXs1FC3Hte9) ([kaynak](bolumler/05-cizgeler.html)) | 9 | 40 |
-| VI | [Dinamik Programlama](https://claude.ai/artifact/YaxiipjtgYnrsTgEh6EXxC) ([kaynak](bolumler/06-dp.html)) | 6 | 28 |
+| Hazırlık | [Tarayıcıda, hiçbir şey yüklemeden](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/00-hazirlik.html) ([kaynak](bolumler/00-hazirlik.html)) | 3 | 12 |
+| I | [İlk Adımlar](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/01-ilk-adimlar.html) ([kaynak](bolumler/01-ilk-adimlar.html)) | 6 | 29 |
+| II | [Veriyi Düzenlemek](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/02-veri.html) ([kaynak](bolumler/02-veri.html)) | 7 | 35 |
+| III | [Programcının Zanaatı](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/03-zanaat.html) ([kaynak](bolumler/03-zanaat.html)) | 6 | 25 |
+| IV | [Özyineleme ve Arama](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/04-ozyineleme.html) ([kaynak](bolumler/04-ozyineleme.html)) | 6 | 29 |
+| V | [Çizgeler ve Gezintiler](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/05-cizgeler.html) ([kaynak](bolumler/05-cizgeler.html)) | 9 | 40 |
+| VI | [Dinamik Programlama](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma/06-dp.html) ([kaynak](bolumler/06-dp.html)) | 6 | 28 |
 
 Bölüm metinleri `bolumler/*.html` dosyalarında, kitapçıkla aynı düzende;
 `make html` ile `cikti/` altında yayımlanabilir sayfalar üretilir. Biçem

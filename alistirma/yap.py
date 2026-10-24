@@ -15,6 +15,7 @@ import mimetypes
 import os
 import pathlib
 import re
+import sys
 
 KOK = pathlib.Path(__file__).resolve().parent
 # Biçemin tamamı kardeş kitapçıktan geliyor; ek.css vurgu rengini değiştiriyor
@@ -207,6 +208,11 @@ def tam_yaz() -> None:
         f'<div class="sayfa">\n' + "\n".join(parcalar) + "\n</div>\n"
         + kopyala_betigi() + "</body>\n</html>\n"
     )
+    # PDF kâğıtta yaşar: kitapçığa, deftere ve dizine giden bağlantılar kalıcı
+    # Pages adresine gitsin (bkz. kitaplik/adresler.py).
+    sys.path.insert(0, str(KOK.parent / "kitaplik"))
+    import adresler
+    html = adresler.cevir(html)
     (CIKTI / "defter-tam.html").write_text(html, encoding="utf-8")
 
 

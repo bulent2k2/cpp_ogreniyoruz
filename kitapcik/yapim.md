@@ -206,6 +206,12 @@ sarar ve iki dönüşüm uygular:
   çoğalmasın); deponun ham GitHub adresinden (`raw.githubusercontent.com`)
   okunur. Yazı tipleri yayımlanan sayfalardaki gibi Google Fonts'tan gelir.
 
+PDF ve EPUB de kendi başlarına yaşar: kardeş kitapçığa, deftere, dizine ve
+Kitaplık'a giden bağlantılar orada da claude.ai yerine kalıcı Pages adresine
+çevrilir. Çeviriyi `kitaplik/adresler.py` yapar; `yap.py` (PDF'in birleşik
+belgesi) ve `epub.py` onu çağırır. Adreslerin kaynağı yine `baglantilar.txt`'nin
+üçüncü sütunudur.
+
 Kitaplık sayfaları (`kitaplik.html` → `docs/index.html`, `dizin.html`,
 `inceleme.html`, `dizin-veri.js`) de aynı adres çevirisinden geçer. Betik
 bitince aynadaki göreli bağlantıları ve çapaları denetler; kırık varsa adını
@@ -214,3 +220,35 @@ basar ve 1 ile çıkar.
 Bölüm metnini, Kitaplık sayfalarını ya da `baglantilar.txt`'yi değiştirdiyseniz
 `make -C kitaplik ayna` deyip `docs/`'u da commit edin; yoksa ayna geride kalır.
 `docs/` içindeki dosyaları elle düzenlemeyin.
+
+Alıştırma defterlerinin PDF ve EPUB'ı
+--
+
+İki defterin (`alistirma/`, `alistirma-koco/`) de kendi `pdf.mjs`, `epub.py` ve
+kapak betiği var; kitapçıklarınkinin kardeşleri, araçlar aynı (Python 3.10+,
+Node + Playwright, isteğe bağlı `epubcheck`). Çıktılar `kitap/` dizinine gider:
+
+```bash
+make -C alistirma pdf epub        # kitap/Keyifli-Alistirmalar-Cpp.pdf / .epub
+make -C alistirma-koco pdf epub   # kitap/Keyifli-Alistirmalar-Koco.pdf / .epub
+make -C alistirma kapak           # kitap/kapak-alistirma.png (Koco: kapak-alistirma-koco.png)
+```
+
+Kitapçıklardan üç fark var:
+
++ **İpuçları.** Ekranda üç kademeli ipuçları kapalı `<details>` kutularıdır;
+  kâğıtta ve çoğu e-kitap okuyucuda açılamazlar. `pdf.mjs` basmadan önce hepsini
+  açar, `epub.py` düz kutulara çevirir. Başlıklarının yanındaki aç/kapa imi
+  baskıda gizlenir (`alistirma/ek.css`, baskı bloğu).
++ **Biçem.** EPUB biçemi kitapçığın `kitapcik/epub.css` dosyasına
+  `alistirma/epub-ek.css` eklenerek kurulur (basamak rozetleri, ipucu kutuları,
+  Koco cildinin "Tuvalde" tarifi). Ekran biçemindeki CSS değişkenleri EPUB'da yok;
+  renkler orada düz yazılı.
++ **Kapak.** Kitapçıklarınki gibi `kapak-tasarim.html` ekran görüntüsü; ama
+  resim yok, dört basamağın dört kartı var.
+
+Bölüm kaynaklarında `<` ve `&` kaçışlı olmalı (`&lt;`, `&amp;`): tarayıcı
+kaçışsız olanı hoş görür, EPUB'ın XHTML'i görmez ve `epub.py` bunu satırıyla
+söyleyerek durur. Bağlantıları Pages adresine çevirmek `kitaplik/adresler.py`'nin
+işi (yukarıdaki bölüm).
+

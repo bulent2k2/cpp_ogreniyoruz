@@ -16,6 +16,7 @@ import mimetypes
 import os
 import pathlib
 import re
+import sys
 
 KOK = pathlib.Path(__file__).resolve().parent
 ORTAK = (KOK / "ortak.css").read_text(encoding="utf-8")
@@ -234,6 +235,11 @@ def tam_yaz() -> None:
         f'<div class="sayfa">\n' + "\n".join(parcalar) + "\n</div>\n"
         + kopyala_betigi() + "</body>\n</html>\n"
     )
+    # PDF kâğıtta yaşar: kardeş kitapçık, defter, dizin ve Kitaplık bağlantıları
+    # kalıcı Pages adresine gitsin (bkz. kitaplik/adresler.py).
+    sys.path.insert(0, str(KOK.parent / "kitaplik"))
+    import adresler
+    html = adresler.cevir(html)
     (CIKTI / "kitapcik-tam.html").write_text(html, encoding="utf-8")
 
 

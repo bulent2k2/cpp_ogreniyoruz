@@ -798,7 +798,13 @@ hr.ayrac {
 .ipucu summary::before { content: "+ "; }
 .ipucu details[open] summary::before { content: "\2212 "; }
 .ipucu details p { margin: 0.35rem 0 0.25rem; }
-@media print { .ipucu details { break-inside: avoid; } }
+@media print {
+  .ipucu details { break-inside: avoid; }
+  /* PDF'te ipuçları açık basılır; ekrandaki aç/kapa imi (+ / −) kâğıtta anlamsız */
+  .ipucu summary::before, .ipucu details[open] summary::before { content: ""; }
+  /* uzun satır içi kod (özellikle "İlk satır" ipucu) sayfadan taşmasın */
+  .soru code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 
 /* bölüm sınavı (P8): üç soru bağlantısı */
 .sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
@@ -1150,7 +1156,7 @@ ekok(4, 6) = 12</code></pre>
 <p>Kitapçığın dördüncü alıştırması. <code>asalMıHızlı</code> karekök sınırıyla yazılmış ama içinde bir hata var: sınır <code>b * b &lt; n</code>. Eşleme denemesi onu yakalar: 1'den 1000'e iki sürümün ayrıştığı ilk sayıyı yazdırın (<code>bul</code>). Hatayı düzeltin (<code>&lt;=</code>), yeniden çalıştırın: ayrışma kalmadı mı? Sonunda 1000'e kadar kaç asal var, yazın. Yavaş ama basit sürüm, hızlı sürümün hakemi.</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Yavaş sürüm hakem; hızlı sürümle ayrıştığı ilk sayı hatayı gösterir.</p></details>
-<details><summary>Yaklaşım</summary><p><code>bul</code> bir <code>Belki</code> verir: <code>Biri(n)</code> ya da <code>Hiçbiri</code>; <code>eşle</code> ile yazdırın. Hata <code>b * b < n</code>'de: tam kare sayılarda (25, 49) kök dahil edilmiyor.</p></details>
+<details><summary>Yaklaşım</summary><p><code>bul</code> bir <code>Belki</code> verir: <code>Biri(n)</code> ya da <code>Hiçbiri</code>; <code>eşle</code> ile yazdırın. Hata <code>b * b &lt; n</code>'de: tam kare sayılarda (25, 49) kök dahil edilmiyor.</p></details>
 <details><summary>İlk satır</summary><p><code>ayrışan eşle { durum Biri(n) => satıryaz(s"ilk ayrışma: $n"); durum Hiçbiri => satıryaz("ayrışma yok") }</code></p></details>
 </div>
 <figure class="kod">
@@ -1220,7 +1226,7 @@ ekok(4, 6) = 12</code></pre>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>İki yöntem aynı sayıyı vermeli; elek katları siler, deneme bölenleri dener.</p></details>
 <details><summary>Yaklaşım</summary><p>Elek: <code>(2 |-| 316).herbiriİçin { i => eğer (elek(i)) (i * i |-| n).adımla(i).herbiriİçin(k => elek(k) = yanlış) }</code>; sonra <code>elek.say(x => x)</code>. (<code>adımla</code> yoksa <code>yineleDoğruysa</code> ile.)</p></details>
-<details><summary>İlk satır</summary><p><code>den k = i * i; yineleDoğruysa(k <= n) { elek(k) = yanlış; k = k + i }</code></p></details>
+<details><summary>İlk satır</summary><p><code>den k = i * i; yineleDoğruysa(k &lt;= n) { elek(k) = yanlış; k = k + i }</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

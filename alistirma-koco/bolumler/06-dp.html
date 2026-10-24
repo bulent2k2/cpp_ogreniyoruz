@@ -72,7 +72,7 @@ kayıt: 400</code></pre>
 <p>Kitapçığın birinci son alıştırması, CSES DP 1: toplamı n olan kaç zar dizisi? f(0) = 1, f(n) = f(n−1) + … + f(n−6), eksi n için 0. Bu bölümün kalıbıyla: <code>(1 |-| 6).işle(z =&gt; f(n − z)).topla</code> ve kenar defteri. f(0)..f(10)'u tek satırda yazdırın; sonra f(100)'ü <code>İriSayı</code> ile (kaç basamak?).</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Altı önceki değerin toplamı; eksi için 0, sıfır için 1; defter İriSayı.</p></details>
-<details><summary>Yaklaşım</summary><p><code>eğer (n < 0) 0 yoksa eğer (n == 0) 1 yoksa bellek.alYoksa(n, { dez s = (1 |-| 6).işle(z => f(n - z)).topla; bellek.eşEkle(n -> s); s })</code>; basamak: <code>f(100).yazıya.boyu</code>.</p></details>
+<details><summary>Yaklaşım</summary><p><code>eğer (n &lt; 0) 0 yoksa eğer (n == 0) 1 yoksa bellek.alYoksa(n, { dez s = (1 |-| 6).işle(z => f(n - z)).topla; bellek.eşEkle(n -> s); s })</code>; basamak: <code>f(100).yazıya.boyu</code>.</p></details>
 <details><summary>İlk satır</summary><p><code>dez s = (1 |-| 6).işle(z => f(n - z)).topla</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
@@ -197,8 +197,8 @@ küme: 3</code></pre>
 <p><a href="https://cses.fi/problemset/task/1634">CSES 1634</a> (<em>Minimizing Coins</em>): tutar bir milyona kadar; özyineleme derinliği yetmez. Aşağıdan yukarı: <code>Dizik.doldur(x + 1)(SONSUZ)</code>, <code>f(0) = 0</code>, 1'den x'e her t için paraları gezip <code>enUfağı</code>. İmkânsızsa −1. CSES'in örneği (1, 5, 7 ile 11) → 3; sonra 1 000 000 için (1, 5, 7). Gönderin; dizik ile Eşlem arasındaki hız farkını da ölçün (<code>buSaniye</code>).</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Çizelge bir dizik; her tutar için her parayı dene, en küçüğünü yaz.</p></details>
-<details><summary>Yaklaşım</summary><p><code>(1 |-| x).herbiriİçin { t => paralar.herbiriİçin { p => eğer (t - p >= 0 && f(t - p) + 1 < f(t)) f(t) = f(t - p) + 1 } }</code>.</p></details>
-<details><summary>İlk satır</summary><p><code>eğer (t - p >= 0 && f(t - p) + 1 < f(t)) f(t) = f(t - p) + 1</code></p></details>
+<details><summary>Yaklaşım</summary><p><code>(1 |-| x).herbiriİçin { t => paralar.herbiriİçin { p => eğer (t - p >= 0 &amp;&amp; f(t - p) + 1 &lt; f(t)) f(t) = f(t - p) + 1 } }</code>.</p></details>
+<details><summary>İlk satır</summary><p><code>eğer (t - p >= 0 &amp;&amp; f(t - p) + 1 &lt; f(t)) f(t) = f(t - p) + 1</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

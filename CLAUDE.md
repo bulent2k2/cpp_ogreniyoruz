@@ -88,7 +88,10 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
 - `alistirma/` — **Keyifli Alıştırmalar**, giriş kitapçığının alıştırma
   defteri (C++ cildi). Her konuda dört basamak: Isınma / Alıştırma /
   Zorlayıcı / Keşif. `bolumler/*.html` kitapçıkla aynı düzende, biçemi
-  `../kitapcik/ortak.css` + `ek.css`; `yap.py` ile üretilir. `kod/<id>/`
+  `../kitapcik/ortak.css` + `ek.css`; `yap.py` ile üretilir. PDF için
+  `pdf.mjs`, EPUB için `epub.py` (+ `epub-ek.css`), kapak için `kapak.mjs` +
+  `kapak-tasarim.html` vardır (`make pdf epub kapak`; çıktılar `kitap/`'ta:
+  `Keyifli-Alistirmalar-Cpp.*`). `kod/<id>/`
   dizinlerinde `ana.cpp` (başlangıç), varsa `girdi`, ve `beklenen-cikti`;
   `make test` karşılaştırır. **Depoda çözüm yoktur ve eklenmez**; bazı
   başlangıç dosyaları (Hazırlık'taki hata alıştırmaları, "işlevi siz yazın"
@@ -97,7 +100,9 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
 - `alistirma-koco/` — Keyifli Alıştırmalar'ın **Koco cildi**: `alistirma/` ile aynı
   düzen (dört basamak, `bolumler/*.html`, `yap.py`), biçemi
   `../kitapcik/ortak.css` + `../alistirma/ek.css` + `../kitapcik-koco/ek.css` +
-  `ek.css`. `kod/<id>/` dizinlerinde `ana.kojo` (başlangıç), varsa `girdi` ve
+  `ek.css`. PDF/EPUB/kapak betikleri C++ cildindekilerin kardeşi (çıktılar
+  `kitap/Keyifli-Alistirmalar-Koco.*`; `epub-ek.css` C++ cildinde, ortak).
+  `kod/<id>/` dizinlerinde `ana.kojo` (başlangıç), varsa `girdi` ve
   konsola yazan alıştırmalar için `beklenen-cikti`; çizim alıştırmalarının
   beklenen çıktısı yok (defterdeki "Tuvalde" satırı). `konsol/` Koco'nun
   Türkçe derleyicisiyle konsol alıştırmalarını sınayan düzenek (`kur.sh`,
@@ -132,8 +137,11 @@ yeni dersin `Önceki` bağlantısını) güncellemek zorunludur.
   çalıştırıp `docs/`'u da commit edin. Bölümler arası bağlantılar göreli,
   resimler deponun ham GitHub adresinden; claude.ai adresi kalmamalı
   (betik denetler).
-- `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf) ve iki
-  kitapçığın PDF/EPUB sürümleri ile kapak resimleri.
+- `kitap/` — Rekabetçi Programlama El Kitabı (TR ve EN pdf), iki kitapçığın
+  ve iki alıştırma defterinin PDF/EPUB sürümleri ile kapak resimleri.
+  PDF/EPUB'ları ilgili `make pdf epub` üretir; bölüm kaynağını değiştirdiyseniz
+  yeniden üretip commit edin. Bunlardaki claude.ai bağlantıları
+  `kitaplik/adresler.py` ile Pages adresine çevrilir.
 - `mp4ler/gorsel-kayitlar.md` — derslerin Google Drive video kayıt
   bağlantıları.
 - `python/`, `kojo/` — yan diller/ortamlar için giriş yazıları.

@@ -49,7 +49,22 @@ sayfalar GitHub Pages aynasında: [bulent2k2.github.io/cpp_ogreniyoruz/alistirma
 Bölüm metinleri `bolumler/*.html` dosyalarında, kitapçıkla aynı düzende;
 `make html` ile `cikti/` altında yayımlanabilir sayfalar üretilir. Biçem
 kardeş kitapçıktan (`../kitapcik/ortak.css`) gelir, `ek.css` yalnızca vurgu
-rengini ve basamak rozetlerini ekler. PDF ve EPUB, bölümler çoğalınca.
+rengini ve basamak rozetlerini ekler.
+
+Basılı ve e-kitap
+--
+
+Defterin tamamı tek dosyada da duruyor; tıklayınca iner:
+
++ [PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Cpp.pdf) &mdash; A4'e basılmak üzere
+  düzenlendi. Kâğıtta tıklanacak bir şey olmadığı için üç kademeli ipuçları
+  (Düşünce / Yaklaşım / İlk satır) açık basılır: takılmadan okumayın, bir
+  kâğıtla örtün. Çevrimiçi sayfada ipuçları kapalı gelir, tıklayınca açılır.
++ [EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Cpp.epub) &mdash; telefon, tablet ve
+  e-kitap okuyucular için; ipuçları orada da açık kutular.
+
+Kitapçıktaki gibi yeniden üretmek için `make pdf epub` (araçlar için
+[`../kitapcik/yapim.md`](../kitapcik/yapim.md)); kapak resmi `make kapak`.
 
 Yazarken dikkat edilenler
 --

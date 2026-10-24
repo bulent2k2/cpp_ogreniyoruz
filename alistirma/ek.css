@@ -90,7 +90,13 @@
 .ipucu summary::before { content: "+ "; }
 .ipucu details[open] summary::before { content: "\2212 "; }
 .ipucu details p { margin: 0.35rem 0 0.25rem; }
-@media print { .ipucu details { break-inside: avoid; } }
+@media print {
+  .ipucu details { break-inside: avoid; }
+  /* PDF'te ipuçları açık basılır; ekrandaki aç/kapa imi (+ / −) kâğıtta anlamsız */
+  .ipucu summary::before, .ipucu details[open] summary::before { content: ""; }
+  /* uzun satır içi kod (özellikle "İlk satır" ipucu) sayfadan taşmasın */
+  .soru code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 
 /* bölüm sınavı (P8): üç soru bağlantısı */
 .sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }

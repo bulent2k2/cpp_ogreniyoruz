@@ -36,6 +36,21 @@ Bağlantısı olan herkes sayfaları açabilir; aynı sayfalar GitHub Pages ayna
 Adresler `baglantilar.txt`'de, `yap.py` ilk adresi bölümler arası gezinmeye
 yerleştiriyor.
 
+Basılı ve e-kitap
+--
+
+Defterin tamamı tek dosyada da duruyor; tıklayınca iner:
+
++ [PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Koco.pdf) &mdash; A4'e basılmak üzere
+  düzenlendi. Kâğıtta tıklanacak bir şey olmadığı için üç kademeli ipuçları
+  (Düşünce / Yaklaşım / İlk satır) açık basılır: takılmadan okumayın, bir
+  kâğıtla örtün. Çevrimiçi sayfada ipuçları kapalı gelir, tıklayınca açılır.
++ [EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Koco.epub) &mdash; telefon, tablet ve
+  e-kitap okuyucular için; ipuçları orada da açık kutular.
+
+Kitapçıktaki gibi yeniden üretmek için `make pdf epub` (araçlar için
+[`../kitapcik/yapim.md`](../kitapcik/yapim.md)); kapak resmi `make kapak`.
+
 Dizin yapısı
 --
 

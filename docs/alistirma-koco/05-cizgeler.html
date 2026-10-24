@@ -798,7 +798,13 @@ hr.ayrac {
 .ipucu summary::before { content: "+ "; }
 .ipucu details[open] summary::before { content: "\2212 "; }
 .ipucu details p { margin: 0.35rem 0 0.25rem; }
-@media print { .ipucu details { break-inside: avoid; } }
+@media print {
+  .ipucu details { break-inside: avoid; }
+  /* PDF'te ipuçları açık basılır; ekrandaki aç/kapa imi (+ / −) kâğıtta anlamsız */
+  .ipucu summary::before, .ipucu details[open] summary::before { content: ""; }
+  /* uzun satır içi kod (özellikle "İlk satır" ipucu) sayfadan taşmasın */
+  .soru code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 
 /* bölüm sınavı (P8): üç soru bağlantısı */
 .sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
@@ -1058,8 +1064,8 @@ kuyrukla: A B C D E F G </code></pre>
 <p>Kitapçığın &ldquo;Gerçek bir hata&rdquo;sı: <code>eğer (!gezilen(şimdiki))</code> silinirse iki yoldan ulaşılan düğümler iki kere işlenir, çevrimde ise hiç durmaz. Ölçün: <code>gez2</code>'nin denetimsiz bir sürümünü yazın ama en çok <code>sınır</code> işlemde dursun ve kaç işlem yaptığını döndürsün. Kitapçığın çizgesinde (çevrimsiz) kaç işlem? Denetimli 7; sonra <code>G -&gt; A</code> bağını ekleyin: sınıra (1000) çarpıyor mu?</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Denetimsiz gezi aynı düğümü yeniden işler; çevrimde hiç durmaz, sınırla durdurun.</p></details>
-<details><summary>Yaklaşım</summary><p>Yığınlı <code>gez2</code>'yi kopyalayın; <code>eğer (!gezilen(şimdiki))</code> satırını kaldırın, döngüye <code>işlem < sınır</code> koşulu ekleyin, işlem sayısını döndürün. <code>G -> A</code> bağı çevrimi yaratır.</p></details>
-<details><summary>İlk satır</summary><p><code>yineleDoğruysa(yığın.boyu > 0 && işlem < sınır) { ... işlem = işlem + 1 }</code></p></details>
+<details><summary>Yaklaşım</summary><p>Yığınlı <code>gez2</code>'yi kopyalayın; <code>eğer (!gezilen(şimdiki))</code> satırını kaldırın, döngüye <code>işlem &lt; sınır</code> koşulu ekleyin, işlem sayısını döndürün. <code>G -> A</code> bağı çevrimi yaratır.</p></details>
+<details><summary>İlk satır</summary><p><code>yineleDoğruysa(yığın.boyu > 0 &amp;&amp; işlem &lt; sınır) { ... işlem = işlem + 1 }</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
@@ -1074,7 +1080,7 @@ denetimli: 7 işlem
 <p>Kitapçığın &ldquo;Takım işi&rdquo;: <code>düğümÇiz(ad, x, y)</code> (<code>atla</code>, küçük <code>daire</code>, yanına <code>yazı(ad)</code>) ve iki düğüm arasına çizgi çeken <code>bağÇiz</code> (<code>atla</code>, <code>noktayaDön</code>, uzaklık kadar <code>ileri</code>; uzaklık <code>karekökü</code> ile). Konumları bir <code>Eşlem[Düğüm, (Kesir, Kesir)]</code>'de tutun; yedi düğümlü çizgeyi ekrana alın. Kaç düğüm, kaç bağ çizdiniz, yazdırın. Gezilerinizi resmin üstünde parmakla izleyin.</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Düğümlerin yerini siz seçersiniz; bağ iki konum arası düz çizgi.</p></details>
-<details><summary>Yaklaşım</summary><p><code>konum: Eşlem[Düğüm, (Kesir, Kesir)]</code>; <code>düğümÇiz</code>: <code>atla(x, y); daire(10); yazı(ad)</code>; <code>bağÇiz</code>: <code>atla(x1, y1); noktayaDön(x2, y2); ileri(karekökü(...))</code>. Her bağı bir kere çizmek için <code>a < b</code> koşulu.</p></details>
+<details><summary>Yaklaşım</summary><p><code>konum: Eşlem[Düğüm, (Kesir, Kesir)]</code>; <code>düğümÇiz</code>: <code>atla(x, y); daire(10); yazı(ad)</code>; <code>bağÇiz</code>: <code>atla(x1, y1); noktayaDön(x2, y2); ileri(karekökü(...))</code>. Her bağı bir kere çizmek için <code>a &lt; b</code> koşulu.</p></details>
 <details><summary>İlk satır</summary><p><code>tanım bağÇiz(a: Düğüm, b: Düğüm) = { dez (x1, y1) = konum(a); dez (x2, y2) = konum(b); atla(x1, y1); noktayaDön(x2, y2); ileri(karekökü((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))) }</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
@@ -1251,7 +1257,7 @@ tersten: 7 parça</code></pre>
 <p>Uzaklık yetmez, yol da lazım. Dijkstra'ya ikinci bir eşlem ekleyin: <code>nereden</code>, her şehre en kısa yolda hangi şehirden gelindiği. Sonunda hedeften geriye izleyip (başlangıca gelene kadar) dizini ters çevirin. Kardeş kitapçığın beş şehirlik örneği: 1→2 (4), 1→3 (1), 3→2 (2), 2→4 (5), 3→4 (8), 4→5 (3), 3→5 (10). Uzaklıklar 0 3 1 8 11; 1'den 5'e yol? Dikkat: 11'e iki yol var (1 3 5 ve 1 3 2 4 5); sizinki hangisini buluyor, neden? (Kardeş kitapçık ötekini buldu.)</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Uzaklığı iyileştiren her gevşetme, nereden geldiğini de yazsın.</p></details>
-<details><summary>Yaklaşım</summary><p>Dijkstra'da <code>eğer (yeni < uzaklık.alYoksa(şehir, SONSUZ))</code> dalında <code>nereden.eşEkle(şehir -> buradan)</code>; sonunda 5'ten 1'e <code>nereden</code> ile geri yürüyüp <code>tersi</code>.</p></details>
+<details><summary>Yaklaşım</summary><p>Dijkstra'da <code>eğer (yeni &lt; uzaklık.alYoksa(şehir, SONSUZ))</code> dalında <code>nereden.eşEkle(şehir -> buradan)</code>; sonunda 5'ten 1'e <code>nereden</code> ile geri yürüyüp <code>tersi</code>.</p></details>
 <details><summary>İlk satır</summary><p><code>den p = 5; den yol: Dizin[Sayı] = Dizin(5); yineleDoğruysa(p != 1) { p = nereden(p); yol = p :: yol }</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">

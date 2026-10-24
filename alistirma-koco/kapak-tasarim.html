@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Kapak (Koco)</title>
+<link rel="stylesheet" href="../kitapcik/yazitipi/yazitipi.css">  <!-- yazı tipleri yerelde: kitapcik/yazitipi -->
+<style>
+  /* Kapak resmi: 1600x2400. kapak.mjs bu sayfanın ekran görüntüsünü alıyor.
+     Kitapçık kapaklarıyla aynı düzen; vurgu rengi petrol. Kolajda
+     resim yok: dört basamak, basamak basamak yükselen dört kart. */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1600px; height: 2400px;
+    background-color: #F6F7FA;
+    background-image:
+      linear-gradient(#DFE5F1 2px, transparent 2px),
+      linear-gradient(90deg, #DFE5F1 2px, transparent 2px);
+    background-size: 64px 64px;
+    color: #16203A;
+    font-family: "IBM Plex Sans", sans-serif;
+    display: flex; flex-direction: column;
+    padding: 140px 120px 110px;
+    position: relative; overflow: hidden;
+  }
+
+  .serit { position: absolute; top: 0; left: 0; width: 26px; height: 100%; background: #0E7490; }
+
+  .seri {
+    font-family: "IBM Plex Mono", monospace; font-size: 29px;
+    letter-spacing: .22em; text-transform: uppercase; color: #8792AA;
+  }
+
+  h1 {
+    font-family: "Bitter", serif; font-weight: 700;
+    font-size: 150px; line-height: 1.06; letter-spacing: -.03em;
+    margin-top: 54px;
+  }
+  h1 .vurgu { color: #0E7490; }
+  h1 .kucuk { display: block; font-size: 70px; letter-spacing: -.02em; color: #52607C; font-weight: 600; margin-top: 18px; }
+
+  .alt {
+    font-size: 40px; color: #52607C; line-height: 1.5;
+    margin-top: 40px; max-width: 1360px;
+  }
+
+  .bolumler {
+    font-family: "IBM Plex Mono", monospace; font-size: 21px;
+    letter-spacing: 0; color: #8792AA;
+    margin-top: 38px; white-space: nowrap;
+  }
+  .bolumler b { color: #0E7490; font-weight: 500; }
+
+  /* ---- dört basamak ---- */
+
+  .kolaj { position: relative; flex: 1; margin-top: 30px; }
+
+  .soz {
+    position: absolute; left: 0; top: 40px; width: 560px;
+    font-family: "Bitter", serif; font-weight: 700; font-size: 62px; line-height: 1.22;
+    color: #16203A;
+  }
+  .soz span { color: #0E7490; }
+  .soz small {
+    display: block; margin-top: 26px;
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.5;
+    color: #52607C;
+  }
+
+  .basamaklar {
+    position: absolute; right: 0; bottom: 0;
+    display: flex; align-items: flex-end; gap: 22px;
+  }
+  .kart {
+    width: 262px; background: #fff;
+    border: 2px solid #CBD6E9; border-top: 14px solid var(--r);
+    box-shadow: 0 16px 34px -22px rgba(16, 28, 60, .5);
+    padding: 26px 26px 28px;
+  }
+  .kart .ad {
+    font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 24px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--r);
+  }
+  .kart .sure {
+    font-family: "IBM Plex Mono", monospace; font-size: 24px; color: #8792AA; margin-top: 8px;
+  }
+  .kart p { font-size: 28px; line-height: 1.42; color: #52607C; margin-top: 18px; }
+  .k1 { --r: #2E6F4E; height: 390px; }
+  .k2 { --r: #0E7490; height: 500px; }
+  .k3 { --r: #97701A; height: 610px; }
+  .k4 { --r: #BF3B2E; height: 720px; }
+
+  /* ---- alt bilgi ---- */
+
+  .altbilgi {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-top: 3px solid #16203A; padding-top: 38px; margin-top: 30px;
+  }
+  .yazar { font-family: "Bitter", serif; font-size: 50px; font-weight: 700; }
+  .yazar .surum {
+    display: block; margin-top: 14px;
+    font-family: "IBM Plex Mono", monospace; font-size: 25px;
+    font-weight: 400; color: #8792AA;
+  }
+  .rozet {
+    font-family: "IBM Plex Mono", monospace; font-size: 25px;
+    color: #52607C; text-align: right; line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+  <div class="serit"></div>
+
+  <div class="seri">Alıştırma defteri · Koco cildi</div>
+
+  <h1>Keyifli<br><span class="vurgu">Alıştırmalar</span><span class="kucuk">Koco cildi</span></h1>
+
+  <p class="alt">
+    Programlamaya ve Algoritmalara Keyifli ve İşlevsel Bir Giriş&rsquo;in<br>
+    alıştırma defteri. Hazırlık ve altı bölüm; her konuda dört basamak.
+  </p>
+
+  <div class="bolumler">
+    <b>H</b> Hazırlık &middot; <b>I</b> İlk Adımlar &middot; <b>II</b> Veri &middot; <b>III</b> Soyutlama &middot;
+    <b>IV</b> Özyineleme &middot; <b>V</b> Çizgeler &middot; <b>VI</b> Dinamik Programlama
+  </div>
+
+  <div class="kolaj">
+    <div class="soz">Çözüm yok,<br><span>ipucu var.</span>
+      <small>Yanıt sizde &mdash; ya da yan masadaki arkadaşınızda.</small></div>
+    <div class="basamaklar">
+      <div class="kart k1"><div class="ad">Isınma</div><div class="sure">~10 dakika</div>
+        <p>Kitapçığın programını çalıştırın, bir satırını değiştirin.</p></div>
+      <div class="kart k2"><div class="ad">Alıştırma</div><div class="sure">20&ndash;30 dakika</div>
+        <p>Aynı kalıpla yeni, küçük bir iş. Beklenen çıktı ya da tuvaldeki görünüm hazır.</p></div>
+      <div class="kart k3"><div class="ad">Zorlayıcı</div><div class="sure">45&ndash;90 dakika</div>
+        <p>Kalıbı bükün, iki kalıbı birleştirin ya da bir hatayı bulun.</p></div>
+      <div class="kart k4"><div class="ad">Keşif</div><div class="sure">açık uçlu</div>
+        <p>Beklenen çıktı yok. Bir şey inşa edin, arkadaşlarınıza gösterin.</p></div>
+    </div>
+  </div>
+
+  <div class="altbilgi">
+    <div class="yazar">Bülent Başaran<span class="surum">2026 &middot; birinci sürüm</span></div>
+    <div class="rozet">CC BY-SA 4.0 &middot; kod MIT<br>github.com/bulent2k2/cpp_ogreniyoruz</div>
+  </div>
+</body>
+</html>

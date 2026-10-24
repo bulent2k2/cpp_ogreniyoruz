@@ -798,7 +798,13 @@ hr.ayrac {
 .ipucu summary::before { content: "+ "; }
 .ipucu details[open] summary::before { content: "\2212 "; }
 .ipucu details p { margin: 0.35rem 0 0.25rem; }
-@media print { .ipucu details { break-inside: avoid; } }
+@media print {
+  .ipucu details { break-inside: avoid; }
+  /* PDF'te ipuçları açık basılır; ekrandaki aç/kapa imi (+ / −) kâğıtta anlamsız */
+  .ipucu summary::before, .ipucu details[open] summary::before { content: ""; }
+  /* uzun satır içi kod (özellikle "İlk satır" ipucu) sayfadan taşmasın */
+  .soru code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 
 /* bölüm sınavı (P8): üç soru bağlantısı */
 .sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
@@ -1061,8 +1067,8 @@ boşun toplamı: 0</code></pre>
 <p><a href="https://projecteuler.net/problem=4">PE 4</a>: iki üç basamaklı sayının çarpımı olan en büyük palindrom. Palindrom sınaması tek satır: sayının yazısı tersine eşit mi (<code>yazıya</code> ve <code>tersi</code>). Çarpımlar için <code>için ... ver</code> (KI-3-K1) ya da iç içe <code>düzİşle</code>/<code>işle</code>. Yanıtı yazdırın; PE'ye gönderin. Kaç çarpım sınadınız, hesaplayın: 900 × 900'ü yarıya indirmenin yolu var mı?</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Bütün üç basamaklı çarpımlar; palindrom olanların en büyüğü.</p></details>
-<details><summary>Yaklaşım</summary><p><code>için (a <- 100 |-| 999; b <- a |-| 999) ver a * b</code> çarpımları verir; <code>ele(palindromMu).enİrisi</code>. <code>b</code>'yi <code>a</code>'dan başlatmak yarıya indirir.</p></details>
-<details><summary>İlk satır</summary><p><code>dez çarpımlar = için (a <- 100 |-| 999; b <- a |-| 999) ver a * b</code></p></details>
+<details><summary>Yaklaşım</summary><p><code>için (a &lt;- 100 |-| 999; b &lt;- a |-| 999) ver a * b</code> çarpımları verir; <code>ele(palindromMu).enİrisi</code>. <code>b</code>'yi <code>a</code>'dan başlatmak yarıya indirir.</p></details>
+<details><summary>İlk satır</summary><p><code>dez çarpımlar = için (a &lt;- 100 |-| 999; b &lt;- a |-| 999) ver a * b</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

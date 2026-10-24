@@ -1,0 +1,96 @@
+/* ===========================================================
+   Alıştırma defterlerinin EPUB biçemi: kitapcik/epub.css'in üstüne eklenir
+   (alistirma/epub.py ve alistirma-koco/epub.py ikisini birleştirir).
+   Ekran biçemindeki (ek.css) CSS değişkenleri EPUB'da yok; renkler düz.
+   =========================================================== */
+
+/* ---------- basamak imleri ---------- */
+
+.basamak {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66em;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.18em 0.5em;
+  border-radius: 4px;
+  margin-right: 0.45em;
+}
+.basamak.isinma    { background: #E5F2EA; color: #2E6F4E; }
+.basamak.alistirma { background: #E7ECFB; color: #21409A; }
+.basamak.zor       { background: #F8F0DC; color: #7A5A12; }
+.basamak.kesif     { background: #FBEAE7; color: #A12E22; }
+.basamak.ikili     { background: #EDF0F7; color: #52607C; border: 1px dashed #8792AA; }
+
+.merdiven { margin: 0 0 1em; }
+.merdiven .basamak { margin: 0 0.2em 0 0; }
+
+.sure {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68em;
+  color: #6E7B95;
+  margin-left: 0.4em;
+  white-space: nowrap;
+}
+
+/* ---------- tek alıştırma ---------- */
+
+.soru {
+  margin: 1.6em 0 0;
+  padding-top: 1em;
+  border-top: 1px dashed #BDC7DB;
+}
+.soru > h3 { margin-top: 0; }
+.soru-no {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78em;
+  color: #6E7B95;
+  margin-right: 0.45em;
+}
+.soru .dizin { font-size: 0.86em; color: #6E7B95; margin-top: 0.6em; }
+
+/* Koco cildi: çizim alıştırmalarının "Tuvalde" tarifi */
+.soru .gorunum {
+  font-size: 0.92em;
+  margin-top: 0.8em;
+  padding: 0.5em 0.8em;
+  border-left: 3px solid #0E7490;
+  background: #E0F2F7;
+}
+.soru .gorunum .etk { font-weight: bold; color: #0E7490; margin-right: 0.3em; }
+
+/* ---------- üç kademeli ipucu (EPUB'da <details> yerine düz kutular) ---------- */
+
+.ipucu { margin: 0.6em 0 1em; }
+.ipucu-adim {
+  margin: 0.4em 0;
+  padding: 0.3em 0.8em;
+  border: 1px solid #CBD4E4;
+  border-left: 3px solid #97701A;
+  background: #FAFBFD;
+  font-size: 0.94em;
+  page-break-inside: avoid;
+}
+.ipucu-baslik {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7A5A12;
+  margin: 0 0 0.2em;
+}
+.ipucu-adim p { margin: 0.2em 0; }
+
+/* ---------- bölüm sınavı: üç soru bağlantısı ---------- */
+
+.sinav-sorular { margin: 0.6em 0 0.9em; }
+.sinav-sorular a {
+  display: inline-block;
+  margin: 0.2em 0.5em 0.2em 0;
+  padding: 0.15em 0.6em;
+  border: 1px solid #BDC7DB;
+  border-radius: 4px;
+  text-decoration: none;
+}

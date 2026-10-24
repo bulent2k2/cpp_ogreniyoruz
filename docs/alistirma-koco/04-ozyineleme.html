@@ -798,7 +798,13 @@ hr.ayrac {
 .ipucu summary::before { content: "+ "; }
 .ipucu details[open] summary::before { content: "\2212 "; }
 .ipucu details p { margin: 0.35rem 0 0.25rem; }
-@media print { .ipucu details { break-inside: avoid; } }
+@media print {
+  .ipucu details { break-inside: avoid; }
+  /* PDF'te ipuçları açık basılır; ekrandaki aç/kapa imi (+ / −) kâğıtta anlamsız */
+  .ipucu summary::before, .ipucu details[open] summary::before { content: ""; }
+  /* uzun satır içi kod (özellikle "İlk satır" ipucu) sayfadan taşmasın */
+  .soru code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 
 /* bölüm sınavı (P8): üç soru bağlantısı */
 .sinav-sorular { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin: 0.6rem 0 0.9rem; }
@@ -1241,7 +1247,7 @@ binom(30, 15) = 155117520</code></pre>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Aynı fib, türü İriSayı; döngülü sürüm iki değişken.</p></details>
 <details><summary>Yaklaşım</summary><p><code>fibİri</code>: kitapçığın <code>alYoksa</code> kalıbı, bellek <code>Eşlem[Sayı, İriSayı]</code>. Döngü: <code>den a: İriSayı = 0; den b: İriSayı = 1</code>, n kere <code>(a, b) = (b, a + b)</code>.</p></details>
-<details><summary>İlk satır</summary><p><code>tanım fibİri(n: Sayı): İriSayı = eğer (n < 2) n yoksa bellek.alYoksa(n, { dez s = fibİri(n - 1) + fibİri(n - 2); bellek.eşEkle(n -> s); s })</code></p></details>
+<details><summary>İlk satır</summary><p><code>tanım fibİri(n: Sayı): İriSayı = eğer (n &lt; 2) n yoksa bellek.alYoksa(n, { dez s = fibİri(n - 1) + fibİri(n - 2); bellek.eşEkle(n -> s); s })</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

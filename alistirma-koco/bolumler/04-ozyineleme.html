@@ -374,7 +374,7 @@ binom(30, 15) = 155117520</code></pre>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Aynı fib, türü İriSayı; döngülü sürüm iki değişken.</p></details>
 <details><summary>Yaklaşım</summary><p><code>fibİri</code>: kitapçığın <code>alYoksa</code> kalıbı, bellek <code>Eşlem[Sayı, İriSayı]</code>. Döngü: <code>den a: İriSayı = 0; den b: İriSayı = 1</code>, n kere <code>(a, b) = (b, a + b)</code>.</p></details>
-<details><summary>İlk satır</summary><p><code>tanım fibİri(n: Sayı): İriSayı = eğer (n < 2) n yoksa bellek.alYoksa(n, { dez s = fibİri(n - 1) + fibİri(n - 2); bellek.eşEkle(n -> s); s })</code></p></details>
+<details><summary>İlk satır</summary><p><code>tanım fibİri(n: Sayı): İriSayı = eğer (n &lt; 2) n yoksa bellek.alYoksa(n, { dez s = fibİri(n - 1) + fibİri(n - 2); bellek.eşEkle(n -> s); s })</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

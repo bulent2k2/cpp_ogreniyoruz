@@ -324,7 +324,7 @@ fark: 33165
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>Arama yazdırmasın, yalnız saysın; sonra bütün sayılar için en büyük adım.</p></details>
 <details><summary>Yaklaşım</summary><p><code>adımSayısı</code> içinde KI-4-A1'in döngüsü, <code>satıryaz</code> satırları silinmiş; dışarıda <code>(1 |-| sınır).işle(t => adımSayısı(t, sınır)).enİrisi</code>.</p></details>
-<details><summary>İlk satır</summary><p><code>yineleDoğruysa(altSınır <= üstSınır) { dez orta = (altSınır + üstSınır) / 2; adım = adım + 1; ... }</code></p></details>
+<details><summary>İlk satır</summary><p><code>yineleDoğruysa(altSınır &lt;= üstSınır) { dez orta = (altSınır + üstSınır) / 2; adım = adım + 1; ... }</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>
@@ -359,8 +359,8 @@ fark: 33165
 <p>Kitapçığın üçüncü ve dördüncü alıştırmaları, bu sefer kodla. <a href="https://projecteuler.net/problem=2">PE 2</a>: dört milyonu aşmayan çift Fibonaççi sayılarının toplamı; <code>den</code> ve <code>yineleDoğruysa</code> ile (Bölüm IV'te bambaşka yazacağız). <a href="https://projecteuler.net/problem=3">PE 3</a>: 600851475143'ün en büyük asal çarpanı; sayı Sayı'ya sığmaz, <code>Uzun</code> gerekir (sabitin sonuna <code>L</code>). En küçük bölenden başlayıp bölebildikçe bölün; kalan son sayı yanıt. İki sayıyı yazdırın, PE'ye gönderin.</p>
 <div class="ipucu">
 <details><summary>Düşünce</summary><p>PE 2 iki değişkenli döngü; PE 3 en küçük bölenden başlayıp bölerek küçültme.</p></details>
-<details><summary>Yaklaşım</summary><p>PE 2: <code>yineleDoğruysa(b <= 4000000)</code>, çiftse topla, <code>(a, b) = (b, a + b)</code> için geçici değişken. PE 3: <code>den b = 2L</code>, <code>n % b == 0</code> iken böl, değilse <code>b</code> artır; kalan <code>n</code> yanıt.</p></details>
-<details><summary>İlk satır</summary><p><code>yineleDoğruysa(b * b <= n) { eğer (n % b == 0) n = n / b yoksa b = b + 1 }</code></p></details>
+<details><summary>Yaklaşım</summary><p>PE 2: <code>yineleDoğruysa(b &lt;= 4000000)</code>, çiftse topla, <code>(a, b) = (b, a + b)</code> için geçici değişken. PE 3: <code>den b = 2L</code>, <code>n % b == 0</code> iken böl, değilse <code>b</code> artır; kalan <code>n</code> yanıt.</p></details>
+<details><summary>İlk satır</summary><p><code>yineleDoğruysa(b * b &lt;= n) { eğer (n % b == 0) n = n / b yoksa b = b + 1 }</code></p></details>
 </div>
 <figure class="kod kopyalanmaz dar">
 <figcaption><span class="nokta"></span><span class="ad">çıktı</span><span class="etiket">beklenen-cikti</span></figcaption>

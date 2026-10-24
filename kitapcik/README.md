@@ -12,10 +12,10 @@ Kitapçığı okumak ve basmak için seçenekler
 **Çevirim içi okuyun.** Bağlantılar hemen altta. Bir sonraki bölümde.
 
 **PDF (80 sayfa, A4'e basmaya hazır):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.pdf)
 
 **EPUB (telefon, tablet, e-kitap okuyucu):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 
 İkisi de bu depoda duruyor; herkes indirip okuyabilir, basabilir.
 
@@ -26,16 +26,16 @@ Kitapçık bölüm bölüm çevrimiçi sayfalar hâlinde de yayımlandı. Bağla
 olan herkes açabilir; telefondan okumak için elverişli. Ders sırasında hızlıca
 bir bölüme bakmak isteyenler için:
 
-+ [Kapak ve kılavuz](https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63) nasıl çalışalım, ikili programlama, tezgâh kurulumu
-+ [I. İlk Adımlar](https://claude.ai/code/artifact/8f21bd01-d69e-4e83-bb53-60b5d594e4f7) değer, değişken, tür, işlev; taşma; kapsam; sayı tahmin oyunu
-+ [II. Veriyi Düzenlemek](https://claude.ai/code/artifact/998f8f77-ca22-4e95-83a3-bbc71464b43f) dizi, eşlem, küme, yığın, kuyruk; kendi türlerimiz; kalıplar
-+ [III. Programcının Zanaatı](https://claude.ai/code/artifact/6a403229-5395-4258-adc4-496f5c79a5a1) derleme, `make`, altın dosya testleri, `gdb`, hız ölçümü
-+ [IV. Özyineleme ve Arama](https://claude.ai/code/artifact/baab8280-db12-4152-8fba-702522ffdeff) Hanoi, memoizasyon, geri dönüşlü arama, sekiz vezir, budama
-+ [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/011ec142-ce1d-4a00-9c0a-2b37b47054cc) derinlemesine/enlemesine gezi, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford
-+ [VI. Dinamik Programlama](https://claude.ai/code/artifact/82baa360-2ba8-4f7e-b3a9-68a7c3705aeb) beş adımlık reçete, ızgara yolları, bozuk para soruları
-+ [Küçük Sözlük](https://claude.ai/artifact/MQsSVarxjXcUiczTtanFn5) terimlerin Türkçesi, İngilizcesi, bir cümlelik anlamı
++ [Kapak ve kılavuz](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/00-kapak.html) nasıl çalışalım, ikili programlama, tezgâh kurulumu
++ [I. İlk Adımlar](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/01-ilk-adimlar.html) değer, değişken, tür, işlev; taşma; kapsam; sayı tahmin oyunu
++ [II. Veriyi Düzenlemek](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/02-veri.html) dizi, eşlem, küme, yığın, kuyruk; kendi türlerimiz; kalıplar
++ [III. Programcının Zanaatı](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/03-zanaat.html) derleme, `make`, altın dosya testleri, `gdb`, hız ölçümü
++ [IV. Özyineleme ve Arama](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/04-ozyineleme.html) Hanoi, memoizasyon, geri dönüşlü arama, sekiz vezir, budama
++ [V. Çizgeler ve Gezintiler](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/05-cizgeler.html) derinlemesine/enlemesine gezi, Dijkstra, Floyd&ndash;Warshall, Bellman&ndash;Ford
++ [VI. Dinamik Programlama](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/06-dp.html) beş adımlık reçete, ızgara yolları, bozuk para soruları
++ [Küçük Sözlük](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/07-sozluk.html) terimlerin Türkçesi, İngilizcesi, bir cümlelik anlamı
 
-Aynı bölümler GitHub Pages aynasında da var: [bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik/00-kapak.html). İki adres aynı içeriği taşır; biri açılmazsa öteki. Adresler `baglantilar.txt`'de.
+Aynı bölümler claude.ai'de de yayımlı: [kapak](https://claude.ai/code/artifact/5636245b-1b09-4b69-be33-a0cf21566a63). İki adres aynı içeriği taşır; biri açılmazsa öteki. Adresler `baglantilar.txt`'de.
 
 Yazarken dikkat edilenler
 --

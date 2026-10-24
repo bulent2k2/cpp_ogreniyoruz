@@ -25,10 +25,10 @@ Kitapçığı okumak
 --
 
 **PDF (A4'e basmaya hazır):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.pdf)
 
 **EPUB (telefon, tablet, e-kitap okuyucu):**
-[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub](../kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
+[kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
 
 Çevrimiçi bölümler
 --
@@ -37,16 +37,16 @@ Kitapçık bölüm bölüm çevrimiçi sayfalar hâlinde de yayımlandı. Bağla
 olan herkes açabilir; telefondan okumak için elverişli. Her bölümün başındaki
 şeritten kılavuza ve öbür bölümlere geçilebilir:
 
-+ [Kapak ve kılavuz](https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702) Koco nedir, kurulum, çalışma yöntemi, içindekiler
-+ [I. İlk Adımlar](https://claude.ai/code/artifact/6a819623-8348-459b-8314-e9d143bf14a3) kaplumbağa komutları; değer, tür, işlev; tahmin oyunu
-+ [II. Veriyi Düzenlemek](https://claude.ai/code/artifact/48f70cc7-3678-466e-8d71-7948182564ec) dizin, küme, eşlem; `işle`, `ele`, `indirge`; `Belki`
-+ [III. Soyutlama Sanatı](https://claude.ai/code/artifact/1bff2e2b-9d1a-435e-901e-974e6acced99) işlevi girdi alan işlevler; `belirt` ile sınama; ölçme
-+ [IV. Özyineleme ve Fraktallar](https://claude.ai/code/artifact/7d214fb0-5fd4-4074-a4ab-fe8ca99820dd) sarmal, ağaç, Koch tanesi; Hanoi; bellekle hızlandırma
-+ [V. Çizgeler ve Gezintiler](https://claude.ai/code/artifact/d5817874-92b1-4750-a267-d646b4f7bf8c) işlevsel derinlemesine/enlemesine gezi, bağlı parçalar
-+ [VI. Dinamik Programlama](https://claude.ai/code/artifact/cc64eaea-0d24-493a-a94d-b0cda5eb4cb9) ızgara yolları, bozuk para; Mandelbrot; yola devam
-+ [Küçük Sözlük](https://claude.ai/artifact/RBmX55BsV339Foquk6b6oT) terimlerin Türkçesi, Scala'daki ve İngilizcedeki karşılığı
++ [Kapak ve kılavuz](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/00-kapak.html) Koco nedir, kurulum, çalışma yöntemi, içindekiler
++ [I. İlk Adımlar](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/01-ilk-adimlar.html) kaplumbağa komutları; değer, tür, işlev; tahmin oyunu
++ [II. Veriyi Düzenlemek](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/02-veri.html) dizin, küme, eşlem; `işle`, `ele`, `indirge`; `Belki`
++ [III. Soyutlama Sanatı](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/03-soyutlama.html) işlevi girdi alan işlevler; `belirt` ile sınama; ölçme
++ [IV. Özyineleme ve Fraktallar](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/04-ozyineleme.html) sarmal, ağaç, Koch tanesi; Hanoi; bellekle hızlandırma
++ [V. Çizgeler ve Gezintiler](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/05-cizgeler.html) işlevsel derinlemesine/enlemesine gezi, bağlı parçalar
++ [VI. Dinamik Programlama](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/06-dp.html) ızgara yolları, bozuk para; Mandelbrot; yola devam
++ [Küçük Sözlük](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/07-sozluk.html) terimlerin Türkçesi, Scala'daki ve İngilizcedeki karşılığı
 
-Aynı bölümler GitHub Pages aynasında da var: [bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/](https://bulent2k2.github.io/cpp_ogreniyoruz/kitapcik-koco/00-kapak.html). İki adres aynı içeriği taşır; biri açılmazsa öteki. Adresler `baglantilar.txt`
+Aynı bölümler claude.ai'de de yayımlı: [kapak](https://claude.ai/code/artifact/ce43da09-9f13-46ae-bb18-57ba0bda0702). İki adres aynı içeriği taşır; biri açılmazsa öteki. Adresler `baglantilar.txt`
 dosyasında; `yap.py` bunları bölümler arası bağlantılara yerleştiriyor.
 
 

@@ -23,13 +23,13 @@ Bölümler
 
 | | Bölüm | Konu | Alıştırma |
 |---|---|---|---|
-| Hazırlık | [iKojo'da, hiçbir şey yüklemeden](https://claude.ai/artifact/FwDRrhtE1EdJwcoQHSzNqK) ([kaynak](bolumler/00-hazirlik.html)) | 1 | 5 |
-| I | [Kaplumbağayla İlk Adımlar](https://claude.ai/artifact/JBkHFPVcsbMPhzLj6eQa23) ([kaynak](bolumler/01-ilk-adimlar.html)) | 4 | 19 |
-| II | [Veriyi Düzenlemek](https://claude.ai/artifact/QTdneCZbUatA4nnG7fj3cg) ([kaynak](bolumler/02-veri.html)) | 4 | 19 |
-| III | [Soyutlama Sanatı](https://claude.ai/artifact/CWD4GvcNUNrUHiBhjfMkVc) ([kaynak](bolumler/03-soyutlama.html)) | 4 | 18 |
-| IV | [Özyineleme ve Fraktallar](https://claude.ai/artifact/Xb1fHfS7a1uUiV9tX8zVPk) ([kaynak](bolumler/04-ozyineleme.html)) | 4 | 18 |
-| V | [Çizgeler ve Gezintiler](https://claude.ai/artifact/UkwaywCDT7d3GRkxY3HDZc) ([kaynak](bolumler/05-cizgeler.html)) | 4 | 18 |
-| VI | [Dinamik Programlama](https://claude.ai/artifact/YJrUEgeuxn8hEZDeBwSVLJ) ([kaynak](bolumler/06-dp.html)) | 4 | 19 |
+| Hazırlık | [iKojo'da, hiçbir şey yüklemeden](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/00-hazirlik.html) ([kaynak](bolumler/00-hazirlik.html)) | 1 | 5 |
+| I | [Kaplumbağayla İlk Adımlar](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/01-ilk-adimlar.html) ([kaynak](bolumler/01-ilk-adimlar.html)) | 4 | 19 |
+| II | [Veriyi Düzenlemek](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/02-veri.html) ([kaynak](bolumler/02-veri.html)) | 4 | 19 |
+| III | [Soyutlama Sanatı](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/03-soyutlama.html) ([kaynak](bolumler/03-soyutlama.html)) | 4 | 18 |
+| IV | [Özyineleme ve Fraktallar](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/04-ozyineleme.html) ([kaynak](bolumler/04-ozyineleme.html)) | 4 | 18 |
+| V | [Çizgeler ve Gezintiler](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/05-cizgeler.html) ([kaynak](bolumler/05-cizgeler.html)) | 4 | 18 |
+| VI | [Dinamik Programlama](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/06-dp.html) ([kaynak](bolumler/06-dp.html)) | 4 | 19 |
 
 Bağlantısı olan herkes sayfaları açabilir; aynı sayfalar GitHub Pages aynasında:
 [bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/](https://bulent2k2.github.io/cpp_ogreniyoruz/alistirma-koco/00-hazirlik.html).

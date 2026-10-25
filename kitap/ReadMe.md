@@ -25,4 +25,8 @@ Bu ikisi bizim Ankara Fen Lisesindeki ders notlarımızdan damıtıldı ve derle
 - [C++ EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 - [Scala EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-ve-Islevsel-Bir-Giris.epub)
 
+Her kıtapçığın bir de alıştırma defteri var (Isınma, Alıştırma, Zorlayıcı, Keşif; yanıt yok, ipucu var). Onları da indirebilirsiniz:  
+- [C++ defteri, PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Cpp.pdf) ve [EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Cpp.epub)
+- [Koco defteri, PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Koco.pdf) ve [EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Koco.epub)
+
 Başarılar diliyorum. Sevgiler, selamlar. 

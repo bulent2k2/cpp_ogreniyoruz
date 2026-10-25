@@ -17,7 +17,7 @@ Kitapçığı okumak ve basmak için seçenekler
 **EPUB (telefon, tablet, e-kitap okuyucu):**
 [kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Programlamaya-ve-Algoritmalara-Keyifli-Bir-Baslangic.epub)
 
-İkisi de bu depoda duruyor; herkes indirip okuyabilir, basabilir.
+İkisi de bu depoda duruyor; herkes indirip okuyabilir, basabilir. Alıştırma defterinin de PDF ve EPUB'ı var: [PDF](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Cpp.pdf), [EPUB](https://raw.githubusercontent.com/bulent2k2/cpp_ogreniyoruz/main/kitap/Keyifli-Alistirmalar-Cpp.epub).
 
 Çevrimiçi okuyun
 --
